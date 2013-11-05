@@ -1,4 +1,4 @@
 SpacePuzzle
 ===========
 
-A Space Puzzle Game
+A Space Puzzle Game.
