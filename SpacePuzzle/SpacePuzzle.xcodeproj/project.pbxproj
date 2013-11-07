@@ -15,9 +15,8 @@
 		E6214063182BA53800EC5C21 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E6214062182BA53800EC5C21 /* main.m */; };
 		E6214067182BA53800EC5C21 /* GViewAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E6214066182BA53800EC5C21 /* GViewAppDelegate.m */; };
 		E621406A182BA53800EC5C21 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6214068182BA53800EC5C21 /* Main.storyboard */; };
-		E621406D182BA53800EC5C21 /* GViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E621406C182BA53800EC5C21 /* GViewViewController.m */; };
-		E6214070182BA53800EC5C21 /* GViewMyScene.m in Sources */ = {isa = PBXBuildFile; fileRef = E621406F182BA53800EC5C21 /* GViewMyScene.m */; };
-		E6214072182BA53800EC5C21 /* Spaceship.png in Resources */ = {isa = PBXBuildFile; fileRef = E6214071182BA53800EC5C21 /* Spaceship.png */; };
+		E621406D182BA53800EC5C21 /* SpacePuzzleController.m in Sources */ = {isa = PBXBuildFile; fileRef = E621406C182BA53800EC5C21 /* SpacePuzzleController.m */; };
+		E6214070182BA53800EC5C21 /* MainScene.m in Sources */ = {isa = PBXBuildFile; fileRef = E621406F182BA53800EC5C21 /* MainScene.m */; };
 		E6214074182BA53800EC5C21 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E6214073182BA53800EC5C21 /* Images.xcassets */; };
 		E621407B182BA53800EC5C21 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E621407A182BA53800EC5C21 /* XCTest.framework */; };
 		E621407C182BA53800EC5C21 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6214054182BA53800EC5C21 /* Foundation.framework */; };
@@ -49,11 +48,10 @@
 		E6214065182BA53800EC5C21 /* GViewAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GViewAppDelegate.h; sourceTree = "<group>"; };
 		E6214066182BA53800EC5C21 /* GViewAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GViewAppDelegate.m; sourceTree = "<group>"; };
 		E6214069182BA53800EC5C21 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		E621406B182BA53800EC5C21 /* GViewViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GViewViewController.h; sourceTree = "<group>"; };
-		E621406C182BA53800EC5C21 /* GViewViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GViewViewController.m; sourceTree = "<group>"; };
-		E621406E182BA53800EC5C21 /* GViewMyScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GViewMyScene.h; sourceTree = "<group>"; };
-		E621406F182BA53800EC5C21 /* GViewMyScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GViewMyScene.m; sourceTree = "<group>"; };
-		E6214071182BA53800EC5C21 /* Spaceship.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Spaceship.png; sourceTree = "<group>"; };
+		E621406B182BA53800EC5C21 /* SpacePuzzleController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpacePuzzleController.h; sourceTree = "<group>"; };
+		E621406C182BA53800EC5C21 /* SpacePuzzleController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SpacePuzzleController.m; sourceTree = "<group>"; };
+		E621406E182BA53800EC5C21 /* MainScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainScene.h; sourceTree = "<group>"; };
+		E621406F182BA53800EC5C21 /* MainScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainScene.m; sourceTree = "<group>"; };
 		E6214073182BA53800EC5C21 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		E6214079182BA53800EC5C21 /* SpacePuzzleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpacePuzzleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E621407A182BA53800EC5C21 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -124,11 +122,10 @@
 				E6214065182BA53800EC5C21 /* GViewAppDelegate.h */,
 				E6214066182BA53800EC5C21 /* GViewAppDelegate.m */,
 				E6214068182BA53800EC5C21 /* Main.storyboard */,
-				E621406B182BA53800EC5C21 /* GViewViewController.h */,
-				E621406C182BA53800EC5C21 /* GViewViewController.m */,
-				E621406E182BA53800EC5C21 /* GViewMyScene.h */,
-				E621406F182BA53800EC5C21 /* GViewMyScene.m */,
-				E6214071182BA53800EC5C21 /* Spaceship.png */,
+				E621406B182BA53800EC5C21 /* SpacePuzzleController.h */,
+				E621406C182BA53800EC5C21 /* SpacePuzzleController.m */,
+				E621406E182BA53800EC5C21 /* MainScene.h */,
+				E621406F182BA53800EC5C21 /* MainScene.m */,
 				E6214073182BA53800EC5C21 /* Images.xcassets */,
 				E621405D182BA53800EC5C21 /* Supporting Files */,
 			);
@@ -243,7 +240,6 @@
 			files = (
 				E6214061182BA53800EC5C21 /* InfoPlist.strings in Resources */,
 				E6214074182BA53800EC5C21 /* Images.xcassets in Resources */,
-				E6214072182BA53800EC5C21 /* Spaceship.png in Resources */,
 				E621406A182BA53800EC5C21 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -265,8 +261,8 @@
 			files = (
 				E6214063182BA53800EC5C21 /* main.m in Sources */,
 				E6214067182BA53800EC5C21 /* GViewAppDelegate.m in Sources */,
-				E621406D182BA53800EC5C21 /* GViewViewController.m in Sources */,
-				E6214070182BA53800EC5C21 /* GViewMyScene.m in Sources */,
+				E621406D182BA53800EC5C21 /* SpacePuzzleController.m in Sources */,
+				E6214070182BA53800EC5C21 /* MainScene.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -477,6 +473,7 @@
 				E621408C182BA53800EC5C21 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E621408D182BA53800EC5C21 /* Build configuration list for PBXNativeTarget "SpacePuzzleTests" */ = {
 			isa = XCConfigurationList;
@@ -485,6 +482,7 @@
 				E621408F182BA53800EC5C21 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

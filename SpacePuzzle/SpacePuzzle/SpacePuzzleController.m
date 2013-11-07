@@ -6,10 +6,10 @@
 //  Copyright (c) 2013 WMD. All rights reserved.
 //
 
-#import "GViewViewController.h"
-#import "GViewMyScene.h"
+#import "SpacePuzzleController.h"
+#import "MainScene.h"
 
-@implementation GViewViewController
+@implementation SpacePuzzleController
 
 - (void)viewDidLoad
 {
@@ -21,7 +21,7 @@
     skView.showsNodeCount = YES;
     
     // Create and configure the scene.
-    SKScene * scene = [GViewMyScene sceneWithSize:skView.bounds.size];
+    SKScene * scene = [MainScene sceneWithSize:skView.bounds.size];
     scene.scaleMode = SKSceneScaleModeAspectFill;
     
     // Present the scene.
