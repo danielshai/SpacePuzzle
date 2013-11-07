@@ -1,10 +1,9 @@
-//
-//  GViewMyScene.h
-//  SpacePuzzle
-//
+/*
+    MainScene.h
+    SpacePuzzle
 
-//  Copyright (c) 2013 WMD. All rights reserved.
-//
+    The main scene of the game, i.e. where the main game is shown.
+ */
 
 #import <SpriteKit/SpriteKit.h>
 

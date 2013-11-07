@@ -1,10 +1,6 @@
 //
 //  GViewViewController.m
 //  SpacePuzzle
-//
-//  Created by IxD on 07/11/13.
-//  Copyright (c) 2013 WMD. All rights reserved.
-//
 
 #import "SpacePuzzleController.h"
 #import "MainScene.h"
@@ -26,6 +22,15 @@
     
     // Present the scene.
     [skView presentScene:scene];
+    
+    // TEMP CODE.
+    Board *board = [[Board alloc] init];
+    // Load the board.
+    NSString *levelNr = @"1";
+    NSString *pathBoard = [NSString stringWithFormat:@"%@%@",@"BoardListLevel",levelNr];
+    NSString *filePathBoard = [[NSBundle mainBundle] pathForResource:pathBoard
+                                                              ofType:@"plist"];
+    [board loadBoard:filePathBoard];
 }
 
 - (BOOL)shouldAutorotate

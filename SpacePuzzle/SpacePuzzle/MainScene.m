@@ -2,9 +2,6 @@
 //  GViewMyScene.m
 //  SpacePuzzle
 //
-//  Created by IxD on 07/11/13.
-//  Copyright (c) 2013 WMD. All rights reserved.
-//
 
 #import "MainScene.h"
 
@@ -15,8 +12,6 @@
         /* Setup your scene here */
         
         self.backgroundColor = [SKColor colorWithRed:0.15 green:0.15 blue:0.3 alpha:1.0];
-        
-       
     }
     return self;
 }
@@ -25,9 +20,7 @@
     /* Called when a touch begins */
     
     for (UITouch *touch in touches) {
-        CGPoint location = [touch locationInNode:self];
-        
-        
+        //CGPoint location = [touch locationInNode:self];
     }
 }
 

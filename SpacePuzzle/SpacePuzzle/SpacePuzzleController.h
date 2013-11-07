@@ -1,13 +1,14 @@
-//
-//  GViewViewController.h
-//  SpacePuzzle
-//
+/*
+    GViewViewController.h
+    SpacePuzzle
 
-//  Copyright (c) 2013 WMD. All rights reserved.
-//
+    Controller for the main game scene.
+    ADD LEVELFACTORY.
+*/
 
 #import <UIKit/UIKit.h>
 #import <SpriteKit/SpriteKit.h>
+#import "Board.h"
 
 @interface SpacePuzzleController : UIViewController
 

@@ -23,6 +23,16 @@
 		E621407D182BA53800EC5C21 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6214058182BA53800EC5C21 /* UIKit.framework */; };
 		E6214085182BA53800EC5C21 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E6214083182BA53800EC5C21 /* InfoPlist.strings */; };
 		E6214087182BA53800EC5C21 /* SpacePuzzleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E6214086182BA53800EC5C21 /* SpacePuzzleTests.m */; };
+		E6E657FE182BB8C50022BF5F /* Board.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E657FD182BB8C50022BF5F /* Board.m */; };
+		E6E65801182BB9020022BF5F /* Position.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E65800182BB9020022BF5F /* Position.m */; };
+		E6E65804182BBAB30022BF5F /* BoardCoord.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E65803182BBAB30022BF5F /* BoardCoord.m */; };
+		E6E65806182BC1680022BF5F /* BoardListLevel1.plist in Resources */ = {isa = PBXBuildFile; fileRef = E6E65805182BC1680022BF5F /* BoardListLevel1.plist */; };
+		E6E6580B182BC2CE0022BF5F /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E6580A182BC2CE0022BF5F /* Item.m */; };
+		E6E6580E182BC3C50022BF5F /* BigL.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E6580D182BC3C50022BF5F /* BigL.m */; };
+		E6E65811182BC50D0022BF5F /* SpriteWithItem.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E65810182BC50D0022BF5F /* SpriteWithItem.m */; };
+		E6E65815182BC82E0022BF5F /* LittleJohn.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E65814182BC82E0022BF5F /* LittleJohn.m */; };
+		E6E65819182BC9390022BF5F /* Unit.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E65818182BC9390022BF5F /* Unit.m */; };
+		E6E6581C182BCD660022BF5F /* Converter.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E6581B182BCD660022BF5F /* Converter.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +68,26 @@
 		E6214082182BA53800EC5C21 /* SpacePuzzleTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SpacePuzzleTests-Info.plist"; sourceTree = "<group>"; };
 		E6214084182BA53800EC5C21 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		E6214086182BA53800EC5C21 /* SpacePuzzleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SpacePuzzleTests.m; sourceTree = "<group>"; };
+		E6E657FB182BB7BD0022BF5F /* Macros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Macros.h; sourceTree = "<group>"; };
+		E6E657FC182BB8C50022BF5F /* Board.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Board.h; sourceTree = "<group>"; };
+		E6E657FD182BB8C50022BF5F /* Board.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Board.m; sourceTree = "<group>"; };
+		E6E657FF182BB9020022BF5F /* Position.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Position.h; sourceTree = "<group>"; };
+		E6E65800182BB9020022BF5F /* Position.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Position.m; sourceTree = "<group>"; };
+		E6E65802182BBAB30022BF5F /* BoardCoord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoardCoord.h; sourceTree = "<group>"; };
+		E6E65803182BBAB30022BF5F /* BoardCoord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoardCoord.m; sourceTree = "<group>"; };
+		E6E65805182BC1680022BF5F /* BoardListLevel1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = BoardListLevel1.plist; sourceTree = "<group>"; };
+		E6E65809182BC2CE0022BF5F /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Item.h; sourceTree = "<group>"; };
+		E6E6580A182BC2CE0022BF5F /* Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Item.m; sourceTree = "<group>"; };
+		E6E6580C182BC3C50022BF5F /* BigL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BigL.h; sourceTree = "<group>"; };
+		E6E6580D182BC3C50022BF5F /* BigL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BigL.m; sourceTree = "<group>"; };
+		E6E6580F182BC50D0022BF5F /* SpriteWithItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpriteWithItem.h; sourceTree = "<group>"; };
+		E6E65810182BC50D0022BF5F /* SpriteWithItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpriteWithItem.m; sourceTree = "<group>"; };
+		E6E65813182BC82E0022BF5F /* LittleJohn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LittleJohn.h; sourceTree = "<group>"; };
+		E6E65814182BC82E0022BF5F /* LittleJohn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LittleJohn.m; sourceTree = "<group>"; };
+		E6E65817182BC9390022BF5F /* Unit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Unit.h; sourceTree = "<group>"; };
+		E6E65818182BC9390022BF5F /* Unit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Unit.m; sourceTree = "<group>"; };
+		E6E6581A182BCD660022BF5F /* Converter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Converter.h; sourceTree = "<group>"; };
+		E6E6581B182BCD660022BF5F /* Converter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Converter.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,13 +149,17 @@
 		E621405C182BA53800EC5C21 /* SpacePuzzle */ = {
 			isa = PBXGroup;
 			children = (
+				E6214068182BA53800EC5C21 /* Main.storyboard */,
 				E6214065182BA53800EC5C21 /* GViewAppDelegate.h */,
 				E6214066182BA53800EC5C21 /* GViewAppDelegate.m */,
-				E6214068182BA53800EC5C21 /* Main.storyboard */,
 				E621406B182BA53800EC5C21 /* SpacePuzzleController.h */,
 				E621406C182BA53800EC5C21 /* SpacePuzzleController.m */,
 				E621406E182BA53800EC5C21 /* MainScene.h */,
 				E621406F182BA53800EC5C21 /* MainScene.m */,
+				E6E6580F182BC50D0022BF5F /* SpriteWithItem.h */,
+				E6E65810182BC50D0022BF5F /* SpriteWithItem.m */,
+				E6E65812182BC5B40022BF5F /* Model */,
+				E6E65808182BC2820022BF5F /* Utility */,
 				E6214073182BA53800EC5C21 /* Images.xcassets */,
 				E621405D182BA53800EC5C21 /* Supporting Files */,
 			);
@@ -136,6 +170,7 @@
 			isa = PBXGroup;
 			children = (
 				E621405E182BA53800EC5C21 /* SpacePuzzle-Info.plist */,
+				E6E65805182BC1680022BF5F /* BoardListLevel1.plist */,
 				E621405F182BA53800EC5C21 /* InfoPlist.strings */,
 				E6214062182BA53800EC5C21 /* main.m */,
 				E6214064182BA53800EC5C21 /* SpacePuzzle-Prefix.pch */,
@@ -159,6 +194,53 @@
 				E6214083182BA53800EC5C21 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E6E65807182BC2690022BF5F /* Board */ = {
+			isa = PBXGroup;
+			children = (
+				E6E657FF182BB9020022BF5F /* Position.h */,
+				E6E65800182BB9020022BF5F /* Position.m */,
+				E6E657FC182BB8C50022BF5F /* Board.h */,
+				E6E657FD182BB8C50022BF5F /* Board.m */,
+				E6E65802182BBAB30022BF5F /* BoardCoord.h */,
+				E6E65803182BBAB30022BF5F /* BoardCoord.m */,
+			);
+			name = Board;
+			sourceTree = "<group>";
+		};
+		E6E65808182BC2820022BF5F /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				E6E6581A182BCD660022BF5F /* Converter.h */,
+				E6E6581B182BCD660022BF5F /* Converter.m */,
+				E6E657FB182BB7BD0022BF5F /* Macros.h */,
+			);
+			name = Utility;
+			sourceTree = "<group>";
+		};
+		E6E65812182BC5B40022BF5F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E6E65807182BC2690022BF5F /* Board */,
+				E6E65816182BC9010022BF5F /* Units */,
+				E6E65809182BC2CE0022BF5F /* Item.h */,
+				E6E6580A182BC2CE0022BF5F /* Item.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		E6E65816182BC9010022BF5F /* Units */ = {
+			isa = PBXGroup;
+			children = (
+				E6E65817182BC9390022BF5F /* Unit.h */,
+				E6E65818182BC9390022BF5F /* Unit.m */,
+				E6E6580C182BC3C50022BF5F /* BigL.h */,
+				E6E6580D182BC3C50022BF5F /* BigL.m */,
+				E6E65813182BC82E0022BF5F /* LittleJohn.h */,
+				E6E65814182BC82E0022BF5F /* LittleJohn.m */,
+			);
+			name = Units;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -238,6 +320,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E6E65806182BC1680022BF5F /* BoardListLevel1.plist in Resources */,
 				E6214061182BA53800EC5C21 /* InfoPlist.strings in Resources */,
 				E6214074182BA53800EC5C21 /* Images.xcassets in Resources */,
 				E621406A182BA53800EC5C21 /* Main.storyboard in Resources */,
@@ -259,10 +342,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E6E6580B182BC2CE0022BF5F /* Item.m in Sources */,
+				E6E65815182BC82E0022BF5F /* LittleJohn.m in Sources */,
+				E6E65801182BB9020022BF5F /* Position.m in Sources */,
+				E6E6581C182BCD660022BF5F /* Converter.m in Sources */,
 				E6214063182BA53800EC5C21 /* main.m in Sources */,
+				E6E6580E182BC3C50022BF5F /* BigL.m in Sources */,
 				E6214067182BA53800EC5C21 /* GViewAppDelegate.m in Sources */,
+				E6E65811182BC50D0022BF5F /* SpriteWithItem.m in Sources */,
 				E621406D182BA53800EC5C21 /* SpacePuzzleController.m in Sources */,
+				E6E65804182BBAB30022BF5F /* BoardCoord.m in Sources */,
+				E6E65819182BC9390022BF5F /* Unit.m in Sources */,
 				E6214070182BA53800EC5C21 /* MainScene.m in Sources */,
+				E6E657FE182BB8C50022BF5F /* Board.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
