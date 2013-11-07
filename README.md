@@ -1,7 +1,7 @@
 # SpacePuzzle
-===========
 
-A Space Puzzle Game.
+## About
+This is a puzzle game that takes place in space! To be continued...
 
 
 ## Contribute
