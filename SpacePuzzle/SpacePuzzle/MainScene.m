@@ -38,8 +38,8 @@
     
     NSInteger xx = x*32+16;
 
-    NSInteger yy = 352 - y*32-16;
-
+    NSInteger yy = 480 - y*32-16;
+    NSLog(@"%d,   %d",x,y);
     sprite.position = CGPointMake(xx,yy);
     [self addChild:sprite];
 }

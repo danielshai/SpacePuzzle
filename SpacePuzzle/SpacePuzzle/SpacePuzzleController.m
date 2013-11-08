@@ -3,11 +3,12 @@
 //  SpacePuzzle
 
 #import "SpacePuzzleController.h"
-#import "MainScene.h"
 
 @implementation SpacePuzzleController
+@synthesize board = _board;
+@synthesize scene = _scene;
 
-- (void)viewDidLoad
+-(void)viewDidLoad
 {
     [super viewDidLoad];
 
@@ -17,35 +18,40 @@
     skView.showsNodeCount = YES;
     
     // Create and configure the scene.
-    MainScene *scene = [MainScene sceneWithSize:skView.bounds.size];
-    scene.scaleMode = SKSceneScaleModeAspectFill;
+    _scene = [MainScene sceneWithSize:skView.bounds.size];
+    _scene.scaleMode = SKSceneScaleModeAspectFill;
+    
+    [self setupBoard];
     
     // Present the scene.
-    [skView presentScene:scene];
-    
+    [skView presentScene:_scene];
+}
+
+-(void)setupBoard {
     // TEMP CODE.
-    Board *board = [[Board alloc] init];
+    _board = [[Board alloc] init];
     // Load the board.
     NSString *levelNr = @"1";
     NSString *pathBoard = [NSString stringWithFormat:@"%@%@",@"BoardListLevel",levelNr];
     NSString *filePathBoard = [[NSBundle mainBundle] pathForResource:pathBoard
                                                               ofType:@"plist"];
-    [board loadBoard:filePathBoard];
+    [_board loadBoard:filePathBoard];
     
     for(int i = 0; i < BOARD_SIZE_Y; i++) {
         for(int j = 0; j < BOARD_SIZE_X; j++) {
-            BoardCoord *bc = [board.board objectAtIndex:BOARD_SIZE_X*i + j];
-            [scene renderBoardX:[bc x] Y:[bc y]];
+            BoardCoord *bc = [_board.board objectAtIndex:BOARD_SIZE_X*i + j];
+            [_scene renderBoardX:[bc x] Y:[bc y]];
         }
     }
 }
 
-- (BOOL)shouldAutorotate
+
+-(BOOL)shouldAutorotate
 {
     return YES;
 }
 
-- (NSUInteger)supportedInterfaceOrientations
+-(NSUInteger)supportedInterfaceOrientations
 {
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
         return UIInterfaceOrientationMaskAllButUpsideDown;
@@ -54,7 +60,7 @@
     }
 }
 
-- (void)didReceiveMemoryWarning
+-(void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Release any cached data, images, etc that aren't in use.

@@ -9,6 +9,6 @@
 
 @interface MainScene : SKScene
 @property (nonatomic, assign) SKTexture *square;
--(void) renderBoardX:(NSInteger) x Y: (NSInteger) y;
+-(void)renderBoardX:(NSInteger) x Y: (NSInteger) y;
 
 @end
