@@ -20,7 +20,7 @@
 #define BOARD_COORD_BEGIN_Y     1
 
 #define BOARD_SIZE_X            10
-#define BOARD_SIZE_Y            7
+#define BOARD_SIZE_Y            11
 
 #define TOUCHES_BEGAN           @"TouchesBegan"
 #define TOUCHES_MOVED           @"TouchesMoved"

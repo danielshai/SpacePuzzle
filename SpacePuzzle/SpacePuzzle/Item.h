@@ -8,5 +8,6 @@
 #import "Position.h"
 
 @interface Item : Position
+-(void) doAction;
 
 @end

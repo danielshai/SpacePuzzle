@@ -17,7 +17,7 @@
     skView.showsNodeCount = YES;
     
     // Create and configure the scene.
-    SKScene * scene = [MainScene sceneWithSize:skView.bounds.size];
+    MainScene *scene = [MainScene sceneWithSize:skView.bounds.size];
     scene.scaleMode = SKSceneScaleModeAspectFill;
     
     // Present the scene.
@@ -31,6 +31,13 @@
     NSString *filePathBoard = [[NSBundle mainBundle] pathForResource:pathBoard
                                                               ofType:@"plist"];
     [board loadBoard:filePathBoard];
+    
+    for(int i = 0; i < BOARD_SIZE_Y; i++) {
+        for(int j = 0; j < BOARD_SIZE_X; j++) {
+            BoardCoord *bc = [board.board objectAtIndex:BOARD_SIZE_X*i + j];
+            [scene renderBoardX:[bc x] Y:[bc y]];
+        }
+    }
 }
 
 - (BOOL)shouldAutorotate

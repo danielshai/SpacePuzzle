@@ -8,5 +8,7 @@
 #import <SpriteKit/SpriteKit.h>
 
 @interface MainScene : SKScene
+@property (nonatomic, assign) SKTexture *square;
+-(void) renderBoardX:(NSInteger) x Y: (NSInteger) y;
 
 @end

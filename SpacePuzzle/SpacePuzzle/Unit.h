@@ -1,10 +1,9 @@
-//
-//  Unit.h
-//  SpacePuzzle
-//
-//  Created by IxD on 07/11/13.
-//  Copyright (c) 2013 WMD. All rights reserved.
-//
+/*
+    Unit.h
+    SpacePuzzle
+ 
+    A parent class the playable units in the game.
+*/
 
 #import "Position.h"
 
