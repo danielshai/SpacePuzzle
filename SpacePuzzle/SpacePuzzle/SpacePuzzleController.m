@@ -7,6 +7,9 @@
 @implementation SpacePuzzleController
 @synthesize board = _board;
 @synthesize scene = _scene;
+@synthesize currentUnit = _currentUnit;
+@synthesize bigL = _bigL;
+@synthesize littleJohn = _littleJohn;
 
 -(void)viewDidLoad
 {
@@ -22,11 +25,17 @@
     _scene.scaleMode = SKSceneScaleModeAspectFill;
     
     [self setupBoard];
+    [self setupUnits];
     
     // Present the scene.
     [skView presentScene:_scene];
+    
+    // Add observers to the view.
+    [self observeText:UNIT_MOVED Selector:@selector(unitMoved:)];
 }
 
+/*
+ *  Loads the board according to the level. ADD LEVELFACTORY!!!. */
 -(void)setupBoard {
     // TEMP CODE.
     _board = [[Board alloc] init];
@@ -40,11 +49,34 @@
     for(int i = 0; i < BOARD_SIZE_Y; i++) {
         for(int j = 0; j < BOARD_SIZE_X; j++) {
             BoardCoord *bc = [_board.board objectAtIndex:BOARD_SIZE_X*i + j];
-            [_scene renderBoardX:[bc x] Y:[bc y]];
+            [_scene setupBoardX:[bc x] Y:[bc y]];
         }
     }
 }
 
+/* 
+ *  Called when a notification of unit movement is sent from the |MainScene|. Updates the data model of the
+ *  unit accordingly. */
+-(void)unitMoved:(NSNotification *)notification{
+    NSLog(@"MOVED!");
+}
+
+/*
+ *  Creates the units. */
+-(void)setupUnits {
+    _bigL = [[BigL alloc] init];
+    _littleJohn = [[LittleJohn alloc] init];
+    
+    _currentUnit = _littleJohn;
+    
+    [_scene setupUnits];
+}
+
+/*
+ *  Adds a notification to listen to from this class. */
+-(void)observeText:(NSString *)text Selector:(SEL)selector {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:selector name:text object:nil];
+}
 
 -(BOOL)shouldAutorotate
 {

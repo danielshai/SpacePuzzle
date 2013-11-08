@@ -4,6 +4,8 @@
  
     Contains static utility functions in the form of converters between pixels and board
     coordinates.
+ 
+    DOES NOT CONVERT CORRECTLY.
 */
 #import <SpriteKit/SpriteKit.h>
 #import <Foundation/Foundation.h>
@@ -16,6 +18,6 @@
 +(NSInteger) convertXPixelToCoord:(NSInteger) pixel shift: (NSInteger) spriteShift;
 +(NSInteger) convertYPixelToCoord:(NSInteger) pixel shift: (NSInteger) spriteShift;
 +(CGPoint) convertCoordToPixel:(NSInteger) coordX yCoord: (NSInteger) coordY shiftX: (NSInteger)ssX shiftY
-                              :(NSInteger) ssY winSize: (float) winSizeY;
+                              :(NSInteger) ssY winSizeY: (float) winSizeY;
 +(CGPoint) convertStoneCoordToPixel:(NSInteger) x yCoord: (NSInteger) y;
 @end

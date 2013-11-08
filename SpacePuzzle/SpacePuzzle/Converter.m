@@ -59,7 +59,7 @@
  *  Converts a board coordinate (x,y) to pixels (x,y) using the |spriteShift| of a sprite to 
  *  get the "true" value. */
 +(CGPoint) convertCoordToPixel:(NSInteger) coordX yCoord: (NSInteger) coordY shiftX: (NSInteger)ssX shiftY:
-                              (NSInteger) ssY winSize: (float) winSizeY {
+                              (NSInteger) ssY winSizeY: (float) winSizeY {
     NSInteger xPixel;
     NSInteger yPixel;
     

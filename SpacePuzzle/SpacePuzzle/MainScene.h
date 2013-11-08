@@ -6,9 +6,16 @@
  */
 
 #import <SpriteKit/SpriteKit.h>
+#import "Macros.h"
+#import "Converter.h"
 
 @interface MainScene : SKScene
-@property (nonatomic, assign) SKTexture *square;
--(void)renderBoardX:(NSInteger) x Y: (NSInteger) y;
+@property (nonatomic, retain) SKTexture *square;
+@property (nonatomic, retain) SKSpriteNode *bigL;
+@property (nonatomic, retain) SKSpriteNode *littleJohn;
+
+-(void)setupBoardX:(NSInteger)x Y: (NSInteger)y;
+-(void)setupUnits;
+-(void)notifyText:(NSString *)text Object: (NSObject*)object Key: (NSString*)key;
 
 @end
