@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 WMD. All rights reserved.
 //
 
-#import "GViewMyScene.h"
+#import "BoardViewScene.h"
 
-@implementation GViewMyScene
+@implementation BoardViewScene
 
 -(id)initWithSize:(CGSize)size {    
     if (self = [super initWithSize:size]) {

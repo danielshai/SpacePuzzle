@@ -13,13 +13,16 @@
 		E654B2F01830F7DD006BFCAC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E654B2EF1830F7DD006BFCAC /* main.m */; };
 		E654B2F41830F7DD006BFCAC /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = E654B2F21830F7DD006BFCAC /* Credits.rtf */; };
 		E654B2F61830F7DD006BFCAC /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = E654B2F51830F7DD006BFCAC /* MainMenu.xib */; };
-		E654B2F81830F7DD006BFCAC /* GViewMyScene.m in Sources */ = {isa = PBXBuildFile; fileRef = E654B2F71830F7DD006BFCAC /* GViewMyScene.m */; };
+		E654B2F81830F7DD006BFCAC /* BoardViewScene.m in Sources */ = {isa = PBXBuildFile; fileRef = E654B2F71830F7DD006BFCAC /* BoardViewScene.m */; };
 		E654B2FB1830F7DD006BFCAC /* GViewAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E654B2FA1830F7DD006BFCAC /* GViewAppDelegate.m */; };
 		E654B3001830F7DD006BFCAC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E654B2FF1830F7DD006BFCAC /* Images.xcassets */; };
 		E654B3071830F7DD006BFCAC /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E654B3061830F7DD006BFCAC /* XCTest.framework */; };
 		E654B3081830F7DD006BFCAC /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E654B2E11830F7DD006BFCAC /* Cocoa.framework */; };
 		E654B3101830F7DD006BFCAC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E654B30E1830F7DD006BFCAC /* InfoPlist.strings */; };
 		E654B3121830F7DD006BFCAC /* SpacePuzzleEditorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E654B3111830F7DD006BFCAC /* SpacePuzzleEditorTests.m */; };
+		E6A0EEE318311690006BF476 /* Board.m in Sources */ = {isa = PBXBuildFile; fileRef = E6A0EEDE18311690006BF476 /* Board.m */; };
+		E6A0EEE418311690006BF476 /* BoardCoord.m in Sources */ = {isa = PBXBuildFile; fileRef = E6A0EEE018311690006BF476 /* BoardCoord.m */; };
+		E6A0EEE518311690006BF476 /* Position.m in Sources */ = {isa = PBXBuildFile; fileRef = E6A0EEE218311690006BF476 /* Position.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,8 +48,8 @@
 		E654B2F11830F7DD006BFCAC /* SpacePuzzleEditor-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SpacePuzzleEditor-Prefix.pch"; sourceTree = "<group>"; };
 		E654B2F31830F7DD006BFCAC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
 		E654B2F51830F7DD006BFCAC /* MainMenu.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
-		E654B2F71830F7DD006BFCAC /* GViewMyScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GViewMyScene.m; sourceTree = "<group>"; };
-		E654B2F91830F7DD006BFCAC /* GViewMyScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GViewMyScene.h; sourceTree = "<group>"; };
+		E654B2F71830F7DD006BFCAC /* BoardViewScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BoardViewScene.m; sourceTree = "<group>"; };
+		E654B2F91830F7DD006BFCAC /* BoardViewScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BoardViewScene.h; sourceTree = "<group>"; };
 		E654B2FA1830F7DD006BFCAC /* GViewAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GViewAppDelegate.m; sourceTree = "<group>"; };
 		E654B2FC1830F7DD006BFCAC /* GViewAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GViewAppDelegate.h; sourceTree = "<group>"; };
 		E654B2FF1830F7DD006BFCAC /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -55,6 +58,12 @@
 		E654B30D1830F7DD006BFCAC /* SpacePuzzleEditorTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SpacePuzzleEditorTests-Info.plist"; sourceTree = "<group>"; };
 		E654B30F1830F7DD006BFCAC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		E654B3111830F7DD006BFCAC /* SpacePuzzleEditorTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SpacePuzzleEditorTests.m; sourceTree = "<group>"; };
+		E6A0EEDD18311690006BF476 /* Board.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Board.h; path = ../../SpacePuzzle/SpacePuzzle/Board.h; sourceTree = "<group>"; };
+		E6A0EEDE18311690006BF476 /* Board.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Board.m; path = ../../SpacePuzzle/SpacePuzzle/Board.m; sourceTree = "<group>"; };
+		E6A0EEDF18311690006BF476 /* BoardCoord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BoardCoord.h; path = ../../SpacePuzzle/SpacePuzzle/BoardCoord.h; sourceTree = "<group>"; };
+		E6A0EEE018311690006BF476 /* BoardCoord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BoardCoord.m; path = ../../SpacePuzzle/SpacePuzzle/BoardCoord.m; sourceTree = "<group>"; };
+		E6A0EEE118311690006BF476 /* Position.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Position.h; path = ../../SpacePuzzle/SpacePuzzle/Position.h; sourceTree = "<group>"; };
+		E6A0EEE218311690006BF476 /* Position.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Position.m; path = ../../SpacePuzzle/SpacePuzzle/Position.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,9 +131,10 @@
 		E654B2E91830F7DD006BFCAC /* SpacePuzzleEditor */ = {
 			isa = PBXGroup;
 			children = (
+				E6A0EEE6183116AB006BF476 /* Model */,
 				E654B2F51830F7DD006BFCAC /* MainMenu.xib */,
-				E654B2F71830F7DD006BFCAC /* GViewMyScene.m */,
-				E654B2F91830F7DD006BFCAC /* GViewMyScene.h */,
+				E654B2F71830F7DD006BFCAC /* BoardViewScene.m */,
+				E654B2F91830F7DD006BFCAC /* BoardViewScene.h */,
 				E654B2FA1830F7DD006BFCAC /* GViewAppDelegate.m */,
 				E654B2FC1830F7DD006BFCAC /* GViewAppDelegate.h */,
 				E654B2FF1830F7DD006BFCAC /* Images.xcassets */,
@@ -161,6 +171,19 @@
 				E654B30E1830F7DD006BFCAC /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E6A0EEE6183116AB006BF476 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E6A0EEDD18311690006BF476 /* Board.h */,
+				E6A0EEDE18311690006BF476 /* Board.m */,
+				E6A0EEDF18311690006BF476 /* BoardCoord.h */,
+				E6A0EEE018311690006BF476 /* BoardCoord.m */,
+				E6A0EEE118311690006BF476 /* Position.h */,
+				E6A0EEE218311690006BF476 /* Position.m */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -261,8 +284,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E6A0EEE518311690006BF476 /* Position.m in Sources */,
 				E654B2F01830F7DD006BFCAC /* main.m in Sources */,
-				E654B2F81830F7DD006BFCAC /* GViewMyScene.m in Sources */,
+				E6A0EEE418311690006BF476 /* BoardCoord.m in Sources */,
+				E654B2F81830F7DD006BFCAC /* BoardViewScene.m in Sources */,
+				E6A0EEE318311690006BF476 /* Board.m in Sources */,
 				E654B2FB1830F7DD006BFCAC /* GViewAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -468,6 +494,7 @@
 				E654B3171830F7DD006BFCAC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E654B3181830F7DD006BFCAC /* Build configuration list for PBXNativeTarget "SpacePuzzleEditorTests" */ = {
 			isa = XCConfigurationList;
@@ -476,6 +503,7 @@
 				E654B31A1830F7DD006BFCAC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

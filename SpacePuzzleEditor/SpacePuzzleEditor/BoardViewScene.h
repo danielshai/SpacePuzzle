@@ -8,6 +8,6 @@
 
 #import <SpriteKit/SpriteKit.h>
 
-@interface GViewMyScene : SKScene
+@interface BoardViewScene : SKScene
 
 @end
