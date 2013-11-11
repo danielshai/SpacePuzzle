@@ -7,32 +7,41 @@
 //
 
 #import "GViewAppDelegate.h"
-#import "BoardViewScene.h"
+#import "BoardScene.h"
 
 @implementation GViewAppDelegate
 
 @synthesize window = _window;
 @synthesize board = _board;
 @synthesize scene = _scene;
+@synthesize skView = _skView;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
+ //   _window.acceptsMouseMovedEvents = YES;
+   // [_window makeFirstResponder:self.skView.scene];
+ 
     /* Pick a size for the scene */
-    _scene = [BoardViewScene sceneWithSize:CGSizeMake(480, 360)]; //480, 360
-
+    _scene = [BoardScene sceneWithSize:CGSizeMake(480, 360)]; //480, 360
+    
     /* Set the scale mode to scale to fit the window */
     _scene.scaleMode = SKSceneScaleModeAspectFit;
 
-    [self.skView presentScene:_scene];
-
+    [_skView presentScene:_scene];
+  //  [_skView add
    // self.skView.showsFPS = YES;
    // self.skView.showsNodeCount = YES;
-    
+ 
     [self setupBoard];
 }
 
+
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender {
     return YES;
+}
+
+-(void)mouseDownAtPosition:(CGPoint)pos {
+    NSLog(@"%f", pos.x);
 }
 
 -(void)setupBoard {

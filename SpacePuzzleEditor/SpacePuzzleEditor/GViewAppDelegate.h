@@ -9,13 +9,16 @@
 #import <Cocoa/Cocoa.h>
 #import <SpriteKit/SpriteKit.h>
 #import "Board.h"
-#import "BoardViewScene.h"
+#import "BoardScene.h"
+
+@class BoardView;
 
 @interface GViewAppDelegate : NSObject <NSApplicationDelegate>
 
-@property (assign) IBOutlet NSWindow *window;
-@property (assign) IBOutlet SKView *skView;
+@property (retain) IBOutlet NSWindow *window;
+@property (retain) IBOutlet SKView *skView;
 @property (nonatomic, retain) Board *board;
-@property (nonatomic, retain) BoardViewScene *scene;
+@property (nonatomic, retain) BoardScene *scene;
+-(void)mouseDownAtPosition:(CGPoint)pos;
 -(void)setupBoard;
 @end

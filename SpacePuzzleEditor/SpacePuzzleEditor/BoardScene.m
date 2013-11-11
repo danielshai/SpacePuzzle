@@ -6,11 +6,12 @@
 //  Copyright (c) 2013 WMD. All rights reserved.
 //
 
-#import "BoardViewScene.h"
+#import "BoardScene.h"
 
-@implementation BoardViewScene
+@implementation BoardScene
 @synthesize square = _square;
 @synthesize unplayable = _unplayable;
+@synthesize highlight = _highlight;
 
 -(id)initWithSize:(CGSize)size {    
     if (self = [super initWithSize:size]) {
@@ -20,6 +21,11 @@
         self.size = CGSizeMake(size.width, size.height);
         _square = [SKTexture textureWithImageNamed:@"square.gif"];
         _unplayable = [SKTexture textureWithImageNamed:@"grey.png"];
+        _highlight = [SKSpriteNode spriteNodeWithImageNamed:@"hl.png"];
+        _highlight.size = CGSizeMake(40, 40);
+
+        
+        //[self addTrackingArea:trackingArea];
     }
     return self;
 }
@@ -40,6 +46,15 @@
     
     [self addChild:sprite];
      */
+    SKView *sk = self.view;
+    NSPoint mouseLoc = [sk convertPoint:[theEvent locationInWindow] fromView:nil];
+    CGPoint loc = CGPointMake(mouseLoc.x*480/(sk.frame.size.width), mouseLoc.y);
+    loc = [Converter convertMousePosToCoord:loc];
+    NSLog(@"%f",loc.x);
+}
+
+-(void)mouseMoved:(NSEvent *)theEvent {
+    NSLog(@"HEJ2");
 }
 
 -(void)update:(CFTimeInterval)currentTime {
