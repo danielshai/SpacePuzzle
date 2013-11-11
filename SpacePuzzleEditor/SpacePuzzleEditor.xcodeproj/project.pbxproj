@@ -1,0 +1,487 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		E654B2E21830F7DD006BFCAC /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E654B2E11830F7DD006BFCAC /* Cocoa.framework */; };
+		E654B2E41830F7DD006BFCAC /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E654B2E31830F7DD006BFCAC /* SpriteKit.framework */; };
+		E654B2EE1830F7DD006BFCAC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E654B2EC1830F7DD006BFCAC /* InfoPlist.strings */; };
+		E654B2F01830F7DD006BFCAC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E654B2EF1830F7DD006BFCAC /* main.m */; };
+		E654B2F41830F7DD006BFCAC /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = E654B2F21830F7DD006BFCAC /* Credits.rtf */; };
+		E654B2F61830F7DD006BFCAC /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = E654B2F51830F7DD006BFCAC /* MainMenu.xib */; };
+		E654B2F81830F7DD006BFCAC /* GViewMyScene.m in Sources */ = {isa = PBXBuildFile; fileRef = E654B2F71830F7DD006BFCAC /* GViewMyScene.m */; };
+		E654B2FB1830F7DD006BFCAC /* GViewAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E654B2FA1830F7DD006BFCAC /* GViewAppDelegate.m */; };
+		E654B2FE1830F7DD006BFCAC /* Spaceship.png in Resources */ = {isa = PBXBuildFile; fileRef = E654B2FD1830F7DD006BFCAC /* Spaceship.png */; };
+		E654B3001830F7DD006BFCAC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E654B2FF1830F7DD006BFCAC /* Images.xcassets */; };
+		E654B3071830F7DD006BFCAC /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E654B3061830F7DD006BFCAC /* XCTest.framework */; };
+		E654B3081830F7DD006BFCAC /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E654B2E11830F7DD006BFCAC /* Cocoa.framework */; };
+		E654B3101830F7DD006BFCAC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E654B30E1830F7DD006BFCAC /* InfoPlist.strings */; };
+		E654B3121830F7DD006BFCAC /* SpacePuzzleEditorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E654B3111830F7DD006BFCAC /* SpacePuzzleEditorTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		E654B3091830F7DD006BFCAC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E654B2D61830F7DD006BFCAC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E654B2DD1830F7DD006BFCAC;
+			remoteInfo = SpacePuzzleEditor;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		E654B2DE1830F7DD006BFCAC /* SpacePuzzleEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpacePuzzleEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E654B2E11830F7DD006BFCAC /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		E654B2E31830F7DD006BFCAC /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
+		E654B2E61830F7DD006BFCAC /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		E654B2E71830F7DD006BFCAC /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		E654B2E81830F7DD006BFCAC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		E654B2EB1830F7DD006BFCAC /* SpacePuzzleEditor-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SpacePuzzleEditor-Info.plist"; sourceTree = "<group>"; };
+		E654B2ED1830F7DD006BFCAC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		E654B2EF1830F7DD006BFCAC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		E654B2F11830F7DD006BFCAC /* SpacePuzzleEditor-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SpacePuzzleEditor-Prefix.pch"; sourceTree = "<group>"; };
+		E654B2F31830F7DD006BFCAC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		E654B2F51830F7DD006BFCAC /* MainMenu.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
+		E654B2F71830F7DD006BFCAC /* GViewMyScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GViewMyScene.m; sourceTree = "<group>"; };
+		E654B2F91830F7DD006BFCAC /* GViewMyScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GViewMyScene.h; sourceTree = "<group>"; };
+		E654B2FA1830F7DD006BFCAC /* GViewAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GViewAppDelegate.m; sourceTree = "<group>"; };
+		E654B2FC1830F7DD006BFCAC /* GViewAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GViewAppDelegate.h; sourceTree = "<group>"; };
+		E654B2FD1830F7DD006BFCAC /* Spaceship.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Spaceship.png; sourceTree = "<group>"; };
+		E654B2FF1830F7DD006BFCAC /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		E654B3051830F7DD006BFCAC /* SpacePuzzleEditorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpacePuzzleEditorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E654B3061830F7DD006BFCAC /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		E654B30D1830F7DD006BFCAC /* SpacePuzzleEditorTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SpacePuzzleEditorTests-Info.plist"; sourceTree = "<group>"; };
+		E654B30F1830F7DD006BFCAC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		E654B3111830F7DD006BFCAC /* SpacePuzzleEditorTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SpacePuzzleEditorTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		E654B2DB1830F7DD006BFCAC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E654B2E41830F7DD006BFCAC /* SpriteKit.framework in Frameworks */,
+				E654B2E21830F7DD006BFCAC /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E654B3021830F7DD006BFCAC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E654B3081830F7DD006BFCAC /* Cocoa.framework in Frameworks */,
+				E654B3071830F7DD006BFCAC /* XCTest.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		E654B2D51830F7DD006BFCAC = {
+			isa = PBXGroup;
+			children = (
+				E654B2E91830F7DD006BFCAC /* SpacePuzzleEditor */,
+				E654B30B1830F7DD006BFCAC /* SpacePuzzleEditorTests */,
+				E654B2E01830F7DD006BFCAC /* Frameworks */,
+				E654B2DF1830F7DD006BFCAC /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		E654B2DF1830F7DD006BFCAC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E654B2DE1830F7DD006BFCAC /* SpacePuzzleEditor.app */,
+				E654B3051830F7DD006BFCAC /* SpacePuzzleEditorTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E654B2E01830F7DD006BFCAC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E654B2E11830F7DD006BFCAC /* Cocoa.framework */,
+				E654B2E31830F7DD006BFCAC /* SpriteKit.framework */,
+				E654B3061830F7DD006BFCAC /* XCTest.framework */,
+				E654B2E51830F7DD006BFCAC /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E654B2E51830F7DD006BFCAC /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E654B2E61830F7DD006BFCAC /* AppKit.framework */,
+				E654B2E71830F7DD006BFCAC /* CoreData.framework */,
+				E654B2E81830F7DD006BFCAC /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		E654B2E91830F7DD006BFCAC /* SpacePuzzleEditor */ = {
+			isa = PBXGroup;
+			children = (
+				E654B2F51830F7DD006BFCAC /* MainMenu.xib */,
+				E654B2F71830F7DD006BFCAC /* GViewMyScene.m */,
+				E654B2F91830F7DD006BFCAC /* GViewMyScene.h */,
+				E654B2FA1830F7DD006BFCAC /* GViewAppDelegate.m */,
+				E654B2FC1830F7DD006BFCAC /* GViewAppDelegate.h */,
+				E654B2FD1830F7DD006BFCAC /* Spaceship.png */,
+				E654B2FF1830F7DD006BFCAC /* Images.xcassets */,
+				E654B2EA1830F7DD006BFCAC /* Supporting Files */,
+			);
+			path = SpacePuzzleEditor;
+			sourceTree = "<group>";
+		};
+		E654B2EA1830F7DD006BFCAC /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				E654B2EB1830F7DD006BFCAC /* SpacePuzzleEditor-Info.plist */,
+				E654B2EC1830F7DD006BFCAC /* InfoPlist.strings */,
+				E654B2EF1830F7DD006BFCAC /* main.m */,
+				E654B2F11830F7DD006BFCAC /* SpacePuzzleEditor-Prefix.pch */,
+				E654B2F21830F7DD006BFCAC /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E654B30B1830F7DD006BFCAC /* SpacePuzzleEditorTests */ = {
+			isa = PBXGroup;
+			children = (
+				E654B3111830F7DD006BFCAC /* SpacePuzzleEditorTests.m */,
+				E654B30C1830F7DD006BFCAC /* Supporting Files */,
+			);
+			path = SpacePuzzleEditorTests;
+			sourceTree = "<group>";
+		};
+		E654B30C1830F7DD006BFCAC /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				E654B30D1830F7DD006BFCAC /* SpacePuzzleEditorTests-Info.plist */,
+				E654B30E1830F7DD006BFCAC /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E654B2DD1830F7DD006BFCAC /* SpacePuzzleEditor */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E654B3151830F7DD006BFCAC /* Build configuration list for PBXNativeTarget "SpacePuzzleEditor" */;
+			buildPhases = (
+				E654B2DA1830F7DD006BFCAC /* Sources */,
+				E654B2DB1830F7DD006BFCAC /* Frameworks */,
+				E654B2DC1830F7DD006BFCAC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SpacePuzzleEditor;
+			productName = SpacePuzzleEditor;
+			productReference = E654B2DE1830F7DD006BFCAC /* SpacePuzzleEditor.app */;
+			productType = "com.apple.product-type.application";
+		};
+		E654B3041830F7DD006BFCAC /* SpacePuzzleEditorTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E654B3181830F7DD006BFCAC /* Build configuration list for PBXNativeTarget "SpacePuzzleEditorTests" */;
+			buildPhases = (
+				E654B3011830F7DD006BFCAC /* Sources */,
+				E654B3021830F7DD006BFCAC /* Frameworks */,
+				E654B3031830F7DD006BFCAC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E654B30A1830F7DD006BFCAC /* PBXTargetDependency */,
+			);
+			name = SpacePuzzleEditorTests;
+			productName = SpacePuzzleEditorTests;
+			productReference = E654B3051830F7DD006BFCAC /* SpacePuzzleEditorTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E654B2D61830F7DD006BFCAC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = GView;
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = WMD;
+				TargetAttributes = {
+					E654B3041830F7DD006BFCAC = {
+						TestTargetID = E654B2DD1830F7DD006BFCAC;
+					};
+				};
+			};
+			buildConfigurationList = E654B2D91830F7DD006BFCAC /* Build configuration list for PBXProject "SpacePuzzleEditor" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = E654B2D51830F7DD006BFCAC;
+			productRefGroup = E654B2DF1830F7DD006BFCAC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E654B2DD1830F7DD006BFCAC /* SpacePuzzleEditor */,
+				E654B3041830F7DD006BFCAC /* SpacePuzzleEditorTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		E654B2DC1830F7DD006BFCAC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E654B2FE1830F7DD006BFCAC /* Spaceship.png in Resources */,
+				E654B3001830F7DD006BFCAC /* Images.xcassets in Resources */,
+				E654B2EE1830F7DD006BFCAC /* InfoPlist.strings in Resources */,
+				E654B2F41830F7DD006BFCAC /* Credits.rtf in Resources */,
+				E654B2F61830F7DD006BFCAC /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E654B3031830F7DD006BFCAC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E654B3101830F7DD006BFCAC /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E654B2DA1830F7DD006BFCAC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E654B2F01830F7DD006BFCAC /* main.m in Sources */,
+				E654B2F81830F7DD006BFCAC /* GViewMyScene.m in Sources */,
+				E654B2FB1830F7DD006BFCAC /* GViewAppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E654B3011830F7DD006BFCAC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E654B3121830F7DD006BFCAC /* SpacePuzzleEditorTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		E654B30A1830F7DD006BFCAC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E654B2DD1830F7DD006BFCAC /* SpacePuzzleEditor */;
+			targetProxy = E654B3091830F7DD006BFCAC /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		E654B2EC1830F7DD006BFCAC /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E654B2ED1830F7DD006BFCAC /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		E654B2F21830F7DD006BFCAC /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E654B2F31830F7DD006BFCAC /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		E654B30E1830F7DD006BFCAC /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E654B30F1830F7DD006BFCAC /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		E654B3131830F7DD006BFCAC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		E654B3141830F7DD006BFCAC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		E654B3161830F7DD006BFCAC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SpacePuzzleEditor/SpacePuzzleEditor-Prefix.pch";
+				INFOPLIST_FILE = "SpacePuzzleEditor/SpacePuzzleEditor-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		E654B3171830F7DD006BFCAC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SpacePuzzleEditor/SpacePuzzleEditor-Prefix.pch";
+				INFOPLIST_FILE = "SpacePuzzleEditor/SpacePuzzleEditor-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		E654B3191830F7DD006BFCAC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/SpacePuzzleEditor.app/Contents/MacOS/SpacePuzzleEditor";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SpacePuzzleEditor/SpacePuzzleEditor-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "SpacePuzzleEditorTests/SpacePuzzleEditorTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		E654B31A1830F7DD006BFCAC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/SpacePuzzleEditor.app/Contents/MacOS/SpacePuzzleEditor";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SpacePuzzleEditor/SpacePuzzleEditor-Prefix.pch";
+				INFOPLIST_FILE = "SpacePuzzleEditorTests/SpacePuzzleEditorTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E654B2D91830F7DD006BFCAC /* Build configuration list for PBXProject "SpacePuzzleEditor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E654B3131830F7DD006BFCAC /* Debug */,
+				E654B3141830F7DD006BFCAC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E654B3151830F7DD006BFCAC /* Build configuration list for PBXNativeTarget "SpacePuzzleEditor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E654B3161830F7DD006BFCAC /* Debug */,
+				E654B3171830F7DD006BFCAC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		E654B3181830F7DD006BFCAC /* Build configuration list for PBXNativeTarget "SpacePuzzleEditorTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E654B3191830F7DD006BFCAC /* Debug */,
+				E654B31A1830F7DD006BFCAC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = E654B2D61830F7DD006BFCAC /* Project object */;
+}
