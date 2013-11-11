@@ -13,16 +13,17 @@
 
 @synthesize window = _window;
 @synthesize board = _board;
+@synthesize scene = _scene;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     /* Pick a size for the scene */
-    SKScene *scene = [BoardViewScene sceneWithSize:CGSizeMake(480, 360)]; //480, 360
+    _scene = [BoardViewScene sceneWithSize:CGSizeMake(480, 360)]; //480, 360
 
     /* Set the scale mode to scale to fit the window */
-    scene.scaleMode = SKSceneScaleModeAspectFit;
+    _scene.scaleMode = SKSceneScaleModeAspectFit;
 
-    [self.skView presentScene:scene];
+    [self.skView presentScene:_scene];
 
    // self.skView.showsFPS = YES;
    // self.skView.showsNodeCount = YES;
@@ -34,12 +35,12 @@
     return YES;
 }
 
-
 -(void)setupBoard {
-    // TEMP CODE.
-    NSInteger boardSizeX = 7;
-    NSInteger boardSizeY = 7;
     _board = [[Board alloc] init];
+    // TEMP CODE.
+    NSInteger boardSizeX = [_board boardSizeX];
+    NSInteger boardSizeY = [_board boardSizeY];
+
     // Load the board.
     NSString *levelNr = @"1";
     NSString *pathBoard = [NSString stringWithFormat:@"%@%@",@"BoardListLevel",levelNr];
@@ -50,7 +51,8 @@
     for(int i = 0; i < boardSizeY; i++) {
         for(int j = 0; j < boardSizeX; j++) {
             BoardCoord *bc = [_board.board objectAtIndex:boardSizeX*i + j];
-            //[_scene setupBoardX:[bc x] Y:[bc y]];
+            //[[_scene setupBoardX:[bc x] Y:[bc y]];]
+            [_scene setupBoardX:[bc x] Y:[bc y] TileSize:[_board tilesize] BeginPoint:[_board boardBegin] Status:[bc status]];
             // SHOW IT HERE
         }
     }

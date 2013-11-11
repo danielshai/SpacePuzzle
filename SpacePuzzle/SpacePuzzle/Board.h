@@ -11,8 +11,11 @@
 
 @interface Board : NSObject
 @property (nonatomic, strong) NSMutableArray *board;
+@property (nonatomic, assign) NSInteger tilesize;
+@property (nonatomic, assign) NSInteger boardSizeX;
+@property (nonatomic, assign) NSInteger boardSizeY;
+@property (nonatomic, assign) CGPoint boardBegin;
+
 -(void) loadBoard:(NSString*) path;
--(NSInteger) getBoardSizeX;
--(NSInteger) getBoardSizeY;
 
 @end

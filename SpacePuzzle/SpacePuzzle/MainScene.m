@@ -27,7 +27,6 @@
         
         SKSpriteNode *touchedNode = (SKSpriteNode *)[self nodeAtPoint:location];
         
-        
         // TEMP CODE
         _littleJohn.position = location;
         [self notifyText:UNIT_MOVED Object:nil Key:UNIT_MOVED];

@@ -2,22 +2,22 @@
 #import "Board.h"
 #import "Macros.h"
 
-@interface Board() {
-@private
-    NSInteger boardSizeX;
-    NSInteger boardSizeY;
-}
-@end
-
 @implementation Board
 
 @synthesize board = _board;
+@synthesize tilesize = _tilesize;
+@synthesize boardSizeX = _boardSizeX;
+@synthesize boardSizeY = _boardSizeY;
+@synthesize boardBegin = _boardBegin;
 
 -(id) init {
     if(self = [super init]){
         _board = [[NSMutableArray alloc] init];
-        boardSizeX = 0;
-        boardSizeY = 0;
+        _boardSizeX = 10;
+        _boardSizeY = 8;
+        _tilesize = 44;
+        _boardBegin.x = 5;
+        _boardBegin.y = 360;
     }
     return self;
 }
@@ -34,33 +34,25 @@
     [_board removeAllObjects];
     
     //i = rows
-    for (int i = 0; i < BOARD_SIZE_Y; i++) {
+    for (int i = 0; i < _boardSizeY; i++) {
         //j = columns
-        for (int j = 0; j < BOARD_SIZE_X; j++) {
+        for (int j = 0; j < _boardSizeX; j++) {
             BoardCoord* bc = [[BoardCoord alloc] init];
             bc.x = j;
             bc.y = i;
-            if(i*BOARD_SIZE_X + j < [arr count]) {
-                bc.status = [[arr objectAtIndex:((i*BOARD_SIZE_X) + j)] intValue];
+            if(i*_boardSizeX + j < [arr count]) {
+                bc.status = [[arr objectAtIndex:((i*_boardSizeX) + j)] intValue];
             } else {
                 // If the |BoardList| is incomplete for some reason, fill it up with
                 // |MAPSTATUS_UNPLAYABLE|.
                 bc.status = MAPSTATUS_UNPLAYABLE;
             }
             //(Row number * y) + Column number)
-            [_board insertObject:bc atIndex:((i*BOARD_SIZE_X) + j)];
+            [_board insertObject:bc atIndex:((i*_boardSizeX) + j)];
         }
     }
-    boardSizeX = BOARD_SIZE_X;
-    boardSizeY = BOARD_SIZE_Y;
-}
-
--(NSInteger) getBoardSizeX {
-    return boardSizeX;
-}
-
--(NSInteger) getBoardSizeY {
-    return boardSizeY;
+    //_boardSizeX = BOARD_SIZE_X;
+    //_boardSizeY = BOARD_SIZE_Y;
 }
 
 - (void) print {
