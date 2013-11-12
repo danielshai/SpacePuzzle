@@ -10,7 +10,8 @@
 #import "Converter.h"
 
 @interface BoardScene : SKScene {
-    NSTrackingArea *tArea;
+    NSInteger statusOfPalette;
+    SKTexture *currentTexture;
 }
 @property (nonatomic, retain) SKTexture *square;
 @property (nonatomic, retain) SKTexture *unplayable;

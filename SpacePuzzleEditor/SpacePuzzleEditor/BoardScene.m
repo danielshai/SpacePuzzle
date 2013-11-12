@@ -25,6 +25,8 @@
         _highlight = [SKSpriteNode spriteNodeWithImageNamed:@"hl.png"];
         _highlight.size = CGSizeMake(40, 40);
         _boardSprites = [[NSMutableArray alloc] init];
+        statusOfPalette = MAPSTATUS_EMPTY;
+        currentTexture = _square;
     }
     return self;
 }
@@ -45,17 +47,21 @@
     
     [self addChild:sprite];
     */
+    
+    // Find mouse location and convert.
     SKView *sk = self.view;
     NSPoint mouseLoc = [sk convertPoint:[theEvent locationInWindow] fromView:nil];
     CGPoint loc = CGPointMake(mouseLoc.x*360/(sk.frame.size.width), mouseLoc.y*480/(sk.frame.size.height));
     
     loc = [Converter convertMousePosToCoord:loc];
-    NSArray *arr = [NSArray arrayWithObjects:[NSValue valueWithPoint:loc],nil];
     
+    // Notify observers.
+    NSArray *arr = [NSArray arrayWithObjects:[NSValue valueWithPoint:loc],nil];
     [self notifyText:@"MouseDown" Object:arr Key:@"MouseDown"];
     
+    // Change texture of sprite.
     SKSpriteNode * s = [_boardSprites objectAtIndex:loc.y * BOARD_SIZE_X + loc.x];
-    s.texture = _square;
+    s.texture = currentTexture;
 }
 
 -(void)update:(CFTimeInterval)currentTime {

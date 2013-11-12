@@ -146,8 +146,8 @@
 			children = (
 				E6A0EEE6183116AB006BF476 /* Model */,
 				E654B2F51830F7DD006BFCAC /* MainMenu.xib */,
-				E654B2F71830F7DD006BFCAC /* BoardScene.m */,
 				E654B2F91830F7DD006BFCAC /* BoardScene.h */,
+				E654B2F71830F7DD006BFCAC /* BoardScene.m */,
 				E654B2FA1830F7DD006BFCAC /* GViewAppDelegate.m */,
 				E654B2FC1830F7DD006BFCAC /* GViewAppDelegate.h */,
 				E654B2FF1830F7DD006BFCAC /* Images.xcassets */,

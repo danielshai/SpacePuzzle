@@ -44,9 +44,10 @@
     NSDictionary *userInfo = notification.userInfo;
     NSSet *objectSent = [userInfo objectForKey:@"MouseDown"];
     NSArray *touchList = [objectSent allObjects];
-    NSLog(@"%@", [touchList objectAtIndex:0]);
-    
-    
+    NSValue *val = [touchList objectAtIndex:0];
+   
+    BoardCoord *bc = [[_board board] objectAtIndex:val.pointValue.y * BOARD_SIZE_X + val.pointValue.x];
+    bc.status = 0;
 }
 
 -(void)setupBoard {
