@@ -6,15 +6,21 @@
 //  Copyright (c) 2013 WMD. All rights reserved.
 //
 
-#import "GViewAppDelegate.h"
+#import "AppDelegate.h"
 #import "BoardScene.h"
 
-@implementation GViewAppDelegate
+@implementation AppDelegate
 
 @synthesize window = _window;
 @synthesize board = _board;
 @synthesize scene = _scene;
 @synthesize skView = _skView;
+//@synthesize palette = _palette;
+/*
+ @synthesize solidPalette = _solidPalette;
+ @synthesize crackedPalette = _crackedPalette;
+ @synthesize voidPalette = _voidPalette;
+ */
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
@@ -30,8 +36,8 @@
     [_skView presentScene:_scene];
   //  [_skView add
    // self.skView.showsFPS = YES;
-   // self.skView.showsNodeCount = YES;
- 
+   // self.skView.showsNodeCount = YES;|
+   
     [self setupBoard];
     [self observeText:@"MouseDown" Selector:@selector(mouseDownAtPosition:)];
 }

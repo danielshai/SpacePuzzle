@@ -124,22 +124,101 @@
                 </constraints>
             </view>
         </window>
-        <window title="Palette" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" animationBehavior="default" id="OQd-pb-Vvp" customClass="NSPanel">
+        <window title="Palette" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" animationBehavior="default" id="OQd-pb-Vvp" customClass="Palette">
             <windowStyleMask key="styleMask" titled="YES" utility="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="105" y="68" width="276" height="378"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1280" height="800"/>
             <view key="contentView" id="vlI-Vs-b8g">
                 <rect key="frame" x="0.0" y="0.0" width="276" height="378"/>
-                <autoresizingMask key="autoresizingMask"/>
+                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                <subviews>
+                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MlX-MT-5z7">
+                        <rect key="frame" x="17" y="295" width="48" height="48"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" image="square" id="qvy-5d-OZj"/>
+                        <connections>
+                            <action selector="print:" target="vlI-Vs-b8g" id="jqT-wP-jXJ"/>
+                        </connections>
+                    </imageView>
+                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FWN-3I-4Vg">
+                        <rect key="frame" x="114" y="295" width="48" height="48"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" image="hl" id="FTA-sF-BsS"/>
+                    </imageView>
+                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fcb-MM-H18">
+                        <rect key="frame" x="211" y="295" width="48" height="48"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" image="grey" id="luD-pK-ooq"/>
+                    </imageView>
+                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YFp-3z-tWF">
+                        <rect key="frame" x="211" y="295" width="48" height="48"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" image="grey" id="nQZ-eG-fc0"/>
+                    </imageView>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5d8-QM-429">
+                        <rect key="frame" x="20" y="297" width="42" height="44"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="smallSquare" title="Gradient Button" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" state="on" borderStyle="border" transparent="YES" imageScaling="proportionallyDown" inset="2" id="JJn-hE-2kx">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="solidClick:" target="OQd-pb-Vvp" id="bWQ-Nd-3Pl"/>
+                        </connections>
+                    </button>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4fx-oz-fHX">
+                        <rect key="frame" x="214" y="297" width="42" height="44"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="smallSquare" title="Gradient Button" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" state="on" borderStyle="border" transparent="YES" imageScaling="proportionallyDown" inset="2" id="fvN-Va-MpK">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="voidClick:" target="OQd-pb-Vvp" id="j8s-6A-pDe"/>
+                        </connections>
+                    </button>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1pn-Mi-w3w">
+                        <rect key="frame" x="117" y="297" width="42" height="44"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="smallSquare" title="Gradient Button" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" state="on" borderStyle="border" transparent="YES" imageScaling="proportionallyDown" inset="2" id="p2K-If-hRI">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="crackedAction:" target="OQd-pb-Vvp" id="13f-Xk-7EM"/>
+                        </connections>
+                    </button>
+                </subviews>
             </view>
-        </window>
-        <customObject id="494" customClass="GViewAppDelegate">
             <connections>
+                <outlet property="cracked" destination="FWN-3I-4Vg" id="4H6-CG-lsc"/>
+                <outlet property="crackedButton" destination="4fx-oz-fHX" id="SQ2-Af-wOO"/>
+                <outlet property="crackedTile" destination="FWN-3I-4Vg" id="7af-BF-MYr"/>
+                <outlet property="solid" destination="qvy-5d-OZj" id="WLd-1y-ACU"/>
+                <outlet property="solidButton" destination="4fx-oz-fHX" id="vjG-2I-2VZ"/>
+                <outlet property="solidTile" destination="MlX-MT-5z7" id="sbh-YX-MKn"/>
+                <outlet property="void" destination="Fcb-MM-H18" id="gLx-Vh-xC2"/>
+                <outlet property="voidButton" destination="4fx-oz-fHX" id="3aa-Qh-t4N"/>
+                <outlet property="voidTile" destination="YFp-3z-tWF" id="fDf-L1-b12"/>
+            </connections>
+        </window>
+        <customObject id="494" customClass="AppDelegate">
+            <connections>
+                <outlet property="crackedPalette" destination="FWN-3I-4Vg" id="b1Y-S4-gNT"/>
+                <outlet property="palette" destination="vlI-Vs-b8g" id="IEf-tI-d5o"/>
                 <outlet property="skView" destination="539" id="540"/>
+                <outlet property="solidPalette" destination="MlX-MT-5z7" id="5af-P3-ici"/>
+                <outlet property="voidPalette" destination="Fcb-MM-H18" id="lsE-qf-hFC"/>
                 <outlet property="window" destination="371" id="532"/>
             </connections>
         </customObject>
         <customObject id="420" customClass="NSFontManager"/>
+        <collectionViewItem id="7gO-MF-BWZ"/>
     </objects>
+    <resources>
+        <image name="grey" width="15.595667839050293" height="15.595667839050293"/>
+        <image name="hl" width="120" height="120"/>
+        <image name="square" width="576" height="576"/>
+    </resources>
 </document>

@@ -32,22 +32,17 @@
 }
 
 -(void)mouseDown:(NSEvent *)theEvent {
-    /* Called when a mouse click occurs */
-    
-    //CGPoint location = [theEvent locationInNode:self];
-    /*
-    SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithImageNamed:@"Spaceship"];
-    
-    sprite.position = CGPointMake(480, 360);
-    sprite.scale = 0.5;
-    
-    SKAction *action = [SKAction rotateByAngle:M_PI duration:1];
-    
-    [sprite runAction:[SKAction repeatActionForever:action]];
-    
-    [self addChild:sprite];
-    */
-    
+    [self editABoardItem:theEvent];
+}
+
+-(void)mouseDragged:(NSEvent *)theEvent {
+    [self editABoardItem:theEvent];
+}
+
+/*
+ *  Changes one tile on the board according to what brush is used and notifuies observers that the view
+ *  has changed. */
+-(void)editABoardItem:(NSEvent *)theEvent {
     // Find mouse location and convert.
     SKView *sk = self.view;
     NSPoint mouseLoc = [sk convertPoint:[theEvent locationInWindow] fromView:nil];
@@ -55,13 +50,22 @@
     
     loc = [Converter convertMousePosToCoord:loc];
     
-    // Notify observers.
-    NSArray *arr = [NSArray arrayWithObjects:[NSValue valueWithPoint:loc],nil];
-    [self notifyText:@"MouseDown" Object:arr Key:@"MouseDown"];
+    if(loc.x >= 0 && loc.x < BOARD_SIZE_X && loc.y >= 0 && loc.y < BOARD_SIZE_Y) {
+        // Notify observers.
+        NSArray *arr = [NSArray arrayWithObjects:[NSValue valueWithPoint:loc],nil];
+        [self notifyText:@"MouseDown" Object:arr Key:@"MouseDown"];
     
-    // Change texture of sprite.
-    SKSpriteNode * s = [_boardSprites objectAtIndex:loc.y * BOARD_SIZE_X + loc.x];
-    s.texture = currentTexture;
+        // Change texture of sprite.
+        SKSpriteNode * s = [_boardSprites objectAtIndex:loc.y * BOARD_SIZE_X + loc.x];
+        s.texture = currentTexture;
+    }
+}
+
+-(void)changeTextureOfBrush:(NSInteger)status {
+    if(status == MAPSTATUS_EMPTY) {
+        currentTexture = _square;
+        statusOfPalette = status;
+    }
 }
 
 -(void)update:(CFTimeInterval)currentTime {

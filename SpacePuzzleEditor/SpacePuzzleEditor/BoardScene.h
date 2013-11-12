@@ -21,4 +21,6 @@
 -(void)setupBoardX: (NSInteger)x Y: (NSInteger)y TileSize: (NSInteger) ts BeginPoint: (CGPoint) p
             Status: (NSInteger)status;
 -(void)notifyText:(NSString *)text Object: (NSObject*)object Key: (NSString*)key;
+-(void)changeTextureOfBrush:(NSInteger) status;
+-(void)editABoardItem:(NSEvent *)theEvent;
 @end

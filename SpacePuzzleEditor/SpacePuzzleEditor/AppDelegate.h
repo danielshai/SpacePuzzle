@@ -13,12 +13,14 @@
 
 @class BoardView;
 
-@interface GViewAppDelegate : NSObject <NSApplicationDelegate>
+@interface AppDelegate : NSObject <NSApplicationDelegate>
 
 @property (retain) IBOutlet NSWindow *window;
 @property (retain) IBOutlet SKView *skView;
 @property (nonatomic, retain) Board *board;
 @property (nonatomic, retain) BoardScene *scene;
+
 -(void)mouseDownAtPosition:(NSNotification *) notification;
 -(void)setupBoard;
+-(void)setupPalette;
 @end
