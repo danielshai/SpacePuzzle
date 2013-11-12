@@ -18,6 +18,6 @@
 - (IBAction)solidClick:(id)sender;
 - (IBAction)crackedAction:(id)sender;
 - (IBAction)voidClick:(id)sender;
-
+-(void)notifyText:(NSString *)text Object: (NSObject*)object Key: (NSString*)key;
 
 @end

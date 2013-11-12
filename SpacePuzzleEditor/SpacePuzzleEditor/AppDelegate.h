@@ -22,5 +22,5 @@
 
 -(void)mouseDownAtPosition:(NSNotification *) notification;
 -(void)setupBoard;
--(void)setupPalette;
+-(void)observeText:(NSString *)text Selector:(SEL)selector;
 @end

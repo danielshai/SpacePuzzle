@@ -27,6 +27,8 @@
         _boardSprites = [[NSMutableArray alloc] init];
         statusOfPalette = MAPSTATUS_EMPTY;
         currentTexture = _square;
+        [self observeText:@"SolidClick" Selector:@selector(solidClick)];
+        [self observeText:@"VoidClick" Selector:@selector(voidClick)];
     }
     return self;
 }
@@ -53,7 +55,7 @@
     if(loc.x >= 0 && loc.x < BOARD_SIZE_X && loc.y >= 0 && loc.y < BOARD_SIZE_Y) {
         // Notify observers.
         NSArray *arr = [NSArray arrayWithObjects:[NSValue valueWithPoint:loc],nil];
-        [self notifyText:@"MouseDown" Object:arr Key:@"MouseDown"];
+        [self notifyText:@"BoardEdited" Object:arr Key:@"BoardEdited"];
     
         // Change texture of sprite.
         SKSpriteNode * s = [_boardSprites objectAtIndex:loc.y * BOARD_SIZE_X + loc.x];
@@ -61,9 +63,24 @@
     }
 }
 
+-(void)solidClick {
+    [self changeTextureOfBrush:MAPSTATUS_EMPTY];
+}
+
+-(void)crackedClick {
+   
+}
+
+-(void)voidClick {
+    [self changeTextureOfBrush:MAPSTATUS_VOID];
+}
+
 -(void)changeTextureOfBrush:(NSInteger)status {
     if(status == MAPSTATUS_EMPTY) {
         currentTexture = _square;
+        statusOfPalette = status;
+    } else if(status == MAPSTATUS_VOID) {
+        currentTexture = _unplayable;
         statusOfPalette = status;
     }
 }
@@ -100,5 +117,10 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:text object:nil];
     }
 }
+
+-(void)observeText:(NSString *)text Selector:(SEL)selector {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:selector name:text object:nil];
+}
+
 
 @end

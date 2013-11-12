@@ -39,7 +39,7 @@
    // self.skView.showsNodeCount = YES;|
    
     [self setupBoard];
-    [self observeText:@"MouseDown" Selector:@selector(mouseDownAtPosition:)];
+    [self observeText:@"BoardEdited" Selector:@selector(mouseDownAtPosition:)];
 }
 
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender {
