@@ -9,8 +9,8 @@
 #import "BoardScene.h"
 
 @implementation BoardScene
-@synthesize square = _square;
-@synthesize unplayable = _unplayable;
+@synthesize solid = _solid;
+@synthesize voidTile = _voidTile;
 @synthesize highlight = _highlight;
 @synthesize boardSprites = _boardSprites;
 
@@ -20,13 +20,13 @@
         
         self.backgroundColor = [SKColor colorWithRed:0.15 green:0.15 blue:0.3 alpha:1.0];
         self.size = CGSizeMake(size.width, size.height);
-        _square = [SKTexture textureWithImageNamed:@"square.gif"];
-        _unplayable = [SKTexture textureWithImageNamed:@"grey.png"];
+        _solid = [SKTexture textureWithImageNamed:@"square.gif"];
+        _voidTile = [SKTexture textureWithImageNamed:@"grey.png"];
         _highlight = [SKSpriteNode spriteNodeWithImageNamed:@"hl.png"];
         _highlight.size = CGSizeMake(40, 40);
         _boardSprites = [[NSMutableArray alloc] init];
-        statusOfPalette = MAPSTATUS_EMPTY;
-        currentTexture = _square;
+        statusOfPalette = MAPSTATUS_SOLID;
+        currentTexture = _solid;
         [self observeText:@"SolidClick" Selector:@selector(solidClick)];
         [self observeText:@"VoidClick" Selector:@selector(voidClick)];
     }
@@ -64,11 +64,11 @@
 }
 
 -(void)solidClick {
-    [self changeTextureOfBrush:MAPSTATUS_EMPTY];
+    [self changeTextureOfBrush:MAPSTATUS_SOLID];
 }
 
 -(void)crackedClick {
-   
+    [self changeTextureOfBrush:MAPSTATUS_CRACKED];
 }
 
 -(void)voidClick {
@@ -76,11 +76,11 @@
 }
 
 -(void)changeTextureOfBrush:(NSInteger)status {
-    if(status == MAPSTATUS_EMPTY) {
-        currentTexture = _square;
+    if(status == MAPSTATUS_SOLID) {
+        currentTexture = _solid;
         statusOfPalette = status;
     } else if(status == MAPSTATUS_VOID) {
-        currentTexture = _unplayable;
+        currentTexture = _voidTile;
         statusOfPalette = status;
     }
 }
@@ -89,14 +89,16 @@
     /* Called before each frame is rendered */
 }
 
--(void)setupBoardX:(NSInteger)x Y:(NSInteger)y TileSize:(NSInteger)ts BeginPoint:(CGPoint)p Status:(NSInteger)status {
+-(void)setupBoardX:(NSInteger)x Y:(NSInteger)y TileSize:(NSInteger)ts BeginPoint:(CGPoint)p
+            Status:(NSInteger)status {
     SKSpriteNode *sprite;
     
-    if(status == 0) {
-        sprite = [SKSpriteNode spriteNodeWithTexture:_square];
-    } else if(status == -2) {
-        sprite = [SKSpriteNode spriteNodeWithTexture:_unplayable];
+    if(status == MAPSTATUS_SOLID) {
+        sprite = [SKSpriteNode spriteNodeWithTexture:_solid];
+    } else if(status == MAPSTATUS_VOID) {
+        sprite = [SKSpriteNode spriteNodeWithTexture:_voidTile];
     }
+    NSLog(@"loaded");
     sprite.size = CGSizeMake(ts, ts);
     
     NSInteger xx = x*ts + p.x + ts/2;

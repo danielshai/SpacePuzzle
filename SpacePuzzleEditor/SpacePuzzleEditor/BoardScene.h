@@ -13,8 +13,8 @@
     NSInteger statusOfPalette;
     SKTexture *currentTexture;
 }
-@property (nonatomic, retain) SKTexture *square;
-@property (nonatomic, retain) SKTexture *unplayable;
+@property (nonatomic, retain) SKTexture *solid;
+@property (nonatomic, retain) SKTexture *voidTile;
 @property (nonatomic, retain) SKSpriteNode *highlight;
 @property (nonatomic, retain) NSMutableArray *boardSprites;
 
