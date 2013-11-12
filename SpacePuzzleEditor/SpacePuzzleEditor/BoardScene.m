@@ -12,6 +12,7 @@
 @synthesize square = _square;
 @synthesize unplayable = _unplayable;
 @synthesize highlight = _highlight;
+@synthesize boardSprites = _boardSprites;
 
 -(id)initWithSize:(CGSize)size {    
     if (self = [super initWithSize:size]) {
@@ -23,9 +24,7 @@
         _unplayable = [SKTexture textureWithImageNamed:@"grey.png"];
         _highlight = [SKSpriteNode spriteNodeWithImageNamed:@"hl.png"];
         _highlight.size = CGSizeMake(40, 40);
-
-        
-        //[self addTrackingArea:trackingArea];
+        _boardSprites = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -45,16 +44,18 @@
     [sprite runAction:[SKAction repeatActionForever:action]];
     
     [self addChild:sprite];
-     */
+    */
     SKView *sk = self.view;
     NSPoint mouseLoc = [sk convertPoint:[theEvent locationInWindow] fromView:nil];
-    CGPoint loc = CGPointMake(mouseLoc.x*480/(sk.frame.size.width), mouseLoc.y);
+    CGPoint loc = CGPointMake(mouseLoc.x*360/(sk.frame.size.width), mouseLoc.y*480/(sk.frame.size.height));
+    
     loc = [Converter convertMousePosToCoord:loc];
-    NSLog(@"%f",loc.x);
-}
-
--(void)mouseMoved:(NSEvent *)theEvent {
-    NSLog(@"HEJ2");
+    NSArray *arr = [NSArray arrayWithObjects:[NSValue valueWithPoint:loc],nil];
+    
+    [self notifyText:@"MouseDown" Object:arr Key:@"MouseDown"];
+    
+    SKSpriteNode * s = [_boardSprites objectAtIndex:loc.y * BOARD_SIZE_X + loc.x];
+    s.texture = _square;
 }
 
 -(void)update:(CFTimeInterval)currentTime {
@@ -76,7 +77,18 @@
     NSInteger yy = p.y - y*ts-ts/2 - 5;
 
     sprite.position = CGPointMake(xx,yy);
+    [_boardSprites addObject:sprite];
     [self addChild:sprite];
+}
+
+-(void) notifyText:(NSString *)text Object:(NSObject *)object Key:(NSString *)key {
+    if(object) {
+        NSDictionary *userInfo = [NSDictionary dictionaryWithObject:object forKey:key];
+        [[NSNotificationCenter defaultCenter] postNotificationName:text object:nil
+                                                          userInfo:userInfo];
+    } else {
+        [[NSNotificationCenter defaultCenter] postNotificationName:text object:nil];
+    }
 }
 
 @end

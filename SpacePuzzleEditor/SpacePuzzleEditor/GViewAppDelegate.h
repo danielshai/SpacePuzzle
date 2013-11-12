@@ -19,6 +19,6 @@
 @property (retain) IBOutlet SKView *skView;
 @property (nonatomic, retain) Board *board;
 @property (nonatomic, retain) BoardScene *scene;
--(void)mouseDownAtPosition:(CGPoint)pos;
+-(void)mouseDownAtPosition:(NSNotification *) notification;
 -(void)setupBoard;
 @end

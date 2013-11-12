@@ -22,7 +22,7 @@
    // [_window makeFirstResponder:self.skView.scene];
  
     /* Pick a size for the scene */
-    _scene = [BoardScene sceneWithSize:CGSizeMake(480, 360)]; //480, 360
+    _scene = [BoardScene sceneWithSize:CGSizeMake(360, 480)]; //480, 360
     
     /* Set the scale mode to scale to fit the window */
     _scene.scaleMode = SKSceneScaleModeAspectFit;
@@ -33,15 +33,20 @@
    // self.skView.showsNodeCount = YES;
  
     [self setupBoard];
+    [self observeText:@"MouseDown" Selector:@selector(mouseDownAtPosition:)];
 }
-
 
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender {
     return YES;
 }
 
--(void)mouseDownAtPosition:(CGPoint)pos {
-    NSLog(@"%f", pos.x);
+-(void)mouseDownAtPosition:(NSNotification *) notification {
+    NSDictionary *userInfo = notification.userInfo;
+    NSSet *objectSent = [userInfo objectForKey:@"MouseDown"];
+    NSArray *touchList = [objectSent allObjects];
+    NSLog(@"%@", [touchList objectAtIndex:0]);
+    
+    
 }
 
 -(void)setupBoard {
@@ -65,6 +70,10 @@
             // SHOW IT HERE
         }
     }
+}
+
+-(void)observeText:(NSString *)text Selector:(SEL)selector {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:selector name:text object:nil];
 }
 
 @end

@@ -103,16 +103,16 @@
         <window title="SpacePuzzleEditor" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="371">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowCollectionBehavior key="collectionBehavior" fullScreenPrimary="YES"/>
-            <rect key="contentRect" x="0.0" y="0.0" width="800" height="600"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1280" height="778"/>
-            <value key="minSize" type="size" width="800" height="600"/>
-            <value key="maxSize" type="size" width="800" height="600"/>
+            <rect key="contentRect" x="0.0" y="0.0" width="360" height="480"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1280" height="800"/>
+            <value key="minSize" type="size" width="360" height="480"/>
+            <value key="maxSize" type="size" width="360" height="480"/>
             <view key="contentView" id="372">
-                <rect key="frame" x="0.0" y="0.0" width="800" height="600"/>
+                <rect key="frame" x="0.0" y="0.0" width="360" height="480"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="539" customClass="SKView">
-                        <rect key="frame" x="0.0" y="0.0" width="800" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="360" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     </customView>
                 </subviews>
@@ -128,7 +128,7 @@
             <windowStyleMask key="styleMask" titled="YES" utility="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="105" y="68" width="276" height="378"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1280" height="778"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1280" height="800"/>
             <view key="contentView" id="vlI-Vs-b8g">
                 <rect key="frame" x="0.0" y="0.0" width="276" height="378"/>
                 <autoresizingMask key="autoresizingMask"/>

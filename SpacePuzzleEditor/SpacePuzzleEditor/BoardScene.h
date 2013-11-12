@@ -15,6 +15,9 @@
 @property (nonatomic, retain) SKTexture *square;
 @property (nonatomic, retain) SKTexture *unplayable;
 @property (nonatomic, retain) SKSpriteNode *highlight;
+@property (nonatomic, retain) NSMutableArray *boardSprites;
+
 -(void)setupBoardX: (NSInteger)x Y: (NSInteger)y TileSize: (NSInteger) ts BeginPoint: (CGPoint) p
             Status: (NSInteger)status;
+-(void)notifyText:(NSString *)text Object: (NSObject*)object Key: (NSString*)key;
 @end
