@@ -76,10 +76,11 @@
 }
 
 +(CGPoint) convertMousePosToCoord:(CGPoint)pos {
-    CGFloat nx = (pos.x-7) / TILESIZE; // -10 from begin pixel of board. CREATE VAR.
-    
+    CGFloat nx = (pos.x-25) / TILESIZE; // -7 from begin pixel of board. CREATE VAR.
+    CGFloat ny = (460 - pos.y) / TILESIZE;
     nx = floorf(nx);
-    return CGPointMake(nx, 0);
+    ny = floorf(ny);
+    return CGPointMake(nx, ny);
 }
 
 @end

@@ -9,9 +9,9 @@
 #ifndef Block_Game_Macros_h
 #define Block_Game_Macros_h
 
-#define MAPSTATUS_UNPLAYABLE    -2
 #define MAPSTATUS_VOID          -1
-#define MAPSTATUS_EMPTY         0
+#define MAPSTATUS_SOLID         0
+#define MAPSTATUS_CRACKED       1
 
 #define TILESIZE                44
 #define BOARD_PIXEL_BEGIN_X     32 // The pixel value that the actual board begins at.

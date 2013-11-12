@@ -13,11 +13,11 @@
 -(id) init {
     if(self = [super init]){
         _board = [[NSMutableArray alloc] init];
-        _boardSizeX = 10;
-        _boardSizeY = 8;
+        _boardSizeX = 7;
+        _boardSizeY = 10;
         _tilesize = 44;
-        _boardBegin.x = 5;
-        _boardBegin.y = 360;
+        _boardBegin.x = 25;
+        _boardBegin.y = 465;
     }
     return self;
 }
@@ -45,19 +45,20 @@
             } else {
                 // If the |BoardList| is incomplete for some reason, fill it up with
                 // |MAPSTATUS_UNPLAYABLE|.
-                bc.status = MAPSTATUS_UNPLAYABLE;
+                bc.status = MAPSTATUS_VOID;
             }
             //(Row number * y) + Column number)
             [_board insertObject:bc atIndex:((i*_boardSizeX) + j)];
         }
     }
+    NSLog(@"LOADED");
     //_boardSizeX = BOARD_SIZE_X;
     //_boardSizeY = BOARD_SIZE_Y;
 }
 
 - (void) print {
     for (int i = 0; i < _board.count; i++) {
-        if([[_board objectAtIndex:i] status] != MAPSTATUS_EMPTY)
+        if([[_board objectAtIndex:i] status] != MAPSTATUS_SOLID)
             NSLog(@"%d IS TAKEN ON THE MAP!", i);
     }
 }
