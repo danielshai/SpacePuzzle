@@ -12,6 +12,8 @@
 		E64C9F831833785800A18E36 /* voidtile.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E64C9F821833785800A18E36 /* voidtile.jpg */; };
 		E64C9F8518337A3200A18E36 /* crackedtile.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E64C9F8418337A3200A18E36 /* crackedtile.jpg */; };
 		E64C9F89183380B600A18E36 /* selected.png in Resources */ = {isa = PBXBuildFile; fileRef = E64C9F88183380B600A18E36 /* selected.png */; };
+		E64C9F8C18339F2E00A18E36 /* XMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = E64C9F8B18339F2E00A18E36 /* XMLParser.m */; };
+		E64C9F8E1833A54900A18E36 /* test.xml in Resources */ = {isa = PBXBuildFile; fileRef = E64C9F8D1833A54900A18E36 /* test.xml */; };
 		E654B2E21830F7DD006BFCAC /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E654B2E11830F7DD006BFCAC /* Cocoa.framework */; };
 		E654B2E41830F7DD006BFCAC /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E654B2E31830F7DD006BFCAC /* SpriteKit.framework */; };
 		E654B2EE1830F7DD006BFCAC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E654B2EC1830F7DD006BFCAC /* InfoPlist.strings */; };
@@ -48,6 +50,9 @@
 		E64C9F821833785800A18E36 /* voidtile.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = voidtile.jpg; sourceTree = "<group>"; };
 		E64C9F8418337A3200A18E36 /* crackedtile.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = crackedtile.jpg; sourceTree = "<group>"; };
 		E64C9F88183380B600A18E36 /* selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = selected.png; sourceTree = "<group>"; };
+		E64C9F8A18339F2E00A18E36 /* XMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLParser.h; sourceTree = "<group>"; };
+		E64C9F8B18339F2E00A18E36 /* XMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLParser.m; sourceTree = "<group>"; };
+		E64C9F8D1833A54900A18E36 /* test.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = test.xml; sourceTree = "<group>"; };
 		E654B2DE1830F7DD006BFCAC /* SpacePuzzleEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpacePuzzleEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E654B2E11830F7DD006BFCAC /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		E654B2E31830F7DD006BFCAC /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
@@ -154,6 +159,8 @@
 				E654B2F71830F7DD006BFCAC /* BoardScene.m */,
 				E654B2FC1830F7DD006BFCAC /* AppDelegate.h */,
 				E654B2FA1830F7DD006BFCAC /* AppDelegate.m */,
+				E64C9F8A18339F2E00A18E36 /* XMLParser.h */,
+				E64C9F8B18339F2E00A18E36 /* XMLParser.m */,
 				E65EE66D18325FB300E38A3F /* Palette.h */,
 				E65EE66E18325FB300E38A3F /* Palette.m */,
 				E654B2F51830F7DD006BFCAC /* MainMenu.xib */,
@@ -166,6 +173,7 @@
 		E654B2EA1830F7DD006BFCAC /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				E64C9F8D1833A54900A18E36 /* test.xml */,
 				E64C9F88183380B600A18E36 /* selected.png */,
 				E64C9F8418337A3200A18E36 /* crackedtile.jpg */,
 				E64C9F821833785800A18E36 /* voidtile.jpg */,
@@ -288,6 +296,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E654B3001830F7DD006BFCAC /* Images.xcassets in Resources */,
+				E64C9F8E1833A54900A18E36 /* test.xml in Resources */,
 				E64C9F831833785800A18E36 /* voidtile.jpg in Resources */,
 				E654B2EE1830F7DD006BFCAC /* InfoPlist.strings in Resources */,
 				E61F9C0D18312C6800351B6F /* grey.png in Resources */,
@@ -321,6 +330,7 @@
 				E6EE6F411831428B0072D3E6 /* Converter.m in Sources */,
 				E654B2F81830F7DD006BFCAC /* BoardScene.m in Sources */,
 				E6A0EEE318311690006BF476 /* Board.m in Sources */,
+				E64C9F8C18339F2E00A18E36 /* XMLParser.m in Sources */,
 				E654B2FB1830F7DD006BFCAC /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

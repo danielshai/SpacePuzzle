@@ -8,14 +8,14 @@
 
 #import "AppDelegate.h"
 #import "BoardScene.h"
-
+#import "XMLParser.h"
 @implementation AppDelegate
 
 @synthesize window = _window;
 @synthesize board = _board;
 @synthesize scene = _scene;
 @synthesize skView = _skView;
-//@synthesize palette = _palette;
+@synthesize parser = _parser;
 /*
  @synthesize solidPalette = _solidPalette;
  @synthesize crackedPalette = _crackedPalette;
@@ -34,7 +34,10 @@
     _scene.scaleMode = SKSceneScaleModeAspectFit;
 
     [_skView presentScene:_scene];
-   
+    
+    NSURL *path = [[NSURL alloc] initFileURLWithPath:@"/Users/IxD/SpacePuzzle/SpacePuzzleEditor/SpacePuzzleEditor/test.xml"];
+    NSLog(@"%@",path.path);
+    _parser = [[XMLParser alloc] initWithContentsOfURL:path];
     [self setupBoard];
     [self observeText:@"BoardEdited" Selector:@selector(boardEdited:)];
 }
@@ -44,11 +47,38 @@
 }
 
 - (IBAction)openLevel:(id)sender {
-    NSLog(@"open");
+    int i; // Loop counter.
+    
+    // Create the File Open Dialog class.
+    NSOpenPanel* openDlg = [NSOpenPanel openPanel];
+    
+    // Enable the selection of files in the dialog.
+    [openDlg setCanChooseFiles:YES];
+    
+    // Enable the selection of directories in the dialog.
+    [openDlg setCanChooseDirectories:YES];
+    
+    // Display the dialog.  If the OK button was pressed,
+    // process the files.
+    if ( [openDlg runModalForDirectory:nil file:nil] == NSOKButton )
+    {
+        // Get an array containing the full filenames of all
+        // files and directories selected.
+        NSArray* files = [openDlg filenames];
+        
+        // Loop through all the files and process them.
+        for( i = 0; i < [files count]; i++ )
+        {
+            NSString* fileName = [files objectAtIndex:i];
+            
+            // Do something with the filename.
+        }
+    }
 }
 
 - (IBAction)saveLevel:(id)sender {
     NSLog(@"saved");
+    
 }
 
 -(void)boardEdited:(NSNotification *) notification {
