@@ -2,9 +2,6 @@
 //  GViewMyScene.m
 //  SpacePuzzleEditor
 //
-//  Created by IxD on 11/11/13.
-//  Copyright (c) 2013 WMD. All rights reserved.
-//
 
 #import "BoardScene.h"
 
@@ -61,7 +58,7 @@
     // Check if the click was inside the board.
     if(loc.x >= 0 && loc.x < BOARD_SIZE_X && loc.y >= 0 && loc.y < BOARD_SIZE_Y) {
         // Notify observers.
-        NSArray *arr = [NSArray arrayWithObjects:[NSValue valueWithPoint:loc],nil];
+        NSArray *arr = [NSArray arrayWithObjects:[NSValue valueWithPoint:loc],statusOfPalette,nil];
         [self notifyText:@"BoardEdited" Object:arr Key:@"BoardEdited"];
     
         // Change texture of sprite.
@@ -101,15 +98,9 @@
 
 -(void)setupBoardX:(NSInteger)x Y:(NSInteger)y TileSize:(NSInteger)ts BeginPoint:(CGPoint)p
             Status:(NSInteger)status {
-    SKSpriteNode *sprite;
+    SKSpriteNode *sprite = [[SKSpriteNode alloc] init];
     
-    if(status == MAPSTATUS_SOLID) {
-        sprite = [SKSpriteNode spriteNodeWithTexture:_solid];
-    } else if(status == MAPSTATUS_VOID) {
-        sprite = [SKSpriteNode spriteNodeWithTexture:_voidTile];
-    } else if(status == MAPSTATUS_CRACKED) {
-        sprite = [SKSpriteNode spriteNodeWithTexture:_crackedTile];
-    }
+    [self setTextureOfSprite:sprite AccordingToStatus:status];
 
     sprite.size = CGSizeMake(ts, ts);
     
@@ -119,6 +110,23 @@
     sprite.position = CGPointMake(xx,yy);
     [_boardSprites addObject:sprite];
     [self addChild:sprite];
+}
+
+-(void)refreshBoardX:(NSInteger)x Y:(NSInteger)y Status: (NSInteger)status {
+    SKSpriteNode *sprite = [_boardSprites objectAtIndex:y*BOARD_SIZE_X + x];
+    [self setTextureOfSprite:sprite AccordingToStatus:status];
+}
+
+/*
+ *  Sets the texture of a sprite according to the status of the board coordinate. */
+-(void)setTextureOfSprite:(SKSpriteNode *)sprite AccordingToStatus:(NSInteger)status {
+    if(status == MAPSTATUS_SOLID) {
+        sprite.texture = _solid;
+    } else if(status == MAPSTATUS_VOID) {
+        sprite.texture = _voidTile;
+    } else if(status == MAPSTATUS_CRACKED) {
+        sprite.texture = _crackedTile;
+    }
 }
 
 -(void) notifyText:(NSString *)text Object:(NSObject *)object Key:(NSString *)key {

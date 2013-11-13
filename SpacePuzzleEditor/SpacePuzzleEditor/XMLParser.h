@@ -11,6 +11,8 @@
 @interface XMLParser : NSObject <NSXMLParserDelegate> {
     NSString *currentElement;
 }
+
 @property (nonatomic, retain) NSXMLParser *parser;
+@property (nonatomic, retain) NSMutableArray *board;
 -(id)initWithContentsOfURL:(NSURL *)url;
 @end

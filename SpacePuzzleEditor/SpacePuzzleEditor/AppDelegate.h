@@ -12,7 +12,6 @@
 #import "BoardScene.h"
 
 @class BoardView;
-@class XMLParser;
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 
@@ -20,11 +19,11 @@
 @property (retain) IBOutlet SKView *skView;
 @property (nonatomic, retain) Board *board;
 @property (nonatomic, retain) BoardScene *scene;
-@property (nonatomic, retain) XMLParser *parser;
 
 -(IBAction)openLevel:(id)sender;
 -(IBAction)saveLevel:(id)sender;
 -(void)boardEdited:(NSNotification *) notification;
+-(void)refreshBoard;
 -(void)setupBoard;
 -(void)observeText:(NSString *)text Selector:(SEL)selector;
 @end

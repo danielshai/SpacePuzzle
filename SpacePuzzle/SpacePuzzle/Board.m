@@ -1,6 +1,7 @@
 // Board.m
 #import "Board.h"
 #import "Macros.h"
+#import "XMLParser.h"
 
 @implementation Board
 
@@ -12,6 +13,7 @@
 
 -(id) init {
     if(self = [super init]){
+        defaultBoardPath = @"/Users/IxD/SpacePuzzle/SpacePuzzleEditor/SpacePuzzleEditor/empty.xml";
         _board = [[NSMutableArray alloc] init];
         _boardSizeX = 7;
         _boardSizeY = 10;
@@ -27,9 +29,8 @@
  *  the board. */
 - (void) loadBoard:(NSString*) path {
     
-    NSArray *arr = [NSArray arrayWithContentsOfFile:path];
-    
-    // Gets the dimensions of the board.
+    NSURL *s = [[NSURL alloc] initFileURLWithPath:path];
+    _parser = [[XMLParser alloc] initWithContentsOfURL:s];
     
     [_board removeAllObjects];
     
@@ -40,8 +41,8 @@
             BoardCoord* bc = [[BoardCoord alloc] init];
             bc.x = j;
             bc.y = i;
-            if(i*_boardSizeX + j < [arr count]) {
-                bc.status = [[arr objectAtIndex:((i*_boardSizeX) + j)] intValue];
+            if(i*_boardSizeX + j < [[_parser board] count]) {
+                bc.status = [[[_parser board] objectAtIndex:((i*_boardSizeX) + j)] intValue];
             } else {
                 // If the |BoardList| is incomplete for some reason, fill it up with
                 // |MAPSTATUS_UNPLAYABLE|.
@@ -56,13 +57,18 @@
 }
 
 -(void)createDefaultBoard {
+    [_board removeAllObjects];
+    NSURL *path = [[NSURL alloc] initFileURLWithPath:defaultBoardPath];
+
+    _parser = [[XMLParser alloc] initWithContentsOfURL:path];
+    
     for (int i = 0; i < _boardSizeY; i++) {
         //j = columns
         for (int j = 0; j < _boardSizeX; j++) {
             BoardCoord* bc = [[BoardCoord alloc] init];
             bc.x = j;
             bc.y = i;
-            bc.status = MAPSTATUS_VOID;
+            bc.status = [[[_parser board] objectAtIndex:((i*_boardSizeX) + j)] intValue];
             
             //(Row number * y) + Column number)
             [_board insertObject:bc atIndex:((i*_boardSizeX) + j)];

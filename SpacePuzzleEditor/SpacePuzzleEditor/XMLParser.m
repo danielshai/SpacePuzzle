@@ -10,9 +10,11 @@
 
 @implementation XMLParser
 @synthesize parser = _parser;
+@synthesize board = _board;
 
 -(id)initWithContentsOfURL:(NSURL *)url {
     if(self = [super init]) {
+        _board = [[NSMutableArray alloc] init];
         _parser = [[NSXMLParser alloc] initWithContentsOfURL:url];
         [_parser setDelegate:self];
         [_parser parse];
@@ -30,7 +32,9 @@
 
 -(void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string {
     if([currentElement isEqualToString:@"status"]) {
-        NSLog(@"%@", string);
+        //NSLog(@"%@", string);
+        int i = [string intValue];
+        [_board insertObject:[NSNumber numberWithInt:i] atIndex:[_board count]];
     }
 }
 

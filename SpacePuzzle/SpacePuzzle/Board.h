@@ -9,12 +9,17 @@
 #import <Foundation/Foundation.h>
 #import "BoardCoord.h"
 
-@interface Board : NSObject
+@class XMLParser;
+
+@interface Board : NSObject {
+    NSString *defaultBoardPath;
+}
 @property (nonatomic, strong) NSMutableArray *board;
 @property (nonatomic, assign) NSInteger tilesize;
 @property (nonatomic, assign) NSInteger boardSizeX;
 @property (nonatomic, assign) NSInteger boardSizeY;
 @property (nonatomic, assign) CGPoint boardBegin;
+@property (nonatomic, retain) XMLParser *parser;
 
 -(void) loadBoard:(NSString*) path;
 -(void) createDefaultBoard;

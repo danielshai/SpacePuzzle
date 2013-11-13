@@ -1,10 +1,6 @@
 //
 //  GViewAppDelegate.m
 //  SpacePuzzleEditor
-//
-//  Created by IxD on 11/11/13.
-//  Copyright (c) 2013 WMD. All rights reserved.
-//
 
 #import "AppDelegate.h"
 #import "BoardScene.h"
@@ -15,12 +11,6 @@
 @synthesize board = _board;
 @synthesize scene = _scene;
 @synthesize skView = _skView;
-@synthesize parser = _parser;
-/*
- @synthesize solidPalette = _solidPalette;
- @synthesize crackedPalette = _crackedPalette;
- @synthesize voidPalette = _voidPalette;
- */
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
@@ -34,10 +24,7 @@
     _scene.scaleMode = SKSceneScaleModeAspectFit;
 
     [_skView presentScene:_scene];
-    
-    NSURL *path = [[NSURL alloc] initFileURLWithPath:@"/Users/IxD/SpacePuzzle/SpacePuzzleEditor/SpacePuzzleEditor/test.xml"];
-    NSLog(@"%@",path.path);
-    _parser = [[XMLParser alloc] initWithContentsOfURL:path];
+
     [self setupBoard];
     [self observeText:@"BoardEdited" Selector:@selector(boardEdited:)];
 }
@@ -60,23 +47,54 @@
     
     // Display the dialog.  If the OK button was pressed,
     // process the files.
-    if ( [openDlg runModalForDirectory:nil file:nil] == NSOKButton )
+    if ( [openDlg runModal] == NSOKButton )
     {
         // Get an array containing the full filenames of all
         // files and directories selected.
-        NSArray* files = [openDlg filenames];
+        NSArray* files = [openDlg URLs];
         
         // Loop through all the files and process them.
         for( i = 0; i < [files count]; i++ )
         {
-            NSString* fileName = [files objectAtIndex:i];
+            NSURL* fileName = [files objectAtIndex:i];
+            NSString *path = [fileName absoluteString];
             
-            // Do something with the filename.
+            // Removes "file://" from the string, otherwise not valid path.
+            path = [path substringFromIndex:7];
+            NSString *extension = [path substringFromIndex:path.length-4];
+            extension = [extension lowercaseString];
+            // Only open .xml files.
+            if([extension isEqualToString:@".xml"]) {
+                [_board loadBoard:path];
+                [self refreshBoard];
+            } else {
+                NSAlert *alert = [NSAlert alertWithMessageText: @"File is not a valid level!\n\nLevel files must be of xml (.xml) type."
+                                                 defaultButton:@"OK"
+                                               alternateButton:@""
+                                                   otherButton:nil
+                                     informativeTextWithFormat:@""];
+                [alert runModal];
+            }
         }
     }
 }
 
-- (IBAction)saveLevel:(id)sender {
+/*
+ *  Should be called when a new board has been loaded. This function updates the view of the changes. */
+-(void)refreshBoard {
+    NSInteger boardSizeX = [_board boardSizeX];
+    NSInteger boardSizeY = [_board boardSizeY];
+    
+    for(int i = 0; i < boardSizeY; i++) {
+        for(int j = 0; j < boardSizeX; j++) {
+            BoardCoord *bc = [_board.board objectAtIndex:boardSizeX*i + j];
+            
+            [_scene refreshBoardX:[bc x] Y:[bc y] Status:[bc status]];
+        }
+    }
+}
+
+-(IBAction)saveLevel:(id)sender {
     NSLog(@"saved");
     
 }
@@ -84,11 +102,11 @@
 -(void)boardEdited:(NSNotification *) notification {
     NSDictionary *userInfo = notification.userInfo;
     NSSet *objectSent = [userInfo objectForKey:@"MouseDown"];
-    NSArray *touchList = [objectSent allObjects];
-    NSValue *val = [touchList objectAtIndex:0];
+    NSArray *data = [objectSent allObjects];
+    NSValue *val = [data objectAtIndex:0];
    
     BoardCoord *bc = [[_board board] objectAtIndex:val.pointValue.y * BOARD_SIZE_X + val.pointValue.x];
-    bc.status = 0;
+    bc.status = [[data objectAtIndex:1] integerValue];
 }
 
 -(void)setupBoard {
