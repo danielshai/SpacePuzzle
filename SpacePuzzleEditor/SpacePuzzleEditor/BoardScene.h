@@ -2,10 +2,7 @@
 //  GViewMyScene.h
 //  SpacePuzzleEditor
 //
-
-//  Copyright (c) 2013 WMD. All rights reserved.
-//
-
+//  IMPORTANT: the tile graphics should include a border on each texture, so that the grid is visible.
 #import <SpriteKit/SpriteKit.h>
 #import "Converter.h"
 
@@ -15,7 +12,7 @@
 }
 @property (nonatomic, retain) SKTexture *solid;
 @property (nonatomic, retain) SKTexture *voidTile;
-@property (nonatomic, retain) SKSpriteNode *highlight;
+@property (nonatomic, retain) SKTexture *crackedTile;
 @property (nonatomic, retain) NSMutableArray *boardSprites;
 
 -(void)setupBoardX: (NSInteger)x Y: (NSInteger)y TileSize: (NSInteger) ts BeginPoint: (CGPoint) p

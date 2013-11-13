@@ -51,9 +51,23 @@
             [_board insertObject:bc atIndex:((i*_boardSizeX) + j)];
         }
     }
-    NSLog(@"LOADED");
     //_boardSizeX = BOARD_SIZE_X;
     //_boardSizeY = BOARD_SIZE_Y;
+}
+
+-(void)createDefaultBoard {
+    for (int i = 0; i < _boardSizeY; i++) {
+        //j = columns
+        for (int j = 0; j < _boardSizeX; j++) {
+            BoardCoord* bc = [[BoardCoord alloc] init];
+            bc.x = j;
+            bc.y = i;
+            bc.status = MAPSTATUS_VOID;
+            
+            //(Row number * y) + Column number)
+            [_board insertObject:bc atIndex:((i*_boardSizeX) + j)];
+        }
+    }
 }
 
 - (void) print {

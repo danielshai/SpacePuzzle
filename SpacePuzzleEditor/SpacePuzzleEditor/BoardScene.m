@@ -11,24 +11,26 @@
 @implementation BoardScene
 @synthesize solid = _solid;
 @synthesize voidTile = _voidTile;
-@synthesize highlight = _highlight;
+@synthesize crackedTile = _crackedTile;
 @synthesize boardSprites = _boardSprites;
 
 -(id)initWithSize:(CGSize)size {    
     if (self = [super initWithSize:size]) {
         /* Setup your scene here */
         
-        self.backgroundColor = [SKColor colorWithRed:0.15 green:0.15 blue:0.3 alpha:1.0];
+        self.backgroundColor = [SKColor colorWithRed:0.89 green:0.89 blue:0.89 alpha:1.0];
         self.size = CGSizeMake(size.width, size.height);
         _solid = [SKTexture textureWithImageNamed:@"square.gif"];
-        _voidTile = [SKTexture textureWithImageNamed:@"grey.png"];
-        _highlight = [SKSpriteNode spriteNodeWithImageNamed:@"hl.png"];
-        _highlight.size = CGSizeMake(40, 40);
+        _voidTile = [SKTexture textureWithImageNamed:@"voidtile.jpg"];
+        _crackedTile = [SKTexture textureWithImageNamed:@"crackedtile.jpg"];
+       
         _boardSprites = [[NSMutableArray alloc] init];
         statusOfPalette = MAPSTATUS_SOLID;
         currentTexture = _solid;
+        
         [self observeText:@"SolidClick" Selector:@selector(solidClick)];
         [self observeText:@"VoidClick" Selector:@selector(voidClick)];
+        [self observeText:@"CrackedClick" Selector:@selector(crackedClick)];
     }
     return self;
 }
@@ -39,6 +41,10 @@
 
 -(void)mouseDragged:(NSEvent *)theEvent {
     [self editABoardItem:theEvent];
+}
+
+-(void)keyDown:(NSEvent *)theEvent {
+    
 }
 
 /*
@@ -52,13 +58,14 @@
     
     loc = [Converter convertMousePosToCoord:loc];
     
+    // Check if the click was inside the board.
     if(loc.x >= 0 && loc.x < BOARD_SIZE_X && loc.y >= 0 && loc.y < BOARD_SIZE_Y) {
         // Notify observers.
         NSArray *arr = [NSArray arrayWithObjects:[NSValue valueWithPoint:loc],nil];
         [self notifyText:@"BoardEdited" Object:arr Key:@"BoardEdited"];
     
         // Change texture of sprite.
-        SKSpriteNode * s = [_boardSprites objectAtIndex:loc.y * BOARD_SIZE_X + loc.x];
+        SKSpriteNode *s = [_boardSprites objectAtIndex:loc.y * BOARD_SIZE_X + loc.x];
         s.texture = currentTexture;
     }
 }
@@ -82,6 +89,9 @@
     } else if(status == MAPSTATUS_VOID) {
         currentTexture = _voidTile;
         statusOfPalette = status;
+    } else if(status == MAPSTATUS_CRACKED) {
+        currentTexture = _crackedTile;
+        statusOfPalette = status;
     }
 }
 
@@ -97,12 +107,13 @@
         sprite = [SKSpriteNode spriteNodeWithTexture:_solid];
     } else if(status == MAPSTATUS_VOID) {
         sprite = [SKSpriteNode spriteNodeWithTexture:_voidTile];
+    } else if(status == MAPSTATUS_CRACKED) {
+        sprite = [SKSpriteNode spriteNodeWithTexture:_crackedTile];
     }
-    NSLog(@"loaded");
+
     sprite.size = CGSizeMake(ts, ts);
     
     NSInteger xx = x*ts + p.x + ts/2;
-    
     NSInteger yy = p.y - y*ts-ts/2 - 5;
 
     sprite.position = CGPointMake(xx,yy);

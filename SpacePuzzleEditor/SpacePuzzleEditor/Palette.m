@@ -12,17 +12,32 @@
 @synthesize solidTile = _solidTile;
 @synthesize crackedTile = _crackedTile;
 @synthesize voidTile = _voidTile;
+@synthesize selectedSolid = _selectedSolid;
+@synthesize selectedCracked = _selectedCracked;
+@synthesize selectedVoid = _selectedVoid;
 
-- (IBAction)solidClick:(id)sender {
-    NSLog(@"solidclick");
+-(IBAction)solidClick:(id)sender {
+    // Show which tile is selected.
+    [_selectedSolid setHidden:NO];
+    [_selectedVoid setHidden:YES];
+    [_selectedCracked setHidden:YES];
+    
     [self notifyText:@"SolidClick" Object:nil Key:@"SolidClick"];
 }
 
-- (IBAction)crackedAction:(id)sender {
+-(IBAction)crackedAction:(id)sender {
+    [_selectedSolid setHidden:YES];
+    [_selectedVoid setHidden:YES];
+    [_selectedCracked setHidden:NO];
     
+    [self notifyText:@"CrackedClick" Object:nil Key:@"CrackedClick"];
 }
 
-- (IBAction)voidClick:(id)sender {
+-(IBAction)voidClick:(id)sender {
+    [_selectedSolid setHidden:YES];
+    [_selectedVoid setHidden:NO];
+    [_selectedCracked setHidden:YES];
+    
     [self notifyText:@"VoidClick" Object:nil Key:@"VoidClick"];
 }
 

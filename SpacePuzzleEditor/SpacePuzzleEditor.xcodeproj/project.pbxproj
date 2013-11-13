@@ -9,7 +9,9 @@
 /* Begin PBXBuildFile section */
 		E61F9C0B18311E9300351B6F /* square.gif in Resources */ = {isa = PBXBuildFile; fileRef = E61F9C0A18311E9300351B6F /* square.gif */; };
 		E61F9C0D18312C6800351B6F /* grey.png in Resources */ = {isa = PBXBuildFile; fileRef = E61F9C0C18312C6800351B6F /* grey.png */; };
-		E61F9C0F18312E6000351B6F /* BoardListLevel1.plist in Resources */ = {isa = PBXBuildFile; fileRef = E61F9C0E18312E6000351B6F /* BoardListLevel1.plist */; };
+		E64C9F831833785800A18E36 /* voidtile.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E64C9F821833785800A18E36 /* voidtile.jpg */; };
+		E64C9F8518337A3200A18E36 /* crackedtile.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E64C9F8418337A3200A18E36 /* crackedtile.jpg */; };
+		E64C9F89183380B600A18E36 /* selected.png in Resources */ = {isa = PBXBuildFile; fileRef = E64C9F88183380B600A18E36 /* selected.png */; };
 		E654B2E21830F7DD006BFCAC /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E654B2E11830F7DD006BFCAC /* Cocoa.framework */; };
 		E654B2E41830F7DD006BFCAC /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E654B2E31830F7DD006BFCAC /* SpriteKit.framework */; };
 		E654B2EE1830F7DD006BFCAC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E654B2EC1830F7DD006BFCAC /* InfoPlist.strings */; };
@@ -27,7 +29,6 @@
 		E6A0EEE318311690006BF476 /* Board.m in Sources */ = {isa = PBXBuildFile; fileRef = E6A0EEDE18311690006BF476 /* Board.m */; };
 		E6A0EEE418311690006BF476 /* BoardCoord.m in Sources */ = {isa = PBXBuildFile; fileRef = E6A0EEE018311690006BF476 /* BoardCoord.m */; };
 		E6A0EEE518311690006BF476 /* Position.m in Sources */ = {isa = PBXBuildFile; fileRef = E6A0EEE218311690006BF476 /* Position.m */; };
-		E6EE6F3B183142240072D3E6 /* hl.png in Resources */ = {isa = PBXBuildFile; fileRef = E6EE6F3A183142240072D3E6 /* hl.png */; };
 		E6EE6F411831428B0072D3E6 /* Converter.m in Sources */ = {isa = PBXBuildFile; fileRef = E6EE6F401831428B0072D3E6 /* Converter.m */; };
 /* End PBXBuildFile section */
 
@@ -44,7 +45,9 @@
 /* Begin PBXFileReference section */
 		E61F9C0A18311E9300351B6F /* square.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = square.gif; path = ../../SpacePuzzle/SpacePuzzle/square.gif; sourceTree = "<group>"; };
 		E61F9C0C18312C6800351B6F /* grey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grey.png; sourceTree = "<group>"; };
-		E61F9C0E18312E6000351B6F /* BoardListLevel1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = BoardListLevel1.plist; sourceTree = "<group>"; };
+		E64C9F821833785800A18E36 /* voidtile.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = voidtile.jpg; sourceTree = "<group>"; };
+		E64C9F8418337A3200A18E36 /* crackedtile.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = crackedtile.jpg; sourceTree = "<group>"; };
+		E64C9F88183380B600A18E36 /* selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = selected.png; sourceTree = "<group>"; };
 		E654B2DE1830F7DD006BFCAC /* SpacePuzzleEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpacePuzzleEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E654B2E11830F7DD006BFCAC /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		E654B2E31830F7DD006BFCAC /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
@@ -75,7 +78,6 @@
 		E6A0EEE018311690006BF476 /* BoardCoord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BoardCoord.m; path = ../../SpacePuzzle/SpacePuzzle/BoardCoord.m; sourceTree = "<group>"; };
 		E6A0EEE118311690006BF476 /* Position.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Position.h; path = ../../SpacePuzzle/SpacePuzzle/Position.h; sourceTree = "<group>"; };
 		E6A0EEE218311690006BF476 /* Position.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Position.m; path = ../../SpacePuzzle/SpacePuzzle/Position.m; sourceTree = "<group>"; };
-		E6EE6F3A183142240072D3E6 /* hl.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hl.png; sourceTree = "<group>"; };
 		E6EE6F3F1831428B0072D3E6 /* Converter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Converter.h; path = ../SpacePuzzle/SpacePuzzle/Converter.h; sourceTree = "<group>"; };
 		E6EE6F401831428B0072D3E6 /* Converter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Converter.m; path = ../SpacePuzzle/SpacePuzzle/Converter.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -164,8 +166,9 @@
 		E654B2EA1830F7DD006BFCAC /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				E61F9C0E18312E6000351B6F /* BoardListLevel1.plist */,
-				E6EE6F3A183142240072D3E6 /* hl.png */,
+				E64C9F88183380B600A18E36 /* selected.png */,
+				E64C9F8418337A3200A18E36 /* crackedtile.jpg */,
+				E64C9F821833785800A18E36 /* voidtile.jpg */,
 				E61F9C0A18311E9300351B6F /* square.gif */,
 				E61F9C0C18312C6800351B6F /* grey.png */,
 				E654B2EB1830F7DD006BFCAC /* SpacePuzzleEditor-Info.plist */,
@@ -285,12 +288,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				E654B3001830F7DD006BFCAC /* Images.xcassets in Resources */,
+				E64C9F831833785800A18E36 /* voidtile.jpg in Resources */,
 				E654B2EE1830F7DD006BFCAC /* InfoPlist.strings in Resources */,
-				E61F9C0F18312E6000351B6F /* BoardListLevel1.plist in Resources */,
 				E61F9C0D18312C6800351B6F /* grey.png in Resources */,
 				E61F9C0B18311E9300351B6F /* square.gif in Resources */,
-				E6EE6F3B183142240072D3E6 /* hl.png in Resources */,
 				E654B2F41830F7DD006BFCAC /* Credits.rtf in Resources */,
+				E64C9F8518337A3200A18E36 /* crackedtile.jpg in Resources */,
+				E64C9F89183380B600A18E36 /* selected.png in Resources */,
 				E654B2F61830F7DD006BFCAC /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -34,19 +34,24 @@
     _scene.scaleMode = SKSceneScaleModeAspectFit;
 
     [_skView presentScene:_scene];
-  //  [_skView add
-   // self.skView.showsFPS = YES;
-   // self.skView.showsNodeCount = YES;|
    
     [self setupBoard];
-    [self observeText:@"BoardEdited" Selector:@selector(mouseDownAtPosition:)];
+    [self observeText:@"BoardEdited" Selector:@selector(boardEdited:)];
 }
 
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender {
     return YES;
 }
 
--(void)mouseDownAtPosition:(NSNotification *) notification {
+- (IBAction)openLevel:(id)sender {
+    NSLog(@"open");
+}
+
+- (IBAction)saveLevel:(id)sender {
+    NSLog(@"saved");
+}
+
+-(void)boardEdited:(NSNotification *) notification {
     NSDictionary *userInfo = notification.userInfo;
     NSSet *objectSent = [userInfo objectForKey:@"MouseDown"];
     NSArray *touchList = [objectSent allObjects];
@@ -62,19 +67,13 @@
     NSInteger boardSizeX = [_board boardSizeX];
     NSInteger boardSizeY = [_board boardSizeY];
 
-    // Load the board.
-    NSString *levelNr = @"1";
-    NSString *pathBoard = [NSString stringWithFormat:@"%@%@",@"BoardListLevel",levelNr];
-    NSString *filePathBoard = [[NSBundle mainBundle] pathForResource:pathBoard
-                                                              ofType:@"plist"];
-    [_board loadBoard:filePathBoard];
+    [_board createDefaultBoard];
     
     for(int i = 0; i < boardSizeY; i++) {
         for(int j = 0; j < boardSizeX; j++) {
             BoardCoord *bc = [_board.board objectAtIndex:boardSizeX*i + j];
             //[[_scene setupBoardX:[bc x] Y:[bc y]];]
             [_scene setupBoardX:[bc x] Y:[bc y] TileSize:[_board tilesize] BeginPoint:[_board boardBegin] Status:[bc status]];
-            // SHOW IT HERE
         }
     }
 }

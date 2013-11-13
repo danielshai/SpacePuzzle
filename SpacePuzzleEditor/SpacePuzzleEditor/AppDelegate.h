@@ -20,7 +20,9 @@
 @property (nonatomic, retain) Board *board;
 @property (nonatomic, retain) BoardScene *scene;
 
--(void)mouseDownAtPosition:(NSNotification *) notification;
+-(IBAction)openLevel:(id)sender;
+-(IBAction)saveLevel:(id)sender;
+-(void)boardEdited:(NSNotification *) notification;
 -(void)setupBoard;
 -(void)observeText:(NSString *)text Selector:(SEL)selector;
 @end

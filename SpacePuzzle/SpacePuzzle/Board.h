@@ -17,5 +17,5 @@
 @property (nonatomic, assign) CGPoint boardBegin;
 
 -(void) loadBoard:(NSString*) path;
-
+-(void) createDefaultBoard;
 @end

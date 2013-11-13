@@ -62,6 +62,58 @@
                         </items>
                     </menu>
                 </menuItem>
+                <menuItem title="File" id="M5T-pz-eXL">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" title="File" id="7wc-3F-y89">
+                        <items>
+                            <menuItem title="New" keyEquivalent="n" id="Gk2-nT-P5J">
+                                <connections>
+                                    <action selector="newDocument:" target="-1" id="ipR-pB-beb"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Open…" keyEquivalent="o" id="1FM-Yg-1qv">
+                                <connections>
+                                    <action selector="openLevel:" target="494" id="X27-pC-tMX"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Open Recent" id="tHp-KQ-obU">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Open Recent" systemMenu="recentDocuments" id="M8q-dH-pCE">
+                                    <items>
+                                        <menuItem title="Clear Menu" id="WSs-1j-IHs">
+                                            <connections>
+                                                <action selector="clearRecentDocuments:" target="-1" id="D7R-qD-WoQ"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="OXW-PY-1Jt"/>
+                            <menuItem title="Save" keyEquivalent="s" id="Cy2-HG-JWE">
+                                <connections>
+                                    <action selector="saveLevel:" target="494" id="dZw-W0-Qyd"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Save As…" keyEquivalent="S" id="TAx-Yg-2e8">
+                                <connections>
+                                    <action selector="saveDocumentAs:" target="-1" id="oH0-aX-pNd"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Revert to Saved" id="umZ-bq-gM3">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="revertDocumentToSaved:" target="-1" id="Eht-gt-zAc"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="qoR-88-a4Z"/>
+                            <menuItem title="Close" keyEquivalent="w" id="PZB-rQ-ahB">
+                                <connections>
+                                    <action selector="performClose:" target="-1" id="nUy-PL-bgE"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
                 <menuItem title="Window" id="19">
                     <menu key="submenu" title="Window" systemMenu="window" id="24">
                         <items>
@@ -133,8 +185,23 @@
                 <rect key="frame" x="0.0" y="0.0" width="276" height="378"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
+                    <imageView hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1lE-yZ-g96">
+                        <rect key="frame" x="203" y="258" width="64" height="64"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" id="Db0-Xw-Orb"/>
+                    </imageView>
+                    <imageView hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ddw-Ch-YvL">
+                        <rect key="frame" x="106" y="258" width="64" height="64"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" id="ee2-Qx-Av8"/>
+                    </imageView>
+                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HFh-uJ-dod">
+                        <rect key="frame" x="9" y="258" width="64" height="64"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" id="lMm-EH-K5c"/>
+                    </imageView>
                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MlX-MT-5z7">
-                        <rect key="frame" x="17" y="295" width="48" height="48"/>
+                        <rect key="frame" x="17" y="266" width="48" height="48"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" image="square" id="qvy-5d-OZj"/>
                         <connections>
@@ -142,22 +209,22 @@
                         </connections>
                     </imageView>
                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FWN-3I-4Vg">
-                        <rect key="frame" x="114" y="295" width="48" height="48"/>
+                        <rect key="frame" x="114" y="266" width="48" height="48"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" image="hl" id="FTA-sF-BsS"/>
+                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" image="crackedtile" id="FTA-sF-BsS"/>
                     </imageView>
                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fcb-MM-H18">
-                        <rect key="frame" x="211" y="295" width="48" height="48"/>
+                        <rect key="frame" x="211" y="266" width="48" height="48"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" image="grey" id="luD-pK-ooq"/>
                     </imageView>
                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YFp-3z-tWF">
-                        <rect key="frame" x="211" y="295" width="48" height="48"/>
+                        <rect key="frame" x="211" y="266" width="48" height="48"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" image="grey" id="nQZ-eG-fc0"/>
+                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" image="voidtile" id="nQZ-eG-fc0"/>
                     </imageView>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5d8-QM-429">
-                        <rect key="frame" x="20" y="297" width="42" height="44"/>
+                        <rect key="frame" x="20" y="268" width="42" height="44"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="smallSquare" title="Gradient Button" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" state="on" borderStyle="border" transparent="YES" imageScaling="proportionallyDown" inset="2" id="JJn-hE-2kx">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -168,7 +235,7 @@
                         </connections>
                     </button>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4fx-oz-fHX">
-                        <rect key="frame" x="214" y="297" width="42" height="44"/>
+                        <rect key="frame" x="214" y="268" width="42" height="44"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="smallSquare" title="Gradient Button" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" state="on" borderStyle="border" transparent="YES" imageScaling="proportionallyDown" inset="2" id="fvN-Va-MpK">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -179,7 +246,7 @@
                         </connections>
                     </button>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1pn-Mi-w3w">
-                        <rect key="frame" x="117" y="297" width="42" height="44"/>
+                        <rect key="frame" x="117" y="268" width="42" height="44"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="smallSquare" title="Gradient Button" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" state="on" borderStyle="border" transparent="YES" imageScaling="proportionallyDown" inset="2" id="p2K-If-hRI">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -189,12 +256,48 @@
                             <action selector="crackedAction:" target="OQd-pb-Vvp" id="13f-Xk-7EM"/>
                         </connections>
                     </button>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Rw-1U-pA7">
+                        <rect key="frame" x="122" y="341" width="33" height="17"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Tiles" id="xno-6w-hWD">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LJE-re-n3A">
+                        <rect key="frame" x="108" y="205" width="60" height="17"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Doodads" id="A5t-3e-csX">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <box autoresizesSubviews="NO" verticalHuggingPriority="750" fixedFrame="YES" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="zyN-5I-LnM">
+                        <rect key="frame" x="12" y="331" width="252" height="5"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
+                        <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <font key="titleFont" metaFont="system"/>
+                    </box>
+                    <box autoresizesSubviews="NO" verticalHuggingPriority="750" fixedFrame="YES" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="bbO-ni-hSY">
+                        <rect key="frame" x="12" y="195" width="252" height="5"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
+                        <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <font key="titleFont" metaFont="system"/>
+                    </box>
                 </subviews>
             </view>
             <connections>
                 <outlet property="cracked" destination="FWN-3I-4Vg" id="4H6-CG-lsc"/>
                 <outlet property="crackedButton" destination="4fx-oz-fHX" id="SQ2-Af-wOO"/>
                 <outlet property="crackedTile" destination="FWN-3I-4Vg" id="7af-BF-MYr"/>
+                <outlet property="selected" destination="HFh-uJ-dod" id="8ov-Zn-vsg"/>
+                <outlet property="selectedCracked" destination="ddw-Ch-YvL" id="J01-2d-qgN"/>
+                <outlet property="selectedSolid" destination="HFh-uJ-dod" id="XG7-Kx-ETS"/>
+                <outlet property="selectedVoid" destination="1lE-yZ-g96" id="Npk-AE-Baw"/>
                 <outlet property="solid" destination="qvy-5d-OZj" id="WLd-1y-ACU"/>
                 <outlet property="solidButton" destination="4fx-oz-fHX" id="vjG-2I-2VZ"/>
                 <outlet property="solidTile" destination="MlX-MT-5z7" id="sbh-YX-MKn"/>
@@ -207,6 +310,7 @@
             <connections>
                 <outlet property="crackedPalette" destination="FWN-3I-4Vg" id="b1Y-S4-gNT"/>
                 <outlet property="palette" destination="vlI-Vs-b8g" id="IEf-tI-d5o"/>
+                <outlet property="save" destination="Cy2-HG-JWE" id="8fh-RS-3rB"/>
                 <outlet property="skView" destination="539" id="540"/>
                 <outlet property="solidPalette" destination="MlX-MT-5z7" id="5af-P3-ici"/>
                 <outlet property="voidPalette" destination="Fcb-MM-H18" id="lsE-qf-hFC"/>
@@ -217,8 +321,9 @@
         <collectionViewItem id="7gO-MF-BWZ"/>
     </objects>
     <resources>
+        <image name="crackedtile" width="1200" height="1200"/>
         <image name="grey" width="15.595667839050293" height="15.595667839050293"/>
-        <image name="hl" width="120" height="120"/>
         <image name="square" width="576" height="576"/>
+        <image name="voidtile" width="400" height="400"/>
     </resources>
 </document>

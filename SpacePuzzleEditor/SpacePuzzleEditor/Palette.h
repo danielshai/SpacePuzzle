@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import <SpriteKit/SpriteKit.h>
 
 @interface Palette : NSPanel
 @property (weak) IBOutlet NSImageView *solidTile;
@@ -15,9 +16,13 @@
 @property (weak) IBOutlet NSButton *solidButton;
 @property (weak) IBOutlet NSButton *crackedButton;
 @property (weak) IBOutlet NSButton *voidButton;
-- (IBAction)solidClick:(id)sender;
-- (IBAction)crackedAction:(id)sender;
-- (IBAction)voidClick:(id)sender;
+@property (weak) IBOutlet NSImageView *selectedSolid;
+@property (weak) IBOutlet NSImageView *selectedCracked;
+@property (weak) IBOutlet NSImageView *selectedVoid;
+
+-(IBAction)solidClick:(id)sender;
+-(IBAction)crackedAction:(id)sender;
+-(IBAction)voidClick:(id)sender;
 -(void)notifyText:(NSString *)text Object: (NSObject*)object Key: (NSString*)key;
 
 @end
