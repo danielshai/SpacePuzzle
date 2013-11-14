@@ -122,11 +122,6 @@
                                     <action selector="performMiniaturize:" target="-1" id="538"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Zoom" id="239">
-                                <connections>
-                                    <action selector="performZoom:" target="-1" id="240"/>
-                                </connections>
-                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="92">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
@@ -153,7 +148,7 @@
             </items>
         </menu>
         <window title="Space Puzzle Editor" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="371">
-            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
             <windowCollectionBehavior key="collectionBehavior" fullScreenPrimary="YES"/>
             <rect key="contentRect" x="0.0" y="0.0" width="360" height="480"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1280" height="800"/>
@@ -315,6 +310,7 @@
             <connections>
                 <outlet property="crackedPalette" destination="FWN-3I-4Vg" id="b1Y-S4-gNT"/>
                 <outlet property="palette" destination="vlI-Vs-b8g" id="IEf-tI-d5o"/>
+                <outlet property="recentMenu" destination="7wc-3F-y89" id="ROQ-Zi-Cid"/>
                 <outlet property="save" destination="Cy2-HG-JWE" id="8fh-RS-3rB"/>
                 <outlet property="skView" destination="539" id="540"/>
                 <outlet property="solidPalette" destination="MlX-MT-5z7" id="5af-P3-ici"/>

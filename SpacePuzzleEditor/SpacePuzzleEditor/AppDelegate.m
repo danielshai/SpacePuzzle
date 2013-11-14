@@ -11,6 +11,7 @@
 @synthesize board = _board;
 @synthesize scene = _scene;
 @synthesize skView = _skView;
+@synthesize recentMenu = _recentMenu;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
@@ -87,7 +88,8 @@
                 [self refreshBoard];
                 // Updates the window's title.
                 [[self window] setTitle:[path lastPathComponent]];
-                edited = NO;
+                // A newly opened file cannot be edited.
+                [[NSDocumentController sharedDocumentController] noteNewRecentDocumentURL:[NSURL fileURLWithPath:path]];
             } else {
                 NSAlert *alert = [NSAlert alertWithMessageText: @"File is not a valid level!"
                                                  defaultButton:@"OK"
@@ -100,9 +102,18 @@
     }
 }
 
+-(BOOL)application:(NSApplication *)theApplication openFile:(NSString *)filename {
+    [_board loadBoard:filename];
+    currentFilePath = filename;
+    [[self window] setTitle:[filename lastPathComponent]];
+    [self refreshBoard];
+    return YES;
+}
+
 /*
  *  Should be called when a new board has been loaded. This function updates the view of the changes. */
 -(void)refreshBoard {
+    edited = NO;
     NSInteger boardSizeX = [_board boardSizeX];
     NSInteger boardSizeY = [_board boardSizeY];
     

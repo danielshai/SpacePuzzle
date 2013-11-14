@@ -15,6 +15,7 @@
 
 @interface AppDelegate : NSObject <NSApplicationDelegate> {
     NSString *currentFilePath;
+    // Used for checking if a file has been edited, which is used to give feedback to the user of this fact.
     BOOL edited;
 }
 
@@ -22,6 +23,7 @@
 @property (retain) IBOutlet SKView *skView;
 @property (nonatomic, retain) Board *board;
 @property (nonatomic, retain) BoardScene *scene;
+@property (weak) IBOutlet NSMenu *recentMenu;
 -(IBAction)newLevel:(id)sender;
 -(IBAction)openLevel:(id)sender;
 -(IBAction)saveLevel:(id)sender;
