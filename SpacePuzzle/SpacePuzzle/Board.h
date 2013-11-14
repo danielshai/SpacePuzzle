@@ -11,9 +11,8 @@
 
 @class XMLParser;
 
-@interface Board : NSObject {
-    NSString *defaultBoardPath;
-}
+@interface Board : NSObject
+
 @property (nonatomic, strong) NSMutableArray *board;
 @property (nonatomic, assign) NSInteger tilesize;
 @property (nonatomic, assign) NSInteger boardSizeX;
@@ -23,5 +22,5 @@
 
 -(void) loadBoard:(NSString*) path;
 -(void) saveBoard:(NSString*) fileName;
--(void) createDefaultBoard;
+-(void) createEmptyBoard;
 @end

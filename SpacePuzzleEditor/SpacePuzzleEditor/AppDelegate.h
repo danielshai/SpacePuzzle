@@ -13,16 +13,19 @@
 
 @class BoardView;
 
-@interface AppDelegate : NSObject <NSApplicationDelegate>
+@interface AppDelegate : NSObject <NSApplicationDelegate> {
+    NSString *currentFilePath;
+    BOOL edited;
+}
 
 @property (retain) IBOutlet NSWindow *window;
 @property (retain) IBOutlet SKView *skView;
 @property (nonatomic, retain) Board *board;
 @property (nonatomic, retain) BoardScene *scene;
-
+-(IBAction)newLevel:(id)sender;
 -(IBAction)openLevel:(id)sender;
 -(IBAction)saveLevel:(id)sender;
-- (IBAction)saveAsLevel:(id)sender;
+-(IBAction)saveAsLevel:(id)sender;
 -(void)boardEdited:(NSNotification *) notification;
 -(void)refreshBoard;
 -(void)setupBoard;

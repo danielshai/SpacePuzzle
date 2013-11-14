@@ -13,8 +13,8 @@
 
 -(id) init {
     if(self = [super init]){
-        defaultBoardPath = @"/Users/IxD/SpacePuzzle/SpacePuzzleEditor/SpacePuzzleEditor/empty.splvl";
         _board = [[NSMutableArray alloc] init];
+        _parser = [[XMLParser alloc] init];
         _boardSizeX = 7;
         _boardSizeY = 10;
         _tilesize = 44;
@@ -55,19 +55,14 @@
     //_boardSizeY = BOARD_SIZE_Y;
 }
 
--(void)createDefaultBoard {
-    [_board removeAllObjects];
-    NSURL *path = [[NSURL alloc] initFileURLWithPath:defaultBoardPath];
-
-    _parser = [[XMLParser alloc] initWithContentsOfURL:path];
-    
+-(void)createEmptyBoard {
     for (int i = 0; i < _boardSizeY; i++) {
         //j = columns
         for (int j = 0; j < _boardSizeX; j++) {
             BoardCoord* bc = [[BoardCoord alloc] init];
             bc.x = j;
             bc.y = i;
-            bc.status = [[[_parser board] objectAtIndex:((i*_boardSizeX) + j)] intValue];
+            bc.status = MAPSTATUS_VOID;
             
             //(Row number * y) + Column number)
             [_board insertObject:bc atIndex:((i*_boardSizeX) + j)];

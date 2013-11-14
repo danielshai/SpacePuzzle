@@ -12,6 +12,16 @@
 @synthesize parser = _parser;
 @synthesize board = _board;
 
+-(id)init {
+    if(self = [super init]) {
+        output = @"";
+        boardElement = NO;
+        _board = [[NSMutableArray alloc] init];
+        [_parser setDelegate:self];
+    }
+    return self;
+}
+
 -(id)initWithContentsOfURL:(NSURL *)url {
     if(self = [super init]) {
         output = @"";
