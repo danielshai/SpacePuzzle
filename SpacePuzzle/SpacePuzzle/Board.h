@@ -22,5 +22,6 @@
 @property (nonatomic, retain) XMLParser *parser;
 
 -(void) loadBoard:(NSString*) path;
+-(void) saveBoard:(NSString*) fileName;
 -(void) createDefaultBoard;
 @end

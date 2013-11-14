@@ -1,6 +1,6 @@
 # OS X
 .DS_Store
-
+*.splvl
 # Xcode
 */build/*
 *.pbxuser

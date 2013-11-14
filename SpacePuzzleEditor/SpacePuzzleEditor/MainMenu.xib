@@ -96,7 +96,7 @@
                             </menuItem>
                             <menuItem title="Save As…" keyEquivalent="S" id="TAx-Yg-2e8">
                                 <connections>
-                                    <action selector="saveDocumentAs:" target="-1" id="oH0-aX-pNd"/>
+                                    <action selector="saveAsLevel:" target="494" id="cqx-WG-xFy"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Revert to Saved" id="umZ-bq-gM3">
@@ -152,7 +152,7 @@
                 </menuItem>
             </items>
         </menu>
-        <window title="SpacePuzzleEditor" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="371">
+        <window title="Space Puzzle Editor" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="371">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowCollectionBehavior key="collectionBehavior" fullScreenPrimary="YES"/>
             <rect key="contentRect" x="0.0" y="0.0" width="360" height="480"/>

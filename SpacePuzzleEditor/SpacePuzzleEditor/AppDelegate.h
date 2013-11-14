@@ -22,6 +22,7 @@
 
 -(IBAction)openLevel:(id)sender;
 -(IBAction)saveLevel:(id)sender;
+- (IBAction)saveAsLevel:(id)sender;
 -(void)boardEdited:(NSNotification *) notification;
 -(void)refreshBoard;
 -(void)setupBoard;

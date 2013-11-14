@@ -27,6 +27,8 @@
 
     [self setupBoard];
     [self observeText:@"BoardEdited" Selector:@selector(boardEdited:)];
+    [[self window] setTitle:@"Untitled.splvl"];
+    
 }
 
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender {
@@ -34,8 +36,6 @@
 }
 
 - (IBAction)openLevel:(id)sender {
-    int i; // Loop counter.
-    
     // Create the File Open Dialog class.
     NSOpenPanel* openDlg = [NSOpenPanel openPanel];
     
@@ -54,21 +54,22 @@
         NSArray* files = [openDlg URLs];
         
         // Loop through all the files and process them.
-        for( i = 0; i < [files count]; i++ )
+        for(int i = 0; i < [files count]; i++ )
         {
             NSURL* fileName = [files objectAtIndex:i];
             NSString *path = [fileName absoluteString];
             
             // Removes "file://" from the string, otherwise not valid path.
             path = [path substringFromIndex:7];
-            NSString *extension = [path substringFromIndex:path.length-4];
+            // Get the extension of the file.
+            NSString *extension = [path substringFromIndex:path.length-6];
             extension = [extension lowercaseString];
             // Only open .xml files.
-            if([extension isEqualToString:@".xml"]) {
+            if([extension isEqualToString:@".splvl"]) {
                 [_board loadBoard:path];
                 [self refreshBoard];
             } else {
-                NSAlert *alert = [NSAlert alertWithMessageText: @"File is not a valid level!\n\nLevel files must be of xml (.xml) type."
+                NSAlert *alert = [NSAlert alertWithMessageText: @"File is not a valid level!\n\nLevel files must be of .splvl type."
                                                  defaultButton:@"OK"
                                                alternateButton:@""
                                                    otherButton:nil
@@ -95,13 +96,37 @@
 }
 
 -(IBAction)saveLevel:(id)sender {
-    NSLog(@"saved");
+    // Create the File Open Dialog class.
+    NSSavePanel* saveDlg = [NSSavePanel savePanel];
     
+    // Enable the selection of files in the dialog.
+    [saveDlg setCanCreateDirectories:YES];
+    
+    // Enable the selection of directories in the dialog.
+    [saveDlg setCanSelectHiddenExtension:YES];
+    
+    // Display the dialog.  If the OK button was pressed,
+    // process the files.
+    if ([saveDlg runModal] == NSOKButton) {
+        NSURL *fileName = [saveDlg URL];
+        NSString *path = [fileName absoluteString];
+        // Removes "file://" from the string, otherwise not valid path.
+        path = [path substringFromIndex:7];
+        // Adds correct extension.
+        path = [path stringByAppendingString:@".splvl"];
+        [_board saveBoard:path];
+    }
 }
 
+- (IBAction)saveAsLevel:(id)sender {
+    [self saveLevel:sender];
+}
+
+
 -(void)boardEdited:(NSNotification *) notification {
+
     NSDictionary *userInfo = notification.userInfo;
-    NSSet *objectSent = [userInfo objectForKey:@"MouseDown"];
+    NSSet *objectSent = [userInfo objectForKey:@"BoardEdited"];
     NSArray *data = [objectSent allObjects];
     NSValue *val = [data objectAtIndex:0];
    

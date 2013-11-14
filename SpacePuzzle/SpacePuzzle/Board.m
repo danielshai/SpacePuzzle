@@ -13,7 +13,7 @@
 
 -(id) init {
     if(self = [super init]){
-        defaultBoardPath = @"/Users/IxD/SpacePuzzle/SpacePuzzleEditor/SpacePuzzleEditor/empty.xml";
+        defaultBoardPath = @"/Users/IxD/SpacePuzzle/SpacePuzzleEditor/SpacePuzzleEditor/empty.splvl";
         _board = [[NSMutableArray alloc] init];
         _boardSizeX = 7;
         _boardSizeY = 10;
@@ -28,7 +28,6 @@
  *  Loads a board given a path, i.e. |BoardValues| are set for each coordinate on 
  *  the board. */
 - (void) loadBoard:(NSString*) path {
-    
     NSURL *s = [[NSURL alloc] initFileURLWithPath:path];
     _parser = [[XMLParser alloc] initWithContentsOfURL:s];
     
@@ -76,10 +75,24 @@
     }
 }
 
-- (void) print {
-    for (int i = 0; i < _board.count; i++) {
-        if([[_board objectAtIndex:i] status] != MAPSTATUS_SOLID)
-            NSLog(@"%d IS TAKEN ON THE MAP!", i);
+/* 
+ *  Saves the board to a given path/filename. First you have to add the output to the parser then finally
+ *  the actual write to file. */
+-(void)saveBoard:(NSString *)fileName {
+    // Add the board in xml format.
+    [_parser addOutput:@"<board>"];
+    for (int i = 0; i < _boardSizeY; i++) {
+        for (int j = 0; j < _boardSizeX; j++) {
+            BoardCoord* bc = [_board objectAtIndex:(i*_boardSizeX + j)] ;
+            NSString *s = @"\n<status>";
+            s = [s stringByAppendingString:[@(bc.status) stringValue]];
+            s = [s stringByAppendingString:@"</status>"];
+            [_parser addOutput:s];
+        }
     }
+    [_parser addOutput:@"\n</board>"];
+    // End of board.
+    
+    [_parser writeToFile:fileName];
 }
 @end

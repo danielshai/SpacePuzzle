@@ -10,9 +10,13 @@
 
 @interface XMLParser : NSObject <NSXMLParserDelegate> {
     NSString *currentElement;
+    BOOL boardElement;
+    NSString *output;
 }
 
 @property (nonatomic, retain) NSXMLParser *parser;
 @property (nonatomic, retain) NSMutableArray *board;
 -(id)initWithContentsOfURL:(NSURL *)url;
+-(void)addOutput:(NSString *) string;
+-(BOOL)writeToFile:(NSString *)fileName;
 @end

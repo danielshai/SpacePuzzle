@@ -45,7 +45,7 @@
 }
 
 /*
- *  Changes one tile on the board according to what brush is used and notifuies observers that the view
+ *  Changes one tile on the board according to what brush is used and notifies observers that the view
  *  has changed. */
 -(void)editABoardItem:(NSEvent *)theEvent {
     // Find mouse location and convert.
@@ -58,7 +58,8 @@
     // Check if the click was inside the board.
     if(loc.x >= 0 && loc.x < BOARD_SIZE_X && loc.y >= 0 && loc.y < BOARD_SIZE_Y) {
         // Notify observers.
-        NSArray *arr = [NSArray arrayWithObjects:[NSValue valueWithPoint:loc],statusOfPalette,nil];
+        NSArray *arr = [NSArray arrayWithObjects:[NSValue valueWithPoint:loc],
+                                                 [NSNumber numberWithInteger: statusOfPalette],nil];
         [self notifyText:@"BoardEdited" Object:arr Key:@"BoardEdited"];
     
         // Change texture of sprite.
