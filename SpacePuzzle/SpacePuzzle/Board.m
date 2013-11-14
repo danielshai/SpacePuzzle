@@ -10,6 +10,7 @@
 @synthesize boardSizeX = _boardSizeX;
 @synthesize boardSizeY = _boardSizeY;
 @synthesize boardBegin = _boardBegin;
+@synthesize itemDictionary = _itemDictionary;
 
 -(id) init {
     if(self = [super init]){
@@ -18,8 +19,9 @@
         _boardSizeX = 7;
         _boardSizeY = 10;
         _tilesize = 44;
-        _boardBegin.x = 25;
-        _boardBegin.y = 465;
+        _boardBegin.x = BOARD_PIXEL_BEGIN_X;
+        _boardBegin.y = BOARD_PIXEL_BEGIN_Y;
+        _itemDictionary = [[NSMutableDictionary alloc] init];
     }
     return self;
 }
@@ -31,9 +33,10 @@
     NSURL *s = [[NSURL alloc] initFileURLWithPath:path];
     _parser = [[XMLParser alloc] initWithContentsOfURL:s];
     
+    [_itemDictionary removeAllObjects];
     [_board removeAllObjects];
     
-    //i = rows
+    // The board tiles.
     for (int i = 0; i < _boardSizeY; i++) {
         //j = columns
         for (int j = 0; j < _boardSizeX; j++) {
@@ -51,8 +54,11 @@
             [_board insertObject:bc atIndex:((i*_boardSizeX) + j)];
         }
     }
-    //_boardSizeX = BOARD_SIZE_X;
-    //_boardSizeY = BOARD_SIZE_Y;
+    
+    // The items.
+    // Få coords från XMLParser. Används de som key, object själva item. Skapa item mha ClassFromString (strängen fås från XMLParser.
+    
+    // id object = [[NSClassFromString(@"NameofClass") alloc] init];
 }
 
 -(void)createEmptyBoard {

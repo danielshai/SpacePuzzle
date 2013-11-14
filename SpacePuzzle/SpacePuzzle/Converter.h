@@ -21,4 +21,5 @@
                               :(NSInteger) ssY winSizeY: (float) winSizeY;
 +(CGPoint) convertStoneCoordToPixel:(NSInteger) x yCoord: (NSInteger) y;
 +(CGPoint) convertMousePosToCoord:(CGPoint)pos;
++(CGPoint) convertCoordToPixel:(CGPoint)coord;
 @end

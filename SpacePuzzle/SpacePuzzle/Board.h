@@ -19,7 +19,7 @@
 @property (nonatomic, assign) NSInteger boardSizeY;
 @property (nonatomic, assign) CGPoint boardBegin;
 @property (nonatomic, retain) XMLParser *parser;
-
+@property (nonatomic, retain) NSMutableDictionary *itemDictionary;
 -(void) loadBoard:(NSString*) path;
 -(void) saveBoard:(NSString*) fileName;
 -(void) createEmptyBoard;

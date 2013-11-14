@@ -40,11 +40,7 @@
     // TEMP CODE.
     _board = [[Board alloc] init];
     // Load the board.
-    NSString *levelNr = @"1";
-    NSString *pathBoard = [NSString stringWithFormat:@"%@%@",@"BoardListLevel",levelNr];
-    NSString *filePathBoard = [[NSBundle mainBundle] pathForResource:pathBoard
-                                                              ofType:@"plist"];
-    [_board loadBoard:filePathBoard];
+    [_board loadBoard:@"/Users/IxD/SpacePuzzle/full.splvl"];
     
     for(int i = 0; i < BOARD_SIZE_Y; i++) {
         for(int j = 0; j < BOARD_SIZE_X; j++) {
@@ -57,8 +53,14 @@
 /* 
  *  Called when a notification of unit movement is sent from the |MainScene|. Updates the data model of the
  *  unit accordingly. */
--(void)unitMoved:(NSNotification *)notification{
-    NSLog(@"MOVED!");
+-(void)unitMoved:(NSNotification *)notification {
+    NSDictionary *userInfo = notification.userInfo;
+    NSSet *objectSent = [userInfo objectForKey:UNIT_MOVED];
+    NSArray *data = [objectSent allObjects];
+    NSValue *val = [data objectAtIndex:0];
+    
+    // UPDATE DATA MODEL.
+
 }
 
 /*

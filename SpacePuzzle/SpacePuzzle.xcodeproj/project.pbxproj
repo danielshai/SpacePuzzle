@@ -25,6 +25,7 @@
 		E6214087182BA53800EC5C21 /* SpacePuzzleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E6214086182BA53800EC5C21 /* SpacePuzzleTests.m */; };
 		E6270527182CE8040064C758 /* square.gif in Resources */ = {isa = PBXBuildFile; fileRef = E6270526182CE8040064C758 /* square.gif */; };
 		E6270571182D0DA00064C758 /* littlejohn.png in Resources */ = {isa = PBXBuildFile; fileRef = E6270570182D0DA00064C758 /* littlejohn.png */; };
+		E633067A1835018A00E908F7 /* XMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = E63306791835018A00E908F7 /* XMLParser.m */; };
 		E6E657FE182BB8C50022BF5F /* Board.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E657FD182BB8C50022BF5F /* Board.m */; };
 		E6E65801182BB9020022BF5F /* Position.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E65800182BB9020022BF5F /* Position.m */; };
 		E6E65804182BBAB30022BF5F /* BoardCoord.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E65803182BBAB30022BF5F /* BoardCoord.m */; };
@@ -72,6 +73,8 @@
 		E6214086182BA53800EC5C21 /* SpacePuzzleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SpacePuzzleTests.m; sourceTree = "<group>"; };
 		E6270526182CE8040064C758 /* square.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = square.gif; sourceTree = "<group>"; };
 		E6270570182D0DA00064C758 /* littlejohn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = littlejohn.png; sourceTree = "<group>"; };
+		E63306781835018A00E908F7 /* XMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XMLParser.h; path = ../../SpacePuzzleEditor/SpacePuzzleEditor/XMLParser.h; sourceTree = "<group>"; };
+		E63306791835018A00E908F7 /* XMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XMLParser.m; path = ../../SpacePuzzleEditor/SpacePuzzleEditor/XMLParser.m; sourceTree = "<group>"; };
 		E6E657FB182BB7BD0022BF5F /* Macros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Macros.h; sourceTree = "<group>"; };
 		E6E657FC182BB8C50022BF5F /* Board.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Board.h; sourceTree = "<group>"; };
 		E6E657FD182BB8C50022BF5F /* Board.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Board.m; sourceTree = "<group>"; };
@@ -162,6 +165,8 @@
 				E621406F182BA53800EC5C21 /* MainScene.m */,
 				E6E6580F182BC50D0022BF5F /* SpriteWithItem.h */,
 				E6E65810182BC50D0022BF5F /* SpriteWithItem.m */,
+				E63306781835018A00E908F7 /* XMLParser.h */,
+				E63306791835018A00E908F7 /* XMLParser.m */,
 				E6E65812182BC5B40022BF5F /* Model */,
 				E6E65808182BC2820022BF5F /* Utility */,
 				E6214073182BA53800EC5C21 /* Images.xcassets */,
@@ -350,6 +355,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E633067A1835018A00E908F7 /* XMLParser.m in Sources */,
 				E6E6580B182BC2CE0022BF5F /* Item.m in Sources */,
 				E6E65815182BC82E0022BF5F /* LittleJohn.m in Sources */,
 				E6E65801182BB9020022BF5F /* Position.m in Sources */,

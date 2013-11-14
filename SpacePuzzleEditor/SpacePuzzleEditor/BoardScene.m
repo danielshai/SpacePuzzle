@@ -58,6 +58,7 @@
     // Check if the click was inside the board.
     if(loc.x >= 0 && loc.x < BOARD_SIZE_X && loc.y >= 0 && loc.y < BOARD_SIZE_Y) {
         // Notify observers.
+        
         NSArray *arr = [NSArray arrayWithObjects:[NSValue valueWithPoint:loc],
                                                  [NSNumber numberWithInteger: statusOfPalette],nil];
         [self notifyText:@"BoardEdited" Object:arr Key:@"BoardEdited"];
@@ -106,7 +107,7 @@
     sprite.size = CGSizeMake(ts, ts);
     
     NSInteger xx = x*ts + p.x + ts/2;
-    NSInteger yy = p.y - y*ts-ts/2 - 5;
+    NSInteger yy = p.y - y*ts-ts/2;
 
     sprite.position = CGPointMake(xx,yy);
     [_boardSprites addObject:sprite];

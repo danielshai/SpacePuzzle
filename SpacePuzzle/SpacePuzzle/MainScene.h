@@ -13,6 +13,7 @@
 @property (nonatomic, retain) SKTexture *square;
 @property (nonatomic, retain) SKSpriteNode *bigL;
 @property (nonatomic, retain) SKSpriteNode *littleJohn;
+@property (nonatomic, retain) SKSpriteNode *currentUnit;
 
 -(void)setupBoardX:(NSInteger)x Y: (NSInteger)y;
 -(void)setupUnits;

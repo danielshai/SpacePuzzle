@@ -72,7 +72,6 @@
     NSError *error;
     
     if (![output writeToFile:fileName atomically:YES encoding:NSUTF8StringEncoding error:&error]) {
-        NSBeep();
         NSLog(@"Could not write document out...");
         output = @"";
         return NO;
