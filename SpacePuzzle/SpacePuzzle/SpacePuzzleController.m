@@ -26,6 +26,7 @@
     _scene.scaleMode = SKSceneScaleModeAspectFill;
     
     [self setupBoard];
+    [self setupElements];
     [self setupUnits];
     
     // Present the scene.
@@ -52,6 +53,18 @@
     }
 }
 
+-(void)setupElements {
+    // Talk to the scene what to show.
+    NSEnumerator *enumerator = [[_board elementDictionary] objectEnumerator];
+    Element *obj;
+    while((obj = [enumerator nextObject])) {
+        CGPoint p = CGPointMake([obj x], [obj y]);
+        NSString *str = NSStringFromClass([obj class]);
+        
+        [_scene setupElement:p Name:str];
+    }
+}
+
 -(void)unitWantsToMove:(NSNotification *)notification {
     // Get data.
     NSArray *data = [self getDataFromNotification:notification Key:UNIT_WANTS_TO_MOVE];
@@ -75,7 +88,16 @@
             NSNumber *key = [NSNumber numberWithInt:y*BOARD_SIZE_X + x];
             Element *e = [[_board elementDictionary] objectForKey:key];
             
-            if(![e blocking]) {
+            // If the element exists.
+            if(e) {
+                // If the element isn't blocking, move unit.
+                if(![e blocking]) {
+                    _currentUnit.x = x;
+                    _currentUnit.y = y;
+                    [_scene updateUnit:CGPointMake(x, y)];
+                }
+            }
+            else {
                 _currentUnit.x = x;
                 _currentUnit.y = y;
                 [_scene updateUnit:CGPointMake(x, y)];

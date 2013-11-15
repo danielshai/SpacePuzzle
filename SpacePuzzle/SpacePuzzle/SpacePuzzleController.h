@@ -26,6 +26,7 @@
 -(void)unitWantsToMove:(NSNotification *)notification;
 -(void)unitMoved:(NSNotification *) notification;
 -(void)setupBoard;
+-(void)setupElements;
 -(void)setupUnits;
 -(void)observeText:(NSString*)text Selector: (SEL)selector;
 -(NSArray*)getDataFromNotification:(NSNotification*) notif Key: (NSString*) key;

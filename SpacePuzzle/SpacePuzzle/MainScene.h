@@ -16,9 +16,13 @@
 @property (nonatomic, retain) SKSpriteNode *bigL;
 @property (nonatomic, retain) SKSpriteNode *littleJohn;
 @property (nonatomic, retain) SKSpriteNode *currentUnit;
+@property (nonatomic, retain) SKSpriteNode *bkg;
+@property (nonatomic, retain) NSMutableDictionary *elements;
 
 -(void)updateUnit:(CGPoint) coord;
+-(void)updateElement:(CGPoint) oldCoord NewCoord:(CGPoint) newCoord;
 -(void)setupBoardX:(NSInteger)x Y: (NSInteger)y Status: (NSInteger) status;
+-(void)setupElement:(CGPoint) coord Name: (NSString*) className;
 -(void)setupUnits;
 -(void)notifyText:(NSString *)text Object: (NSObject*)object Key: (NSString*)key;
 

@@ -11,15 +11,20 @@
 @synthesize bigL = _bigL;
 @synthesize littleJohn = _littleJohn;
 @synthesize currentUnit = _currentUnit;
+@synthesize bkg = _bkg;
+@synthesize elements = _elements;
 
 -(id)initWithSize:(CGSize)size {    
     if (self = [super initWithSize:size]) {
         /* Setup your scene here */
         _currentUnit = _littleJohn;
         self.backgroundColor = [SKColor colorWithRed:0.15 green:0.15 blue:0.3 alpha:1.0];
-        _solidTile = [SKTexture textureWithImageNamed:@"square.gif"];
+        _solidTile = [SKTexture textureWithImageNamed:@"platform.png"];
         _crackedTile = [SKTexture textureWithImageNamed:@"crackedtile.jpg"];
-        _voidTile = [SKTexture textureWithImageNamed:@"voidtile.jpg"];
+        _voidTile = [SKTexture textureWithImageNamed:@"voidtile.png"];
+        _bkg = [SKSpriteNode spriteNodeWithImageNamed:@"BoardPortrait2.png"];
+        [self addChild:_bkg];
+        _elements = [[NSMutableDictionary alloc] init];
     }
     return self;
 }
@@ -64,6 +69,10 @@
     _currentUnit.position = pos;
 }
 
+-(void)updateElement:(CGPoint)oldCoord NewCoord:(CGPoint)newCoord {
+    
+}
+
 -(void)update:(CFTimeInterval)currentTime {
     /* Called before each frame is rendered */
    
@@ -87,6 +96,23 @@
     NSInteger yy = BOARD_PIXEL_BEGIN_Y - y*TILESIZE-TILESIZE/2;
     
     sprite.position = CGPointMake(xx,yy);
+    [self addChild:sprite];
+}
+
+-(void)setupElement:(CGPoint)coord Name:(NSString *)className {
+    NSString *path = className;
+    path = [path stringByAppendingString:@".png"];
+    SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithImageNamed:path];
+    [sprite setSize:CGSizeMake(TILESIZE, TILESIZE)];
+    CGPoint pos = [Converter convertCoordToPixel:coord];
+    
+    // Shift the sprite a bit.
+    pos.x += sprite.size.width/2;
+    
+    [sprite setPosition:pos];
+    
+    NSNumber *nr = [NSNumber numberWithInt:coord.y*BOARD_SIZE_X + coord.x];
+    [_elements setObject:sprite forKey:nr];
     [self addChild:sprite];
 }
 
