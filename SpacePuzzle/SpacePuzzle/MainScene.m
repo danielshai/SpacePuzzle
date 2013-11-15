@@ -5,7 +5,9 @@
 #import "MainScene.h"
 
 @implementation MainScene
-@synthesize square = _square;
+@synthesize solidTile = _solidTile;
+@synthesize crackedTile = _crackedTile;
+@synthesize voidTile = _voidTile;
 @synthesize bigL = _bigL;
 @synthesize littleJohn = _littleJohn;
 @synthesize currentUnit = _currentUnit;
@@ -15,7 +17,9 @@
         /* Setup your scene here */
         _currentUnit = _littleJohn;
         self.backgroundColor = [SKColor colorWithRed:0.15 green:0.15 blue:0.3 alpha:1.0];
-        _square = [SKTexture textureWithImageNamed:@"square.gif"];
+        _solidTile = [SKTexture textureWithImageNamed:@"square.gif"];
+        _crackedTile = [SKTexture textureWithImageNamed:@"crackedtile.jpg"];
+        _voidTile = [SKTexture textureWithImageNamed:@"voidtile.jpg"];
     }
     return self;
 }
@@ -26,38 +30,38 @@
     for (UITouch *touch in touches) {
         CGPoint location = [touch locationInNode:self];
         
-        SKSpriteNode *touchedNode = (SKSpriteNode *)[self nodeAtPoint:location];
-        
-        // TEMP CODE
+        //SKSpriteNode *touchedNode = (SKSpriteNode *)[self nodeAtPoint:location];
         CGPoint coord = [Converter convertMousePosToCoord:location];
-        CGPoint pos = [Converter convertCoordToPixel:coord];
-        pos.x += 20; // TEMP SHIFT FOR THIS CERTAIN TEMP TEXTURE
-        pos.y -= 5;
-        if(coord.x >= 0 && coord.x < BOARD_SIZE_X && coord.y >= 0 && coord.y < BOARD_SIZE_Y) {
-            CGPoint p = _currentUnit.position;
-            p.x += 20;
-            p.y -= 5;
-            CGPoint unit = CGPointMake([Converter convertMousePosToCoord:p].x, [Converter convertMousePosToCoord:p].y);
-            
-            // Only move one step.
-            if((coord.x - unit.x == 1 || coord.x - unit.x == -1) && coord.y == unit.y) {
-                _currentUnit.position = CGPointMake(pos.x, _currentUnit.position.y);
-                NSArray *arr = [NSArray arrayWithObjects:[NSValue valueWithCGPoint:coord],nil];
-                [self notifyText:UNIT_MOVED Object:arr Key:UNIT_MOVED];
-            } else if ((coord.y - unit.y == 1 || coord.y - unit.y == -1) && coord.x == unit.x) {
-                _currentUnit.position = CGPointMake(_currentUnit.position.x, pos.y);
-                NSArray *arr = [NSArray arrayWithObjects:[NSValue valueWithCGPoint:coord],nil];
-                [self notifyText:UNIT_MOVED Object:arr Key:UNIT_MOVED];
-            }
-        }
-        // ADD CONNECTION TO CONTROLLER. NOTIFY NEW POSITION OF UNIT.
         
-        // When adding swipe, this code should be run.
+        CGPoint p = _currentUnit.position;
+        // TEMP SHIFT FOR THIS SPRITE
+        p.x += 20;
+        p.y -= 5;
+        CGPoint unit = CGPointMake([Converter convertMousePosToCoord:p].x, [Converter convertMousePosToCoord:p].y);
+        
+        // Create data to send.
+        NSArray *arr = [NSArray arrayWithObjects:[NSValue valueWithCGPoint:coord],
+                                                 [NSValue valueWithCGPoint:unit],nil];
+        // Notifies the controller that the unit wants to move. The controller checks if it's possible, if
+        // so the controller will call this scene and update the position of the unit accordingly.
+        [self notifyText:UNIT_WANTS_TO_MOVE Object:arr Key:UNIT_WANTS_TO_MOVE];
+        
         /*
+        // When adding swipe, this code should be run.
+        
         if([_littleJohn isEqual:touchedNode]) {
             // Add point to where the currentUnit should move.
         }*/
     }
+}
+
+/* 
+ *  Updates the current unit with the data model. */
+-(void)updateUnit:(CGPoint)coord {
+    CGPoint pos = [Converter convertCoordToPixel:coord];
+    pos.x += 20;
+    pos.y -= 5;
+    _currentUnit.position = pos;
 }
 
 -(void)update:(CFTimeInterval)currentTime {
@@ -67,8 +71,15 @@
 
 /*
  *  Sets up the view of the board. TEMP CODE RIGHT NOW. */
--(void)setupBoardX:(NSInteger)x Y:(NSInteger)y {
-    SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithTexture:_square];
+-(void)setupBoardX:(NSInteger)x Y:(NSInteger)y Status:(NSInteger)status {
+    SKSpriteNode *sprite;
+    if(status == MAPSTATUS_SOLID) {
+        sprite = [SKSpriteNode spriteNodeWithTexture:_solidTile];
+    } else if(status == MAPSTATUS_CRACKED) {
+        sprite = [SKSpriteNode spriteNodeWithTexture:_crackedTile];
+    } else if(status == MAPSTATUS_VOID) {
+        sprite = [SKSpriteNode spriteNodeWithTexture:_voidTile];
+    }
     sprite.size = CGSizeMake(TILESIZE, TILESIZE);
     
     NSInteger xx = x*TILESIZE+TILESIZE/2 + BOARD_PIXEL_BEGIN_X;

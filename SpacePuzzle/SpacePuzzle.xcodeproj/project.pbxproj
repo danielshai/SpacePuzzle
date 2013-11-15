@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E6057673183614740033AE88 /* crackedtile.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E6057671183614740033AE88 /* crackedtile.jpg */; };
+		E6057677183619120033AE88 /* Rock.m in Sources */ = {isa = PBXBuildFile; fileRef = E6057676183619120033AE88 /* Rock.m */; };
+		E605768018362BB80033AE88 /* voidtile.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E605767F18362BB80033AE88 /* voidtile.jpg */; };
 		E6214055182BA53800EC5C21 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6214054182BA53800EC5C21 /* Foundation.framework */; };
 		E6214057182BA53800EC5C21 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6214056182BA53800EC5C21 /* CoreGraphics.framework */; };
 		E6214059182BA53800EC5C21 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6214058182BA53800EC5C21 /* UIKit.framework */; };
@@ -30,9 +33,8 @@
 		E6E65801182BB9020022BF5F /* Position.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E65800182BB9020022BF5F /* Position.m */; };
 		E6E65804182BBAB30022BF5F /* BoardCoord.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E65803182BBAB30022BF5F /* BoardCoord.m */; };
 		E6E65806182BC1680022BF5F /* BoardListLevel1.plist in Resources */ = {isa = PBXBuildFile; fileRef = E6E65805182BC1680022BF5F /* BoardListLevel1.plist */; };
-		E6E6580B182BC2CE0022BF5F /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E6580A182BC2CE0022BF5F /* Item.m */; };
+		E6E6580B182BC2CE0022BF5F /* Element.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E6580A182BC2CE0022BF5F /* Element.m */; };
 		E6E6580E182BC3C50022BF5F /* BigL.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E6580D182BC3C50022BF5F /* BigL.m */; };
-		E6E65811182BC50D0022BF5F /* SpriteWithItem.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E65810182BC50D0022BF5F /* SpriteWithItem.m */; };
 		E6E65815182BC82E0022BF5F /* LittleJohn.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E65814182BC82E0022BF5F /* LittleJohn.m */; };
 		E6E65819182BC9390022BF5F /* Unit.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E65818182BC9390022BF5F /* Unit.m */; };
 		E6E6581C182BCD660022BF5F /* Converter.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E6581B182BCD660022BF5F /* Converter.m */; };
@@ -49,6 +51,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E6057671183614740033AE88 /* crackedtile.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = crackedtile.jpg; sourceTree = "<group>"; };
+		E6057675183619120033AE88 /* Rock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rock.h; sourceTree = "<group>"; };
+		E6057676183619120033AE88 /* Rock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Rock.m; sourceTree = "<group>"; };
+		E605767F18362BB80033AE88 /* voidtile.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = voidtile.jpg; path = ../../SpacePuzzleEditor/SpacePuzzleEditor/voidtile.jpg; sourceTree = "<group>"; };
 		E6214051182BA53800EC5C21 /* SpacePuzzle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpacePuzzle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6214054182BA53800EC5C21 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		E6214056182BA53800EC5C21 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -83,12 +89,10 @@
 		E6E65802182BBAB30022BF5F /* BoardCoord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoardCoord.h; sourceTree = "<group>"; };
 		E6E65803182BBAB30022BF5F /* BoardCoord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoardCoord.m; sourceTree = "<group>"; };
 		E6E65805182BC1680022BF5F /* BoardListLevel1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = BoardListLevel1.plist; sourceTree = "<group>"; };
-		E6E65809182BC2CE0022BF5F /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Item.h; sourceTree = "<group>"; };
-		E6E6580A182BC2CE0022BF5F /* Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Item.m; sourceTree = "<group>"; };
+		E6E65809182BC2CE0022BF5F /* Element.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Element.h; sourceTree = "<group>"; };
+		E6E6580A182BC2CE0022BF5F /* Element.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Element.m; sourceTree = "<group>"; };
 		E6E6580C182BC3C50022BF5F /* BigL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BigL.h; sourceTree = "<group>"; };
 		E6E6580D182BC3C50022BF5F /* BigL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BigL.m; sourceTree = "<group>"; };
-		E6E6580F182BC50D0022BF5F /* SpriteWithItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpriteWithItem.h; sourceTree = "<group>"; };
-		E6E65810182BC50D0022BF5F /* SpriteWithItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpriteWithItem.m; sourceTree = "<group>"; };
 		E6E65813182BC82E0022BF5F /* LittleJohn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LittleJohn.h; sourceTree = "<group>"; };
 		E6E65814182BC82E0022BF5F /* LittleJohn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LittleJohn.m; sourceTree = "<group>"; };
 		E6E65817182BC9390022BF5F /* Unit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Unit.h; sourceTree = "<group>"; };
@@ -122,6 +126,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E6057678183619520033AE88 /* Elements */ = {
+			isa = PBXGroup;
+			children = (
+				E6E65809182BC2CE0022BF5F /* Element.h */,
+				E6E6580A182BC2CE0022BF5F /* Element.m */,
+				E6057675183619120033AE88 /* Rock.h */,
+				E6057676183619120033AE88 /* Rock.m */,
+			);
+			name = Elements;
+			sourceTree = "<group>";
+		};
+		E605768118362BC70033AE88 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				E605767F18362BB80033AE88 /* voidtile.jpg */,
+				E6057671183614740033AE88 /* crackedtile.jpg */,
+				E6270526182CE8040064C758 /* square.gif */,
+				E6270570182D0DA00064C758 /* littlejohn.png */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		E6214048182BA53800EC5C21 = {
 			isa = PBXGroup;
 			children = (
@@ -163,15 +189,12 @@
 				E621406C182BA53800EC5C21 /* SpacePuzzleController.m */,
 				E621406E182BA53800EC5C21 /* MainScene.h */,
 				E621406F182BA53800EC5C21 /* MainScene.m */,
-				E6E6580F182BC50D0022BF5F /* SpriteWithItem.h */,
-				E6E65810182BC50D0022BF5F /* SpriteWithItem.m */,
 				E63306781835018A00E908F7 /* XMLParser.h */,
 				E63306791835018A00E908F7 /* XMLParser.m */,
 				E6E65812182BC5B40022BF5F /* Model */,
 				E6E65808182BC2820022BF5F /* Utility */,
 				E6214073182BA53800EC5C21 /* Images.xcassets */,
-				E6270526182CE8040064C758 /* square.gif */,
-				E6270570182D0DA00064C758 /* littlejohn.png */,
+				E605768118362BC70033AE88 /* Resources */,
 				E621405D182BA53800EC5C21 /* Supporting Files */,
 			);
 			path = SpacePuzzle;
@@ -235,8 +258,7 @@
 			children = (
 				E6E65807182BC2690022BF5F /* Board */,
 				E6E65816182BC9010022BF5F /* Units */,
-				E6E65809182BC2CE0022BF5F /* Item.h */,
-				E6E6580A182BC2CE0022BF5F /* Item.m */,
+				E6057678183619520033AE88 /* Elements */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -332,9 +354,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				E6E65806182BC1680022BF5F /* BoardListLevel1.plist in Resources */,
+				E605768018362BB80033AE88 /* voidtile.jpg in Resources */,
 				E6214061182BA53800EC5C21 /* InfoPlist.strings in Resources */,
 				E6214074182BA53800EC5C21 /* Images.xcassets in Resources */,
 				E6270527182CE8040064C758 /* square.gif in Resources */,
+				E6057673183614740033AE88 /* crackedtile.jpg in Resources */,
 				E621406A182BA53800EC5C21 /* Main.storyboard in Resources */,
 				E6270571182D0DA00064C758 /* littlejohn.png in Resources */,
 			);
@@ -356,14 +380,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				E633067A1835018A00E908F7 /* XMLParser.m in Sources */,
-				E6E6580B182BC2CE0022BF5F /* Item.m in Sources */,
+				E6E6580B182BC2CE0022BF5F /* Element.m in Sources */,
 				E6E65815182BC82E0022BF5F /* LittleJohn.m in Sources */,
 				E6E65801182BB9020022BF5F /* Position.m in Sources */,
 				E6E6581C182BCD660022BF5F /* Converter.m in Sources */,
 				E6214063182BA53800EC5C21 /* main.m in Sources */,
+				E6057677183619120033AE88 /* Rock.m in Sources */,
 				E6E6580E182BC3C50022BF5F /* BigL.m in Sources */,
 				E6214067182BA53800EC5C21 /* GViewAppDelegate.m in Sources */,
-				E6E65811182BC50D0022BF5F /* SpriteWithItem.m in Sources */,
 				E621406D182BA53800EC5C21 /* SpacePuzzleController.m in Sources */,
 				E6E65804182BBAB30022BF5F /* BoardCoord.m in Sources */,
 				E6E65819182BC9390022BF5F /* Unit.m in Sources */,

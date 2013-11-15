@@ -2,6 +2,7 @@
 #import "Board.h"
 #import "Macros.h"
 #import "XMLParser.h"
+#import "Rock.h"
 
 @implementation Board
 
@@ -10,7 +11,7 @@
 @synthesize boardSizeX = _boardSizeX;
 @synthesize boardSizeY = _boardSizeY;
 @synthesize boardBegin = _boardBegin;
-@synthesize itemDictionary = _itemDictionary;
+@synthesize elementDictionary = _elementDictionary;
 
 -(id) init {
     if(self = [super init]){
@@ -21,7 +22,7 @@
         _tilesize = 44;
         _boardBegin.x = BOARD_PIXEL_BEGIN_X;
         _boardBegin.y = BOARD_PIXEL_BEGIN_Y;
-        _itemDictionary = [[NSMutableDictionary alloc] init];
+        _elementDictionary = [[NSMutableDictionary alloc] init];
     }
     return self;
 }
@@ -33,7 +34,7 @@
     NSURL *s = [[NSURL alloc] initFileURLWithPath:path];
     _parser = [[XMLParser alloc] initWithContentsOfURL:s];
     
-    [_itemDictionary removeAllObjects];
+    [_elementDictionary removeAllObjects];
     [_board removeAllObjects];
     
     // The board tiles.
@@ -57,6 +58,9 @@
     
     // The items.
     // Få coords från XMLParser. Används de som key, object själva item. Skapa item mha ClassFromString (strängen fås från XMLParser.
+    Rock *rock = [[Rock alloc] initWithX:2 Y:2];
+    NSNumber *nr = [NSNumber numberWithInt:rock.y*_boardSizeX + rock.x];
+    [_elementDictionary setObject:rock forKey:nr];
     
     // id object = [[NSClassFromString(@"NameofClass") alloc] init];
 }

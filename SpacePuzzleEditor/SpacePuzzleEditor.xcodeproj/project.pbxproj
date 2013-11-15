@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E605767D18362B590033AE88 /* Element.m in Sources */ = {isa = PBXBuildFile; fileRef = E605767A18362B590033AE88 /* Element.m */; };
+		E605767E18362B590033AE88 /* Rock.m in Sources */ = {isa = PBXBuildFile; fileRef = E605767C18362B590033AE88 /* Rock.m */; };
 		E61F9C0B18311E9300351B6F /* square.gif in Resources */ = {isa = PBXBuildFile; fileRef = E61F9C0A18311E9300351B6F /* square.gif */; };
 		E61F9C0D18312C6800351B6F /* grey.png in Resources */ = {isa = PBXBuildFile; fileRef = E61F9C0C18312C6800351B6F /* grey.png */; };
 		E64C9F831833785800A18E36 /* voidtile.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E64C9F821833785800A18E36 /* voidtile.jpg */; };
@@ -44,6 +46,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E605767918362B590033AE88 /* Element.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Element.h; path = ../SpacePuzzle/SpacePuzzle/Element.h; sourceTree = "<group>"; };
+		E605767A18362B590033AE88 /* Element.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Element.m; path = ../SpacePuzzle/SpacePuzzle/Element.m; sourceTree = "<group>"; };
+		E605767B18362B590033AE88 /* Rock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Rock.h; path = ../SpacePuzzle/SpacePuzzle/Rock.h; sourceTree = "<group>"; };
+		E605767C18362B590033AE88 /* Rock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Rock.m; path = ../SpacePuzzle/SpacePuzzle/Rock.m; sourceTree = "<group>"; };
 		E61F9C0A18311E9300351B6F /* square.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = square.gif; path = ../../SpacePuzzle/SpacePuzzle/square.gif; sourceTree = "<group>"; };
 		E61F9C0C18312C6800351B6F /* grey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grey.png; sourceTree = "<group>"; };
 		E64C9F821833785800A18E36 /* voidtile.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = voidtile.jpg; sourceTree = "<group>"; };
@@ -110,6 +116,10 @@
 		E654B2D51830F7DD006BFCAC = {
 			isa = PBXGroup;
 			children = (
+				E605767918362B590033AE88 /* Element.h */,
+				E605767A18362B590033AE88 /* Element.m */,
+				E605767B18362B590033AE88 /* Rock.h */,
+				E605767C18362B590033AE88 /* Rock.m */,
 				E6EE6F3F1831428B0072D3E6 /* Converter.h */,
 				E6EE6F401831428B0072D3E6 /* Converter.m */,
 				E654B2E91830F7DD006BFCAC /* SpacePuzzleEditor */,
@@ -321,11 +331,13 @@
 			files = (
 				E6A0EEE518311690006BF476 /* Position.m in Sources */,
 				E654B2F01830F7DD006BFCAC /* main.m in Sources */,
+				E605767D18362B590033AE88 /* Element.m in Sources */,
 				E6A0EEE418311690006BF476 /* BoardCoord.m in Sources */,
 				E65EE66F18325FB300E38A3F /* Palette.m in Sources */,
 				E6EE6F411831428B0072D3E6 /* Converter.m in Sources */,
 				E654B2F81830F7DD006BFCAC /* BoardScene.m in Sources */,
 				E6A0EEE318311690006BF476 /* Board.m in Sources */,
+				E605767E18362B590033AE88 /* Rock.m in Sources */,
 				E64C9F8C18339F2E00A18E36 /* XMLParser.m in Sources */,
 				E654B2FB1830F7DD006BFCAC /* AppDelegate.m in Sources */,
 			);

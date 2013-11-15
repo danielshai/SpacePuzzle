@@ -27,4 +27,5 @@
 #define TOUCHES_ENDED           @"TouchesEnded"
 #define NEXT_BUTTON_TOUCHED     @"nextButtonTouched"
 #define UNIT_MOVED              @"UnitMoved"
+#define UNIT_WANTS_TO_MOVE      @"UnitWantsToMove"
 #endif

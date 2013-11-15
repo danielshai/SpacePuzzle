@@ -7,7 +7,9 @@
 
 #import "Position.h"
 
-@interface Item : Position
+@interface Element : Position
+@property (nonatomic, assign) BOOL blocking;
+-(id)initWithX: (NSInteger) x Y: (NSInteger) y;
 -(void) doAction;
 
 @end

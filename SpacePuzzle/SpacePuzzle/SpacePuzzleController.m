@@ -3,6 +3,7 @@
 //  SpacePuzzle
 
 #import "SpacePuzzleController.h"
+#import "Element.h"
 
 @implementation SpacePuzzleController
 @synthesize board = _board;
@@ -32,6 +33,7 @@
     
     // Add observers to the view.
     [self observeText:UNIT_MOVED Selector:@selector(unitMoved:)];
+    [self observeText:UNIT_WANTS_TO_MOVE Selector:@selector(unitWantsToMove:)];
 }
 
 /*
@@ -40,12 +42,44 @@
     // TEMP CODE.
     _board = [[Board alloc] init];
     // Load the board.
-    [_board loadBoard:@"/Users/IxD/SpacePuzzle/full.splvl"];
+    [_board loadBoard:@"/Users/IxD/SpacePuzzle/SpacePuzzleEditor/mario.splvl"];
     
     for(int i = 0; i < BOARD_SIZE_Y; i++) {
         for(int j = 0; j < BOARD_SIZE_X; j++) {
             BoardCoord *bc = [_board.board objectAtIndex:BOARD_SIZE_X*i + j];
-            [_scene setupBoardX:[bc x] Y:[bc y]];
+            [_scene setupBoardX:[bc x] Y:[bc y] Status:[bc status]];
+        }
+    }
+}
+
+-(void)unitWantsToMove:(NSNotification *)notification {
+    // Get data.
+    NSArray *data = [self getDataFromNotification:notification Key:UNIT_WANTS_TO_MOVE];
+    NSValue *val = [data objectAtIndex:0];
+    NSValue *val2 = [data objectAtIndex:1];
+    
+    NSInteger x  = val.CGPointValue.x;
+    NSInteger y = val.CGPointValue.y;
+    NSInteger unitX = val2.CGPointValue.x;
+    NSInteger unitY = val2.CGPointValue.y;
+    
+    // First check if the movement was inside the board and if the tile isn't |void| (which units cannot
+    // move to).
+    if(x >= 0 && x < BOARD_SIZE_X && y >= 0 && y < BOARD_SIZE_Y
+       && [[[_board board] objectAtIndex:y*BOARD_SIZE_X + x] status] != MAPSTATUS_VOID) {
+        // Checks if the move is 1 step in x or y, but not both at the same time.
+        if( ((x - unitX == 1 || x - unitX == -1) && y == unitY) ||
+            ((y - unitY == 1 || y - unitY == -1) && x == unitX) )
+        {
+            // Check elements on the board.
+            NSNumber *key = [NSNumber numberWithInt:y*BOARD_SIZE_X + x];
+            Element *e = [[_board elementDictionary] objectForKey:key];
+            
+            if(![e blocking]) {
+                _currentUnit.x = x;
+                _currentUnit.y = y;
+                [_scene updateUnit:CGPointMake(x, y)];
+            }
         }
     }
 }
@@ -54,13 +88,15 @@
  *  Called when a notification of unit movement is sent from the |MainScene|. Updates the data model of the
  *  unit accordingly. */
 -(void)unitMoved:(NSNotification *)notification {
-    NSDictionary *userInfo = notification.userInfo;
-    NSSet *objectSent = [userInfo objectForKey:UNIT_MOVED];
-    NSArray *data = [objectSent allObjects];
+    NSArray *data = [self getDataFromNotification:notification Key:UNIT_MOVED];
     NSValue *val = [data objectAtIndex:0];
-    
     // UPDATE DATA MODEL.
+}
 
+-(NSArray*) getDataFromNotification:(NSNotification *)notif Key:(NSString *)key {
+    NSDictionary *userInfo = notif.userInfo;
+    NSSet *objectSent = [userInfo objectForKey:key];
+    return [objectSent allObjects];
 }
 
 /*

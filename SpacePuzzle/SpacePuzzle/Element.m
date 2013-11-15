@@ -1,12 +1,11 @@
 //
-//  Position.m
+//  Item.m
 //  SpacePuzzle
 
-#import "Position.h"
+#import "Element.h"
 
-@implementation Position
-@synthesize x = _x;
-@synthesize y = _y;
+@implementation Element
+@synthesize blocking = _blocking;
 
 -(id)init {
     if(self = [super init]){
@@ -16,11 +15,14 @@
 }
 
 -(id)initWithX:(NSInteger)x Y:(NSInteger)y {
-    if(self = [super init]){
-        _x = x;
-        _y = y;
+    if(self = [super initWithX:x Y:y]) {
+        
     }
     return self;
+}
+
+-(void)doAction {
+    
 }
 
 @end

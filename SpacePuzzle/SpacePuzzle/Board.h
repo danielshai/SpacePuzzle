@@ -10,7 +10,7 @@
 #import "BoardCoord.h"
 
 @class XMLParser;
-
+@class Rock;
 @interface Board : NSObject
 
 @property (nonatomic, strong) NSMutableArray *board;
@@ -19,7 +19,7 @@
 @property (nonatomic, assign) NSInteger boardSizeY;
 @property (nonatomic, assign) CGPoint boardBegin;
 @property (nonatomic, retain) XMLParser *parser;
-@property (nonatomic, retain) NSMutableDictionary *itemDictionary;
+@property (nonatomic, retain) NSMutableDictionary *elementDictionary;
 -(void) loadBoard:(NSString*) path;
 -(void) saveBoard:(NSString*) fileName;
 -(void) createEmptyBoard;
