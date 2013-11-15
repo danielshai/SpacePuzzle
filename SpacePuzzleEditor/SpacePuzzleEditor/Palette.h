@@ -19,10 +19,12 @@
 @property (weak) IBOutlet NSImageView *selectedSolid;
 @property (weak) IBOutlet NSImageView *selectedCracked;
 @property (weak) IBOutlet NSImageView *selectedVoid;
+@property (weak) IBOutlet NSButton *startButton;
 
 -(IBAction)solidClick:(id)sender;
 -(IBAction)crackedAction:(id)sender;
 -(IBAction)voidClick:(id)sender;
 -(void)notifyText:(NSString *)text Object: (NSObject*)object Key: (NSString*)key;
+- (IBAction)startClick:(id)sender;
 
 @end

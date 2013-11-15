@@ -13,6 +13,7 @@
 @property (nonatomic, retain) SKTexture *solid;
 @property (nonatomic, retain) SKTexture *voidTile;
 @property (nonatomic, retain) SKTexture *crackedTile;
+@property (nonatomic, retain) SKTexture *startElement;
 @property (nonatomic, retain) SKSpriteNode *bkg;
 @property (nonatomic, retain) NSMutableArray *boardSprites;
 

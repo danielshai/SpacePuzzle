@@ -256,7 +256,7 @@
                         </textFieldCell>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LJE-re-n3A">
-                        <rect key="frame" x="108" y="205" width="61" height="17"/>
+                        <rect key="frame" x="108" y="208" width="61" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Elements" id="A5t-3e-csX">
                             <font key="font" metaFont="system"/>
@@ -272,7 +272,7 @@
                         <font key="titleFont" metaFont="system"/>
                     </box>
                     <box autoresizesSubviews="NO" verticalHuggingPriority="750" fixedFrame="YES" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="bbO-ni-hSY">
-                        <rect key="frame" x="12" y="195" width="252" height="5"/>
+                        <rect key="frame" x="12" y="198" width="252" height="5"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                         <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -310,6 +310,26 @@
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q0M-oy-gS4">
+                        <rect key="frame" x="10" y="180" width="63" height="11"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" controlSize="mini" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Start position" id="0HV-LK-yoR">
+                            <font key="font" metaFont="miniSystem"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fe5-O1-WJa">
+                        <rect key="frame" x="20" y="132" width="45" height="45"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" imagePosition="only" alignment="center" borderStyle="border" transparent="YES" imageScaling="proportionallyDown" inset="2" id="mpw-Ch-ucO">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="startClick:" target="OQd-pb-Vvp" id="7aa-P0-a1A"/>
+                        </connections>
+                    </button>
                 </subviews>
             </view>
             <connections>
@@ -323,6 +343,7 @@
                 <outlet property="solid" destination="qvy-5d-OZj" id="WLd-1y-ACU"/>
                 <outlet property="solidButton" destination="4fx-oz-fHX" id="vjG-2I-2VZ"/>
                 <outlet property="solidTile" destination="MlX-MT-5z7" id="sbh-YX-MKn"/>
+                <outlet property="startButton" destination="fe5-O1-WJa" id="fLq-36-ThN"/>
                 <outlet property="void" destination="Fcb-MM-H18" id="gLx-Vh-xC2"/>
                 <outlet property="voidButton" destination="4fx-oz-fHX" id="3aa-Qh-t4N"/>
             </connections>

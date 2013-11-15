@@ -12,6 +12,8 @@
 #define MAPSTATUS_VOID          -1
 #define MAPSTATUS_SOLID         0
 #define MAPSTATUS_CRACKED       1
+#define BRUSH_ROCK              100
+#define BRUSH_START             101
 
 #define TILESIZE                44
 #define BOARD_PIXEL_BEGIN_X     10 // The pixel value that the actual board begins at.

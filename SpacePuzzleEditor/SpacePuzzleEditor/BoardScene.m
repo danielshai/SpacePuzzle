@@ -11,6 +11,7 @@
 @synthesize crackedTile = _crackedTile;
 @synthesize boardSprites = _boardSprites;
 @synthesize bkg = _bkg;
+@synthesize startElement = _startElement;
 
 -(id)initWithSize:(CGSize)size {    
     if (self = [super initWithSize:size]) {
@@ -22,12 +23,12 @@
         _voidTile = [SKTexture textureWithImageNamed:@"voidtile.png"];
         _crackedTile = [SKTexture textureWithImageNamed:@"crackedtile.jpg"];
         _bkg = [SKSpriteNode spriteNodeWithImageNamed:@"Background.png"];
+        _startElement = [SKTexture textureWithImageNamed:@"Start.gif"];
      
         _bkg.size = CGSizeMake(size.width, size.height);
         _bkg.position = CGPointMake(WIN_SIZE_X/2, WIN_SIZE_Y/2);
         [self addChild:_bkg];
 
-        NSLog(@"%f", self.size.height);
         _boardSprites = [[NSMutableArray alloc] init];
         statusOfPalette = MAPSTATUS_SOLID;
         currentTexture = _solid;
@@ -35,6 +36,7 @@
         [self observeText:@"SolidClick" Selector:@selector(solidClick)];
         [self observeText:@"VoidClick" Selector:@selector(voidClick)];
         [self observeText:@"CrackedClick" Selector:@selector(crackedClick)];
+        [self observeText:@"StartClick" Selector:@selector(startClick)];
     }
     return self;
 }
@@ -70,10 +72,23 @@
                                                  [NSNumber numberWithInteger: statusOfPalette],nil];
         [self notifyText:@"BoardEdited" Object:arr Key:@"BoardEdited"];
     
-        // Change texture of sprite.
-        SKSpriteNode *s = [_boardSprites objectAtIndex:loc.y * BOARD_SIZE_X + loc.x];
-        s.texture = currentTexture;
+        // Change texture of sprite if tiles.
+        if(statusOfPalette == MAPSTATUS_SOLID || statusOfPalette == MAPSTATUS_CRACKED || statusOfPalette == MAPSTATUS_VOID) {
+            SKSpriteNode *s = [_boardSprites objectAtIndex:loc.y * BOARD_SIZE_X + loc.x];
+            s.texture = currentTexture;
+        }
+        // Items
+        else {
+            if(statusOfPalette == BRUSH_START) {
+                // Change position of Start sprite.
+            }
+            // Add sprite to dictionary with items according to brush.
+        }
     }
+}
+
+-(void)startClick {
+    [self changeTextureOfBrush:BRUSH_START];
 }
 
 -(void)solidClick {
@@ -88,6 +103,8 @@
     [self changeTextureOfBrush:MAPSTATUS_VOID];
 }
 
+/*
+ *  Changes the texture of the brush, i.e. what the brush will "paint". */
 -(void)changeTextureOfBrush:(NSInteger)status {
     if(status == MAPSTATUS_SOLID) {
         currentTexture = _solid;
@@ -97,6 +114,9 @@
         statusOfPalette = status;
     } else if(status == MAPSTATUS_CRACKED) {
         currentTexture = _crackedTile;
+        statusOfPalette = status;
+    } else if(status == BRUSH_START) {
+        currentTexture = _startElement;
         statusOfPalette = status;
     }
 }
@@ -137,6 +157,8 @@
         sprite.texture = _voidTile;
     } else if(status == MAPSTATUS_CRACKED) {
         sprite.texture = _crackedTile;
+    } else if(status == BRUSH_START) {
+        sprite.texture = _startElement;
     }
 }
 

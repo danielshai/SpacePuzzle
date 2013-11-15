@@ -181,7 +181,6 @@
     }
 }
 
-
 /* 
  *  Called when the board has been edited in the |BoardScene|. Updates the data model according to the 
  *  change. */
@@ -192,8 +191,17 @@
     NSArray *data = [objectSent allObjects];
     NSValue *val = [data objectAtIndex:0];
    
-    BoardCoord *bc = [[_board board] objectAtIndex:val.pointValue.y * BOARD_SIZE_X + val.pointValue.x];
-    bc.status = [[data objectAtIndex:1] integerValue];
+    NSInteger stat = [[data objectAtIndex:1] integerValue];
+    
+    // If the change was on a tile, the |BoardCoord| status should change. Otherwise elements should change.
+    if(stat == MAPSTATUS_SOLID || stat== MAPSTATUS_CRACKED || stat == MAPSTATUS_VOID) {
+        BoardCoord *bc = [[_board board] objectAtIndex:val.pointValue.y * BOARD_SIZE_X + val.pointValue.x];
+        bc.status = stat;
+    } else {
+        if(stat == BRUSH_START) {
+            // Update position of start element.
+        }
+    }
     
     if(edited == NO) {
         edited = YES;

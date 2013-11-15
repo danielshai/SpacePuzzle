@@ -19,10 +19,10 @@
         /* Setup your scene here */
         _currentUnit = _littleJohn;
         self.backgroundColor = [SKColor colorWithRed:0.15 green:0.15 blue:0.3 alpha:1.0];
-        _solidTile = [SKTexture textureWithImageNamed:@"platform.png"];
+        _solidTile = [SKTexture textureWithImageNamed:@"solidtile.png"];
         _crackedTile = [SKTexture textureWithImageNamed:@"crackedtile.jpg"];
         _voidTile = [SKTexture textureWithImageNamed:@"voidtile.png"];
-        _bkg = [SKSpriteNode spriteNodeWithImageNamed:@"BoardPortrait2.png"];
+        _bkg = [SKSpriteNode spriteNodeWithImageNamed:@"Background.png"];
         _bkg.size = CGSizeMake(size.width, size.height);
 
         _bkg.position = CGPointMake(WIN_SIZE_X/2, WIN_SIZE_Y/2);

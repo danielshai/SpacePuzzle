@@ -51,4 +51,8 @@
     }
 }
 
+- (IBAction)startClick:(id)sender {
+    [self notifyText:@"StartClick" Object:Nil Key:@"StartClick"];
+}
+
 @end

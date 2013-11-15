@@ -6,6 +6,8 @@
 //  Copyright (c) 2013 WMD. All rights reserved.
 //
 
+
+// TODO: fixa att rita ut element. behöver en dictionary. Start och finish element kan ha en av varje.
 #import <Cocoa/Cocoa.h>
 #import <SpriteKit/SpriteKit.h>
 #import "Board.h"
