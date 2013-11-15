@@ -24,7 +24,7 @@
         _voidTile = [SKTexture textureWithImageNamed:@"voidtile.png"];
         _bkg = [SKSpriteNode spriteNodeWithImageNamed:@"BoardPortrait2.png"];
         _bkg.size = CGSizeMake(size.width, size.height);
-        NSLog(@"%f", _bkg.size.width);
+
         _bkg.position = CGPointMake(WIN_SIZE_X/2, WIN_SIZE_Y/2);
         [self addChild:_bkg];
         _elements = [[NSMutableDictionary alloc] init];

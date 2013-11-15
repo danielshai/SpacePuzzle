@@ -26,7 +26,6 @@
     edited = NO;
     _scene.scaleMode = SKSceneScaleModeAspectFit;
     _scene.scaleMode = SKSceneScaleModeAspectFill;
-   
     
     [_skView presentScene:_scene];
 

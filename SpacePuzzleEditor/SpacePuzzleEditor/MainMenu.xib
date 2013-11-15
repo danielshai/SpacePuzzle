@@ -198,7 +198,7 @@
                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MlX-MT-5z7">
                         <rect key="frame" x="17" y="253" width="48" height="48"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" image="square" id="qvy-5d-OZj"/>
+                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" image="solidtile" id="qvy-5d-OZj"/>
                         <connections>
                             <action selector="print:" target="vlI-Vs-b8g" id="jqT-wP-jXJ"/>
                         </connections>
@@ -211,12 +211,7 @@
                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fcb-MM-H18">
                         <rect key="frame" x="211" y="253" width="48" height="48"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" image="grey" id="luD-pK-ooq"/>
-                    </imageView>
-                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YFp-3z-tWF">
-                        <rect key="frame" x="211" y="253" width="48" height="48"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" image="voidtile" id="nQZ-eG-fc0"/>
+                        <imageCell key="cell" controlSize="mini" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" image="Background.png" id="luD-pK-ooq"/>
                     </imageView>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5d8-QM-429">
                         <rect key="frame" x="20" y="255" width="42" height="44"/>
@@ -330,7 +325,6 @@
                 <outlet property="solidTile" destination="MlX-MT-5z7" id="sbh-YX-MKn"/>
                 <outlet property="void" destination="Fcb-MM-H18" id="gLx-Vh-xC2"/>
                 <outlet property="voidButton" destination="4fx-oz-fHX" id="3aa-Qh-t4N"/>
-                <outlet property="voidTile" destination="YFp-3z-tWF" id="fDf-L1-b12"/>
             </connections>
         </window>
         <customObject id="494" customClass="AppDelegate">
@@ -340,7 +334,10 @@
                 <outlet property="recentMenu" destination="7wc-3F-y89" id="ROQ-Zi-Cid"/>
                 <outlet property="save" destination="Cy2-HG-JWE" id="8fh-RS-3rB"/>
                 <outlet property="skView" destination="539" id="540"/>
+                <outlet property="solidImagePanel" destination="MlX-MT-5z7" id="e13-ve-qPI"/>
                 <outlet property="solidPalette" destination="MlX-MT-5z7" id="5af-P3-ici"/>
+                <outlet property="solidPanel" destination="MlX-MT-5z7" id="uQx-pj-2ca"/>
+                <outlet property="voidImagePanel" destination="Fcb-MM-H18" id="Dnp-2g-fJI"/>
                 <outlet property="voidPalette" destination="Fcb-MM-H18" id="lsE-qf-hFC"/>
                 <outlet property="window" destination="371" id="532"/>
             </connections>
@@ -349,9 +346,8 @@
         <collectionViewItem id="7gO-MF-BWZ"/>
     </objects>
     <resources>
+        <image name="Background.png" width="128" height="128"/>
         <image name="crackedtile" width="1200" height="1200"/>
-        <image name="grey" width="15.595667839050293" height="15.595667839050293"/>
-        <image name="square" width="576" height="576"/>
-        <image name="voidtile" width="800" height="800"/>
+        <image name="solidtile" width="400" height="400"/>
     </resources>
 </document>

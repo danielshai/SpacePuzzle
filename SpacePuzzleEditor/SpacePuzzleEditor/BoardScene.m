@@ -18,10 +18,10 @@
         
         self.backgroundColor = [SKColor colorWithRed:0.89 green:0.89 blue:0.89 alpha:1.0];
         self.size = CGSizeMake(size.width, size.height);
-        _solid = [SKTexture textureWithImageNamed:@"square.gif"];
+        _solid = [SKTexture textureWithImageNamed:@"solidtile.png"];
         _voidTile = [SKTexture textureWithImageNamed:@"voidtile.png"];
         _crackedTile = [SKTexture textureWithImageNamed:@"crackedtile.jpg"];
-        _bkg = [SKSpriteNode spriteNodeWithImageNamed:@"BoardPortrait2.png"];
+        _bkg = [SKSpriteNode spriteNodeWithImageNamed:@"Background.png"];
      
         _bkg.size = CGSizeMake(size.width, size.height);
         _bkg.position = CGPointMake(WIN_SIZE_X/2, WIN_SIZE_Y/2);

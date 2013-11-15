@@ -9,12 +9,10 @@
 /* Begin PBXBuildFile section */
 		E605767D18362B590033AE88 /* Element.m in Sources */ = {isa = PBXBuildFile; fileRef = E605767A18362B590033AE88 /* Element.m */; };
 		E605767E18362B590033AE88 /* Rock.m in Sources */ = {isa = PBXBuildFile; fileRef = E605767C18362B590033AE88 /* Rock.m */; };
-		E6057695183640520033AE88 /* voidtile.png in Resources */ = {isa = PBXBuildFile; fileRef = E6057694183640520033AE88 /* voidtile.png */; };
-		E6057697183640B30033AE88 /* BoardPortrait2.png in Resources */ = {isa = PBXBuildFile; fileRef = E6057696183640B30033AE88 /* BoardPortrait2.png */; };
-		E61F9C0B18311E9300351B6F /* square.gif in Resources */ = {isa = PBXBuildFile; fileRef = E61F9C0A18311E9300351B6F /* square.gif */; };
-		E61F9C0D18312C6800351B6F /* grey.png in Resources */ = {isa = PBXBuildFile; fileRef = E61F9C0C18312C6800351B6F /* grey.png */; };
-		E64C9F8518337A3200A18E36 /* crackedtile.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E64C9F8418337A3200A18E36 /* crackedtile.jpg */; };
-		E64C9F89183380B600A18E36 /* selected.png in Resources */ = {isa = PBXBuildFile; fileRef = E64C9F88183380B600A18E36 /* selected.png */; };
+		E6057699183651740033AE88 /* Background.png in Resources */ = {isa = PBXBuildFile; fileRef = E6057698183651740033AE88 /* Background.png */; };
+		E605769D183651D20033AE88 /* crackedtile.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E605769A183651D20033AE88 /* crackedtile.jpg */; };
+		E605769E183651D20033AE88 /* solidtile.png in Resources */ = {isa = PBXBuildFile; fileRef = E605769B183651D20033AE88 /* solidtile.png */; };
+		E605769F183651D20033AE88 /* voidtile.png in Resources */ = {isa = PBXBuildFile; fileRef = E605769C183651D20033AE88 /* voidtile.png */; };
 		E64C9F8C18339F2E00A18E36 /* XMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = E64C9F8B18339F2E00A18E36 /* XMLParser.m */; };
 		E654B2E21830F7DD006BFCAC /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E654B2E11830F7DD006BFCAC /* Cocoa.framework */; };
 		E654B2E41830F7DD006BFCAC /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E654B2E31830F7DD006BFCAC /* SpriteKit.framework */; };
@@ -51,12 +49,10 @@
 		E605767A18362B590033AE88 /* Element.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Element.m; path = ../SpacePuzzle/SpacePuzzle/Element.m; sourceTree = "<group>"; };
 		E605767B18362B590033AE88 /* Rock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Rock.h; path = ../SpacePuzzle/SpacePuzzle/Rock.h; sourceTree = "<group>"; };
 		E605767C18362B590033AE88 /* Rock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Rock.m; path = ../SpacePuzzle/SpacePuzzle/Rock.m; sourceTree = "<group>"; };
-		E6057694183640520033AE88 /* voidtile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = voidtile.png; path = ../voidtile.png; sourceTree = "<group>"; };
-		E6057696183640B30033AE88 /* BoardPortrait2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BoardPortrait2.png; sourceTree = "<group>"; };
-		E61F9C0A18311E9300351B6F /* square.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = square.gif; path = ../../SpacePuzzle/SpacePuzzle/square.gif; sourceTree = "<group>"; };
-		E61F9C0C18312C6800351B6F /* grey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grey.png; sourceTree = "<group>"; };
-		E64C9F8418337A3200A18E36 /* crackedtile.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = crackedtile.jpg; sourceTree = "<group>"; };
-		E64C9F88183380B600A18E36 /* selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = selected.png; sourceTree = "<group>"; };
+		E6057698183651740033AE88 /* Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Background.png; path = ../../Resources/Interface/Background.png; sourceTree = "<group>"; };
+		E605769A183651D20033AE88 /* crackedtile.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = crackedtile.jpg; path = ../../Resources/Tiles/crackedtile.jpg; sourceTree = "<group>"; };
+		E605769B183651D20033AE88 /* solidtile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = solidtile.png; path = ../../Resources/Tiles/solidtile.png; sourceTree = "<group>"; };
+		E605769C183651D20033AE88 /* voidtile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = voidtile.png; path = ../../Resources/Tiles/voidtile.png; sourceTree = "<group>"; };
 		E64C9F8A18339F2E00A18E36 /* XMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLParser.h; sourceTree = "<group>"; };
 		E64C9F8B18339F2E00A18E36 /* XMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLParser.m; sourceTree = "<group>"; wrapsLines = 1; };
 		E654B2DE1830F7DD006BFCAC /* SpacePuzzleEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpacePuzzleEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -115,6 +111,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E60576A0183651E30033AE88 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				E605769A183651D20033AE88 /* crackedtile.jpg */,
+				E605769B183651D20033AE88 /* solidtile.png */,
+				E605769C183651D20033AE88 /* voidtile.png */,
+				E6057698183651740033AE88 /* Background.png */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		E654B2D51830F7DD006BFCAC = {
 			isa = PBXGroup;
 			children = (
@@ -175,6 +182,7 @@
 				E65EE66E18325FB300E38A3F /* Palette.m */,
 				E654B2F51830F7DD006BFCAC /* MainMenu.xib */,
 				E654B2FF1830F7DD006BFCAC /* Images.xcassets */,
+				E60576A0183651E30033AE88 /* Resources */,
 				E654B2EA1830F7DD006BFCAC /* Supporting Files */,
 			);
 			path = SpacePuzzleEditor;
@@ -183,12 +191,6 @@
 		E654B2EA1830F7DD006BFCAC /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				E6057696183640B30033AE88 /* BoardPortrait2.png */,
-				E6057694183640520033AE88 /* voidtile.png */,
-				E64C9F88183380B600A18E36 /* selected.png */,
-				E64C9F8418337A3200A18E36 /* crackedtile.jpg */,
-				E61F9C0A18311E9300351B6F /* square.gif */,
-				E61F9C0C18312C6800351B6F /* grey.png */,
 				E654B2EB1830F7DD006BFCAC /* SpacePuzzleEditor-Info.plist */,
 				E654B2EC1830F7DD006BFCAC /* InfoPlist.strings */,
 				E654B2EF1830F7DD006BFCAC /* main.m */,
@@ -306,15 +308,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				E654B3001830F7DD006BFCAC /* Images.xcassets in Resources */,
+				E605769E183651D20033AE88 /* solidtile.png in Resources */,
+				E605769D183651D20033AE88 /* crackedtile.jpg in Resources */,
 				E654B2EE1830F7DD006BFCAC /* InfoPlist.strings in Resources */,
-				E6057695183640520033AE88 /* voidtile.png in Resources */,
-				E61F9C0D18312C6800351B6F /* grey.png in Resources */,
-				E61F9C0B18311E9300351B6F /* square.gif in Resources */,
+				E6057699183651740033AE88 /* Background.png in Resources */,
 				E654B2F41830F7DD006BFCAC /* Credits.rtf in Resources */,
-				E6057697183640B30033AE88 /* BoardPortrait2.png in Resources */,
-				E64C9F8518337A3200A18E36 /* crackedtile.jpg in Resources */,
-				E64C9F89183380B600A18E36 /* selected.png in Resources */,
 				E654B2F61830F7DD006BFCAC /* MainMenu.xib in Resources */,
+				E605769F183651D20033AE88 /* voidtile.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
