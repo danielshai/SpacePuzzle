@@ -19,13 +19,15 @@
    // [_window makeFirstResponder:self.skView.scene];
  
     /* Pick a size for the scene */
-    _scene = [BoardScene sceneWithSize:CGSizeMake(360, 480)]; //480, 360
+    _scene = [BoardScene sceneWithSize:CGSizeMake(WIN_SIZE_X, WIN_SIZE_Y)];
     
     /* Set the scale mode to scale to fit the window */
     currentFilePath = @"";
     edited = NO;
     _scene.scaleMode = SKSceneScaleModeAspectFit;
-
+    _scene.scaleMode = SKSceneScaleModeAspectFill;
+   
+    
     [_skView presentScene:_scene];
 
     [self setupBoard];
@@ -216,7 +218,7 @@
         for(int j = 0; j < boardSizeX; j++) {
             BoardCoord *bc = [_board.board objectAtIndex:boardSizeX*i + j];
             //[[_scene setupBoardX:[bc x] Y:[bc y]];]
-            [_scene setupBoardX:[bc x] Y:[bc y] TileSize:[_board tilesize] BeginPoint:[_board boardBegin] Status:[bc status]];
+            [_scene setupBoardX:[bc x] Y:[bc y] TileSize:[_board tilesize] Status:[bc status]];
         }
     }
 }

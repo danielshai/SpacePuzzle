@@ -10,6 +10,7 @@
 @synthesize voidTile = _voidTile;
 @synthesize crackedTile = _crackedTile;
 @synthesize boardSprites = _boardSprites;
+@synthesize bkg = _bkg;
 
 -(id)initWithSize:(CGSize)size {    
     if (self = [super initWithSize:size]) {
@@ -18,9 +19,15 @@
         self.backgroundColor = [SKColor colorWithRed:0.89 green:0.89 blue:0.89 alpha:1.0];
         self.size = CGSizeMake(size.width, size.height);
         _solid = [SKTexture textureWithImageNamed:@"square.gif"];
-        _voidTile = [SKTexture textureWithImageNamed:@"voidtile.jpg"];
+        _voidTile = [SKTexture textureWithImageNamed:@"voidtile.png"];
         _crackedTile = [SKTexture textureWithImageNamed:@"crackedtile.jpg"];
-       
+        _bkg = [SKSpriteNode spriteNodeWithImageNamed:@"BoardPortrait2.png"];
+     
+        _bkg.size = CGSizeMake(size.width, size.height);
+        _bkg.position = CGPointMake(WIN_SIZE_X/2, WIN_SIZE_Y/2);
+        [self addChild:_bkg];
+
+        NSLog(@"%f", self.size.height);
         _boardSprites = [[NSMutableArray alloc] init];
         statusOfPalette = MAPSTATUS_SOLID;
         currentTexture = _solid;
@@ -51,7 +58,7 @@
     // Find mouse location and convert.
     SKView *sk = self.view;
     NSPoint mouseLoc = [sk convertPoint:[theEvent locationInWindow] fromView:nil];
-    CGPoint loc = CGPointMake(mouseLoc.x*360/(sk.frame.size.width), mouseLoc.y*480/(sk.frame.size.height));
+    CGPoint loc = CGPointMake(mouseLoc.x*WIN_SIZE_X/(sk.frame.size.width), mouseLoc.y*WIN_SIZE_Y/(sk.frame.size.height));
     
     loc = [Converter convertMousePosToCoord:loc];
     
@@ -98,18 +105,20 @@
     /* Called before each frame is rendered */
 }
 
--(void)setupBoardX:(NSInteger)x Y:(NSInteger)y TileSize:(NSInteger)ts BeginPoint:(CGPoint)p
-            Status:(NSInteger)status {
+-(void)setupBoardX:(NSInteger)x Y:(NSInteger)y TileSize:(NSInteger)ts Status:(NSInteger)status {
     SKSpriteNode *sprite = [[SKSpriteNode alloc] init];
     
     [self setTextureOfSprite:sprite AccordingToStatus:status];
 
     sprite.size = CGSizeMake(ts, ts);
+    CGPoint p = CGPointMake(x, y);
+    p = [Converter convertCoordToPixel:p];
+    p.x += 22;
     
-    NSInteger xx = x*ts + p.x + ts/2;
-    NSInteger yy = p.y - y*ts-ts/2;
+   // NSInteger xx = x*ts + p.x + ts/2;
+   // NSInteger yy = [Converter convertCoordToPixel:p];//WIN_SIZE_Y - 22 - y*ts;
 
-    sprite.position = CGPointMake(xx,yy);
+    sprite.position = p;
     [_boardSprites addObject:sprite];
     [self addChild:sprite];
 }

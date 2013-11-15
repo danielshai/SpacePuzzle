@@ -59,8 +59,11 @@
     // The items.
     // Få coords från XMLParser. Används de som key, object själva item. Skapa item mha ClassFromString (strängen fås från XMLParser.
     Rock *rock = [[Rock alloc] initWithX:2 Y:2];
+    Rock *rock2 =[[Rock alloc] initWithX:4 Y:3];
     NSNumber *nr = [NSNumber numberWithInt:rock.y*_boardSizeX + rock.x];
+    NSNumber *nr2 = [NSNumber numberWithInt:rock2.y*_boardSizeX + rock2.x];
     [_elementDictionary setObject:rock forKey:nr];
+    [_elementDictionary setObject:rock2 forKey:nr2];
     
     // id object = [[NSClassFromString(@"NameofClass") alloc] init];
 }

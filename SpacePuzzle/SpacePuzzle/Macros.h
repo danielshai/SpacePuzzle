@@ -18,7 +18,8 @@
 #define BOARD_PIXEL_BEGIN_Y     465
 #define BOARD_COORD_BEGIN_X     1  // The coordinate value that the actual board begins at.
 #define BOARD_COORD_BEGIN_Y     1
-
+#define WIN_SIZE_X              320
+#define WIN_SIZE_Y              480
 #define BOARD_SIZE_X            7
 #define BOARD_SIZE_Y            10
 

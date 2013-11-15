@@ -85,7 +85,7 @@
 
 +(CGPoint) convertCoordToPixel:(CGPoint)coord {
     CGFloat x = coord.x * TILESIZE + BOARD_PIXEL_BEGIN_X;
-    CGFloat y = BOARD_PIXEL_BEGIN_Y-(coord.y * TILESIZE + (480-BOARD_PIXEL_BEGIN_Y));
+    CGFloat y = BOARD_PIXEL_BEGIN_Y-(coord.y * TILESIZE + (WIN_SIZE_Y-BOARD_PIXEL_BEGIN_Y));
     return CGPointMake(x, y);
 }
 

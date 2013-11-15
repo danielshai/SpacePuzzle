@@ -13,10 +13,10 @@
 @property (nonatomic, retain) SKTexture *solid;
 @property (nonatomic, retain) SKTexture *voidTile;
 @property (nonatomic, retain) SKTexture *crackedTile;
+@property (nonatomic, retain) SKSpriteNode *bkg;
 @property (nonatomic, retain) NSMutableArray *boardSprites;
 
--(void)setupBoardX: (NSInteger)x Y: (NSInteger)y TileSize: (NSInteger) ts BeginPoint: (CGPoint) p
-            Status: (NSInteger)status;
+-(void)setupBoardX: (NSInteger)x Y: (NSInteger)y TileSize: (NSInteger) ts Status: (NSInteger)status;
 -(void)refreshBoardX: (NSInteger)x Y: (NSInteger)y Status: (NSInteger)status;
 -(void)setTextureOfSprite: (SKSpriteNode*)sprite AccordingToStatus: (NSInteger)status;
 -(void)solidClick;
