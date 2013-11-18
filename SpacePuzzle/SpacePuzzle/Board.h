@@ -26,4 +26,6 @@
 -(void) saveBoard:(NSString*) fileName;
 -(void) createEmptyBoard;
 -(void) startAndFinishExport;
+-(void) addElementNamed:(NSString*) name AtPosition:(CGPoint) pos IsBlocking:(BOOL) block;
+-(void) elementExport;
 @end

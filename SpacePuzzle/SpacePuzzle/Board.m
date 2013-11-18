@@ -76,7 +76,16 @@
     [_elementDictionary setObject:rock forKey:nr];
     [_elementDictionary setObject:rock2 forKey:nr2];
     
-    // id object = [[NSClassFromString(@"NameofClass") alloc] init];
+    
+}
+
+-(void)addElementNamed:(NSString *)name AtPosition:(CGPoint)pos IsBlocking:(BOOL)block{
+    Element *element = [[NSClassFromString(name) alloc] init];
+    element.x = pos.x;
+    element.y = pos.y;
+    element.blocking = block;
+    NSNumber *flatIndex = [NSNumber numberWithInt:pos.y*_boardSizeX + pos.x];
+    [_elementDictionary setObject:element forKey:flatIndex];
 }
 
 -(void)createEmptyBoard {
@@ -115,13 +124,15 @@
     
     // Start and finish pos in xml format.
     [self startAndFinishExport];
-    
+    [self elementExport];
     // Elements.
     // ...
     [_parser addOutput:@"</board>"];
     [_parser writeToFile:fileName];
 }
 
+/*
+ *  Exports the start and finish tokens to the splvl file. */
 -(void)startAndFinishExport {
     // Start pos.
     [_parser addOutput:@"<start>"];
@@ -148,5 +159,38 @@
     coordY = [coordY stringByAppendingString:@"</y>"];
     [_parser addOutput:coordY];
     [_parser addOutput:@"</finish>"];
+}
+
+-(void)elementExport {
+    [_parser addOutput:@"<boardelements>"];
+   
+    for(id key in _elementDictionary) {
+        Element *e = [_elementDictionary objectForKey:key];
+        NSString *element = @"<";
+        element = [element stringByAppendingString:e.className];
+        element = [element stringByAppendingString:@">"];
+        
+        // Output actual data about the element.
+        element = [element stringByAppendingString:@"<x>"];
+        element = [element stringByAppendingString:[@(e.x) stringValue]];
+        element = [element stringByAppendingString:@"</x>"];
+        
+        element = [element stringByAppendingString:@"<y>"];
+        element = [element stringByAppendingString:[@(e.y) stringValue]];
+        element = [element stringByAppendingString:@"</y>"];
+        
+        element = [element stringByAppendingString:@"<blocking>"];
+        element = [element stringByAppendingString:[@(e.blocking) stringValue]];
+        element = [element stringByAppendingString:@"</blocking>"];
+        
+        // End of this element.
+        element = [element stringByAppendingString:@"</"];
+        element = [element stringByAppendingString:e.className];
+        element = [element stringByAppendingString:@">"];
+        
+        [_parser addOutput:element];
+    }
+   
+    [_parser addOutput:@"</boardelements>"];
 }
 @end

@@ -31,6 +31,8 @@
     if(self = [super init]) {
         output = @"";
         boardElement = NO;
+        startElement = NO;
+        finishElement = NO;
         _board = [[NSMutableArray alloc] init];
         _parser = [[NSXMLParser alloc] initWithContentsOfURL:url];
         _start = [[Position alloc] initWithX:0 Y:0];
@@ -88,6 +90,13 @@
 
 -(void)parserDidEndDocument:(NSXMLParser *)parser {
     // INSERT ERROR CHECK HERE.
+    output = @"";
+    boardElement = NO;
+    startElement = NO;
+    finishElement = NO;
+    _start = [[Position alloc] initWithX:0 Y:0];
+    _finish = [[Position alloc] initWithX:0 Y:0];
+
 }
 
 -(void)addOutput:(NSString *)string {

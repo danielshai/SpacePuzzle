@@ -5,6 +5,7 @@
 #import "AppDelegate.h"
 #import "BoardScene.h"
 #import "XMLParser.h"
+
 @implementation AppDelegate
 
 @synthesize window = _window;
@@ -121,6 +122,9 @@
             // Update position of finish element.
             _board.finishPos.x = newPos.x;
             _board.finishPos.y = newPos.y;
+        } else if (stat == BRUSH_ROCK) {
+            CGPoint pos = CGPointMake(val.pointValue.x, val.pointValue.y);
+            [_board addElementNamed:@"Rock" AtPosition:pos IsBlocking:YES];
         }
     }
     

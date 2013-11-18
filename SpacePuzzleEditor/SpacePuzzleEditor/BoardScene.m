@@ -77,7 +77,7 @@
    
 }
 
-/*  NÄR MAN LÄGGER I ELEMENT I DICTIONARY; KOLLA ATT DET INTE REDAN FINNS EN PÅ DEN POSITIONEN!!!
+/*
  *  Changes one tile/element on the board according to what brush is used and notifies observers that the 
  *  view has changed. */
 -(void)editABoardItem:(NSEvent *)theEvent {
@@ -87,19 +87,17 @@
     CGPoint loc = CGPointMake(mouseLoc.x*WIN_SIZE_X/(sk.frame.size.width), mouseLoc.y*WIN_SIZE_Y/(sk.frame.size.height));
     
     loc = [Converter convertMousePosToCoord:loc];
-    
+    NSArray *arr = [NSArray arrayWithObjects:[NSValue valueWithPoint:loc],
+                    [NSNumber numberWithInteger: statusOfPalette],nil];
+    NSNumber *flatIndex = [NSNumber numberWithInt:loc.y*BOARD_SIZE_X + loc.x];
     // Check if the click was inside the board.
     if(loc.x >= 0 && loc.x < BOARD_SIZE_X && loc.y >= 0 && loc.y < BOARD_SIZE_Y) {
-        // Notify observers.
-        
-        NSArray *arr = [NSArray arrayWithObjects:[NSValue valueWithPoint:loc],
-                                                 [NSNumber numberWithInteger: statusOfPalette],nil];
-        [self notifyText:@"BoardEdited" Object:arr Key:@"BoardEdited"];
-    
         // Change texture of sprite if tiles.
         if(statusOfPalette == MAPSTATUS_SOLID || statusOfPalette == MAPSTATUS_CRACKED || statusOfPalette == MAPSTATUS_VOID) {
             SKSpriteNode *s = [_boardSprites objectAtIndex:loc.y * BOARD_SIZE_X + loc.x];
             s.texture = currentTexture;
+
+            [self notifyText:@"BoardEdited" Object:arr Key:@"BoardEdited"];
         }
         // Elements
         else {
@@ -107,25 +105,27 @@
                 // Change position of Start sprite.
                 loc = [Converter convertCoordToPixel:loc];
                 loc.x += TILESIZE/2;
-                
                 _startElSprite.position = CGPointMake(loc.x, loc.y);
+                [self notifyText:@"BoardEdited" Object:arr Key:@"BoardEdited"];
             } else if(statusOfPalette == BRUSH_FINISH) {
                 loc = [Converter convertCoordToPixel:loc];
                 loc.x +=TILESIZE/2;
-                
                 _finishSprite.position = CGPointMake(loc.x, loc.y);
-            } else if(statusOfPalette == BRUSH_ROCK) {
-                // Sets up a rock at the position selected.
-                SKSpriteNode *rock = [SKSpriteNode spriteNodeWithTexture:_rockTexture];
-                loc = [Converter convertCoordToPixel:loc];
-                loc.x += TILESIZE/2;
-                rock.position = loc;
-                rock.size = CGSizeMake(TILESIZE-4, TILESIZE-4);
-                NSNumber *nr = [NSNumber numberWithInt:loc.y*BOARD_SIZE_X + loc.x];
-                [_elementSprites setObject:rock forKey:nr];
-                [self addChild:rock];
-            }
+                [self notifyText:@"BoardEdited" Object:arr Key:@"BoardEdited"];
+            } else if (![_elementSprites objectForKey:flatIndex]) {
+                [self notifyText:@"BoardEdited" Object:arr Key:@"BoardEdited"];
             
+                if(statusOfPalette == BRUSH_ROCK) {
+                    // Sets up a rock at the position selected.
+                    SKSpriteNode *rock = [SKSpriteNode spriteNodeWithTexture:_rockTexture];
+                    CGPoint locPx = [Converter convertCoordToPixel:loc];
+                    locPx.x += TILESIZE/2;
+                    rock.position = locPx;
+                    rock.size = CGSizeMake(TILESIZE-4, TILESIZE-4);
+                    [_elementSprites setObject:rock forKey:flatIndex];
+                    [self addChild:rock];
+                }
+            }
             // Add sprite to dictionary with items according to brush.
         }
     }
@@ -211,8 +211,6 @@
 -(void)refreshElementsStart:(CGPoint)start Finish:(CGPoint)finish {
     for(id key in _elementSprites) {
         SKSpriteNode* s = [_elementSprites objectForKey:key];
-        
-        NSLog(@"%f",s.position.x);
         [s removeFromParent];
     }
    
