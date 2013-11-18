@@ -31,6 +31,7 @@
 		E6214085182BA53800EC5C21 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E6214083182BA53800EC5C21 /* InfoPlist.strings */; };
 		E6214087182BA53800EC5C21 /* SpacePuzzleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E6214086182BA53800EC5C21 /* SpacePuzzleTests.m */; };
 		E633067A1835018A00E908F7 /* XMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = E63306791835018A00E908F7 /* XMLParser.m */; };
+		E687AE4D183A43EB00A5B78C /* mario.splvl in Resources */ = {isa = PBXBuildFile; fileRef = E687AE4C183A43EB00A5B78C /* mario.splvl */; };
 		E6E657FE182BB8C50022BF5F /* Board.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E657FD182BB8C50022BF5F /* Board.m */; };
 		E6E65801182BB9020022BF5F /* Position.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E65800182BB9020022BF5F /* Position.m */; };
 		E6E65804182BBAB30022BF5F /* BoardCoord.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E65803182BBAB30022BF5F /* BoardCoord.m */; };
@@ -84,6 +85,7 @@
 		E6214086182BA53800EC5C21 /* SpacePuzzleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SpacePuzzleTests.m; sourceTree = "<group>"; };
 		E63306781835018A00E908F7 /* XMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XMLParser.h; path = ../../SpacePuzzleEditor/SpacePuzzleEditor/XMLParser.h; sourceTree = "<group>"; };
 		E63306791835018A00E908F7 /* XMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XMLParser.m; path = ../../SpacePuzzleEditor/SpacePuzzleEditor/XMLParser.m; sourceTree = "<group>"; };
+		E687AE4C183A43EB00A5B78C /* mario.splvl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = mario.splvl; path = ../../Levels/mario.splvl; sourceTree = "<group>"; };
 		E6E657FB182BB7BD0022BF5F /* Macros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Macros.h; sourceTree = "<group>"; };
 		E6E657FC182BB8C50022BF5F /* Board.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Board.h; sourceTree = "<group>"; };
 		E6E657FD182BB8C50022BF5F /* Board.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Board.m; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 				E6E65812182BC5B40022BF5F /* Model */,
 				E6E65808182BC2820022BF5F /* Utility */,
 				E6214073182BA53800EC5C21 /* Images.xcassets */,
+				E687AE4E183A440F00A5B78C /* Levels */,
 				E605768118362BC70033AE88 /* Resources */,
 				E621405D182BA53800EC5C21 /* Supporting Files */,
 			);
@@ -231,6 +234,14 @@
 				E6214083182BA53800EC5C21 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E687AE4E183A440F00A5B78C /* Levels */ = {
+			isa = PBXGroup;
+			children = (
+				E687AE4C183A43EB00A5B78C /* mario.splvl */,
+			);
+			name = Levels;
 			sourceTree = "<group>";
 		};
 		E6E65807182BC2690022BF5F /* Board */ = {
@@ -360,6 +371,7 @@
 				E60576AC183656CD0033AE88 /* littlejohn.png in Resources */,
 				E60576AA183656C40033AE88 /* voidtile.png in Resources */,
 				E6214061182BA53800EC5C21 /* InfoPlist.strings in Resources */,
+				E687AE4D183A43EB00A5B78C /* mario.splvl in Resources */,
 				E60576A2183656A60033AE88 /* Rock.png in Resources */,
 				E60576A4183656B00033AE88 /* Background.png in Resources */,
 				E60576A8183656C40033AE88 /* crackedtile.jpg in Resources */,

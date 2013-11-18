@@ -43,7 +43,11 @@
     // TEMP CODE.
     _board = [[Board alloc] init];
     // Load the board.
-    [_board loadBoard:@"/Users/IxD/SpacePuzzle/Levels/mario.splvl"];
+
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"mario" ofType:@"splvl"];
+    NSLog(@"%@", path);
+    
+    [_board loadBoard:path];
     
     for(int i = 0; i < BOARD_SIZE_Y; i++) {
         for(int j = 0; j < BOARD_SIZE_X; j++) {

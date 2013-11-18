@@ -7,15 +7,20 @@
 //
 
 #import "XMLParser.h"
+#import "Position.h"
 
 @implementation XMLParser
 @synthesize parser = _parser;
 @synthesize board = _board;
+@synthesize start = _start;
+@synthesize finish = _finish;
 
 -(id)init {
     if(self = [super init]) {
         output = @"";
         boardElement = NO;
+        startElement = NO;
+        finishElement = NO;
         _board = [[NSMutableArray alloc] init];
         [_parser setDelegate:self];
     }
@@ -46,15 +51,31 @@
     currentElement = @"ENDED";
     if ([elementName isEqualToString:@"board"]) {
         boardElement = NO;
+    } else if ([elementName isEqualToString:@"start"]) {
+        startElement = NO;
+    } else if ([elementName isEqualToString:@"finish"]) {
+        finishElement = NO;
     }
 }
 
 -(void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string {
+    int intString = [string intValue];
+    
     if ([currentElement isEqualToString:@"board"]) {
         boardElement = YES;
+ 
     } else if([currentElement isEqualToString:@"status"] && boardElement) {
-        int i = [string intValue];
-        [_board insertObject:[NSNumber numberWithInt:i] atIndex:[_board count]];
+        [_board insertObject:[NSNumber numberWithInt:intString] atIndex:[_board count]];
+    }  if([currentElement isEqualToString:@"start"]) {
+        startElement = YES;
+        NSLog(@"FOUND START");
+    } else if([currentElement isEqualToString:@"finish"]) {
+        finishElement = YES;
+    } else if([currentElement isEqualToString:@"x"]) {
+        NSLog(@"%d",intString);
+        _start.x = intString;
+    } else if([currentElement isEqualToString:@"y"]) {
+        _start.y = intString;
     }
 }
 

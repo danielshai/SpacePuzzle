@@ -185,8 +185,9 @@
     [self setTextureOfSprite:sprite AccordingToStatus:status];
 }
 
--(void)refreshElements {
-    
+-(void)refreshElementsStart:(CGPoint)start Finish:(CGPoint)finish {
+    _startElSprite.position = start;
+    _finishSprite.position = finish;
 }
 
 /*

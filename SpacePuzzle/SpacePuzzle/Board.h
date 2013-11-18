@@ -25,5 +25,5 @@
 -(void) loadBoard:(NSString*) path;
 -(void) saveBoard:(NSString*) fileName;
 -(void) createEmptyBoard;
-//-(void) start
+-(void) startAndFinishExport;
 @end

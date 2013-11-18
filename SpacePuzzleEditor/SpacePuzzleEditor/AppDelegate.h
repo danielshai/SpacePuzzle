@@ -31,7 +31,9 @@
 -(IBAction)saveLevel:(id)sender;
 -(IBAction)saveAsLevel:(id)sender;
 -(void)boardEdited:(NSNotification *) notification;
--(void)refreshBoard;
+-(void)refreshView;
+-(void)refreshBoardView;
+-(void)refreshElementView;
 -(void)setupBoard;
 -(void)observeText:(NSString *)text Selector:(SEL)selector;
 @end

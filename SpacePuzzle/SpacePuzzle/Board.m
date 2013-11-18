@@ -38,6 +38,7 @@
     NSURL *s = [[NSURL alloc] initFileURLWithPath:path];
     _parser = [[XMLParser alloc] initWithContentsOfURL:s];
     
+    NSLog(@"%@",[s absoluteString]);
     [_elementDictionary removeAllObjects];
     [_board removeAllObjects];
     
@@ -60,7 +61,13 @@
         }
     }
     
-    // The items.
+    // Start and finish positions
+    _startPos.x = [[_parser start] x];
+    _startPos.y = [[_parser start] y];
+    
+    _finishPos.x = [[_parser finish] x];
+    _finishPos.y = [[_parser finish] y];
+    // The elements.
     // Få coords från XMLParser. Används de som key, object själva item. Skapa item mha ClassFromString (strängen fås från XMLParser.
     Rock *rock = [[Rock alloc] initWithX:2 Y:2];
     Rock *rock2 =[[Rock alloc] initWithX:4 Y:3];
@@ -70,9 +77,6 @@
     [_elementDictionary setObject:rock2 forKey:nr2];
     
     // id object = [[NSClassFromString(@"NameofClass") alloc] init];
-    
-    // Start and finish positions
-    //_startPos.x = ...;
 }
 
 -(void)createEmptyBoard {
@@ -108,8 +112,17 @@
     [_parser addOutput:@"\n</board>"];
     // End of board.
     
-    // Elements.
+    // Start and finish pos.
+    [self startAndFinishExport];
     
+    // Elements.
+    // ...
+    
+    [_parser writeToFile:fileName];
+}
+
+-(void)startAndFinishExport {
+    // Start pos.
     [_parser addOutput:@"\n<start>"];
     NSString *coordX = @"\n<x>";
     coordX = [coordX stringByAppendingString:[@(_startPos.x) stringValue]];
@@ -122,7 +135,17 @@
     [_parser addOutput:coordY];
     [_parser addOutput:@"\n</start>"];
     
+    // Finish pos.
+    [_parser addOutput:@"\n<finish>"];
+    coordX = @"\n<x>";
+    coordX = [coordX stringByAppendingString:[@(_finishPos.x) stringValue]];
+    coordX = [coordX stringByAppendingString:@"</x>"];
+    [_parser addOutput:coordX];
     
-    [_parser writeToFile:fileName];
+    coordY = @"\n<y>";
+    coordY = [coordY stringByAppendingString:[@(_finishPos.y) stringValue]];
+    coordY = [coordY stringByAppendingString:@"</y>"];
+    [_parser addOutput:coordY];
+    [_parser addOutput:@"\n</finish>"];
 }
 @end

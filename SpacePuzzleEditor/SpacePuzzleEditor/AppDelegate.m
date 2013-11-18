@@ -47,7 +47,7 @@
                          informativeTextWithFormat:@"Unsaved work will be lost."];
     if([alert runModal] == NSOKButton) {
         [_board createEmptyBoard];
-        [self refreshBoard];
+        [self refreshView];
         currentFilePath = @"";
         [[self window] setTitle:@"Untitled.splvl"];
     }
@@ -57,13 +57,18 @@
     [_board loadBoard:filename];
     currentFilePath = filename;
     [[self window] setTitle:[filename lastPathComponent]];
-    [self refreshBoard];
+    [self refreshView];
     return YES;
+}
+
+-(void)refreshView {
+    [self refreshBoardView];
+    [self refreshElementView];
 }
 
 /*
  *  Should be called when a new board has been loaded. This function updates the view of the changes. */
--(void)refreshBoard {
+-(void)refreshBoardView {
     edited = NO;
     NSInteger boardSizeX = [_board boardSizeX];
     NSInteger boardSizeY = [_board boardSizeY];
@@ -75,6 +80,12 @@
             [_scene refreshBoardX:[bc x] Y:[bc y] Status:[bc status]];
         }
     }
+}
+
+-(void)refreshElementView {
+    CGPoint s = CGPointMake(_board.startPos.x, _board.startPos.y);
+    CGPoint f = CGPointMake(_board.finishPos.x, _board.finishPos.y);
+    [_scene refreshElementsStart:s Finish:f];
 }
 
 /* 
@@ -171,7 +182,7 @@
             if([extension isEqualToString:@".splvl"]) {
                 [_board loadBoard:path];
                 currentFilePath = path;
-                [self refreshBoard];
+                [self refreshView];
                 // Updates the window's title.
                 [[self window] setTitle:[path lastPathComponent]];
                 // A newly opened file cannot be edited.
