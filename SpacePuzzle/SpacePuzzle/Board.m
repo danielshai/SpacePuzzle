@@ -109,10 +109,20 @@
     // End of board.
     
     // Elements.
-    [_parser addOutput:@"<start>"];
-    NSString *coord = @"\n<x>";
-    coord = [coord stringByAppendingString:[@(_startPos.x) stringValue]];
-    coord = [coord stringByAppendingString:@"</x>"];
+    
+    [_parser addOutput:@"\n<start>"];
+    NSString *coordX = @"\n<x>";
+    coordX = [coordX stringByAppendingString:[@(_startPos.x) stringValue]];
+    coordX = [coordX stringByAppendingString:@"</x>"];
+    [_parser addOutput:coordX];
+    
+    NSString *coordY = @"\n<y>";
+    coordY = [coordY stringByAppendingString:[@(_startPos.y) stringValue]];
+    coordY = [coordY stringByAppendingString:@"</y>"];
+    [_parser addOutput:coordY];
+    [_parser addOutput:@"\n</start>"];
+    
+    
     [_parser writeToFile:fileName];
 }
 @end
