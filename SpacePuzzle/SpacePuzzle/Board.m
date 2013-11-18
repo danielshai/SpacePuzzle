@@ -38,7 +38,6 @@
     NSURL *s = [[NSURL alloc] initFileURLWithPath:path];
     _parser = [[XMLParser alloc] initWithContentsOfURL:s];
     
-    NSLog(@"%@",[s absoluteString]);
     [_elementDictionary removeAllObjects];
     [_board removeAllObjects];
     
@@ -64,6 +63,8 @@
     // Start and finish positions
     _startPos.x = [[_parser start] x];
     _startPos.y = [[_parser start] y];
+    
+    NSLog(@"START POS X: %ld", [[_parser start] x]);
     
     _finishPos.x = [[_parser finish] x];
     _finishPos.y = [[_parser finish] y];
@@ -98,54 +99,55 @@
  *  Saves the board to a given path/filename. First you have to add the output to the parser then finally
  *  the actual write to file. */
 -(void)saveBoard:(NSString *)fileName {
-    // Add the board in xml format.
+    // Add the tiles in xml format.
     [_parser addOutput:@"<board>"];
+    [_parser addOutput:@"<coords>"];
     for (int i = 0; i < _boardSizeY; i++) {
         for (int j = 0; j < _boardSizeX; j++) {
             BoardCoord* bc = [_board objectAtIndex:(i*_boardSizeX + j)] ;
-            NSString *s = @"\n<status>";
+            NSString *s = @"<status>";
             s = [s stringByAppendingString:[@(bc.status) stringValue]];
             s = [s stringByAppendingString:@"</status>"];
             [_parser addOutput:s];
         }
     }
-    [_parser addOutput:@"\n</board>"];
-    // End of board.
+    [_parser addOutput:@"</coords>"];
+    // End of tiles.
     
-    // Start and finish pos.
+    // Start and finish pos in xml format.
     [self startAndFinishExport];
     
     // Elements.
     // ...
-    
+    [_parser addOutput:@"</board>"];
     [_parser writeToFile:fileName];
 }
 
 -(void)startAndFinishExport {
     // Start pos.
-    [_parser addOutput:@"\n<start>"];
-    NSString *coordX = @"\n<x>";
+    [_parser addOutput:@"<start>"];
+    NSString *coordX = @"<x>";
     coordX = [coordX stringByAppendingString:[@(_startPos.x) stringValue]];
     coordX = [coordX stringByAppendingString:@"</x>"];
     [_parser addOutput:coordX];
     
-    NSString *coordY = @"\n<y>";
+    NSString *coordY = @"<y>";
     coordY = [coordY stringByAppendingString:[@(_startPos.y) stringValue]];
     coordY = [coordY stringByAppendingString:@"</y>"];
     [_parser addOutput:coordY];
-    [_parser addOutput:@"\n</start>"];
+    [_parser addOutput:@"</start>"];
     
     // Finish pos.
-    [_parser addOutput:@"\n<finish>"];
-    coordX = @"\n<x>";
+    [_parser addOutput:@"<finish>"];
+    coordX = @"<x>";
     coordX = [coordX stringByAppendingString:[@(_finishPos.x) stringValue]];
     coordX = [coordX stringByAppendingString:@"</x>"];
     [_parser addOutput:coordX];
     
-    coordY = @"\n<y>";
+    coordY = @"<y>";
     coordY = [coordY stringByAppendingString:[@(_finishPos.y) stringValue]];
     coordY = [coordY stringByAppendingString:@"</y>"];
     [_parser addOutput:coordY];
-    [_parser addOutput:@"\n</finish>"];
+    [_parser addOutput:@"</finish>"];
 }
 @end

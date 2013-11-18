@@ -33,6 +33,8 @@
         boardElement = NO;
         _board = [[NSMutableArray alloc] init];
         _parser = [[NSXMLParser alloc] initWithContentsOfURL:url];
+        _start = [[Position alloc] initWithX:0 Y:0];
+        _finish = [[Position alloc] initWithX:0 Y:0];
         [_parser setDelegate:self];
         [_parser parse];
     }
@@ -41,15 +43,19 @@
 
 -(void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict {
     currentElement = elementName;
-}
-
--(void)parser:(NSXMLParser *)parser foundAttributeDeclarationWithName:(NSString *)attributeName forElement:(NSString *)elementName type:(NSString *)type defaultValue:(NSString *)defaultValue {
     
+    if([currentElement isEqualToString:@"coords"]) {
+        boardElement = YES;
+    } else if ([currentElement isEqualToString:@"start"]) {
+        startElement = YES;
+    } else if ([currentElement isEqualToString:@"finish"]) {
+        finishElement = YES;
+    }
 }
 
 -(void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
-    currentElement = @"ENDED";
-    if ([elementName isEqualToString:@"board"]) {
+
+    if ([elementName isEqualToString:@"coords"]) {
         boardElement = NO;
     } else if ([elementName isEqualToString:@"start"]) {
         startElement = NO;
@@ -61,21 +67,18 @@
 -(void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string {
     int intString = [string intValue];
     
-    if ([currentElement isEqualToString:@"board"]) {
+    if ([currentElement isEqualToString:@"coords"]) {
         boardElement = YES;
- 
     } else if([currentElement isEqualToString:@"status"] && boardElement) {
         [_board insertObject:[NSNumber numberWithInt:intString] atIndex:[_board count]];
-    }  if([currentElement isEqualToString:@"start"]) {
-        startElement = YES;
-        NSLog(@"FOUND START");
-    } else if([currentElement isEqualToString:@"finish"]) {
-        finishElement = YES;
-    } else if([currentElement isEqualToString:@"x"]) {
-        NSLog(@"%d",intString);
+    } else if([currentElement isEqualToString:@"x"] && startElement) {
         _start.x = intString;
-    } else if([currentElement isEqualToString:@"y"]) {
+    } else if([currentElement isEqualToString:@"y"] && startElement) {
         _start.y = intString;
+    } else if([currentElement isEqualToString:@"x"] && finishElement) {
+        _finish.x = intString;
+    } else if([currentElement isEqualToString:@"y"] && finishElement) {
+        _finish.y = intString;
     }
 }
 

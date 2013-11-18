@@ -170,7 +170,7 @@
     sprite.size = CGSizeMake(ts, ts);
     CGPoint p = CGPointMake(x, y);
     p = [Converter convertCoordToPixel:p];
-    p.x += 22;
+    p.x += TILESIZE/2;
     
    // NSInteger xx = x*ts + p.x + ts/2;
    // NSInteger yy = [Converter convertCoordToPixel:p];//WIN_SIZE_Y - 22 - y*ts;
@@ -186,6 +186,11 @@
 }
 
 -(void)refreshElementsStart:(CGPoint)start Finish:(CGPoint)finish {
+    start = [Converter convertCoordToPixel:start];
+    finish = [Converter convertCoordToPixel:finish];
+    start.x += TILESIZE/2;
+    finish.x += TILESIZE/2;
+    
     _startElSprite.position = start;
     _finishSprite.position = finish;
 }
