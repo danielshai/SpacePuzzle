@@ -29,6 +29,7 @@
 		E654B3101830F7DD006BFCAC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E654B30E1830F7DD006BFCAC /* InfoPlist.strings */; };
 		E654B3121830F7DD006BFCAC /* SpacePuzzleEditorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E654B3111830F7DD006BFCAC /* SpacePuzzleEditorTests.m */; };
 		E65EE66F18325FB300E38A3F /* Palette.m in Sources */ = {isa = PBXBuildFile; fileRef = E65EE66E18325FB300E38A3F /* Palette.m */; };
+		E687AE4B183A239000A5B78C /* Finish.png in Resources */ = {isa = PBXBuildFile; fileRef = E687AE4A183A239000A5B78C /* Finish.png */; };
 		E6A0EEE318311690006BF476 /* Board.m in Sources */ = {isa = PBXBuildFile; fileRef = E6A0EEDE18311690006BF476 /* Board.m */; };
 		E6A0EEE418311690006BF476 /* BoardCoord.m in Sources */ = {isa = PBXBuildFile; fileRef = E6A0EEE018311690006BF476 /* BoardCoord.m */; };
 		E6A0EEE518311690006BF476 /* Position.m in Sources */ = {isa = PBXBuildFile; fileRef = E6A0EEE218311690006BF476 /* Position.m */; };
@@ -81,6 +82,7 @@
 		E654B3111830F7DD006BFCAC /* SpacePuzzleEditorTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SpacePuzzleEditorTests.m; sourceTree = "<group>"; };
 		E65EE66D18325FB300E38A3F /* Palette.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Palette.h; sourceTree = "<group>"; };
 		E65EE66E18325FB300E38A3F /* Palette.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Palette.m; sourceTree = "<group>"; };
+		E687AE4A183A239000A5B78C /* Finish.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Finish.png; path = ../../Resources/Elements/Finish.png; sourceTree = "<group>"; };
 		E6A0EEDD18311690006BF476 /* Board.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Board.h; path = ../../SpacePuzzle/SpacePuzzle/Board.h; sourceTree = "<group>"; };
 		E6A0EEDE18311690006BF476 /* Board.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Board.m; path = ../../SpacePuzzle/SpacePuzzle/Board.m; sourceTree = "<group>"; };
 		E6A0EEDF18311690006BF476 /* BoardCoord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BoardCoord.h; path = ../../SpacePuzzle/SpacePuzzle/BoardCoord.h; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 		E60576A0183651E30033AE88 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E687AE4A183A239000A5B78C /* Finish.png */,
 				E605769A183651D20033AE88 /* crackedtile.jpg */,
 				E605769B183651D20033AE88 /* solidtile.png */,
 				E605769C183651D20033AE88 /* voidtile.png */,
@@ -310,6 +313,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E687AE4B183A239000A5B78C /* Finish.png in Resources */,
 				E654B3001830F7DD006BFCAC /* Images.xcassets in Resources */,
 				E605769E183651D20033AE88 /* solidtile.png in Resources */,
 				E605769D183651D20033AE88 /* crackedtile.jpg in Resources */,

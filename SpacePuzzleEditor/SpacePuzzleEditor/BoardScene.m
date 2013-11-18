@@ -12,6 +12,9 @@
 @synthesize boardSprites = _boardSprites;
 @synthesize bkg = _bkg;
 @synthesize startElement = _startElement;
+@synthesize startElSprite = _startElSprite;
+@synthesize finishElement = _finishElement;
+@synthesize finishSprite = _finishSprite;
 
 -(id)initWithSize:(CGSize)size {    
     if (self = [super initWithSize:size]) {
@@ -24,7 +27,20 @@
         _crackedTile = [SKTexture textureWithImageNamed:@"crackedtile.jpg"];
         _bkg = [SKSpriteNode spriteNodeWithImageNamed:@"Background.png"];
         _startElement = [SKTexture textureWithImageNamed:@"Start.gif"];
-     
+        _finishElement = [SKTexture textureWithImageNamed:@"Finish.png"];
+        
+        _startElSprite = [SKSpriteNode spriteNodeWithTexture:_startElement];
+        _startElSprite.position = CGPointMake(-100, -100);
+        _startElSprite.size = CGSizeMake(TILESIZE/2, TILESIZE/2);
+        _startElSprite.zPosition = 10;
+        [self addChild:_startElSprite];
+        
+        _finishSprite = [SKSpriteNode spriteNodeWithTexture:_finishElement];
+        _finishSprite.position = CGPointMake(-100, -100);
+        _finishSprite.size = CGSizeMake(TILESIZE/2, TILESIZE/2);
+        _finishSprite.zPosition = 10;
+        [self addChild:_finishSprite];
+        
         _bkg.size = CGSizeMake(size.width, size.height);
         _bkg.position = CGPointMake(WIN_SIZE_X/2, WIN_SIZE_Y/2);
         [self addChild:_bkg];
@@ -37,6 +53,7 @@
         [self observeText:@"VoidClick" Selector:@selector(voidClick)];
         [self observeText:@"CrackedClick" Selector:@selector(crackedClick)];
         [self observeText:@"StartClick" Selector:@selector(startClick)];
+        [self observeText:@"FinishClick" Selector:@selector(finishClick)];
     }
     return self;
 }
@@ -49,8 +66,10 @@
     [self editABoardItem:theEvent];
 }
 
+/*
+ *  Could be used to change brush? */
 -(void)keyDown:(NSEvent *)theEvent {
-    
+   
 }
 
 /*
@@ -77,18 +96,33 @@
             SKSpriteNode *s = [_boardSprites objectAtIndex:loc.y * BOARD_SIZE_X + loc.x];
             s.texture = currentTexture;
         }
-        // Items
+        // Elements
         else {
             if(statusOfPalette == BRUSH_START) {
                 // Change position of Start sprite.
+                loc = [Converter convertCoordToPixel:loc];
+                loc.x += TILESIZE/2;
+                
+                _startElSprite.position = CGPointMake(loc.x, loc.y);
+            } else if(statusOfPalette == BRUSH_FINISH) {
+                loc = [Converter convertCoordToPixel:loc];
+                loc.x +=TILESIZE/2;
+                
+                _finishSprite.position = CGPointMake(loc.x, loc.y);
             }
             // Add sprite to dictionary with items according to brush.
         }
     }
 }
 
+/* 
+ *  Runs when something is clicked on the palette. */
 -(void)startClick {
     [self changeTextureOfBrush:BRUSH_START];
+}
+
+-(void)finishClick {
+    [self changeTextureOfBrush:BRUSH_FINISH];
 }
 
 -(void)solidClick {
@@ -118,6 +152,9 @@
     } else if(status == BRUSH_START) {
         currentTexture = _startElement;
         statusOfPalette = status;
+    } else if(status == BRUSH_FINISH) {
+        currentTexture = _finishElement;
+        statusOfPalette = status;
     }
 }
 
@@ -146,6 +183,10 @@
 -(void)refreshBoardX:(NSInteger)x Y:(NSInteger)y Status: (NSInteger)status {
     SKSpriteNode *sprite = [_boardSprites objectAtIndex:y*BOARD_SIZE_X + x];
     [self setTextureOfSprite:sprite AccordingToStatus:status];
+}
+
+-(void)refreshElements {
+    
 }
 
 /*

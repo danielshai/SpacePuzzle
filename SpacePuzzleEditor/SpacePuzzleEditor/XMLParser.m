@@ -38,6 +38,10 @@
     currentElement = elementName;
 }
 
+-(void)parser:(NSXMLParser *)parser foundAttributeDeclarationWithName:(NSString *)attributeName forElement:(NSString *)elementName type:(NSString *)type defaultValue:(NSString *)defaultValue {
+    
+}
+
 -(void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
     currentElement = @"ENDED";
     if ([elementName isEqualToString:@"board"]) {

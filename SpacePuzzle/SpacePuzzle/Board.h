@@ -20,6 +20,8 @@
 @property (nonatomic, assign) CGPoint boardBegin;
 @property (nonatomic, retain) XMLParser *parser;
 @property (nonatomic, retain) NSMutableDictionary *elementDictionary;
+@property (nonatomic, retain) Position *startPos;
+@property (nonatomic, retain) Position *finishPos;
 -(void) loadBoard:(NSString*) path;
 -(void) saveBoard:(NSString*) fileName;
 -(void) createEmptyBoard;

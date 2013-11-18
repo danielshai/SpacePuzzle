@@ -12,6 +12,8 @@
 @synthesize boardSizeY = _boardSizeY;
 @synthesize boardBegin = _boardBegin;
 @synthesize elementDictionary = _elementDictionary;
+@synthesize startPos = _startPos;
+@synthesize finishPos = _finishPos;
 
 -(id) init {
     if(self = [super init]){
@@ -23,6 +25,8 @@
         _boardBegin.x = BOARD_PIXEL_BEGIN_X;
         _boardBegin.y = BOARD_PIXEL_BEGIN_Y;
         _elementDictionary = [[NSMutableDictionary alloc] init];
+        _startPos = [[Position alloc] initWithX:5 Y:8];
+        _finishPos = [[Position alloc] initWithX:0 Y:0];
     }
     return self;
 }
@@ -66,6 +70,9 @@
     [_elementDictionary setObject:rock2 forKey:nr2];
     
     // id object = [[NSClassFromString(@"NameofClass") alloc] init];
+    
+    // Start and finish positions
+    //_startPos.x = ...;
 }
 
 -(void)createEmptyBoard {
@@ -101,6 +108,11 @@
     [_parser addOutput:@"\n</board>"];
     // End of board.
     
+    // Elements.
+    [_parser addOutput:@"<start>"];
+    NSString *coord = @"\n<x>";
+    coord = [coord stringByAppendingString:[@(_startPos.x) stringValue]];
+    coord = [coord stringByAppendingString:@"</x>"];
     [_parser writeToFile:fileName];
 }
 @end

@@ -53,6 +53,91 @@
     }
 }
 
+-(BOOL)application:(NSApplication *)theApplication openFile:(NSString *)filename {
+    [_board loadBoard:filename];
+    currentFilePath = filename;
+    [[self window] setTitle:[filename lastPathComponent]];
+    [self refreshBoard];
+    return YES;
+}
+
+/*
+ *  Should be called when a new board has been loaded. This function updates the view of the changes. */
+-(void)refreshBoard {
+    edited = NO;
+    NSInteger boardSizeX = [_board boardSizeX];
+    NSInteger boardSizeY = [_board boardSizeY];
+    
+    for(int i = 0; i < boardSizeY; i++) {
+        for(int j = 0; j < boardSizeX; j++) {
+            BoardCoord *bc = [_board.board objectAtIndex:boardSizeX*i + j];
+            
+            [_scene refreshBoardX:[bc x] Y:[bc y] Status:[bc status]];
+        }
+    }
+}
+
+/* 
+ *  Called when the board has been edited in the |BoardScene|. Updates the data model according to the 
+ *  change. */
+-(void)boardEdited:(NSNotification *) notification {
+
+    NSDictionary *userInfo = notification.userInfo;
+    NSSet *objectSent = [userInfo objectForKey:@"BoardEdited"];
+    NSArray *data = [objectSent allObjects];
+    NSValue *val = [data objectAtIndex:0];
+   
+    NSInteger stat = [[data objectAtIndex:1] integerValue];
+    
+    // If the change was on a tile, the |BoardCoord| status should change. Otherwise elements should change.
+    if(stat == MAPSTATUS_SOLID || stat== MAPSTATUS_CRACKED || stat == MAPSTATUS_VOID) {
+        BoardCoord *bc = [[_board board] objectAtIndex:val.pointValue.y * BOARD_SIZE_X + val.pointValue.x];
+        bc.status = stat;
+    } else {
+        CGPoint newPos = CGPointMake(val.pointValue.x, val.pointValue.y);
+
+        if(stat == BRUSH_START) {
+            // Update position of start element.
+            _board.startPos.x = newPos.x;
+            _board.startPos.y = newPos.y;
+          
+        } else if (stat == BRUSH_FINISH) {
+            // Update position of finish element.
+            _board.finishPos.x = newPos.x;
+            _board.finishPos.y = newPos.y;
+        }
+    }
+    
+    // Adds feedback to the user if the board has been edited (adds a * at the end of the file name).
+    if(edited == NO) {
+        edited = YES;
+        if([currentFilePath isEqualToString:@""]) {
+            [[self window] setTitle:@"Untitled.splvl*"];
+        } else {
+            [[self window] setTitle: [[currentFilePath lastPathComponent] stringByAppendingString:@"*"]];
+        }
+    }
+}
+
+-(void)setupBoard {
+    _board = [[Board alloc] init];
+    // TEMP CODE.
+    NSInteger boardSizeX = [_board boardSizeX];
+    NSInteger boardSizeY = [_board boardSizeY];
+
+    [_board createEmptyBoard];
+    
+    for(int i = 0; i < boardSizeY; i++) {
+        for(int j = 0; j < boardSizeX; j++) {
+            BoardCoord *bc = [_board.board objectAtIndex:boardSizeX*i + j];
+            //[[_scene setupBoardX:[bc x] Y:[bc y]];]
+            [_scene setupBoardX:[bc x] Y:[bc y] TileSize:[_board tilesize] Status:[bc status]];
+        }
+    }
+}
+
+/*
+ *  Loads a level. */
 - (IBAction)openLevel:(id)sender {
     // Create the File Open Dialog class.
     NSOpenPanel* openDlg = [NSOpenPanel openPanel];
@@ -103,31 +188,7 @@
     }
 }
 
--(BOOL)application:(NSApplication *)theApplication openFile:(NSString *)filename {
-    [_board loadBoard:filename];
-    currentFilePath = filename;
-    [[self window] setTitle:[filename lastPathComponent]];
-    [self refreshBoard];
-    return YES;
-}
-
 /*
- *  Should be called when a new board has been loaded. This function updates the view of the changes. */
--(void)refreshBoard {
-    edited = NO;
-    NSInteger boardSizeX = [_board boardSizeX];
-    NSInteger boardSizeY = [_board boardSizeY];
-    
-    for(int i = 0; i < boardSizeY; i++) {
-        for(int j = 0; j < boardSizeX; j++) {
-            BoardCoord *bc = [_board.board objectAtIndex:boardSizeX*i + j];
-            
-            [_scene refreshBoardX:[bc x] Y:[bc y] Status:[bc status]];
-        }
-    }
-}
-
-/* 
  *  Called when "Save" is selected in the file menu. */
 -(IBAction)saveLevel:(id)sender {
     // If the file that is worked on hasn't been saved before, open save panel.
@@ -178,55 +239,6 @@
         [_board saveBoard:path];
         currentFilePath = path;
         edited = NO;
-    }
-}
-
-/* 
- *  Called when the board has been edited in the |BoardScene|. Updates the data model according to the 
- *  change. */
--(void)boardEdited:(NSNotification *) notification {
-
-    NSDictionary *userInfo = notification.userInfo;
-    NSSet *objectSent = [userInfo objectForKey:@"BoardEdited"];
-    NSArray *data = [objectSent allObjects];
-    NSValue *val = [data objectAtIndex:0];
-   
-    NSInteger stat = [[data objectAtIndex:1] integerValue];
-    
-    // If the change was on a tile, the |BoardCoord| status should change. Otherwise elements should change.
-    if(stat == MAPSTATUS_SOLID || stat== MAPSTATUS_CRACKED || stat == MAPSTATUS_VOID) {
-        BoardCoord *bc = [[_board board] objectAtIndex:val.pointValue.y * BOARD_SIZE_X + val.pointValue.x];
-        bc.status = stat;
-    } else {
-        if(stat == BRUSH_START) {
-            // Update position of start element.
-        }
-    }
-    
-    if(edited == NO) {
-        edited = YES;
-        if([currentFilePath isEqualToString:@""]) {
-            [[self window] setTitle:@"Untitled.splvl*"];
-        } else {
-            [[self window] setTitle: [[currentFilePath lastPathComponent] stringByAppendingString:@"*"]];
-        }
-    }
-}
-
--(void)setupBoard {
-    _board = [[Board alloc] init];
-    // TEMP CODE.
-    NSInteger boardSizeX = [_board boardSizeX];
-    NSInteger boardSizeY = [_board boardSizeY];
-
-    [_board createEmptyBoard];
-    
-    for(int i = 0; i < boardSizeY; i++) {
-        for(int j = 0; j < boardSizeX; j++) {
-            BoardCoord *bc = [_board.board objectAtIndex:boardSizeX*i + j];
-            //[[_scene setupBoardX:[bc x] Y:[bc y]];]
-            [_scene setupBoardX:[bc x] Y:[bc y] TileSize:[_board tilesize] Status:[bc status]];
-        }
     }
 }
 

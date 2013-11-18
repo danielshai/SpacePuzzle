@@ -55,4 +55,8 @@
     [self notifyText:@"StartClick" Object:Nil Key:@"StartClick"];
 }
 
+- (IBAction)finishClick:(id)sender {
+    [self notifyText:@"FinishClick" Object:Nil Key:@"FinishClick"];
+}
+
 @end
