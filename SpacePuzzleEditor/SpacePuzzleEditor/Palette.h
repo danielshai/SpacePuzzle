@@ -28,5 +28,7 @@
 -(void)notifyText:(NSString *)text Object: (NSObject*)object Key: (NSString*)key;
 - (IBAction)startClick:(id)sender;
 - (IBAction)finishClick:(id)sender;
+@property (weak) IBOutlet NSButton *rockButton;
+- (IBAction)rockClick:(id)sender;
 
 @end

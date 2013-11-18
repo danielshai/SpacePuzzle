@@ -15,10 +15,13 @@
 @synthesize startElSprite = _startElSprite;
 @synthesize finishElement = _finishElement;
 @synthesize finishSprite = _finishSprite;
+@synthesize rockTexture = _rockTexture;
+@synthesize elementSprites = _elementSprites;
 
 -(id)initWithSize:(CGSize)size {    
     if (self = [super initWithSize:size]) {
         /* Setup your scene here */
+        _elementSprites = [[NSMutableDictionary alloc] init];
         
         self.backgroundColor = [SKColor colorWithRed:0.89 green:0.89 blue:0.89 alpha:1.0];
         self.size = CGSizeMake(size.width, size.height);
@@ -28,6 +31,7 @@
         _bkg = [SKSpriteNode spriteNodeWithImageNamed:@"Background.png"];
         _startElement = [SKTexture textureWithImageNamed:@"Start.gif"];
         _finishElement = [SKTexture textureWithImageNamed:@"Finish.png"];
+        _rockTexture = [SKTexture textureWithImageNamed:@"Rock.png"];
         
         _startElSprite = [SKSpriteNode spriteNodeWithTexture:_startElement];
         _startElSprite.position = CGPointMake(-100, -100);
@@ -54,6 +58,7 @@
         [self observeText:@"CrackedClick" Selector:@selector(crackedClick)];
         [self observeText:@"StartClick" Selector:@selector(startClick)];
         [self observeText:@"FinishClick" Selector:@selector(finishClick)];
+        [self observeText:@"RockClick" Selector:@selector(rockClick)];
     }
     return self;
 }
@@ -72,9 +77,9 @@
    
 }
 
-/*
- *  Changes one tile on the board according to what brush is used and notifies observers that the view
- *  has changed. */
+/*  NÄR MAN LÄGGER I ELEMENT I DICTIONARY; KOLLA ATT DET INTE REDAN FINNS EN PÅ DEN POSITIONEN!!!
+ *  Changes one tile/element on the board according to what brush is used and notifies observers that the 
+ *  view has changed. */
 -(void)editABoardItem:(NSEvent *)theEvent {
     // Find mouse location and convert.
     SKView *sk = self.view;
@@ -109,7 +114,18 @@
                 loc.x +=TILESIZE/2;
                 
                 _finishSprite.position = CGPointMake(loc.x, loc.y);
+            } else if(statusOfPalette == BRUSH_ROCK) {
+                // Sets up a rock at the position selected.
+                SKSpriteNode *rock = [SKSpriteNode spriteNodeWithTexture:_rockTexture];
+                loc = [Converter convertCoordToPixel:loc];
+                loc.x += TILESIZE/2;
+                rock.position = loc;
+                rock.size = CGSizeMake(TILESIZE-4, TILESIZE-4);
+                NSNumber *nr = [NSNumber numberWithInt:loc.y*BOARD_SIZE_X + loc.x];
+                [_elementSprites setObject:rock forKey:nr];
+                [self addChild:rock];
             }
+            
             // Add sprite to dictionary with items according to brush.
         }
     }
@@ -137,6 +153,10 @@
     [self changeTextureOfBrush:MAPSTATUS_VOID];
 }
 
+-(void)rockClick {
+    [self changeTextureOfBrush:BRUSH_ROCK];
+}
+
 /*
  *  Changes the texture of the brush, i.e. what the brush will "paint". */
 -(void)changeTextureOfBrush:(NSInteger)status {
@@ -154,6 +174,9 @@
         statusOfPalette = status;
     } else if(status == BRUSH_FINISH) {
         currentTexture = _finishElement;
+        statusOfPalette = status;
+    } else if (status == BRUSH_ROCK) {
+        currentTexture = _rockTexture;
         statusOfPalette = status;
     }
 }
@@ -186,6 +209,15 @@
 }
 
 -(void)refreshElementsStart:(CGPoint)start Finish:(CGPoint)finish {
+    for(id key in _elementSprites) {
+        SKSpriteNode* s = [_elementSprites objectForKey:key];
+        
+        NSLog(@"%f",s.position.x);
+        [s removeFromParent];
+    }
+   
+    [_elementSprites removeAllObjects];
+    
     start = [Converter convertCoordToPixel:start];
     finish = [Converter convertCoordToPixel:finish];
     start.x += TILESIZE/2;
@@ -193,6 +225,20 @@
     
     _startElSprite.position = start;
     _finishSprite.position = finish;
+}
+
+-(void)cleanView {
+    for(id key in _elementSprites) {
+        SKSpriteNode* s = [_elementSprites objectForKey:key];
+      
+        [s removeFromParent];
+    }
+    
+
+    [_elementSprites removeAllObjects];
+   
+    _startElSprite.position = CGPointMake(-100, -100);
+    _finishSprite.position = CGPointMake(-100, -100);
 }
 
 /*

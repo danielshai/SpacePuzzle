@@ -31,6 +31,7 @@
 -(IBAction)saveLevel:(id)sender;
 -(IBAction)saveAsLevel:(id)sender;
 -(void)boardEdited:(NSNotification *) notification;
+-(void)cleanView;
 -(void)refreshView;
 -(void)refreshBoardView;
 -(void)refreshElementView;

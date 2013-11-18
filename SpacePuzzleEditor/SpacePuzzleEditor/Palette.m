@@ -41,6 +41,19 @@
     [self notifyText:@"VoidClick" Object:nil Key:@"VoidClick"];
 }
 
+
+-(IBAction)startClick:(id)sender {
+    [self notifyText:@"StartClick" Object:Nil Key:@"StartClick"];
+}
+
+-(IBAction)finishClick:(id)sender {
+    [self notifyText:@"FinishClick" Object:Nil Key:@"FinishClick"];
+}
+
+-(IBAction)rockClick:(id)sender {
+    [self notifyText:@"RockClick" Object:Nil Key:@"RockClick"];
+}
+
 -(void) notifyText:(NSString *)text Object:(NSObject *)object Key:(NSString *)key {
     if(object) {
         NSDictionary *userInfo = [NSDictionary dictionaryWithObject:object forKey:key];
@@ -50,13 +63,4 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:text object:nil];
     }
 }
-
-- (IBAction)startClick:(id)sender {
-    [self notifyText:@"StartClick" Object:Nil Key:@"StartClick"];
-}
-
-- (IBAction)finishClick:(id)sender {
-    [self notifyText:@"FinishClick" Object:Nil Key:@"FinishClick"];
-}
-
 @end

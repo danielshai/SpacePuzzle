@@ -47,7 +47,7 @@
                          informativeTextWithFormat:@"Unsaved work will be lost."];
     if([alert runModal] == NSOKButton) {
         [_board createEmptyBoard];
-        [self refreshView];
+        [self cleanView];
         currentFilePath = @"";
         [[self window] setTitle:@"Untitled.splvl"];
     }
@@ -64,6 +64,11 @@
 -(void)refreshView {
     [self refreshBoardView];
     [self refreshElementView];
+}
+
+-(void)cleanView {
+    [self refreshBoardView];
+    [_scene cleanView];
 }
 
 /*

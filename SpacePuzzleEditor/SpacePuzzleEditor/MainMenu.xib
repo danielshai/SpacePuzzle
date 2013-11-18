@@ -328,6 +328,15 @@
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lc0-Gh-4hB">
+                        <rect key="frame" x="222" y="180" width="26" height="11"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" controlSize="mini" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Rock" id="nzy-hi-gXc">
+                            <font key="font" metaFont="miniSystem"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fe5-O1-WJa">
                         <rect key="frame" x="20" y="132" width="45" height="45"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -355,6 +364,22 @@
                             <action selector="finishClick:" target="OQd-pb-Vvp" id="hCr-NF-JoV"/>
                         </connections>
                     </button>
+                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="arw-yl-ZQ1">
+                        <rect key="frame" x="211" y="132" width="48" height="48"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" id="hSl-La-aSC"/>
+                    </imageView>
+                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6VA-Ty-BGb">
+                        <rect key="frame" x="214" y="135" width="42" height="43"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" imagePosition="only" alignment="center" borderStyle="border" transparent="YES" imageScaling="proportionallyDown" inset="2" id="QDT-1m-016">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="rockClick:" target="OQd-pb-Vvp" id="jkq-Zn-x3J"/>
+                        </connections>
+                    </button>
                 </subviews>
             </view>
             <connections>
@@ -362,6 +387,7 @@
                 <outlet property="crackedButton" destination="4fx-oz-fHX" id="SQ2-Af-wOO"/>
                 <outlet property="crackedTile" destination="FWN-3I-4Vg" id="7af-BF-MYr"/>
                 <outlet property="finishButton" destination="hPy-zW-iXT" id="tVK-mE-KzX"/>
+                <outlet property="rockButton" destination="6VA-Ty-BGb" id="yyb-J3-BD4"/>
                 <outlet property="selected" destination="HFh-uJ-dod" id="8ov-Zn-vsg"/>
                 <outlet property="selectedCracked" destination="ddw-Ch-YvL" id="J01-2d-qgN"/>
                 <outlet property="selectedSolid" destination="HFh-uJ-dod" id="XG7-Kx-ETS"/>

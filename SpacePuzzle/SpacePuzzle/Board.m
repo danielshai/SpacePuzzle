@@ -64,10 +64,9 @@
     _startPos.x = [[_parser start] x];
     _startPos.y = [[_parser start] y];
     
-    NSLog(@"START POS X: %ld", [[_parser start] x]);
-    
     _finishPos.x = [[_parser finish] x];
     _finishPos.y = [[_parser finish] y];
+    
     // The elements.
     // Få coords från XMLParser. Används de som key, object själva item. Skapa item mha ClassFromString (strängen fås från XMLParser.
     Rock *rock = [[Rock alloc] initWithX:2 Y:2];
