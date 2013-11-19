@@ -19,54 +19,62 @@
 @synthesize selectedRock = _selectedRock;
 @synthesize selectedStart = _selectedStart;
 @synthesize selectedStar = _selectedStar;
+@synthesize selectedEraser = _selectedEraser;
 
 -(IBAction)solidClick:(id)sender {
     // Show which tile is selected.
     [self setSelectedIndicatorIsHiddenSolid:NO IsCracked:YES IsVoid:YES isStart:YES isFinished:YES
-                                     isRock:YES isStar:YES];
+                                     isRock:YES isStar:YES isEraser:YES];
     
     [self notifyText:@"SolidClick" Object:nil Key:@"SolidClick"];
 }
 
 -(IBAction)crackedAction:(id)sender {
     [self setSelectedIndicatorIsHiddenSolid:YES IsCracked:NO IsVoid:YES isStart:YES isFinished:YES
-                                     isRock:YES isStar:YES];
+                                     isRock:YES isStar:YES isEraser:YES];
     
     [self notifyText:@"CrackedClick" Object:nil Key:@"CrackedClick"];
 }
 
 -(IBAction)voidClick:(id)sender {
     [self setSelectedIndicatorIsHiddenSolid:YES IsCracked:YES IsVoid:NO isStart:YES isFinished:YES
-                                     isRock:YES isStar:YES];
+                                     isRock:YES isStar:YES isEraser:YES];
     
     [self notifyText:@"VoidClick" Object:nil Key:@"VoidClick"];
 }
 
 -(IBAction)startClick:(id)sender {
     [self setSelectedIndicatorIsHiddenSolid:YES IsCracked:YES IsVoid:YES isStart:NO isFinished:YES
-                                     isRock:YES isStar:YES];
+                                     isRock:YES isStar:YES isEraser:YES];
     [self notifyText:@"StartClick" Object:Nil Key:@"StartClick"];
 }
 
 -(IBAction)finishClick:(id)sender {
     [self setSelectedIndicatorIsHiddenSolid:YES IsCracked:YES IsVoid:YES isStart:YES isFinished:NO
-                                     isRock:YES isStar:YES];
+                                     isRock:YES isStar:YES isEraser:YES];
     [self notifyText:@"FinishClick" Object:Nil Key:@"FinishClick"];
 }
 
 -(IBAction)rockClick:(id)sender {
     [self setSelectedIndicatorIsHiddenSolid:YES IsCracked:YES IsVoid:YES isStart:YES isFinished:YES
-                                     isRock:NO isStar:YES];
+                                     isRock:NO isStar:YES isEraser:YES];
     [self notifyText:@"RockClick" Object:Nil Key:@"RockClick"];
 }
 
 - (IBAction)starClick:(id)sender {
     [self setSelectedIndicatorIsHiddenSolid:YES IsCracked:YES IsVoid:YES isStart:YES isFinished:YES
-                                     isRock:YES isStar:NO];
+                                     isRock:YES isStar:NO isEraser:YES];
     [self notifyText:@"StarClick" Object:Nil Key:@"StarClick"];
 }
 
--(void)setSelectedIndicatorIsHiddenSolid:(BOOL)solid IsCracked:(BOOL)cracked IsVoid:(BOOL)isVoid isStart:(BOOL)start isFinished:(BOOL)finish isRock:(BOOL)rock isStar:(BOOL)star {
+- (IBAction)eraserClick:(id)sender {
+    [self setSelectedIndicatorIsHiddenSolid:YES IsCracked:YES IsVoid:YES isStart:YES isFinished:YES isRock:YES isStar:YES isEraser:NO];
+    [self notifyText:@"EraserClick" Object:Nil Key:@"EraserClick"];
+}
+
+/* 
+ *  Displays a selection rectangle on the palette according to what brush is selected. */
+-(void)setSelectedIndicatorIsHiddenSolid:(BOOL)solid IsCracked:(BOOL)cracked IsVoid:(BOOL)isVoid isStart:(BOOL)start isFinished:(BOOL)finish isRock:(BOOL)rock isStar:(BOOL)star isEraser:(BOOL)eraser{
     [_selectedSolid setHidden:solid];
     [_selectedVoid setHidden:isVoid];
     [_selectedCracked setHidden:cracked];
@@ -74,6 +82,7 @@
     [_selectedFinish setHidden:finish];
     [_selectedRock setHidden:rock];
     [_selectedStar setHidden:star];
+    [_selectedEraser setHidden:eraser];
 }
 
 -(void) notifyText:(NSString *)text Object:(NSObject *)object Key:(NSString *)key {

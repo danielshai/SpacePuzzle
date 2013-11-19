@@ -30,6 +30,7 @@
 -(void)cleanElements;
 -(void)cleanView;
 -(void)setTextureOfSprite: (SKSpriteNode*)sprite AccordingToStatus: (NSInteger)status;
+-(void)removeOneSprite: (NSNumber*) index;
 -(void)solidClick;
 -(void)crackedClick;
 -(void)voidClick;
@@ -37,9 +38,11 @@
 -(void)finishClick;
 -(void)rockClick;
 -(void)starClick;
+-(void)eraserClick;
 -(void)notifyText:(NSString *)text Object: (NSObject*)object Key: (NSString*)key;
 -(void)changeTextureOfBrush:(NSInteger) status;
 -(void)editABoardItem:(NSEvent *)theEvent;
 -(void)observeText:(NSString *)text Selector:(SEL)selector;
-
+-(void)addAStar:(CGPoint) pos Index: (NSNumber*) index;
+-(void)addARock:(CGPoint) pos Index: (NSNumber*) index;
 @end

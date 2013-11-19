@@ -416,16 +416,57 @@
                             <action selector="rockClick:" target="OQd-pb-Vvp" id="jkq-Zn-x3J"/>
                         </connections>
                     </button>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Sln-qM-Gqk">
+                        <rect key="frame" x="31" y="162" width="21" height="11"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" controlSize="mini" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Star" id="yS5-fu-EaO">
+                            <font key="font" metaFont="miniSystem"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <imageView hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="r1a-kb-Moi">
+                        <rect key="frame" x="203" y="17" width="64" height="64"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" id="ydi-gX-bVO"/>
+                    </imageView>
+                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bRR-gc-3b4">
+                        <rect key="frame" x="211" y="25" width="48" height="48"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" image="NSRemoveTemplate" id="1fN-dx-Oc2"/>
+                    </imageView>
+                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="phZ-kF-e3G">
+                        <rect key="frame" x="214" y="25" width="45" height="45"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" imagePosition="only" alignment="center" borderStyle="border" transparent="YES" imageScaling="proportionallyDown" inset="2" id="xR0-Nj-MyW">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="eraserClick:" target="OQd-pb-Vvp" id="UiX-c3-ahW"/>
+                        </connections>
+                    </button>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="r1h-9X-F58">
+                        <rect key="frame" x="220" y="81" width="31" height="11"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" controlSize="mini" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Eraser" id="6fH-tM-IoQ">
+                            <font key="font" metaFont="miniSystem"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
                 </subviews>
             </view>
             <connections>
                 <outlet property="cracked" destination="FWN-3I-4Vg" id="4H6-CG-lsc"/>
                 <outlet property="crackedButton" destination="4fx-oz-fHX" id="SQ2-Af-wOO"/>
                 <outlet property="crackedTile" destination="FWN-3I-4Vg" id="7af-BF-MYr"/>
+                <outlet property="eraserClick" destination="phZ-kF-e3G" id="7jl-it-Ppa"/>
                 <outlet property="finishButton" destination="hPy-zW-iXT" id="tVK-mE-KzX"/>
                 <outlet property="rockButton" destination="6VA-Ty-BGb" id="yyb-J3-BD4"/>
                 <outlet property="selected" destination="HFh-uJ-dod" id="8ov-Zn-vsg"/>
                 <outlet property="selectedCracked" destination="ddw-Ch-YvL" id="J01-2d-qgN"/>
+                <outlet property="selectedEraser" destination="r1a-kb-Moi" id="f8G-GR-BI0"/>
                 <outlet property="selectedFinish" destination="iRH-zu-3zK" id="7eI-IH-YVu"/>
                 <outlet property="selectedRock" destination="yz7-xM-C13" id="Ss1-e0-F3d"/>
                 <outlet property="selectedSolid" destination="HFh-uJ-dod" id="XG7-Kx-ETS"/>
@@ -462,8 +503,9 @@
     <resources>
         <image name="Background.png" width="128" height="128"/>
         <image name="Finish" width="256" height="256"/>
+        <image name="NSRemoveTemplate" width="8" height="8"/>
         <image name="Rock" width="400" height="400"/>
-        <image name="Star" width="400" height="400"/>
+        <image name="Star" width="138" height="148"/>
         <image name="Start" width="400" height="400"/>
         <image name="crackedtile" width="1200" height="1200"/>
         <image name="solidtile" width="88" height="88"/>

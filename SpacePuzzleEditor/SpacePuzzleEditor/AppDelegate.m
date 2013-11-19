@@ -111,8 +111,10 @@
     NSDictionary *userInfo = notification.userInfo;
     NSSet *objectSent = [userInfo objectForKey:@"BoardEdited"];
     NSArray *data = [objectSent allObjects];
+    // Edited at coordinate.
     NSValue *val = [data objectAtIndex:0];
    
+    // The used brush.
     NSInteger stat = [[data objectAtIndex:1] integerValue];
     
     // If the change was on a tile, the |BoardCoord| status should change. Otherwise elements should change.
@@ -131,6 +133,9 @@
             // Update position of finish element.
             _board.finishPos.x = newPos.x;
             _board.finishPos.y = newPos.y;
+        } else if (stat == BRUSH_ERASER) {
+            NSNumber *index = [NSNumber numberWithInt:val.pointValue.y * BOARD_SIZE_X + val.pointValue.x];
+            [[_board elementDictionary] removeObjectForKey: index];
         } else if (stat == BRUSH_ROCK) {
             CGPoint pos = CGPointMake(val.pointValue.x, val.pointValue.y);
             [_board addElementNamed:@"Rock" AtPosition:pos IsBlocking:YES];
