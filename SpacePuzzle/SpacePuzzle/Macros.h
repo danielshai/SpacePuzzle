@@ -33,4 +33,9 @@
 #define NEXT_BUTTON_TOUCHED     @"nextButtonTouched"
 #define UNIT_MOVED              @"UnitMoved"
 #define UNIT_WANTS_TO_MOVE      @"UnitWantsToMove"
+
+#define RIGHT                   501
+#define LEFT                    502
+#define UP                      503
+#define DOWN                    504
 #endif

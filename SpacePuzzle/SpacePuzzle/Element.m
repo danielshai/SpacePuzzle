@@ -25,4 +25,8 @@
     
 }
 
+-(void)doMoveAction:(NSInteger)dir {
+    
+}
+
 @end

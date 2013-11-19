@@ -4,6 +4,7 @@
 
 #import "SpacePuzzleController.h"
 #import "Element.h"
+#import "Converter.h"
 
 @implementation SpacePuzzleController
 @synthesize board = _board;
@@ -94,6 +95,9 @@
             
             // If the element exists.
             if(e) {
+                CGPoint xx = CGPointMake(x, y);
+                CGPoint yy = CGPointMake(unitX, unitY);
+                [e doMoveAction: [Converter convertCoordsTo:xx Direction:yy]];
                 // If the element isn't blocking, move unit.
                 if(![e blocking]) {
                     _currentUnit.x = x;

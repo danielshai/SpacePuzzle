@@ -23,4 +23,5 @@
 +(CGPoint) convertMousePosToCoord:(CGPoint)pos;
 +(CGPoint) convertCoordToPixel:(CGPoint)coord;
 +(CGPoint) convertFlatIndexToTwoDimensions:(NSInteger) index;
++(NSInteger) convertCoordsTo:(CGPoint) object Direction: (CGPoint) u;
 @end

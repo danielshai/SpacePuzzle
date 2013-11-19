@@ -98,4 +98,17 @@
     return CGPointMake(x, y);
 }
 
++(NSInteger) convertCoordsTo:(CGPoint)object Direction:(CGPoint)unit {
+    if (object.y > unit.y) {
+        return DOWN;
+    } else if (object.y < unit.y) {
+        return UP;
+    } else if (object.x > unit.x) {
+        return RIGHT;
+    } else if (object.x < unit.x) {
+        return LEFT;
+    } else
+        return -1;
+}
+
 @end

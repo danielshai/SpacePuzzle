@@ -11,5 +11,6 @@
 @property (nonatomic, assign) BOOL blocking;
 -(id)initWithX: (NSInteger) x Y: (NSInteger) y;
 -(void) doAction;
+-(void) doMoveAction: (NSInteger) dir;
 
 @end

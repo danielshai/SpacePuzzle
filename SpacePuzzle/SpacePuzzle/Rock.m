@@ -21,7 +21,8 @@
     return self;
 }
 
--(void) doAction {
-    NSLog(@"ROCK ACTION!");
+-(void) doMoveAction:(NSInteger)dir{
+    NSLog(@"%d", dir);
 }
+
 @end
