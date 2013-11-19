@@ -24,7 +24,7 @@
 -(void)removeElementAtPosition:(NSNumber*) index;
 -(void)setupBoardX:(NSInteger)x Y: (NSInteger)y Status: (NSInteger) status;
 -(void)setupElement:(CGPoint) coord Name: (NSString*) className;
--(void)setupUnits;
+-(void)setupUnits:(CGPoint) pos;
 -(void)notifyText:(NSString *)text Object: (NSObject*)object Key: (NSString*)key;
 
 @end

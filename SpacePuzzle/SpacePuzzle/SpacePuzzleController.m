@@ -151,8 +151,10 @@
     _littleJohn = [[LittleJohn alloc] init];
     
     _currentUnit = _littleJohn;
-    
-    [_scene setupUnits];
+    _littleJohn.x = _board.startPos.x;
+    _littleJohn.y = _board.startPos.y;
+    CGPoint p = CGPointMake(_littleJohn.x, _littleJohn.y);
+    [_scene setupUnits:p];
 }
 
 /*
