@@ -62,6 +62,7 @@
         [self observeText:@"FinishClick" Selector:@selector(finishClick)];
         [self observeText:@"RockClick" Selector:@selector(rockClick)];
         [self observeText:@"StarClick" Selector:@selector(starClick)];
+        [self observeText:@"EraserClick" Selector:@selector(eraserClick)];
     }
     return self;
 }
@@ -115,6 +116,11 @@
                 loc.x +=TILESIZE/2;
                 _finishSprite.position = CGPointMake(loc.x, loc.y);
                 [self notifyText:@"BoardEdited" Object:arr Key:@"BoardEdited"];
+            } else if(statusOfPalette == BRUSH_ERASER) {
+                if([_elementSprites objectForKey:flatIndex]) {
+                    [self removeOneSprite:flatIndex];
+                    [self notifyText:@"BoardEdited" Object:arr Key:@"BoardEdited"];
+                }
             }
             // Elements that are part of the element dictionary.
             else if (![_elementSprites objectForKey:flatIndex]) {
@@ -127,9 +133,14 @@
                     [self addAStar:loc Index:flatIndex];
                 }
             }
-            // Add sprite to dictionary with items according to brush.
         }
     }
+}
+
+-(void)removeOneSprite:(NSNumber *)index {
+    SKSpriteNode* s = [_elementSprites objectForKey:index];
+    [s removeFromParent];
+    [_elementSprites removeObjectForKey:index];
 }
 
 /* 
@@ -161,6 +172,10 @@
 -(void)starClick {
     [self changeTextureOfBrush:BRUSH_STAR];
 }
+
+-(void)eraserClick {
+    [self changeTextureOfBrush:BRUSH_ERASER];
+}
 /*
  *  Changes the texture of the brush, i.e. what the brush will "paint". */
 -(void)changeTextureOfBrush:(NSInteger)status {
@@ -184,6 +199,9 @@
         statusOfPalette = status;
     } else if(status == BRUSH_STAR) {
         currentTexture = _starTexture;
+        statusOfPalette = status;
+    } else if(status == BRUSH_ERASER) {
+        currentTexture = nil;
         statusOfPalette = status;
     }
 }
