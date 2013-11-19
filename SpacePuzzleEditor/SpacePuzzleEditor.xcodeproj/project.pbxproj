@@ -93,6 +93,7 @@
 		E6A0EEE218311690006BF476 /* Position.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Position.m; path = ../../SpacePuzzle/SpacePuzzle/Position.m; sourceTree = "<group>"; };
 		E6EE6F3F1831428B0072D3E6 /* Converter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Converter.h; path = ../SpacePuzzle/SpacePuzzle/Converter.h; sourceTree = "<group>"; };
 		E6EE6F401831428B0072D3E6 /* Converter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Converter.m; path = ../SpacePuzzle/SpacePuzzle/Converter.m; sourceTree = "<group>"; };
+		E6EED0BA183B623E0083E633 /* Macros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Macros.h; path = ../../SpacePuzzle/SpacePuzzle/Macros.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -189,6 +190,7 @@
 				E64C9F8B18339F2E00A18E36 /* XMLParser.m */,
 				E65EE66D18325FB300E38A3F /* Palette.h */,
 				E65EE66E18325FB300E38A3F /* Palette.m */,
+				E6EED0BA183B623E0083E633 /* Macros.h */,
 				E654B2F51830F7DD006BFCAC /* MainMenu.xib */,
 				E654B2FF1830F7DD006BFCAC /* Images.xcassets */,
 				E60576A0183651E30033AE88 /* Resources */,

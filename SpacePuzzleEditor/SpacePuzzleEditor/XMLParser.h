@@ -8,12 +8,17 @@
 
 #import <Foundation/Foundation.h>
 @class Position;
+@class Rock;
 
 @interface XMLParser : NSObject <NSXMLParserDelegate> {
     NSString *currentElement;
     BOOL boardElement;
     BOOL startElement;
     BOOL finishElement;
+    BOOL rockElement;
+    NSInteger tempXElement;
+    NSInteger tempYElement;
+    BOOL tempBlockingElement;
     NSString *output;
 }
 
@@ -21,6 +26,7 @@
 @property (nonatomic, retain) NSMutableArray *board;
 @property (nonatomic, retain) Position *start;
 @property (nonatomic, retain) Position *finish;
+@property (nonatomic, retain) NSMutableDictionary *elements;
 -(id)initWithContentsOfURL:(NSURL *)url;
 -(void)addOutput:(NSString *) string;
 -(BOOL)writeToFile:(NSString *)fileName;

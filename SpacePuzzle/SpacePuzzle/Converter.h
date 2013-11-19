@@ -22,4 +22,5 @@
 +(CGPoint) convertStoneCoordToPixel:(NSInteger) x yCoord: (NSInteger) y;
 +(CGPoint) convertMousePosToCoord:(CGPoint)pos;
 +(CGPoint) convertCoordToPixel:(CGPoint)coord;
++(CGPoint) convertFlatIndexToTwoDimensions:(NSInteger) index;
 @end

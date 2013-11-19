@@ -5,6 +5,7 @@
 #import "AppDelegate.h"
 #import "BoardScene.h"
 #import "XMLParser.h"
+#import "Element.h"
 
 @implementation AppDelegate
 
@@ -69,6 +70,7 @@
 
 -(void)cleanView {
     [self refreshBoardView];
+    [self refreshElementView];
     [_scene cleanView];
 }
 
@@ -92,6 +94,14 @@
     CGPoint s = CGPointMake(_board.startPos.x, _board.startPos.y);
     CGPoint f = CGPointMake(_board.finishPos.x, _board.finishPos.y);
     [_scene refreshElementsStart:s Finish:f];
+    
+    [_scene cleanElements];
+    for(id key in [_board elementDictionary]) {
+        Element *e = [[_board elementDictionary] objectForKey:key];
+        CGPoint pos = CGPointMake(e.x, e.y);
+        [_scene addElement:e.className Position:pos];
+    }
+    
 }
 
 /* 

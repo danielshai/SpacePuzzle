@@ -25,6 +25,8 @@
 -(void)setupBoardX: (NSInteger)x Y: (NSInteger)y TileSize: (NSInteger) ts Status: (NSInteger)status;
 -(void)refreshBoardX: (NSInteger)x Y: (NSInteger)y Status: (NSInteger)status;
 -(void)refreshElementsStart: (CGPoint)start Finish: (CGPoint) finish;
+-(void)addElement: (NSString*) element Position: (CGPoint)pos;
+-(void)cleanElements;
 -(void)cleanView;
 -(void)setTextureOfSprite: (SKSpriteNode*)sprite AccordingToStatus: (NSInteger)status;
 -(void)solidClick;

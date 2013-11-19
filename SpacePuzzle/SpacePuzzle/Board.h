@@ -10,7 +10,9 @@
 #import "BoardCoord.h"
 
 @class XMLParser;
+@class Element;
 @class Rock;
+
 @interface Board : NSObject
 
 @property (nonatomic, strong) NSMutableArray *board;

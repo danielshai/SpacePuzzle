@@ -3,6 +3,7 @@
 #import "Macros.h"
 #import "XMLParser.h"
 #import "Rock.h"
+#import "Element.h"
 
 @implementation Board
 
@@ -68,17 +69,11 @@
     _finishPos.y = [[_parser finish] y];
     
     // The elements.
-    // Få coords från XMLParser. Används de som key, object själva item. Skapa item mha ClassFromString (strängen fås från XMLParser.
-    Rock *rock = [[Rock alloc] initWithX:2 Y:2];
-    Rock *rock2 =[[Rock alloc] initWithX:4 Y:3];
-    NSNumber *nr = [NSNumber numberWithInt:rock.y*_boardSizeX + rock.x];
-    NSNumber *nr2 = [NSNumber numberWithInt:rock2.y*_boardSizeX + rock2.x];
-    [_elementDictionary setObject:rock forKey:nr];
-    [_elementDictionary setObject:rock2 forKey:nr2];
-    
-    
+    _elementDictionary = [_parser elements];
 }
 
+/*
+ *  Adds an element to the board model. Called when the user has used the editor to create an item. */
 -(void)addElementNamed:(NSString *)name AtPosition:(CGPoint)pos IsBlocking:(BOOL)block{
     Element *element = [[NSClassFromString(name) alloc] init];
     element.x = pos.x;
@@ -101,6 +96,7 @@
             [_board insertObject:bc atIndex:((i*_boardSizeX) + j)];
         }
     }
+    [_elementDictionary removeAllObjects];
 }
 
 /* 

@@ -8,12 +8,15 @@
 
 #import "XMLParser.h"
 #import "Position.h"
+#import "Rock.h"
+#import "Macros.h"
 
 @implementation XMLParser
 @synthesize parser = _parser;
 @synthesize board = _board;
 @synthesize start = _start;
 @synthesize finish = _finish;
+@synthesize elements = _elements;
 
 -(id)init {
     if(self = [super init]) {
@@ -37,10 +40,16 @@
         _parser = [[NSXMLParser alloc] initWithContentsOfURL:url];
         _start = [[Position alloc] initWithX:0 Y:0];
         _finish = [[Position alloc] initWithX:0 Y:0];
+        _elements = [[NSMutableDictionary alloc] init];
         [_parser setDelegate:self];
         [_parser parse];
     }
     return self;
+}
+
+-(void)parserDidStartDocument:(NSXMLParser *)parser {
+    _start = [[Position alloc] initWithX:0 Y:0];
+    _finish = [[Position alloc] initWithX:0 Y:0];
 }
 
 -(void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict {
@@ -52,6 +61,8 @@
         startElement = YES;
     } else if ([currentElement isEqualToString:@"finish"]) {
         finishElement = YES;
+    } else if ([currentElement isEqualToString:@"Rock"]) {
+        rockElement = YES;
     }
 }
 
@@ -63,6 +74,11 @@
         startElement = NO;
     } else if ([elementName isEqualToString:@"finish"]) {
         finishElement = NO;
+    } else if ([elementName isEqualToString:@"Rock"]) {
+        rockElement = NO;
+        Rock *r = [[Rock alloc] initWithX:tempXElement Y:tempYElement];
+        NSNumber *index = [NSNumber numberWithInteger:tempYElement*BOARD_SIZE_X + tempXElement];
+        [_elements setObject:r forKey:index];
     }
 }
 
@@ -74,6 +90,7 @@
     } else if([currentElement isEqualToString:@"status"] && boardElement) {
         [_board insertObject:[NSNumber numberWithInt:intString] atIndex:[_board count]];
     } else if([currentElement isEqualToString:@"x"] && startElement) {
+        NSLog(@"FOUND START");
         _start.x = intString;
     } else if([currentElement isEqualToString:@"y"] && startElement) {
         _start.y = intString;
@@ -81,11 +98,13 @@
         _finish.x = intString;
     } else if([currentElement isEqualToString:@"y"] && finishElement) {
         _finish.y = intString;
+    } else if([currentElement isEqualToString:@"x"] && rockElement) {
+        tempXElement = intString;
+    } else if([currentElement isEqualToString:@"y"] && rockElement) {
+        tempYElement = intString;
+    } else if([currentElement isEqualToString:@"blocking"] && rockElement) {
+        tempBlockingElement = intString;
     }
-}
-
--(void)parserDidStartDocument:(NSXMLParser *)parser {
-
 }
 
 -(void)parserDidEndDocument:(NSXMLParser *)parser {
@@ -94,9 +113,7 @@
     boardElement = NO;
     startElement = NO;
     finishElement = NO;
-    _start = [[Position alloc] initWithX:0 Y:0];
-    _finish = [[Position alloc] initWithX:0 Y:0];
-
+    rockElement = NO;
 }
 
 -(void)addOutput:(NSString *)string {
@@ -116,5 +133,4 @@
     output = @"";
     return YES;
 }
-
 @end

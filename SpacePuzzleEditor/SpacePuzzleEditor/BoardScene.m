@@ -209,13 +209,6 @@
 }
 
 -(void)refreshElementsStart:(CGPoint)start Finish:(CGPoint)finish {
-    for(id key in _elementSprites) {
-        SKSpriteNode* s = [_elementSprites objectForKey:key];
-        [s removeFromParent];
-    }
-   
-    [_elementSprites removeAllObjects];
-    
     start = [Converter convertCoordToPixel:start];
     finish = [Converter convertCoordToPixel:finish];
     start.x += TILESIZE/2;
@@ -225,13 +218,35 @@
     _finishSprite.position = finish;
 }
 
+-(void)addElement:(NSString *)element Position:(CGPoint)pos {
+    NSNumber *flatIndex = [NSNumber numberWithInt:pos.y*BOARD_SIZE_X + pos.x];
+    
+    if([element isEqualToString:@"Rock"]) {
+        SKSpriteNode *rock = [SKSpriteNode spriteNodeWithTexture:_rockTexture];
+       
+        CGPoint pxl = [Converter convertCoordToPixel:pos];
+        pxl.x += TILESIZE/2;
+        rock.position = pxl;
+        rock.size = CGSizeMake(TILESIZE-4, TILESIZE-4);
+        
+        [_elementSprites setObject:rock forKey:flatIndex];
+        [self addChild:rock];
+    }
+}
+
+-(void)cleanElements {
+    for(id key in _elementSprites) {
+        SKSpriteNode* s = [_elementSprites objectForKey:key];
+        [s removeFromParent];
+    }
+}
+
 -(void)cleanView {
     for(id key in _elementSprites) {
         SKSpriteNode* s = [_elementSprites objectForKey:key];
       
         [s removeFromParent];
     }
-    
 
     [_elementSprites removeAllObjects];
    

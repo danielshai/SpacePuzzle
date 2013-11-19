@@ -281,7 +281,7 @@
                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="On9-t4-Gip">
                         <rect key="frame" x="17" y="132" width="48" height="48"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" id="s6F-Ek-WZv"/>
+                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" image="Start" id="s6F-Ek-WZv"/>
                     </imageView>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fgu-bE-EOg">
                         <rect key="frame" x="28" y="309" width="26" height="11"/>
@@ -351,7 +351,7 @@
                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9yv-XK-4ef">
                         <rect key="frame" x="114" y="132" width="48" height="48"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" id="OFi-u4-Ue4"/>
+                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" image="Finish" id="OFi-u4-Ue4"/>
                     </imageView>
                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hPy-zW-iXT">
                         <rect key="frame" x="117" y="132" width="45" height="45"/>
@@ -367,7 +367,7 @@
                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="arw-yl-ZQ1">
                         <rect key="frame" x="211" y="132" width="48" height="48"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" id="hSl-La-aSC"/>
+                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" image="Rock" id="hSl-La-aSC"/>
                     </imageView>
                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6VA-Ty-BGb">
                         <rect key="frame" x="214" y="135" width="42" height="43"/>
@@ -420,7 +420,10 @@
     </objects>
     <resources>
         <image name="Background.png" width="128" height="128"/>
+        <image name="Finish" width="256" height="256"/>
+        <image name="Rock" width="400" height="400"/>
+        <image name="Start" width="400" height="400"/>
         <image name="crackedtile" width="1200" height="1200"/>
-        <image name="solidtile" width="400" height="400"/>
+        <image name="solidtile" width="88" height="88"/>
     </resources>
 </document>

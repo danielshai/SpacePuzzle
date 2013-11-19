@@ -9,7 +9,7 @@
 
 -(id)init {
     if(self = [super init]){
-        
+        _blocking = YES;
     }
     return self;
 }
