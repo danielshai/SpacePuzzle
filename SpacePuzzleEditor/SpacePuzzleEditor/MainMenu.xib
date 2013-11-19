@@ -180,6 +180,21 @@
                 <rect key="frame" x="0.0" y="0.0" width="276" height="450"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
+                    <imageView hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yz7-xM-C13">
+                        <rect key="frame" x="203" y="187" width="64" height="64"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" id="GbP-Zy-Spk"/>
+                    </imageView>
+                    <imageView hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iRH-zu-3zK">
+                        <rect key="frame" x="106" y="187" width="64" height="64"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" id="Xfw-Ek-lD7"/>
+                    </imageView>
+                    <imageView hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fGQ-lQ-Sk2">
+                        <rect key="frame" x="9" y="187" width="64" height="64"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" id="SJi-uG-IEr"/>
+                    </imageView>
                     <imageView hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1lE-yZ-g96">
                         <rect key="frame" x="203" y="317" width="64" height="64"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -279,7 +294,7 @@
                         <font key="titleFont" metaFont="system"/>
                     </box>
                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="On9-t4-Gip">
-                        <rect key="frame" x="17" y="204" width="48" height="48"/>
+                        <rect key="frame" x="17" y="195" width="48" height="48"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" image="Start" id="s6F-Ek-WZv"/>
                     </imageView>
@@ -338,7 +353,7 @@
                         </textFieldCell>
                     </textField>
                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fe5-O1-WJa">
-                        <rect key="frame" x="20" y="204" width="45" height="45"/>
+                        <rect key="frame" x="20" y="195" width="45" height="45"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" imagePosition="only" alignment="center" borderStyle="border" transparent="YES" imageScaling="proportionallyDown" inset="2" id="mpw-Ch-ucO">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -348,13 +363,34 @@
                             <action selector="startClick:" target="OQd-pb-Vvp" id="7aa-P0-a1A"/>
                         </connections>
                     </button>
+                    <imageView hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mV6-HW-5uY">
+                        <rect key="frame" x="9" y="99" width="64" height="64"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" id="jWV-JS-b5T"/>
+                    </imageView>
+                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BnT-oK-e7R">
+                        <rect key="frame" x="17" y="107" width="48" height="48"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" image="Star" id="Ua3-o4-evw"/>
+                    </imageView>
+                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pPo-fj-ktc">
+                        <rect key="frame" x="20" y="107" width="45" height="45"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" imagePosition="only" alignment="center" borderStyle="border" transparent="YES" imageScaling="proportionallyDown" inset="2" id="THn-EF-8dN">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="starClick:" target="OQd-pb-Vvp" id="OIE-ZY-fAa"/>
+                        </connections>
+                    </button>
                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9yv-XK-4ef">
-                        <rect key="frame" x="114" y="204" width="48" height="48"/>
+                        <rect key="frame" x="114" y="195" width="48" height="48"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" image="Finish" id="OFi-u4-Ue4"/>
                     </imageView>
                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hPy-zW-iXT">
-                        <rect key="frame" x="117" y="204" width="45" height="45"/>
+                        <rect key="frame" x="117" y="195" width="45" height="45"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" imagePosition="only" alignment="center" borderStyle="border" transparent="YES" imageScaling="proportionallyDown" inset="2" id="wMH-aF-a5j">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -365,12 +401,12 @@
                         </connections>
                     </button>
                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="arw-yl-ZQ1">
-                        <rect key="frame" x="211" y="204" width="48" height="48"/>
+                        <rect key="frame" x="211" y="195" width="48" height="48"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" image="Rock" id="hSl-La-aSC"/>
                     </imageView>
                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6VA-Ty-BGb">
-                        <rect key="frame" x="214" y="207" width="42" height="43"/>
+                        <rect key="frame" x="214" y="198" width="42" height="43"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" imagePosition="only" alignment="center" borderStyle="border" transparent="YES" imageScaling="proportionallyDown" inset="2" id="QDT-1m-016">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -390,12 +426,17 @@
                 <outlet property="rockButton" destination="6VA-Ty-BGb" id="yyb-J3-BD4"/>
                 <outlet property="selected" destination="HFh-uJ-dod" id="8ov-Zn-vsg"/>
                 <outlet property="selectedCracked" destination="ddw-Ch-YvL" id="J01-2d-qgN"/>
+                <outlet property="selectedFinish" destination="iRH-zu-3zK" id="7eI-IH-YVu"/>
+                <outlet property="selectedRock" destination="yz7-xM-C13" id="Ss1-e0-F3d"/>
                 <outlet property="selectedSolid" destination="HFh-uJ-dod" id="XG7-Kx-ETS"/>
+                <outlet property="selectedStar" destination="mV6-HW-5uY" id="erW-D1-5Zu"/>
+                <outlet property="selectedStart" destination="fGQ-lQ-Sk2" id="F6a-7C-Cl9"/>
                 <outlet property="selectedVoid" destination="1lE-yZ-g96" id="Npk-AE-Baw"/>
                 <outlet property="solid" destination="qvy-5d-OZj" id="WLd-1y-ACU"/>
                 <outlet property="solidButton" destination="4fx-oz-fHX" id="vjG-2I-2VZ"/>
                 <outlet property="solidTile" destination="MlX-MT-5z7" id="sbh-YX-MKn"/>
-                <outlet property="startButton" destination="fe5-O1-WJa" id="fLq-36-ThN"/>
+                <outlet property="starButton" destination="pPo-fj-ktc" id="PVa-6Z-ZL4"/>
+                <outlet property="starClick" destination="pPo-fj-ktc" id="6I4-ZD-5Qj"/>
                 <outlet property="void" destination="Fcb-MM-H18" id="gLx-Vh-xC2"/>
                 <outlet property="voidButton" destination="4fx-oz-fHX" id="3aa-Qh-t4N"/>
             </connections>
@@ -422,6 +463,7 @@
         <image name="Background.png" width="128" height="128"/>
         <image name="Finish" width="256" height="256"/>
         <image name="Rock" width="400" height="400"/>
+        <image name="Star" width="400" height="400"/>
         <image name="Start" width="400" height="400"/>
         <image name="crackedtile" width="1200" height="1200"/>
         <image name="solidtile" width="88" height="88"/>

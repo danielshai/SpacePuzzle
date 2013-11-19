@@ -14,6 +14,7 @@
 		E60576A9183656C40033AE88 /* solidtile.png in Resources */ = {isa = PBXBuildFile; fileRef = E60576A6183656C40033AE88 /* solidtile.png */; };
 		E60576AA183656C40033AE88 /* voidtile.png in Resources */ = {isa = PBXBuildFile; fileRef = E60576A7183656C40033AE88 /* voidtile.png */; };
 		E60576AC183656CD0033AE88 /* littlejohn.png in Resources */ = {isa = PBXBuildFile; fileRef = E60576AB183656CD0033AE88 /* littlejohn.png */; };
+		E60C6A01183B94F000D6FA14 /* Star.m in Sources */ = {isa = PBXBuildFile; fileRef = E60C6A00183B94F000D6FA14 /* Star.m */; };
 		E6214055182BA53800EC5C21 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6214054182BA53800EC5C21 /* Foundation.framework */; };
 		E6214057182BA53800EC5C21 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6214056182BA53800EC5C21 /* CoreGraphics.framework */; };
 		E6214059182BA53800EC5C21 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6214058182BA53800EC5C21 /* UIKit.framework */; };
@@ -61,6 +62,8 @@
 		E60576A6183656C40033AE88 /* solidtile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = solidtile.png; path = ../../Resources/Tiles/solidtile.png; sourceTree = "<group>"; };
 		E60576A7183656C40033AE88 /* voidtile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = voidtile.png; path = ../../Resources/Tiles/voidtile.png; sourceTree = "<group>"; };
 		E60576AB183656CD0033AE88 /* littlejohn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = littlejohn.png; path = ../../Resources/Units/littlejohn.png; sourceTree = "<group>"; };
+		E60C69FF183B94F000D6FA14 /* Star.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Star.h; sourceTree = "<group>"; };
+		E60C6A00183B94F000D6FA14 /* Star.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Star.m; sourceTree = "<group>"; };
 		E6214051182BA53800EC5C21 /* SpacePuzzle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpacePuzzle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6214054182BA53800EC5C21 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		E6214056182BA53800EC5C21 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -135,6 +138,8 @@
 			children = (
 				E6E65809182BC2CE0022BF5F /* Element.h */,
 				E6E6580A182BC2CE0022BF5F /* Element.m */,
+				E60C69FF183B94F000D6FA14 /* Star.h */,
+				E60C6A00183B94F000D6FA14 /* Star.m */,
 				E6057675183619120033AE88 /* Rock.h */,
 				E6057676183619120033AE88 /* Rock.m */,
 			);
@@ -405,6 +410,7 @@
 				E6E6580E182BC3C50022BF5F /* BigL.m in Sources */,
 				E6214067182BA53800EC5C21 /* GViewAppDelegate.m in Sources */,
 				E621406D182BA53800EC5C21 /* SpacePuzzleController.m in Sources */,
+				E60C6A01183B94F000D6FA14 /* Star.m in Sources */,
 				E6E65804182BBAB30022BF5F /* BoardCoord.m in Sources */,
 				E6E65819182BC9390022BF5F /* Unit.m in Sources */,
 				E6214070182BA53800EC5C21 /* MainScene.m in Sources */,

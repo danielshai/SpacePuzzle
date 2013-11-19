@@ -16,6 +16,7 @@
 @property (nonatomic, retain) SKTexture *startElement;
 @property (nonatomic, retain) SKTexture *finishElement;
 @property (nonatomic, retain) SKTexture *rockTexture;
+@property (nonatomic, retain) SKTexture *starTexture;
 @property (nonatomic, retain) SKSpriteNode *bkg;
 @property (nonatomic, retain) SKSpriteNode *startElSprite;
 @property (nonatomic, retain) SKSpriteNode *finishSprite;
@@ -35,6 +36,7 @@
 -(void)startClick;
 -(void)finishClick;
 -(void)rockClick;
+-(void)starClick;
 -(void)notifyText:(NSString *)text Object: (NSObject*)object Key: (NSString*)key;
 -(void)changeTextureOfBrush:(NSInteger) status;
 -(void)editABoardItem:(NSEvent *)theEvent;

@@ -17,6 +17,7 @@
 @synthesize finishSprite = _finishSprite;
 @synthesize rockTexture = _rockTexture;
 @synthesize elementSprites = _elementSprites;
+@synthesize starTexture = _starTexture;
 
 -(id)initWithSize:(CGSize)size {    
     if (self = [super initWithSize:size]) {
@@ -32,6 +33,7 @@
         _startElement = [SKTexture textureWithImageNamed:@"Start.gif"];
         _finishElement = [SKTexture textureWithImageNamed:@"Finish.png"];
         _rockTexture = [SKTexture textureWithImageNamed:@"Rock.png"];
+        _starTexture = [SKTexture textureWithImageNamed:@"Star.png"];
         
         _startElSprite = [SKSpriteNode spriteNodeWithTexture:_startElement];
         _startElSprite.position = CGPointMake(-100, -100);
@@ -59,6 +61,7 @@
         [self observeText:@"StartClick" Selector:@selector(startClick)];
         [self observeText:@"FinishClick" Selector:@selector(finishClick)];
         [self observeText:@"RockClick" Selector:@selector(rockClick)];
+        [self observeText:@"StarClick" Selector:@selector(starClick)];
     }
     return self;
 }
@@ -99,7 +102,7 @@
 
             [self notifyText:@"BoardEdited" Object:arr Key:@"BoardEdited"];
         }
-        // Elements
+        // Elements.
         else {
             if(statusOfPalette == BRUSH_START) {
                 // Change position of Start sprite.
@@ -112,7 +115,9 @@
                 loc.x +=TILESIZE/2;
                 _finishSprite.position = CGPointMake(loc.x, loc.y);
                 [self notifyText:@"BoardEdited" Object:arr Key:@"BoardEdited"];
-            } else if (![_elementSprites objectForKey:flatIndex]) {
+            }
+            // Elements that are part of the element dictionary.
+            else if (![_elementSprites objectForKey:flatIndex]) {
                 [self notifyText:@"BoardEdited" Object:arr Key:@"BoardEdited"];
             
                 if(statusOfPalette == BRUSH_ROCK) {
@@ -124,6 +129,14 @@
                     rock.size = CGSizeMake(TILESIZE-4, TILESIZE-4);
                     [_elementSprites setObject:rock forKey:flatIndex];
                     [self addChild:rock];
+                } else if(statusOfPalette == BRUSH_STAR) {
+                    SKSpriteNode *star = [SKSpriteNode spriteNodeWithTexture:_starTexture];
+                    CGPoint locPx = [Converter convertCoordToPixel:loc];
+                    locPx.x += TILESIZE/2;
+                    star.position = locPx;
+                    star.size = CGSizeMake(TILESIZE-4, TILESIZE-4);
+                    [_elementSprites setObject:star forKey:flatIndex];
+                    [self addChild:star];
                 }
             }
             // Add sprite to dictionary with items according to brush.
@@ -157,6 +170,9 @@
     [self changeTextureOfBrush:BRUSH_ROCK];
 }
 
+-(void)starClick {
+    [self changeTextureOfBrush:BRUSH_STAR];
+}
 /*
  *  Changes the texture of the brush, i.e. what the brush will "paint". */
 -(void)changeTextureOfBrush:(NSInteger)status {
@@ -175,8 +191,11 @@
     } else if(status == BRUSH_FINISH) {
         currentTexture = _finishElement;
         statusOfPalette = status;
-    } else if (status == BRUSH_ROCK) {
+    } else if(status == BRUSH_ROCK) {
         currentTexture = _rockTexture;
+        statusOfPalette = status;
+    } else if(status == BRUSH_STAR) {
+        currentTexture = _starTexture;
         statusOfPalette = status;
     }
 }
