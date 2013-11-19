@@ -416,6 +416,15 @@
                             <action selector="rockClick:" target="OQd-pb-Vvp" id="jkq-Zn-x3J"/>
                         </connections>
                     </button>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Sln-qM-Gqk">
+                        <rect key="frame" x="31" y="162" width="21" height="11"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" controlSize="mini" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Star" id="yS5-fu-EaO">
+                            <font key="font" metaFont="miniSystem"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
                 </subviews>
             </view>
             <connections>
@@ -463,7 +472,7 @@
         <image name="Background.png" width="128" height="128"/>
         <image name="Finish" width="256" height="256"/>
         <image name="Rock" width="400" height="400"/>
-        <image name="Star" width="400" height="400"/>
+        <image name="Star" width="138" height="148"/>
         <image name="Start" width="400" height="400"/>
         <image name="crackedtile" width="1200" height="1200"/>
         <image name="solidtile" width="88" height="88"/>

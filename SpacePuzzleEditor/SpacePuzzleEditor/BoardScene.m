@@ -122,21 +122,9 @@
             
                 if(statusOfPalette == BRUSH_ROCK) {
                     // Sets up a rock at the position selected.
-                    SKSpriteNode *rock = [SKSpriteNode spriteNodeWithTexture:_rockTexture];
-                    CGPoint locPx = [Converter convertCoordToPixel:loc];
-                    locPx.x += TILESIZE/2;
-                    rock.position = locPx;
-                    rock.size = CGSizeMake(TILESIZE-4, TILESIZE-4);
-                    [_elementSprites setObject:rock forKey:flatIndex];
-                    [self addChild:rock];
+                    [self addARock:loc Index:flatIndex];
                 } else if(statusOfPalette == BRUSH_STAR) {
-                    SKSpriteNode *star = [SKSpriteNode spriteNodeWithTexture:_starTexture];
-                    CGPoint locPx = [Converter convertCoordToPixel:loc];
-                    locPx.x += TILESIZE/2;
-                    star.position = locPx;
-                    star.size = CGSizeMake(TILESIZE-4, TILESIZE-4);
-                    [_elementSprites setObject:star forKey:flatIndex];
-                    [self addChild:star];
+                    [self addAStar:loc Index:flatIndex];
                 }
             }
             // Add sprite to dictionary with items according to brush.
@@ -241,16 +229,36 @@
     NSNumber *flatIndex = [NSNumber numberWithInt:pos.y*BOARD_SIZE_X + pos.x];
     
     if([element isEqualToString:@"Rock"]) {
-        SKSpriteNode *rock = [SKSpriteNode spriteNodeWithTexture:_rockTexture];
-       
-        CGPoint pxl = [Converter convertCoordToPixel:pos];
-        pxl.x += TILESIZE/2;
-        rock.position = pxl;
-        rock.size = CGSizeMake(TILESIZE-4, TILESIZE-4);
-        
-        [_elementSprites setObject:rock forKey:flatIndex];
-        [self addChild:rock];
+        [self addARock:pos Index:flatIndex];
+    } else if([element isEqualToString:@"Star"]) {
+        [self addAStar:pos Index:flatIndex];
     }
+}
+
+/*
+ *  Adds a star at a given coordinate. */
+-(void)addAStar:(CGPoint)pos Index:(NSNumber*)index{
+    SKSpriteNode *star = [SKSpriteNode spriteNodeWithTexture:_starTexture];
+    
+    CGPoint pxl = [Converter convertCoordToPixel:pos];
+    pxl.x += TILESIZE/2;
+    star.position = pxl;
+    star.size = CGSizeMake(TILESIZE-20, TILESIZE-20);
+    
+    [_elementSprites setObject:star forKey:index];
+    [self addChild:star];
+}
+
+-(void)addARock:(CGPoint)pos Index:(NSNumber *)index {
+    SKSpriteNode *rock = [SKSpriteNode spriteNodeWithTexture:_rockTexture];
+    
+    CGPoint pxl = [Converter convertCoordToPixel:pos];
+    pxl.x += TILESIZE/2;
+    rock.position = pxl;
+    rock.size = CGSizeMake(TILESIZE-4, TILESIZE-4);
+    
+    [_elementSprites setObject:rock forKey:index];
+    [self addChild:rock];
 }
 
 -(void)cleanElements {

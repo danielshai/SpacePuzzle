@@ -10,6 +10,7 @@
 #import "Position.h"
 #import "Rock.h"
 #import "Macros.h"
+#import "Star.h"
 
 @implementation XMLParser
 @synthesize parser = _parser;
@@ -36,6 +37,8 @@
         boardElement = NO;
         startElement = NO;
         finishElement = NO;
+        starElement = NO;
+        boardElements = NO;
         _board = [[NSMutableArray alloc] init];
         _parser = [[NSXMLParser alloc] initWithContentsOfURL:url];
         _start = [[Position alloc] initWithX:0 Y:0];
@@ -63,6 +66,10 @@
         finishElement = YES;
     } else if ([currentElement isEqualToString:@"Rock"]) {
         rockElement = YES;
+    } else if ([currentElement isEqualToString:@"Star"]) {
+        starElement = YES;
+    } else if ([currentElement isEqualToString:@"boardelements"]) {
+        boardElement = YES;
     }
 }
 
@@ -79,6 +86,11 @@
         Rock *r = [[Rock alloc] initWithX:tempXElement Y:tempYElement];
         NSNumber *index = [NSNumber numberWithInteger:tempYElement*BOARD_SIZE_X + tempXElement];
         [_elements setObject:r forKey:index];
+    } else if ([elementName isEqualToString:@"Star"]) {
+        starElement = NO;
+        Star *s = [[Star alloc] initWithX:tempXElement Y:tempYElement];
+        NSNumber *index = [NSNumber numberWithInteger:tempYElement*BOARD_SIZE_X + tempXElement];
+        [_elements setObject:s forKey:index];
     }
 }
 
@@ -97,9 +109,9 @@
         _finish.x = intString;
     } else if([currentElement isEqualToString:@"y"] && finishElement) {
         _finish.y = intString;
-    } else if([currentElement isEqualToString:@"x"] && rockElement) {
+    } else if([currentElement isEqualToString:@"x"] && boardElement) {
         tempXElement = intString;
-    } else if([currentElement isEqualToString:@"y"] && rockElement) {
+    } else if([currentElement isEqualToString:@"y"] && boardElement) {
         tempYElement = intString;
     } else if([currentElement isEqualToString:@"blocking"] && rockElement) {
         tempBlockingElement = intString;
@@ -113,6 +125,8 @@
     startElement = NO;
     finishElement = NO;
     rockElement = NO;
+    starElement = NO;
+    boardElements = NO;
 }
 
 -(void)addOutput:(NSString *)string {

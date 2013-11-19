@@ -41,5 +41,6 @@
 -(void)changeTextureOfBrush:(NSInteger) status;
 -(void)editABoardItem:(NSEvent *)theEvent;
 -(void)observeText:(NSString *)text Selector:(SEL)selector;
-
+-(void)addAStar:(CGPoint) pos Index: (NSNumber*) index;
+-(void)addARock:(CGPoint) pos Index: (NSNumber*) index;
 @end

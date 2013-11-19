@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 @class Position;
 @class Rock;
+@class Star;
 
 @interface XMLParser : NSObject <NSXMLParserDelegate> {
     NSString *currentElement;
@@ -16,6 +17,8 @@
     BOOL startElement;
     BOOL finishElement;
     BOOL rockElement;
+    BOOL starElement;
+    BOOL boardElements;
     NSInteger tempXElement;
     NSInteger tempYElement;
     BOOL tempBlockingElement;
