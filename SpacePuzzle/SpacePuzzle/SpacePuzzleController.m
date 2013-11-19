@@ -76,8 +76,11 @@
     NSValue *val = [data objectAtIndex:0];
     NSValue *val2 = [data objectAtIndex:1];
     
+    // The position that the unit wants to move to.
     NSInteger x  = val.CGPointValue.x;
     NSInteger y = val.CGPointValue.y;
+    
+    // The unit who wants to move's position.
     NSInteger unitX = val2.CGPointValue.x;
     NSInteger unitY = val2.CGPointValue.y;
     
