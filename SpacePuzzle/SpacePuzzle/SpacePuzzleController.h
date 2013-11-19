@@ -17,6 +17,8 @@
 #import "LittleJohn.h"
 
 @class Element;
+@class Star;
+@class Player;
 
 @interface SpacePuzzleController : UIViewController
 @property (nonatomic, retain) Board *board;
@@ -24,6 +26,7 @@
 @property (nonatomic, retain) Unit *currentUnit;
 @property (nonatomic, retain) BigL *bigL;
 @property (nonatomic, retain) LittleJohn *littleJohn;
+@property (nonatomic, retain) Player *player;
 -(void)unitWantsToMove:(NSNotification *)notification;
 -(void)unitMoved:(NSNotification *) notification;
 -(void)setupBoard;

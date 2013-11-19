@@ -5,6 +5,8 @@
 #import "SpacePuzzleController.h"
 #import "Element.h"
 #import "Converter.h"
+#import "Star.h"
+#import "Player.h"
 
 @implementation SpacePuzzleController
 @synthesize board = _board;
@@ -12,6 +14,7 @@
 @synthesize currentUnit = _currentUnit;
 @synthesize bigL = _bigL;
 @synthesize littleJohn = _littleJohn;
+@synthesize player = _player;
 
 -(void)viewDidLoad
 {
@@ -25,6 +28,8 @@
     // Create and configure the scene.
     _scene = [MainScene sceneWithSize:skView.bounds.size];
     _scene.scaleMode = SKSceneScaleModeAspectFill;
+    
+    _player = [[Player alloc] init];
     
     [self setupBoard];
     [self setupElements];
@@ -46,7 +51,6 @@
     // Load the board.
 
     NSString *path = [[NSBundle mainBundle] pathForResource:@"mario" ofType:@"splvl"];
-    NSLog(@"%@", path);
     
     [_board loadBoard:path];
     
@@ -106,6 +110,14 @@
                     _currentUnit.x = x;
                     _currentUnit.y = y;
                     [_scene updateUnit:CGPointMake(x, y)];
+                    [e movedTo];
+                    
+                    // If the element is a star.
+                    if([e isKindOfClass:[Star class]]) {
+                        _player.starsTaken += 1;
+                        [[_board elementDictionary] removeObjectForKey:key];
+                        [_scene removeElementAtPosition:key];
+                    }
                 }
             }
             else {

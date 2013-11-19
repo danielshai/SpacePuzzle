@@ -76,6 +76,12 @@
     
 }
 
+-(void)removeElementAtPosition:(NSNumber *)index {
+    SKSpriteNode* s = [_elements objectForKey:index];
+    [s removeFromParent];
+    [_elements removeObjectForKey:index];
+}
+
 -(void)update:(CFTimeInterval)currentTime {
     /* Called before each frame is rendered */
    

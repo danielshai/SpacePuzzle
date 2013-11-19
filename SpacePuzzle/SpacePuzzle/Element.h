@@ -12,5 +12,5 @@
 -(id)initWithX: (NSInteger) x Y: (NSInteger) y;
 -(void) doAction;
 -(void) doMoveAction: (NSInteger) dir;
-
+-(void) movedTo;
 @end

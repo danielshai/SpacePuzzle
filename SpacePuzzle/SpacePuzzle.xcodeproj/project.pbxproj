@@ -16,6 +16,7 @@
 		E60576AC183656CD0033AE88 /* littlejohn.png in Resources */ = {isa = PBXBuildFile; fileRef = E60576AB183656CD0033AE88 /* littlejohn.png */; };
 		E60C6A01183B94F000D6FA14 /* Star.m in Sources */ = {isa = PBXBuildFile; fileRef = E60C6A00183B94F000D6FA14 /* Star.m */; };
 		E60C6A07183BAA4800D6FA14 /* Star.png in Resources */ = {isa = PBXBuildFile; fileRef = E60C6A06183BAA4800D6FA14 /* Star.png */; };
+		E60C6A0A183BB19F00D6FA14 /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = E60C6A09183BB19F00D6FA14 /* Player.m */; };
 		E6214055182BA53800EC5C21 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6214054182BA53800EC5C21 /* Foundation.framework */; };
 		E6214057182BA53800EC5C21 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6214056182BA53800EC5C21 /* CoreGraphics.framework */; };
 		E6214059182BA53800EC5C21 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6214058182BA53800EC5C21 /* UIKit.framework */; };
@@ -66,6 +67,8 @@
 		E60C69FF183B94F000D6FA14 /* Star.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Star.h; sourceTree = "<group>"; };
 		E60C6A00183B94F000D6FA14 /* Star.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Star.m; sourceTree = "<group>"; };
 		E60C6A06183BAA4800D6FA14 /* Star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Star.png; path = ../../Resources/Elements/Star.png; sourceTree = "<group>"; };
+		E60C6A08183BB19F00D6FA14 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
+		E60C6A09183BB19F00D6FA14 /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
 		E6214051182BA53800EC5C21 /* SpacePuzzle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpacePuzzle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6214054182BA53800EC5C21 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		E6214056182BA53800EC5C21 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -278,6 +281,8 @@
 		E6E65812182BC5B40022BF5F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E60C6A08183BB19F00D6FA14 /* Player.h */,
+				E60C6A09183BB19F00D6FA14 /* Player.m */,
 				E6E65807182BC2690022BF5F /* Board */,
 				E6E65816182BC9010022BF5F /* Units */,
 				E6057678183619520033AE88 /* Elements */,
@@ -404,6 +409,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E60C6A0A183BB19F00D6FA14 /* Player.m in Sources */,
 				E633067A1835018A00E908F7 /* XMLParser.m in Sources */,
 				E6E6580B182BC2CE0022BF5F /* Element.m in Sources */,
 				E6E65815182BC82E0022BF5F /* LittleJohn.m in Sources */,
