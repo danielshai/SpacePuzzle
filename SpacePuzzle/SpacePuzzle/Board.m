@@ -133,6 +133,7 @@
     // Start pos.
     [_parser addOutput:@"<start>"];
     NSString *coordX = @"<x>";
+    
     coordX = [coordX stringByAppendingString:[@(_startPos.x) stringValue]];
     coordX = [coordX stringByAppendingString:@"</x>"];
     [_parser addOutput:coordX];
@@ -163,7 +164,8 @@
     for(id key in _elementDictionary) {
         Element *e = [_elementDictionary objectForKey:key];
         NSString *element = @"<";
-        element = [element stringByAppendingString:e.className];
+        
+        element = [element stringByAppendingString:NSStringFromClass([e class])];
         element = [element stringByAppendingString:@">"];
         
         // Output actual data about the element.
@@ -181,7 +183,7 @@
         
         // End of this element.
         element = [element stringByAppendingString:@"</"];
-        element = [element stringByAppendingString:e.className];
+        element = [element stringByAppendingString:NSStringFromClass([e class])];
         element = [element stringByAppendingString:@">"];
         
         [_parser addOutput:element];

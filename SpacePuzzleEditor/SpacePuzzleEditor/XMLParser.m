@@ -90,7 +90,6 @@
     } else if([currentElement isEqualToString:@"status"] && boardElement) {
         [_board insertObject:[NSNumber numberWithInt:intString] atIndex:[_board count]];
     } else if([currentElement isEqualToString:@"x"] && startElement) {
-        NSLog(@"FOUND START");
         _start.x = intString;
     } else if([currentElement isEqualToString:@"y"] && startElement) {
         _start.y = intString;
