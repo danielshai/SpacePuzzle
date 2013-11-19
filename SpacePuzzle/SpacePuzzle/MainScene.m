@@ -111,8 +111,11 @@
     
     // Shift the sprite a bit.
     pos.x += sprite.size.width/2;
-    
     [sprite setPosition:pos];
+    
+    if([className isEqualToString:@"Star"]) {
+        sprite.size = CGSizeMake(22, 22);
+    }
     
     NSNumber *nr = [NSNumber numberWithInt:coord.y*BOARD_SIZE_X + coord.x];
     [_elements setObject:sprite forKey:nr];
