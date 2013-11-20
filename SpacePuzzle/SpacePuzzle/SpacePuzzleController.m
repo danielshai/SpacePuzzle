@@ -89,6 +89,13 @@
     NSInteger unitX = val2.CGPointValue.x;
     NSInteger unitY = val2.CGPointValue.y;
     
+    CGPoint hitPoint = CGPointMake(x, y);
+    CGPoint origin = CGPointMake(unitX, unitY);
+    
+    NSInteger nextTile;
+    NSNumber *nextKey;
+    NSNumber *curKey = [NSNumber numberWithInt:unitX*BOARD_SIZE_X + unitX];
+    NSInteger curInt = [curKey integerValue];
     // First check if the movement was inside the board and if the tile isn't |void| (which units cannot
     // move to).
     if(x >= 0 && x < BOARD_SIZE_X && y >= 0 && y < BOARD_SIZE_Y
@@ -97,19 +104,24 @@
         if( ((x - unitX == 1 || x - unitX == -1) && y == unitY) ||
             ((y - unitY == 1 || y - unitY == -1) && x == unitX) )
         {
+            
+            if ([[[_board board] objectAtIndex:unitY*BOARD_SIZE_X + unitX] status] == MAPSTATUS_CRACKED && _currentUnit == _bigL) {
+                [[_board elementDictionary] removeObjectForKey:curKey];
+                [_scene removeElementAtPosition:curKey];
+                [[[_board board] objectAtIndex:curInt] setStatus:MAPSTATUS_VOID];
+                [_scene refreshTileAtFlatIndex:curInt WithStatus:MAPSTATUS_VOID];
+            }
+            
+            // Updates the position of curKey to the one that the unit is moving towards.
+            curKey = [NSNumber numberWithInt:y*BOARD_SIZE_X + x];
             // Check elements on the board.
-            NSNumber *curKey = [NSNumber numberWithInt:y*BOARD_SIZE_X + x];
             Element *e = [[_board elementDictionary] objectForKey:curKey];
             
             // If the element exists.
             if(e) {
                 if ([e isKindOfClass:[Rock class]]) {
-                    CGPoint hitPoint = CGPointMake(x, y);
-                    CGPoint origin = CGPointMake(unitX, unitY);
                     CGPoint nextPos;
                     NSInteger dir = [Converter convertCoordsTo:hitPoint Direction:origin];
-                    NSInteger nextTile;
-                    NSNumber *nextKey;
                     Element *ee;
                     
                     if (dir == RIGHT) {
@@ -148,7 +160,6 @@
                                 [_scene refreshTileAtFlatIndex:intKey WithStatus:MAPSTATUS_VOID];
                             }
                         } else {
-                            NSLog(@"%f %f", nextPos.x, nextPos.y);
                             [_board moveElementFrom:hitPoint To:nextPos];
                             [_scene moveElement:hitPoint NewCoord:nextPos];
                         }

@@ -21,7 +21,7 @@
         _currentUnit = _littleJohn;
         self.backgroundColor = [SKColor colorWithRed:0.15 green:0.15 blue:0.3 alpha:1.0];
         _solidTile = [SKTexture textureWithImageNamed:@"solidtile.png"];
-        _crackedTile = [SKTexture textureWithImageNamed:@"crackedtile.jpg"];
+        _crackedTile = [SKTexture textureWithImageNamed:@"Cracked.png"];
         _voidTile = [SKTexture textureWithImageNamed:@"voidtile.png"];
         _bkg = [SKSpriteNode spriteNodeWithImageNamed:@"Background.png"];
         _bkg.size = CGSizeMake(size.width, size.height);
@@ -168,7 +168,7 @@
  *  Sets up the view of units. */
 -(void)setupUnits:(CGPoint)pos{
     // TEMP
-    _littleJohn = [SKSpriteNode spriteNodeWithImageNamed:@"littlejohn.png"];
+    _littleJohn = [SKSpriteNode spriteNodeWithImageNamed:@"Alien.png"];
     _littleJohn.size = CGSizeMake(32,32);
     CGPoint p = [Converter convertCoordToPixel:CGPointMake(pos.x, pos.y)];
     p.x += 20;
