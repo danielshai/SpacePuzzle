@@ -13,6 +13,7 @@
 @synthesize currentUnit = _currentUnit;
 @synthesize bkg = _bkg;
 @synthesize elements = _elements;
+@synthesize tiles = _tiles;
 
 -(id)initWithSize:(CGSize)size {    
     if (self = [super initWithSize:size]) {
@@ -28,6 +29,7 @@
         _bkg.position = CGPointMake(WIN_SIZE_X/2, WIN_SIZE_Y/2);
         [self addChild:_bkg];
         _elements = [[NSMutableDictionary alloc] init];
+        _tiles = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -97,6 +99,18 @@
    
 }
 
+-(void)refreshTileAtPosition: (CGPoint)pos WithStatus: (NSInteger)status {
+    SKSpriteNode *s = [_tiles objectAtIndex:pos.y*BOARD_SIZE_X + pos.x];
+    
+    if(status == MAPSTATUS_SOLID) {
+        s.texture = _solidTile;
+    } else if(status == MAPSTATUS_CRACKED) {
+        s.texture = _crackedTile;
+    } else if(status == MAPSTATUS_VOID) {
+        s.texture = _voidTile;
+    }
+}
+
 /*
  *  Sets up the view of the board. TEMP CODE RIGHT NOW. */
 -(void)setupBoardX:(NSInteger)x Y:(NSInteger)y Status:(NSInteger)status {
@@ -115,6 +129,7 @@
     
     sprite.position = CGPointMake(xx,yy);
     [self addChild:sprite];
+    [_tiles insertObject:sprite atIndex:y*BOARD_SIZE_X + x];
 }
 
 -(void)setupElement:(CGPoint)coord Name:(NSString *)className {

@@ -18,13 +18,15 @@
 @property (nonatomic, retain) SKSpriteNode *currentUnit;
 @property (nonatomic, retain) SKSpriteNode *bkg;
 @property (nonatomic, retain) NSMutableDictionary *elements;
+@property (nonatomic, retain) NSMutableArray *tiles;
 
 -(void)updateUnit:(CGPoint) coord;
--(void)moveElement:(CGPoint) oldCoord NewCoord:(CGPoint) newCoord;
--(void)removeElementAtPosition:(NSNumber*) index;
--(void)setupBoardX:(NSInteger)x Y: (NSInteger)y Status: (NSInteger) status;
--(void)setupElement:(CGPoint) coord Name: (NSString*) className;
--(void)setupUnits:(CGPoint) pos;
--(void)notifyText:(NSString *)text Object: (NSObject*)object Key: (NSString*)key;
+-(void)refreshTileAtPosition: (CGPoint) pos WithStatus: (NSInteger)status;
+-(void)moveElement: (CGPoint)oldCoord NewCoord: (CGPoint)newCoord;
+-(void)removeElementAtPosition: (NSNumber*)index;
+-(void)setupBoardX: (NSInteger)x Y: (NSInteger)y Status: (NSInteger)status;
+-(void)setupElement: (CGPoint)coord Name: (NSString*)className;
+-(void)setupUnits: (CGPoint)pos;
+-(void)notifyText: (NSString *)text Object: (NSObject*)object Key: (NSString*)key;
 
 @end
