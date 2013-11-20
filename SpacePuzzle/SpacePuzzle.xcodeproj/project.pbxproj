@@ -7,30 +7,28 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7797AC0C183CE7D700E63E95 /* Box.png in Resources */ = {isa = PBXBuildFile; fileRef = 7797AC00183CE7D700E63E95 /* Box.png */; };
-		7797AC0D183CE7D700E63E95 /* BridgeOFF.png in Resources */ = {isa = PBXBuildFile; fileRef = 7797AC01183CE7D700E63E95 /* BridgeOFF.png */; };
-		7797AC0E183CE7D700E63E95 /* BridgeON.png in Resources */ = {isa = PBXBuildFile; fileRef = 7797AC02183CE7D700E63E95 /* BridgeON.png */; };
-		7797AC0F183CE7D700E63E95 /* Button.png in Resources */ = {isa = PBXBuildFile; fileRef = 7797AC03183CE7D700E63E95 /* Button.png */; };
-		7797AC10183CE7D700E63E95 /* ButtonOFF.png in Resources */ = {isa = PBXBuildFile; fileRef = 7797AC04183CE7D700E63E95 /* ButtonOFF.png */; };
-		7797AC11183CE7D700E63E95 /* ButtonON.png in Resources */ = {isa = PBXBuildFile; fileRef = 7797AC05183CE7D700E63E95 /* ButtonON.png */; };
-		7797AC12183CE7D700E63E95 /* Finish.png in Resources */ = {isa = PBXBuildFile; fileRef = 7797AC06183CE7D700E63E95 /* Finish.png */; };
-		7797AC13183CE7D700E63E95 /* Rock.png in Resources */ = {isa = PBXBuildFile; fileRef = 7797AC07183CE7D700E63E95 /* Rock.png */; };
-		7797AC14183CE7D700E63E95 /* Star.png in Resources */ = {isa = PBXBuildFile; fileRef = 7797AC08183CE7D700E63E95 /* Star.png */; };
-		7797AC15183CE7D700E63E95 /* Start.gif in Resources */ = {isa = PBXBuildFile; fileRef = 7797AC09183CE7D700E63E95 /* Start.gif */; };
-		7797AC16183CE7D700E63E95 /* SwitchOFF.png in Resources */ = {isa = PBXBuildFile; fileRef = 7797AC0A183CE7D700E63E95 /* SwitchOFF.png */; };
-		7797AC17183CE7D700E63E95 /* SwitchON.png in Resources */ = {isa = PBXBuildFile; fileRef = 7797AC0B183CE7D700E63E95 /* SwitchON.png */; };
-		7797AC19183CE7FB00E63E95 /* Cracked.png in Resources */ = {isa = PBXBuildFile; fileRef = 7797AC18183CE7FB00E63E95 /* Cracked.png */; };
-		7797AC1C183CE82200E63E95 /* Alien.png in Resources */ = {isa = PBXBuildFile; fileRef = 7797AC1A183CE82200E63E95 /* Alien.png */; };
-		7797AC1D183CE82200E63E95 /* Astronaut.png in Resources */ = {isa = PBXBuildFile; fileRef = 7797AC1B183CE82200E63E95 /* Astronaut.png */; };
+		7797AC36183CE9F500E63E95 /* Box.png in Resources */ = {isa = PBXBuildFile; fileRef = 7797AC1F183CE9F500E63E95 /* Box.png */; };
+		7797AC37183CE9F500E63E95 /* BridgeOFF.png in Resources */ = {isa = PBXBuildFile; fileRef = 7797AC20183CE9F500E63E95 /* BridgeOFF.png */; };
+		7797AC38183CE9F500E63E95 /* BridgeON.png in Resources */ = {isa = PBXBuildFile; fileRef = 7797AC21183CE9F500E63E95 /* BridgeON.png */; };
+		7797AC39183CE9F500E63E95 /* Button.png in Resources */ = {isa = PBXBuildFile; fileRef = 7797AC22183CE9F500E63E95 /* Button.png */; };
+		7797AC3A183CE9F500E63E95 /* ButtonOFF.png in Resources */ = {isa = PBXBuildFile; fileRef = 7797AC23183CE9F500E63E95 /* ButtonOFF.png */; };
+		7797AC3B183CE9F500E63E95 /* ButtonON.png in Resources */ = {isa = PBXBuildFile; fileRef = 7797AC24183CE9F500E63E95 /* ButtonON.png */; };
+		7797AC3C183CE9F500E63E95 /* Finish.png in Resources */ = {isa = PBXBuildFile; fileRef = 7797AC25183CE9F500E63E95 /* Finish.png */; };
+		7797AC3D183CE9F500E63E95 /* Rock.png in Resources */ = {isa = PBXBuildFile; fileRef = 7797AC26183CE9F500E63E95 /* Rock.png */; };
+		7797AC3E183CE9F500E63E95 /* Star.png in Resources */ = {isa = PBXBuildFile; fileRef = 7797AC27183CE9F500E63E95 /* Star.png */; };
+		7797AC3F183CE9F500E63E95 /* Start.gif in Resources */ = {isa = PBXBuildFile; fileRef = 7797AC28183CE9F500E63E95 /* Start.gif */; };
+		7797AC40183CE9F500E63E95 /* SwitchOFF.png in Resources */ = {isa = PBXBuildFile; fileRef = 7797AC29183CE9F500E63E95 /* SwitchOFF.png */; };
+		7797AC41183CE9F500E63E95 /* SwitchON.png in Resources */ = {isa = PBXBuildFile; fileRef = 7797AC2A183CE9F500E63E95 /* SwitchON.png */; };
+		7797AC42183CE9F500E63E95 /* Background.png in Resources */ = {isa = PBXBuildFile; fileRef = 7797AC2C183CE9F500E63E95 /* Background.png */; };
+		7797AC43183CE9F500E63E95 /* Cracked.png in Resources */ = {isa = PBXBuildFile; fileRef = 7797AC2E183CE9F500E63E95 /* Cracked.png */; };
+		7797AC44183CE9F500E63E95 /* crackedtile.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7797AC2F183CE9F500E63E95 /* crackedtile.jpg */; };
+		7797AC45183CE9F500E63E95 /* solidtile.png in Resources */ = {isa = PBXBuildFile; fileRef = 7797AC30183CE9F500E63E95 /* solidtile.png */; };
+		7797AC46183CE9F500E63E95 /* voidtile.png in Resources */ = {isa = PBXBuildFile; fileRef = 7797AC31183CE9F500E63E95 /* voidtile.png */; };
+		7797AC47183CE9F500E63E95 /* Alien.png in Resources */ = {isa = PBXBuildFile; fileRef = 7797AC33183CE9F500E63E95 /* Alien.png */; };
+		7797AC48183CE9F500E63E95 /* Astronaut.png in Resources */ = {isa = PBXBuildFile; fileRef = 7797AC34183CE9F500E63E95 /* Astronaut.png */; };
+		7797AC49183CE9F500E63E95 /* littlejohn.png in Resources */ = {isa = PBXBuildFile; fileRef = 7797AC35183CE9F500E63E95 /* littlejohn.png */; };
 		E6057677183619120033AE88 /* Rock.m in Sources */ = {isa = PBXBuildFile; fileRef = E6057676183619120033AE88 /* Rock.m */; };
-		E60576A2183656A60033AE88 /* Rock.png in Resources */ = {isa = PBXBuildFile; fileRef = E60576A1183656A60033AE88 /* Rock.png */; };
-		E60576A4183656B00033AE88 /* Background.png in Resources */ = {isa = PBXBuildFile; fileRef = E60576A3183656B00033AE88 /* Background.png */; };
-		E60576A8183656C40033AE88 /* crackedtile.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E60576A5183656C40033AE88 /* crackedtile.jpg */; };
-		E60576A9183656C40033AE88 /* solidtile.png in Resources */ = {isa = PBXBuildFile; fileRef = E60576A6183656C40033AE88 /* solidtile.png */; };
-		E60576AA183656C40033AE88 /* voidtile.png in Resources */ = {isa = PBXBuildFile; fileRef = E60576A7183656C40033AE88 /* voidtile.png */; };
-		E60576AC183656CD0033AE88 /* littlejohn.png in Resources */ = {isa = PBXBuildFile; fileRef = E60576AB183656CD0033AE88 /* littlejohn.png */; };
 		E60C6A01183B94F000D6FA14 /* Star.m in Sources */ = {isa = PBXBuildFile; fileRef = E60C6A00183B94F000D6FA14 /* Star.m */; };
-		E60C6A07183BAA4800D6FA14 /* Star.png in Resources */ = {isa = PBXBuildFile; fileRef = E60C6A06183BAA4800D6FA14 /* Star.png */; };
 		E60C6A0A183BB19F00D6FA14 /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = E60C6A09183BB19F00D6FA14 /* Player.m */; };
 		E6214055182BA53800EC5C21 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6214054182BA53800EC5C21 /* Foundation.framework */; };
 		E6214057182BA53800EC5C21 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6214056182BA53800EC5C21 /* CoreGraphics.framework */; };
@@ -71,32 +69,30 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		7797AC00183CE7D700E63E95 /* Box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Box.png; path = "../../../../Downloads/SpacePuzzle-master/Resources/Elements/Box.png"; sourceTree = "<group>"; };
-		7797AC01183CE7D700E63E95 /* BridgeOFF.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BridgeOFF.png; path = "../../../../Downloads/SpacePuzzle-master/Resources/Elements/BridgeOFF.png"; sourceTree = "<group>"; };
-		7797AC02183CE7D700E63E95 /* BridgeON.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BridgeON.png; path = "../../../../Downloads/SpacePuzzle-master/Resources/Elements/BridgeON.png"; sourceTree = "<group>"; };
-		7797AC03183CE7D700E63E95 /* Button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Button.png; path = "../../../../Downloads/SpacePuzzle-master/Resources/Elements/Button.png"; sourceTree = "<group>"; };
-		7797AC04183CE7D700E63E95 /* ButtonOFF.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonOFF.png; path = "../../../../Downloads/SpacePuzzle-master/Resources/Elements/ButtonOFF.png"; sourceTree = "<group>"; };
-		7797AC05183CE7D700E63E95 /* ButtonON.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ButtonON.png; path = "../../../../Downloads/SpacePuzzle-master/Resources/Elements/ButtonON.png"; sourceTree = "<group>"; };
-		7797AC06183CE7D700E63E95 /* Finish.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Finish.png; path = "../../../../Downloads/SpacePuzzle-master/Resources/Elements/Finish.png"; sourceTree = "<group>"; };
-		7797AC07183CE7D700E63E95 /* Rock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Rock.png; path = "../../../../Downloads/SpacePuzzle-master/Resources/Elements/Rock.png"; sourceTree = "<group>"; };
-		7797AC08183CE7D700E63E95 /* Star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Star.png; path = "../../../../Downloads/SpacePuzzle-master/Resources/Elements/Star.png"; sourceTree = "<group>"; };
-		7797AC09183CE7D700E63E95 /* Start.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = Start.gif; path = "../../../../Downloads/SpacePuzzle-master/Resources/Elements/Start.gif"; sourceTree = "<group>"; };
-		7797AC0A183CE7D700E63E95 /* SwitchOFF.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SwitchOFF.png; path = "../../../../Downloads/SpacePuzzle-master/Resources/Elements/SwitchOFF.png"; sourceTree = "<group>"; };
-		7797AC0B183CE7D700E63E95 /* SwitchON.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SwitchON.png; path = "../../../../Downloads/SpacePuzzle-master/Resources/Elements/SwitchON.png"; sourceTree = "<group>"; };
-		7797AC18183CE7FB00E63E95 /* Cracked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Cracked.png; path = "../../../../Downloads/SpacePuzzle-master/Resources/Tiles/Cracked.png"; sourceTree = "<group>"; };
-		7797AC1A183CE82200E63E95 /* Alien.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Alien.png; path = "../../../../Downloads/SpacePuzzle-master/Resources/Units/Alien.png"; sourceTree = "<group>"; };
-		7797AC1B183CE82200E63E95 /* Astronaut.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Astronaut.png; path = "../../../../Downloads/SpacePuzzle-master/Resources/Units/Astronaut.png"; sourceTree = "<group>"; };
+		7797AC1F183CE9F500E63E95 /* Box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Box.png; sourceTree = "<group>"; };
+		7797AC20183CE9F500E63E95 /* BridgeOFF.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BridgeOFF.png; sourceTree = "<group>"; };
+		7797AC21183CE9F500E63E95 /* BridgeON.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BridgeON.png; sourceTree = "<group>"; };
+		7797AC22183CE9F500E63E95 /* Button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Button.png; sourceTree = "<group>"; };
+		7797AC23183CE9F500E63E95 /* ButtonOFF.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ButtonOFF.png; sourceTree = "<group>"; };
+		7797AC24183CE9F500E63E95 /* ButtonON.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ButtonON.png; sourceTree = "<group>"; };
+		7797AC25183CE9F500E63E95 /* Finish.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Finish.png; sourceTree = "<group>"; };
+		7797AC26183CE9F500E63E95 /* Rock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Rock.png; sourceTree = "<group>"; };
+		7797AC27183CE9F500E63E95 /* Star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Star.png; sourceTree = "<group>"; };
+		7797AC28183CE9F500E63E95 /* Start.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Start.gif; sourceTree = "<group>"; };
+		7797AC29183CE9F500E63E95 /* SwitchOFF.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SwitchOFF.png; sourceTree = "<group>"; };
+		7797AC2A183CE9F500E63E95 /* SwitchON.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SwitchON.png; sourceTree = "<group>"; };
+		7797AC2C183CE9F500E63E95 /* Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Background.png; sourceTree = "<group>"; };
+		7797AC2E183CE9F500E63E95 /* Cracked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Cracked.png; sourceTree = "<group>"; };
+		7797AC2F183CE9F500E63E95 /* crackedtile.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = crackedtile.jpg; sourceTree = "<group>"; };
+		7797AC30183CE9F500E63E95 /* solidtile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = solidtile.png; sourceTree = "<group>"; };
+		7797AC31183CE9F500E63E95 /* voidtile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voidtile.png; sourceTree = "<group>"; };
+		7797AC33183CE9F500E63E95 /* Alien.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Alien.png; sourceTree = "<group>"; };
+		7797AC34183CE9F500E63E95 /* Astronaut.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Astronaut.png; sourceTree = "<group>"; };
+		7797AC35183CE9F500E63E95 /* littlejohn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = littlejohn.png; sourceTree = "<group>"; };
 		E6057675183619120033AE88 /* Rock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rock.h; sourceTree = "<group>"; };
 		E6057676183619120033AE88 /* Rock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Rock.m; sourceTree = "<group>"; };
-		E60576A1183656A60033AE88 /* Rock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Rock.png; path = ../../Resources/Elements/Rock.png; sourceTree = "<group>"; };
-		E60576A3183656B00033AE88 /* Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Background.png; path = ../../Resources/Interface/Background.png; sourceTree = "<group>"; };
-		E60576A5183656C40033AE88 /* crackedtile.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = crackedtile.jpg; path = ../../Resources/Tiles/crackedtile.jpg; sourceTree = "<group>"; };
-		E60576A6183656C40033AE88 /* solidtile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = solidtile.png; path = ../../Resources/Tiles/solidtile.png; sourceTree = "<group>"; };
-		E60576A7183656C40033AE88 /* voidtile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = voidtile.png; path = ../../Resources/Tiles/voidtile.png; sourceTree = "<group>"; };
-		E60576AB183656CD0033AE88 /* littlejohn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = littlejohn.png; path = ../../Resources/Units/littlejohn.png; sourceTree = "<group>"; };
 		E60C69FF183B94F000D6FA14 /* Star.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Star.h; sourceTree = "<group>"; };
 		E60C6A00183B94F000D6FA14 /* Star.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Star.m; sourceTree = "<group>"; };
-		E60C6A06183BAA4800D6FA14 /* Star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Star.png; path = ../../Resources/Elements/Star.png; sourceTree = "<group>"; };
 		E60C6A08183BB19F00D6FA14 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
 		E60C6A09183BB19F00D6FA14 /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
 		E6214051182BA53800EC5C21 /* SpacePuzzle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpacePuzzle.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -168,6 +164,58 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7797AC1E183CE9F500E63E95 /* Elements */ = {
+			isa = PBXGroup;
+			children = (
+				7797AC1F183CE9F500E63E95 /* Box.png */,
+				7797AC20183CE9F500E63E95 /* BridgeOFF.png */,
+				7797AC21183CE9F500E63E95 /* BridgeON.png */,
+				7797AC22183CE9F500E63E95 /* Button.png */,
+				7797AC23183CE9F500E63E95 /* ButtonOFF.png */,
+				7797AC24183CE9F500E63E95 /* ButtonON.png */,
+				7797AC25183CE9F500E63E95 /* Finish.png */,
+				7797AC26183CE9F500E63E95 /* Rock.png */,
+				7797AC27183CE9F500E63E95 /* Star.png */,
+				7797AC28183CE9F500E63E95 /* Start.gif */,
+				7797AC29183CE9F500E63E95 /* SwitchOFF.png */,
+				7797AC2A183CE9F500E63E95 /* SwitchON.png */,
+			);
+			name = Elements;
+			path = ../../Resources/Elements;
+			sourceTree = "<group>";
+		};
+		7797AC2B183CE9F500E63E95 /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				7797AC2C183CE9F500E63E95 /* Background.png */,
+			);
+			name = Interface;
+			path = ../../Resources/Interface;
+			sourceTree = "<group>";
+		};
+		7797AC2D183CE9F500E63E95 /* Tiles */ = {
+			isa = PBXGroup;
+			children = (
+				7797AC2E183CE9F500E63E95 /* Cracked.png */,
+				7797AC2F183CE9F500E63E95 /* crackedtile.jpg */,
+				7797AC30183CE9F500E63E95 /* solidtile.png */,
+				7797AC31183CE9F500E63E95 /* voidtile.png */,
+			);
+			name = Tiles;
+			path = ../../Resources/Tiles;
+			sourceTree = "<group>";
+		};
+		7797AC32183CE9F500E63E95 /* Units */ = {
+			isa = PBXGroup;
+			children = (
+				7797AC33183CE9F500E63E95 /* Alien.png */,
+				7797AC34183CE9F500E63E95 /* Astronaut.png */,
+				7797AC35183CE9F500E63E95 /* littlejohn.png */,
+			);
+			name = Units;
+			path = ../../Resources/Units;
+			sourceTree = "<group>";
+		};
 		E6057678183619520033AE88 /* Elements */ = {
 			isa = PBXGroup;
 			children = (
@@ -184,28 +232,10 @@
 		E605768118362BC70033AE88 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				7797AC18183CE7FB00E63E95 /* Cracked.png */,
-				7797AC1A183CE82200E63E95 /* Alien.png */,
-				7797AC1B183CE82200E63E95 /* Astronaut.png */,
-				7797AC00183CE7D700E63E95 /* Box.png */,
-				7797AC01183CE7D700E63E95 /* BridgeOFF.png */,
-				7797AC02183CE7D700E63E95 /* BridgeON.png */,
-				7797AC03183CE7D700E63E95 /* Button.png */,
-				7797AC04183CE7D700E63E95 /* ButtonOFF.png */,
-				7797AC05183CE7D700E63E95 /* ButtonON.png */,
-				7797AC06183CE7D700E63E95 /* Finish.png */,
-				7797AC07183CE7D700E63E95 /* Rock.png */,
-				7797AC08183CE7D700E63E95 /* Star.png */,
-				7797AC09183CE7D700E63E95 /* Start.gif */,
-				7797AC0A183CE7D700E63E95 /* SwitchOFF.png */,
-				7797AC0B183CE7D700E63E95 /* SwitchON.png */,
-				E60576AB183656CD0033AE88 /* littlejohn.png */,
-				E60C6A06183BAA4800D6FA14 /* Star.png */,
-				E60576A5183656C40033AE88 /* crackedtile.jpg */,
-				E60576A6183656C40033AE88 /* solidtile.png */,
-				E60576A7183656C40033AE88 /* voidtile.png */,
-				E60576A3183656B00033AE88 /* Background.png */,
-				E60576A1183656A60033AE88 /* Rock.png */,
+				7797AC1E183CE9F500E63E95 /* Elements */,
+				7797AC2B183CE9F500E63E95 /* Interface */,
+				7797AC2D183CE9F500E63E95 /* Tiles */,
+				7797AC32183CE9F500E63E95 /* Units */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -425,32 +455,30 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E60C6A07183BAA4800D6FA14 /* Star.png in Resources */,
-				E60576A9183656C40033AE88 /* solidtile.png in Resources */,
-				7797AC17183CE7D700E63E95 /* SwitchON.png in Resources */,
-				7797AC19183CE7FB00E63E95 /* Cracked.png in Resources */,
-				7797AC1C183CE82200E63E95 /* Alien.png in Resources */,
-				E60576AC183656CD0033AE88 /* littlejohn.png in Resources */,
-				7797AC0C183CE7D700E63E95 /* Box.png in Resources */,
-				7797AC0D183CE7D700E63E95 /* BridgeOFF.png in Resources */,
-				7797AC0F183CE7D700E63E95 /* Button.png in Resources */,
-				7797AC0E183CE7D700E63E95 /* BridgeON.png in Resources */,
-				7797AC16183CE7D700E63E95 /* SwitchOFF.png in Resources */,
-				7797AC10183CE7D700E63E95 /* ButtonOFF.png in Resources */,
-				E60576AA183656C40033AE88 /* voidtile.png in Resources */,
+				7797AC36183CE9F500E63E95 /* Box.png in Resources */,
+				7797AC47183CE9F500E63E95 /* Alien.png in Resources */,
+				7797AC48183CE9F500E63E95 /* Astronaut.png in Resources */,
+				7797AC39183CE9F500E63E95 /* Button.png in Resources */,
 				E6214061182BA53800EC5C21 /* InfoPlist.strings in Resources */,
-				7797AC13183CE7D700E63E95 /* Rock.png in Resources */,
-				7797AC15183CE7D700E63E95 /* Start.gif in Resources */,
+				7797AC3E183CE9F500E63E95 /* Star.png in Resources */,
+				7797AC37183CE9F500E63E95 /* BridgeOFF.png in Resources */,
+				7797AC46183CE9F500E63E95 /* voidtile.png in Resources */,
+				7797AC3B183CE9F500E63E95 /* ButtonON.png in Resources */,
 				E687AE4D183A43EB00A5B78C /* mario.splvl in Resources */,
-				E60576A2183656A60033AE88 /* Rock.png in Resources */,
-				E60576A4183656B00033AE88 /* Background.png in Resources */,
-				7797AC1D183CE82200E63E95 /* Astronaut.png in Resources */,
-				E60576A8183656C40033AE88 /* crackedtile.jpg in Resources */,
+				7797AC3D183CE9F500E63E95 /* Rock.png in Resources */,
 				E6214074182BA53800EC5C21 /* Images.xcassets in Resources */,
+				7797AC42183CE9F500E63E95 /* Background.png in Resources */,
+				7797AC3A183CE9F500E63E95 /* ButtonOFF.png in Resources */,
+				7797AC38183CE9F500E63E95 /* BridgeON.png in Resources */,
+				7797AC3F183CE9F500E63E95 /* Start.gif in Resources */,
+				7797AC45183CE9F500E63E95 /* solidtile.png in Resources */,
+				7797AC3C183CE9F500E63E95 /* Finish.png in Resources */,
 				E621406A182BA53800EC5C21 /* Main.storyboard in Resources */,
-				7797AC14183CE7D700E63E95 /* Star.png in Resources */,
-				7797AC12183CE7D700E63E95 /* Finish.png in Resources */,
-				7797AC11183CE7D700E63E95 /* ButtonON.png in Resources */,
+				7797AC43183CE9F500E63E95 /* Cracked.png in Resources */,
+				7797AC44183CE9F500E63E95 /* crackedtile.jpg in Resources */,
+				7797AC41183CE9F500E63E95 /* SwitchON.png in Resources */,
+				7797AC49183CE9F500E63E95 /* littlejohn.png in Resources */,
+				7797AC40183CE9F500E63E95 /* SwitchOFF.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
