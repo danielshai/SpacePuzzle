@@ -27,6 +27,8 @@
 @property (nonatomic, retain) BigL *bigL;
 @property (nonatomic, retain) LittleJohn *littleJohn;
 @property (nonatomic, retain) Player *player;
+-(void)singleTap:(UIGestureRecognizer *)sender;
+-(void)doubleTap:(UIGestureRecognizer *)sender;
 -(void)unitWantsToMove:(NSNotification *)notification;
 -(void)unitMoved:(NSNotification *) notification;
 -(void)setupBoard;
