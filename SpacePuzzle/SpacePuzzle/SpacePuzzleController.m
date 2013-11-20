@@ -54,7 +54,7 @@
 /*
  *  Called when the user taps once. */
 -(void)singleTap:(UIGestureRecognizer *)sender {
-   // if (sender.state == UIGestureRecognizerStateEnded) {
+    if (sender.state == UIGestureRecognizerStateEnded) {
         CGPoint location = [sender locationInView:_scene.view];
         
         // Convert to board coordinates. Invert with -9.
@@ -62,7 +62,7 @@
         location.y = abs(location.y - 9);
         
         [self unitWantsToMoveTo:location];
-   // }
+    }
 }
 
 /* 
