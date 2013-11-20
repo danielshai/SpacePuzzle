@@ -111,6 +111,18 @@
     }
 }
 
+-(void)refreshTileAtFlatIndex:(NSInteger)findex WithStatus:(NSInteger)status {
+    SKSpriteNode *s = [_tiles objectAtIndex:findex];
+    
+    if(status == MAPSTATUS_SOLID) {
+        s.texture = _solidTile;
+    } else if(status == MAPSTATUS_CRACKED) {
+        s.texture = _crackedTile;
+    } else if(status == MAPSTATUS_VOID) {
+        s.texture = _voidTile;
+    }
+}
+
 /*
  *  Sets up the view of the board. TEMP CODE RIGHT NOW. */
 -(void)setupBoardX:(NSInteger)x Y:(NSInteger)y Status:(NSInteger)status {
