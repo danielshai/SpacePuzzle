@@ -153,6 +153,8 @@
                     
                     // If the element is a star.
                     if([e isKindOfClass:[Star class]]) {
+                        CGPoint hitPoint = CGPointMake(x, y);
+                        CGPoint origin = CGPointMake(unitX, unitY);
                         _player.starsTaken += 1;
                         [[_board elementDictionary] removeObjectForKey:curKey];
                         [_scene removeElementAtPosition:curKey];

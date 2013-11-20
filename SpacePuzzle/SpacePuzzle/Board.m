@@ -34,7 +34,11 @@
 
 -(void)moveElementFrom:(CGPoint)oldPos To:(CGPoint)newPos {
     NSNumber *oldFlatIndex = [NSNumber numberWithInt:oldPos.y*_boardSizeX + oldPos.x];
-    NSNumber *oldNewIndex = [NSNumber numberWithInt:newPos.y*_boardSizeX + newPos.x];
+    NSNumber *newFlatIndex = [NSNumber numberWithInt:newPos.y*_boardSizeX + newPos.x];
+    
+    Element *e = [_elementDictionary objectForKey:oldFlatIndex];
+    [_elementDictionary setObject:e forKey:newFlatIndex];
+    [_elementDictionary removeObjectForKey:oldFlatIndex];
 }
 
 /*
