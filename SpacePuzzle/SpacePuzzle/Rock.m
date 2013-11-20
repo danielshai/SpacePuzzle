@@ -32,8 +32,6 @@
         self.y = self.y - 1;
     } else
         self.y = self.y + 1;
-    
-    NSLog(@"%d", dir);
 }
 
 @end

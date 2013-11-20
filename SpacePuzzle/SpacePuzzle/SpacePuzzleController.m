@@ -98,8 +98,8 @@
             ((y - unitY == 1 || y - unitY == -1) && x == unitX) )
         {
             // Check elements on the board.
-            NSNumber *key = [NSNumber numberWithInt:y*BOARD_SIZE_X + x];
-            Element *e = [[_board elementDictionary] objectForKey:key];
+            NSNumber *curKey = [NSNumber numberWithInt:y*BOARD_SIZE_X + x];
+            Element *e = [[_board elementDictionary] objectForKey:curKey];
             
             // If the element exists.
             if(e) {
@@ -109,25 +109,33 @@
                     CGPoint hitPoint = CGPointMake(x, y);
                     CGPoint origin = CGPointMake(unitX, unitY);
                     NSInteger dir = [Converter convertCoordsTo:hitPoint Direction:origin];
-                
+                    NSNumber *nextKey = [NSNumber numberWithInt:y*BOARD_SIZE_X + x];
+                    
                     if (dir == RIGHT) {
-                        key = [NSNumber numberWithInt:y*BOARD_SIZE_X + x + 1];
-                        ee = [[_board elementDictionary] objectForKey:key];
+                        nextKey = [NSNumber numberWithInt:y*BOARD_SIZE_X + x + 1];
+                        ee = [[_board elementDictionary] objectForKey:nextKey];
                     } else if (dir == LEFT) {
-                        key = [NSNumber numberWithInt:y*BOARD_SIZE_X + x - 1];
-                        ee = [[_board elementDictionary] objectForKey:key];
+                        nextKey = [NSNumber numberWithInt:y*BOARD_SIZE_X + x - 1];
+                        ee = [[_board elementDictionary] objectForKey:nextKey];
                     } else if (dir == UP) {
-                        key = [NSNumber numberWithInt:(y - 1)*BOARD_SIZE_X + x];
-                        ee = [[_board elementDictionary] objectForKey:key];
+                        nextKey = [NSNumber numberWithInt:(y - 1)*BOARD_SIZE_X + x];
+                        ee = [[_board elementDictionary] objectForKey:nextKey];
                     } else {
-                        key = [NSNumber numberWithInt:(y + 1)*BOARD_SIZE_X + x];
-                        ee = [[_board elementDictionary] objectForKey:key];
+                        nextKey = [NSNumber numberWithInt:(y + 1)*BOARD_SIZE_X + x];
+                        ee = [[_board elementDictionary] objectForKey:nextKey];
                     }
                 
                     if (![ee isKindOfClass:[Rock class]]) {
-                        NSInteger intKey = [key integerValue];
+                        NSInteger intKey = [nextKey integerValue];
                         // Add this to if-statement when |Lever|-class is created "|| [ee isKindOfClass:[Lever class]]"
                         nextTile = [[[_board board] objectAtIndex:intKey] status];
+                        
+                        NSLog(@"%d", nextTile);
+                        if(nextTile != MAPSTATUS_SOLID) {
+                            [[_board elementDictionary] removeObjectForKey:curKey];
+                            [_scene removeElementAtPosition:curKey];
+                        }
+                        
                         [e doMoveAction:dir];
                         [_scene updateElement:origin NewCoord:hitPoint];
                         //nextTile should invoke its "doAction"...
@@ -144,8 +152,8 @@
                     // If the element is a star.
                     if([e isKindOfClass:[Star class]]) {
                         _player.starsTaken += 1;
-                        [[_board elementDictionary] removeObjectForKey:key];
-                        [_scene removeElementAtPosition:key];
+                        [[_board elementDictionary] removeObjectForKey:curKey];
+                        [_scene removeElementAtPosition:curKey];
                     }
                 }
             }
