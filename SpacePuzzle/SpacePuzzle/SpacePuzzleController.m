@@ -7,6 +7,7 @@
 #import "Converter.h"
 #import "Rock.h"
 #import "Star.h"
+#import "Player.h"
 
 @implementation SpacePuzzleController
 @synthesize board = _board;
@@ -102,6 +103,8 @@
             
             // If the element exists.
             if(e) {
+                if ([e isKindOfClass:[Rock class]]) {
+                    
                 NSInteger nextTile;
                 Element *ee;
                 CGPoint hitPoint = CGPointMake(x, y);
@@ -129,7 +132,7 @@
                     [_scene updateElement:origin NewCoord:hitPoint];
                     //nextTile should invoke its "doAction"...
                 }
-                
+                }
                 //[e doMoveAction];
                 // If the element isn't blocking, move unit.
                 if(![e blocking]) {
