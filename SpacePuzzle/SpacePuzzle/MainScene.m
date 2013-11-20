@@ -76,6 +76,12 @@
     
 }
 
+-(void)removeElementAtPosition:(NSNumber *)index {
+    SKSpriteNode* s = [_elements objectForKey:index];
+    [s removeFromParent];
+    [_elements removeObjectForKey:index];
+}
+
 -(void)update:(CFTimeInterval)currentTime {
     /* Called before each frame is rendered */
    
@@ -124,11 +130,11 @@
 
 /*
  *  Sets up the view of units. */
--(void)setupUnits {
+-(void)setupUnits:(CGPoint)pos{
     // TEMP
     _littleJohn = [SKSpriteNode spriteNodeWithImageNamed:@"littlejohn.png"];
     _littleJohn.size = CGSizeMake(32,32);
-    CGPoint p = [Converter convertCoordToPixel:CGPointMake(0, 0)];
+    CGPoint p = [Converter convertCoordToPixel:CGPointMake(pos.x, pos.y)];
     p.x += 20;
     p.y -= 5;
     _littleJohn.position = p;

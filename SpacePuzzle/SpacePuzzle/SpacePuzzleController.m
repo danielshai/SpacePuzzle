@@ -14,6 +14,7 @@
 @synthesize currentUnit = _currentUnit;
 @synthesize bigL = _bigL;
 @synthesize littleJohn = _littleJohn;
+@synthesize player = _player;
 
 -(void)viewDidLoad
 {
@@ -27,6 +28,8 @@
     // Create and configure the scene.
     _scene = [MainScene sceneWithSize:skView.bounds.size];
     _scene.scaleMode = SKSceneScaleModeAspectFill;
+    
+    _player = [[Player alloc] init];
     
     [self setupBoard];
     [self setupElements];
@@ -48,7 +51,6 @@
     // Load the board.
 
     NSString *path = [[NSBundle mainBundle] pathForResource:@"mario" ofType:@"splvl"];
-    NSLog(@"%@", path);
     
     [_board loadBoard:path];
     
@@ -78,8 +80,11 @@
     NSValue *val = [data objectAtIndex:0];
     NSValue *val2 = [data objectAtIndex:1];
     
+    // The position that the unit wants to move to.
     NSInteger x  = val.CGPointValue.x;
     NSInteger y = val.CGPointValue.y;
+    
+    // The unit who wants to move's position.
     NSInteger unitX = val2.CGPointValue.x;
     NSInteger unitY = val2.CGPointValue.y;
     
@@ -131,6 +136,14 @@
                     _currentUnit.x = x;
                     _currentUnit.y = y;
                     [_scene updateUnit:CGPointMake(x, y)];
+                    [e movedTo];
+                    
+                    // If the element is a star.
+                    if([e isKindOfClass:[Star class]]) {
+                        _player.starsTaken += 1;
+                        [[_board elementDictionary] removeObjectForKey:key];
+                        [_scene removeElementAtPosition:key];
+                    }
                 }
             }
             else {
@@ -164,8 +177,10 @@
     _littleJohn = [[LittleJohn alloc] init];
     
     _currentUnit = _littleJohn;
-    
-    [_scene setupUnits];
+    _littleJohn.x = _board.startPos.x;
+    _littleJohn.y = _board.startPos.y;
+    CGPoint p = CGPointMake(_littleJohn.x, _littleJohn.y);
+    [_scene setupUnits:p];
 }
 
 /*
