@@ -34,30 +34,6 @@
     return self;
 }
 
-/* 
- *  Called when a touch begins. */
--(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    for (UITouch *touch in touches) {
-        CGPoint location = [touch locationInNode:self];
-        
-        //SKSpriteNode *touchedNode = (SKSpriteNode *)[self nodeAtPoint:location];
-        CGPoint coord = [Converter convertMousePosToCoord:location];
-        
-        CGPoint p = _currentUnit.position;
-        // TEMP SHIFT FOR THIS SPRITE
-        p.x += 20;
-        p.y -= 5;
-        CGPoint unit = CGPointMake([Converter convertMousePosToCoord:p].x, [Converter convertMousePosToCoord:p].y);
-        
-        // Create data to send.
-        NSArray *arr = [NSArray arrayWithObjects:[NSValue valueWithCGPoint:coord],
-                                                 [NSValue valueWithCGPoint:unit],nil];
-        // Notifies the controller that the unit wants to move. The controller checks if it's possible, if
-        // so the controller will call this scene and update the position of the unit accordingly.
-        [self notifyText:UNIT_WANTS_TO_MOVE Object:arr Key:UNIT_WANTS_TO_MOVE];
-    }
-}
-
 /*
  *  Updates the current unit with the data model. */
 -(void)updateUnit:(CGPoint)coord {
