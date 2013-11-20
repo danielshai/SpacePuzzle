@@ -28,11 +28,11 @@
         self.size = CGSizeMake(size.width, size.height);
         _solid = [SKTexture textureWithImageNamed:@"solidtile.png"];
         _voidTile = [SKTexture textureWithImageNamed:@"voidtile.png"];
-        _crackedTile = [SKTexture textureWithImageNamed:@"crackedtile.jpg"];
+        _crackedTile = [SKTexture textureWithImageNamed:@"Cracked.png"];
         _bkg = [SKSpriteNode spriteNodeWithImageNamed:@"Background.png"];
         _startElement = [SKTexture textureWithImageNamed:@"Start.gif"];
         _finishElement = [SKTexture textureWithImageNamed:@"Finish.png"];
-        _rockTexture = [SKTexture textureWithImageNamed:@"Rock.png"];
+        _rockTexture = [SKTexture textureWithImageNamed:@"Box.png"];
         _starTexture = [SKTexture textureWithImageNamed:@"Star.png"];
         
         _startElSprite = [SKSpriteNode spriteNodeWithTexture:_startElement];
@@ -246,7 +246,7 @@
 -(void)addElement:(NSString *)element Position:(CGPoint)pos {
     NSNumber *flatIndex = [NSNumber numberWithInt:pos.y*BOARD_SIZE_X + pos.x];
     
-    if([element isEqualToString:@"Rock"]) {
+    if([element isEqualToString:@"Box"]) {
         [self addARock:pos Index:flatIndex];
     } else if([element isEqualToString:@"Star"]) {
         [self addAStar:pos Index:flatIndex];

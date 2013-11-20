@@ -33,6 +33,8 @@
 		E654B3121830F7DD006BFCAC /* SpacePuzzleEditorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E654B3111830F7DD006BFCAC /* SpacePuzzleEditorTests.m */; };
 		E65EE66F18325FB300E38A3F /* Palette.m in Sources */ = {isa = PBXBuildFile; fileRef = E65EE66E18325FB300E38A3F /* Palette.m */; };
 		E687AE4B183A239000A5B78C /* Finish.png in Resources */ = {isa = PBXBuildFile; fileRef = E687AE4A183A239000A5B78C /* Finish.png */; };
+		E68A93F6183D0A7900AE9D4C /* Box.png in Resources */ = {isa = PBXBuildFile; fileRef = E68A93F5183D0A7900AE9D4C /* Box.png */; };
+		E68A93F8183D0A8700AE9D4C /* Cracked.png in Resources */ = {isa = PBXBuildFile; fileRef = E68A93F7183D0A8600AE9D4C /* Cracked.png */; };
 		E6A0EEE318311690006BF476 /* Board.m in Sources */ = {isa = PBXBuildFile; fileRef = E6A0EEDE18311690006BF476 /* Board.m */; };
 		E6A0EEE418311690006BF476 /* BoardCoord.m in Sources */ = {isa = PBXBuildFile; fileRef = E6A0EEE018311690006BF476 /* BoardCoord.m */; };
 		E6A0EEE518311690006BF476 /* Position.m in Sources */ = {isa = PBXBuildFile; fileRef = E6A0EEE218311690006BF476 /* Position.m */; };
@@ -90,6 +92,8 @@
 		E65EE66D18325FB300E38A3F /* Palette.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Palette.h; sourceTree = "<group>"; };
 		E65EE66E18325FB300E38A3F /* Palette.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Palette.m; sourceTree = "<group>"; };
 		E687AE4A183A239000A5B78C /* Finish.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Finish.png; path = ../../Resources/Elements/Finish.png; sourceTree = "<group>"; };
+		E68A93F5183D0A7900AE9D4C /* Box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Box.png; path = ../../Resources/Elements/Box.png; sourceTree = "<group>"; };
+		E68A93F7183D0A8600AE9D4C /* Cracked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Cracked.png; path = ../../Resources/Tiles/Cracked.png; sourceTree = "<group>"; };
 		E6A0EEDD18311690006BF476 /* Board.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Board.h; path = ../../SpacePuzzle/SpacePuzzle/Board.h; sourceTree = "<group>"; };
 		E6A0EEDE18311690006BF476 /* Board.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Board.m; path = ../../SpacePuzzle/SpacePuzzle/Board.m; sourceTree = "<group>"; };
 		E6A0EEDF18311690006BF476 /* BoardCoord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BoardCoord.h; path = ../../SpacePuzzle/SpacePuzzle/BoardCoord.h; sourceTree = "<group>"; };
@@ -126,6 +130,8 @@
 		E60576A0183651E30033AE88 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E68A93F7183D0A8600AE9D4C /* Cracked.png */,
+				E68A93F5183D0A7900AE9D4C /* Box.png */,
 				E60C69FD183B908500D6FA14 /* Star.png */,
 				E687AE4A183A239000A5B78C /* Finish.png */,
 				E60C92AA183A5FD9005DCBB7 /* Rock.png */,
@@ -338,12 +344,14 @@
 				E687AE4B183A239000A5B78C /* Finish.png in Resources */,
 				E654B3001830F7DD006BFCAC /* Images.xcassets in Resources */,
 				E605769E183651D20033AE88 /* solidtile.png in Resources */,
+				E68A93F6183D0A7900AE9D4C /* Box.png in Resources */,
 				E605769D183651D20033AE88 /* crackedtile.jpg in Resources */,
 				E654B2EE1830F7DD006BFCAC /* InfoPlist.strings in Resources */,
 				E6057699183651740033AE88 /* Background.png in Resources */,
 				E654B2F41830F7DD006BFCAC /* Credits.rtf in Resources */,
 				E654B2F61830F7DD006BFCAC /* MainMenu.xib in Resources */,
 				E60C69FE183B908500D6FA14 /* Star.png in Resources */,
+				E68A93F8183D0A8700AE9D4C /* Cracked.png in Resources */,
 				E605769F183651D20033AE88 /* voidtile.png in Resources */,
 				E60576AE18365BC40033AE88 /* Start.gif in Resources */,
 			);

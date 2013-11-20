@@ -7,7 +7,7 @@
 //
 
 
-// TODO: fixa att rita ut element. behöver en dictionary. Start och finish element kan ha en av varje.
+// TODO: FIXA MACROS MED KLASSNAMN EFTERSOM DE KAN ÄNDRAS!!
 #import <Cocoa/Cocoa.h>
 #import <SpriteKit/SpriteKit.h>
 #import "Board.h"

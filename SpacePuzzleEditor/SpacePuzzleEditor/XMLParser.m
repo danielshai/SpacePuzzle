@@ -64,7 +64,7 @@
         startElement = YES;
     } else if ([currentElement isEqualToString:@"finish"]) {
         finishElement = YES;
-    } else if ([currentElement isEqualToString:@"Rock"]) {
+    } else if ([currentElement isEqualToString:@"Box"]) {
         rockElement = YES;
     } else if ([currentElement isEqualToString:@"Star"]) {
         starElement = YES;

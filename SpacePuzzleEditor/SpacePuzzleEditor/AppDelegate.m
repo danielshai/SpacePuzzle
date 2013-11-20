@@ -138,7 +138,7 @@
             [[_board elementDictionary] removeObjectForKey: index];
         } else if (stat == BRUSH_ROCK) {
             CGPoint pos = CGPointMake(val.pointValue.x, val.pointValue.y);
-            [_board addElementNamed:@"Rock" AtPosition:pos IsBlocking:YES];
+            [_board addElementNamed:@"Box" AtPosition:pos IsBlocking:YES];
         } else if (stat == BRUSH_STAR) {
             CGPoint pos = CGPointMake(val.pointValue.x, val.pointValue.y);
             [_board addElementNamed:@"Star" AtPosition:pos IsBlocking:NO];
