@@ -104,25 +104,30 @@
             // If the element exists.
             if(e) {
                 if ([e isKindOfClass:[Rock class]]) {
-                    NSInteger nextTile;
-                    Element *ee;
                     CGPoint hitPoint = CGPointMake(x, y);
                     CGPoint origin = CGPointMake(unitX, unitY);
+                    CGPoint nextPos;
                     NSInteger dir = [Converter convertCoordsTo:hitPoint Direction:origin];
+                    NSInteger nextTile;
                     NSNumber *nextKey;
+                    Element *ee;
                     
                     if (dir == RIGHT) {
                         nextKey = [NSNumber numberWithInt:y*BOARD_SIZE_X + x + 1];
+                        nextPos = CGPointMake(x + 1, y);
                         ee = [[_board elementDictionary] objectForKey:nextKey];
                     } else if (dir == LEFT) {
                         nextKey = [NSNumber numberWithInt:y*BOARD_SIZE_X + x - 1];
                         ee = [[_board elementDictionary] objectForKey:nextKey];
+                        nextPos = CGPointMake(x - 1, y);
                     } else if (dir == UP) {
                         nextKey = [NSNumber numberWithInt:(y - 1)*BOARD_SIZE_X + x];
                         ee = [[_board elementDictionary] objectForKey:nextKey];
+                        nextPos = CGPointMake(x, y - 1);
                     } else {
                         nextKey = [NSNumber numberWithInt:(y + 1)*BOARD_SIZE_X + x];
                         ee = [[_board elementDictionary] objectForKey:nextKey];
+                        nextPos = CGPointMake(x, y + 1);
                     }
                 
                     if (![ee isKindOfClass:[Rock class]]) {
@@ -141,6 +146,10 @@
                                 [_scene removeElementAtPosition:nextKey];
                                 [[[_board board] objectAtIndex:intKey] setStatus:MAPSTATUS_VOID];
                             }
+                        } else {
+                            NSLog(@"%f %f", nextPos.x, nextPos.y);
+                            [_board moveElementFrom:hitPoint To:nextPos];
+                            [_scene moveElement:hitPoint NewCoord:nextPos];
                         }
                         //nextTile should invoke its "doAction"...
                     }
