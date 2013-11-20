@@ -140,6 +140,7 @@
                                 [[_board elementDictionary] removeObjectForKey:nextKey];
                                 [_scene removeElementAtPosition:nextKey];
                                 [[[_board board] objectAtIndex:intKey] setStatus:MAPSTATUS_VOID];
+                                [_scene refreshTileAtFlatIndex:intKey WithStatus:MAPSTATUS_VOID];
                             }
                         }
                         //nextTile should invoke its "doAction"...

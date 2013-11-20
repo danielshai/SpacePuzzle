@@ -21,7 +21,8 @@
 @property (nonatomic, retain) NSMutableArray *tiles;
 
 -(void)updateUnit:(CGPoint) coord;
--(void)refreshTileAtPosition: (CGPoint) pos WithStatus: (NSInteger)status;
+-(void)refreshTileAtPosition: (CGPoint)pos WithStatus: (NSInteger)status;
+-(void)refreshTileAtFlatIndex: (NSInteger)findex WithStatus:(NSInteger)status;
 -(void)moveElement: (CGPoint)oldCoord NewCoord: (CGPoint)newCoord;
 -(void)removeElementAtPosition: (NSNumber*)index;
 -(void)setupBoardX: (NSInteger)x Y: (NSInteger)y Status: (NSInteger)status;
