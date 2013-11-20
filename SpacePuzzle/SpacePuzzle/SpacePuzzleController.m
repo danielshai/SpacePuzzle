@@ -100,16 +100,15 @@
             // Check elements on the board.
             NSNumber *curKey = [NSNumber numberWithInt:y*BOARD_SIZE_X + x];
             Element *e = [[_board elementDictionary] objectForKey:curKey];
-            
+            NSInteger nextTile;
             // If the element exists.
             if(e) {
                 if ([e isKindOfClass:[Rock class]]) {
-                    NSInteger nextTile;
                     Element *ee;
                     CGPoint hitPoint = CGPointMake(x, y);
                     CGPoint origin = CGPointMake(unitX, unitY);
                     NSInteger dir = [Converter convertCoordsTo:hitPoint Direction:origin];
-                    NSNumber *nextKey = [NSNumber numberWithInt:y*BOARD_SIZE_X + x];
+                    NSNumber *nextKey;
                     
                     if (dir == RIGHT) {
                         nextKey = [NSNumber numberWithInt:y*BOARD_SIZE_X + x + 1];
@@ -127,13 +126,16 @@
                 
                     if (![ee isKindOfClass:[Rock class]]) {
                         NSInteger intKey = [nextKey integerValue];
-                        // Add this to if-statement when |Lever|-class is created "|| [ee isKindOfClass:[Lever class]]"
+                        // Add more elements which cannot be pushed upon to if-statement.
                         nextTile = [[[_board board] objectAtIndex:intKey] status];
                         
-                        NSLog(@"%d", nextTile);
                         if(nextTile != MAPSTATUS_SOLID) {
                             [[_board elementDictionary] removeObjectForKey:curKey];
                             [_scene removeElementAtPosition:curKey];
+                            if(nextTile == MAPSTATUS_CRACKED) {
+                                [[_board elementDictionary] removeObjectForKey:nextKey];
+                                [_scene removeElementAtPosition:nextKey];
+                            }
                         }
                         
                         [e doMoveAction:dir];
