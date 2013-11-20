@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E605767D18362B590033AE88 /* Element.m in Sources */ = {isa = PBXBuildFile; fileRef = E605767A18362B590033AE88 /* Element.m */; };
-		E605767E18362B590033AE88 /* Rock.m in Sources */ = {isa = PBXBuildFile; fileRef = E605767C18362B590033AE88 /* Rock.m */; };
+		E605767E18362B590033AE88 /* Box.m in Sources */ = {isa = PBXBuildFile; fileRef = E605767C18362B590033AE88 /* Box.m */; };
 		E6057699183651740033AE88 /* Background.png in Resources */ = {isa = PBXBuildFile; fileRef = E6057698183651740033AE88 /* Background.png */; };
 		E605769D183651D20033AE88 /* crackedtile.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E605769A183651D20033AE88 /* crackedtile.jpg */; };
 		E605769E183651D20033AE88 /* solidtile.png in Resources */ = {isa = PBXBuildFile; fileRef = E605769B183651D20033AE88 /* solidtile.png */; };
@@ -52,8 +52,8 @@
 /* Begin PBXFileReference section */
 		E605767918362B590033AE88 /* Element.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Element.h; path = ../SpacePuzzle/SpacePuzzle/Element.h; sourceTree = "<group>"; };
 		E605767A18362B590033AE88 /* Element.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Element.m; path = ../SpacePuzzle/SpacePuzzle/Element.m; sourceTree = "<group>"; };
-		E605767B18362B590033AE88 /* Rock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Rock.h; path = ../SpacePuzzle/SpacePuzzle/Rock.h; sourceTree = "<group>"; };
-		E605767C18362B590033AE88 /* Rock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Rock.m; path = ../SpacePuzzle/SpacePuzzle/Rock.m; sourceTree = "<group>"; };
+		E605767B18362B590033AE88 /* Box.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Box.h; path = ../SpacePuzzle/SpacePuzzle/Box.h; sourceTree = "<group>"; };
+		E605767C18362B590033AE88 /* Box.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Box.m; path = ../SpacePuzzle/SpacePuzzle/Box.m; sourceTree = "<group>"; };
 		E6057698183651740033AE88 /* Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Background.png; path = ../../Resources/Interface/Background.png; sourceTree = "<group>"; };
 		E605769A183651D20033AE88 /* crackedtile.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = crackedtile.jpg; path = ../../Resources/Tiles/crackedtile.jpg; sourceTree = "<group>"; };
 		E605769B183651D20033AE88 /* solidtile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = solidtile.png; path = ../../Resources/Tiles/solidtile.png; sourceTree = "<group>"; };
@@ -143,8 +143,8 @@
 			children = (
 				E605767918362B590033AE88 /* Element.h */,
 				E605767A18362B590033AE88 /* Element.m */,
-				E605767B18362B590033AE88 /* Rock.h */,
-				E605767C18362B590033AE88 /* Rock.m */,
+				E605767B18362B590033AE88 /* Box.h */,
+				E605767C18362B590033AE88 /* Box.m */,
 				E60C6A02183B953C00D6FA14 /* Star.h */,
 				E60C6A03183B953C00D6FA14 /* Star.m */,
 			);
@@ -373,7 +373,7 @@
 				E654B2F81830F7DD006BFCAC /* BoardScene.m in Sources */,
 				E60C6A04183B953C00D6FA14 /* Star.m in Sources */,
 				E6A0EEE318311690006BF476 /* Board.m in Sources */,
-				E605767E18362B590033AE88 /* Rock.m in Sources */,
+				E605767E18362B590033AE88 /* Box.m in Sources */,
 				E64C9F8C18339F2E00A18E36 /* XMLParser.m in Sources */,
 				E654B2FB1830F7DD006BFCAC /* AppDelegate.m in Sources */,
 			);

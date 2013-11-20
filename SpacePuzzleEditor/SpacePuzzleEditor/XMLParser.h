@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 @class Position;
-@class Rock;
+@class Box;
 @class Star;
 
 @interface XMLParser : NSObject <NSXMLParserDelegate> {

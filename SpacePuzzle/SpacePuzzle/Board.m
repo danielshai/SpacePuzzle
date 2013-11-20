@@ -2,7 +2,7 @@
 #import "Board.h"
 #import "Macros.h"
 #import "XMLParser.h"
-#import "Rock.h"
+#import "Box.h"
 #import "Element.h"
 
 @implementation Board

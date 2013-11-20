@@ -5,7 +5,7 @@
 #import "SpacePuzzleController.h"
 #import "Element.h"
 #import "Converter.h"
-#import "Rock.h"
+#import "Box.h"
 #import "Star.h"
 #import "Player.h"
 
@@ -183,7 +183,7 @@
         // If the element exists.
         if(e) {
             // Do action depending on element type.
-            if ([e isKindOfClass:[Rock class]]) {
+            if ([e isKindOfClass:[Box class]]) {
                 NSInteger dir = [Converter convertCoordsTo:actionPoint Direction:unitPoint];
                 [self doActionOnRock:e InDirection:dir];
             }
@@ -216,7 +216,7 @@
     }
     
     // Add more elements which cannot be pushed upon to if-statement.
-    if (![e isKindOfClass:[Rock class]]) {
+    if (![e isKindOfClass:[Box class]]) {
         NSInteger intKey = [nextKey integerValue];
         NSInteger nextTile = [[[_board board] objectAtIndex:intKey] status];
         

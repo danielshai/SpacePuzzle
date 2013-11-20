@@ -8,7 +8,7 @@
 
 #import "XMLParser.h"
 #import "Position.h"
-#import "Rock.h"
+#import "Box.h"
 #import "Macros.h"
 #import "Star.h"
 
@@ -83,7 +83,7 @@
         finishElement = NO;
     } else if ([elementName isEqualToString:@"Rock"]) {
         rockElement = NO;
-        Rock *r = [[Rock alloc] initWithX:tempXElement Y:tempYElement];
+        Box *r = [[Box alloc] initWithX:tempXElement Y:tempYElement];
         NSNumber *index = [NSNumber numberWithInteger:tempYElement*BOARD_SIZE_X + tempXElement];
         [_elements setObject:r forKey:index];
     } else if ([elementName isEqualToString:@"Star"]) {

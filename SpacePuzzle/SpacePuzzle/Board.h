@@ -11,7 +11,7 @@
 
 @class XMLParser;
 @class Element;
-@class Rock;
+@class Box;
 
 @interface Board : NSObject
 

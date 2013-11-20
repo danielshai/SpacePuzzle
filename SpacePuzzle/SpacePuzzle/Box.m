@@ -2,10 +2,10 @@
 //  Rock.m
 //  SpacePuzzle
 
-#import "Rock.h"
+#import "Box.h"
 #import "Macros.h"
 
-@implementation Rock
+@implementation Box
 @synthesize blocking = _blocking;
 
 -(id)init {

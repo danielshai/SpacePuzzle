@@ -8,6 +8,6 @@
 
 #import "Element.h"
 
-@interface Rock : Element
+@interface Box : Element
 
 @end

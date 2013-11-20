@@ -27,7 +27,7 @@
 		7797AC47183CE9F500E63E95 /* Alien.png in Resources */ = {isa = PBXBuildFile; fileRef = 7797AC33183CE9F500E63E95 /* Alien.png */; };
 		7797AC48183CE9F500E63E95 /* Astronaut.png in Resources */ = {isa = PBXBuildFile; fileRef = 7797AC34183CE9F500E63E95 /* Astronaut.png */; };
 		7797AC49183CE9F500E63E95 /* littlejohn.png in Resources */ = {isa = PBXBuildFile; fileRef = 7797AC35183CE9F500E63E95 /* littlejohn.png */; };
-		E6057677183619120033AE88 /* Rock.m in Sources */ = {isa = PBXBuildFile; fileRef = E6057676183619120033AE88 /* Rock.m */; };
+		E6057677183619120033AE88 /* Box.m in Sources */ = {isa = PBXBuildFile; fileRef = E6057676183619120033AE88 /* Box.m */; };
 		E60C6A01183B94F000D6FA14 /* Star.m in Sources */ = {isa = PBXBuildFile; fileRef = E60C6A00183B94F000D6FA14 /* Star.m */; };
 		E60C6A0A183BB19F00D6FA14 /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = E60C6A09183BB19F00D6FA14 /* Player.m */; };
 		E6214055182BA53800EC5C21 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6214054182BA53800EC5C21 /* Foundation.framework */; };
@@ -89,8 +89,8 @@
 		7797AC33183CE9F500E63E95 /* Alien.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Alien.png; sourceTree = "<group>"; };
 		7797AC34183CE9F500E63E95 /* Astronaut.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Astronaut.png; sourceTree = "<group>"; };
 		7797AC35183CE9F500E63E95 /* littlejohn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = littlejohn.png; sourceTree = "<group>"; };
-		E6057675183619120033AE88 /* Rock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rock.h; sourceTree = "<group>"; };
-		E6057676183619120033AE88 /* Rock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Rock.m; sourceTree = "<group>"; };
+		E6057675183619120033AE88 /* Box.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Box.h; sourceTree = "<group>"; };
+		E6057676183619120033AE88 /* Box.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Box.m; sourceTree = "<group>"; };
 		E60C69FF183B94F000D6FA14 /* Star.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Star.h; sourceTree = "<group>"; };
 		E60C6A00183B94F000D6FA14 /* Star.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Star.m; sourceTree = "<group>"; };
 		E60C6A08183BB19F00D6FA14 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
@@ -223,8 +223,8 @@
 				E6E6580A182BC2CE0022BF5F /* Element.m */,
 				E60C69FF183B94F000D6FA14 /* Star.h */,
 				E60C6A00183B94F000D6FA14 /* Star.m */,
-				E6057675183619120033AE88 /* Rock.h */,
-				E6057676183619120033AE88 /* Rock.m */,
+				E6057675183619120033AE88 /* Box.h */,
+				E6057676183619120033AE88 /* Box.m */,
 			);
 			name = Elements;
 			sourceTree = "<group>";
@@ -504,7 +504,7 @@
 				E6E65801182BB9020022BF5F /* Position.m in Sources */,
 				E6E6581C182BCD660022BF5F /* Converter.m in Sources */,
 				E6214063182BA53800EC5C21 /* main.m in Sources */,
-				E6057677183619120033AE88 /* Rock.m in Sources */,
+				E6057677183619120033AE88 /* Box.m in Sources */,
 				E6E6580E182BC3C50022BF5F /* BigL.m in Sources */,
 				E6214067182BA53800EC5C21 /* GViewAppDelegate.m in Sources */,
 				E621406D182BA53800EC5C21 /* SpacePuzzleController.m in Sources */,
