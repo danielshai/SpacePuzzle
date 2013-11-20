@@ -72,8 +72,18 @@
     _currentUnit.position = pos;
 }
 
--(void)updateElement:(CGPoint)oldCoord NewCoord:(CGPoint)newCoord {
-    
+-(void)moveElement:(CGPoint)oldCoord NewCoord:(CGPoint)newCoord {
+    NSNumber *indexOrigin = [NSNumber numberWithFloat:oldCoord.y*BOARD_SIZE_X + oldCoord.x];
+    NSNumber *indexNew = [NSNumber numberWithFloat:newCoord.y*BOARD_SIZE_X + newCoord.x];
+    SKSpriteNode *s = [_elements objectForKey:indexOrigin];
+    [_elements setObject:s forKey:indexNew];
+
+    // Gets the pixel value for the new position.
+    newCoord = [Converter convertCoordToPixel:newCoord];
+    // Converter does not take into account anchor point.
+    newCoord.x += TILESIZE/2;
+    s.position = newCoord;
+    [_elements removeObjectForKey:indexOrigin];
 }
 
 -(void)removeElementAtPosition:(NSNumber *)index {
@@ -101,7 +111,6 @@
     sprite.size = CGSizeMake(TILESIZE, TILESIZE);
     
     NSInteger xx = x*TILESIZE+TILESIZE/2 + BOARD_PIXEL_BEGIN_X;
-
     NSInteger yy = BOARD_PIXEL_BEGIN_Y - y*TILESIZE-TILESIZE/2;
     
     sprite.position = CGPointMake(xx,yy);

@@ -32,6 +32,11 @@
     return self;
 }
 
+-(void)moveElementFrom:(CGPoint)oldPos To:(CGPoint)newPos {
+    NSNumber *oldFlatIndex = [NSNumber numberWithInt:oldPos.y*_boardSizeX + oldPos.x];
+    NSNumber *oldNewIndex = [NSNumber numberWithInt:newPos.y*_boardSizeX + newPos.x];
+}
+
 /*
  *  Loads a board given a path, i.e. |BoardValues| are set for each coordinate on 
  *  the board. */

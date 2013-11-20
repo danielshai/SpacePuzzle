@@ -109,7 +109,7 @@
                     CGPoint hitPoint = CGPointMake(x, y);
                     CGPoint origin = CGPointMake(unitX, unitY);
                     NSInteger dir = [Converter convertCoordsTo:hitPoint Direction:origin];
-                    NSNumber *nextKey = [NSNumber numberWithInt:y*BOARD_SIZE_X + x];
+                    NSNumber *nextKey;
                     
                     if (dir == RIGHT) {
                         nextKey = [NSNumber numberWithInt:y*BOARD_SIZE_X + x + 1];

@@ -24,6 +24,8 @@
 @property (nonatomic, retain) NSMutableDictionary *elementDictionary;
 @property (nonatomic, retain) Position *startPos;
 @property (nonatomic, retain) Position *finishPos;
+
+-(void) moveElementFrom: (CGPoint)oldPos To: (CGPoint)newPos;
 -(void) loadBoard:(NSString*) path;
 -(void) saveBoard:(NSString*) fileName;
 -(void) createEmptyBoard;
