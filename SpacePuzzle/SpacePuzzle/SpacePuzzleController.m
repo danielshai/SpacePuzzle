@@ -104,34 +104,34 @@
             // If the element exists.
             if(e) {
                 if ([e isKindOfClass:[Rock class]]) {
-                    
-                NSInteger nextTile;
-                Element *ee;
-                CGPoint hitPoint = CGPointMake(x, y);
-                CGPoint origin = CGPointMake(unitX, unitY);
-                NSInteger dir = [Converter convertCoordsTo:hitPoint Direction:origin];
+                    NSInteger nextTile;
+                    Element *ee;
+                    CGPoint hitPoint = CGPointMake(x, y);
+                    CGPoint origin = CGPointMake(unitX, unitY);
+                    NSInteger dir = [Converter convertCoordsTo:hitPoint Direction:origin];
                 
-                if (dir == RIGHT) {
-                    key = [NSNumber numberWithInt:y*BOARD_SIZE_X + x + 1];
-                    ee = [[_board elementDictionary] objectForKey:key];
-                } else if (dir == LEFT) {
-                    key = [NSNumber numberWithInt:y*BOARD_SIZE_X + x - 1];
-                    ee = [[_board elementDictionary] objectForKey:key];
-                } else if (dir == UP) {
-                    key = [NSNumber numberWithInt:(y - 1)*BOARD_SIZE_X + x];
-                    ee = [[_board elementDictionary] objectForKey:key];
-                } else {
-                    key = [NSNumber numberWithInt:(y + 1)*BOARD_SIZE_X + x];
-                    ee = [[_board elementDictionary] objectForKey:key];
-                }
+                    if (dir == RIGHT) {
+                        key = [NSNumber numberWithInt:y*BOARD_SIZE_X + x + 1];
+                        ee = [[_board elementDictionary] objectForKey:key];
+                    } else if (dir == LEFT) {
+                        key = [NSNumber numberWithInt:y*BOARD_SIZE_X + x - 1];
+                        ee = [[_board elementDictionary] objectForKey:key];
+                    } else if (dir == UP) {
+                        key = [NSNumber numberWithInt:(y - 1)*BOARD_SIZE_X + x];
+                        ee = [[_board elementDictionary] objectForKey:key];
+                    } else {
+                        key = [NSNumber numberWithInt:(y + 1)*BOARD_SIZE_X + x];
+                        ee = [[_board elementDictionary] objectForKey:key];
+                    }
                 
-                if (![ee isKindOfClass:[Rock class]]) {
-                    // Add this to if-statement when |Lever|-class is created "|| [ee isKindOfClass:[Lever class]]"
-                    nextTile = [[[_board board] objectAtIndex:y*BOARD_SIZE_X + x + 1] status];
-                    [e doMoveAction:dir];
-                    [_scene updateElement:origin NewCoord:hitPoint];
-                    //nextTile should invoke its "doAction"...
-                }
+                    if (![ee isKindOfClass:[Rock class]]) {
+                        NSInteger intKey = [key integerValue];
+                        // Add this to if-statement when |Lever|-class is created "|| [ee isKindOfClass:[Lever class]]"
+                        nextTile = [[[_board board] objectAtIndex:intKey] status];
+                        [e doMoveAction:dir];
+                        [_scene updateElement:origin NewCoord:hitPoint];
+                        //nextTile should invoke its "doAction"...
+                    }
                 }
                 //[e doMoveAction];
                 // If the element isn't blocking, move unit.

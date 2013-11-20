@@ -35,8 +35,8 @@
 #define UNIT_MOVED              @"UnitMoved"
 #define UNIT_WANTS_TO_MOVE      @"UnitWantsToMove"
 
-#define RIGHT                   501
-#define LEFT                    502
-#define UP                      503
-#define DOWN                    504
+#define RIGHT                   1
+#define LEFT                    2
+#define UP                      3
+#define DOWN                    4
 #endif

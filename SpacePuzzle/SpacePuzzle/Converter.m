@@ -108,7 +108,7 @@
     } else if (object.x < unit.x) {
         return LEFT;
     } else
-        return -1;
+        return 0;
 }
 
 @end
