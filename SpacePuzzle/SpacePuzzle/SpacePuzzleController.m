@@ -6,6 +6,7 @@
 #import "Element.h"
 #import "Converter.h"
 #import "Rock.h"
+#import "Star.h"
 
 @implementation SpacePuzzleController
 @synthesize board = _board;
