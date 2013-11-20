@@ -100,10 +100,11 @@
             // Check elements on the board.
             NSNumber *curKey = [NSNumber numberWithInt:y*BOARD_SIZE_X + x];
             Element *e = [[_board elementDictionary] objectForKey:curKey];
-            NSInteger nextTile;
+            
             // If the element exists.
             if(e) {
                 if ([e isKindOfClass:[Rock class]]) {
+                    NSInteger nextTile;
                     Element *ee;
                     CGPoint hitPoint = CGPointMake(x, y);
                     CGPoint origin = CGPointMake(unitX, unitY);
@@ -130,7 +131,7 @@
                         nextTile = [[[_board board] objectAtIndex:intKey] status];
                         
                         [e doMoveAction:dir];
-                        [_scene moveElement:origin NewCoord:hitPoint];
+                        //[_scene moveElement:origin NewCoord:hitPoint];
                         
                         if(nextTile != MAPSTATUS_SOLID) {
                             [[_board elementDictionary] removeObjectForKey:curKey];
@@ -138,6 +139,7 @@
                             if(nextTile == MAPSTATUS_CRACKED) {
                                 [[_board elementDictionary] removeObjectForKey:nextKey];
                                 [_scene removeElementAtPosition:nextKey];
+                                [[[_board board] objectAtIndex:intKey] setStatus:MAPSTATUS_VOID];
                             }
                         }
                         //nextTile should invoke its "doAction"...
