@@ -129,6 +129,9 @@
                         // Add more elements which cannot be pushed upon to if-statement.
                         nextTile = [[[_board board] objectAtIndex:intKey] status];
                         
+                        [e doMoveAction:dir];
+                        [_scene moveElement:origin NewCoord:hitPoint];
+                        
                         if(nextTile != MAPSTATUS_SOLID) {
                             [[_board elementDictionary] removeObjectForKey:curKey];
                             [_scene removeElementAtPosition:curKey];
@@ -137,9 +140,6 @@
                                 [_scene removeElementAtPosition:nextKey];
                             }
                         }
-                        
-                        [e doMoveAction:dir];
-                        [_scene updateElement:origin NewCoord:hitPoint];
                         //nextTile should invoke its "doAction"...
                     }
                 }
