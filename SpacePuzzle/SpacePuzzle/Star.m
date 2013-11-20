@@ -26,11 +26,11 @@
 }
 
 -(void) movedTo {
-    NSLog(@"MOVED TO A STAR");
+
 }
 
 -(void) doAction {
-    NSLog(@"STAR ACTION!");
+ 
 }
 
 @end

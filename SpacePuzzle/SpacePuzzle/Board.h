@@ -25,7 +25,7 @@
 @property (nonatomic, retain) Position *startPos;
 @property (nonatomic, retain) Position *finishPos;
 
--(void) moveElementFrom: (CGPoint)oldPos To: (CGPoint)newPos;
+-(void) moveElementFrom: (CGPoint)from To: (CGPoint)to;
 -(void) loadBoard:(NSString*) path;
 -(void) saveBoard:(NSString*) fileName;
 -(void) createEmptyBoard;

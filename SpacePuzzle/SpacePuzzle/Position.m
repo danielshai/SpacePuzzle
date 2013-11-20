@@ -10,7 +10,8 @@
 
 -(id)init {
     if(self = [super init]){
-        
+        _x = 0;
+        _y = 0;
     }
     return self;
 }

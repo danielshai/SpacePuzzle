@@ -34,4 +34,8 @@
         self.y = self.y + 1;
 }
 
+-(NSNumber*) key {
+    return [NSNumber numberWithInteger:self.y*BOARD_SIZE_X + self.x];
+}
+
 @end

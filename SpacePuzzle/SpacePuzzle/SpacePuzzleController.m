@@ -41,7 +41,6 @@
     
     // Add observers to the view.
     [self observeText:UNIT_MOVED Selector:@selector(unitMoved:)];
-    [self observeText:UNIT_WANTS_TO_MOVE Selector:@selector(unitWantsToMove:)];
     
     UITapGestureRecognizer *singleTapR = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTap:)];
     singleTapR.numberOfTapsRequired = 1;
@@ -62,7 +61,7 @@
         location = [Converter convertMousePosToCoord:location];
         location.y = abs(location.y - 9);
         
-        NSLog(@"Single");
+        [self unitWantsToMoveTo:location];
     }
 }
 
@@ -75,6 +74,8 @@
         // Convert to board coordinates. Invert with -9.
         location = [Converter convertMousePosToCoord:location];
         location.y = abs(location.y - 9);
+        
+        [self unitWantsToDoActionAt:location];
     }
 }
 
@@ -109,123 +110,137 @@
     }
 }
 
--(void)unitWantsToMove:(NSNotification *)notification {
-    // Get data.
-    NSArray *data = [self getDataFromNotification:notification Key:UNIT_WANTS_TO_MOVE];
-    NSValue *val = [data objectAtIndex:0];
-    NSValue *val2 = [data objectAtIndex:1];
-    
+-(void)unitWantsToMoveTo:(CGPoint)loc {
     // The position that the unit wants to move to.
-    NSInteger x  = val.CGPointValue.x;
-    NSInteger y = val.CGPointValue.y;
-    
+    NSInteger x  = loc.x;
+    NSInteger y = loc.y;
+    NSNumber *nextPosKey = [NSNumber numberWithInt:y*BOARD_SIZE_X + x];
+    NSInteger nextPosIntKey = [nextPosKey integerValue];
     // The unit who wants to move's position.
-    NSInteger unitX = val2.CGPointValue.x;
-    NSInteger unitY = val2.CGPointValue.y;
+    NSInteger unitX = _currentUnit.x;
+    NSInteger unitY = _currentUnit.y;
+    NSNumber *unitKey = [NSNumber numberWithInt:unitY*BOARD_SIZE_X + unitX];
+    NSInteger unitIntKey = [unitKey integerValue];
     
-    CGPoint hitPoint = CGPointMake(x, y);
-    CGPoint origin = CGPointMake(unitX, unitY);
-    
-    NSInteger nextTile;
-    NSNumber *nextKey;
-    NSNumber *curKey = [NSNumber numberWithInt:unitX*BOARD_SIZE_X + unitX];
-    NSInteger curInt = [curKey integerValue];
     // First check if the movement was inside the board and if the tile isn't |void| (which units cannot
     // move to).
     if(x >= 0 && x < BOARD_SIZE_X && y >= 0 && y < BOARD_SIZE_Y
-       && [[[_board board] objectAtIndex:y*BOARD_SIZE_X + x] status] != MAPSTATUS_VOID) {
+       && [[[_board board] objectAtIndex:nextPosIntKey] status] != MAPSTATUS_VOID) {
         // Checks if the move is 1 step in x or y, but not both at the same time.
         if( ((x - unitX == 1 || x - unitX == -1) && y == unitY) ||
             ((y - unitY == 1 || y - unitY == -1) && x == unitX) )
         {
-            
-            if ([[[_board board] objectAtIndex:unitY*BOARD_SIZE_X + unitX] status] == MAPSTATUS_CRACKED && _currentUnit == _bigL) {
-                [[_board elementDictionary] removeObjectForKey:curKey];
-                [_scene removeElementAtPosition:curKey];
-                [[[_board board] objectAtIndex:curInt] setStatus:MAPSTATUS_VOID];
-                [_scene refreshTileAtFlatIndex:curInt WithStatus:MAPSTATUS_VOID];
+            // If |bigL| is standing on a cracked tile and moves away from it. This will destroy the tile,
+            // making it void, and also destroying the item on it.
+            if ([[[_board board] objectAtIndex:unitIntKey] status] == MAPSTATUS_CRACKED && _currentUnit == _bigL) {
+                [[_board elementDictionary] removeObjectForKey:unitKey];
+                [_scene removeElementAtPosition:unitKey];
+                [[[_board board] objectAtIndex:unitIntKey] setStatus:MAPSTATUS_VOID];
+                [_scene refreshTileAtFlatIndex:unitIntKey WithStatus:MAPSTATUS_VOID];
             }
-            
+           
             // Updates the position of curKey to the one that the unit is moving towards.
-            curKey = [NSNumber numberWithInt:y*BOARD_SIZE_X + x];
+            NSNumber *nextPos = [NSNumber numberWithInt:y*BOARD_SIZE_X + x];
             // Check elements on the board.
-            Element *e = [[_board elementDictionary] objectForKey:curKey];
+            Element *e = [[_board elementDictionary] objectForKey:nextPos];
             
-            // If the element exists.
-            if(e) {
-                if ([e isKindOfClass:[Rock class]]) {
-                    CGPoint nextPos;
-                    NSInteger dir = [Converter convertCoordsTo:hitPoint Direction:origin];
-                    Element *ee;
-                    
-                    if (dir == RIGHT) {
-                        nextKey = [NSNumber numberWithInt:y*BOARD_SIZE_X + x + 1];
-                        nextPos = CGPointMake(x + 1, y);
-                        ee = [[_board elementDictionary] objectForKey:nextKey];
-                    } else if (dir == LEFT) {
-                        nextKey = [NSNumber numberWithInt:y*BOARD_SIZE_X + x - 1];
-                        ee = [[_board elementDictionary] objectForKey:nextKey];
-                        nextPos = CGPointMake(x - 1, y);
-                    } else if (dir == UP) {
-                        nextKey = [NSNumber numberWithInt:(y - 1)*BOARD_SIZE_X + x];
-                        ee = [[_board elementDictionary] objectForKey:nextKey];
-                        nextPos = CGPointMake(x, y - 1);
-                    } else {
-                        nextKey = [NSNumber numberWithInt:(y + 1)*BOARD_SIZE_X + x];
-                        ee = [[_board elementDictionary] objectForKey:nextKey];
-                        nextPos = CGPointMake(x, y + 1);
-                    }
-                
-                    if (![ee isKindOfClass:[Rock class]]) {
-                        NSInteger intKey = [nextKey integerValue];
-                        // Add more elements which cannot be pushed upon to if-statement.
-                        nextTile = [[[_board board] objectAtIndex:intKey] status];
-                        
-                        [e doMoveAction:dir];
-                        //[_scene moveElement:origin NewCoord:hitPoint];
-                        
-                        if(nextTile != MAPSTATUS_SOLID) {
-                            [[_board elementDictionary] removeObjectForKey:curKey];
-                            [_scene removeElementAtPosition:curKey];
-                            if(nextTile == MAPSTATUS_CRACKED) {
-                                [[_board elementDictionary] removeObjectForKey:nextKey];
-                                [_scene removeElementAtPosition:nextKey];
-                                [[[_board board] objectAtIndex:intKey] setStatus:MAPSTATUS_VOID];
-                                [_scene refreshTileAtFlatIndex:intKey WithStatus:MAPSTATUS_VOID];
-                            }
-                        } else {
-                            [_board moveElementFrom:hitPoint To:nextPos];
-                            [_scene moveElement:hitPoint NewCoord:nextPos];
-                        }
-                        //nextTile should invoke its "doAction"...
-                    }
-                }
-                //[e doMoveAction];
-                // If the element isn't blocking, move unit.
-                if(![e blocking]) {
-                    _currentUnit.x = x;
-                    _currentUnit.y = y;
-                    [_scene updateUnit:CGPointMake(x, y)];
-                    [e movedTo];
-                    
-                    // If the element is a star.
-                    if([e isKindOfClass:[Star class]]) {
-                        _player.starsTaken += 1;
-                        [[_board elementDictionary] removeObjectForKey:curKey];
-                        [_scene removeElementAtPosition:curKey];
-                    }
-                }
-            }
-            else {
+            // If the element isn't blocking, move unit.
+            if(![e blocking]) {
                 _currentUnit.x = x;
                 _currentUnit.y = y;
                 [_scene updateUnit:CGPointMake(x, y)];
+                [e movedTo];
+                
+                // If the element is a star.
+                if([e isKindOfClass:[Star class]]) {
+                    _player.starsTaken += 1;
+                    [[_board elementDictionary] removeObjectForKey:nextPosKey];
+                    [_scene removeElementAtPosition:nextPosKey];
+                }
             }
         }
     }
 }
 
-/* 
+-(void)unitWantsToDoActionAt:(CGPoint)loc {
+    NSInteger x = loc.x;
+    NSInteger y = loc.y;
+
+    NSNumber *actionPointKey = [NSNumber numberWithInt:y*BOARD_SIZE_X + x];
+    
+    NSInteger unitX = _currentUnit.x;
+    NSInteger unitY = _currentUnit.y;
+    
+    CGPoint unitPoint = CGPointMake(unitX, unitY);
+    CGPoint actionPoint = CGPointMake(x, y);
+ 
+    // Checks if element will be next to the unit.
+    if( ((x - unitX == 1 || x - unitX == -1) && y == unitY) ||
+       ((y - unitY == 1 || y - unitY == -1) && x == unitX) )
+    {
+        Element *e = [[_board elementDictionary] objectForKey:actionPointKey];
+    
+        // If the element exists.
+        if(e) {
+            // Do action depending on element type.
+            if ([e isKindOfClass:[Rock class]]) {
+                NSInteger dir = [Converter convertCoordsTo:actionPoint Direction:unitPoint];
+                [self doActionOnRock:e InDirection:dir];
+            }
+        }
+    }
+}
+
+-(void)doActionOnRock:(Element *)rock InDirection:(NSInteger)dir{
+    NSNumber *nextKey;
+    CGPoint nextPos;
+    Element *e;
+    NSNumber *elementKey = [NSNumber numberWithInteger:rock.y*BOARD_SIZE_X + rock.x];
+    
+    if (dir == RIGHT) {
+        nextKey = [NSNumber numberWithInt:rock.y*BOARD_SIZE_X + rock.x + 1];
+        e = [[_board elementDictionary] objectForKey:nextKey];
+        nextPos = CGPointMake(rock.x + 1, rock.y);
+    } else if (dir == LEFT) {
+        nextKey = [NSNumber numberWithInt:rock.y*BOARD_SIZE_X + rock.x - 1];
+        e = [[_board elementDictionary] objectForKey:nextKey];
+        nextPos = CGPointMake(rock.x - 1, rock.y);
+    } else if (dir == UP) {
+        nextKey = [NSNumber numberWithInt:(rock.y - 1)*BOARD_SIZE_X + rock.x];
+        e = [[_board elementDictionary] objectForKey:nextKey];
+        nextPos = CGPointMake(rock.x, rock.y - 1);
+    } else {
+        nextKey = [NSNumber numberWithInt:(rock.y + 1)*BOARD_SIZE_X + rock.x];
+        e = [[_board elementDictionary] objectForKey:nextKey];
+        nextPos = CGPointMake(rock.x, rock.y + 1);
+    }
+    
+    // Add more elements which cannot be pushed upon to if-statement.
+    if (![e isKindOfClass:[Rock class]]) {
+        NSInteger intKey = [nextKey integerValue];
+        NSInteger nextTile = [[[_board board] objectAtIndex:intKey] status];
+        
+        CGPoint posPreMove = CGPointMake(rock.x, rock.y);
+        [rock doMoveAction:dir];
+        
+        if(nextTile != MAPSTATUS_SOLID) {
+            [[_board elementDictionary] removeObjectForKey:elementKey];
+            [_scene removeElementAtPosition:elementKey];
+            if(nextTile == MAPSTATUS_CRACKED) {
+                [[_board elementDictionary] removeObjectForKey:nextKey];
+                [_scene removeElementAtPosition:nextKey];
+                [[[_board board] objectAtIndex:intKey] setStatus:MAPSTATUS_VOID];
+                [_scene refreshTileAtFlatIndex:intKey WithStatus:MAPSTATUS_VOID];
+            }
+        } else {
+            [_board moveElementFrom:posPreMove To:nextPos];
+            [_scene moveElement:posPreMove NewCoord:nextPos];
+        }
+        //nextTile should invoke its "doAction"...
+    }
+}
+
+/*
  *  Called when a notification of unit movement is sent from the |MainScene|. Updates the data model of the
  *  unit accordingly. */
 -(void)unitMoved:(NSNotification *)notification {

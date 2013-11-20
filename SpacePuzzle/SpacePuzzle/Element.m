@@ -3,6 +3,7 @@
 //  SpacePuzzle
 
 #import "Element.h"
+#import "Macros.h"
 
 @implementation Element
 @synthesize blocking = _blocking;
@@ -16,7 +17,7 @@
 
 -(id)initWithX:(NSInteger)x Y:(NSInteger)y {
     if(self = [super initWithX:x Y:y]) {
-        
+     
     }
     return self;
 }
@@ -31,6 +32,10 @@
 
 -(void)movedTo {
     
+}
+
+-(NSNumber*) key {
+    return [NSNumber numberWithInteger:self.y*BOARD_SIZE_X + self.x];
 }
 
 @end

@@ -10,6 +10,7 @@
 @interface Element : Position
 @property (nonatomic, assign) BOOL blocking;
 -(id)initWithX: (NSInteger) x Y: (NSInteger) y;
+-(NSNumber*) key;
 -(void) doAction;
 -(void) doMoveAction: (NSInteger) dir;
 -(void) movedTo;
