@@ -5,6 +5,7 @@
 #import "SpacePuzzleController.h"
 #import "Element.h"
 #import "Converter.h"
+#import "Rock.h"
 
 @implementation SpacePuzzleController
 @synthesize board = _board;
@@ -95,9 +96,35 @@
             
             // If the element exists.
             if(e) {
-                CGPoint xx = CGPointMake(x, y);
-                CGPoint yy = CGPointMake(unitX, unitY);
-                [e doMoveAction: [Converter convertCoordsTo:xx Direction:yy]];
+                NSInteger nextTile;
+                Element *ee;
+                CGPoint hitPoint = CGPointMake(x, y);
+                CGPoint origin = CGPointMake(unitX, unitY);
+                NSInteger dir = [Converter convertCoordsTo:hitPoint Direction:origin];
+                
+                if (dir == RIGHT) {
+                    key = [NSNumber numberWithInt:y*BOARD_SIZE_X + x + 1];
+                    ee = [[_board elementDictionary] objectForKey:key];
+                } else if (dir == LEFT) {
+                    key = [NSNumber numberWithInt:y*BOARD_SIZE_X + x - 1];
+                    ee = [[_board elementDictionary] objectForKey:key];
+                } else if (dir == UP) {
+                    key = [NSNumber numberWithInt:(y - 1)*BOARD_SIZE_X + x];
+                    ee = [[_board elementDictionary] objectForKey:key];
+                } else {
+                    key = [NSNumber numberWithInt:(y + 1)*BOARD_SIZE_X + x];
+                    ee = [[_board elementDictionary] objectForKey:key];
+                }
+                
+                if (![ee isKindOfClass:[Rock class]]) {
+                    // Add this to if-statement when |Lever|-class is created "|| [ee isKindOfClass:[Lever class]]"
+                    nextTile = [[[_board board] objectAtIndex:y*BOARD_SIZE_X + x + 1] status];
+                    [e doMoveAction:dir];
+                    [_scene updateElement:origin NewCoord:hitPoint];
+                    //nextTile should invoke its "doAction"...
+                }
+                
+                //[e doMoveAction];
                 // If the element isn't blocking, move unit.
                 if(![e blocking]) {
                     _currentUnit.x = x;
