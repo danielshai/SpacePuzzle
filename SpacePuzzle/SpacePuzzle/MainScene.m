@@ -55,17 +55,10 @@
         // Notifies the controller that the unit wants to move. The controller checks if it's possible, if
         // so the controller will call this scene and update the position of the unit accordingly.
         [self notifyText:UNIT_WANTS_TO_MOVE Object:arr Key:UNIT_WANTS_TO_MOVE];
-        
-        /*
-        // When adding swipe, this code should be run.
-        
-        if([_littleJohn isEqual:touchedNode]) {
-            // Add point to where the currentUnit should move.
-        }*/
     }
 }
 
-/* 
+/*
  *  Updates the current unit with the data model. */
 -(void)updateUnit:(CGPoint)coord {
     CGPoint pos = [Converter convertCoordToPixel:coord];

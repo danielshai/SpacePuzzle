@@ -42,6 +42,40 @@
     // Add observers to the view.
     [self observeText:UNIT_MOVED Selector:@selector(unitMoved:)];
     [self observeText:UNIT_WANTS_TO_MOVE Selector:@selector(unitWantsToMove:)];
+    
+    UITapGestureRecognizer *singleTapR = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTap:)];
+    singleTapR.numberOfTapsRequired = 1;
+    [_scene.view addGestureRecognizer:singleTapR];
+    
+    UITapGestureRecognizer *doubleTapR = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doubleTap:)];
+    doubleTapR.numberOfTapsRequired = 2;
+    [_scene.view addGestureRecognizer:doubleTapR];
+}
+
+/*
+ *  Called when the user taps once. */
+-(void)singleTap:(UIGestureRecognizer *)sender {
+    if (sender.state == UIGestureRecognizerStateEnded) {
+        CGPoint location = [sender locationInView:_scene.view];
+        
+        // Convert to board coordinates. Invert with -9.
+        location = [Converter convertMousePosToCoord:location];
+        location.y = abs(location.y - 9);
+        
+        NSLog(@"Single");
+    }
+}
+
+/* 
+ *  Called when the user double taps the view. */
+-(void)doubleTap:(UIGestureRecognizer *)sender {
+    if (sender.state == UIGestureRecognizerStateEnded) {
+        CGPoint location = [sender locationInView:_scene.view];
+        
+        // Convert to board coordinates. Invert with -9.
+        location = [Converter convertMousePosToCoord:location];
+        location.y = abs(location.y - 9);
+    }
 }
 
 /*
