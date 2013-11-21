@@ -14,6 +14,7 @@
 @synthesize scene = _scene;
 @synthesize skView = _skView;
 @synthesize recentMenu = _recentMenu;
+@synthesize controlPanel = _controlPanel;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
@@ -33,12 +34,39 @@
 
     [self setupBoard];
     [self observeText:@"BoardEdited" Selector:@selector(boardEdited:)];
+    [self observeText:@"ControlPanel" Selector:@selector(showControlPanel:)];
     [[self window] setTitle:@"Untitled.splvl"];
-    
 }
 
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender {
     return YES;
+}
+
+-(void)showControlPanel:(NSNotification *) notification {
+    // Get the data (location of click).
+    NSDictionary *userInfo = notification.userInfo;
+    NSSet *objectSent = [userInfo objectForKey:@"ControlPanel"];
+    NSArray *data = [objectSent allObjects];
+    // Edited at coordinate.
+    NSValue *val = [data objectAtIndex:0];
+    NSNumber *index = [NSNumber numberWithInteger:val.pointValue.y*BOARD_SIZE_X + val.pointValue.x];
+    
+    Element *e = [[_board elementDictionary] objectForKey:index];
+ 
+    if([NSStringFromClass([e class]) isEqualToString:@"StarButton"]) {
+        // Open properties window. Set some size and position.
+        [_controlPanel makeKeyAndOrderFront:self];
+        NSRect frame = [[self window] frame];
+        CGPoint p = frame.origin;
+        CGSize s = frame.size;
+        s.height -= 200;
+        s.width -= 10;
+        p.x += 5;
+        p.y += 100;
+        frame.size = s;
+        frame.origin = p;
+        [_controlPanel setFrame:frame display:YES animate:YES];
+    }
 }
 
 - (IBAction)newLevel:(id)sender {
@@ -142,6 +170,9 @@
         } else if (stat == BRUSH_STAR) {
             CGPoint pos = CGPointMake(val.pointValue.x, val.pointValue.y);
             [_board addElementNamed:@"Star" AtPosition:pos IsBlocking:NO];
+        } else if (stat == BRUSH_STARBUTTON) {
+            CGPoint pos = CGPointMake(val.pointValue.x, val.pointValue.y);
+            [_board addElementNamed:@"StarButton" AtPosition:pos IsBlocking:NO];
         }
     }
     

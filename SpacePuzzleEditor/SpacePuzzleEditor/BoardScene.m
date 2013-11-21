@@ -18,11 +18,22 @@
 @synthesize rockTexture = _rockTexture;
 @synthesize elementSprites = _elementSprites;
 @synthesize starTexture = _starTexture;
+@synthesize buttonTexture = _buttonTexture;
+@synthesize controlHover = _controlHover;
 
 -(id)initWithSize:(CGSize)size {    
     if (self = [super initWithSize:size]) {
         /* Setup your scene here */
         _elementSprites = [[NSMutableDictionary alloc] init];
+        controlClickDrag = NO;
+        controlDragLine = [SKShapeNode node];
+        controlDragLine.antialiased = YES;
+        //controlDragLine.glowWidth = 1;
+        controlDragLine.lineWidth = 1;
+        [controlDragLine setStrokeColor:[SKColor colorWithRed:244.0/255.0 green:185.0/255.0 blue:43.0/255.0 alpha:1]];
+        _controlHover = [SKSpriteNode spriteNodeWithImageNamed:@"Cracked.png"];
+        _controlHover.size = CGSizeMake(32, 32);
+        _controlHover.hidden = YES;
         
         self.backgroundColor = [SKColor colorWithRed:0.89 green:0.89 blue:0.89 alpha:1.0];
         self.size = CGSizeMake(size.width, size.height);
@@ -34,7 +45,7 @@
         _finishElement = [SKTexture textureWithImageNamed:@"Finish.png"];
         _rockTexture = [SKTexture textureWithImageNamed:@"Box.png"];
         _starTexture = [SKTexture textureWithImageNamed:@"Star.png"];
-        
+        _buttonTexture = [SKTexture textureWithImageNamed:@"Button.png"];
         _startElSprite = [SKSpriteNode spriteNodeWithTexture:_startElement];
         _startElSprite.position = CGPointMake(-100, -100);
         _startElSprite.size = CGSizeMake(TILESIZE/2, TILESIZE/2);
@@ -63,22 +74,59 @@
         [self observeText:@"RockClick" Selector:@selector(rockClick)];
         [self observeText:@"StarClick" Selector:@selector(starClick)];
         [self observeText:@"EraserClick" Selector:@selector(eraserClick)];
+        [self observeText:@"StarButtonClick" Selector:@selector(starButtonClick)];
+        
+        controlDragLine.zPosition = 100000;
+        [self addChild:controlDragLine];
     }
     return self;
 }
 
 -(void)mouseDown:(NSEvent *)theEvent {
-    [self editABoardItem:theEvent];
+    if (theEvent.modifierFlags & NSControlKeyMask) {
+        controlClickDrag = YES;
+        
+        SKView *sk = self.view;
+        NSPoint loc = [sk convertPoint:[theEvent locationInWindow] fromView:nil];
+        startControlDrag = CGPointMake(loc.x, loc.y);
+        loc = [Converter convertMousePosToCoord:loc];
+        
+        NSArray *arr = [NSArray arrayWithObjects:[NSValue valueWithPoint:loc],nil];
+        [self notifyText:@"ControlPanel" Object:arr Key:@"ControlPanel"];
+    } else if (!controlClickDrag) {
+        [self editABoardItem:theEvent];
+    }
 }
 
 -(void)mouseDragged:(NSEvent *)theEvent {
-    [self editABoardItem:theEvent];
+    SKView *sk = self.view;
+    NSPoint loc = [sk convertPoint:[theEvent locationInWindow] fromView:nil];
+    if (controlClickDrag) {
+        controlDragLine.hidden = NO;
+        endControlDrag = CGPointMake(loc.x, loc.y);
+        
+        CGMutablePathRef pathToDraw = CGPathCreateMutable();
+        CGPathMoveToPoint(pathToDraw, NULL, startControlDrag.x, startControlDrag.y);
+        CGPathAddLineToPoint(pathToDraw, NULL, endControlDrag.x, endControlDrag.y);
+        controlDragLine.path = pathToDraw;
+    } else {
+        controlClickDrag = NO;
+        controlDragLine.hidden = YES;
+        [self editABoardItem:theEvent];
+    }
+}
+
+-(void)mouseUp:(NSEvent *)theEvent {
+    if(controlClickDrag) {
+        controlDragLine.hidden = YES;
+        controlClickDrag = NO;
+    }
 }
 
 /*
  *  Could be used to change brush? */
 -(void)keyDown:(NSEvent *)theEvent {
-   
+  //if(theEvent.modifierFlags & NSControl)
 }
 
 /*
@@ -131,6 +179,8 @@
                     [self addARock:loc Index:flatIndex];
                 } else if(statusOfPalette == BRUSH_STAR) {
                     [self addAStar:loc Index:flatIndex];
+                } else if(statusOfPalette == BRUSH_STARBUTTON) {
+                    [self addAStarButton:loc Index:flatIndex];
                 }
             }
         }
@@ -176,6 +226,10 @@
 -(void)eraserClick {
     [self changeTextureOfBrush:BRUSH_ERASER];
 }
+
+-(void)starButtonClick {
+    [self changeTextureOfBrush:BRUSH_STARBUTTON];
+}
 /*
  *  Changes the texture of the brush, i.e. what the brush will "paint". */
 -(void)changeTextureOfBrush:(NSInteger)status {
@@ -202,6 +256,9 @@
         statusOfPalette = status;
     } else if(status == BRUSH_ERASER) {
         currentTexture = nil;
+        statusOfPalette = status;
+    } else if(status == BRUSH_STARBUTTON) {
+        currentTexture = _buttonTexture;
         statusOfPalette = status;
     }
 }
@@ -250,6 +307,8 @@
         [self addARock:pos Index:flatIndex];
     } else if([element isEqualToString:@"Star"]) {
         [self addAStar:pos Index:flatIndex];
+    } else if([element isEqualToString:@"StarButton"]) {
+        [self addAStarButton:pos Index:flatIndex];
     }
 }
 
@@ -277,6 +336,18 @@
     
     [_elementSprites setObject:rock forKey:index];
     [self addChild:rock];
+}
+
+-(void)addAStarButton:(CGPoint)pos Index:(NSNumber *)index {
+    SKSpriteNode *starbtn = [SKSpriteNode spriteNodeWithTexture:_buttonTexture];
+    
+    CGPoint pxl = [Converter convertCoordToPixel:pos];
+    pxl.x += TILESIZE/2;
+    starbtn.position = pxl;
+    starbtn.size = CGSizeMake(TILESIZE-4, TILESIZE-4);
+    
+    [_elementSprites setObject:starbtn forKey:index];
+    [self addChild:starbtn];
 }
 
 -(void)cleanElements {
