@@ -9,6 +9,7 @@
 #import "Star.h"
 #import "Player.h"
 #import "StarButton.h"
+#import "BridgeButton.h"
 
 @implementation SpacePuzzleController
 @synthesize board = _board;
@@ -255,6 +256,8 @@
                 [self doActionOnBox:e InDirection:dir];
             } else if ([e isKindOfClass:[StarButton class]]) {
                 [self doActionOnStarButton:e];
+            } else if ([e isKindOfClass:[BridgeButton class]]) {
+                [self doActionOnBridgeButton:e];
             }
         }
     }
@@ -316,7 +319,6 @@
 
 -(void)doActionOnStarButton:(Element *)button {
     StarButton *sb = (StarButton*)button;
-    sb.state = YES;
     [sb doAction];
     
     // Updates the button on the scene.
@@ -327,7 +329,14 @@
 }
 
 -(void)doActionOnBridgeButton: (Element*)button {
+    BridgeButton *bb = (BridgeButton*)button;
+    [bb doAction];
     
+    // Updates the button on the scene.
+    [_scene refreshElementAtPosition:bb.key OfClass:@"Button" WithStatus:bb.state];
+    // Updates the bridge connected to the button on the scene, i.e. showing it.
+    [_scene setElementAtPosition:bb.bridge.key IsHidden:NO];
+    [_scene refreshElementAtPosition:bb.bridge.key OfClass:@"Bridge" WithStatus:bb.bridge.blocking];
 }
 
 -(NSArray*) getDataFromNotification:(NSNotification *)notif Key:(NSString *)key {

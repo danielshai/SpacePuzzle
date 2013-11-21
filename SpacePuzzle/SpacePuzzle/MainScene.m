@@ -16,6 +16,8 @@
 @synthesize tiles = _tiles;
 @synthesize buttonOff = _buttonOff;
 @synthesize buttonOn = _buttonOn;
+@synthesize bridgeOff = _bridgeOff;
+@synthesize bridgeOn = _bridgeOn;
 
 -(id)initWithSize:(CGSize)size {    
     if (self = [super initWithSize:size]) {
@@ -27,7 +29,8 @@
         _voidTile = [SKTexture textureWithImageNamed:@"voidtile.png"];
         _buttonOn = [SKTexture textureWithImageNamed:@"ButtonON.png"];
         _buttonOff = [SKTexture textureWithImageNamed:@"ButtonOFF.png"];
-    
+        _bridgeOn = [SKTexture textureWithImageNamed:@"BridgeON.png"];
+        _bridgeOff = [SKTexture textureWithImageNamed:@"BridgeOFF.png"];
         _bkg = [SKSpriteNode spriteNodeWithImageNamed:@"Background.png"];
         _bkg.size = CGSizeMake(size.width, size.height);
 
@@ -109,7 +112,13 @@
         } else {
             s.texture = _buttonOff;
         }
-    } //else if ()
+    } else if([name isEqualToString:@"Bridge"]) {
+        if (on) {
+            s.texture = _bridgeOn;
+        } else {
+            s.texture = _bridgeOff;
+        }
+    }
 }
 
 -(void)setElementAtPosition:(NSNumber *)index IsHidden:(BOOL)hidden {

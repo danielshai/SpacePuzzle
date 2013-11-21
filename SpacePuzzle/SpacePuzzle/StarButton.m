@@ -38,7 +38,8 @@
 }
 
 -(void) doAction {
-    _star.hidden = NO;
+    _state = !_state;
+    _star.hidden = !_state;
 }
 
 @end

@@ -37,7 +37,7 @@
 }
 
 -(void) doAction {
-    
+    _state = !_state;
 }
 
 @end

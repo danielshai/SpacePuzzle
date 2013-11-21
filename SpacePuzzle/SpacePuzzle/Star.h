@@ -9,4 +9,5 @@
 #import "Element.h"
 
 @interface Star : Element
+
 @end

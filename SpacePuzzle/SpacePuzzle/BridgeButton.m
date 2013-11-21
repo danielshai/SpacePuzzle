@@ -7,7 +7,6 @@
 //
 
 #import "BridgeButton.h"
-#import "Bridge.h"
 
 @implementation BridgeButton
 @synthesize blocking = _blocking;
@@ -38,7 +37,8 @@
 }
 
 -(void) doAction {
-    
+    _state = !_state;
+    _bridge.blocking = !_bridge.blocking;
 }
 
 @end

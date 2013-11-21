@@ -7,8 +7,7 @@
 //
 
 #import "Element.h"
-
-@class Bridge;
+#import "Bridge.h"
 
 @interface BridgeButton : Element
 @property (nonatomic, assign) Bridge* bridge;
