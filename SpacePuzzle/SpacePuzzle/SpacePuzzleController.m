@@ -249,7 +249,6 @@
     NSNumber *elementTargetKey = [NSNumber numberWithInteger:button.y*BOARD_SIZE_X + button.x];
     NSInteger targetKey = [elementTargetKey integerValue];
     [[_board elementDictionary] objectForKey:e.element.key];
-    [_scene refresh]
 }
 
 /*
