@@ -33,6 +33,7 @@
 -(void)unitWantsToMoveTo: (CGPoint)loc;
 -(void)unitWantsToDoActionAt: (CGPoint)loc;
 -(void)doActionOnRock: (Element*)rock InDirection: (NSInteger)dir;
+-(void)doActionOnButton: (Element*)button;
 -(void)unitMoved:(NSNotification *) notification;
 -(void)setupBoard;
 -(void)setupElements;

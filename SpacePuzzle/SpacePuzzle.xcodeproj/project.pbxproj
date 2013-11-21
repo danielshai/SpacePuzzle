@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		77010766183E010D00AAF564 /* Button.m in Sources */ = {isa = PBXBuildFile; fileRef = 77010765183E010D00AAF564 /* Button.m */; };
 		7797AC36183CE9F500E63E95 /* Box.png in Resources */ = {isa = PBXBuildFile; fileRef = 7797AC1F183CE9F500E63E95 /* Box.png */; };
 		7797AC37183CE9F500E63E95 /* BridgeOFF.png in Resources */ = {isa = PBXBuildFile; fileRef = 7797AC20183CE9F500E63E95 /* BridgeOFF.png */; };
 		7797AC38183CE9F500E63E95 /* BridgeON.png in Resources */ = {isa = PBXBuildFile; fileRef = 7797AC21183CE9F500E63E95 /* BridgeON.png */; };
@@ -69,6 +70,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		77010764183E010D00AAF564 /* Button.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Button.h; sourceTree = "<group>"; };
+		77010765183E010D00AAF564 /* Button.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Button.m; sourceTree = "<group>"; };
 		7797AC1F183CE9F500E63E95 /* Box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Box.png; sourceTree = "<group>"; };
 		7797AC20183CE9F500E63E95 /* BridgeOFF.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BridgeOFF.png; sourceTree = "<group>"; };
 		7797AC21183CE9F500E63E95 /* BridgeON.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BridgeON.png; sourceTree = "<group>"; };
@@ -225,6 +228,8 @@
 				E60C6A00183B94F000D6FA14 /* Star.m */,
 				E6057675183619120033AE88 /* Box.h */,
 				E6057676183619120033AE88 /* Box.m */,
+				77010764183E010D00AAF564 /* Button.h */,
+				77010765183E010D00AAF564 /* Button.m */,
 			);
 			name = Elements;
 			sourceTree = "<group>";
@@ -503,6 +508,7 @@
 				E6E65815182BC82E0022BF5F /* LittleJohn.m in Sources */,
 				E6E65801182BB9020022BF5F /* Position.m in Sources */,
 				E6E6581C182BCD660022BF5F /* Converter.m in Sources */,
+				77010766183E010D00AAF564 /* Button.m in Sources */,
 				E6214063182BA53800EC5C21 /* main.m in Sources */,
 				E6057677183619120033AE88 /* Box.m in Sources */,
 				E6E6580E182BC3C50022BF5F /* BigL.m in Sources */,

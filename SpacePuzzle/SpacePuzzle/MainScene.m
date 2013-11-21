@@ -92,6 +92,14 @@
     }
 }
 
+-(void)refreshElementAtPoistion: (NSNumber*)index OfClass:(NSString*)name {
+    SKSpriteNode *s = [_elements objectForKey:index];
+    
+    if([name isEqualToString:@"Button"]) {
+        
+    } //else if (<#expression#>)
+}
+
 /*
  *  Sets up the view of the board. TEMP CODE RIGHT NOW. */
 -(void)setupBoardX:(NSInteger)x Y:(NSInteger)y Status:(NSInteger)status {
