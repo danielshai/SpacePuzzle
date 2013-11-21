@@ -32,7 +32,7 @@
 -(void)doubleTap:(UIGestureRecognizer *)sender;
 -(void)unitWantsToMoveTo: (CGPoint)loc;
 -(void)unitWantsToDoActionAt: (CGPoint)loc;
--(void)doActionOnRock: (Element*)rock InDirection: (NSInteger)dir;
+-(void)doActionOnBox: (Element*)rock InDirection: (NSInteger)dir;
 -(void)unitMoved:(NSNotification *) notification;
 -(void)setupBoard;
 -(void)setupElements;

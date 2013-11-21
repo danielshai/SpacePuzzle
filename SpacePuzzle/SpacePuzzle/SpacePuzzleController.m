@@ -46,7 +46,8 @@
     singleTapR.numberOfTapsRequired = 1;
     [_scene.view addGestureRecognizer:singleTapR];
     
-    UITapGestureRecognizer *doubleTapR = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doubleTap:)];
+    UITapGestureRecognizer *doubleTapR = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                         action:@selector(doubleTap:)];
     doubleTapR.numberOfTapsRequired = 2;
     [_scene.view addGestureRecognizer:doubleTapR];
 }
@@ -162,6 +163,9 @@
     }
 }
 
+/*
+ *  Called when a unit (i.e. the user) wants to do an action. First checks if the action is possible,
+ *  then chooses an action based on what element the action is performed on. */
 -(void)unitWantsToDoActionAt:(CGPoint)loc {
     NSInteger x = loc.x;
     NSInteger y = loc.y;
@@ -185,13 +189,15 @@
             // Do action depending on element type.
             if ([e isKindOfClass:[Box class]]) {
                 NSInteger dir = [Converter convertCoordsTo:actionPoint Direction:unitPoint];
-                [self doActionOnRock:e InDirection:dir];
+                [self doActionOnBox:e InDirection:dir];
             }
         }
     }
 }
 
--(void)doActionOnRock:(Element *)rock InDirection:(NSInteger)dir{
+/*
+ *  Does an action on a box based on the direction. The action moves the box to a tile. */
+-(void)doActionOnBox:(Element *)rock InDirection:(NSInteger)dir{
     NSNumber *nextKey;
     CGPoint nextPos;
     Element *e;
