@@ -98,7 +98,6 @@
 }
 
 -(void)swipeUp:(UISwipeGestureRecognizer *)sender {
-    NSLog(@"UP");
     if (sender.state == UIGestureRecognizerStateEnded) {
         CGPoint location = CGPointMake(_currentUnit.x, _currentUnit.y);
         location.y -= 1;
@@ -107,7 +106,6 @@
 }
 
 -(void)swipeDown:(UISwipeGestureRecognizer *)sender {
-    NSLog(@"DOWN");
     if (sender.state == UIGestureRecognizerStateEnded) {
         CGPoint location = CGPointMake(_currentUnit.x, _currentUnit.y);
         location.y += 1;
@@ -116,7 +114,6 @@
 }
 
 -(void)swipeLeft:(UISwipeGestureRecognizer *)sender {
-    NSLog(@"Left");
     if (sender.state == UIGestureRecognizerStateEnded) {
         CGPoint location = CGPointMake(_currentUnit.x, _currentUnit.y);
         location.x -= 1;
@@ -125,7 +122,6 @@
 }
 
 -(void)swipeRight:(UISwipeGestureRecognizer *)sender {
-    NSLog(@"Right");
     if (sender.state == UIGestureRecognizerStateEnded) {
         CGPoint location = CGPointMake(_currentUnit.x, _currentUnit.y);
         location.x += 1;
