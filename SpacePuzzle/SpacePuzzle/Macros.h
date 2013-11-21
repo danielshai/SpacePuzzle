@@ -20,7 +20,7 @@
 
 #define TILESIZE                44
 #define BOARD_PIXEL_BEGIN_X     10 // The pixel value that the actual board begins at.
-#define BOARD_PIXEL_BEGIN_Y     465
+#define BOARD_PIXEL_BEGIN_Y     460
 #define BOARD_COORD_BEGIN_X     1  // The coordinate value that the actual board begins at.
 #define BOARD_COORD_BEGIN_Y     1
 #define WIN_SIZE_X              320

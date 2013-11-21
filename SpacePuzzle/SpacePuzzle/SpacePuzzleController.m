@@ -157,8 +157,17 @@
             [_scene setupElement:p Name:@"ButtonOFF" Hidden:[obj hidden]];
         }
     }
-    
-    // ADD TEMP CODE TO ADD BUTTONS TO CHECK IF IT WORKS.
+    // TEMP TEST CODE
+    NSNumber *nr = [NSNumber numberWithInteger:2*BOARD_SIZE_X];
+    obj = [[_board elementDictionary] objectForKey:nr];
+    Star *s = (Star*)obj;
+    s.hidden = YES;
+    [_scene setElementAtPosition:s.key IsHidden:YES];
+    StarButton *st = [[StarButton alloc] initWithStar:s X:0 Y:0];
+    nr = [NSNumber numberWithInteger:0];
+    [[_board elementDictionary] setObject:st forKey:nr];
+    CGPoint p = CGPointMake(0, 0);
+    [_scene setupElement:p Name:@"ButtonOFF" Hidden:NO];
 }
 
 /*
@@ -233,7 +242,8 @@
  
     // Checks if element will be next to the unit.
     if( ((x - unitX == 1 || x - unitX == -1) && y == unitY) ||
-       ((y - unitY == 1 || y - unitY == -1) && x == unitX) )
+       ((y - unitY == 1 || y - unitY == -1) && x == unitX) ||
+       (x == unitX && y == unitY) )
     {
         Element *e = [[_board elementDictionary] objectForKey:actionPointKey];
     
@@ -306,7 +316,7 @@
 
 -(void)doActionOnStarButton:(Element *)button {
     StarButton *sb = (StarButton*)button;
-    sb.state = !sb.state;
+    sb.state = YES;
     [sb doAction];
     
     // Updates the button on the scene.

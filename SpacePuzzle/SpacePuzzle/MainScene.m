@@ -25,8 +25,9 @@
         _solidTile = [SKTexture textureWithImageNamed:@"solidtile.png"];
         _crackedTile = [SKTexture textureWithImageNamed:@"Cracked.png"];
         _voidTile = [SKTexture textureWithImageNamed:@"voidtile.png"];
-        _buttonOn = [SKTexture textureWithImageNamed:@"BridgeON.png"];
-        _buttonOff = [SKTexture textureWithImageNamed:@"BridgeOFF.png"];
+        _buttonOn = [SKTexture textureWithImageNamed:@"ButtonON.png"];
+        _buttonOff = [SKTexture textureWithImageNamed:@"ButtonOFF.png"];
+    
         _bkg = [SKSpriteNode spriteNodeWithImageNamed:@"Background.png"];
         _bkg.size = CGSizeMake(size.width, size.height);
 
@@ -150,6 +151,10 @@
     
     if([className isEqualToString:@"Star"]) {
         sprite.size = CGSizeMake(22, 22);
+    } else if([className isEqualToString:@"ButtonOFF"]) {
+        sprite.size = CGSizeMake(40, 40);
+        pos.y -= 2;
+        [sprite setPosition:pos];
     }
     
     NSNumber *nr = [NSNumber numberWithInt:coord.y*BOARD_SIZE_X + coord.x];
