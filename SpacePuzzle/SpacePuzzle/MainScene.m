@@ -111,6 +111,11 @@
     } //else if ()
 }
 
+-(void)setElementAtPosition:(NSNumber *)index IsHidden:(BOOL)hidden {
+    SKSpriteNode *s = [_elements objectForKey:index];
+    s.hidden = hidden;
+}
+
 /*
  *  Sets up the view of the board. TEMP CODE RIGHT NOW. */
 -(void)setupBoardX:(NSInteger)x Y:(NSInteger)y Status:(NSInteger)status {

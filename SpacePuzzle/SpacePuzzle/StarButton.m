@@ -38,7 +38,7 @@
 }
 
 -(void) doAction {
-    
+    _star.hidden = NO;
 }
 
 @end

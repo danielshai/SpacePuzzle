@@ -40,9 +40,6 @@
     // Present the scene.
     [skView presentScene:_scene];
     
-    // Add observers to the view.
-    [self observeText:UNIT_MOVED Selector:@selector(unitMoved:)];
-    
     // Input recognizers.
     UITapGestureRecognizer *singleTapR = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTap:)];
     singleTapR.numberOfTapsRequired = 1;
@@ -133,12 +130,9 @@
 /*
  *  Loads the board according to the level. ADD LEVELFACTORY!!!. */
 -(void)setupBoard {
-    // TEMP CODE.
     _board = [[Board alloc] init];
     // Load the board.
-
     NSString *path = [[NSBundle mainBundle] pathForResource:@"mario" ofType:@"splvl"];
-    
     [_board loadBoard:path];
     
     for(int i = 0; i < BOARD_SIZE_Y; i++) {
@@ -294,7 +288,10 @@
                 [_scene refreshTileAtFlatIndex:intKey WithStatus:MAPSTATUS_VOID];
             }
         } else {
+            NSNumber *index = [NSNumber numberWithInteger:nextPos.y * BOARD_SIZE_X + nextPos.x];
+            [[_board elementDictionary] removeObjectForKey:index];
             [_board moveElementFrom:posPreMove To:nextPos];
+            [_scene removeElementAtPosition:index];
             [_scene moveElement:posPreMove NewCoord:nextPos];
         }
         //nextTile should invoke its "doAction"...
@@ -302,26 +299,19 @@
 }
 
 -(void)doActionOnStarButton:(Element *)button {
-    StarButton *e = (StarButton*)button;
-    e.state = !e.state;
-    NSNumber *elementTargetKey = [NSNumber numberWithInteger:button.y*BOARD_SIZE_X + button.x];
-    NSInteger targetKey = [elementTargetKey integerValue];
-    [[_board elementDictionary] objectForKey:e.star.key];
+    StarButton *sb = (StarButton*)button;
+    sb.state = !sb.state;
+    [sb doAction];
     
-    [_scene refreshElementAtPosition:elementTargetKey OfClass:@"Button" WithStatus:e.state];
+    // Updates the button on the scene.
+    [_scene refreshElementAtPosition:sb.key OfClass:@"Button" WithStatus:sb.state];
+    // Updates the star connected to the button on the scene, i.e. showing it.
+    [_scene setElementAtPosition:sb.star.key IsHidden:NO];
+    
 }
 
 -(void)doActionOnBridgeButton: (Element*)button {
     
-}
-
-/*
- *  Called when a notification of unit movement is sent from the |MainScene|. Updates the data model of the
- *  unit accordingly. */
--(void)unitMoved:(NSNotification *)notification {
-    NSArray *data = [self getDataFromNotification:notification Key:UNIT_MOVED];
-    NSValue *val = [data objectAtIndex:0];
-    // UPDATE DATA MODEL.
 }
 
 -(NSArray*) getDataFromNotification:(NSNotification *)notif Key:(NSString *)key {
