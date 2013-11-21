@@ -151,8 +151,14 @@
         CGPoint p = CGPointMake([obj x], [obj y]);
         NSString *str = NSStringFromClass([obj class]);
         
-        [_scene setupElement:p Name:str Hidden:[obj hidden]];
+        if(![str isEqualToString:@"StarButton"] && ![str isEqualToString:@"BridgeButton"]) {
+            [_scene setupElement:p Name:str Hidden:[obj hidden]];
+        } else {
+            [_scene setupElement:p Name:@"ButtonOFF" Hidden:[obj hidden]];
+        }
     }
+    
+    // ADD TEMP CODE TO ADD BUTTONS TO CHECK IF IT WORKS.
 }
 
 /*
