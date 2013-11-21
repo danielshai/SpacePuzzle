@@ -242,7 +242,7 @@
             // Do action depending on element type.
             if ([e isKindOfClass:[Box class]]) {
                 NSInteger dir = [Converter convertCoordsTo:actionPoint Direction:unitPoint];
-                [self doActionOnRock:e InDirection:dir];
+                [self doActionOnBox:e InDirection:dir];
             } else if ([e isKindOfClass:[Button class]]) {
                 [self doActionOnButton:e];
             }
