@@ -9,7 +9,9 @@
 
 @interface Element : Position
 @property (nonatomic, assign) BOOL blocking;
+@property (nonatomic, assign) BOOL hidden;
 -(id)initWithX: (NSInteger) x Y: (NSInteger) y;
+-(id)initWithX:(NSInteger)x Y:(NSInteger)y Hidden: (BOOL)hidden;
 -(NSNumber*) key;
 -(void) doAction;
 -(void) doMoveAction: (NSInteger) dir;

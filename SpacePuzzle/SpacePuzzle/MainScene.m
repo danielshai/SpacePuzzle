@@ -99,7 +99,7 @@
 /*
  *  Refreshes the sprite connected to an element on a position. This is only needed for elements that have
  *  different states. */
--(void)refreshElementAtPoistion: (NSNumber*)index OfClass:(NSString*)name WithStatus:(BOOL)on{
+-(void)refreshElementAtPosition: (NSNumber*)index OfClass:(NSString*)name WithStatus:(BOOL)on{
     SKSpriteNode *s = [_elements objectForKey:index];
 
     if([name isEqualToString:@"Button"]) {
@@ -132,7 +132,7 @@
     [_tiles insertObject:sprite atIndex:y*BOARD_SIZE_X + x];
 }
 
--(void)setupElement:(CGPoint)coord Name:(NSString *)className {
+-(void)setupElement:(CGPoint)coord Name:(NSString *)className Hidden:(BOOL)hidden{
     NSString *path = className;
     path = [path stringByAppendingString:@".png"];
     SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithImageNamed:path];
@@ -149,6 +149,8 @@
     
     NSNumber *nr = [NSNumber numberWithInt:coord.y*BOARD_SIZE_X + coord.x];
     [_elements setObject:sprite forKey:nr];
+    sprite.hidden = hidden;
+    
     [self addChild:sprite];
 }
 

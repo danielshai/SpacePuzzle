@@ -25,11 +25,11 @@
 -(void)updateUnit:(CGPoint) coord;
 -(void)refreshTileAtPosition: (CGPoint)pos WithStatus: (NSInteger)status;
 -(void)refreshTileAtFlatIndex: (NSInteger)findex WithStatus:(NSInteger)status;
--(void)refreshElementAtPoistion: (NSNumber*)index OfClass:(NSString*)name WithStatus:(BOOL)on;
+-(void)refreshElementAtPosition: (NSNumber*)index OfClass:(NSString*)name WithStatus:(BOOL)on;
 -(void)moveElement: (CGPoint)oldCoord NewCoord: (CGPoint)newCoord;
 -(void)removeElementAtPosition: (NSNumber*)index;
 -(void)setupBoardX: (NSInteger)x Y: (NSInteger)y Status: (NSInteger)status;
--(void)setupElement: (CGPoint)coord Name: (NSString*)className;
+-(void)setupElement: (CGPoint)coord Name: (NSString*)className Hidden: (BOOL)hidden;
 -(void)setupUnits: (CGPoint)pos;
 -(void)notifyText: (NSString *)text Object: (NSObject*)object Key: (NSString*)key;
 

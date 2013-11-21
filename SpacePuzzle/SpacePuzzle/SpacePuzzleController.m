@@ -157,7 +157,7 @@
         CGPoint p = CGPointMake([obj x], [obj y]);
         NSString *str = NSStringFromClass([obj class]);
         
-        [_scene setupElement:p Name:str];
+        [_scene setupElement:p Name:str Hidden:[obj hidden]];
     }
 }
 
@@ -206,7 +206,7 @@
                 [e movedTo];
                 
                 // If the element is a star.
-                if([e isKindOfClass:[Star class]]) {
+                if([e isKindOfClass:[Star class]] && ![e hidden]) {
                     _player.starsTaken += 1;
                     [[_board elementDictionary] removeObjectForKey:nextPosKey];
                     [_scene removeElementAtPosition:nextPosKey];
@@ -308,7 +308,7 @@
     NSInteger targetKey = [elementTargetKey integerValue];
     [[_board elementDictionary] objectForKey:e.element.key];
     
-    [_scene refreshElementAtPoistion:elementTargetKey OfClass:NSStringFromClass([button class])];
+    [_scene refreshElementAtPoistion:elementTargetKey OfClass:@"Button" WithStatus:e.state];
 }
 
 -(void)doActionOnBridgeButton: (Element*)button {
