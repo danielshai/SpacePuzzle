@@ -39,6 +39,7 @@
 -(void)doActionOnBox: (Element*)rock InDirection: (NSInteger)dir;
 -(void)doActionOnStarButton: (Element*)button;
 -(void)doActionOnBridgeButton: (Element*)button;
+-(void)doActionOnPlatformLever: (Element*)lever;
 -(void)setupBoard;
 -(void)setupElements;
 -(void)setupUnits;

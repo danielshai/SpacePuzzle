@@ -339,6 +339,10 @@
     [_scene refreshElementAtPosition:bb.bridge.key OfClass:@"Bridge" WithStatus:bb.bridge.blocking];
 }
 
+-(void)doActionOnPlatformLever:(Element *)lever {
+    
+}
+
 -(NSArray*) getDataFromNotification:(NSNotification *)notif Key:(NSString *)key {
     NSDictionary *userInfo = notif.userInfo;
     NSSet *objectSent = [userInfo objectForKey:key];
