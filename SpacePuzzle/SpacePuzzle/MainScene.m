@@ -14,6 +14,8 @@
 @synthesize bkg = _bkg;
 @synthesize elements = _elements;
 @synthesize tiles = _tiles;
+@synthesize buttonOff = _buttonOff;
+@synthesize buttonOn = _buttonOn;
 
 -(id)initWithSize:(CGSize)size {    
     if (self = [super initWithSize:size]) {
@@ -23,6 +25,8 @@
         _solidTile = [SKTexture textureWithImageNamed:@"solidtile.png"];
         _crackedTile = [SKTexture textureWithImageNamed:@"Cracked.png"];
         _voidTile = [SKTexture textureWithImageNamed:@"voidtile.png"];
+        _buttonOn = [SKTexture textureWithImageNamed:@"BridgeON.png"];
+        _buttonOff = [SKTexture textureWithImageNamed:@"BridgeOFF.png"];
         _bkg = [SKSpriteNode spriteNodeWithImageNamed:@"Background.png"];
         _bkg.size = CGSizeMake(size.width, size.height);
 
@@ -92,12 +96,19 @@
     }
 }
 
--(void)refreshElementAtPoistion: (NSNumber*)index OfClass:(NSString*)name {
+/*
+ *  Refreshes the sprite connected to an element on a position. This is only needed for elements that have
+ *  different states. */
+-(void)refreshElementAtPoistion: (NSNumber*)index OfClass:(NSString*)name WithStatus:(BOOL)on{
     SKSpriteNode *s = [_elements objectForKey:index];
-    
+
     if([name isEqualToString:@"Button"]) {
-        
-    } //else if (<#expression#>)
+        if(on) {
+            s.texture = _buttonOn;
+        } else {
+            s.texture = _buttonOff;
+        }
+    } //else if ()
 }
 
 /*
