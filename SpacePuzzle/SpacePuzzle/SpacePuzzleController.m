@@ -306,9 +306,9 @@
     e.state = !e.state;
     NSNumber *elementTargetKey = [NSNumber numberWithInteger:button.y*BOARD_SIZE_X + button.x];
     NSInteger targetKey = [elementTargetKey integerValue];
-    [[_board elementDictionary] objectForKey:e.element.key];
+    [[_board elementDictionary] objectForKey:e.star.key];
     
-    [_scene refreshElementAtPoistion:elementTargetKey OfClass:@"Button" WithStatus:e.state];
+    [_scene refreshElementAtPosition:elementTargetKey OfClass:@"Button" WithStatus:e.state];
 }
 
 -(void)doActionOnBridgeButton: (Element*)button {
