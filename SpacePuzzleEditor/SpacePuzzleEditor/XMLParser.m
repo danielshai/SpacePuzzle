@@ -81,7 +81,7 @@
         startElement = NO;
     } else if ([elementName isEqualToString:@"finish"]) {
         finishElement = NO;
-    } else if ([elementName isEqualToString:@"Rock"]) {
+    } else if ([elementName isEqualToString:@"Box"]) {
         rockElement = NO;
         Box *r = [[Box alloc] initWithX:tempXElement Y:tempYElement];
         NSNumber *index = [NSNumber numberWithInteger:tempYElement*BOARD_SIZE_X + tempXElement];

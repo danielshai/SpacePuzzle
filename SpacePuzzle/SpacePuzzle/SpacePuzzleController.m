@@ -43,13 +43,31 @@
     // Add observers to the view.
     [self observeText:UNIT_MOVED Selector:@selector(unitMoved:)];
     
+    // Input recognizers.
     UITapGestureRecognizer *singleTapR = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTap:)];
     singleTapR.numberOfTapsRequired = 1;
     [_scene.view addGestureRecognizer:singleTapR];
     
-    UITapGestureRecognizer *doubleTapR = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doubleTap:)];
+    UITapGestureRecognizer *doubleTapR = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                         action:@selector(doubleTap:)];
     doubleTapR.numberOfTapsRequired = 2;
     [_scene.view addGestureRecognizer:doubleTapR];
+    
+    UISwipeGestureRecognizer *swipeUp = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeUp:)];
+    swipeUp.direction = UISwipeGestureRecognizerDirectionUp;
+    [_scene.view addGestureRecognizer:swipeUp];
+    
+    UISwipeGestureRecognizer *swipeDown = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeDown:)];
+    swipeDown.direction = UISwipeGestureRecognizerDirectionDown;
+    [_scene.view addGestureRecognizer:swipeDown];
+    
+    UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeLeft:)];
+    swipeLeft.direction = UISwipeGestureRecognizerDirectionLeft;
+    [_scene.view addGestureRecognizer:swipeLeft];
+    
+    UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeRight:)];
+    swipeRight.direction = UISwipeGestureRecognizerDirectionRight;
+    [_scene.view addGestureRecognizer:swipeRight];
 }
 
 /*
@@ -77,6 +95,38 @@
         location.y = abs(location.y - 9);
         
         [self unitWantsToDoActionAt:location];
+    }
+}
+
+-(void)swipeUp:(UISwipeGestureRecognizer *)sender {
+    if (sender.state == UIGestureRecognizerStateEnded) {
+        CGPoint location = CGPointMake(_currentUnit.x, _currentUnit.y);
+        location.y -= 1;
+        [self unitWantsToMoveTo:location];
+    }
+}
+
+-(void)swipeDown:(UISwipeGestureRecognizer *)sender {
+    if (sender.state == UIGestureRecognizerStateEnded) {
+        CGPoint location = CGPointMake(_currentUnit.x, _currentUnit.y);
+        location.y += 1;
+        [self unitWantsToMoveTo:location];
+    }
+}
+
+-(void)swipeLeft:(UISwipeGestureRecognizer *)sender {
+    if (sender.state == UIGestureRecognizerStateEnded) {
+        CGPoint location = CGPointMake(_currentUnit.x, _currentUnit.y);
+        location.x -= 1;
+        [self unitWantsToMoveTo:location];
+    }
+}
+
+-(void)swipeRight:(UISwipeGestureRecognizer *)sender {
+    if (sender.state == UIGestureRecognizerStateEnded) {
+        CGPoint location = CGPointMake(_currentUnit.x, _currentUnit.y);
+        location.x += 1;
+        [self unitWantsToMoveTo:location];
     }
 }
 
@@ -111,6 +161,9 @@
     }
 }
 
+/*
+ *  Called when a unit wants to move to a location on the board. This method checks if the move is possible,
+ *  if so moves the unit. If unit moves to star, consume the star. */
 -(void)unitWantsToMoveTo:(CGPoint)loc {
     // The position that the unit wants to move to.
     NSInteger x  = loc.x;
@@ -163,6 +216,9 @@
     }
 }
 
+/*
+ *  Called when a unit (i.e. the user) wants to do an action. First checks if the action is possible,
+ *  then chooses an action based on what element the action is performed on. */
 -(void)unitWantsToDoActionAt:(CGPoint)loc {
     NSInteger x = loc.x;
     NSInteger y = loc.y;
@@ -194,7 +250,9 @@
     }
 }
 
--(void)doActionOnRock:(Element *)rock InDirection:(NSInteger)dir{
+/*
+ *  Does an action on a box based on the direction. The action moves the box to a tile. */
+-(void)doActionOnBox:(Element *)rock InDirection:(NSInteger)dir{
     NSNumber *nextKey;
     CGPoint nextPos;
     Element *e;
