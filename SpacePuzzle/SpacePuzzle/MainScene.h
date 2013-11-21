@@ -13,6 +13,8 @@
 @property (nonatomic, retain) SKTexture *solidTile;
 @property (nonatomic, retain) SKTexture *crackedTile;
 @property (nonatomic, retain) SKTexture *voidTile;
+@property (nonatomic, retain) SKTexture *buttonOn;
+@property (nonatomic, retain) SKTexture *buttonOff;
 @property (nonatomic, retain) SKSpriteNode *bigL;
 @property (nonatomic, retain) SKSpriteNode *littleJohn;
 @property (nonatomic, retain) SKSpriteNode *currentUnit;
@@ -23,7 +25,7 @@
 -(void)updateUnit:(CGPoint) coord;
 -(void)refreshTileAtPosition: (CGPoint)pos WithStatus: (NSInteger)status;
 -(void)refreshTileAtFlatIndex: (NSInteger)findex WithStatus:(NSInteger)status;
--(void)refreshElementAtPoistion: (NSNumber*)index OfClass:(NSString*)name;
+-(void)refreshElementAtPoistion: (NSNumber*)index OfClass:(NSString*)name WithStatus:(BOOL)on;
 -(void)moveElement: (CGPoint)oldCoord NewCoord: (CGPoint)newCoord;
 -(void)removeElementAtPosition: (NSNumber*)index;
 -(void)setupBoardX: (NSInteger)x Y: (NSInteger)y Status: (NSInteger)status;
