@@ -6,9 +6,10 @@
 //  Copyright (c) 2013 WMD. All rights reserved.
 //
 
-#import "Button.h"
+#import "StarButton.h"
+#import "Star.h"
 
-@implementation Button
+@implementation StarButton
 @synthesize blocking = _blocking;
 @synthesize element = _element;
 @synthesize state = _state;
@@ -29,7 +30,7 @@
     return self;
 }
 
--(id)initWithElement:(Element*)e X:(NSInteger)x Y:(NSInteger)y{
+-(id)initWithElement:(Star*)e X:(NSInteger)x Y:(NSInteger)y{
     if(self = [super initWithX:x Y:y]) {
         _element = e;
     }

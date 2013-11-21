@@ -8,7 +8,7 @@
 #import "Box.h"
 #import "Star.h"
 #import "Player.h"
-#import "Button.h"
+#import "StarButton.h"
 
 @implementation SpacePuzzleController
 @synthesize board = _board;
@@ -243,8 +243,8 @@
             if ([e isKindOfClass:[Box class]]) {
                 NSInteger dir = [Converter convertCoordsTo:actionPoint Direction:unitPoint];
                 [self doActionOnBox:e InDirection:dir];
-            } else if ([e isKindOfClass:[Button class]]) {
-                [self doActionOnButton:e];
+            } else if ([e isKindOfClass:[StarButton class]]) {
+                [self doActionOnStarButton:e];
             }
         }
     }
@@ -301,12 +301,18 @@
     }
 }
 
--(void)doActionOnButton:(Element *)button {
-    Button *e = (Button*)button;
+-(void)doActionOnStarButton:(Element *)button {
+    StarButton *e = (StarButton*)button;
     e.state = !e.state;
     NSNumber *elementTargetKey = [NSNumber numberWithInteger:button.y*BOARD_SIZE_X + button.x];
     NSInteger targetKey = [elementTargetKey integerValue];
     [[_board elementDictionary] objectForKey:e.element.key];
+    
+    [_scene refreshElementAtPoistion:elementTargetKey OfClass:NSStringFromClass([button class])];
+}
+
+-(void)doActionOnBridgeButton: (Element*)button {
+    
 }
 
 /*

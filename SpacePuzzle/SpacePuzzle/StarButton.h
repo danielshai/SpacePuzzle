@@ -8,8 +8,10 @@
 
 #import "Element.h"
 
-@interface Button : Element
-@property (nonatomic, assign) Element* element;
+@class Star;
+
+@interface StarButton : Element
+@property (nonatomic, assign) Star* element;
 @property (nonatomic, assign) BOOL state;
 -(id)initWithElement: (Element*)e X:(NSInteger)x Y:(NSInteger)y;
 
