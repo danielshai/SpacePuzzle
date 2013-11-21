@@ -50,6 +50,9 @@
                                                                          action:@selector(doubleTap:)];
     doubleTapR.numberOfTapsRequired = 2;
     [_scene.view addGestureRecognizer:doubleTapR];
+    
+    UISwipeGestureRecognizer *swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipe:)];
+    [_scene.view addGestureRecognizer:swipe];
 }
 
 /*
@@ -77,6 +80,28 @@
         location.y = abs(location.y - 9);
         
         [self unitWantsToDoActionAt:location];
+    }
+}
+
+-(void)swipe:(UISwipeGestureRecognizer *)sender {
+    if (sender.state == UIGestureRecognizerStateEnded) {
+        if(sender.direction == UISwipeGestureRecognizerDirectionDown) {
+            CGPoint location = CGPointMake(_currentUnit.x, _currentUnit.y);
+            location.y += 1;
+            [self unitWantsToMoveTo:location];
+        } else if(sender.direction == UISwipeGestureRecognizerDirectionUp) {
+            CGPoint location = CGPointMake(_currentUnit.x, _currentUnit.y);
+            location.y -= 1;
+            [self unitWantsToMoveTo:location];
+        } else if(sender.direction == UISwipeGestureRecognizerDirectionLeft) {
+            CGPoint location = CGPointMake(_currentUnit.x, _currentUnit.y);
+            location.x -= 1;
+            [self unitWantsToMoveTo:location];
+        } else if(sender.direction == UISwipeGestureRecognizerDirectionRight) {
+            CGPoint location = CGPointMake(_currentUnit.x, _currentUnit.y);
+            location.x += 1;
+            [self unitWantsToMoveTo:location];
+        }
     }
 }
 
@@ -111,6 +136,9 @@
     }
 }
 
+/*
+ *  Called when a unit wants to move to a location on the board. This method checks if the move is possible,
+ *  if so moves the unit. If unit moves to star, consume the star. */
 -(void)unitWantsToMoveTo:(CGPoint)loc {
     // The position that the unit wants to move to.
     NSInteger x  = loc.x;
