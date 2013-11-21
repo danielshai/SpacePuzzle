@@ -42,6 +42,7 @@
     // Add observers to the view.
     [self observeText:UNIT_MOVED Selector:@selector(unitMoved:)];
     
+    // Input recognizers.
     UITapGestureRecognizer *singleTapR = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTap:)];
     singleTapR.numberOfTapsRequired = 1;
     [_scene.view addGestureRecognizer:singleTapR];
@@ -51,8 +52,21 @@
     doubleTapR.numberOfTapsRequired = 2;
     [_scene.view addGestureRecognizer:doubleTapR];
     
-    UISwipeGestureRecognizer *swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipe:)];
-    [_scene.view addGestureRecognizer:swipe];
+    UISwipeGestureRecognizer *swipeUp = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeUp:)];
+    swipeUp.direction = UISwipeGestureRecognizerDirectionUp;
+    [_scene.view addGestureRecognizer:swipeUp];
+    
+    UISwipeGestureRecognizer *swipeDown = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeDown:)];
+    swipeDown.direction = UISwipeGestureRecognizerDirectionDown;
+    [_scene.view addGestureRecognizer:swipeDown];
+    
+    UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeLeft:)];
+    swipeLeft.direction = UISwipeGestureRecognizerDirectionLeft;
+    [_scene.view addGestureRecognizer:swipeLeft];
+    
+    UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeRight:)];
+    swipeRight.direction = UISwipeGestureRecognizerDirectionRight;
+    [_scene.view addGestureRecognizer:swipeRight];
 }
 
 /*
@@ -83,25 +97,39 @@
     }
 }
 
--(void)swipe:(UISwipeGestureRecognizer *)sender {
+-(void)swipeUp:(UISwipeGestureRecognizer *)sender {
+    NSLog(@"UP");
     if (sender.state == UIGestureRecognizerStateEnded) {
-        if(sender.direction == UISwipeGestureRecognizerDirectionDown) {
-            CGPoint location = CGPointMake(_currentUnit.x, _currentUnit.y);
-            location.y += 1;
-            [self unitWantsToMoveTo:location];
-        } else if(sender.direction == UISwipeGestureRecognizerDirectionUp) {
-            CGPoint location = CGPointMake(_currentUnit.x, _currentUnit.y);
-            location.y -= 1;
-            [self unitWantsToMoveTo:location];
-        } else if(sender.direction == UISwipeGestureRecognizerDirectionLeft) {
-            CGPoint location = CGPointMake(_currentUnit.x, _currentUnit.y);
-            location.x -= 1;
-            [self unitWantsToMoveTo:location];
-        } else if(sender.direction == UISwipeGestureRecognizerDirectionRight) {
-            CGPoint location = CGPointMake(_currentUnit.x, _currentUnit.y);
-            location.x += 1;
-            [self unitWantsToMoveTo:location];
-        }
+        CGPoint location = CGPointMake(_currentUnit.x, _currentUnit.y);
+        location.y -= 1;
+        [self unitWantsToMoveTo:location];
+    }
+}
+
+-(void)swipeDown:(UISwipeGestureRecognizer *)sender {
+    NSLog(@"DOWN");
+    if (sender.state == UIGestureRecognizerStateEnded) {
+        CGPoint location = CGPointMake(_currentUnit.x, _currentUnit.y);
+        location.y += 1;
+        [self unitWantsToMoveTo:location];
+    }
+}
+
+-(void)swipeLeft:(UISwipeGestureRecognizer *)sender {
+    NSLog(@"Left");
+    if (sender.state == UIGestureRecognizerStateEnded) {
+        CGPoint location = CGPointMake(_currentUnit.x, _currentUnit.y);
+        location.x -= 1;
+        [self unitWantsToMoveTo:location];
+    }
+}
+
+-(void)swipeRight:(UISwipeGestureRecognizer *)sender {
+    NSLog(@"Right");
+    if (sender.state == UIGestureRecognizerStateEnded) {
+        CGPoint location = CGPointMake(_currentUnit.x, _currentUnit.y);
+        location.x += 1;
+        [self unitWantsToMoveTo:location];
     }
 }
 

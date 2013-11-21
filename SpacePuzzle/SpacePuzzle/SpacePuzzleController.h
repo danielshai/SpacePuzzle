@@ -30,7 +30,10 @@
 
 -(void)singleTap:(UIGestureRecognizer *)sender;
 -(void)doubleTap:(UIGestureRecognizer *)sender;
--(void)swipe:(UISwipeGestureRecognizer *)sender;
+-(void)swipeUp:(UISwipeGestureRecognizer *)sender;
+-(void)swipeDown:(UISwipeGestureRecognizer *)sender;
+-(void)swipeLeft:(UISwipeGestureRecognizer *)sender;
+-(void)swipeRight:(UISwipeGestureRecognizer *)sender;
 -(void)unitWantsToMoveTo: (CGPoint)loc;
 -(void)unitWantsToDoActionAt: (CGPoint)loc;
 -(void)doActionOnBox: (Element*)rock InDirection: (NSInteger)dir;
