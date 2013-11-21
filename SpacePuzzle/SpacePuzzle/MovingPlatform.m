@@ -1,14 +1,14 @@
 //
-//  Bridge.m
+//  MovingPlatform.m
 //  SpacePuzzle
 //
 //  Created by Viktor on 21/11/13.
 //  Copyright (c) 2013 WMD. All rights reserved.
 //
 
-#import "Bridge.h"
+#import "MovingPlatform.h"
 
-@implementation Bridge
+@implementation MovingPlatform
 @synthesize blocking = _blocking;
 
 -(id)init {

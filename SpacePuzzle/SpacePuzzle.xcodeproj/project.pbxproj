@@ -30,6 +30,8 @@
 		7797AC47183CE9F500E63E95 /* Alien.png in Resources */ = {isa = PBXBuildFile; fileRef = 7797AC33183CE9F500E63E95 /* Alien.png */; };
 		7797AC48183CE9F500E63E95 /* Astronaut.png in Resources */ = {isa = PBXBuildFile; fileRef = 7797AC34183CE9F500E63E95 /* Astronaut.png */; };
 		7797AC49183CE9F500E63E95 /* littlejohn.png in Resources */ = {isa = PBXBuildFile; fileRef = 7797AC35183CE9F500E63E95 /* littlejohn.png */; };
+		779DB365183E32030059A084 /* PlatformLever.m in Sources */ = {isa = PBXBuildFile; fileRef = 779DB364183E32030059A084 /* PlatformLever.m */; };
+		779DB368183E32560059A084 /* MovingPlatform.m in Sources */ = {isa = PBXBuildFile; fileRef = 779DB367183E32560059A084 /* MovingPlatform.m */; };
 		E6057677183619120033AE88 /* Box.m in Sources */ = {isa = PBXBuildFile; fileRef = E6057676183619120033AE88 /* Box.m */; };
 		E60C6A01183B94F000D6FA14 /* Star.m in Sources */ = {isa = PBXBuildFile; fileRef = E60C6A00183B94F000D6FA14 /* Star.m */; };
 		E60C6A0A183BB19F00D6FA14 /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = E60C6A09183BB19F00D6FA14 /* Player.m */; };
@@ -98,6 +100,10 @@
 		7797AC33183CE9F500E63E95 /* Alien.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Alien.png; sourceTree = "<group>"; };
 		7797AC34183CE9F500E63E95 /* Astronaut.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Astronaut.png; sourceTree = "<group>"; };
 		7797AC35183CE9F500E63E95 /* littlejohn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = littlejohn.png; sourceTree = "<group>"; };
+		779DB363183E32030059A084 /* PlatformLever.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlatformLever.h; sourceTree = "<group>"; };
+		779DB364183E32030059A084 /* PlatformLever.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlatformLever.m; sourceTree = "<group>"; };
+		779DB366183E32560059A084 /* MovingPlatform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovingPlatform.h; sourceTree = "<group>"; };
+		779DB367183E32560059A084 /* MovingPlatform.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovingPlatform.m; sourceTree = "<group>"; };
 		E6057675183619120033AE88 /* Box.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Box.h; sourceTree = "<group>"; };
 		E6057676183619120033AE88 /* Box.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Box.m; sourceTree = "<group>"; };
 		E60C69FF183B94F000D6FA14 /* Star.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Star.h; sourceTree = "<group>"; };
@@ -240,6 +246,10 @@
 				77010768183E0FB500AAF564 /* BridgeButton.m */,
 				7701076A183E0FFB00AAF564 /* Bridge.h */,
 				7701076B183E0FFB00AAF564 /* Bridge.m */,
+				779DB363183E32030059A084 /* PlatformLever.h */,
+				779DB364183E32030059A084 /* PlatformLever.m */,
+				779DB366183E32560059A084 /* MovingPlatform.h */,
+				779DB367183E32560059A084 /* MovingPlatform.m */,
 			);
 			name = Elements;
 			sourceTree = "<group>";
@@ -515,8 +525,10 @@
 				E60C6A0A183BB19F00D6FA14 /* Player.m in Sources */,
 				E633067A1835018A00E908F7 /* XMLParser.m in Sources */,
 				E6E6580B182BC2CE0022BF5F /* Element.m in Sources */,
+				779DB368183E32560059A084 /* MovingPlatform.m in Sources */,
 				E6E65815182BC82E0022BF5F /* LittleJohn.m in Sources */,
 				E6E65801182BB9020022BF5F /* Position.m in Sources */,
+				779DB365183E32030059A084 /* PlatformLever.m in Sources */,
 				E6E6581C182BCD660022BF5F /* Converter.m in Sources */,
 				77010766183E010D00AAF564 /* StarButton.m in Sources */,
 				E6214063182BA53800EC5C21 /* main.m in Sources */,
