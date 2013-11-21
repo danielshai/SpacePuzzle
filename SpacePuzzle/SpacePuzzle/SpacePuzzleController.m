@@ -10,6 +10,7 @@
 #import "Player.h"
 #import "StarButton.h"
 #import "BridgeButton.h"
+#import "PlatformLever.h"
 
 @implementation SpacePuzzleController
 @synthesize board = _board;
@@ -340,7 +341,13 @@
 }
 
 -(void)doActionOnPlatformLever:(Element *)lever {
+    PlatformLever *pl = (PlatformLever*)lever;
+    [pl doAction];
     
+    // Updates the lever on the scene.
+    [_scene refreshElementAtPosition:pl.key OfClass:@"Lever" WithStatus:pl.state];
+    // Updates the moving platform connected to the lever on the scene, i.e. moving it.
+    [_scene setElementAtPosition:pl.movingPlatform.key IsHidden:NO];
 }
 
 -(NSArray*) getDataFromNotification:(NSNotification *)notif Key:(NSString *)key {

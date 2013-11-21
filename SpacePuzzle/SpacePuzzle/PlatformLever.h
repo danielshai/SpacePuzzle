@@ -7,8 +7,7 @@
 //
 
 #import "Element.h"
-
-@class MovingPlatform;
+#import "MovingPlatform.h"
 
 @interface PlatformLever : Element
 @property (nonatomic, assign) MovingPlatform* movingPlatform;
