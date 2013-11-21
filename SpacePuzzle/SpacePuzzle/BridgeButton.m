@@ -11,7 +11,7 @@
 
 @implementation BridgeButton
 @synthesize blocking = _blocking;
-@synthesize element = _element;
+@synthesize bridge = _bridge;
 @synthesize state = _state;
 
 -(id)init {
@@ -30,9 +30,9 @@
     return self;
 }
 
--(id)initWithElement:(Bridge*)e X:(NSInteger)x Y:(NSInteger)y{
+-(id)initWithBridge:(Bridge*)e X:(NSInteger)x Y:(NSInteger)y{
     if(self = [super initWithX:x Y:y]) {
-        _element = e;
+        _bridge = e;
     }
     return self;
 }

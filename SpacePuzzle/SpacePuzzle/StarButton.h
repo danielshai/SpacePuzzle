@@ -11,8 +11,8 @@
 @class Star;
 
 @interface StarButton : Element
-@property (nonatomic, assign) Star* element;
+@property (nonatomic, assign) Star* star;
 @property (nonatomic, assign) BOOL state;
--(id)initWithElement: (Element*)e X:(NSInteger)x Y:(NSInteger)y;
+-(id)initWithStar: (Star*)e X:(NSInteger)x Y:(NSInteger)y;
 
 @end

@@ -11,7 +11,7 @@
 
 @implementation StarButton
 @synthesize blocking = _blocking;
-@synthesize element = _element;
+@synthesize star = _star;
 @synthesize state = _state;
 
 -(id)init {
@@ -30,9 +30,9 @@
     return self;
 }
 
--(id)initWithElement:(Star*)e X:(NSInteger)x Y:(NSInteger)y{
+-(id)initWithStar:(Star*)e X:(NSInteger)x Y:(NSInteger)y{
     if(self = [super initWithX:x Y:y]) {
-        _element = e;
+        _star = e;
     }
     return self;
 }

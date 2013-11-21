@@ -11,8 +11,8 @@
 @class Bridge;
 
 @interface BridgeButton : Element
-@property (nonatomic, assign) Bridge* element;
+@property (nonatomic, assign) Bridge* bridge;
 @property (nonatomic, assign) BOOL state;
--(id)initWithElement: (Element*)e X:(NSInteger)x Y:(NSInteger)y;
+-(id)initWithBridge: (Bridge*)e X:(NSInteger)x Y:(NSInteger)y;
 
 @end
