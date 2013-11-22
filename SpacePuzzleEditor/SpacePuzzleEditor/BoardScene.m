@@ -20,11 +20,14 @@
 @synthesize starTexture = _starTexture;
 @synthesize buttonTexture = _buttonTexture;
 @synthesize controlHover = _controlHover;
+@synthesize connectionSprites = _connectionSprites;
 
 -(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
         /* Setup your scene here */
         _elementSprites = [[NSMutableDictionary alloc] init];
+        _connectionSprites = [[NSMutableDictionary alloc] init];
+        
         controlClickDrag = NO;
         controlDragLine = [SKShapeNode node];
         //controlDragLine.glowWidth = 1;
@@ -37,7 +40,7 @@
         _controlHover = [SKSpriteNode spriteNodeWithImageNamed:@"OrangeTile.png"];
         _controlHover.size = CGSizeMake(42, 42);
         _controlHover.hidden = YES;
-        _controlHover.zPosition = 99999999;
+        _controlHover.zPosition = 999996;
         
         circle = [SKShapeNode node];
         circleOutline = [SKShapeNode node];
@@ -259,6 +262,31 @@
     }
 }
 
+-(void)setAConnectionFrom:(CGPoint)from To:(CGPoint)to {
+    SKShapeNode *s = [SKShapeNode node];
+    CGMutablePathRef pathToDraw = CGPathCreateMutable();
+    from = [Converter convertCoordToPixel:from];
+    to = [Converter convertCoordToPixel:to];
+    to.x += 20;
+    from.x += 20;
+    s.lineWidth = 0.4;
+    s.zPosition = 999999999;
+    [s setStrokeColor:[SKColor colorWithRed:244.0/255.0 green:185.0/255.0 blue:43.0/255.0 alpha:0.61]];
+    CGPathMoveToPoint(pathToDraw, NULL, from.x, from.y);
+    CGPathAddLineToPoint(pathToDraw, NULL, to.x, to.y);
+    s.path = pathToDraw;
+    [self addChild:s];
+    NSNumber *index = [NSNumber numberWithInteger:from.y * BOARD_SIZE_X + from.x];
+    [_connectionSprites setObject:s forKey:index];
+}
+
+-(void)removeAConnectionFrom:(CGPoint)from To:(CGPoint)to {
+    NSNumber *index = [NSNumber numberWithInteger:from.y * BOARD_SIZE_X + from.x];
+    SKShapeNode *s = [_connectionSprites objectForKey:index];
+    [s removeFromParent];
+    [_connectionSprites removeObjectForKey:index];
+}
+
 -(void)removeOneSprite:(NSNumber *)index {
     SKSpriteNode* s = [_elementSprites objectForKey:index];
     [s removeFromParent];
@@ -427,6 +455,7 @@
         SKSpriteNode* s = [_elementSprites objectForKey:key];
         [s removeFromParent];
     }
+    [_elementSprites removeAllObjects];
 }
 
 -(void)cleanView {

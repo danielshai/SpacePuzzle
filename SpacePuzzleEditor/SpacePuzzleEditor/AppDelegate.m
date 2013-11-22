@@ -94,6 +94,10 @@
             Star *s = (Star*) eEnd;
             // Sets the |StarButton|'s |Star| to be the one selected by the user.
             sb.star = s;
+            CGPoint from = CGPointMake(startPoint.pointValue.x, startPoint.pointValue.y);
+            CGPoint to = CGPointMake(endPoint.pointValue.x, endPoint.pointValue.y);
+            [_scene removeAConnectionFrom:from To:to];
+            [_scene setAConnectionFrom:from To:to];
         } else {
             // No highlight should be presented, since the elements cannot be connected.
             [_scene noHighlight];
