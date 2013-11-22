@@ -172,7 +172,6 @@
     [_scene setupElement:p Name:@"ButtonOFF" Hidden:NO];
     
     // TEMP TEST CODE FOR PLATFORM LEVER
-    nr = [NSNumber numberWithInteger:2*BOARD_SIZE_X+1];
     MovingPlatform *mp = [[MovingPlatform alloc] initWithX:2 Y:0 Hidden:NO];
     [[_board elementDictionary] setObject:mp forKey:mp.key];
     PlatformLever *pl = [[PlatformLever alloc] initWithMovingPlatform:mp X:1 Y:0];
@@ -181,7 +180,6 @@
     [_scene setupElement:p Name:@"MovingPlatform" Hidden:NO];
     [_scene setElementAtPosition:mp.key IsHidden:NO];
     [_scene setElementAtPosition:pl.key IsHidden:NO];
-    
     nr = [NSNumber numberWithInteger:1];
     [[_board elementDictionary] setObject:pl forKey:nr];
     p = CGPointMake(1, 0);
