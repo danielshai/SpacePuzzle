@@ -184,8 +184,7 @@
     nr = [NSNumber numberWithInteger:1];
     [[_board elementDictionary] setObject:pl forKey:nr];
     p = CGPointMake(1, 0);
-    [_scene setupElement:p Name:@"LeverOFF" Hidden:NO];
-    
+    [_scene setupElement:p Name:@"SwitchOFF" Hidden:NO];
 }
 
 /*
@@ -275,6 +274,8 @@
                 [self doActionOnStarButton:e];
             } else if ([e isKindOfClass:[BridgeButton class]]) {
                 [self doActionOnBridgeButton:e];
+            } else if ([e isKindOfClass:[PlatformLever class]]) {
+                [self doActionOnPlatformLever:e];
             }
         }
     }
@@ -364,6 +365,7 @@
     [_scene refreshElementAtPosition:pl.key OfClass:@"Lever" WithStatus:pl.state];
     // Updates the moving platform connected to the lever on the scene, i.e. moving it.
     [_scene setElementAtPosition:pl.movingPlatform.key IsHidden:NO];
+    [_scene refreshElementAtPosition:pl.movingPlatform.key OfClass:@"MovingPlatform" WithStatus:pl.movingPlatform.blocking];
 }
 
 -(NSArray*) getDataFromNotification:(NSNotification *)notif Key:(NSString *)key {

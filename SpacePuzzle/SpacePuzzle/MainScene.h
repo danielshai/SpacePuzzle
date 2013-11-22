@@ -17,6 +17,8 @@
 @property (nonatomic, retain) SKTexture *buttonOff;
 @property (nonatomic, retain) SKTexture *bridgeOn;
 @property (nonatomic, retain) SKTexture *bridgeOff;
+@property (nonatomic, retain) SKTexture *switchOn;
+@property (nonatomic, retain) SKTexture *switchOff;
 @property (nonatomic, retain) SKSpriteNode *bigL;
 @property (nonatomic, retain) SKSpriteNode *littleJohn;
 @property (nonatomic, retain) SKSpriteNode *currentUnit;

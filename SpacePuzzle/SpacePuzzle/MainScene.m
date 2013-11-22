@@ -18,6 +18,8 @@
 @synthesize buttonOn = _buttonOn;
 @synthesize bridgeOff = _bridgeOff;
 @synthesize bridgeOn = _bridgeOn;
+@synthesize switchOff = _switchOff;
+@synthesize switchOn = _switchOn;
 
 -(id)initWithSize:(CGSize)size {    
     if (self = [super initWithSize:size]) {
@@ -31,6 +33,8 @@
         _buttonOff = [SKTexture textureWithImageNamed:@"ButtonOFF.png"];
         _bridgeOn = [SKTexture textureWithImageNamed:@"BridgeON.png"];
         _bridgeOff = [SKTexture textureWithImageNamed:@"BridgeOFF.png"];
+        _switchOn = [SKTexture textureWithImageNamed:@"SwitchON.png"];
+        _switchOff = [SKTexture textureWithImageNamed:@"SwitchOFF.png"];
         _bkg = [SKSpriteNode spriteNodeWithImageNamed:@"Background.png"];
         _bkg.size = CGSizeMake(size.width, size.height);
 
@@ -117,6 +121,12 @@
             s.texture = _bridgeOn;
         } else {
             s.texture = _bridgeOff;
+        }
+    } else if ([name isEqualToString:@"Lever"]) {
+        if (on) {
+            s.texture = _switchOn;
+        } else {
+            s.texture = _switchOff;
         }
     }
 }
