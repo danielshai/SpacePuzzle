@@ -39,6 +39,8 @@
 		E6A0EEE418311690006BF476 /* BoardCoord.m in Sources */ = {isa = PBXBuildFile; fileRef = E6A0EEE018311690006BF476 /* BoardCoord.m */; };
 		E6A0EEE518311690006BF476 /* Position.m in Sources */ = {isa = PBXBuildFile; fileRef = E6A0EEE218311690006BF476 /* Position.m */; };
 		E6EE6F411831428B0072D3E6 /* Converter.m in Sources */ = {isa = PBXBuildFile; fileRef = E6EE6F401831428B0072D3E6 /* Converter.m */; };
+		E6F5C0CC183E3F3200A4275B /* Button.png in Resources */ = {isa = PBXBuildFile; fileRef = E6F5C0CB183E3F3200A4275B /* Button.png */; };
+		E6FBA613183E478A007A39C4 /* StarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E6FBA612183E478A007A39C4 /* StarButton.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,6 +105,9 @@
 		E6EE6F3F1831428B0072D3E6 /* Converter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Converter.h; path = ../SpacePuzzle/SpacePuzzle/Converter.h; sourceTree = "<group>"; };
 		E6EE6F401831428B0072D3E6 /* Converter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Converter.m; path = ../SpacePuzzle/SpacePuzzle/Converter.m; sourceTree = "<group>"; };
 		E6EED0BA183B623E0083E633 /* Macros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Macros.h; path = ../../SpacePuzzle/SpacePuzzle/Macros.h; sourceTree = "<group>"; };
+		E6F5C0CB183E3F3200A4275B /* Button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Button.png; path = ../../Resources/Elements/Button.png; sourceTree = "<group>"; };
+		E6FBA611183E478A007A39C4 /* StarButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StarButton.h; path = ../SpacePuzzle/SpacePuzzle/StarButton.h; sourceTree = "<group>"; };
+		E6FBA612183E478A007A39C4 /* StarButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StarButton.m; path = ../SpacePuzzle/SpacePuzzle/StarButton.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +135,7 @@
 		E60576A0183651E30033AE88 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E6F5C0CB183E3F3200A4275B /* Button.png */,
 				E68A93F7183D0A8600AE9D4C /* Cracked.png */,
 				E68A93F5183D0A7900AE9D4C /* Box.png */,
 				E60C69FD183B908500D6FA14 /* Star.png */,
@@ -147,6 +153,8 @@
 		E60C6A05183B954A00D6FA14 /* Elements */ = {
 			isa = PBXGroup;
 			children = (
+				E6FBA611183E478A007A39C4 /* StarButton.h */,
+				E6FBA612183E478A007A39C4 /* StarButton.m */,
 				E605767918362B590033AE88 /* Element.h */,
 				E605767A18362B590033AE88 /* Element.m */,
 				E605767B18362B590033AE88 /* Box.h */,
@@ -345,6 +353,7 @@
 				E654B3001830F7DD006BFCAC /* Images.xcassets in Resources */,
 				E605769E183651D20033AE88 /* solidtile.png in Resources */,
 				E68A93F6183D0A7900AE9D4C /* Box.png in Resources */,
+				E6F5C0CC183E3F3200A4275B /* Button.png in Resources */,
 				E605769D183651D20033AE88 /* crackedtile.jpg in Resources */,
 				E654B2EE1830F7DD006BFCAC /* InfoPlist.strings in Resources */,
 				E6057699183651740033AE88 /* Background.png in Resources */,
@@ -375,6 +384,7 @@
 				E6A0EEE518311690006BF476 /* Position.m in Sources */,
 				E654B2F01830F7DD006BFCAC /* main.m in Sources */,
 				E605767D18362B590033AE88 /* Element.m in Sources */,
+				E6FBA613183E478A007A39C4 /* StarButton.m in Sources */,
 				E6A0EEE418311690006BF476 /* BoardCoord.m in Sources */,
 				E65EE66F18325FB300E38A3F /* Palette.m in Sources */,
 				E6EE6F411831428B0072D3E6 /* Converter.m in Sources */,

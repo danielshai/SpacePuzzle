@@ -425,6 +425,36 @@
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
+                    <imageView hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LJo-D7-tv0">
+                        <rect key="frame" x="107" y="99" width="64" height="64"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" id="PGn-QY-J6c"/>
+                    </imageView>
+                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TBv-LT-2v8">
+                        <rect key="frame" x="115" y="107" width="48" height="48"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" image="Button" id="Luv-Xz-XIA"/>
+                    </imageView>
+                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K3t-Ns-VvJ">
+                        <rect key="frame" x="118" y="107" width="45" height="45"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" imagePosition="only" alignment="center" borderStyle="border" transparent="YES" imageScaling="proportionallyDown" inset="2" id="Zhf-Cn-z8d">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="starButtonClick:" target="OQd-pb-Vvp" id="nXq-nJ-tKN"/>
+                        </connections>
+                    </button>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OBF-lK-yLx">
+                        <rect key="frame" x="112" y="162" width="53" height="11"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" controlSize="mini" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Star Button" id="lpX-wE-jxb">
+                            <font key="font" metaFont="miniSystem"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
                     <imageView hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="r1a-kb-Moi">
                         <rect key="frame" x="203" y="17" width="64" height="64"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -471,6 +501,7 @@
                 <outlet property="selectedRock" destination="yz7-xM-C13" id="Ss1-e0-F3d"/>
                 <outlet property="selectedSolid" destination="HFh-uJ-dod" id="XG7-Kx-ETS"/>
                 <outlet property="selectedStar" destination="mV6-HW-5uY" id="erW-D1-5Zu"/>
+                <outlet property="selectedStarButton" destination="LJo-D7-tv0" id="BZa-bA-UfB"/>
                 <outlet property="selectedStart" destination="fGQ-lQ-Sk2" id="F6a-7C-Cl9"/>
                 <outlet property="selectedVoid" destination="1lE-yZ-g96" id="Npk-AE-Baw"/>
                 <outlet property="solid" destination="qvy-5d-OZj" id="WLd-1y-ACU"/>
@@ -484,6 +515,7 @@
         </window>
         <customObject id="494" customClass="AppDelegate">
             <connections>
+                <outlet property="controlPanel" destination="Nfw-WY-MpN" id="Abi-uL-Trr"/>
                 <outlet property="crackedPalette" destination="FWN-3I-4Vg" id="b1Y-S4-gNT"/>
                 <outlet property="palette" destination="vlI-Vs-b8g" id="IEf-tI-d5o"/>
                 <outlet property="recentMenu" destination="7wc-3F-y89" id="ROQ-Zi-Cid"/>
@@ -499,10 +531,21 @@
         </customObject>
         <customObject id="420" customClass="NSFontManager"/>
         <collectionViewItem id="7gO-MF-BWZ"/>
+        <window title="Element Properties" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="Nfw-WY-MpN">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="109" y="138" width="480" height="270"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1280" height="800"/>
+            <view key="contentView" id="qgV-Rg-hHM">
+                <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                <autoresizingMask key="autoresizingMask"/>
+            </view>
+        </window>
     </objects>
     <resources>
         <image name="Background.png" width="128" height="128"/>
         <image name="Box" width="176" height="176"/>
+        <image name="Button" width="173" height="168"/>
         <image name="Cracked" width="88" height="88"/>
         <image name="Finish" width="256" height="256"/>
         <image name="NSRemoveTemplate" width="8" height="8"/>

@@ -17,6 +17,7 @@
 #define BRUSH_FINISH            102
 #define BRUSH_STAR              103
 #define BRUSH_ERASER            104
+#define BRUSH_STARBUTTON        105
 
 #define TILESIZE                44
 #define BOARD_PIXEL_BEGIN_X     10 // The pixel value that the actual board begins at.

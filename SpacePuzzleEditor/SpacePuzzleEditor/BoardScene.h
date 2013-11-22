@@ -9,6 +9,10 @@
 @interface BoardScene : SKScene {
     NSInteger statusOfPalette;
     SKTexture *currentTexture;
+    BOOL controlClickDrag;
+    CGPoint startControlDrag;
+    CGPoint endControlDrag;
+    SKShapeNode *controlDragLine;
 }
 @property (nonatomic, retain) SKTexture *solid;
 @property (nonatomic, retain) SKTexture *voidTile;
@@ -17,9 +21,11 @@
 @property (nonatomic, retain) SKTexture *finishElement;
 @property (nonatomic, retain) SKTexture *rockTexture;
 @property (nonatomic, retain) SKTexture *starTexture;
+@property (nonatomic, retain) SKTexture *buttonTexture;
 @property (nonatomic, retain) SKSpriteNode *bkg;
 @property (nonatomic, retain) SKSpriteNode *startElSprite;
 @property (nonatomic, retain) SKSpriteNode *finishSprite;
+@property (nonatomic, retain) SKSpriteNode *controlHover;
 @property (nonatomic, retain) NSMutableArray *boardSprites;
 @property (nonatomic, retain) NSMutableDictionary *elementSprites;
 
@@ -39,10 +45,12 @@
 -(void)rockClick;
 -(void)starClick;
 -(void)eraserClick;
+-(void)starButtonClick;
 -(void)notifyText:(NSString *)text Object: (NSObject*)object Key: (NSString*)key;
 -(void)changeTextureOfBrush:(NSInteger) status;
 -(void)editABoardItem:(NSEvent *)theEvent;
 -(void)observeText:(NSString *)text Selector:(SEL)selector;
 -(void)addAStar:(CGPoint) pos Index: (NSNumber*) index;
 -(void)addARock:(CGPoint) pos Index: (NSNumber*) index;
+-(void)addAStarButton:(CGPoint) pos Index: (NSNumber*) index;
 @end

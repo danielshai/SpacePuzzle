@@ -20,7 +20,7 @@
     // Used for checking if a file has been edited, which is used to give feedback to the user of this fact.
     BOOL edited;
 }
-
+@property (unsafe_unretained) IBOutlet NSWindow *controlPanel;
 @property (retain) IBOutlet NSWindow *window;
 @property (retain) IBOutlet SKView *skView;
 @property (nonatomic, retain) Board *board;
@@ -31,6 +31,7 @@
 -(IBAction)saveLevel:(id)sender;
 -(IBAction)saveAsLevel:(id)sender;
 -(void)boardEdited:(NSNotification *) notification;
+-(void)showControlPanel:(NSNotification *) notification;
 -(void)cleanView;
 -(void)refreshView;
 -(void)refreshBoardView;
