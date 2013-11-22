@@ -34,9 +34,10 @@
         controlDragOutline = [SKShapeNode node];
         controlDragOutline.lineWidth = 2;
         
-        _controlHover = [SKSpriteNode spriteNodeWithImageNamed:@"Cracked.png"];
-        _controlHover.size = CGSizeMake(32, 32);
+        _controlHover = [SKSpriteNode spriteNodeWithImageNamed:@"OrangeTile.png"];
+        _controlHover.size = CGSizeMake(42, 42);
         _controlHover.hidden = YES;
+        _controlHover.zPosition = 99999999;
         
         circle = [SKShapeNode node];
         circleOutline = [SKShapeNode node];
@@ -93,6 +94,7 @@
         [self addChild:controlDragLine];
         [self addChild:circle];
         [self addChild:circleOutline];
+        [self addChild:_controlHover];
         //  [self addChild:controlDragOutline];
     }
     return self;
@@ -100,16 +102,17 @@
 
 /*
  *  Highlights an element. Used when control dragging to show if a connection can be made. */
--(void)highlightElement:(NSNotification*) notification {
-    // Get the data (location of click).
-    NSDictionary *userInfo = notification.userInfo;
-    NSSet *objectSent = [userInfo objectForKey:@"HighlightElement"];
-    NSArray *data = [objectSent allObjects];
-    // Edited at coordinate.
-    NSValue *startPoint = [data objectAtIndex:0];
-    
-    
+-(void)highlightElement:(CGPoint) elementIndex {
+    _controlHover.hidden = NO;
+    //CGPoint p = CGPointMake(elementIndex.pointValue.x, elementIndex.pointValue.y);
+   
+    elementIndex = [Converter convertCoordToPixel:elementIndex];
+    elementIndex.x += 22;
+    _controlHover.position = elementIndex;
+}
 
+-(void)noHighlight {
+    _controlHover.hidden = YES;
 }
 
 -(void)mouseDown:(NSEvent *)theEvent {
@@ -138,6 +141,11 @@
         controlDragOutline.hidden = NO;
         endControlDrag = CGPointMake(loc.x, loc.y);
         [self drawControlLine];
+        CGPoint start = [Converter convertMousePosToCoord:startControlDrag];
+        CGPoint end = [Converter convertMousePosToCoord:endControlDrag];
+        NSArray *arr = [NSArray arrayWithObjects:[NSValue valueWithPoint:start],
+                        [NSNumber valueWithPoint:end], nil];
+        [self notifyText:@"ControlDrag" Object:arr Key:@"ControlDrag"];
     } else {
         circle.hidden = YES;
         circleOutline.hidden = YES;
@@ -182,7 +190,8 @@
         endControlDrag = [Converter convertMousePosToCoord:endControlDrag];
         NSArray *arr = [NSArray arrayWithObjects:[NSValue valueWithPoint:startControlDrag],
                         [NSNumber valueWithPoint:endControlDrag], nil];
-        [self notifyText:@"ControlDrag" Object:arr Key:@"ControlDrag"];
+        [self notifyText:@"ControlDragUp" Object:arr Key:@"ControlDragUp"];
+        [self noHighlight];
     }
 }
 

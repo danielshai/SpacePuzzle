@@ -38,6 +38,7 @@
 		E6A0EEE318311690006BF476 /* Board.m in Sources */ = {isa = PBXBuildFile; fileRef = E6A0EEDE18311690006BF476 /* Board.m */; };
 		E6A0EEE418311690006BF476 /* BoardCoord.m in Sources */ = {isa = PBXBuildFile; fileRef = E6A0EEE018311690006BF476 /* BoardCoord.m */; };
 		E6A0EEE518311690006BF476 /* Position.m in Sources */ = {isa = PBXBuildFile; fileRef = E6A0EEE218311690006BF476 /* Position.m */; };
+		E6D12B64183F661A00DE1632 /* OrangeTile.png in Resources */ = {isa = PBXBuildFile; fileRef = E6D12B63183F661A00DE1632 /* OrangeTile.png */; };
 		E6EE6F411831428B0072D3E6 /* Converter.m in Sources */ = {isa = PBXBuildFile; fileRef = E6EE6F401831428B0072D3E6 /* Converter.m */; };
 		E6F5C0CC183E3F3200A4275B /* Button.png in Resources */ = {isa = PBXBuildFile; fileRef = E6F5C0CB183E3F3200A4275B /* Button.png */; };
 		E6FBA613183E478A007A39C4 /* StarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E6FBA612183E478A007A39C4 /* StarButton.m */; };
@@ -102,6 +103,7 @@
 		E6A0EEE018311690006BF476 /* BoardCoord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BoardCoord.m; path = ../../SpacePuzzle/SpacePuzzle/BoardCoord.m; sourceTree = "<group>"; };
 		E6A0EEE118311690006BF476 /* Position.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Position.h; path = ../../SpacePuzzle/SpacePuzzle/Position.h; sourceTree = "<group>"; };
 		E6A0EEE218311690006BF476 /* Position.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Position.m; path = ../../SpacePuzzle/SpacePuzzle/Position.m; sourceTree = "<group>"; };
+		E6D12B63183F661A00DE1632 /* OrangeTile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = OrangeTile.png; path = ../../../Downloads/OrangeTile.png; sourceTree = "<group>"; };
 		E6EE6F3F1831428B0072D3E6 /* Converter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Converter.h; path = ../SpacePuzzle/SpacePuzzle/Converter.h; sourceTree = "<group>"; };
 		E6EE6F401831428B0072D3E6 /* Converter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Converter.m; path = ../SpacePuzzle/SpacePuzzle/Converter.m; sourceTree = "<group>"; };
 		E6EED0BA183B623E0083E633 /* Macros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Macros.h; path = ../../SpacePuzzle/SpacePuzzle/Macros.h; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 		E60576A0183651E30033AE88 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E6D12B63183F661A00DE1632 /* OrangeTile.png */,
 				E6F5C0CB183E3F3200A4275B /* Button.png */,
 				E68A93F7183D0A8600AE9D4C /* Cracked.png */,
 				E68A93F5183D0A7900AE9D4C /* Box.png */,
@@ -359,6 +362,7 @@
 				E6057699183651740033AE88 /* Background.png in Resources */,
 				E654B2F41830F7DD006BFCAC /* Credits.rtf in Resources */,
 				E654B2F61830F7DD006BFCAC /* MainMenu.xib in Resources */,
+				E6D12B64183F661A00DE1632 /* OrangeTile.png in Resources */,
 				E60C69FE183B908500D6FA14 /* Star.png in Resources */,
 				E68A93F8183D0A8700AE9D4C /* Cracked.png in Resources */,
 				E605769F183651D20033AE88 /* voidtile.png in Resources */,

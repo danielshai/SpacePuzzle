@@ -50,7 +50,8 @@
 -(void)eraserClick;
 -(void)starButtonClick;
 -(void)drawControlLine;
--(void)highlightElement:(NSNumber*) elementIndex;
+-(void)highlightElement:(CGPoint) elementIndex;
+-(void)noHighlight;
 -(void)notifyText:(NSString *)text Object: (NSObject*)object Key: (NSString*)key;
 -(void)changeTextureOfBrush:(NSInteger) status;
 -(void)editABoardItem:(NSEvent *)theEvent;
