@@ -174,6 +174,10 @@
         sprite.size = CGSizeMake(40, 40);
         pos.y -= 2;
         [sprite setPosition:pos];
+    } else if([className isEqualToString:@"MovingPlatform"]) {
+        sprite.size = CGSizeMake(42, 40);
+        pos.y -= 1;
+        [sprite setPosition:pos];
     }
     
     NSNumber *nr = [NSNumber numberWithInt:coord.y*BOARD_SIZE_X + coord.x];

@@ -177,7 +177,8 @@
     [[_board elementDictionary] setObject:mp forKey:mp.key];
     PlatformLever *pl = [[PlatformLever alloc] initWithMovingPlatform:mp X:1 Y:0];
     [[_board elementDictionary] setObject:pl forKey:pl.key];
-    
+    p = CGPointMake(2, 0);
+    [_scene setupElement:p Name:@"MovingPlatform" Hidden:NO];
     [_scene setElementAtPosition:mp.key IsHidden:NO];
     [_scene setElementAtPosition:pl.key IsHidden:NO];
     
