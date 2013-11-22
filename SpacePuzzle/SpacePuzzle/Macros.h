@@ -36,6 +36,9 @@
 #define UNIT_MOVED              @"UnitMoved"
 #define UNIT_WANTS_TO_MOVE      @"UnitWantsToMove"
 
+#define CLASS_STARBUTTON        @"StarButton"
+#define CLASS_STAR              @"Star"
+
 #define RIGHT                   1
 #define LEFT                    2
 #define UP                      3

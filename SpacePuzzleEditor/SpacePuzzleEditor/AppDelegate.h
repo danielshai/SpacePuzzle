@@ -32,10 +32,12 @@
 -(IBAction)saveAsLevel:(id)sender;
 -(void)boardEdited:(NSNotification *) notification;
 -(void)showControlPanel:(NSNotification *) notification;
+-(void)controlDragged:(NSNotification *) notification;
 -(void)cleanView;
 -(void)refreshView;
 -(void)refreshBoardView;
 -(void)refreshElementView;
 -(void)setupBoard;
 -(void)observeText:(NSString *)text Selector:(SEL)selector;
+-(void)notifyText:(NSString *)text Object: (NSObject*)object Key: (NSString*)key;
 @end

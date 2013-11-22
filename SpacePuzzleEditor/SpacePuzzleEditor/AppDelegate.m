@@ -34,12 +34,39 @@
 
     [self setupBoard];
     [self observeText:@"BoardEdited" Selector:@selector(boardEdited:)];
-    [self observeText:@"ControlPanel" Selector:@selector(showControlPanel:)];
+    [self observeText:@"ControlDrag" Selector:@selector(controlDragged:)];
     [[self window] setTitle:@"Untitled.splvl"];
 }
 
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender {
     return YES;
+}
+
+-(void)controlDragged:(NSNotification*) notification {
+    // Get the data (location of click).
+    NSDictionary *userInfo = notification.userInfo;
+    NSSet *objectSent = [userInfo objectForKey:@"ControlDrag"];
+    NSArray *data = [objectSent allObjects];
+    // Edited at coordinate.
+    NSValue *startPoint = [data objectAtIndex:0];
+    NSValue *endPoint = [data objectAtIndex:1];
+    NSNumber *indexStart = [NSNumber numberWithInteger:startPoint.pointValue.y*BOARD_SIZE_X + startPoint.pointValue.x];
+    NSNumber *indexEnd = [NSNumber numberWithInteger:endPoint.pointValue.y*BOARD_SIZE_X + endPoint.pointValue.x];
+    
+    Element *eStart = [[_board elementDictionary] objectForKey:indexStart];
+    Element *eEnd = [[_board elementDictionary] objectForKey:indexEnd];
+    
+    if(eStart && eEnd) {
+        if([NSStringFromClass([eStart class]) isEqualToString:CLASS_STARBUTTON] &&
+           [NSStringFromClass([eEnd class]) isEqualToString:CLASS_STAR]) {
+            NSArray *arr = [NSArray arrayWithObjects:startPoint, nil];
+            
+            [self notifyText:@"HighlightElement" Object:arr Key:@"HighlightElement"];
+            NSLog(@"BUTTON TO STAR");
+        }
+        // IF THE TWO ELEMENTS CAN BE CONNECTED, NOTIFY SCENE TO HIGHLIGHT END ELEMENT.
+        
+    }
 }
 
 -(void)showControlPanel:(NSNotification *) notification {
@@ -312,6 +339,16 @@
 
 -(void)observeText:(NSString *)text Selector:(SEL)selector {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:selector name:text object:nil];
+}
+
+-(void)notifyText:(NSString *)text Object: (NSObject*)object Key: (NSString*)key {
+    if(object) {
+        NSDictionary *userInfo = [NSDictionary dictionaryWithObject:object forKey:key];
+        [[NSNotificationCenter defaultCenter] postNotificationName:text object:nil
+                                                          userInfo:userInfo];
+    } else {
+        [[NSNotificationCenter defaultCenter] postNotificationName:text object:nil];
+    }
 }
 
 @end
