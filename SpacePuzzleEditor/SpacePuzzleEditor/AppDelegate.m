@@ -6,6 +6,7 @@
 #import "BoardScene.h"
 #import "XMLParser.h"
 #import "Element.h"
+#import "StarButton.h"
 
 @implementation AppDelegate
 
@@ -35,6 +36,7 @@
     [self setupBoard];
     [self observeText:@"BoardEdited" Selector:@selector(boardEdited:)];
     [self observeText:@"ControlDrag" Selector:@selector(controlDragged:)];
+    [self observeText:@"ControlDragUp" Selector:@selector(controlDragUp:)];
     [[self window] setTitle:@"Untitled.splvl"];
 }
 
@@ -43,11 +45,10 @@
 }
 
 -(void)controlDragged:(NSNotification*) notification {
-    // Get the data (location of click).
+    // Get the data.
     NSDictionary *userInfo = notification.userInfo;
     NSSet *objectSent = [userInfo objectForKey:@"ControlDrag"];
     NSArray *data = [objectSent allObjects];
-    // Edited at coordinate.
     NSValue *startPoint = [data objectAtIndex:0];
     NSValue *endPoint = [data objectAtIndex:1];
     NSNumber *indexStart = [NSNumber numberWithInteger:startPoint.pointValue.y*BOARD_SIZE_X + startPoint.pointValue.x];
@@ -59,14 +60,48 @@
     if(eStart && eEnd) {
         if([NSStringFromClass([eStart class]) isEqualToString:CLASS_STARBUTTON] &&
            [NSStringFromClass([eEnd class]) isEqualToString:CLASS_STAR]) {
-            NSArray *arr = [NSArray arrayWithObjects:startPoint, nil];
-            
-            [self notifyText:@"HighlightElement" Object:arr Key:@"HighlightElement"];
-            NSLog(@"BUTTON TO STAR");
+            // A |StarButton| connecting to a |Star|.
+            // Tell the scene to highlight star.
+            CGPoint p = CGPointMake(endPoint.pointValue.x, endPoint.pointValue.y);
+            [_scene highlightElement:p];
+        } else {
+            // No highlight should be presented, since the elements cannot be connected.
+            [_scene noHighlight];
         }
-        // IF THE TWO ELEMENTS CAN BE CONNECTED, NOTIFY SCENE TO HIGHLIGHT END ELEMENT.
-        
+    } else {
+        [_scene noHighlight];
     }
+}
+
+-(void)controlDragUp:(NSNotification *)notification {
+    // Get the data.
+    NSDictionary *userInfo = notification.userInfo;
+    NSSet *objectSent = [userInfo objectForKey:@"ControlDragUp"];
+    NSArray *data = [objectSent allObjects];
+    NSValue *startPoint = [data objectAtIndex:0];
+    NSValue *endPoint = [data objectAtIndex:1];
+    NSNumber *indexStart = [NSNumber numberWithInteger:startPoint.pointValue.y*BOARD_SIZE_X + startPoint.pointValue.x];
+    NSNumber *indexEnd = [NSNumber numberWithInteger:endPoint.pointValue.y*BOARD_SIZE_X + endPoint.pointValue.x];
+    
+    Element *eStart = [[_board elementDictionary] objectForKey:indexStart];
+    Element *eEnd = [[_board elementDictionary] objectForKey:indexEnd];
+    
+    if(eStart && eEnd) {
+        if([NSStringFromClass([eStart class]) isEqualToString:CLASS_STARBUTTON] &&
+           [NSStringFromClass([eEnd class]) isEqualToString:CLASS_STAR]) {
+            // A |StarButton| connecting to a |Star|.
+            StarButton *sb = (StarButton*) eStart;
+            Star *s = (Star*) eEnd;
+            // Sets the |StarButton|'s |Star| to be the one selected by the user.
+            sb.star = s;
+        } else {
+            // No highlight should be presented, since the elements cannot be connected.
+            [_scene noHighlight];
+        }
+    } else {
+        [_scene noHighlight];
+    }
+
 }
 
 -(void)showControlPanel:(NSNotification *) notification {

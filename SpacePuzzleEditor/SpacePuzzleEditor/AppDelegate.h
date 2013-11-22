@@ -14,6 +14,8 @@
 #import "BoardScene.h"
 
 @class BoardView;
+@class Star;
+@class StarButton;
 
 @interface AppDelegate : NSObject <NSApplicationDelegate> {
     NSString *currentFilePath;
@@ -33,6 +35,7 @@
 -(void)boardEdited:(NSNotification *) notification;
 -(void)showControlPanel:(NSNotification *) notification;
 -(void)controlDragged:(NSNotification *) notification;
+-(void)controlDragUp:(NSNotification *) notification;
 -(void)cleanView;
 -(void)refreshView;
 -(void)refreshBoardView;
