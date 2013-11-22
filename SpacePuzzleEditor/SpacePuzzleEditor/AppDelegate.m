@@ -230,7 +230,6 @@
         } else if (stat == BRUSH_ERASER) {
             // If a connection is on the place, first remove that one.
             if(![_scene removeAConnectionFrom:point]) {
-                NSLog(@"NO CONNECTION");
                 NSNumber *index = [NSNumber numberWithInt:val.pointValue.y * BOARD_SIZE_X
                                                           + val.pointValue.x];
                 [[_board elementDictionary] removeObjectForKey: index];

@@ -273,9 +273,19 @@
     from.x += 20;
     s.lineWidth = 0.4;
     s.zPosition = 999999999;
-    [s setStrokeColor:[SKColor colorWithRed:244.0/255.0 green:185.0/255.0 blue:43.0/255.0 alpha:0.65]];
+    [s setStrokeColor:[SKColor colorWithRed:244.0/255.0 green:185.0/255.0 blue:43.0/255.0 alpha:0.25]];
     CGPathMoveToPoint(pathToDraw, NULL, from.x, from.y);
     CGPathAddLineToPoint(pathToDraw, NULL, to.x, to.y);
+    
+    // Add a connecting circle to end points.
+    CGPathAddArc(pathToDraw, NULL, from.x, from.y, 2, 0, M_PI*2, NO);
+    CGPathAddArc(pathToDraw, NULL, from.x, from.y, 1, 0, M_PI*2, NO);
+    CGPathAddArc(pathToDraw, NULL, from.x, from.y, 0.5, 0, M_PI*2, NO);
+    
+    CGPathAddArc(pathToDraw, NULL, to.x, to.y, 2, 0, M_PI*2, NO);
+    CGPathAddArc(pathToDraw, NULL, to.x, to.y, 1, 0, M_PI*2, NO);
+    CGPathAddArc(pathToDraw, NULL, to.x, to.y, 0.5, 0, M_PI*2, NO);
+    
     s.path = pathToDraw;
     [self addChild:s];
     
