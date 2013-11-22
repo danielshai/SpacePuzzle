@@ -12,6 +12,6 @@
 @interface PlatformLever : Element
 @property (nonatomic, assign) MovingPlatform* movingPlatform;
 @property (nonatomic, assign) BOOL state;
--(id)initWithBridge: (MovingPlatform*)e X:(NSInteger)x Y:(NSInteger)y;
+-(id)initWithMovingPlatform: (MovingPlatform*)e X:(NSInteger)x Y:(NSInteger)y;
 
 @end

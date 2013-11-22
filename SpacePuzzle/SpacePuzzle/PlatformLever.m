@@ -29,7 +29,7 @@
     return self;
 }
 
--(id)initWithBridge:(MovingPlatform*)e X:(NSInteger)x Y:(NSInteger)y{
+-(id)initWithMovingPlatform:(MovingPlatform*)e X:(NSInteger)x Y:(NSInteger)y{
     if(self = [super initWithX:x Y:y]) {
         _movingPlatform = e;
     }

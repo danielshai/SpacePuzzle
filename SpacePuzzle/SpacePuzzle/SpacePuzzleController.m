@@ -159,7 +159,7 @@
             [_scene setupElement:p Name:@"ButtonOFF" Hidden:[obj hidden]];
         }
     }
-    // TEMP TEST CODE
+    // TEMP TEST CODE FOR STAR BUTTON
     NSNumber *nr = [NSNumber numberWithInteger:2*BOARD_SIZE_X];
     obj = [[_board elementDictionary] objectForKey:nr];
     Star *s = (Star*)obj;
@@ -170,6 +170,22 @@
     [[_board elementDictionary] setObject:st forKey:nr];
     CGPoint p = CGPointMake(0, 0);
     [_scene setupElement:p Name:@"ButtonOFF" Hidden:NO];
+    
+    // TEMP TEST CODE FOR PLATFORM LEVER
+    nr = [NSNumber numberWithInteger:2*BOARD_SIZE_X+1];
+    MovingPlatform *mp = [[MovingPlatform alloc] initWithX:2 Y:0 Hidden:NO];
+    [[_board elementDictionary] setObject:mp forKey:mp.key];
+    PlatformLever *pl = [[PlatformLever alloc] initWithMovingPlatform:mp X:1 Y:0];
+    [[_board elementDictionary] setObject:pl forKey:pl.key];
+    
+    [_scene setElementAtPosition:mp.key IsHidden:NO];
+    [_scene setElementAtPosition:pl.key IsHidden:NO];
+    
+    nr = [NSNumber numberWithInteger:1];
+    [[_board elementDictionary] setObject:pl forKey:nr];
+    p = CGPointMake(1, 0);
+    [_scene setupElement:p Name:@"LeverOFF" Hidden:NO];
+    
 }
 
 /*
