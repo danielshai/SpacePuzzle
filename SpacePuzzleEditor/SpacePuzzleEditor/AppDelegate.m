@@ -96,7 +96,8 @@
             sb.star = s;
             CGPoint from = CGPointMake(startPoint.pointValue.x, startPoint.pointValue.y);
             CGPoint to = CGPointMake(endPoint.pointValue.x, endPoint.pointValue.y);
-            [_scene removeAConnectionFrom:from];
+   
+            [_scene removeAConnectionFrom:from To:to];
             [_scene setAConnectionFrom:from To:to];
         } else {
             // No highlight should be presented, since the elements cannot be connected.
@@ -105,7 +106,6 @@
     } else {
         [_scene noHighlight];
     }
-
 }
 
 -(void)showControlPanel:(NSNotification *) notification {
@@ -196,8 +196,16 @@
         [_scene addElement:e.className Position:pos];
     }
 }
+/*
+-(void)refreshConnections {
+    for(id key in [_board elementDictionary]) {
+        if([NSStringFromClass([key class])) {
+            
+        }
+    }
+}*/
 
-/* 
+/*
  *  Called when the board has been edited in the |BoardScene|. Updates the data model according to the 
  *  change. */
 -(void)boardEdited:(NSNotification *) notification {
@@ -210,7 +218,7 @@
     CGPoint point = CGPointMake(val.pointValue.x, val.pointValue.y);
     // The used brush.
     NSInteger stat = [[data objectAtIndex:1] integerValue];
-    
+    NSNumber *flatIndex = [NSNumber numberWithInt:val.pointValue.y * BOARD_SIZE_X + val.pointValue.x];
     // If the change was on a tile, the |BoardCoord| status should change. Otherwise elements should change.
     if(stat == MAPSTATUS_SOLID || stat== MAPSTATUS_CRACKED || stat == MAPSTATUS_VOID) {
         BoardCoord *bc = [[_board board] objectAtIndex:val.pointValue.y * BOARD_SIZE_X + val.pointValue.x];
@@ -222,19 +230,18 @@
             // Update position of start element.
             _board.startPos.x = newPos.x;
             _board.startPos.y = newPos.y;
-          
         } else if (stat == BRUSH_FINISH) {
             // Update position of finish element.
             _board.finishPos.x = newPos.x;
             _board.finishPos.y = newPos.y;
         } else if (stat == BRUSH_ERASER) {
-            // If a connection is on the place, first remove that one.
-            if(![_scene removeAConnectionFrom:point]) {
-                NSNumber *index = [NSNumber numberWithInt:val.pointValue.y * BOARD_SIZE_X
-                                                          + val.pointValue.x];
-                [[_board elementDictionary] removeObjectForKey: index];
+            // If a connection is on the position, first remove that one.
+            BOOL removeConnection = [_scene removeAConnectionFrom:point];
+            if(!removeConnection) {
+                [[_board elementDictionary] removeObjectForKey: flatIndex];
+                // If an element that was connected to another element, check this.
+                //[self refreshConnections];
             }
-            
         } else if (stat == BRUSH_ROCK) {
             CGPoint pos = CGPointMake(val.pointValue.x, val.pointValue.y);
             [_board addElementNamed:@"Box" AtPosition:pos IsBlocking:YES];

@@ -36,6 +36,7 @@
 -(void)showControlPanel:(NSNotification *) notification;
 -(void)controlDragged:(NSNotification *) notification;
 -(void)controlDragUp:(NSNotification *) notification;
+//-(void)refreshConnections;
 -(void)cleanView;
 -(void)refreshView;
 -(void)refreshBoardView;

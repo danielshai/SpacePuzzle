@@ -20,13 +20,13 @@
 @synthesize starTexture = _starTexture;
 @synthesize buttonTexture = _buttonTexture;
 @synthesize controlHover = _controlHover;
-@synthesize connectionSprites = _connectionSprites;
+@synthesize connectionNodes = _connectionNodes;
 
 -(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
         /* Setup your scene here */
         _elementSprites = [[NSMutableDictionary alloc] init];
-        _connectionSprites = [[NSMutableDictionary alloc] init];
+        _connectionNodes = [[NSMutableDictionary alloc] init];
         
         controlClickDrag = NO;
         controlDragLine = [SKShapeNode node];
@@ -159,6 +159,43 @@
     }
 }
 
+-(void)mouseUp:(NSEvent *)theEvent {
+    if(controlClickDrag) {
+        controlDragLine.hidden = YES;
+        circleOutline.hidden = YES;
+        circle.hidden = YES;
+        controlDragOutline.hidden = YES;
+        controlClickDrag = NO;
+        
+        startControlDrag = [Converter convertMousePosToCoord:startControlDrag];
+        endControlDrag = [Converter convertMousePosToCoord:endControlDrag];
+        
+        // To prevent an element to be connected to more than one, check if the connection already exists.
+        if(![self isEndPointTaken:endControlDrag]) {
+            NSArray *arr = [NSArray arrayWithObjects:[NSValue valueWithPoint:startControlDrag],
+                        [NSNumber valueWithPoint:endControlDrag], nil];
+            [self notifyText:@"ControlDragUp" Object:arr Key:@"ControlDragUp"];
+            [self noHighlight];
+        } else {
+            [self noHighlight];
+        }
+    }
+}
+
+/*
+ *  Checks if a end point of an attempted connection is already connected to something. */
+-(BOOL)isEndPointTaken:(CGPoint)loc {
+    for(id key in _connectionNodes) {
+        SKShapeNode* s = [_connectionNodes objectForKey:key];
+        CGPoint p = [Converter convertMousePosToCoord: s.position];
+        
+        if(loc.x == p.x && loc.y == p.y) {
+            return YES;
+        }
+    }
+    return NO;
+}
+
 -(void)drawControlLine {
     CGMutablePathRef pathToDraw = CGPathCreateMutable();
     CGPathMoveToPoint(pathToDraw, NULL, startControlDrag.x, startControlDrag.y);
@@ -179,23 +216,6 @@
     CGMutablePathRef circlePath2 = CGPathCreateMutable();
     CGPathAddArc(circlePath2, NULL, startControlDrag.x, startControlDrag.y, 3, 0, M_PI*2, NO);
     circleOutline.path = circlePath2;
-}
-
--(void)mouseUp:(NSEvent *)theEvent {
-    if(controlClickDrag) {
-        controlDragLine.hidden = YES;
-        circleOutline.hidden = YES;
-        circle.hidden = YES;
-        controlDragOutline.hidden = YES;
-        controlClickDrag = NO;
-        
-        startControlDrag = [Converter convertMousePosToCoord:startControlDrag];
-        endControlDrag = [Converter convertMousePosToCoord:endControlDrag];
-        NSArray *arr = [NSArray arrayWithObjects:[NSValue valueWithPoint:startControlDrag],
-                        [NSNumber valueWithPoint:endControlDrag], nil];
-        [self notifyText:@"ControlDragUp" Object:arr Key:@"ControlDragUp"];
-        [self noHighlight];
-    }
 }
 
 /*
@@ -241,10 +261,10 @@
                 [self notifyText:@"BoardEdited" Object:arr Key:@"BoardEdited"];
             } else if(statusOfPalette == BRUSH_ERASER) {
                 if([_elementSprites objectForKey:flatIndex]) {
-                    //self removeAConnectionFrom:<#(CGPoint)#>
-                    // if(!removeAConnectionFrom
-                    [self removeOneSprite:flatIndex];
-                    [self notifyText:@"BoardEdited" Object:arr Key:@"BoardEdited"];
+                    if(![self removeAConnectionFrom:loc]) {
+                        [self removeOneSprite:flatIndex];
+                        [self notifyText:@"BoardEdited" Object:arr Key:@"BoardEdited"];
+                    }
                 }
             }
             // Elements that are part of the element dictionary.
@@ -273,36 +293,62 @@
     from.x += 20;
     s.lineWidth = 0.4;
     s.zPosition = 999999999;
+    
+    // Sets the position of the node to the end point. This is used later to check if end points of
+    // attempted connections are free. 
+    s.position = to;
+    float relPX = from.x - s.position.x ;
+    float relPY = from.y - s.position.y;
+    
     [s setStrokeColor:[SKColor colorWithRed:244.0/255.0 green:185.0/255.0 blue:43.0/255.0 alpha:0.25]];
-    CGPathMoveToPoint(pathToDraw, NULL, from.x, from.y);
-    CGPathAddLineToPoint(pathToDraw, NULL, to.x, to.y);
+    CGPathMoveToPoint(pathToDraw, NULL, 0, 0);
+    CGPathAddLineToPoint(pathToDraw, NULL, relPX, relPY);
     
     // Add a connecting circle to end points.
-    CGPathAddArc(pathToDraw, NULL, from.x, from.y, 2, 0, M_PI*2, NO);
-    CGPathAddArc(pathToDraw, NULL, from.x, from.y, 1, 0, M_PI*2, NO);
-    CGPathAddArc(pathToDraw, NULL, from.x, from.y, 0.5, 0, M_PI*2, NO);
+   /* CGPathAddArc(pathToDraw, NULL, relPX, relPY, 2, 0, M_PI*2, NO);
+    CGPathAddArc(pathToDraw, NULL, relPX, relPY, 1, 0, M_PI*2, NO);
+    CGPathAddArc(pathToDraw, NULL, relPX, relPY, 0.5, 0, M_PI*2, NO);
     
     CGPathAddArc(pathToDraw, NULL, to.x, to.y, 2, 0, M_PI*2, NO);
     CGPathAddArc(pathToDraw, NULL, to.x, to.y, 1, 0, M_PI*2, NO);
     CGPathAddArc(pathToDraw, NULL, to.x, to.y, 0.5, 0, M_PI*2, NO);
-    
+    */
     s.path = pathToDraw;
+   
     [self addChild:s];
     
     from = [Converter convertMousePosToCoord:from];
-    NSNumber *index = [NSNumber numberWithInteger:from.y * BOARD_SIZE_X + from.x];
-    [_connectionSprites setObject:s forKey:index];
+    to = [Converter convertMousePosToCoord:to];
+    NSNumber *indexFrom = [NSNumber numberWithInteger:from.y * BOARD_SIZE_X + from.x];
+    NSNumber *indexTo = [NSNumber numberWithInteger:to.y * BOARD_SIZE_X + to.x];
+    [_connectionNodes setObject:s forKey:indexFrom];
+   // [_connectionNodes setObject:s forKey:indexTo];
 }
 
 -(BOOL)removeAConnectionFrom:(CGPoint)from {
     NSNumber *index = [NSNumber numberWithInteger:from.y * BOARD_SIZE_X + from.x];
-    SKShapeNode *s = [_connectionSprites objectForKey:index];
+    SKShapeNode *s = [_connectionNodes objectForKey:index];
     // If the connection doesn't exist, nothing removed.
     if(!s) {
         return NO;
     }
     [s removeFromParent];
-    [_connectionSprites removeObjectForKey:index];
+    [_connectionNodes removeObjectForKey:index];
+    return YES;
+}
+
+-(BOOL)removeAConnectionFrom:(CGPoint)from To: (CGPoint)to {
+    NSNumber *index = [NSNumber numberWithInteger:from.y * BOARD_SIZE_X + from.x];
+    NSNumber *indexTo = [NSNumber numberWithInteger:to.y * BOARD_SIZE_X + to.x];
+    SKShapeNode *s = [_connectionNodes objectForKey:index];
+    SKShapeNode *s2 = [_connectionNodes objectForKey:indexTo];
+    // If the connection doesn't exist, nothing removed.
+    if(!s) {
+        return NO;
+    }
+    [s removeFromParent];
+    [_connectionNodes removeObjectForKey:index];
+    [_connectionNodes removeObjectForKey:indexTo];
     return YES;
 }
 
