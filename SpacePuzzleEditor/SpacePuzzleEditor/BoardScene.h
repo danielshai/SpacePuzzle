@@ -13,6 +13,9 @@
     CGPoint startControlDrag;
     CGPoint endControlDrag;
     SKShapeNode *controlDragLine;
+    SKShapeNode *controlDragOutline;
+    SKShapeNode *circle;
+    SKShapeNode *circleOutline;
 }
 @property (nonatomic, retain) SKTexture *solid;
 @property (nonatomic, retain) SKTexture *voidTile;
@@ -46,6 +49,8 @@
 -(void)starClick;
 -(void)eraserClick;
 -(void)starButtonClick;
+-(void)drawControlLine;
+-(void)highlightElement:(NSNumber*) elementIndex;
 -(void)notifyText:(NSString *)text Object: (NSObject*)object Key: (NSString*)key;
 -(void)changeTextureOfBrush:(NSInteger) status;
 -(void)editABoardItem:(NSEvent *)theEvent;

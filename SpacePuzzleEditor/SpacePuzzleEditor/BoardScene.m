@@ -21,19 +21,28 @@
 @synthesize buttonTexture = _buttonTexture;
 @synthesize controlHover = _controlHover;
 
--(id)initWithSize:(CGSize)size {    
+-(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
         /* Setup your scene here */
         _elementSprites = [[NSMutableDictionary alloc] init];
         controlClickDrag = NO;
         controlDragLine = [SKShapeNode node];
-        controlDragLine.antialiased = YES;
         //controlDragLine.glowWidth = 1;
         controlDragLine.lineWidth = 1;
-        [controlDragLine setStrokeColor:[SKColor colorWithRed:244.0/255.0 green:185.0/255.0 blue:43.0/255.0 alpha:1]];
+        [controlDragLine setStrokeColor:[SKColor colorWithRed:155.0/255.0 green:155.0/255.0 blue:255.0/255.0 alpha:1]];
+        //[controlDragLine setStrokeColor:[SKColor colorWithRed:244.0/255.0 green:185.0/255.0 blue:43.0/255.0 alpha:1]]; // Orange colour.
+        controlDragOutline = [SKShapeNode node];
+        controlDragOutline.lineWidth = 2;
+        
         _controlHover = [SKSpriteNode spriteNodeWithImageNamed:@"Cracked.png"];
         _controlHover.size = CGSizeMake(32, 32);
         _controlHover.hidden = YES;
+        
+        circle = [SKShapeNode node];
+        circleOutline = [SKShapeNode node];
+        [circleOutline setStrokeColor:[NSColor whiteColor]];
+        circle.strokeColor = controlDragLine.strokeColor;
+        circleOutline.glowWidth = 0;
         
         self.backgroundColor = [SKColor colorWithRed:0.89 green:0.89 blue:0.89 alpha:1.0];
         self.size = CGSizeMake(size.width, size.height);
@@ -61,7 +70,7 @@
         _bkg.size = CGSizeMake(size.width, size.height);
         _bkg.position = CGPointMake(WIN_SIZE_X/2, WIN_SIZE_Y/2);
         [self addChild:_bkg];
-
+        
         _boardSprites = [[NSMutableArray alloc] init];
         statusOfPalette = MAPSTATUS_SOLID;
         currentTexture = _solid;
@@ -75,11 +84,32 @@
         [self observeText:@"StarClick" Selector:@selector(starClick)];
         [self observeText:@"EraserClick" Selector:@selector(eraserClick)];
         [self observeText:@"StarButtonClick" Selector:@selector(starButtonClick)];
+        [self observeText:@"HighlightElement" Selector:@selector(highlightElement:)];
         
-        controlDragLine.zPosition = 100000;
+        controlDragLine.zPosition = 999999;
+        circle.zPosition = 999998;
+        circleOutline.zPosition = 999997;
+        controlDragOutline.zPosition = 999997;
         [self addChild:controlDragLine];
+        [self addChild:circle];
+        [self addChild:circleOutline];
+        //  [self addChild:controlDragOutline];
     }
     return self;
+}
+
+/*
+ *  Highlights an element. Used when control dragging to show if a connection can be made. */
+-(void)highlightElement:(NSNotification*) notification {
+    // Get the data (location of click).
+    NSDictionary *userInfo = notification.userInfo;
+    NSSet *objectSent = [userInfo objectForKey:@"HighlightElement"];
+    NSArray *data = [objectSent allObjects];
+    // Edited at coordinate.
+    NSValue *startPoint = [data objectAtIndex:0];
+    
+    
+
 }
 
 -(void)mouseDown:(NSEvent *)theEvent {
@@ -91,8 +121,8 @@
         startControlDrag = CGPointMake(loc.x, loc.y);
         loc = [Converter convertMousePosToCoord:loc];
         
-        NSArray *arr = [NSArray arrayWithObjects:[NSValue valueWithPoint:loc],nil];
-        [self notifyText:@"ControlPanel" Object:arr Key:@"ControlPanel"];
+        // NSArray *arr = [NSArray arrayWithObjects:[NSValue valueWithPoint:loc],nil];
+        // [self notifyText:@"ControlPanel" Object:arr Key:@"ControlPanel"];
     } else if (!controlClickDrag) {
         [self editABoardItem:theEvent];
     }
@@ -103,34 +133,67 @@
     NSPoint loc = [sk convertPoint:[theEvent locationInWindow] fromView:nil];
     if (controlClickDrag) {
         controlDragLine.hidden = NO;
+        circle.hidden = NO;
+        circleOutline.hidden = NO;
+        controlDragOutline.hidden = NO;
         endControlDrag = CGPointMake(loc.x, loc.y);
-        
-        CGMutablePathRef pathToDraw = CGPathCreateMutable();
-        CGPathMoveToPoint(pathToDraw, NULL, startControlDrag.x, startControlDrag.y);
-        CGPathAddLineToPoint(pathToDraw, NULL, endControlDrag.x, endControlDrag.y);
-        controlDragLine.path = pathToDraw;
+        [self drawControlLine];
     } else {
-        controlClickDrag = NO;
+        circle.hidden = YES;
+        circleOutline.hidden = YES;
         controlDragLine.hidden = YES;
+        controlDragOutline.hidden = YES;
+        controlClickDrag = NO;
         [self editABoardItem:theEvent];
     }
+}
+
+-(void)drawControlLine {
+    CGMutablePathRef pathToDraw = CGPathCreateMutable();
+    CGPathMoveToPoint(pathToDraw, NULL, startControlDrag.x, startControlDrag.y);
+    CGPathAddLineToPoint(pathToDraw, NULL, endControlDrag.x, endControlDrag.y);
+    controlDragLine.path = pathToDraw;
+    
+    CGMutablePathRef pathToDraw2 = CGPathCreateMutable();
+    CGPathMoveToPoint(pathToDraw2, NULL, startControlDrag.x, startControlDrag.y);
+    CGPathAddLineToPoint(pathToDraw2, NULL, endControlDrag.x, endControlDrag.y);
+    controlDragOutline.path = pathToDraw2;
+    
+    circle.position = controlDragLine.position;
+    CGMutablePathRef circlePath = CGPathCreateMutable();
+    CGPathAddArc(circlePath, NULL, startControlDrag.x, startControlDrag.y, 2, 0, M_PI*2, NO);
+    circle.path = circlePath;
+    
+    circleOutline.position = controlDragLine.position;
+    CGMutablePathRef circlePath2 = CGPathCreateMutable();
+    CGPathAddArc(circlePath2, NULL, startControlDrag.x, startControlDrag.y, 3, 0, M_PI*2, NO);
+    circleOutline.path = circlePath2;
 }
 
 -(void)mouseUp:(NSEvent *)theEvent {
     if(controlClickDrag) {
         controlDragLine.hidden = YES;
+        circleOutline.hidden = YES;
+        circle.hidden = YES;
+        controlDragOutline.hidden = YES;
         controlClickDrag = NO;
+        
+        startControlDrag = [Converter convertMousePosToCoord:startControlDrag];
+        endControlDrag = [Converter convertMousePosToCoord:endControlDrag];
+        NSArray *arr = [NSArray arrayWithObjects:[NSValue valueWithPoint:startControlDrag],
+                        [NSNumber valueWithPoint:endControlDrag], nil];
+        [self notifyText:@"ControlDrag" Object:arr Key:@"ControlDrag"];
     }
 }
 
 /*
  *  Could be used to change brush? */
 -(void)keyDown:(NSEvent *)theEvent {
-  //if(theEvent.modifierFlags & NSControl)
+    //if(theEvent.modifierFlags & NSControl)
 }
 
 /*
- *  Changes one tile/element on the board according to what brush is used and notifies observers that the 
+ *  Changes one tile/element on the board according to what brush is used and notifies observers that the
  *  view has changed. */
 -(void)editABoardItem:(NSEvent *)theEvent {
     // Find mouse location and convert.
@@ -148,7 +211,7 @@
         if(statusOfPalette == MAPSTATUS_SOLID || statusOfPalette == MAPSTATUS_CRACKED || statusOfPalette == MAPSTATUS_VOID) {
             SKSpriteNode *s = [_boardSprites objectAtIndex:loc.y * BOARD_SIZE_X + loc.x];
             s.texture = currentTexture;
-
+            
             [self notifyText:@"BoardEdited" Object:arr Key:@"BoardEdited"];
         }
         // Elements.
@@ -173,7 +236,7 @@
             // Elements that are part of the element dictionary.
             else if (![_elementSprites objectForKey:flatIndex]) {
                 [self notifyText:@"BoardEdited" Object:arr Key:@"BoardEdited"];
-            
+                
                 if(statusOfPalette == BRUSH_ROCK) {
                     // Sets up a rock at the position selected.
                     [self addARock:loc Index:flatIndex];
@@ -193,7 +256,7 @@
     [_elementSprites removeObjectForKey:index];
 }
 
-/* 
+/*
  *  Runs when something is clicked on the palette. */
 -(void)startClick {
     [self changeTextureOfBrush:BRUSH_START];
@@ -271,15 +334,15 @@
     SKSpriteNode *sprite = [[SKSpriteNode alloc] init];
     
     [self setTextureOfSprite:sprite AccordingToStatus:status];
-
+    
     sprite.size = CGSizeMake(ts, ts);
     CGPoint p = CGPointMake(x, y);
     p = [Converter convertCoordToPixel:p];
     p.x += TILESIZE/2;
     
-   // NSInteger xx = x*ts + p.x + ts/2;
-   // NSInteger yy = [Converter convertCoordToPixel:p];//WIN_SIZE_Y - 22 - y*ts;
-
+    // NSInteger xx = x*ts + p.x + ts/2;
+    // NSInteger yy = [Converter convertCoordToPixel:p];//WIN_SIZE_Y - 22 - y*ts;
+    
     sprite.position = p;
     [_boardSprites addObject:sprite];
     [self addChild:sprite];
@@ -360,12 +423,12 @@
 -(void)cleanView {
     for(id key in _elementSprites) {
         SKSpriteNode* s = [_elementSprites objectForKey:key];
-      
+        
         [s removeFromParent];
     }
-
+    
     [_elementSprites removeAllObjects];
-   
+    
     _startElSprite.position = CGPointMake(-100, -100);
     _finishSprite.position = CGPointMake(-100, -100);
 }
