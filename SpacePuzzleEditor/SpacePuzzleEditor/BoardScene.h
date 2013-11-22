@@ -38,7 +38,7 @@
 -(void)refreshElementsStart: (CGPoint)start Finish: (CGPoint) finish;
 -(void)addElement: (NSString*) element Position: (CGPoint)pos;
 -(void)setAConnectionFrom: (CGPoint) from To: (CGPoint) to;
--(void)removeAConnectionFrom: (CGPoint)from To: (CGPoint)to;
+-(BOOL)removeAConnectionFrom: (CGPoint)from;
 -(void)cleanElements;
 -(void)cleanView;
 -(void)setTextureOfSprite: (SKSpriteNode*)sprite AccordingToStatus: (NSInteger)status;

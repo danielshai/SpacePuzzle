@@ -96,7 +96,7 @@
             sb.star = s;
             CGPoint from = CGPointMake(startPoint.pointValue.x, startPoint.pointValue.y);
             CGPoint to = CGPointMake(endPoint.pointValue.x, endPoint.pointValue.y);
-            [_scene removeAConnectionFrom:from To:to];
+            [_scene removeAConnectionFrom:from];
             [_scene setAConnectionFrom:from To:to];
         } else {
             // No highlight should be presented, since the elements cannot be connected.
@@ -207,7 +207,7 @@
     NSArray *data = [objectSent allObjects];
     // Edited at coordinate.
     NSValue *val = [data objectAtIndex:0];
-   
+    CGPoint point = CGPointMake(val.pointValue.x, val.pointValue.y);
     // The used brush.
     NSInteger stat = [[data objectAtIndex:1] integerValue];
     
@@ -228,8 +228,14 @@
             _board.finishPos.x = newPos.x;
             _board.finishPos.y = newPos.y;
         } else if (stat == BRUSH_ERASER) {
-            NSNumber *index = [NSNumber numberWithInt:val.pointValue.y * BOARD_SIZE_X + val.pointValue.x];
-            [[_board elementDictionary] removeObjectForKey: index];
+            // If a connection is on the place, first remove that one.
+            if(![_scene removeAConnectionFrom:point]) {
+                NSLog(@"NO CONNECTION");
+                NSNumber *index = [NSNumber numberWithInt:val.pointValue.y * BOARD_SIZE_X
+                                                          + val.pointValue.x];
+                [[_board elementDictionary] removeObjectForKey: index];
+            }
+            
         } else if (stat == BRUSH_ROCK) {
             CGPoint pos = CGPointMake(val.pointValue.x, val.pointValue.y);
             [_board addElementNamed:@"Box" AtPosition:pos IsBlocking:YES];

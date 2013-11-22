@@ -241,6 +241,8 @@
                 [self notifyText:@"BoardEdited" Object:arr Key:@"BoardEdited"];
             } else if(statusOfPalette == BRUSH_ERASER) {
                 if([_elementSprites objectForKey:flatIndex]) {
+                    //self removeAConnectionFrom:<#(CGPoint)#>
+                    // if(!removeAConnectionFrom
                     [self removeOneSprite:flatIndex];
                     [self notifyText:@"BoardEdited" Object:arr Key:@"BoardEdited"];
                 }
@@ -271,20 +273,27 @@
     from.x += 20;
     s.lineWidth = 0.4;
     s.zPosition = 999999999;
-    [s setStrokeColor:[SKColor colorWithRed:244.0/255.0 green:185.0/255.0 blue:43.0/255.0 alpha:0.61]];
+    [s setStrokeColor:[SKColor colorWithRed:244.0/255.0 green:185.0/255.0 blue:43.0/255.0 alpha:0.65]];
     CGPathMoveToPoint(pathToDraw, NULL, from.x, from.y);
     CGPathAddLineToPoint(pathToDraw, NULL, to.x, to.y);
     s.path = pathToDraw;
     [self addChild:s];
+    
+    from = [Converter convertMousePosToCoord:from];
     NSNumber *index = [NSNumber numberWithInteger:from.y * BOARD_SIZE_X + from.x];
     [_connectionSprites setObject:s forKey:index];
 }
 
--(void)removeAConnectionFrom:(CGPoint)from To:(CGPoint)to {
+-(BOOL)removeAConnectionFrom:(CGPoint)from {
     NSNumber *index = [NSNumber numberWithInteger:from.y * BOARD_SIZE_X + from.x];
     SKShapeNode *s = [_connectionSprites objectForKey:index];
+    // If the connection doesn't exist, nothing removed.
+    if(!s) {
+        return NO;
+    }
     [s removeFromParent];
     [_connectionSprites removeObjectForKey:index];
+    return YES;
 }
 
 -(void)removeOneSprite:(NSNumber *)index {
