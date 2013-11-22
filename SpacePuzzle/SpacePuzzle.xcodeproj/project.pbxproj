@@ -10,6 +10,7 @@
 		77010766183E010D00AAF564 /* StarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 77010765183E010D00AAF564 /* StarButton.m */; };
 		77010769183E0FB500AAF564 /* BridgeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 77010768183E0FB500AAF564 /* BridgeButton.m */; };
 		7701076C183E0FFB00AAF564 /* Bridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 7701076B183E0FFB00AAF564 /* Bridge.m */; };
+		779715EA183F58A2009A608A /* Platform.png in Resources */ = {isa = PBXBuildFile; fileRef = 779715E9183F58A2009A608A /* Platform.png */; };
 		7797AC36183CE9F500E63E95 /* Box.png in Resources */ = {isa = PBXBuildFile; fileRef = 7797AC1F183CE9F500E63E95 /* Box.png */; };
 		7797AC37183CE9F500E63E95 /* BridgeOFF.png in Resources */ = {isa = PBXBuildFile; fileRef = 7797AC20183CE9F500E63E95 /* BridgeOFF.png */; };
 		7797AC38183CE9F500E63E95 /* BridgeON.png in Resources */ = {isa = PBXBuildFile; fileRef = 7797AC21183CE9F500E63E95 /* BridgeON.png */; };
@@ -80,6 +81,7 @@
 		77010768183E0FB500AAF564 /* BridgeButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BridgeButton.m; sourceTree = "<group>"; };
 		7701076A183E0FFB00AAF564 /* Bridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bridge.h; sourceTree = "<group>"; };
 		7701076B183E0FFB00AAF564 /* Bridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bridge.m; sourceTree = "<group>"; };
+		779715E9183F58A2009A608A /* Platform.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Platform.png; sourceTree = "<group>"; };
 		7797AC1F183CE9F500E63E95 /* Box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Box.png; sourceTree = "<group>"; };
 		7797AC20183CE9F500E63E95 /* BridgeOFF.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BridgeOFF.png; sourceTree = "<group>"; };
 		7797AC21183CE9F500E63E95 /* BridgeON.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BridgeON.png; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 		7797AC1E183CE9F500E63E95 /* Elements */ = {
 			isa = PBXGroup;
 			children = (
+				779715E9183F58A2009A608A /* Platform.png */,
 				7797AC1F183CE9F500E63E95 /* Box.png */,
 				7797AC20183CE9F500E63E95 /* BridgeOFF.png */,
 				7797AC21183CE9F500E63E95 /* BridgeON.png */,
@@ -497,6 +500,7 @@
 				7797AC38183CE9F500E63E95 /* BridgeON.png in Resources */,
 				7797AC3F183CE9F500E63E95 /* Start.gif in Resources */,
 				7797AC45183CE9F500E63E95 /* solidtile.png in Resources */,
+				779715EA183F58A2009A608A /* Platform.png in Resources */,
 				7797AC3C183CE9F500E63E95 /* Finish.png in Resources */,
 				E621406A182BA53800EC5C21 /* Main.storyboard in Resources */,
 				7797AC43183CE9F500E63E95 /* Cracked.png in Resources */,
