@@ -237,10 +237,10 @@
         } else if (stat == BRUSH_ERASER) {
             // If a connection is on the position, first remove that one.
             BOOL removeConnection = [_scene removeAConnectionFrom:point];
-            if(!removeConnection) {
+            if(!removeConnection && ![_scene removeAConnectionBasedOnEndPoint:point]) {
+                NSLog(@"fdsfds");
                 [[_board elementDictionary] removeObjectForKey: flatIndex];
                 // If an element that was connected to another element, check this.
-                //[self refreshConnections];
             }
         } else if (stat == BRUSH_ROCK) {
             CGPoint pos = CGPointMake(val.pointValue.x, val.pointValue.y);

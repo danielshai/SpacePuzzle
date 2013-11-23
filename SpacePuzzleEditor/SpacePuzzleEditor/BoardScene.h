@@ -40,7 +40,8 @@
 -(void)setAConnectionFrom: (CGPoint) from To: (CGPoint) to;
 -(BOOL)removeAConnectionFrom: (CGPoint)from;
 -(BOOL)removeAConnectionFrom: (CGPoint)from To: (CGPoint)to;
--(BOOL)isEndPointTaken: (CGPoint) loc;
+-(BOOL)isPointAConnectionEndPoint: (CGPoint) loc;
+-(BOOL)removeAConnectionBasedOnEndPoint: (CGPoint) loc;
 -(void)cleanElements;
 -(void)cleanView;
 -(void)setTextureOfSprite: (SKSpriteNode*)sprite AccordingToStatus: (NSInteger)status;

@@ -171,7 +171,7 @@
         endControlDrag = [Converter convertMousePosToCoord:endControlDrag];
         
         // To prevent an element to be connected to more than one, check if the connection already exists.
-        if(![self isEndPointTaken:endControlDrag]) {
+        if(![self isPointAConnectionEndPoint:endControlDrag]) {
             NSArray *arr = [NSArray arrayWithObjects:[NSValue valueWithPoint:startControlDrag],
                         [NSNumber valueWithPoint:endControlDrag], nil];
             [self notifyText:@"ControlDragUp" Object:arr Key:@"ControlDragUp"];
@@ -183,8 +183,8 @@
 }
 
 /*
- *  Checks if a end point of an attempted connection is already connected to something. */
--(BOOL)isEndPointTaken:(CGPoint)loc {
+ *  Checks if a point is an end point of a connection. */
+-(BOOL)isPointAConnectionEndPoint:(CGPoint)loc {
     for(id key in _connectionNodes) {
         SKShapeNode* s = [_connectionNodes objectForKey:key];
         CGPoint p = [Converter convertMousePosToCoord: s.position];
@@ -261,7 +261,7 @@
                 [self notifyText:@"BoardEdited" Object:arr Key:@"BoardEdited"];
             } else if(statusOfPalette == BRUSH_ERASER) {
                 if([_elementSprites objectForKey:flatIndex]) {
-                    if(![self removeAConnectionFrom:loc]) {
+                    if(![self removeAConnectionFrom:loc] && ![self removeAConnectionBasedOnEndPoint:loc]) {
                         [self removeOneSprite:flatIndex];
                         [self notifyText:@"BoardEdited" Object:arr Key:@"BoardEdited"];
                     }
@@ -297,7 +297,7 @@
     // Sets the position of the node to the end point. This is used later to check if end points of
     // attempted connections are free. 
     s.position = to;
-    float relPX = from.x - s.position.x ;
+    float relPX = from.x - s.position.x;
     float relPY = from.y - s.position.y;
     
     [s setStrokeColor:[SKColor colorWithRed:244.0/255.0 green:185.0/255.0 blue:43.0/255.0 alpha:0.25]];
@@ -305,14 +305,14 @@
     CGPathAddLineToPoint(pathToDraw, NULL, relPX, relPY);
     
     // Add a connecting circle to end points.
-   /* CGPathAddArc(pathToDraw, NULL, relPX, relPY, 2, 0, M_PI*2, NO);
+    CGPathAddArc(pathToDraw, NULL, relPX, relPY, 2, 0, M_PI*2, NO);
     CGPathAddArc(pathToDraw, NULL, relPX, relPY, 1, 0, M_PI*2, NO);
     CGPathAddArc(pathToDraw, NULL, relPX, relPY, 0.5, 0, M_PI*2, NO);
     
-    CGPathAddArc(pathToDraw, NULL, to.x, to.y, 2, 0, M_PI*2, NO);
-    CGPathAddArc(pathToDraw, NULL, to.x, to.y, 1, 0, M_PI*2, NO);
-    CGPathAddArc(pathToDraw, NULL, to.x, to.y, 0.5, 0, M_PI*2, NO);
-    */
+    CGPathAddArc(pathToDraw, NULL, 0, 0, 2, 0, M_PI*2, NO);
+    CGPathAddArc(pathToDraw, NULL, 0, 0, 1, 0, M_PI*2, NO);
+    CGPathAddArc(pathToDraw, NULL, 0, 0, 0.5, 0, M_PI*2, NO);
+    
     s.path = pathToDraw;
    
     [self addChild:s];
@@ -320,7 +320,6 @@
     from = [Converter convertMousePosToCoord:from];
     to = [Converter convertMousePosToCoord:to];
     NSNumber *indexFrom = [NSNumber numberWithInteger:from.y * BOARD_SIZE_X + from.x];
-    NSNumber *indexTo = [NSNumber numberWithInteger:to.y * BOARD_SIZE_X + to.x];
     [_connectionNodes setObject:s forKey:indexFrom];
    // [_connectionNodes setObject:s forKey:indexTo];
 }
@@ -337,11 +336,25 @@
     return YES;
 }
 
+-(BOOL)removeAConnectionBasedOnEndPoint:(CGPoint)loc {
+    for(id key in _connectionNodes) {
+        SKShapeNode* s = [_connectionNodes objectForKey:key];
+        CGPoint p = [Converter convertMousePosToCoord: s.position];
+        
+        if(loc.x == p.x && loc.y == p.y) {
+            [_connectionNodes removeObjectForKey:key];
+            [s removeFromParent];
+            return YES;
+        }
+    }
+    return NO;
+}
+
 -(BOOL)removeAConnectionFrom:(CGPoint)from To: (CGPoint)to {
     NSNumber *index = [NSNumber numberWithInteger:from.y * BOARD_SIZE_X + from.x];
     NSNumber *indexTo = [NSNumber numberWithInteger:to.y * BOARD_SIZE_X + to.x];
     SKShapeNode *s = [_connectionNodes objectForKey:index];
-    SKShapeNode *s2 = [_connectionNodes objectForKey:indexTo];
+  
     // If the connection doesn't exist, nothing removed.
     if(!s) {
         return NO;
