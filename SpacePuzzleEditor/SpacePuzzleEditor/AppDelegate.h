@@ -1,13 +1,12 @@
 //
 //  GViewAppDelegate.h
 //  SpacePuzzleEditor
-//
 
-//  Copyright (c) 2013 WMD. All rights reserved.
-//
-
-
-// TODO: FIXA MACROS MED KLASSNAMN EFTERSOM DE KAN ÄNDRAS!!
+//  TODO:
+//    - Fixa macros med klassnamn.
+//    - Städa: Synka alltid viewn (BoardScene) utifrån datamodellen. Alltså när en |editABoardItem| sker,
+//             säg bara till AppDelegate, som i sin tur uppdaterar datamodellen och efter det uppdaterar
+//             BoardScene, typ en metod |updateView|
 #import <Cocoa/Cocoa.h>
 #import <SpriteKit/SpriteKit.h>
 #import "Board.h"

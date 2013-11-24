@@ -12,6 +12,8 @@
 @class XMLParser;
 @class Element;
 @class Box;
+@class StarButton;
+@class Star;
 
 @interface Board : NSObject
 
@@ -32,4 +34,7 @@
 -(void) startAndFinishExport;
 -(void) addElementNamed:(NSString*) name AtPosition:(CGPoint) pos IsBlocking:(BOOL) block;
 -(void) elementExport;
+-(void) starExport: (Star*) star;
+-(void) boxExport: (Box*) box;
+-(void) starButtonExport: (StarButton*) sb;
 @end

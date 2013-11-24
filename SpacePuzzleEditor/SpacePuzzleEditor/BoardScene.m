@@ -261,10 +261,10 @@
                 [self notifyText:@"BoardEdited" Object:arr Key:@"BoardEdited"];
             } else if(statusOfPalette == BRUSH_ERASER) {
                 if([_elementSprites objectForKey:flatIndex]) {
-                    if(![self removeAConnectionFrom:loc] && ![self removeAConnectionBasedOnEndPoint:loc]) {
-                        [self removeOneSprite:flatIndex];
+                  //  if(![self removeAConnectionFrom:loc] && ![self removeAConnectionBasedOnEndPoint:loc]) {
+                    //    [self removeOneSprite:flatIndex];
                         [self notifyText:@"BoardEdited" Object:arr Key:@"BoardEdited"];
-                    }
+                   // }
                 }
             }
             // Elements that are part of the element dictionary.
@@ -329,10 +329,12 @@
     SKShapeNode *s = [_connectionNodes objectForKey:index];
     // If the connection doesn't exist, nothing removed.
     if(!s) {
+        NSLog(@"NOTHING TO REMOVE");
         return NO;
     }
     [s removeFromParent];
     [_connectionNodes removeObjectForKey:index];
+    NSLog(@"REMOVED");
     return YES;
 }
 
@@ -534,6 +536,12 @@
         [s removeFromParent];
     }
     [_elementSprites removeAllObjects];
+    
+    for(id key in _connectionNodes) {
+        SKShapeNode* s = [_connectionNodes objectForKey:key];
+        [s removeFromParent];
+    }
+    [_connectionNodes removeAllObjects];
 }
 
 -(void)cleanView {

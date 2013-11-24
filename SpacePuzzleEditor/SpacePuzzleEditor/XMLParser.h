@@ -10,6 +10,7 @@
 @class Position;
 @class Box;
 @class Star;
+@class StarButton;
 
 @interface XMLParser : NSObject <NSXMLParserDelegate> {
     NSString *currentElement;
@@ -19,9 +20,14 @@
     BOOL rockElement;
     BOOL starElement;
     BOOL boardElements;
+    BOOL starButtonElement;
+    BOOL starButtonStar;
     NSInteger tempXElement;
     NSInteger tempYElement;
+    NSInteger tempXRef;
+    NSInteger tempYRef;
     BOOL tempBlockingElement;
+    BOOL tempState;
     NSString *output;
 }
 

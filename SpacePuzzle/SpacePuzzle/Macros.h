@@ -38,6 +38,7 @@
 
 #define CLASS_STARBUTTON        @"StarButton"
 #define CLASS_STAR              @"Star"
+#define STAR_BUTTON_REF         @"starbuttonstar"
 
 #define RIGHT                   1
 #define LEFT                    2

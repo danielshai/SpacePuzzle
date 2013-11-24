@@ -11,6 +11,7 @@
 #import "Box.h"
 #import "Macros.h"
 #import "Star.h"
+#import "StarButton.h"
 
 @implementation XMLParser
 @synthesize parser = _parser;
@@ -39,6 +40,11 @@
         finishElement = NO;
         starElement = NO;
         boardElements = NO;
+        starButtonElement = NO;
+        starButtonStar = NO;
+        tempBlockingElement = NO;
+        tempState = NO;
+        
         _board = [[NSMutableArray alloc] init];
         _parser = [[NSXMLParser alloc] initWithContentsOfURL:url];
         _start = [[Position alloc] initWithX:0 Y:0];
@@ -66,10 +72,14 @@
         finishElement = YES;
     } else if ([currentElement isEqualToString:@"Box"]) {
         rockElement = YES;
-    } else if ([currentElement isEqualToString:@"Star"]) {
+    } else if ([currentElement isEqualToString:CLASS_STAR]) {
         starElement = YES;
     } else if ([currentElement isEqualToString:@"boardelements"]) {
         boardElement = YES;
+    } else if ([currentElement isEqualToString:CLASS_STARBUTTON]) {
+        starButtonElement = YES;
+    } else if ([currentElement isEqualToString:STAR_BUTTON_REF]) {
+        starButtonStar = YES;
     }
 }
 
@@ -86,11 +96,22 @@
         Box *r = [[Box alloc] initWithX:tempXElement Y:tempYElement];
         NSNumber *index = [NSNumber numberWithInteger:tempYElement*BOARD_SIZE_X + tempXElement];
         [_elements setObject:r forKey:index];
-    } else if ([elementName isEqualToString:@"Star"]) {
+    } else if ([elementName isEqualToString:CLASS_STAR]) {
         starElement = NO;
         Star *s = [[Star alloc] initWithX:tempXElement Y:tempYElement];
         NSNumber *index = [NSNumber numberWithInteger:tempYElement*BOARD_SIZE_X + tempXElement];
         [_elements setObject:s forKey:index];
+    } else if ([elementName isEqualToString:CLASS_STARBUTTON]) {
+        starButtonElement = NO;
+        NSNumber *starIndex = [NSNumber numberWithInteger:tempYRef*BOARD_SIZE_X+tempXRef];
+        Star *s = [_elements objectForKey:starIndex];
+        StarButton *sb = [[StarButton alloc] initWithStar:s X:tempXElement Y:tempYElement];
+        NSNumber *index = [NSNumber numberWithInteger:tempYElement*BOARD_SIZE_X + tempXElement];
+        NSLog(@"starbutton: %ld %ld", (long)tempXElement,(long)tempYElement);
+        NSLog(@"starbutton: %ld %ld", (long)tempXRef,(long)tempYRef);
+        [_elements setObject:sb forKey:index];
+    } else if ([elementName isEqualToString:STAR_BUTTON_REF]) {
+        starButtonStar = NO;
     }
 }
 
@@ -109,12 +130,18 @@
         _finish.x = intString;
     } else if([currentElement isEqualToString:@"y"] && finishElement) {
         _finish.y = intString;
-    } else if([currentElement isEqualToString:@"x"] && boardElement) {
+    } else if([currentElement isEqualToString:@"x"] && boardElement && !starButtonStar) {
         tempXElement = intString;
-    } else if([currentElement isEqualToString:@"y"] && boardElement) {
+    } else if([currentElement isEqualToString:@"y"] && boardElement && !starButtonStar) {
         tempYElement = intString;
+    } else if([currentElement isEqualToString:@"x"] && starButtonStar) {
+        tempXRef = intString;
+    } else if([currentElement isEqualToString:@"y"] && starButtonStar) {
+        tempYRef = intString;
     } else if([currentElement isEqualToString:@"blocking"] && rockElement) {
         tempBlockingElement = intString;
+    } else if([currentElement isEqualToString:@"state"] && starButtonElement) {
+        tempState = intString;
     }
 }
 
@@ -127,6 +154,10 @@
     rockElement = NO;
     starElement = NO;
     boardElements = NO;
+    starButtonElement = NO;
+    starButtonStar = NO;
+    tempState = NO;
+    tempBlockingElement = NO;
 }
 
 -(void)addOutput:(NSString *)string {

@@ -4,6 +4,8 @@
 #import "XMLParser.h"
 #import "Box.h"
 #import "Element.h"
+#import "StarButton.h"
+#import "Star.h"
 
 @implementation Board
 
@@ -170,34 +172,123 @@
 -(void)elementExport {
     [_parser addOutput:@"<boardelements>"];
    
+    // Start the export with stars.
     for(id key in _elementDictionary) {
         Element *e = [_elementDictionary objectForKey:key];
-        NSString *element = @"<";
-        
-        element = [element stringByAppendingString:NSStringFromClass([e class])];
-        element = [element stringByAppendingString:@">"];
-        
-        // Output actual data about the element.
-        element = [element stringByAppendingString:@"<x>"];
-        element = [element stringByAppendingString:[@(e.x) stringValue]];
-        element = [element stringByAppendingString:@"</x>"];
-        
-        element = [element stringByAppendingString:@"<y>"];
-        element = [element stringByAppendingString:[@(e.y) stringValue]];
-        element = [element stringByAppendingString:@"</y>"];
-        
-        element = [element stringByAppendingString:@"<blocking>"];
-        element = [element stringByAppendingString:[@(e.blocking) stringValue]];
-        element = [element stringByAppendingString:@"</blocking>"];
-        
-        // End of this element.
-        element = [element stringByAppendingString:@"</"];
-        element = [element stringByAppendingString:NSStringFromClass([e class])];
-        element = [element stringByAppendingString:@">"];
-        
-        [_parser addOutput:element];
+        if([e isKindOfClass: [Star class]]) {
+            Star *ee = (Star*)e;
+            [self starExport:ee];
+        }
+    }
+    // Continue the export with boxes.
+    for(id key in _elementDictionary) {
+        Element *e = [_elementDictionary objectForKey:key];
+        if([e isKindOfClass: [Box class]]) {
+            Box *ee = (Box*)e;
+            [self boxExport:ee];
+        }
+    }
+    
+    for(id key in _elementDictionary) {
+        Element *e = [_elementDictionary objectForKey:key];
+        if([e isKindOfClass: [StarButton class]]) {
+            StarButton *ee = (StarButton*)e;
+            [self starButtonExport:ee];
+        }
     }
    
     [_parser addOutput:@"</boardelements>"];
+}
+
+-(void)starExport:(Star *)star {
+    NSString *element = @"<";
+    
+    element = [element stringByAppendingString:NSStringFromClass([star class])];
+    element = [element stringByAppendingString:@">"];
+    
+    // Output actual data about the element.
+    element = [element stringByAppendingString:@"<x>"];
+    element = [element stringByAppendingString:[@(star.x) stringValue]];
+    element = [element stringByAppendingString:@"</x>"];
+    
+    element = [element stringByAppendingString:@"<y>"];
+    element = [element stringByAppendingString:[@(star.y) stringValue]];
+    element = [element stringByAppendingString:@"</y>"];
+    
+    element = [element stringByAppendingString:@"<blocking>"];
+    element = [element stringByAppendingString:[@(star.blocking) stringValue]];
+    element = [element stringByAppendingString:@"</blocking>"];
+    
+    // End of this element.
+    element = [element stringByAppendingString:@"</"];
+    element = [element stringByAppendingString:NSStringFromClass([star class])];
+    element = [element stringByAppendingString:@">"];
+    
+    [_parser addOutput:element];
+}
+
+-(void)boxExport:(Box *)box {
+    NSString *element = @"<";
+    
+    element = [element stringByAppendingString:NSStringFromClass([box class])];
+    element = [element stringByAppendingString:@">"];
+    
+    // Output actual data about the element.
+    element = [element stringByAppendingString:@"<x>"];
+    element = [element stringByAppendingString:[@(box.x) stringValue]];
+    element = [element stringByAppendingString:@"</x>"];
+    
+    element = [element stringByAppendingString:@"<y>"];
+    element = [element stringByAppendingString:[@(box.y) stringValue]];
+    element = [element stringByAppendingString:@"</y>"];
+    
+    element = [element stringByAppendingString:@"<blocking>"];
+    element = [element stringByAppendingString:[@(box.blocking) stringValue]];
+    element = [element stringByAppendingString:@"</blocking>"];
+    
+    // End of this element.
+    element = [element stringByAppendingString:@"</"];
+    element = [element stringByAppendingString:NSStringFromClass([box class])];
+    element = [element stringByAppendingString:@">"];
+    
+    [_parser addOutput:element];
+}
+
+-(void)starButtonExport:(StarButton *)sb {
+    NSString *element = @"<";
+    
+    element = [element stringByAppendingString:NSStringFromClass([sb class])];
+    element = [element stringByAppendingString:@">"];
+    
+    // Output actual data about the element.
+    element = [element stringByAppendingString:@"<x>"];
+    element = [element stringByAppendingString:[@(sb.x) stringValue]];
+    element = [element stringByAppendingString:@"</x>"];
+    element = [element stringByAppendingString:@"<y>"];
+    element = [element stringByAppendingString:[@(sb.y) stringValue]];
+    element = [element stringByAppendingString:@"</y>"];
+    element = [element stringByAppendingString:@"<blocking>"];
+    element = [element stringByAppendingString:[@(sb.blocking) stringValue]];
+    element = [element stringByAppendingString:@"</blocking>"];
+    element = [element stringByAppendingString:@"<state>"];
+    element = [element stringByAppendingString:[@(sb.state) stringValue]];
+    element = [element stringByAppendingString:@"</state>"];
+    // End of this element.
+    
+    // The referenced star's coordinates.
+    if(sb.star) {
+        element = [element stringByAppendingString:@"<starbuttonstar>"];
+        element = [element stringByAppendingString:@"<x>"];
+        element = [element stringByAppendingString:[@(sb.star.x) stringValue]];
+        element = [element stringByAppendingString:@"</x>"];
+        element = [element stringByAppendingString:@"<y>"];
+        element = [element stringByAppendingString:[@(sb.star.y) stringValue]];
+        element = [element stringByAppendingString:@"</y>"];
+        element = [element stringByAppendingString:@"</starbuttonstar>"];
+    }
+    element = [element stringByAppendingString:@"</"];
+    element = [element stringByAppendingString:NSStringFromClass([sb class])];
+    element = [element stringByAppendingString:@">"];
+    [_parser addOutput:element];
 }
 @end

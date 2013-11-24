@@ -236,11 +236,22 @@
             _board.finishPos.y = newPos.y;
         } else if (stat == BRUSH_ERASER) {
             // If a connection is on the position, first remove that one.
+            // FIX LATER: Här ska datamodellen kollas, om eraset är på en punkt som är kopplad (i.e. StarButton eller StarButton.star), säg till scenen om detta.
             BOOL removeConnection = [_scene removeAConnectionFrom:point];
-            if(!removeConnection && ![_scene removeAConnectionBasedOnEndPoint:point]) {
-                NSLog(@"fdsfds");
+            BOOL removeConnectionEndPoint = [_scene removeAConnectionBasedOnEndPoint:point];
+            if(!removeConnection && !removeConnectionEndPoint) {
                 [[_board elementDictionary] removeObjectForKey: flatIndex];
+                [_scene removeOneSprite:flatIndex];
                 // If an element that was connected to another element, check this.
+            }
+            // If a connection was removed, update data model.
+            if(removeConnection || removeConnectionEndPoint) {
+                Element *e = [[_board elementDictionary] objectForKey:flatIndex];
+                if([e isKindOfClass: [StarButton class]]) {
+                    StarButton *sb = (StarButton*) e;
+                    NSLog(@"Removed connection");
+                    sb.star = nil;
+                }
             }
         } else if (stat == BRUSH_ROCK) {
             CGPoint pos = CGPointMake(val.pointValue.x, val.pointValue.y);
