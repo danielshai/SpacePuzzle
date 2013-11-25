@@ -169,6 +169,7 @@
               !bridgeButtonBridge) {
         tempYElement = intString;
     } else if([currentElement isEqualToString:@"x"] && (starButtonStar || bridgeButtonBridge) ) {
+        if(bridgeButtonBridge)NSLog(@"Setting ref %ld", (long)tempXRef);
         tempXRef = intString;
     } else if([currentElement isEqualToString:@"y"] && (starButtonStar || bridgeButtonBridge) ) {
         tempYRef = intString;
