@@ -567,7 +567,7 @@
     pxl.x += TILESIZE/2;
     starbtn.position = pxl;
     starbtn.size = CGSizeMake(TILESIZE-4, TILESIZE-4);
-    starbtn.color = [SKColor redColor];
+    starbtn.color = [SKColor yellowColor];
     starbtn.colorBlendFactor = 0.3;
     
     [_elementSprites setObject:starbtn forKey:index];
@@ -581,7 +581,7 @@
     pxl.x += TILESIZE/2;
     bridgebtn.position = pxl;
     bridgebtn.size = CGSizeMake(TILESIZE-4, TILESIZE-4);
-    bridgebtn.color = [SKColor greenColor];
+    bridgebtn.color = [SKColor blueColor];
     bridgebtn.colorBlendFactor = 0.25;
     
     [_elementSprites setObject:bridgebtn forKey:index];

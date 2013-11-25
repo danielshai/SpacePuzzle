@@ -14,6 +14,8 @@
 @class Box;
 @class StarButton;
 @class Star;
+@class Bridge;
+@class BridgeButton;
 
 @interface Board : NSObject
 
@@ -37,4 +39,6 @@
 -(void) starExport: (Star*) star;
 -(void) boxExport: (Box*) box;
 -(void) starButtonExport: (StarButton*) sb;
+-(void) bridgeExport: (Bridge*) b;
+-(void) bridgeButtonExport: (BridgeButton*) bb;
 @end

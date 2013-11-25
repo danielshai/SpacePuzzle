@@ -12,6 +12,8 @@
 #import "Macros.h"
 #import "Star.h"
 #import "StarButton.h"
+#import "Bridge.h"
+#import "BridgeButton.h"
 
 @implementation XMLParser
 @synthesize parser = _parser;
@@ -100,16 +102,25 @@
         startElement = NO;
     } else if ([elementName isEqualToString:@"finish"]) {
         finishElement = NO;
-    } else if ([elementName isEqualToString:@"Box"]) {
+    } else if ([elementName isEqualToString:CLASS_BOX]) {
         rockElement = NO;
         Box *r = [[Box alloc] initWithX:tempXElement Y:tempYElement];
         NSNumber *index = [NSNumber numberWithInteger:tempYElement*BOARD_SIZE_X + tempXElement];
         [_elements setObject:r forKey:index];
+        
     } else if ([elementName isEqualToString:CLASS_STAR]) {
         starElement = NO;
         Star *s = [[Star alloc] initWithX:tempXElement Y:tempYElement];
         NSNumber *index = [NSNumber numberWithInteger:tempYElement*BOARD_SIZE_X + tempXElement];
         [_elements setObject:s forKey:index];
+        
+    } else if ([elementName isEqualToString:CLASS_BRIDGE]) {
+        bridgeElement = NO;
+        Bridge *b = [[Bridge alloc] initWithX:tempXElement Y:tempYElement Hidden:NO];
+        b.blocking = tempBlockingElement;
+        NSNumber *index = [NSNumber numberWithInteger:tempYElement*BOARD_SIZE_X + tempXElement];
+        [_elements setObject:b forKey:index];
+        
     } else if ([elementName isEqualToString:CLASS_STARBUTTON]) {
         starButtonElement = NO;
         NSNumber *starIndex = [NSNumber numberWithInteger:tempYRef*BOARD_SIZE_X+tempXRef];
@@ -117,9 +128,18 @@
         s.hidden = YES;
         StarButton *sb = [[StarButton alloc] initWithStar:s X:tempXElement Y:tempYElement];
         NSNumber *index = [NSNumber numberWithInteger:tempYElement*BOARD_SIZE_X + tempXElement];
-       // NSLog(@"starbutton: %ld %ld", (long)tempXElement,(long)tempYElement);
-       // NSLog(@"starbutton: %ld %ld", (long)tempXRef,(long)tempYRef);
         [_elements setObject:sb forKey:index];
+        
+    } else if ([elementName isEqualToString:CLASS_BRIDGEBUTTON]) {
+        bridgeButtonElement = NO;
+        NSNumber *bridgeIndex = [NSNumber numberWithInteger:tempYRef*BOARD_SIZE_X+tempXRef];
+        Bridge *b = [_elements objectForKey:bridgeIndex];
+        b.hidden = NO;
+        BridgeButton *bb = [[BridgeButton alloc] initWithBridge:b X:tempXElement Y:tempYElement];
+        NSNumber *index = [NSNumber numberWithInteger:tempYElement*BOARD_SIZE_X + tempXElement];
+        [_elements setObject:bb forKey:index];
+        NSLog(@"From: %ld %ld  To: %ld %ld",(long)bb.x,(long)bb.y,(long)b.x,(long)b.y);
+        
     } else if ([elementName isEqualToString:STAR_BUTTON_REF]) {
         starButtonStar = NO;
     } else if ([elementName isEqualToString:BRIDGE_BUTTON_REF]) {

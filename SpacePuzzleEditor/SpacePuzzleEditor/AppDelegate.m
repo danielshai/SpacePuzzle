@@ -289,6 +289,12 @@
             if(sb.star) {
                 [_connections addConnectionFrom:e To:to];
             }
+        } else if([e isKindOfClass:[BridgeButton class]]) {
+            BridgeButton *bb = (BridgeButton*)e;
+            Element *to = (Element*)bb.bridge;
+            if(bb.bridge) {
+                [_connections addConnectionFrom:bb To:to];
+            }
         }
     }
 }

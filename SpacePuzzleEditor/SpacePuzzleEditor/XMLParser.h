@@ -11,6 +11,8 @@
 @class Box;
 @class Star;
 @class StarButton;
+@class BridgeButton;
+@class Bridge;
 
 @interface XMLParser : NSObject <NSXMLParserDelegate> {
     NSString *currentElement;
