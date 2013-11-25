@@ -25,8 +25,16 @@
 @property (nonatomic, retain) SKSpriteNode *bkg;
 @property (nonatomic, retain) NSMutableDictionary *elements;
 @property (nonatomic, retain) NSMutableArray *tiles;
+@property (nonatomic, retain) SKTexture *bigLUp;
+@property (nonatomic, retain) SKTexture *bigLDown;
+@property (nonatomic, retain) SKTexture *bigLRight;
+@property (nonatomic, retain) SKTexture *bigLLeft;
+@property (nonatomic, retain) SKTexture *littleJohnUp;
+@property (nonatomic, retain) SKTexture *littleJohnDown;
+@property (nonatomic, retain) SKTexture *littleJohnRight;
+@property (nonatomic, retain) SKTexture *littleJohnLeft;
 
--(void)updateUnit:(CGPoint) coord;
+-(void)updateUnit:(CGPoint) coord inDirection:(NSInteger) direction;
 -(void)refreshTileAtPosition: (CGPoint)pos WithStatus: (NSInteger)status;
 -(void)refreshTileAtFlatIndex: (NSInteger)findex WithStatus:(NSInteger)status;
 -(void)refreshElementAtPosition: (NSNumber*)index OfClass:(NSString*)name WithStatus:(BOOL)on;
@@ -37,5 +45,6 @@
 -(void)setupElement: (CGPoint)coord Name: (NSString*)className Hidden: (BOOL)hidden;
 -(void)setupUnits: (CGPoint)pos;
 -(void)notifyText: (NSString *)text Object: (NSObject*)object Key: (NSString*)key;
+-(void)changeUnit;
 
 @end

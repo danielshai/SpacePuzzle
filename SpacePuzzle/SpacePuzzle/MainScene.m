@@ -3,6 +3,7 @@
 //  SpacePuzzle
 
 #import "MainScene.h"
+#import "Macros.h"
 
 @implementation MainScene
 @synthesize solidTile = _solidTile;
@@ -20,6 +21,14 @@
 @synthesize bridgeOn = _bridgeOn;
 @synthesize switchOff = _switchOff;
 @synthesize switchOn = _switchOn;
+@synthesize bigLUp = _bigLUp;
+@synthesize bigLDown = _bigLDown;
+@synthesize bigLRight = _bigLRight;
+@synthesize bigLLeft = _bigLLeft;
+@synthesize littleJohnUp = _littleJohnUp;
+@synthesize littleJohnDown = _littleJohnDown;
+@synthesize littleJohnRight = _littleJohnRight;
+@synthesize littleJohnLeft = _littleJohnLeft;
 
 -(id)initWithSize:(CGSize)size {    
     if (self = [super initWithSize:size]) {
@@ -37,7 +46,8 @@
         _switchOff = [SKTexture textureWithImageNamed:@"SwitchOFF.png"];
         _bkg = [SKSpriteNode spriteNodeWithImageNamed:@"Background.png"];
         _bkg.size = CGSizeMake(size.width, size.height);
-
+        _littleJohn.texture = [SKTexture textureWithImageNamed:@"AlienDown"];
+        _bigL.texture = [SKTexture textureWithImageNamed:@"AstroDown"];
         _bkg.position = CGPointMake(WIN_SIZE_X/2, WIN_SIZE_Y/2);
         [self addChild:_bkg];
         _elements = [[NSMutableDictionary alloc] init];
@@ -48,11 +58,34 @@
 
 /*
  *  Updates the current unit with the data model. */
--(void)updateUnit:(CGPoint)coord {
+-(void)updateUnit:(CGPoint)coord inDirection:(NSInteger)direction {
     CGPoint pos = [Converter convertCoordToPixel:coord];
     pos.x += 20;
     pos.y -= 5;
     _currentUnit.position = pos;
+    // Depending on the direction the unit is making, update to the correct picture.
+    // Should use [path stringByAppendingString:@".png"] instead due to the numerous numbers of if-statments;
+    if (_currentUnit == _bigL) {
+        if(direction == UP) {
+            _currentUnit.texture = [SKTexture textureWithImageNamed:@"AstroUp.png"];
+        } else if(direction == DOWN) {
+            _currentUnit.texture = [SKTexture textureWithImageNamed:@"AstroDown.png"];
+        } else if(direction == RIGHT) {
+            _currentUnit.texture = [SKTexture textureWithImageNamed:@"AstroRight.png"];
+        } else {
+            _currentUnit.texture = [SKTexture textureWithImageNamed:@"AstroLeft.png"];
+        }
+    } else {
+        if(direction == UP) {
+            _currentUnit.texture = [SKTexture textureWithImageNamed:@"AlienUp.png"];
+        } else if(direction == DOWN) {
+            _currentUnit.texture = [SKTexture textureWithImageNamed:@"AlienDown.png"];
+        } else if(direction == RIGHT) {
+            _currentUnit.texture = [SKTexture textureWithImageNamed:@"AlienRight.png"];
+        } else {
+            _currentUnit.texture = [SKTexture textureWithImageNamed:@"AlienLeft.png"];
+        }
+    }
 }
 
 -(void)moveElement:(CGPoint)oldCoord NewCoord:(CGPoint)newCoord {
@@ -191,14 +224,18 @@
  *  Sets up the view of units. */
 -(void)setupUnits:(CGPoint)pos{
     // TEMP
-    _littleJohn = [SKSpriteNode spriteNodeWithImageNamed:@"Alien.png"];
+    _littleJohn = [SKSpriteNode spriteNodeWithImageNamed:@"AlienDown.png"];
     _littleJohn.size = CGSizeMake(32,32);
+    _bigL = [SKSpriteNode spriteNodeWithImageNamed:@"AstroDown.png"];
+    _bigL.size = CGSizeMake(32,32);
     CGPoint p = [Converter convertCoordToPixel:CGPointMake(pos.x, pos.y)];
     p.x += 20;
     p.y -= 5;
     _littleJohn.position = p;
+    _bigL.position = p;
 
     [self addChild:_littleJohn];
+    [self addChild:_bigL];
     _currentUnit = _littleJohn;
 }
 
@@ -214,4 +251,13 @@
     }
 }
 
+/*
+ * Change the current unit. */
+-(void) changeUnit {
+    if (_currentUnit == _bigL) {
+        _currentUnit = _littleJohn;
+    } else {
+        _currentUnit = _bigL;
+    }
+}
 @end
