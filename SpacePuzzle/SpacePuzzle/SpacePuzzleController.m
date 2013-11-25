@@ -11,6 +11,7 @@
 #import "StarButton.h"
 #import "BridgeButton.h"
 #import "PlatformLever.h"
+#import "Bridge.h"
 
 @implementation SpacePuzzleController
 @synthesize board = _board;
@@ -151,25 +152,16 @@
     Element *obj;
     while((obj = [enumerator nextObject])) {
         CGPoint p = CGPointMake([obj x], [obj y]);
-        NSString *str = NSStringFromClass([obj class]);
-        
-        if(![str isEqualToString:@"StarButton"] && ![str isEqualToString:@"BridgeButton"]) {
-            [_scene setupElement:p Name:str Hidden:[obj hidden]];
+        if([obj isKindOfClass:[Bridge class]]) {
+            [_scene setupElement:p Name:@"BridgeOFF.png" Hidden:[obj hidden]];
+        } else if( ![obj isKindOfClass:[StarButton class]] && ![obj isKindOfClass:[BridgeButton class]] ) {
+            [_scene setupElement:p Name:NSStringFromClass([obj class]) Hidden:[obj hidden]];
         } else {
             [_scene setupElement:p Name:@"ButtonOFF" Hidden:[obj hidden]];
         }
     }
-    // TEMP TEST CODE FOR STAR BUTTON
-    NSNumber *nr = [NSNumber numberWithInteger:2*BOARD_SIZE_X];
-    obj = [[_board elementDictionary] objectForKey:nr];
-    Star *s = (Star*)obj;
-    s.hidden = YES;
-    [_scene setElementAtPosition:s.key IsHidden:YES];
-    StarButton *st = [[StarButton alloc] initWithStar:s X:0 Y:0];
-    nr = [NSNumber numberWithInteger:0];
-    [[_board elementDictionary] setObject:st forKey:nr];
+
     CGPoint p = CGPointMake(0, 0);
-    [_scene setupElement:p Name:@"ButtonOFF" Hidden:NO];
     
     // TEMP TEST CODE FOR PLATFORM LEVER
     MovingPlatform *mp = [[MovingPlatform alloc] initWithX:2 Y:0 Hidden:NO];
