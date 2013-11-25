@@ -192,6 +192,8 @@
     return NO;
 }
 
+/*
+ *  Removes all connections from the scene. */
 -(void)removeAllConnections {
     for(id key in _connectionNodes) {
         SKShapeNode* s = [_connectionNodes objectForKey:key];

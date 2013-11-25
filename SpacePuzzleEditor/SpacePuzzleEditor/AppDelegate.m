@@ -97,10 +97,9 @@
             //Star *s = (Star*) eEnd;
             // Sets the |StarButton|'s |Star| to be the one selected by the user.
             //sb.star = s;
-            CGPoint from = CGPointMake(startPoint.pointValue.x, startPoint.pointValue.y);
-            CGPoint to = CGPointMake(endPoint.pointValue.x, endPoint.pointValue.y);
+            //CGPoint from = CGPointMake(startPoint.pointValue.x, startPoint.pointValue.y);
+            //CGPoint to = CGPointMake(endPoint.pointValue.x, endPoint.pointValue.y);
             [_connections addConnectionFrom:eStart To:eEnd];
-            
             [self updateConnectionsView];
         } else {
             // No highlight should be presented, since the elements cannot be connected.
@@ -163,6 +162,7 @@
 -(void)refreshView {
     [self refreshBoardView];
     [self refreshElementView];
+    [self updateConnectionsView];
 }
 
 -(void)cleanView {
@@ -199,14 +199,6 @@
         [_scene addElement:e.className Position:pos];
     }
 }
-/*
--(void)refreshConnections {
-    for(id key in [_board elementDictionary]) {
-        if([NSStringFromClass([key class])) {
-            
-        }
-    }
-}*/
 
 /*
  *  Called when the board has been edited in the |BoardScene|. Updates the data model according to the 
@@ -287,6 +279,20 @@
     }
 }
 
+-(void)loadConnections {
+    for(id key in [_board elementDictionary]) {
+        Element *e = [[_board elementDictionary] objectForKey:key];
+        
+        if([e isKindOfClass: [StarButton class]]) {
+            StarButton *sb = (StarButton*)e;
+            Element *to = (Element*)sb.star;
+            if(sb.star) {
+                [_connections addConnectionFrom:e To:to];
+            }
+        }
+    }
+}
+
 -(void)setupBoard {
     _board = [[Board alloc] init];
     // TEMP CODE.
@@ -339,6 +345,7 @@
             if([extension isEqualToString:@".splvl"]) {
                 [_board loadBoard:path];
                 currentFilePath = path;
+                [self loadConnections];
                 [self refreshView];
                 // Updates the window's title.
                 [[self window] setTitle:[path lastPathComponent]];

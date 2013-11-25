@@ -21,12 +21,16 @@
     return self;
 }
 
+/*
+ *  Adds a connection from an element to an element, if possible. If the elements are already connected,
+ *  the connection is updated. */
 -(BOOL)addConnectionFrom: (Element*)from To: (Element*)to {
     // First, check if any of the elements already are connected. If so, update with new connection.
     for(int i = 0; i < _connections.count; i++) {
         Element *first = [[_connections objectAtIndex:i] objectAtIndex:0];
         Element *second = [[_connections objectAtIndex:i] objectAtIndex:1];
         
+        // Element has connection. Update.
         if((from.x == first.x && from.y == first.y) || (to.x == second.x && to.y == second.y)) {
             // The case of a starbutton to star.
             if([from isKindOfClass: [StarButton class]] && [to isKindOfClass: [Star class]]) {
@@ -45,6 +49,7 @@
         }
     }
     
+    // A new connection: check if the connection can be made, and if so create it and add to |_connections|. 
     if([from isKindOfClass: [StarButton class]] && [to isKindOfClass: [Star class]]) {
         StarButton *sb = (StarButton*)from;
         Star *star = (Star*)to;
