@@ -105,6 +105,7 @@
         starButtonElement = NO;
         NSNumber *starIndex = [NSNumber numberWithInteger:tempYRef*BOARD_SIZE_X+tempXRef];
         Star *s = [_elements objectForKey:starIndex];
+        s.hidden = YES;
         StarButton *sb = [[StarButton alloc] initWithStar:s X:tempXElement Y:tempYElement];
         NSNumber *index = [NSNumber numberWithInteger:tempYElement*BOARD_SIZE_X + tempXElement];
        // NSLog(@"starbutton: %ld %ld", (long)tempXElement,(long)tempYElement);

@@ -180,8 +180,10 @@
     [_scene setupElement:p Name:@"MovingPlatform" Hidden:NO];
     [_scene setElementAtPosition:mp.key IsHidden:NO];
     [_scene setElementAtPosition:pl.key IsHidden:NO];
-    nr = [NSNumber numberWithInteger:1];
-    [[_board elementDictionary] setObject:pl forKey:nr];
+    
+    pl.movingPlatform = mp;
+   // nr = [NSNumber numberWithInteger:1];
+  //  [[_board elementDictionary] setObject:pl forKey:nr];
     p = CGPointMake(1, 0);
     [_scene setupElement:p Name:@"SwitchOFF" Hidden:NO];
 }
@@ -228,6 +230,7 @@
                 _currentUnit.x = x;
                 _currentUnit.y = y;
                 [_scene updateUnit:CGPointMake(x, y)];
+                [self isUnitOnGoal];
                 [e movedTo];
                 
                 // If the element is a star.
@@ -262,7 +265,6 @@
        (x == unitX && y == unitY) )
     {
         Element *e = [[_board elementDictionary] objectForKey:actionPointKey];
-    
         // If the element exists.
         if(e) {
             // Do action depending on element type.
@@ -289,18 +291,31 @@
     NSNumber *elementKey = [NSNumber numberWithInteger:rock.y*BOARD_SIZE_X + rock.x];
     
     if (dir == RIGHT) {
+        // Check if at the edge of the board, if so do nothing.
+        if(rock.x >= BOARD_SIZE_X-1) {
+            return;
+        }
         nextKey = [NSNumber numberWithInt:rock.y*BOARD_SIZE_X + rock.x + 1];
         e = [[_board elementDictionary] objectForKey:nextKey];
         nextPos = CGPointMake(rock.x + 1, rock.y);
     } else if (dir == LEFT) {
+        if(rock.x <= 0) {
+            return;
+        }
         nextKey = [NSNumber numberWithInt:rock.y*BOARD_SIZE_X + rock.x - 1];
         e = [[_board elementDictionary] objectForKey:nextKey];
         nextPos = CGPointMake(rock.x - 1, rock.y);
     } else if (dir == UP) {
+        if(rock.y <= 0) {
+            return;
+        }
         nextKey = [NSNumber numberWithInt:(rock.y - 1)*BOARD_SIZE_X + rock.x];
         e = [[_board elementDictionary] objectForKey:nextKey];
         nextPos = CGPointMake(rock.x, rock.y - 1);
-    } else {
+    } else if (dir == DOWN){
+        if(rock.y >= BOARD_SIZE_Y-1) {
+            return;
+        }
         nextKey = [NSNumber numberWithInt:(rock.y + 1)*BOARD_SIZE_X + rock.x];
         e = [[_board elementDictionary] objectForKey:nextKey];
         nextPos = CGPointMake(rock.x, rock.y + 1);
@@ -365,6 +380,12 @@
     // Updates the moving platform connected to the lever on the scene, i.e. moving it.
     [_scene setElementAtPosition:pl.movingPlatform.key IsHidden:NO];
     [_scene refreshElementAtPosition:pl.movingPlatform.key OfClass:@"MovingPlatform" WithStatus:pl.movingPlatform.blocking];
+}
+
+/* 
+ *  Checks if the |currentUnit| is no the finish position. */
+-(BOOL)isUnitOnGoal {
+    return([[_board finishPos] x] == _currentUnit.x && [[_board finishPos] y] == _currentUnit.y);
 }
 
 -(NSArray*) getDataFromNotification:(NSNotification *)notif Key:(NSString *)key {

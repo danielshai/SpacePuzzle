@@ -40,6 +40,7 @@
 -(void)doActionOnStarButton: (Element*)button;
 -(void)doActionOnBridgeButton: (Element*)button;
 -(void)doActionOnPlatformLever: (Element*)lever;
+-(BOOL)isUnitOnGoal;
 -(void)setupBoard;
 -(void)setupElements;
 -(void)setupUnits;
