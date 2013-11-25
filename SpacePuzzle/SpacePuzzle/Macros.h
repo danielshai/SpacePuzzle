@@ -44,7 +44,7 @@
 #define CLASS_BOX               @"Box"
 #define CLASS_BRIDGEBUTTON      @"BridgeButton"
 #define STAR_BUTTON_REF         @"starbuttonstar"
-
+#define BRIDGE_BUTTON_REF       @"bridgebuttonbridge"
 #define RIGHT                   1
 #define LEFT                    2
 #define UP                      3

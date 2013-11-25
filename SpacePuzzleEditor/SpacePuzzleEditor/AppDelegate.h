@@ -11,6 +11,7 @@
 #import <SpriteKit/SpriteKit.h>
 #import "Board.h"
 #import "BoardScene.h"
+#import "Palette.h"
 
 @class BoardView;
 @class Star;
@@ -24,6 +25,7 @@
     // Used for checking if a file has been edited, which is used to give feedback to the user of this fact.
     BOOL edited;
 }
+@property (unsafe_unretained) IBOutlet Palette *palette;
 @property (unsafe_unretained) IBOutlet NSWindow *controlPanel;
 @property (retain) IBOutlet NSWindow *window;
 @property (retain) IBOutlet SKView *skView;

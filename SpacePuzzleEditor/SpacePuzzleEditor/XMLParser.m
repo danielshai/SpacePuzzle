@@ -44,6 +44,9 @@
         starButtonStar = NO;
         tempBlockingElement = NO;
         tempState = NO;
+        bridgeElement = NO;
+        bridgeButtonElement = NO;
+        bridgeButtonBridge = NO;
         
         _board = [[NSMutableArray alloc] init];
         _parser = [[NSXMLParser alloc] initWithContentsOfURL:url];
@@ -70,7 +73,7 @@
         startElement = YES;
     } else if ([currentElement isEqualToString:@"finish"]) {
         finishElement = YES;
-    } else if ([currentElement isEqualToString:@"Box"]) {
+    } else if ([currentElement isEqualToString:CLASS_BOX]) {
         rockElement = YES;
     } else if ([currentElement isEqualToString:CLASS_STAR]) {
         starElement = YES;
@@ -80,6 +83,12 @@
         starButtonElement = YES;
     } else if ([currentElement isEqualToString:STAR_BUTTON_REF]) {
         starButtonStar = YES;
+    } else if ([currentElement isEqualToString:CLASS_BRIDGE]) {
+        bridgeElement = YES;
+    } else if ([currentElement isEqualToString:CLASS_BRIDGEBUTTON]) {
+        bridgeButtonElement = YES;
+    } else if ([currentElement isEqualToString:BRIDGE_BUTTON_REF]) {
+        bridgeButtonBridge = YES;
     }
 }
 
@@ -113,6 +122,8 @@
         [_elements setObject:sb forKey:index];
     } else if ([elementName isEqualToString:STAR_BUTTON_REF]) {
         starButtonStar = NO;
+    } else if ([elementName isEqualToString:BRIDGE_BUTTON_REF]) {
+        bridgeButtonBridge = NO;
     }
 }
 
@@ -131,17 +142,19 @@
         _finish.x = intString;
     } else if([currentElement isEqualToString:@"y"] && finishElement) {
         _finish.y = intString;
-    } else if([currentElement isEqualToString:@"x"] && boardElement && !starButtonStar) {
+    } else if([currentElement isEqualToString:@"x"] && boardElement && !starButtonStar &&
+              !bridgeButtonBridge) {
         tempXElement = intString;
-    } else if([currentElement isEqualToString:@"y"] && boardElement && !starButtonStar) {
+    } else if([currentElement isEqualToString:@"y"] && boardElement && !starButtonStar &&
+              !bridgeButtonBridge) {
         tempYElement = intString;
-    } else if([currentElement isEqualToString:@"x"] && starButtonStar) {
+    } else if([currentElement isEqualToString:@"x"] && (starButtonStar || bridgeButtonBridge) ) {
         tempXRef = intString;
-    } else if([currentElement isEqualToString:@"y"] && starButtonStar) {
+    } else if([currentElement isEqualToString:@"y"] && (starButtonStar || bridgeButtonBridge) ) {
         tempYRef = intString;
-    } else if([currentElement isEqualToString:@"blocking"] && rockElement) {
+    } else if([currentElement isEqualToString:@"blocking"] && (rockElement || bridgeButtonElement) ) {
         tempBlockingElement = intString;
-    } else if([currentElement isEqualToString:@"state"] && starButtonElement) {
+    } else if([currentElement isEqualToString:@"state"] && (starButtonElement || bridgeButtonElement) ) {
         tempState = intString;
     }
 }
@@ -159,6 +172,10 @@
     starButtonStar = NO;
     tempState = NO;
     tempBlockingElement = NO;
+    bridgeElement = NO;
+    bridgeButtonElement = NO;
+    bridgeButtonBridge = NO;
+
 }
 
 -(void)addOutput:(NSString *)string {

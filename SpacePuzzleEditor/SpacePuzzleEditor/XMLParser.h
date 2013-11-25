@@ -22,6 +22,9 @@
     BOOL boardElements;
     BOOL starButtonElement;
     BOOL starButtonStar;
+    BOOL bridgeElement;
+    BOOL bridgeButtonElement;
+    BOOL bridgeButtonBridge;
     NSInteger tempXElement;
     NSInteger tempYElement;
     NSInteger tempXRef;

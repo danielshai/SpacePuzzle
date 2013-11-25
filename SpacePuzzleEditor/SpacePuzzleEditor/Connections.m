@@ -63,6 +63,8 @@
     return NO;
 }
 
+/*
+ *  Removes a connection based on a point. Either start or end point, both work. */
 -(BOOL)removeConnection:(CGPoint)pos {
     for(int i = 0; i < _connections.count; i++) {
         Element *from = [[_connections objectAtIndex:i] objectAtIndex:0];

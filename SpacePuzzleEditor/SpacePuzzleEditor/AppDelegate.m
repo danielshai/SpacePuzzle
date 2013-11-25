@@ -21,6 +21,7 @@
 @synthesize recentMenu = _recentMenu;
 @synthesize controlPanel = _controlPanel;
 @synthesize connections = _connections;
+@synthesize palette = _palette;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
@@ -44,6 +45,8 @@
     [self observeText:@"ControlDrag" Selector:@selector(controlDragged:)];
     [self observeText:@"ControlDragUp" Selector:@selector(controlDragUp:)];
     [[self window] setTitle:@"Untitled.splvl"];
+    [_palette setFloatingPanel:YES];
+    [_palette setWorksWhenModal:YES];
 }
 
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender {

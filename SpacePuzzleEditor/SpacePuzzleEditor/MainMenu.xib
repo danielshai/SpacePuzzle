@@ -579,7 +579,7 @@
             <connections>
                 <outlet property="controlPanel" destination="Nfw-WY-MpN" id="Abi-uL-Trr"/>
                 <outlet property="crackedPalette" destination="FWN-3I-4Vg" id="b1Y-S4-gNT"/>
-                <outlet property="palette" destination="vlI-Vs-b8g" id="IEf-tI-d5o"/>
+                <outlet property="palette" destination="OQd-pb-Vvp" id="exI-Kx-y9B"/>
                 <outlet property="recentMenu" destination="7wc-3F-y89" id="ROQ-Zi-Cid"/>
                 <outlet property="save" destination="Cy2-HG-JWE" id="8fh-RS-3rB"/>
                 <outlet property="skView" destination="539" id="540"/>
