@@ -39,7 +39,6 @@
 -(void) doAction {
     _state = !_state;
     _bridge.blocking = !_bridge.blocking;
-    NSLog(@"HAAJ");
 }
 
 @end

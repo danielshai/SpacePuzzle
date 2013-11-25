@@ -203,7 +203,8 @@
     NSInteger unitY = _currentUnit.y;
     NSNumber *unitKey = [NSNumber numberWithInt:unitY*BOARD_SIZE_X + unitX];
     NSInteger unitIntKey = [unitKey integerValue];
-    
+    NSNumber *nextPos = [NSNumber numberWithInt:y*BOARD_SIZE_X + x];
+    Element *e = [[_board elementDictionary] objectForKey:nextPos];
     // First check if the movement was inside the board and if the tile isn't |void| (which units cannot
     // move to).
     if(x >= 0 && x < BOARD_SIZE_X && y >= 0 && y < BOARD_SIZE_Y
@@ -225,9 +226,7 @@
             NSInteger dir = [Converter convertCoordsTo:actionPoint Direction:unitPoint];
             
             // Updates the position of curKey to the one that the unit is moving towards.
-            NSNumber *nextPos = [NSNumber numberWithInt:y*BOARD_SIZE_X + x];
             // Check elements on the board.
-            Element *e = [[_board elementDictionary] objectForKey:nextPos];
             
             // If the element isn't blocking, move unit.
             if(![e blocking]) {
@@ -369,10 +368,9 @@
     [bb doAction];
     
     // Updates the button on the scene.
-    [_scene refreshElementAtPosition:bb.key OfClass:@"Button" WithStatus:bb.state];
+    [_scene refreshElementAtPosition:bb.bridge.key OfClass:CLASS_BRIDGE WithStatus:!bb.blocking];
     // Updates the bridge connected to the button on the scene, i.e. showing it.
     [_scene setElementAtPosition:bb.bridge.key IsHidden:NO];
-    [_scene refreshElementAtPosition:bb.bridge.key OfClass:@"Bridge" WithStatus:bb.bridge.blocking];
 }
 
 -(void)doActionOnPlatformLever:(Element *)lever {
