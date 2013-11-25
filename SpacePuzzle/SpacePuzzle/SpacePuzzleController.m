@@ -93,6 +93,15 @@
         location = [Converter convertMousePosToCoord:location];
         location.y = abs(location.y - 9);
         
+        if (_currentUnit == _bigL) {
+            _currentUnit = _littleJohn;
+            NSLog(@"Little John");
+        } else {
+            _currentUnit = _bigL;
+            NSLog(@"Big L");
+        }
+        [_scene changeUnit];
+        
         [self unitWantsToDoActionAt:location];
     }
 }
@@ -219,7 +228,10 @@
                 [[[_board board] objectAtIndex:unitIntKey] setStatus:MAPSTATUS_VOID];
                 [_scene refreshTileAtFlatIndex:unitIntKey WithStatus:MAPSTATUS_VOID];
             }
-           
+            CGPoint actionPoint = CGPointMake(x, y);
+            CGPoint unitPoint = CGPointMake(unitX, unitY);
+            NSInteger dir = [Converter convertCoordsTo:actionPoint Direction:unitPoint];
+            
             // Updates the position of curKey to the one that the unit is moving towards.
             NSNumber *nextPos = [NSNumber numberWithInt:y*BOARD_SIZE_X + x];
             // Check elements on the board.
@@ -229,7 +241,7 @@
             if(![e blocking]) {
                 _currentUnit.x = x;
                 _currentUnit.y = y;
-                [_scene updateUnit:CGPointMake(x, y)];
+                [_scene updateUnit:CGPointMake(x, y) inDirection:dir];
                 [self isUnitOnGoal];
                 [e movedTo];
                 
@@ -267,8 +279,8 @@
         Element *e = [[_board elementDictionary] objectForKey:actionPointKey];
         // If the element exists.
         if(e) {
-            // Do action depending on element type.
-            if ([e isKindOfClass:[Box class]]) {
+            // Do action depending on element type and current unit.
+            if ([e isKindOfClass:[Box class]] && _currentUnit == _bigL) {
                 NSInteger dir = [Converter convertCoordsTo:actionPoint Direction:unitPoint];
                 [self doActionOnBox:e InDirection:dir];
             } else if ([e isKindOfClass:[StarButton class]]) {
@@ -322,7 +334,7 @@
     }
     
     // Add more elements which cannot be pushed upon to if-statement.
-    if (![e isKindOfClass:[Box class]]) {
+    if (![e isKindOfClass:[Box class]] && (_littleJohn.x != nextPos.x && _littleJohn.y != nextPos.y)) {
         NSInteger intKey = [nextKey integerValue];
         NSInteger nextTile = [[[_board board] objectAtIndex:intKey] status];
         
@@ -383,7 +395,7 @@
 }
 
 /* 
- *  Checks if the |currentUnit| is no the finish position. */
+ *  Checks if the |currentUnit| is on the finish position. */
 -(BOOL)isUnitOnGoal {
     return([[_board finishPos] x] == _currentUnit.x && [[_board finishPos] y] == _currentUnit.y);
 }
@@ -399,10 +411,9 @@
 -(void)setupUnits {
     _bigL = [[BigL alloc] init];
     _littleJohn = [[LittleJohn alloc] init];
-    
-    _currentUnit = _littleJohn;
     _littleJohn.x = _board.startPos.x;
     _littleJohn.y = _board.startPos.y;
+    _currentUnit = _littleJohn;
     CGPoint p = CGPointMake(_littleJohn.x, _littleJohn.y);
     [_scene setupUnits:p];
 }

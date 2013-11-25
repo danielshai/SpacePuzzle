@@ -33,6 +33,14 @@
 		779DB365183E32030059A084 /* PlatformLever.m in Sources */ = {isa = PBXBuildFile; fileRef = 779DB364183E32030059A084 /* PlatformLever.m */; };
 		779DB368183E32560059A084 /* MovingPlatform.m in Sources */ = {isa = PBXBuildFile; fileRef = 779DB367183E32560059A084 /* MovingPlatform.m */; };
 		779EF6A7183F608C0097441A /* MovingPlatform.png in Resources */ = {isa = PBXBuildFile; fileRef = 779EF6A6183F608C0097441A /* MovingPlatform.png */; };
+		77D60727184373F40079A182 /* AlienDown.png in Resources */ = {isa = PBXBuildFile; fileRef = 77D60721184373F40079A182 /* AlienDown.png */; };
+		77D60728184373F40079A182 /* AlienLeft.png in Resources */ = {isa = PBXBuildFile; fileRef = 77D60722184373F40079A182 /* AlienLeft.png */; };
+		77D60729184373F40079A182 /* AlienRight.png in Resources */ = {isa = PBXBuildFile; fileRef = 77D60723184373F40079A182 /* AlienRight.png */; };
+		77D6072A184373F40079A182 /* AlienUp.png in Resources */ = {isa = PBXBuildFile; fileRef = 77D60724184373F40079A182 /* AlienUp.png */; };
+		77D6072B184373F40079A182 /* AstroDown.png in Resources */ = {isa = PBXBuildFile; fileRef = 77D60725184373F40079A182 /* AstroDown.png */; };
+		77D6072C184373F40079A182 /* AstroLeft.png in Resources */ = {isa = PBXBuildFile; fileRef = 77D60726184373F40079A182 /* AstroLeft.png */; };
+		77D6072F184374030079A182 /* AstroRight.png in Resources */ = {isa = PBXBuildFile; fileRef = 77D6072D184374030079A182 /* AstroRight.png */; };
+		77D60730184374030079A182 /* AstroUp.png in Resources */ = {isa = PBXBuildFile; fileRef = 77D6072E184374030079A182 /* AstroUp.png */; };
 		E6057677183619120033AE88 /* Box.m in Sources */ = {isa = PBXBuildFile; fileRef = E6057676183619120033AE88 /* Box.m */; };
 		E60C6A01183B94F000D6FA14 /* Star.m in Sources */ = {isa = PBXBuildFile; fileRef = E60C6A00183B94F000D6FA14 /* Star.m */; };
 		E60C6A0A183BB19F00D6FA14 /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = E60C6A09183BB19F00D6FA14 /* Player.m */; };
@@ -106,6 +114,14 @@
 		779DB366183E32560059A084 /* MovingPlatform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovingPlatform.h; sourceTree = "<group>"; };
 		779DB367183E32560059A084 /* MovingPlatform.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovingPlatform.m; sourceTree = "<group>"; };
 		779EF6A6183F608C0097441A /* MovingPlatform.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MovingPlatform.png; sourceTree = "<group>"; };
+		77D60721184373F40079A182 /* AlienDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AlienDown.png; path = ../Units/AlienDown.png; sourceTree = "<group>"; };
+		77D60722184373F40079A182 /* AlienLeft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AlienLeft.png; path = ../Units/AlienLeft.png; sourceTree = "<group>"; };
+		77D60723184373F40079A182 /* AlienRight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AlienRight.png; path = ../Units/AlienRight.png; sourceTree = "<group>"; };
+		77D60724184373F40079A182 /* AlienUp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AlienUp.png; path = ../Units/AlienUp.png; sourceTree = "<group>"; };
+		77D60725184373F40079A182 /* AstroDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AstroDown.png; path = ../Units/AstroDown.png; sourceTree = "<group>"; };
+		77D60726184373F40079A182 /* AstroLeft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AstroLeft.png; path = ../Units/AstroLeft.png; sourceTree = "<group>"; };
+		77D6072D184374030079A182 /* AstroRight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AstroRight.png; path = ../Units/AstroRight.png; sourceTree = "<group>"; };
+		77D6072E184374030079A182 /* AstroUp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AstroUp.png; path = ../Units/AstroUp.png; sourceTree = "<group>"; };
 		E6057675183619120033AE88 /* Box.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Box.h; sourceTree = "<group>"; };
 		E6057676183619120033AE88 /* Box.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Box.m; sourceTree = "<group>"; };
 		E60C69FF183B94F000D6FA14 /* Star.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Star.h; sourceTree = "<group>"; };
@@ -184,6 +200,14 @@
 		7797AC1E183CE9F500E63E95 /* Elements */ = {
 			isa = PBXGroup;
 			children = (
+				77D6072D184374030079A182 /* AstroRight.png */,
+				77D6072E184374030079A182 /* AstroUp.png */,
+				77D60721184373F40079A182 /* AlienDown.png */,
+				77D60722184373F40079A182 /* AlienLeft.png */,
+				77D60723184373F40079A182 /* AlienRight.png */,
+				77D60724184373F40079A182 /* AlienUp.png */,
+				77D60725184373F40079A182 /* AstroDown.png */,
+				77D60726184373F40079A182 /* AstroLeft.png */,
 				779EF6A6183F608C0097441A /* MovingPlatform.png */,
 				7797AC1F183CE9F500E63E95 /* Box.png */,
 				7797AC20183CE9F500E63E95 /* BridgeOFF.png */,
@@ -487,11 +511,17 @@
 				7797AC47183CE9F500E63E95 /* Alien.png in Resources */,
 				7797AC48183CE9F500E63E95 /* Astronaut.png in Resources */,
 				7797AC39183CE9F500E63E95 /* Button.png in Resources */,
+				77D6072C184373F40079A182 /* AstroLeft.png in Resources */,
 				E6214061182BA53800EC5C21 /* InfoPlist.strings in Resources */,
+				77D6072B184373F40079A182 /* AstroDown.png in Resources */,
 				7797AC3E183CE9F500E63E95 /* Star.png in Resources */,
+				77D6072F184374030079A182 /* AstroRight.png in Resources */,
 				7797AC37183CE9F500E63E95 /* BridgeOFF.png in Resources */,
+				77D6072A184373F40079A182 /* AlienUp.png in Resources */,
+				77D60728184373F40079A182 /* AlienLeft.png in Resources */,
 				7797AC46183CE9F500E63E95 /* voidtile.png in Resources */,
 				7797AC3B183CE9F500E63E95 /* ButtonON.png in Resources */,
+				77D60727184373F40079A182 /* AlienDown.png in Resources */,
 				E687AE4D183A43EB00A5B78C /* mario.splvl in Resources */,
 				7797AC3D183CE9F500E63E95 /* Rock.png in Resources */,
 				E6214074182BA53800EC5C21 /* Images.xcassets in Resources */,
@@ -501,7 +531,9 @@
 				7797AC3F183CE9F500E63E95 /* Start.gif in Resources */,
 				7797AC45183CE9F500E63E95 /* solidtile.png in Resources */,
 				7797AC3C183CE9F500E63E95 /* Finish.png in Resources */,
+				77D60729184373F40079A182 /* AlienRight.png in Resources */,
 				E621406A182BA53800EC5C21 /* Main.storyboard in Resources */,
+				77D60730184374030079A182 /* AstroUp.png in Resources */,
 				7797AC43183CE9F500E63E95 /* Cracked.png in Resources */,
 				7797AC44183CE9F500E63E95 /* crackedtile.jpg in Resources */,
 				7797AC41183CE9F500E63E95 /* SwitchON.png in Resources */,
