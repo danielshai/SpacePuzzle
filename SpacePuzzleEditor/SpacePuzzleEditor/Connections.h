@@ -15,4 +15,5 @@
 @property (nonatomic, retain) NSMutableArray *connections;
 -(BOOL)addConnectionFrom: (Element*)from To: (Element*)to;
 -(BOOL)removeConnection: (CGPoint) pos;
+-(void)removeAllConnections;
 @end

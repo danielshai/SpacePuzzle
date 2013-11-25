@@ -80,4 +80,8 @@
     }
     return NO;
 }
+
+-(void)removeAllConnections {
+    [_connections removeAllObjects];
+}
 @end

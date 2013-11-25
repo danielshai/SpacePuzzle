@@ -145,6 +145,7 @@
                          informativeTextWithFormat:@"Unsaved work will be lost."];
     if([alert runModal] == NSOKButton) {
         [_board createEmptyBoard];
+        [self loadConnections];
         [self cleanView];
         currentFilePath = @"";
         [[self window] setTitle:@"Untitled.splvl"];
@@ -279,7 +280,10 @@
     }
 }
 
+/*
+ *  Loads connections from the element collection. Typically used when a level is loaded. */
 -(void)loadConnections {
+    [_connections removeAllConnections];
     for(id key in [_board elementDictionary]) {
         Element *e = [[_board elementDictionary] objectForKey:key];
         
