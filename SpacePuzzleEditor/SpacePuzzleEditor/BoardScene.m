@@ -170,15 +170,11 @@
         startControlDrag = [Converter convertMousePosToCoord:startControlDrag];
         endControlDrag = [Converter convertMousePosToCoord:endControlDrag];
         
-        // To prevent an element to be connected to more than one, check if the connection already exists.
-        if(![self isPointAConnectionEndPoint:endControlDrag]) {
-            NSArray *arr = [NSArray arrayWithObjects:[NSValue valueWithPoint:startControlDrag],
+
+        NSArray *arr = [NSArray arrayWithObjects:[NSValue valueWithPoint:startControlDrag],
                         [NSNumber valueWithPoint:endControlDrag], nil];
-            [self notifyText:@"ControlDragUp" Object:arr Key:@"ControlDragUp"];
-            [self noHighlight];
-        } else {
-            [self noHighlight];
-        }
+        [self notifyText:@"ControlDragUp" Object:arr Key:@"ControlDragUp"];
+        [self noHighlight];
     }
 }
 
@@ -194,6 +190,14 @@
         }
     }
     return NO;
+}
+
+-(void)removeAllConnections {
+    for(id key in _connectionNodes) {
+        SKShapeNode* s = [_connectionNodes objectForKey:key];
+        [s removeFromParent];
+    }
+    [_connectionNodes removeAllObjects];
 }
 
 -(void)drawControlLine {
@@ -329,12 +333,10 @@
     SKShapeNode *s = [_connectionNodes objectForKey:index];
     // If the connection doesn't exist, nothing removed.
     if(!s) {
-        NSLog(@"NOTHING TO REMOVE");
         return NO;
     }
     [s removeFromParent];
     [_connectionNodes removeObjectForKey:index];
-    NSLog(@"REMOVED");
     return YES;
 }
 

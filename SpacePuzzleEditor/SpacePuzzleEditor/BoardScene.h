@@ -38,6 +38,7 @@
 -(void)refreshElementsStart: (CGPoint)start Finish: (CGPoint) finish;
 -(void)addElement: (NSString*) element Position: (CGPoint)pos;
 -(void)setAConnectionFrom: (CGPoint) from To: (CGPoint) to;
+-(void)removeAllConnections;
 -(BOOL)removeAConnectionFrom: (CGPoint)from;
 -(BOOL)removeAConnectionFrom: (CGPoint)from To: (CGPoint)to;
 -(BOOL)isPointAConnectionEndPoint: (CGPoint) loc;

@@ -107,8 +107,8 @@
         Star *s = [_elements objectForKey:starIndex];
         StarButton *sb = [[StarButton alloc] initWithStar:s X:tempXElement Y:tempYElement];
         NSNumber *index = [NSNumber numberWithInteger:tempYElement*BOARD_SIZE_X + tempXElement];
-        NSLog(@"starbutton: %ld %ld", (long)tempXElement,(long)tempYElement);
-        NSLog(@"starbutton: %ld %ld", (long)tempXRef,(long)tempYRef);
+       // NSLog(@"starbutton: %ld %ld", (long)tempXElement,(long)tempYElement);
+       // NSLog(@"starbutton: %ld %ld", (long)tempXRef,(long)tempYRef);
         [_elements setObject:sb forKey:index];
     } else if ([elementName isEqualToString:STAR_BUTTON_REF]) {
         starButtonStar = NO;

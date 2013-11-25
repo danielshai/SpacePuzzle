@@ -15,6 +15,7 @@
 @class BoardView;
 @class Star;
 @class StarButton;
+@class Connections;
 
 @interface AppDelegate : NSObject <NSApplicationDelegate> {
     NSString *currentFilePath;
@@ -27,6 +28,7 @@
 @property (nonatomic, retain) Board *board;
 @property (nonatomic, retain) BoardScene *scene;
 @property (weak) IBOutlet NSMenu *recentMenu;
+@property (nonatomic, retain) Connections *connections;
 -(IBAction)newLevel:(id)sender;
 -(IBAction)openLevel:(id)sender;
 -(IBAction)saveLevel:(id)sender;
@@ -35,7 +37,7 @@
 -(void)showControlPanel:(NSNotification *) notification;
 -(void)controlDragged:(NSNotification *) notification;
 -(void)controlDragUp:(NSNotification *) notification;
-//-(void)refreshConnections;
+-(void)updateConnectionsView;
 -(void)cleanView;
 -(void)refreshView;
 -(void)refreshBoardView;

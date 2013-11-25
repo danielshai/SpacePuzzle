@@ -7,6 +7,7 @@
 #import "XMLParser.h"
 #import "Element.h"
 #import "StarButton.h"
+#import "Connections.h"
 
 @implementation AppDelegate
 
@@ -16,6 +17,7 @@
 @synthesize skView = _skView;
 @synthesize recentMenu = _recentMenu;
 @synthesize controlPanel = _controlPanel;
+@synthesize connections = _connections;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
@@ -32,7 +34,8 @@
     _scene.scaleMode = SKSceneScaleModeAspectFill;
     
     [_skView presentScene:_scene];
-
+    _connections = [[Connections alloc] init];
+    
     [self setupBoard];
     [self observeText:@"BoardEdited" Selector:@selector(boardEdited:)];
     [self observeText:@"ControlDrag" Selector:@selector(controlDragged:)];
@@ -90,15 +93,15 @@
         if([NSStringFromClass([eStart class]) isEqualToString:CLASS_STARBUTTON] &&
            [NSStringFromClass([eEnd class]) isEqualToString:CLASS_STAR]) {
             // A |StarButton| connecting to a |Star|.
-            StarButton *sb = (StarButton*) eStart;
-            Star *s = (Star*) eEnd;
+            //StarButton *sb = (StarButton*) eStart;
+            //Star *s = (Star*) eEnd;
             // Sets the |StarButton|'s |Star| to be the one selected by the user.
-            sb.star = s;
+            //sb.star = s;
             CGPoint from = CGPointMake(startPoint.pointValue.x, startPoint.pointValue.y);
             CGPoint to = CGPointMake(endPoint.pointValue.x, endPoint.pointValue.y);
-   
-            [_scene removeAConnectionFrom:from To:to];
-            [_scene setAConnectionFrom:from To:to];
+            [_connections addConnectionFrom:eStart To:eEnd];
+            
+            [self updateConnectionsView];
         } else {
             // No highlight should be presented, since the elements cannot be connected.
             [_scene noHighlight];
@@ -209,7 +212,6 @@
  *  Called when the board has been edited in the |BoardScene|. Updates the data model according to the 
  *  change. */
 -(void)boardEdited:(NSNotification *) notification {
-
     NSDictionary *userInfo = notification.userInfo;
     NSSet *objectSent = [userInfo objectForKey:@"BoardEdited"];
     NSArray *data = [objectSent allObjects];
@@ -246,12 +248,9 @@
             }
             // If a connection was removed, update data model.
             if(removeConnection || removeConnectionEndPoint) {
-                Element *e = [[_board elementDictionary] objectForKey:flatIndex];
-                if([e isKindOfClass: [StarButton class]]) {
-                    StarButton *sb = (StarButton*) e;
-                    NSLog(@"Removed connection");
-                    sb.star = nil;
-                }
+                //Element *e = [[_board elementDictionary] objectForKey:flatIndex];
+                [_connections removeConnection:point];
+                [self updateConnectionsView];
             }
         } else if (stat == BRUSH_ROCK) {
             CGPoint pos = CGPointMake(val.pointValue.x, val.pointValue.y);
@@ -273,6 +272,18 @@
         } else {
             [[self window] setTitle: [[currentFilePath lastPathComponent] stringByAppendingString:@"*"]];
         }
+    }
+}
+
+-(void)updateConnectionsView {
+    [_scene removeAllConnections];
+    
+    for(int i = 0; i < _connections.connections.count; i++) {
+        Element *fr = [[[_connections connections] objectAtIndex:i] objectAtIndex:0];
+        Element *t = [[[_connections connections] objectAtIndex:i] objectAtIndex:1];
+        CGPoint from = CGPointMake(fr.x, fr.y);
+        CGPoint to = CGPointMake(t.x, t.y);
+        [_scene setAConnectionFrom:from To:to];
     }
 }
 
