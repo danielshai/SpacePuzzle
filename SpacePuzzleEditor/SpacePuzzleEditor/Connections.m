@@ -74,6 +74,11 @@
                 sb.star = nil;
                 [_connections removeObjectAtIndex:i];
                 return YES;
+            } else if([from isKindOfClass: [BridgeButton class]] && [to isKindOfClass:[Bridge class]]) {
+                BridgeButton *bb = (BridgeButton*)from;
+                bb.bridge = nil;
+                [_connections removeObjectAtIndex:i];
+                return YES;
             }
         }
     }

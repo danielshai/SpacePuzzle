@@ -64,9 +64,7 @@
     Element *eEnd = [[_board elementDictionary] objectForKey:indexEnd];
     
     if(eStart && eEnd) {
-        if( ([eStart isKindOfClass:[StarButton class]] && [eEnd isKindOfClass:[Star class]]) ||
-            ([eStart isKindOfClass:[BridgeButton class]] && [eEnd isKindOfClass:[Bridge class]])) {
-            // A |StarButton| connecting to a |Star|.
+        if([self connectionIsConnectable:eStart To:eEnd]) {
             // Tell the scene to highlight star.
             CGPoint p = CGPointMake(endPoint.pointValue.x, endPoint.pointValue.y);
             [_scene highlightElement:p];
@@ -94,8 +92,7 @@
     
     if(eStart && eEnd) {
         // Check class for highlighting purpose.
-        if([NSStringFromClass([eStart class]) isEqualToString:CLASS_STARBUTTON] &&
-           [NSStringFromClass([eEnd class]) isEqualToString:CLASS_STAR]) {
+        if([self connectionIsConnectable:eStart To:eEnd]) {
             [_connections addConnectionFrom:eStart To:eEnd];
             [self updateConnectionsView];
         } else {
@@ -415,6 +412,13 @@
         currentFilePath = path;
         edited = NO;
     }
+}
+
+/*
+ *  Checks if two elements can be connected. */
+-(BOOL)connectionIsConnectable:(Element *)from To:(Element *)to {
+    return ([from isKindOfClass:[StarButton class]] && [to isKindOfClass:[Star class]]) ||
+    ([from isKindOfClass:[BridgeButton class]] && [to isKindOfClass:[Bridge class]]);
 }
 
 -(void)observeText:(NSString *)text Selector:(SEL)selector {

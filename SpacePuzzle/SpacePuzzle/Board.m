@@ -92,7 +92,6 @@
     element.blocking = block;
     NSNumber *flatIndex = [NSNumber numberWithInt:pos.y*_boardSizeX + pos.x];
     [_elementDictionary setObject:element forKey:flatIndex];
-    NSLog(@"Added %@",element.class);
 }
 
 -(void)createEmptyBoard {
