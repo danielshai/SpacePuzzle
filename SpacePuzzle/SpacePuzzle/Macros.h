@@ -19,6 +19,7 @@
 #define BRUSH_ERASER            104
 #define BRUSH_STARBUTTON        105
 #define BRUSH_BRIDGEBUTTON      106
+#define BRUSH_BRIDGE            107
 
 #define TILESIZE                44
 #define BOARD_PIXEL_BEGIN_X     10 // The pixel value that the actual board begins at.
@@ -39,6 +40,8 @@
 
 #define CLASS_STARBUTTON        @"StarButton"
 #define CLASS_STAR              @"Star"
+#define CLASS_BRIDGE            @"Bridge"
+#define CLASS_BOX               @"Box"
 #define STAR_BUTTON_REF         @"starbuttonstar"
 
 #define RIGHT                   1

@@ -90,15 +90,9 @@
     Element *eEnd = [[_board elementDictionary] objectForKey:indexEnd];
     
     if(eStart && eEnd) {
+        // Check class for highlighting purpose.
         if([NSStringFromClass([eStart class]) isEqualToString:CLASS_STARBUTTON] &&
            [NSStringFromClass([eEnd class]) isEqualToString:CLASS_STAR]) {
-            // A |StarButton| connecting to a |Star|.
-            //StarButton *sb = (StarButton*) eStart;
-            //Star *s = (Star*) eEnd;
-            // Sets the |StarButton|'s |Star| to be the one selected by the user.
-            //sb.star = s;
-            //CGPoint from = CGPointMake(startPoint.pointValue.x, startPoint.pointValue.y);
-            //CGPoint to = CGPointMake(endPoint.pointValue.x, endPoint.pointValue.y);
             [_connections addConnectionFrom:eStart To:eEnd];
             [self updateConnectionsView];
         } else {
@@ -231,13 +225,11 @@
             _board.finishPos.y = newPos.y;
         } else if (stat == BRUSH_ERASER) {
             // If a connection is on the position, first remove that one.
-            // FIX LATER: Här ska datamodellen kollas, om eraset är på en punkt som är kopplad (i.e. StarButton eller StarButton.star), säg till scenen om detta.
             BOOL removeConnection = [_scene removeAConnectionFrom:point];
             BOOL removeConnectionEndPoint = [_scene removeAConnectionBasedOnEndPoint:point];
             if(!removeConnection && !removeConnectionEndPoint) {
                 [[_board elementDictionary] removeObjectForKey: flatIndex];
                 [_scene removeOneSprite:flatIndex];
-                // If an element that was connected to another element, check this.
             }
             // If a connection was removed, update data model.
             if(removeConnection || removeConnectionEndPoint) {
@@ -246,14 +238,13 @@
                 [self updateConnectionsView];
             }
         } else if (stat == BRUSH_ROCK) {
-            CGPoint pos = CGPointMake(val.pointValue.x, val.pointValue.y);
-            [_board addElementNamed:@"Box" AtPosition:pos IsBlocking:YES];
+            [_board addElementNamed:CLASS_BOX AtPosition:newPos IsBlocking:YES];
         } else if (stat == BRUSH_STAR) {
-            CGPoint pos = CGPointMake(val.pointValue.x, val.pointValue.y);
-            [_board addElementNamed:@"Star" AtPosition:pos IsBlocking:NO];
+            [_board addElementNamed:CLASS_STAR AtPosition:newPos IsBlocking:NO];
         } else if (stat == BRUSH_STARBUTTON) {
-            CGPoint pos = CGPointMake(val.pointValue.x, val.pointValue.y);
-            [_board addElementNamed:@"StarButton" AtPosition:pos IsBlocking:NO];
+            [_board addElementNamed:CLASS_STARBUTTON AtPosition:newPos IsBlocking:NO];
+        } else if(stat == BRUSH_BRIDGE) {
+            [_board addElementNamed:CLASS_BRIDGE AtPosition:newPos IsBlocking:YES];
         }
     }
     

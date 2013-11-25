@@ -21,6 +21,7 @@
 @synthesize buttonTexture = _buttonTexture;
 @synthesize controlHover = _controlHover;
 @synthesize connectionNodes = _connectionNodes;
+@synthesize bridgeTexture = _bridgeTexture;
 
 -(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
@@ -59,6 +60,7 @@
         _rockTexture = [SKTexture textureWithImageNamed:@"Box.png"];
         _starTexture = [SKTexture textureWithImageNamed:@"Star.png"];
         _buttonTexture = [SKTexture textureWithImageNamed:@"Button.png"];
+        _bridgeTexture = [SKTexture textureWithImageNamed:@"BridgeON.png"];
         _startElSprite = [SKSpriteNode spriteNodeWithTexture:_startElement];
         _startElSprite.position = CGPointMake(-100, -100);
         _startElSprite.size = CGSizeMake(TILESIZE/2, TILESIZE/2);
@@ -89,6 +91,8 @@
         [self observeText:@"EraserClick" Selector:@selector(eraserClick)];
         [self observeText:@"StarButtonClick" Selector:@selector(starButtonClick)];
         [self observeText:@"HighlightElement" Selector:@selector(highlightElement:)];
+        [self observeText:@"BridgeButtonClick" Selector:@selector(bridgeButtonClick)];
+        [self observeText:@"BridgeClick" Selector:@selector(bridgeClick)];
         
         controlDragLine.zPosition = 999999;
         circle.zPosition = 999998;
@@ -284,6 +288,10 @@
                     [self addAStar:loc Index:flatIndex];
                 } else if(statusOfPalette == BRUSH_STARBUTTON) {
                     [self addAStarButton:loc Index:flatIndex];
+                } else if(statusOfPalette == BRUSH_BRIDGEBUTTON) {
+                    [self addABridgeButton:loc Index:flatIndex];
+                } else if(statusOfPalette == BRUSH_BRIDGE) {
+                    [self addABridge:loc Index:flatIndex];
                 }
             }
         }
@@ -414,6 +422,15 @@
 -(void)starButtonClick {
     [self changeTextureOfBrush:BRUSH_STARBUTTON];
 }
+
+-(void)bridgeButtonClick {
+    [self changeTextureOfBrush:BRUSH_BRIDGEBUTTON];
+}
+
+-(void)bridgeClick {
+    [self changeTextureOfBrush:BRUSH_BRIDGE];
+}
+
 /*
  *  Changes the texture of the brush, i.e. what the brush will "paint". */
 -(void)changeTextureOfBrush:(NSInteger)status {
@@ -443,6 +460,12 @@
         statusOfPalette = status;
     } else if(status == BRUSH_STARBUTTON) {
         currentTexture = _buttonTexture;
+        statusOfPalette = status;
+    } else if(status == BRUSH_BRIDGEBUTTON) {
+        currentTexture = _buttonTexture;
+        statusOfPalette = status;
+    } else if(status == BRUSH_BRIDGE) {
+        currentTexture = _bridgeTexture;
         statusOfPalette = status;
     }
 }
@@ -522,6 +545,18 @@
     [self addChild:rock];
 }
 
+-(void)addABridge:(CGPoint)pos Index:(NSNumber *)index {
+    SKSpriteNode *bridge = [SKSpriteNode spriteNodeWithTexture:_bridgeTexture];
+    
+    CGPoint pxl = [Converter convertCoordToPixel:pos];
+    pxl.x += TILESIZE/2;
+    bridge.position = pxl;
+    bridge.size = CGSizeMake(TILESIZE-4, TILESIZE-4);
+    
+    [_elementSprites setObject:bridge forKey:index];
+    [self addChild:bridge];
+}
+
 -(void)addAStarButton:(CGPoint)pos Index:(NSNumber *)index {
     SKSpriteNode *starbtn = [SKSpriteNode spriteNodeWithTexture:_buttonTexture];
     
@@ -529,9 +564,25 @@
     pxl.x += TILESIZE/2;
     starbtn.position = pxl;
     starbtn.size = CGSizeMake(TILESIZE-4, TILESIZE-4);
+    starbtn.color = [SKColor redColor];
+    starbtn.colorBlendFactor = 0.3;
     
     [_elementSprites setObject:starbtn forKey:index];
     [self addChild:starbtn];
+}
+
+-(void)addABridgeButton:(CGPoint)pos Index:(NSNumber *)index {
+    SKSpriteNode *bridgebtn = [SKSpriteNode spriteNodeWithTexture:_buttonTexture];
+    
+    CGPoint pxl = [Converter convertCoordToPixel:pos];
+    pxl.x += TILESIZE/2;
+    bridgebtn.position = pxl;
+    bridgebtn.size = CGSizeMake(TILESIZE-4, TILESIZE-4);
+    bridgebtn.color = [SKColor greenColor];
+    bridgebtn.colorBlendFactor = 0.25;
+    
+    [_elementSprites setObject:bridgebtn forKey:index];
+    [self addChild:bridgebtn];
 }
 
 -(void)cleanElements {

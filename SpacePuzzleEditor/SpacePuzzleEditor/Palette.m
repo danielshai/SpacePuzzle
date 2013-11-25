@@ -74,6 +74,11 @@
     [self notifyText:@"EraserClick" Object:Nil Key:@"EraserClick"];
 }
 
+- (IBAction)bridgeClick:(id)sender {
+    
+    [self notifyText:@"BridgeClick" Object:nil Key:@"BridgeClick"];
+}
+
 - (IBAction)bridgeButtonClick:(id)sender {
     [self setSelectedIndicatorIsHiddenSolid:YES IsCracked:YES IsVoid:YES isStart:YES isFinished:YES isRock:YES isStar:YES isEraser:YES isStarButton:YES isBridgeButton:NO];
     [self notifyText:@"BridgeButtonClick" Object:Nil Key:@"BridgeButtonClick"];

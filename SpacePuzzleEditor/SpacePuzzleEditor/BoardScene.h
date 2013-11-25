@@ -25,6 +25,8 @@
 @property (nonatomic, retain) SKTexture *rockTexture;
 @property (nonatomic, retain) SKTexture *starTexture;
 @property (nonatomic, retain) SKTexture *buttonTexture;
+@property (nonatomic, retain) SKTexture *brdigeButtonTexture;
+@property (nonatomic, retain) SKTexture *bridgeTexture;
 @property (nonatomic, retain) SKSpriteNode *bkg;
 @property (nonatomic, retain) SKSpriteNode *startElSprite;
 @property (nonatomic, retain) SKSpriteNode *finishSprite;
@@ -56,6 +58,8 @@
 -(void)starClick;
 -(void)eraserClick;
 -(void)starButtonClick;
+-(void)bridgeButtonClick;
+-(void)bridgeClick;
 -(void)drawControlLine;
 -(void)highlightElement:(CGPoint) elementIndex;
 -(void)noHighlight;
@@ -65,5 +69,7 @@
 -(void)observeText:(NSString *)text Selector:(SEL)selector;
 -(void)addAStar:(CGPoint) pos Index: (NSNumber*) index;
 -(void)addARock:(CGPoint) pos Index: (NSNumber*) index;
+-(void)addABridge:(CGPoint) pos Index: (NSNumber*) index;
 -(void)addAStarButton:(CGPoint) pos Index: (NSNumber*) index;
+-(void)addABridgeButton:(CGPoint) pos Index: (NSNumber*) index;
 @end

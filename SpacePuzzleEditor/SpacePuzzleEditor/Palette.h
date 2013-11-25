@@ -19,6 +19,7 @@
 @property (weak) IBOutlet NSButton *crackedButton;
 @property (weak) IBOutlet NSButton *voidButton;
 @property (weak) IBOutlet NSImageView *selectedBridgeButton;
+@property (weak) IBOutlet NSImageView *selectedBridge;
 @property (weak) IBOutlet NSImageView *selectedSolid;
 @property (weak) IBOutlet NSImageView *selectedCracked;
 @property (weak) IBOutlet NSImageView *selectedRock;
@@ -45,6 +46,7 @@
 -(IBAction)rockClick:(id)sender;
 -(IBAction)starClick:(id)sender;
 -(IBAction)eraserClick:(id)sender;
-- (IBAction)bridgeButtonClick:(id)sender;
+-(IBAction)bridgeClick:(id)sender;
+
 
 @end
