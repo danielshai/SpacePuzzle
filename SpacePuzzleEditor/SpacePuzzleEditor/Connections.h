@@ -10,10 +10,14 @@
 @class Element;
 @class Star;
 @class StarButton;
+@class Bridge;
+@class BridgeButton;
 
 @interface Connections : NSObject
 @property (nonatomic, retain) NSMutableArray *connections;
 -(BOOL)addConnectionFrom: (Element*)from To: (Element*)to;
 -(BOOL)removeConnection: (CGPoint) pos;
 -(void)removeAllConnections;
+-(void)createStarConnection: (Element*) from To: (Element*)to;
+-(void)createBridgeConnection: (Element*) from To: (Element*)to;
 @end

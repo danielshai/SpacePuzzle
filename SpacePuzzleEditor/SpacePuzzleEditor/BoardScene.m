@@ -271,10 +271,7 @@
                 [self notifyText:@"BoardEdited" Object:arr Key:@"BoardEdited"];
             } else if(statusOfPalette == BRUSH_ERASER) {
                 if([_elementSprites objectForKey:flatIndex]) {
-                  //  if(![self removeAConnectionFrom:loc] && ![self removeAConnectionBasedOnEndPoint:loc]) {
-                    //    [self removeOneSprite:flatIndex];
-                        [self notifyText:@"BoardEdited" Object:arr Key:@"BoardEdited"];
-                   // }
+                    [self notifyText:@"BoardEdited" Object:arr Key:@"BoardEdited"];
                 }
             }
             // Elements that are part of the element dictionary.
@@ -283,15 +280,15 @@
                 
                 if(statusOfPalette == BRUSH_ROCK) {
                     // Sets up a rock at the position selected.
-                    [self addARock:loc Index:flatIndex];
+                    [self addElement:CLASS_BOX Position:loc];
                 } else if(statusOfPalette == BRUSH_STAR) {
-                    [self addAStar:loc Index:flatIndex];
+                    [self addElement:CLASS_STAR Position:loc];
                 } else if(statusOfPalette == BRUSH_STARBUTTON) {
-                    [self addAStarButton:loc Index:flatIndex];
+                    [self addElement:CLASS_STARBUTTON Position:loc];
                 } else if(statusOfPalette == BRUSH_BRIDGEBUTTON) {
-                    [self addABridgeButton:loc Index:flatIndex];
+                    [self addElement:CLASS_BRIDGEBUTTON Position:loc];
                 } else if(statusOfPalette == BRUSH_BRIDGE) {
-                    [self addABridge:loc Index:flatIndex];
+                    [self addElement:CLASS_BRIDGE Position:loc];
                 }
             }
         }
@@ -507,15 +504,21 @@
     _finishSprite.position = finish;
 }
 
+/*
+ *  Adds an element to the scene, according to class name and position sent as arguments. */
 -(void)addElement:(NSString *)element Position:(CGPoint)pos {
     NSNumber *flatIndex = [NSNumber numberWithInt:pos.y*BOARD_SIZE_X + pos.x];
     
-    if([element isEqualToString:@"Box"]) {
+    if([element isEqualToString:CLASS_BOX]) {
         [self addARock:pos Index:flatIndex];
-    } else if([element isEqualToString:@"Star"]) {
+    } else if([element isEqualToString:CLASS_STAR]) {
         [self addAStar:pos Index:flatIndex];
-    } else if([element isEqualToString:@"StarButton"]) {
+    } else if([element isEqualToString:CLASS_STARBUTTON]) {
         [self addAStarButton:pos Index:flatIndex];
+    } else if([element isEqualToString:CLASS_BRIDGE]) {
+        [self addABridge:pos Index:flatIndex];
+    } else if([element isEqualToString:CLASS_BRIDGEBUTTON]) {
+        [self addABridgeButton:pos Index:flatIndex];
     }
 }
 

@@ -10,6 +10,8 @@
 #import "Element.h"
 #import "StarButton.h"
 #import "Star.h"
+#import "BridgeButton.h"
+#import "Bridge.h"
 
 @implementation Connections
 @synthesize connections = _connections;
@@ -33,17 +35,17 @@
         // Element has connection. Update.
         if((from.x == first.x && from.y == first.y) || (to.x == second.x && to.y == second.y)) {
             // The case of a starbutton to star.
-            if([from isKindOfClass: [StarButton class]] && [to isKindOfClass: [Star class]]) {
+            if([from isKindOfClass: [StarButton class]] && [to isKindOfClass:[Star class]]) {
                 [self removeConnection:CGPointMake(from.x, from.y)];
                 [self removeConnection:CGPointMake(to.x, to.y)];
-                StarButton *sb = (StarButton*)from;
-                Star *star = (Star*)to;
-                sb.star = star;
-                
-                NSMutableArray *arr = [[NSMutableArray alloc] init];
-                [arr insertObject:from atIndex:0];
-                [arr insertObject:to atIndex:1];
-                [_connections insertObject:arr atIndex:_connections.count];
+                [self createStarConnection:from To:to];
+                return YES;
+            }
+            // A bridge button to bridge
+            else if([from isKindOfClass: [BridgeButton class]] && [to isKindOfClass:[Bridge class]]) {
+                [self removeConnection:CGPointMake(from.x, from.y)];
+                [self removeConnection:CGPointMake(to.x, to.y)];
+                [self createBridgeConnection:from To:to];
                 return YES;
             }
         }
@@ -51,13 +53,10 @@
     
     // A new connection: check if the connection can be made, and if so create it and add to |_connections|. 
     if([from isKindOfClass: [StarButton class]] && [to isKindOfClass: [Star class]]) {
-        StarButton *sb = (StarButton*)from;
-        Star *star = (Star*)to;
-        sb.star = star;
-        NSMutableArray *arr = [[NSMutableArray alloc] init];
-        [arr insertObject:from atIndex:0];
-        [arr insertObject:to atIndex:1];
-        [_connections insertObject:arr atIndex:_connections.count];
+        [self createStarConnection:from To:to];
+        return YES;
+    } else if([from isKindOfClass: [BridgeButton class]] && [to isKindOfClass:[Bridge class]]) {
+        [self createBridgeConnection:from To:to];
         return YES;
     }
     
@@ -79,6 +78,28 @@
         }
     }
     return NO;
+}
+
+-(void)createStarConnection:(Element *)from To: (Element*)to {
+    StarButton *sb = (StarButton*)from;
+    Star *star = (Star*)to;
+    sb.star = star;
+    
+    NSMutableArray *arr = [[NSMutableArray alloc] init];
+    [arr insertObject:from atIndex:0];
+    [arr insertObject:to atIndex:1];
+    [_connections insertObject:arr atIndex:_connections.count];
+}
+
+-(void)createBridgeConnection:(Element *)from To: (Element*)to {
+    BridgeButton *bb = (BridgeButton*)from;
+    Bridge *bridge = (Bridge*)to;
+    bb.bridge = bridge;
+    
+    NSMutableArray *arr = [[NSMutableArray alloc] init];
+    [arr insertObject:from atIndex:0];
+    [arr insertObject:to atIndex:1];
+    [_connections insertObject:arr atIndex:_connections.count];
 }
 
 -(void)removeAllConnections {

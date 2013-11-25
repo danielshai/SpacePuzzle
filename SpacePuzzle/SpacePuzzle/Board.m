@@ -92,6 +92,7 @@
     element.blocking = block;
     NSNumber *flatIndex = [NSNumber numberWithInt:pos.y*_boardSizeX + pos.x];
     [_elementDictionary setObject:element forKey:flatIndex];
+    NSLog(@"Added %@",element.class);
 }
 
 -(void)createEmptyBoard {
@@ -188,7 +189,7 @@
             [self boxExport:ee];
         }
     }
-    
+    // Star buttons.
     for(id key in _elementDictionary) {
         Element *e = [_elementDictionary objectForKey:key];
         if([e isKindOfClass: [StarButton class]]) {

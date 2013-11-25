@@ -16,6 +16,8 @@
 @class Star;
 @class StarButton;
 @class Connections;
+@class Bridge;
+@class BridgeButton;
 
 @interface AppDelegate : NSObject <NSApplicationDelegate> {
     NSString *currentFilePath;

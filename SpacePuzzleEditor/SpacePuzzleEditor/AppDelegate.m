@@ -7,7 +7,10 @@
 #import "XMLParser.h"
 #import "Element.h"
 #import "StarButton.h"
+#import "Star.h"
 #import "Connections.h"
+#import "Bridge.h"
+#import "BridgeButton.h"
 
 @implementation AppDelegate
 
@@ -61,8 +64,8 @@
     Element *eEnd = [[_board elementDictionary] objectForKey:indexEnd];
     
     if(eStart && eEnd) {
-        if([NSStringFromClass([eStart class]) isEqualToString:CLASS_STARBUTTON] &&
-           [NSStringFromClass([eEnd class]) isEqualToString:CLASS_STAR]) {
+        if( ([eStart isKindOfClass:[StarButton class]] && [eEnd isKindOfClass:[Star class]]) ||
+            ([eStart isKindOfClass:[BridgeButton class]] && [eEnd isKindOfClass:[Bridge class]])) {
             // A |StarButton| connecting to a |Star|.
             // Tell the scene to highlight star.
             CGPoint p = CGPointMake(endPoint.pointValue.x, endPoint.pointValue.y);
@@ -243,8 +246,10 @@
             [_board addElementNamed:CLASS_STAR AtPosition:newPos IsBlocking:NO];
         } else if (stat == BRUSH_STARBUTTON) {
             [_board addElementNamed:CLASS_STARBUTTON AtPosition:newPos IsBlocking:NO];
-        } else if(stat == BRUSH_BRIDGE) {
+        } else if (stat == BRUSH_BRIDGE) {
             [_board addElementNamed:CLASS_BRIDGE AtPosition:newPos IsBlocking:YES];
+        } else if (stat == BRUSH_BRIDGEBUTTON) {
+            [_board addElementNamed:CLASS_BRIDGEBUTTON AtPosition:newPos IsBlocking:NO];
         }
     }
     
