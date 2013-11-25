@@ -11,17 +11,21 @@
 #import <SpriteKit/SpriteKit.h>
 #import "Board.h"
 #import "BoardScene.h"
+#import "Palette.h"
 
 @class BoardView;
 @class Star;
 @class StarButton;
 @class Connections;
+@class Bridge;
+@class BridgeButton;
 
 @interface AppDelegate : NSObject <NSApplicationDelegate> {
     NSString *currentFilePath;
     // Used for checking if a file has been edited, which is used to give feedback to the user of this fact.
     BOOL edited;
 }
+@property (unsafe_unretained) IBOutlet Palette *palette;
 @property (unsafe_unretained) IBOutlet NSWindow *controlPanel;
 @property (retain) IBOutlet NSWindow *window;
 @property (retain) IBOutlet SKView *skView;
@@ -44,6 +48,7 @@
 -(void)refreshBoardView;
 -(void)refreshElementView;
 -(void)setupBoard;
+-(BOOL)connectionIsConnectable:(Element*) from To: (Element*)to;
 -(void)observeText:(NSString *)text Selector:(SEL)selector;
 -(void)notifyText:(NSString *)text Object: (NSObject*)object Key: (NSString*)key;
 @end

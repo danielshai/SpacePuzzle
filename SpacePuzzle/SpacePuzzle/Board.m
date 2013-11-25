@@ -6,6 +6,8 @@
 #import "Element.h"
 #import "StarButton.h"
 #import "Star.h"
+#import "Bridge.h"
+#import "BridgeButton.h"
 
 @implementation Board
 
@@ -188,7 +190,16 @@
             [self boxExport:ee];
         }
     }
-    
+    // Bridges.
+    for(id key in _elementDictionary) {
+        Element *e = [_elementDictionary objectForKey:key];
+        if([e isKindOfClass: [Bridge class]]) {
+            Bridge *ee = (Bridge*)e;
+            [self bridgeExport:ee];
+        }
+    }
+    // Buttons, and other elements with references to other elements should be last.
+    // Star buttons.
     for(id key in _elementDictionary) {
         Element *e = [_elementDictionary objectForKey:key];
         if([e isKindOfClass: [StarButton class]]) {
@@ -196,7 +207,14 @@
             [self starButtonExport:ee];
         }
     }
-   
+    // Bridge buttons.
+    for(id key in _elementDictionary) {
+        Element *e = [_elementDictionary objectForKey:key];
+        if([e isKindOfClass: [BridgeButton class]]) {
+            BridgeButton *ee = (BridgeButton*)e;
+            [self bridgeButtonExport:ee];
+        }
+    }
     [_parser addOutput:@"</boardelements>"];
 }
 
@@ -254,6 +272,75 @@
     [_parser addOutput:element];
 }
 
+-(void)bridgeExport:(Bridge *)b {
+    NSString *element = @"<";
+    
+    element = [element stringByAppendingString:NSStringFromClass([b class])];
+    element = [element stringByAppendingString:@">"];
+    
+    // Output actual data about the element.
+    element = [element stringByAppendingString:@"<x>"];
+    element = [element stringByAppendingString:[@(b.x) stringValue]];
+    element = [element stringByAppendingString:@"</x>"];
+    
+    element = [element stringByAppendingString:@"<y>"];
+    element = [element stringByAppendingString:[@(b.y) stringValue]];
+    element = [element stringByAppendingString:@"</y>"];
+    
+    element = [element stringByAppendingString:@"<blocking>"];
+    element = [element stringByAppendingString:[@(b.blocking) stringValue]];
+    element = [element stringByAppendingString:@"</blocking>"];
+    
+    // End of this element.
+    element = [element stringByAppendingString:@"</"];
+    element = [element stringByAppendingString:NSStringFromClass([b class])];
+    element = [element stringByAppendingString:@">"];
+    
+    [_parser addOutput:element];
+}
+
+-(void)bridgeButtonExport:(BridgeButton *)bb {
+    NSString *element = @"<";
+    
+    element = [element stringByAppendingString:NSStringFromClass([bb class])];
+    element = [element stringByAppendingString:@">"];
+    
+    // Output actual data about the element.
+    element = [element stringByAppendingString:@"<x>"];
+    element = [element stringByAppendingString:[@(bb.x) stringValue]];
+    element = [element stringByAppendingString:@"</x>"];
+    element = [element stringByAppendingString:@"<y>"];
+    element = [element stringByAppendingString:[@(bb.y) stringValue]];
+    element = [element stringByAppendingString:@"</y>"];
+    element = [element stringByAppendingString:@"<blocking>"];
+    element = [element stringByAppendingString:[@(bb.blocking) stringValue]];
+    element = [element stringByAppendingString:@"</blocking>"];
+    element = [element stringByAppendingString:@"<state>"];
+    element = [element stringByAppendingString:[@(bb.state) stringValue]];
+    element = [element stringByAppendingString:@"</state>"];
+    // End of this element.
+    
+    // The referenced bridge's coordinates.
+    if(bb.bridge) {
+        element = [element stringByAppendingString:@"<"];
+        element = [element stringByAppendingString:BRIDGE_BUTTON_REF];
+        element = [element stringByAppendingString:@">"];
+        element = [element stringByAppendingString:@"<x>"];
+        element = [element stringByAppendingString:[@(bb.bridge.x) stringValue]];
+        element = [element stringByAppendingString:@"</x>"];
+        element = [element stringByAppendingString:@"<y>"];
+        element = [element stringByAppendingString:[@(bb.bridge.y) stringValue]];
+        element = [element stringByAppendingString:@"</y>"];
+        element = [element stringByAppendingString:@"</"];
+        element = [element stringByAppendingString:BRIDGE_BUTTON_REF];
+        element = [element stringByAppendingString:@">"];
+    }
+    element = [element stringByAppendingString:@"</"];
+    element = [element stringByAppendingString:NSStringFromClass([bb class])];
+    element = [element stringByAppendingString:@">"];
+    [_parser addOutput:element];
+}
+
 -(void)starButtonExport:(StarButton *)sb {
     NSString *element = @"<";
     
@@ -277,14 +364,18 @@
     
     // The referenced star's coordinates.
     if(sb.star) {
-        element = [element stringByAppendingString:@"<starbuttonstar>"];
+        element = [element stringByAppendingString:@"<"];
+        element = [element stringByAppendingString:STAR_BUTTON_REF];
+        element = [element stringByAppendingString:@">"];
         element = [element stringByAppendingString:@"<x>"];
         element = [element stringByAppendingString:[@(sb.star.x) stringValue]];
         element = [element stringByAppendingString:@"</x>"];
         element = [element stringByAppendingString:@"<y>"];
         element = [element stringByAppendingString:[@(sb.star.y) stringValue]];
         element = [element stringByAppendingString:@"</y>"];
-        element = [element stringByAppendingString:@"</starbuttonstar>"];
+        element = [element stringByAppendingString:@"</"];
+        element = [element stringByAppendingString:STAR_BUTTON_REF];
+        element = [element stringByAppendingString:@">"];
     }
     element = [element stringByAppendingString:@"</"];
     element = [element stringByAppendingString:NSStringFromClass([sb class])];

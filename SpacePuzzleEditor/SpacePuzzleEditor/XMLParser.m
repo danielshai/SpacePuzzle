@@ -12,6 +12,8 @@
 #import "Macros.h"
 #import "Star.h"
 #import "StarButton.h"
+#import "Bridge.h"
+#import "BridgeButton.h"
 
 @implementation XMLParser
 @synthesize parser = _parser;
@@ -44,6 +46,9 @@
         starButtonStar = NO;
         tempBlockingElement = NO;
         tempState = NO;
+        bridgeElement = NO;
+        bridgeButtonElement = NO;
+        bridgeButtonBridge = NO;
         
         _board = [[NSMutableArray alloc] init];
         _parser = [[NSXMLParser alloc] initWithContentsOfURL:url];
@@ -70,7 +75,7 @@
         startElement = YES;
     } else if ([currentElement isEqualToString:@"finish"]) {
         finishElement = YES;
-    } else if ([currentElement isEqualToString:@"Box"]) {
+    } else if ([currentElement isEqualToString:CLASS_BOX]) {
         rockElement = YES;
     } else if ([currentElement isEqualToString:CLASS_STAR]) {
         starElement = YES;
@@ -80,6 +85,12 @@
         starButtonElement = YES;
     } else if ([currentElement isEqualToString:STAR_BUTTON_REF]) {
         starButtonStar = YES;
+    } else if ([currentElement isEqualToString:CLASS_BRIDGE]) {
+        bridgeElement = YES;
+    } else if ([currentElement isEqualToString:CLASS_BRIDGEBUTTON]) {
+        bridgeButtonElement = YES;
+    } else if ([currentElement isEqualToString:BRIDGE_BUTTON_REF]) {
+        bridgeButtonBridge = YES;
     }
 }
 
@@ -91,16 +102,25 @@
         startElement = NO;
     } else if ([elementName isEqualToString:@"finish"]) {
         finishElement = NO;
-    } else if ([elementName isEqualToString:@"Box"]) {
+    } else if ([elementName isEqualToString:CLASS_BOX]) {
         rockElement = NO;
         Box *r = [[Box alloc] initWithX:tempXElement Y:tempYElement];
         NSNumber *index = [NSNumber numberWithInteger:tempYElement*BOARD_SIZE_X + tempXElement];
         [_elements setObject:r forKey:index];
+        
     } else if ([elementName isEqualToString:CLASS_STAR]) {
         starElement = NO;
         Star *s = [[Star alloc] initWithX:tempXElement Y:tempYElement];
         NSNumber *index = [NSNumber numberWithInteger:tempYElement*BOARD_SIZE_X + tempXElement];
         [_elements setObject:s forKey:index];
+        
+    } else if ([elementName isEqualToString:CLASS_BRIDGE]) {
+        bridgeElement = NO;
+        Bridge *b = [[Bridge alloc] initWithX:tempXElement Y:tempYElement Hidden:NO];
+        b.blocking = tempBlockingElement;
+        NSNumber *index = [NSNumber numberWithInteger:tempYElement*BOARD_SIZE_X + tempXElement];
+        [_elements setObject:b forKey:index];
+        
     } else if ([elementName isEqualToString:CLASS_STARBUTTON]) {
         starButtonElement = NO;
         NSNumber *starIndex = [NSNumber numberWithInteger:tempYRef*BOARD_SIZE_X+tempXRef];
@@ -108,11 +128,22 @@
         s.hidden = YES;
         StarButton *sb = [[StarButton alloc] initWithStar:s X:tempXElement Y:tempYElement];
         NSNumber *index = [NSNumber numberWithInteger:tempYElement*BOARD_SIZE_X + tempXElement];
-       // NSLog(@"starbutton: %ld %ld", (long)tempXElement,(long)tempYElement);
-       // NSLog(@"starbutton: %ld %ld", (long)tempXRef,(long)tempYRef);
         [_elements setObject:sb forKey:index];
+        
+    } else if ([elementName isEqualToString:CLASS_BRIDGEBUTTON]) {
+        bridgeButtonElement = NO;
+        NSNumber *bridgeIndex = [NSNumber numberWithInteger:tempYRef*BOARD_SIZE_X+tempXRef];
+        Bridge *b = [_elements objectForKey:bridgeIndex];
+        b.hidden = NO;
+        BridgeButton *bb = [[BridgeButton alloc] initWithBridge:b X:tempXElement Y:tempYElement];
+        NSNumber *index = [NSNumber numberWithInteger:tempYElement*BOARD_SIZE_X + tempXElement];
+        [_elements setObject:bb forKey:index];
+        NSLog(@"From: %ld %ld  To: %ld %ld",(long)bb.x,(long)bb.y,(long)b.x,(long)b.y);
+        
     } else if ([elementName isEqualToString:STAR_BUTTON_REF]) {
         starButtonStar = NO;
+    } else if ([elementName isEqualToString:BRIDGE_BUTTON_REF]) {
+        bridgeButtonBridge = NO;
     }
 }
 
@@ -131,17 +162,20 @@
         _finish.x = intString;
     } else if([currentElement isEqualToString:@"y"] && finishElement) {
         _finish.y = intString;
-    } else if([currentElement isEqualToString:@"x"] && boardElement && !starButtonStar) {
+    } else if([currentElement isEqualToString:@"x"] && boardElement && !starButtonStar &&
+              !bridgeButtonBridge) {
         tempXElement = intString;
-    } else if([currentElement isEqualToString:@"y"] && boardElement && !starButtonStar) {
+    } else if([currentElement isEqualToString:@"y"] && boardElement && !starButtonStar &&
+              !bridgeButtonBridge) {
         tempYElement = intString;
-    } else if([currentElement isEqualToString:@"x"] && starButtonStar) {
+    } else if([currentElement isEqualToString:@"x"] && (starButtonStar || bridgeButtonBridge) ) {
+        if(bridgeButtonBridge)NSLog(@"Setting ref %ld", (long)tempXRef);
         tempXRef = intString;
-    } else if([currentElement isEqualToString:@"y"] && starButtonStar) {
+    } else if([currentElement isEqualToString:@"y"] && (starButtonStar || bridgeButtonBridge) ) {
         tempYRef = intString;
-    } else if([currentElement isEqualToString:@"blocking"] && rockElement) {
+    } else if([currentElement isEqualToString:@"blocking"] && (rockElement || bridgeButtonElement) ) {
         tempBlockingElement = intString;
-    } else if([currentElement isEqualToString:@"state"] && starButtonElement) {
+    } else if([currentElement isEqualToString:@"state"] && (starButtonElement || bridgeButtonElement) ) {
         tempState = intString;
     }
 }
@@ -159,6 +193,10 @@
     starButtonStar = NO;
     tempState = NO;
     tempBlockingElement = NO;
+    bridgeElement = NO;
+    bridgeButtonElement = NO;
+    bridgeButtonBridge = NO;
+
 }
 
 -(void)addOutput:(NSString *)string {

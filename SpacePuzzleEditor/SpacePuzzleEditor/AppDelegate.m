@@ -7,7 +7,10 @@
 #import "XMLParser.h"
 #import "Element.h"
 #import "StarButton.h"
+#import "Star.h"
 #import "Connections.h"
+#import "Bridge.h"
+#import "BridgeButton.h"
 
 @implementation AppDelegate
 
@@ -18,6 +21,7 @@
 @synthesize recentMenu = _recentMenu;
 @synthesize controlPanel = _controlPanel;
 @synthesize connections = _connections;
+@synthesize palette = _palette;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
@@ -41,6 +45,8 @@
     [self observeText:@"ControlDrag" Selector:@selector(controlDragged:)];
     [self observeText:@"ControlDragUp" Selector:@selector(controlDragUp:)];
     [[self window] setTitle:@"Untitled.splvl"];
+    [_palette setFloatingPanel:YES];
+    [_palette setWorksWhenModal:YES];
 }
 
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender {
@@ -61,9 +67,7 @@
     Element *eEnd = [[_board elementDictionary] objectForKey:indexEnd];
     
     if(eStart && eEnd) {
-        if([NSStringFromClass([eStart class]) isEqualToString:CLASS_STARBUTTON] &&
-           [NSStringFromClass([eEnd class]) isEqualToString:CLASS_STAR]) {
-            // A |StarButton| connecting to a |Star|.
+        if([self connectionIsConnectable:eStart To:eEnd]) {
             // Tell the scene to highlight star.
             CGPoint p = CGPointMake(endPoint.pointValue.x, endPoint.pointValue.y);
             [_scene highlightElement:p];
@@ -90,15 +94,8 @@
     Element *eEnd = [[_board elementDictionary] objectForKey:indexEnd];
     
     if(eStart && eEnd) {
-        if([NSStringFromClass([eStart class]) isEqualToString:CLASS_STARBUTTON] &&
-           [NSStringFromClass([eEnd class]) isEqualToString:CLASS_STAR]) {
-            // A |StarButton| connecting to a |Star|.
-            //StarButton *sb = (StarButton*) eStart;
-            //Star *s = (Star*) eEnd;
-            // Sets the |StarButton|'s |Star| to be the one selected by the user.
-            //sb.star = s;
-            //CGPoint from = CGPointMake(startPoint.pointValue.x, startPoint.pointValue.y);
-            //CGPoint to = CGPointMake(endPoint.pointValue.x, endPoint.pointValue.y);
+        // Check class for highlighting purpose.
+        if([self connectionIsConnectable:eStart To:eEnd]) {
             [_connections addConnectionFrom:eStart To:eEnd];
             [self updateConnectionsView];
         } else {
@@ -231,13 +228,11 @@
             _board.finishPos.y = newPos.y;
         } else if (stat == BRUSH_ERASER) {
             // If a connection is on the position, first remove that one.
-            // FIX LATER: Här ska datamodellen kollas, om eraset är på en punkt som är kopplad (i.e. StarButton eller StarButton.star), säg till scenen om detta.
             BOOL removeConnection = [_scene removeAConnectionFrom:point];
             BOOL removeConnectionEndPoint = [_scene removeAConnectionBasedOnEndPoint:point];
             if(!removeConnection && !removeConnectionEndPoint) {
                 [[_board elementDictionary] removeObjectForKey: flatIndex];
                 [_scene removeOneSprite:flatIndex];
-                // If an element that was connected to another element, check this.
             }
             // If a connection was removed, update data model.
             if(removeConnection || removeConnectionEndPoint) {
@@ -246,14 +241,15 @@
                 [self updateConnectionsView];
             }
         } else if (stat == BRUSH_ROCK) {
-            CGPoint pos = CGPointMake(val.pointValue.x, val.pointValue.y);
-            [_board addElementNamed:@"Box" AtPosition:pos IsBlocking:YES];
+            [_board addElementNamed:CLASS_BOX AtPosition:newPos IsBlocking:YES];
         } else if (stat == BRUSH_STAR) {
-            CGPoint pos = CGPointMake(val.pointValue.x, val.pointValue.y);
-            [_board addElementNamed:@"Star" AtPosition:pos IsBlocking:NO];
+            [_board addElementNamed:CLASS_STAR AtPosition:newPos IsBlocking:NO];
         } else if (stat == BRUSH_STARBUTTON) {
-            CGPoint pos = CGPointMake(val.pointValue.x, val.pointValue.y);
-            [_board addElementNamed:@"StarButton" AtPosition:pos IsBlocking:NO];
+            [_board addElementNamed:CLASS_STARBUTTON AtPosition:newPos IsBlocking:NO];
+        } else if (stat == BRUSH_BRIDGE) {
+            [_board addElementNamed:CLASS_BRIDGE AtPosition:newPos IsBlocking:YES];
+        } else if (stat == BRUSH_BRIDGEBUTTON) {
+            [_board addElementNamed:CLASS_BRIDGEBUTTON AtPosition:newPos IsBlocking:NO];
         }
     }
     
@@ -292,6 +288,12 @@
             Element *to = (Element*)sb.star;
             if(sb.star) {
                 [_connections addConnectionFrom:e To:to];
+            }
+        } else if([e isKindOfClass:[BridgeButton class]]) {
+            BridgeButton *bb = (BridgeButton*)e;
+            Element *to = (Element*)bb.bridge;
+            if(bb.bridge) {
+                [_connections addConnectionFrom:bb To:to];
             }
         }
     }
@@ -419,6 +421,13 @@
         currentFilePath = path;
         edited = NO;
     }
+}
+
+/*
+ *  Checks if two elements can be connected. */
+-(BOOL)connectionIsConnectable:(Element *)from To:(Element *)to {
+    return ([from isKindOfClass:[StarButton class]] && [to isKindOfClass:[Star class]]) ||
+    ([from isKindOfClass:[BridgeButton class]] && [to isKindOfClass:[Bridge class]]);
 }
 
 -(void)observeText:(NSString *)text Selector:(SEL)selector {

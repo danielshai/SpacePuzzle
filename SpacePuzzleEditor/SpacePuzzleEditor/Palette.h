@@ -18,6 +18,8 @@
 @property (weak) IBOutlet NSButton *solidButton;
 @property (weak) IBOutlet NSButton *crackedButton;
 @property (weak) IBOutlet NSButton *voidButton;
+@property (weak) IBOutlet NSImageView *selectedBridgeButton;
+@property (weak) IBOutlet NSImageView *selectedBridge;
 @property (weak) IBOutlet NSImageView *selectedSolid;
 @property (weak) IBOutlet NSImageView *selectedCracked;
 @property (weak) IBOutlet NSImageView *selectedRock;
@@ -33,7 +35,8 @@
 -(void)notifyText:(NSString *)text Object: (NSObject*)object Key: (NSString*)key;
 -(void)setSelectedIndicatorIsHiddenSolid: (BOOL)solid IsCracked: (BOOL)cracked IsVoid: (BOOL)isVoid
                                  isStart: (BOOL)start isFinished: (BOOL)finish isRock: (BOOL)rock
-                                  isStar: (BOOL)star isEraser: (BOOL)eraser isStarButton: (BOOL) starbtn;
+                                  isStar: (BOOL)star isEraser: (BOOL)eraser isStarButton: (BOOL) starbtn
+                          isBridgeButton: (BOOL)bridgebtn isBridge: (BOOL)bridge;
 -(IBAction)starButtonClick:(id)sender;
 -(IBAction)solidClick:(id)sender;
 -(IBAction)crackedAction:(id)sender;
@@ -43,5 +46,7 @@
 -(IBAction)rockClick:(id)sender;
 -(IBAction)starClick:(id)sender;
 -(IBAction)eraserClick:(id)sender;
+-(IBAction)bridgeClick:(id)sender;
+
 
 @end

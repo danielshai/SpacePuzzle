@@ -11,6 +11,8 @@
 @class Box;
 @class Star;
 @class StarButton;
+@class BridgeButton;
+@class Bridge;
 
 @interface XMLParser : NSObject <NSXMLParserDelegate> {
     NSString *currentElement;
@@ -22,6 +24,9 @@
     BOOL boardElements;
     BOOL starButtonElement;
     BOOL starButtonStar;
+    BOOL bridgeElement;
+    BOOL bridgeButtonElement;
+    BOOL bridgeButtonBridge;
     NSInteger tempXElement;
     NSInteger tempYElement;
     NSInteger tempXRef;
