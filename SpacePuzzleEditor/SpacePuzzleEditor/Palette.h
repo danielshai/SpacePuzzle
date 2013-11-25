@@ -36,7 +36,7 @@
 -(void)setSelectedIndicatorIsHiddenSolid: (BOOL)solid IsCracked: (BOOL)cracked IsVoid: (BOOL)isVoid
                                  isStart: (BOOL)start isFinished: (BOOL)finish isRock: (BOOL)rock
                                   isStar: (BOOL)star isEraser: (BOOL)eraser isStarButton: (BOOL) starbtn
-                          isBridgeButton: (BOOL)bridgebtn;
+                          isBridgeButton: (BOOL)bridgebtn isBridge: (BOOL)bridge;
 -(IBAction)starButtonClick:(id)sender;
 -(IBAction)solidClick:(id)sender;
 -(IBAction)crackedAction:(id)sender;
