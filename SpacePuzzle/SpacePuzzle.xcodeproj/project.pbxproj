@@ -68,6 +68,7 @@
 		E6E65815182BC82E0022BF5F /* LittleJohn.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E65814182BC82E0022BF5F /* LittleJohn.m */; };
 		E6E65819182BC9390022BF5F /* Unit.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E65818182BC9390022BF5F /* Unit.m */; };
 		E6E6581C182BCD660022BF5F /* Converter.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E6581B182BCD660022BF5F /* Converter.m */; };
+		E6FB7DC1184505B10075E460 /* Path.m in Sources */ = {isa = PBXBuildFile; fileRef = E6FB7DC0184505B10075E460 /* Path.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -166,6 +167,8 @@
 		E6E65818182BC9390022BF5F /* Unit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Unit.m; sourceTree = "<group>"; };
 		E6E6581A182BCD660022BF5F /* Converter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Converter.h; sourceTree = "<group>"; };
 		E6E6581B182BCD660022BF5F /* Converter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Converter.m; sourceTree = "<group>"; };
+		E6FB7DBF184505B10075E460 /* Path.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Path.h; sourceTree = "<group>"; };
+		E6FB7DC0184505B10075E460 /* Path.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Path.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -402,6 +405,8 @@
 		E6E65812182BC5B40022BF5F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E6FB7DBF184505B10075E460 /* Path.h */,
+				E6FB7DC0184505B10075E460 /* Path.m */,
 				E60C6A08183BB19F00D6FA14 /* Player.h */,
 				E60C6A09183BB19F00D6FA14 /* Player.m */,
 				E6E65807182BC2690022BF5F /* Board */,
@@ -552,6 +557,7 @@
 			files = (
 				E60C6A0A183BB19F00D6FA14 /* Player.m in Sources */,
 				E633067A1835018A00E908F7 /* XMLParser.m in Sources */,
+				E6FB7DC1184505B10075E460 /* Path.m in Sources */,
 				E6E6580B182BC2CE0022BF5F /* Element.m in Sources */,
 				779DB368183E32560059A084 /* MovingPlatform.m in Sources */,
 				E6E65815182BC82E0022BF5F /* LittleJohn.m in Sources */,

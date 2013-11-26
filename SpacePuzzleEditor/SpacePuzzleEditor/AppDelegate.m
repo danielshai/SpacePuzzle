@@ -198,7 +198,7 @@
     for(id key in [_board elementDictionary]) {
         Element *e = [[_board elementDictionary] objectForKey:key];
         CGPoint pos = CGPointMake(e.x, e.y);
-        [_scene addElement:e.className Position:pos];
+        [_scene addElement:[_scene classToBrush:e.className] Position:pos];
     }
 }
 
@@ -254,6 +254,10 @@
             [_board addElementNamed:CLASS_BRIDGE AtPosition:newPos IsBlocking:YES];
         } else if (stat == BRUSH_BRIDGEBUTTON) {
             [_board addElementNamed:CLASS_BRIDGEBUTTON AtPosition:newPos IsBlocking:NO];
+        } else if (stat == BRUSH_MOVING_PLATFORM) {
+            [_board addElementNamed:CLASS_MOVING_PLATFORM AtPosition:newPos IsBlocking:NO];
+        } else if (stat == BRUSH_LEVER) {
+            [_board addElementNamed:CLASS_LEVER AtPosition:newPos IsBlocking:NO];
         }
     }
     

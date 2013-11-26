@@ -7,7 +7,9 @@
 //
 
 #import "Element.h"
+@class Path;
 
 @interface MovingPlatform : Element
-
+@property (nonatomic, retain) Path* path;
+-(id)initWithX:(NSInteger)x Y:(NSInteger)y Path:(Path*) path;
 @end

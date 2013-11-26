@@ -25,13 +25,16 @@
 @property (weak) IBOutlet NSImageView *selectedEraser;
 @property (weak) IBOutlet NSImageView *selectedStarButton;
 @property (weak) IBOutlet NSImageView *selectedStart;
+@property (weak) IBOutlet NSImageView *selectedLever;
+@property (weak) IBOutlet NSImageView *selectedPlatform;
 
 
 -(void)notifyText:(NSString *)text Object: (NSObject*)object Key: (NSString*)key;
 -(void)setSelectedIndicatorIsHiddenSolid: (BOOL)solid IsCracked: (BOOL)cracked IsVoid: (BOOL)isVoid
                                  isStart: (BOOL)start isFinished: (BOOL)finish isRock: (BOOL)rock
                                   isStar: (BOOL)star isEraser: (BOOL)eraser isStarButton: (BOOL) starbtn
-                          isBridgeButton: (BOOL)bridgebtn isBridge: (BOOL)bridge;
+                          isBridgeButton: (BOOL)bridgebtn isBridge: (BOOL)bridge isLever: (BOOL)lever
+                              isPlatform: (BOOL)platform;
 // When a brush has been selected, these actions are run.
 -(IBAction)starButtonClick:(id)sender;
 -(IBAction)solidClick:(id)sender;
@@ -43,6 +46,8 @@
 -(IBAction)starClick:(id)sender;
 -(IBAction)eraserClick:(id)sender;
 -(IBAction)bridgeClick:(id)sender;
+- (IBAction)platformClick:(id)sender;
+- (IBAction)leverClick:(id)sender;
 
 
 @end

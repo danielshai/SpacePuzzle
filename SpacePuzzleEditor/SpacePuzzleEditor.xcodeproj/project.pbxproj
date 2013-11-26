@@ -46,6 +46,9 @@
 		E6D12B64183F661A00DE1632 /* OrangeTile.png in Resources */ = {isa = PBXBuildFile; fileRef = E6D12B63183F661A00DE1632 /* OrangeTile.png */; };
 		E6EE6F411831428B0072D3E6 /* Converter.m in Sources */ = {isa = PBXBuildFile; fileRef = E6EE6F401831428B0072D3E6 /* Converter.m */; };
 		E6F5C0CC183E3F3200A4275B /* Button.png in Resources */ = {isa = PBXBuildFile; fileRef = E6F5C0CB183E3F3200A4275B /* Button.png */; };
+		E6FB7DC418450B580075E460 /* Path.m in Sources */ = {isa = PBXBuildFile; fileRef = E6FB7DC318450B580075E460 /* Path.m */; };
+		E6FB7DC618450CF30075E460 /* MovingPlatform.png in Resources */ = {isa = PBXBuildFile; fileRef = E6FB7DC518450CF30075E460 /* MovingPlatform.png */; };
+		E6FB7DC818450D560075E460 /* SwitchOFF.png in Resources */ = {isa = PBXBuildFile; fileRef = E6FB7DC718450D560075E460 /* SwitchOFF.png */; };
 		E6FBA613183E478A007A39C4 /* StarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E6FBA612183E478A007A39C4 /* StarButton.m */; };
 /* End PBXBuildFile section */
 
@@ -123,6 +126,10 @@
 		E6EE6F401831428B0072D3E6 /* Converter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Converter.m; path = ../SpacePuzzle/SpacePuzzle/Converter.m; sourceTree = "<group>"; };
 		E6EED0BA183B623E0083E633 /* Macros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Macros.h; path = ../../SpacePuzzle/SpacePuzzle/Macros.h; sourceTree = "<group>"; };
 		E6F5C0CB183E3F3200A4275B /* Button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Button.png; path = ../../Resources/Elements/Button.png; sourceTree = "<group>"; };
+		E6FB7DC218450B580075E460 /* Path.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Path.h; path = ../../SpacePuzzle/SpacePuzzle/Path.h; sourceTree = "<group>"; };
+		E6FB7DC318450B580075E460 /* Path.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Path.m; path = ../../SpacePuzzle/SpacePuzzle/Path.m; sourceTree = "<group>"; };
+		E6FB7DC518450CF30075E460 /* MovingPlatform.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = MovingPlatform.png; path = ../../Resources/Elements/MovingPlatform.png; sourceTree = "<group>"; };
+		E6FB7DC718450D560075E460 /* SwitchOFF.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SwitchOFF.png; path = ../../Resources/Elements/SwitchOFF.png; sourceTree = "<group>"; };
 		E6FBA611183E478A007A39C4 /* StarButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StarButton.h; path = ../SpacePuzzle/SpacePuzzle/StarButton.h; sourceTree = "<group>"; };
 		E6FBA612183E478A007A39C4 /* StarButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StarButton.m; path = ../SpacePuzzle/SpacePuzzle/StarButton.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -152,6 +159,8 @@
 		E60576A0183651E30033AE88 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E6FB7DC718450D560075E460 /* SwitchOFF.png */,
+				E6FB7DC518450CF30075E460 /* MovingPlatform.png */,
 				E6279F7118437AF0009A91BC /* BridgeON.png */,
 				E6D12B63183F661A00DE1632 /* OrangeTile.png */,
 				E6F5C0CB183E3F3200A4275B /* Button.png */,
@@ -290,6 +299,8 @@
 		E6A0EEE6183116AB006BF476 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E6FB7DC218450B580075E460 /* Path.h */,
+				E6FB7DC318450B580075E460 /* Path.m */,
 				E60C6A05183B954A00D6FA14 /* Elements */,
 				E6A0EEDD18311690006BF476 /* Board.h */,
 				E6A0EEDE18311690006BF476 /* Board.m */,
@@ -385,8 +396,10 @@
 				E68A93F6183D0A7900AE9D4C /* Box.png in Resources */,
 				E6F5C0CC183E3F3200A4275B /* Button.png in Resources */,
 				E654B2EE1830F7DD006BFCAC /* InfoPlist.strings in Resources */,
+				E6FB7DC618450CF30075E460 /* MovingPlatform.png in Resources */,
 				E6057699183651740033AE88 /* Background.png in Resources */,
 				E654B2F41830F7DD006BFCAC /* Credits.rtf in Resources */,
+				E6FB7DC818450D560075E460 /* SwitchOFF.png in Resources */,
 				E654B2F61830F7DD006BFCAC /* MainMenu.xib in Resources */,
 				E6D12B64183F661A00DE1632 /* OrangeTile.png in Resources */,
 				E60C69FE183B908500D6FA14 /* Star.png in Resources */,
@@ -425,6 +438,7 @@
 				E654B2F81830F7DD006BFCAC /* BoardScene.m in Sources */,
 				E60C6A04183B953C00D6FA14 /* Star.m in Sources */,
 				E6279F6A18434377009A91BC /* Connections.m in Sources */,
+				E6FB7DC418450B580075E460 /* Path.m in Sources */,
 				E6A0EEE318311690006BF476 /* Board.m in Sources */,
 				E605767E18362B590033AE88 /* Box.m in Sources */,
 				E64C9F8C18339F2E00A18E36 /* XMLParser.m in Sources */,

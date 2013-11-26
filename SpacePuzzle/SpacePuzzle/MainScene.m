@@ -181,7 +181,6 @@
     
     // Shift the sprite a bit.
     pos.x += sprite.size.width/2;
-    [sprite setPosition:pos];
     
     if([className isEqualToString:@"Star"]) {
         sprite.size = CGSizeMake(22, 22);
@@ -193,8 +192,11 @@
         sprite.size = CGSizeMake(42, 40);
         pos.y -= 1;
         [sprite setPosition:pos];
+    } else if([className isEqualToString:@"SwitchOFF"]) {
+        sprite.size = CGSizeMake(TILESIZE, sprite.texture.size.height/2);
+        pos.y -= 10;
     }
-    
+    [sprite setPosition:pos];
     NSNumber *nr = [NSNumber numberWithInt:coord.y*BOARD_SIZE_X + coord.x];
     [_elements setObject:sprite forKey:nr];
     sprite.hidden = hidden;

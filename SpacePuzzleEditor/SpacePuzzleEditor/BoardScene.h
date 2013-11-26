@@ -25,8 +25,10 @@
 @property (nonatomic, retain) SKTexture *rockTexture;
 @property (nonatomic, retain) SKTexture *starTexture;
 @property (nonatomic, retain) SKTexture *buttonTexture;
-@property (nonatomic, retain) SKTexture *brdigeButtonTexture;
+@property (nonatomic, retain) SKTexture *bridgeButtonTexture;
 @property (nonatomic, retain) SKTexture *bridgeTexture;
+@property (nonatomic, retain) SKTexture *leverTexture;
+@property (nonatomic, retain) SKTexture *platformTexture;
 @property (nonatomic, retain) SKSpriteNode *bkg;
 @property (nonatomic, retain) SKSpriteNode *startElSprite;
 @property (nonatomic, retain) SKSpriteNode *finishSprite;
@@ -38,7 +40,7 @@
 -(void)setupBoardX: (NSInteger)x Y: (NSInteger)y TileSize: (NSInteger) ts Status: (NSInteger)status;
 -(void)refreshBoardX: (NSInteger)x Y: (NSInteger)y Status: (NSInteger)status;
 -(void)refreshElementsStart: (CGPoint)start Finish: (CGPoint) finish;
--(void)addElement: (NSString*) element Position: (CGPoint)pos;
+-(void)addElement: (NSInteger)brush Position: (CGPoint)pos;
 -(void)setAConnectionFrom: (CGPoint) from To: (CGPoint) to;
 -(void)removeAllConnections;
 -(BOOL)removeAConnectionFrom: (CGPoint)from;
@@ -60,6 +62,8 @@
 -(void)starButtonClick;
 -(void)bridgeButtonClick;
 -(void)bridgeClick;
+-(void)platformClick;
+-(void)leverClick;
 -(void)drawControlLine;
 -(void)highlightElement:(CGPoint) elementIndex;
 -(void)noHighlight;
@@ -72,4 +76,7 @@
 -(void)addABridge:(CGPoint) pos Index: (NSNumber*) index;
 -(void)addAStarButton:(CGPoint) pos Index: (NSNumber*) index;
 -(void)addABridgeButton:(CGPoint) pos Index: (NSNumber*) index;
+-(void)addAPlatform:(CGPoint) pos Index: (NSNumber*) index;
+-(void)addALever:(CGPoint) pos Index: (NSNumber*) index;
+-(NSInteger)classToBrush: (NSString*)className;
 @end

@@ -22,6 +22,8 @@
 @synthesize controlHover = _controlHover;
 @synthesize connectionNodes = _connectionNodes;
 @synthesize bridgeTexture = _bridgeTexture;
+@synthesize leverTexture = _leverTexture;
+@synthesize platformTexture = _platformTexture;
 
 -(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
@@ -61,6 +63,9 @@
         _starTexture = [SKTexture textureWithImageNamed:@"Star.png"];
         _buttonTexture = [SKTexture textureWithImageNamed:@"Button.png"];
         _bridgeTexture = [SKTexture textureWithImageNamed:@"BridgeON.png"];
+        _platformTexture = [SKTexture textureWithImageNamed:@"MovingPlatform.png"];
+        _leverTexture = [SKTexture textureWithImageNamed:@"SwitchOFF.png"];
+        
         _startElSprite = [SKSpriteNode spriteNodeWithTexture:_startElement];
         _startElSprite.position = CGPointMake(-100, -100);
         _startElSprite.size = CGSizeMake(TILESIZE/2, TILESIZE/2);
@@ -93,6 +98,8 @@
         [self observeText:@"HighlightElement" Selector:@selector(highlightElement:)];
         [self observeText:@"BridgeButtonClick" Selector:@selector(bridgeButtonClick)];
         [self observeText:@"BridgeClick" Selector:@selector(bridgeClick)];
+        [self observeText:@"LeverClick" Selector:@selector(leverClick)];
+        [self observeText:@"PlatformClick" Selector:@selector(platformClick)];
         
         controlDragLine.zPosition = 999999;
         circle.zPosition = 999998;
@@ -277,19 +284,7 @@
             // Elements that are part of the element dictionary.
             else if (![_elementSprites objectForKey:flatIndex]) {
                 [self notifyText:@"BoardEdited" Object:arr Key:@"BoardEdited"];
-                
-                if(statusOfPalette == BRUSH_ROCK) {
-                    // Sets up a rock at the position selected.
-                    [self addElement:CLASS_BOX Position:loc];
-                } else if(statusOfPalette == BRUSH_STAR) {
-                    [self addElement:CLASS_STAR Position:loc];
-                } else if(statusOfPalette == BRUSH_STARBUTTON) {
-                    [self addElement:CLASS_STARBUTTON Position:loc];
-                } else if(statusOfPalette == BRUSH_BRIDGEBUTTON) {
-                    [self addElement:CLASS_BRIDGEBUTTON Position:loc];
-                } else if(statusOfPalette == BRUSH_BRIDGE) {
-                    [self addElement:CLASS_BRIDGE Position:loc];
-                }
+                [self addElement:statusOfPalette Position:loc];
             }
         }
     }
@@ -428,42 +423,61 @@
     [self changeTextureOfBrush:BRUSH_BRIDGE];
 }
 
+-(void)platformClick {
+    [self changeTextureOfBrush:BRUSH_MOVING_PLATFORM];
+}
+
+-(void)leverClick {
+    [self changeTextureOfBrush:BRUSH_LEVER];
+}
+
 /*
  *  Changes the texture of the brush, i.e. what the brush will "paint". */
 -(void)changeTextureOfBrush:(NSInteger)status {
-    if(status == MAPSTATUS_SOLID) {
-        currentTexture = _solid;
-        statusOfPalette = status;
-    } else if(status == MAPSTATUS_VOID) {
-        currentTexture = _voidTile;
-        statusOfPalette = status;
-    } else if(status == MAPSTATUS_CRACKED) {
-        currentTexture = _crackedTile;
-        statusOfPalette = status;
-    } else if(status == BRUSH_START) {
-        currentTexture = _startElement;
-        statusOfPalette = status;
-    } else if(status == BRUSH_FINISH) {
-        currentTexture = _finishElement;
-        statusOfPalette = status;
-    } else if(status == BRUSH_ROCK) {
-        currentTexture = _rockTexture;
-        statusOfPalette = status;
-    } else if(status == BRUSH_STAR) {
-        currentTexture = _starTexture;
-        statusOfPalette = status;
-    } else if(status == BRUSH_ERASER) {
-        currentTexture = nil;
-        statusOfPalette = status;
-    } else if(status == BRUSH_STARBUTTON) {
-        currentTexture = _buttonTexture;
-        statusOfPalette = status;
-    } else if(status == BRUSH_BRIDGEBUTTON) {
-        currentTexture = _buttonTexture;
-        statusOfPalette = status;
-    } else if(status == BRUSH_BRIDGE) {
-        currentTexture = _bridgeTexture;
-        statusOfPalette = status;
+    statusOfPalette = status;
+    
+    switch (status) {
+        case MAPSTATUS_SOLID:
+            currentTexture = _solid;
+            break;
+        case MAPSTATUS_VOID:
+            currentTexture = _voidTile;
+            break;
+        case MAPSTATUS_CRACKED:
+            currentTexture = _crackedTile;
+            break;
+        case BRUSH_START:
+            currentTexture = _startElement;
+            break;
+        case BRUSH_FINISH:
+            currentTexture = _finishElement;
+            break;
+        case BRUSH_ROCK:
+            currentTexture = _rockTexture;
+            break;
+        case BRUSH_STAR:
+            currentTexture = _starTexture;
+            break;
+        case BRUSH_STARBUTTON:
+            currentTexture = _buttonTexture;
+            break;
+        case BRUSH_BRIDGE:
+            currentTexture = _bridgeTexture;
+            break;
+        case BRUSH_BRIDGEBUTTON:
+            currentTexture = _buttonTexture;
+            break;
+        case BRUSH_LEVER:
+            currentTexture = _leverTexture;
+            break;
+        case BRUSH_MOVING_PLATFORM:
+            currentTexture = _platformTexture;
+            break;
+        case BRUSH_ERASER:
+            currentTexture = nil;
+            break;
+        default:
+            break;
     }
 }
 
@@ -506,19 +520,33 @@
 
 /*
  *  Adds an element to the scene, according to class name and position sent as arguments. */
--(void)addElement:(NSString *)element Position:(CGPoint)pos {
+-(void)addElement:(NSInteger)brush Position:(CGPoint)pos {
     NSNumber *flatIndex = [NSNumber numberWithInt:pos.y*BOARD_SIZE_X + pos.x];
     
-    if([element isEqualToString:CLASS_BOX]) {
-        [self addARock:pos Index:flatIndex];
-    } else if([element isEqualToString:CLASS_STAR]) {
-        [self addAStar:pos Index:flatIndex];
-    } else if([element isEqualToString:CLASS_STARBUTTON]) {
-        [self addAStarButton:pos Index:flatIndex];
-    } else if([element isEqualToString:CLASS_BRIDGE]) {
-        [self addABridge:pos Index:flatIndex];
-    } else if([element isEqualToString:CLASS_BRIDGEBUTTON]) {
-        [self addABridgeButton:pos Index:flatIndex];
+    switch (brush) {
+        case BRUSH_ROCK:
+            [self addARock:pos Index:flatIndex];
+            break;
+        case BRUSH_STAR:
+            [self addAStar:pos Index:flatIndex];
+            break;
+        case BRUSH_STARBUTTON:
+            [self addAStarButton:pos Index:flatIndex];
+            break;
+        case BRUSH_BRIDGE:
+            [self addABridge:pos Index:flatIndex];
+            break;
+        case BRUSH_BRIDGEBUTTON:
+            [self addABridgeButton:pos Index:flatIndex];
+            break;
+        case BRUSH_LEVER:
+            [self addALever:pos Index:flatIndex];
+            break;
+        case BRUSH_MOVING_PLATFORM:
+            [self addAPlatform:pos Index:flatIndex];
+            break;
+        default:
+            break;
     }
 }
 
@@ -588,6 +616,32 @@
     [self addChild:bridgebtn];
 }
 
+-(void)addAPlatform:(CGPoint)pos Index:(NSNumber *)index {
+    SKSpriteNode *platform = [SKSpriteNode spriteNodeWithTexture:_platformTexture];
+    
+    CGPoint pxl = [Converter convertCoordToPixel:pos];
+    pxl.x += TILESIZE/2;
+    platform.position = pxl;
+    platform.size = CGSizeMake(TILESIZE-1, TILESIZE-1);
+    
+    [_elementSprites setObject:platform forKey:index];
+    [self addChild:platform];
+}
+
+-(void)addALever:(CGPoint)pos Index:(NSNumber *)index {
+    SKSpriteNode *lever = [SKSpriteNode spriteNodeWithTexture:_leverTexture];
+    
+    CGPoint pxl = [Converter convertCoordToPixel:pos];
+    pxl.x += TILESIZE/2;
+    pxl.y -= 10;
+    lever.position = pxl;
+    lever.size = CGSizeMake(TILESIZE-4, _leverTexture.size.height/2);
+    
+    [_elementSprites setObject:lever forKey:index];
+    [self addChild:lever];
+    
+}
+
 -(void)cleanElements {
     for(id key in _elementSprites) {
         SKSpriteNode* s = [_elementSprites objectForKey:key];
@@ -613,6 +667,26 @@
     
     _startElSprite.position = CGPointMake(-100, -100);
     _finishSprite.position = CGPointMake(-100, -100);
+}
+
+-(NSInteger)classToBrush:(NSString *)className {
+    if ([className isEqualToString:CLASS_BOX]) {
+        return BRUSH_ROCK;
+    } else if ([className isEqualToString:CLASS_STAR]) {
+        return BRUSH_STAR;
+    } else if ([className isEqualToString:CLASS_BRIDGE]) {
+        return BRUSH_BRIDGE;
+    } else if ([className isEqualToString:CLASS_LEVER]) {
+        return BRUSH_LEVER;
+    } else if ([className isEqualToString:CLASS_MOVING_PLATFORM]) {
+        return BRUSH_MOVING_PLATFORM;
+    } else if ([className isEqualToString:CLASS_STARBUTTON]) {
+        return BRUSH_STARBUTTON;
+    } else if ([className isEqualToString:CLASS_BRIDGEBUTTON]) {
+        return BRUSH_BRIDGEBUTTON;
+    }
+    
+    return 0;
 }
 
 /*

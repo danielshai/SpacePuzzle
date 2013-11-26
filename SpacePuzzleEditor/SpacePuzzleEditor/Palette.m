@@ -23,76 +23,88 @@
 @synthesize selectedStarButton = _selectedStarButton;
 @synthesize selectedBridgeButton = _selectedBridgeButton;
 @synthesize selectedBridge = _selectedBridge;
+@synthesize selectedLever = _selectedLever;
+@synthesize selectedPlatform = _selectedPlatform;
 
 -(IBAction)solidClick:(id)sender {
     // Show which tile is selected.
     [self setSelectedIndicatorIsHiddenSolid:NO IsCracked:YES IsVoid:YES isStart:YES isFinished:YES
-                                     isRock:YES isStar:YES isEraser:YES isStarButton:YES isBridgeButton:YES isBridge:YES];
+                                     isRock:YES isStar:YES isEraser:YES isStarButton:YES isBridgeButton:YES isBridge:YES isLever:YES isPlatform:YES];
     
     [self notifyText:@"SolidClick" Object:nil Key:@"SolidClick"];
 }
 
 -(IBAction)crackedAction:(id)sender {
     [self setSelectedIndicatorIsHiddenSolid:YES IsCracked:NO IsVoid:YES isStart:YES isFinished:YES
-                                     isRock:YES isStar:YES isEraser:YES isStarButton:YES isBridgeButton:YES isBridge:YES];
+                                     isRock:YES isStar:YES isEraser:YES isStarButton:YES isBridgeButton:YES isBridge:YES isLever:YES isPlatform:YES];
     
     [self notifyText:@"CrackedClick" Object:nil Key:@"CrackedClick"];
 }
 
 -(IBAction)voidClick:(id)sender {
     [self setSelectedIndicatorIsHiddenSolid:YES IsCracked:YES IsVoid:NO isStart:YES isFinished:YES
-                                     isRock:YES isStar:YES isEraser:YES isStarButton:YES isBridgeButton:YES isBridge:YES];
+                                     isRock:YES isStar:YES isEraser:YES isStarButton:YES isBridgeButton:YES isBridge:YES isLever:YES isPlatform:YES];
     
     [self notifyText:@"VoidClick" Object:nil Key:@"VoidClick"];
 }
 
 -(IBAction)startClick:(id)sender {
     [self setSelectedIndicatorIsHiddenSolid:YES IsCracked:YES IsVoid:YES isStart:NO isFinished:YES
-                                     isRock:YES isStar:YES isEraser:YES isStarButton:YES isBridgeButton:YES isBridge:YES];
+                                     isRock:YES isStar:YES isEraser:YES isStarButton:YES isBridgeButton:YES isBridge:YES isLever:YES isPlatform:YES];
     [self notifyText:@"StartClick" Object:Nil Key:@"StartClick"];
 }
 
 -(IBAction)finishClick:(id)sender {
     [self setSelectedIndicatorIsHiddenSolid:YES IsCracked:YES IsVoid:YES isStart:YES isFinished:NO
-                                     isRock:YES isStar:YES isEraser:YES isStarButton:YES isBridgeButton:YES isBridge:YES];
+                                     isRock:YES isStar:YES isEraser:YES isStarButton:YES isBridgeButton:YES isBridge:YES isLever:YES isPlatform:YES];
     [self notifyText:@"FinishClick" Object:Nil Key:@"FinishClick"];
 }
 
 -(IBAction)rockClick:(id)sender {
     [self setSelectedIndicatorIsHiddenSolid:YES IsCracked:YES IsVoid:YES isStart:YES isFinished:YES
-                                     isRock:NO isStar:YES isEraser:YES isStarButton:YES isBridgeButton:YES isBridge:YES];
+                                     isRock:NO isStar:YES isEraser:YES isStarButton:YES isBridgeButton:YES isBridge:YES isLever:YES isPlatform:YES];
     [self notifyText:@"RockClick" Object:Nil Key:@"RockClick"];
 }
 
 - (IBAction)starClick:(id)sender {
     [self setSelectedIndicatorIsHiddenSolid:YES IsCracked:YES IsVoid:YES isStart:YES isFinished:YES
-                                     isRock:YES isStar:NO isEraser:YES isStarButton:YES isBridgeButton:YES isBridge:YES];
+                                     isRock:YES isStar:NO isEraser:YES isStarButton:YES isBridgeButton:YES isBridge:YES isLever:YES isPlatform:YES];
     [self notifyText:@"StarClick" Object:Nil Key:@"StarClick"];
 }
 
 - (IBAction)eraserClick:(id)sender {
-    [self setSelectedIndicatorIsHiddenSolid:YES IsCracked:YES IsVoid:YES isStart:YES isFinished:YES isRock:YES isStar:YES isEraser:NO isStarButton:YES isBridgeButton:YES isBridge:YES];
+    [self setSelectedIndicatorIsHiddenSolid:YES IsCracked:YES IsVoid:YES isStart:YES isFinished:YES isRock:YES isStar:YES isEraser:NO isStarButton:YES isBridgeButton:YES isBridge:YES isLever:YES isPlatform:YES];
     [self notifyText:@"EraserClick" Object:Nil Key:@"EraserClick"];
 }
 
 - (IBAction)bridgeClick:(id)sender {
-    [self setSelectedIndicatorIsHiddenSolid:YES IsCracked:YES IsVoid:YES isStart:YES isFinished:YES isRock:YES isStar:YES isEraser:YES isStarButton:YES isBridgeButton:YES isBridge:NO];
+    [self setSelectedIndicatorIsHiddenSolid:YES IsCracked:YES IsVoid:YES isStart:YES isFinished:YES isRock:YES isStar:YES isEraser:YES isStarButton:YES isBridgeButton:YES isBridge:NO isLever:YES isPlatform:YES];
     [self notifyText:@"BridgeClick" Object:nil Key:@"BridgeClick"];
 }
 
+- (IBAction)platformClick:(id)sender {
+    [self setSelectedIndicatorIsHiddenSolid:YES IsCracked:YES IsVoid:YES isStart:YES isFinished:YES isRock:YES isStar:YES isEraser:YES isStarButton:YES isBridgeButton:YES isBridge:YES isLever:YES isPlatform:NO];
+    [self notifyText:@"PlatformClick" Object:Nil Key:@"PlatformClick"];
+}
+
+- (IBAction)leverClick:(id)sender {
+    [self setSelectedIndicatorIsHiddenSolid:YES IsCracked:YES IsVoid:YES isStart:YES isFinished:YES isRock:YES isStar:YES isEraser:YES isStarButton:YES isBridgeButton:YES isBridge:YES isLever:NO isPlatform:YES];
+    [self notifyText:@"LeverClick" Object:nil Key:@"LeverClick"];
+}
+
 - (IBAction)bridgeButtonClick:(id)sender {
-    [self setSelectedIndicatorIsHiddenSolid:YES IsCracked:YES IsVoid:YES isStart:YES isFinished:YES isRock:YES isStar:YES isEraser:YES isStarButton:YES isBridgeButton:NO isBridge:YES];
+    [self setSelectedIndicatorIsHiddenSolid:YES IsCracked:YES IsVoid:YES isStart:YES isFinished:YES isRock:YES isStar:YES isEraser:YES isStarButton:YES isBridgeButton:NO isBridge:YES isLever:YES isPlatform:YES];
     [self notifyText:@"BridgeButtonClick" Object:Nil Key:@"BridgeButtonClick"];
 }
 
 -(IBAction)starButtonClick:(id)sender {
-    [self setSelectedIndicatorIsHiddenSolid:YES IsCracked:YES IsVoid:YES isStart:YES isFinished:YES isRock:YES isStar:YES isEraser:YES isStarButton:NO isBridgeButton:YES isBridge:YES];
+    [self setSelectedIndicatorIsHiddenSolid:YES IsCracked:YES IsVoid:YES isStart:YES isFinished:YES isRock:YES isStar:YES isEraser:YES isStarButton:NO isBridgeButton:YES isBridge:YES isLever:YES isPlatform:YES];
     [self notifyText:@"StarButtonClick" Object:Nil Key:@"StarButtonClick"];
 }
 
 /* 
  *  Displays a selection rectangle on the palette according to what brush is selected. */
--(void)setSelectedIndicatorIsHiddenSolid:(BOOL)solid IsCracked:(BOOL)cracked IsVoid:(BOOL)isVoid isStart:(BOOL)start isFinished:(BOOL)finish isRock:(BOOL)rock isStar:(BOOL)star isEraser:(BOOL)eraser isStarButton:(BOOL)starbtn isBridgeButton:(BOOL)bridgebtn isBridge:(BOOL)bridge{
+-(void)setSelectedIndicatorIsHiddenSolid:(BOOL)solid IsCracked:(BOOL)cracked IsVoid:(BOOL)isVoid isStart:(BOOL)start isFinished:(BOOL)finish isRock:(BOOL)rock isStar:(BOOL)star isEraser:(BOOL)eraser isStarButton:(BOOL)starbtn isBridgeButton:(BOOL)bridgebtn isBridge:(BOOL)bridge isLever:(BOOL)lever isPlatform:(BOOL)platform {
     [_selectedSolid setHidden:solid];
     [_selectedVoid setHidden:isVoid];
     [_selectedCracked setHidden:cracked];
@@ -104,6 +116,8 @@
     [_selectedStarButton setHidden:starbtn];
     [_selectedBridgeButton setHidden:bridgebtn];
     [_selectedBridge setHidden:bridge];
+    [_selectedPlatform setHidden:platform];
+    [_selectedLever setHidden:lever];
 }
 
 -(void) notifyText:(NSString *)text Object:(NSObject *)object Key:(NSString *)key {

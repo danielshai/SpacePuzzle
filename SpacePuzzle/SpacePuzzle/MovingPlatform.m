@@ -10,6 +10,7 @@
 
 @implementation MovingPlatform
 @synthesize blocking = _blocking;
+@synthesize path = _path;
 
 -(id)init {
     if(self = [super init]){
@@ -21,6 +22,14 @@
 -(id)initWithX:(NSInteger)x Y:(NSInteger)y {
     if(self = [super initWithX:x Y:y]) {
         _blocking = NO;
+    }
+    return self;
+}
+
+-(id)initWithX:(NSInteger)x Y:(NSInteger)y Path:(Path*)path {
+    if(self = [super initWithX:x Y:y]) {
+        _blocking = NO;
+        _path = path;
     }
     return self;
 }
