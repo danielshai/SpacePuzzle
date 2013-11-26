@@ -24,12 +24,10 @@
 		7797AC41183CE9F500E63E95 /* SwitchON.png in Resources */ = {isa = PBXBuildFile; fileRef = 7797AC2A183CE9F500E63E95 /* SwitchON.png */; };
 		7797AC42183CE9F500E63E95 /* Background.png in Resources */ = {isa = PBXBuildFile; fileRef = 7797AC2C183CE9F500E63E95 /* Background.png */; };
 		7797AC43183CE9F500E63E95 /* Cracked.png in Resources */ = {isa = PBXBuildFile; fileRef = 7797AC2E183CE9F500E63E95 /* Cracked.png */; };
-		7797AC44183CE9F500E63E95 /* crackedtile.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7797AC2F183CE9F500E63E95 /* crackedtile.jpg */; };
 		7797AC45183CE9F500E63E95 /* solidtile.png in Resources */ = {isa = PBXBuildFile; fileRef = 7797AC30183CE9F500E63E95 /* solidtile.png */; };
 		7797AC46183CE9F500E63E95 /* voidtile.png in Resources */ = {isa = PBXBuildFile; fileRef = 7797AC31183CE9F500E63E95 /* voidtile.png */; };
 		7797AC47183CE9F500E63E95 /* Alien.png in Resources */ = {isa = PBXBuildFile; fileRef = 7797AC33183CE9F500E63E95 /* Alien.png */; };
 		7797AC48183CE9F500E63E95 /* Astronaut.png in Resources */ = {isa = PBXBuildFile; fileRef = 7797AC34183CE9F500E63E95 /* Astronaut.png */; };
-		7797AC49183CE9F500E63E95 /* littlejohn.png in Resources */ = {isa = PBXBuildFile; fileRef = 7797AC35183CE9F500E63E95 /* littlejohn.png */; };
 		779DB365183E32030059A084 /* PlatformLever.m in Sources */ = {isa = PBXBuildFile; fileRef = 779DB364183E32030059A084 /* PlatformLever.m */; };
 		779DB368183E32560059A084 /* MovingPlatform.m in Sources */ = {isa = PBXBuildFile; fileRef = 779DB367183E32560059A084 /* MovingPlatform.m */; };
 		779EF6A7183F608C0097441A /* MovingPlatform.png in Resources */ = {isa = PBXBuildFile; fileRef = 779EF6A6183F608C0097441A /* MovingPlatform.png */; };
@@ -103,12 +101,10 @@
 		7797AC2A183CE9F500E63E95 /* SwitchON.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SwitchON.png; sourceTree = "<group>"; };
 		7797AC2C183CE9F500E63E95 /* Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Background.png; sourceTree = "<group>"; };
 		7797AC2E183CE9F500E63E95 /* Cracked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Cracked.png; sourceTree = "<group>"; };
-		7797AC2F183CE9F500E63E95 /* crackedtile.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = crackedtile.jpg; sourceTree = "<group>"; };
 		7797AC30183CE9F500E63E95 /* solidtile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = solidtile.png; sourceTree = "<group>"; };
 		7797AC31183CE9F500E63E95 /* voidtile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voidtile.png; sourceTree = "<group>"; };
 		7797AC33183CE9F500E63E95 /* Alien.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Alien.png; sourceTree = "<group>"; };
 		7797AC34183CE9F500E63E95 /* Astronaut.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Astronaut.png; sourceTree = "<group>"; };
-		7797AC35183CE9F500E63E95 /* littlejohn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = littlejohn.png; sourceTree = "<group>"; };
 		779DB363183E32030059A084 /* PlatformLever.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlatformLever.h; sourceTree = "<group>"; };
 		779DB364183E32030059A084 /* PlatformLever.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlatformLever.m; sourceTree = "<group>"; };
 		779DB366183E32560059A084 /* MovingPlatform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovingPlatform.h; sourceTree = "<group>"; };
@@ -239,7 +235,6 @@
 			isa = PBXGroup;
 			children = (
 				7797AC2E183CE9F500E63E95 /* Cracked.png */,
-				7797AC2F183CE9F500E63E95 /* crackedtile.jpg */,
 				7797AC30183CE9F500E63E95 /* solidtile.png */,
 				7797AC31183CE9F500E63E95 /* voidtile.png */,
 			);
@@ -252,7 +247,6 @@
 			children = (
 				7797AC33183CE9F500E63E95 /* Alien.png */,
 				7797AC34183CE9F500E63E95 /* Astronaut.png */,
-				7797AC35183CE9F500E63E95 /* littlejohn.png */,
 			);
 			name = Units;
 			path = ../../Resources/Units;
@@ -535,9 +529,7 @@
 				E621406A182BA53800EC5C21 /* Main.storyboard in Resources */,
 				77D60730184374030079A182 /* AstroUp.png in Resources */,
 				7797AC43183CE9F500E63E95 /* Cracked.png in Resources */,
-				7797AC44183CE9F500E63E95 /* crackedtile.jpg in Resources */,
 				7797AC41183CE9F500E63E95 /* SwitchON.png in Resources */,
-				7797AC49183CE9F500E63E95 /* littlejohn.png in Resources */,
 				7797AC40183CE9F500E63E95 /* SwitchOFF.png in Resources */,
 				779EF6A7183F608C0097441A /* MovingPlatform.png in Resources */,
 			);
