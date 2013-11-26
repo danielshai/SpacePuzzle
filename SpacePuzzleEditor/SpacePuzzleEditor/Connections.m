@@ -87,6 +87,13 @@
     return NO;
 }
 
+/*
+ *  Checks if two elements can be connected. */
++(BOOL)isValidConnection:(Element *)from To:(Element *)to {
+    return ([from isKindOfClass:[StarButton class]] && [to isKindOfClass:[Star class]]) ||
+    ([from isKindOfClass:[BridgeButton class]] && [to isKindOfClass:[Bridge class]]);
+}
+
 -(void)createStarConnection:(Element *)from To: (Element*)to {
     StarButton *sb = (StarButton*)from;
     Star *star = (Star*)to;

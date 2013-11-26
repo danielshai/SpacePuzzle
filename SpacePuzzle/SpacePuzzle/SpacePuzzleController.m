@@ -207,8 +207,7 @@
     Element *e = [[_board elementDictionary] objectForKey:nextPos];
     // First check if the movement was inside the board and if the tile isn't |void| (which units cannot
     // move to).
-    if(x >= 0 && x < BOARD_SIZE_X && y >= 0 && y < BOARD_SIZE_Y
-       && [[[_board board] objectAtIndex:nextPosIntKey] status] != MAPSTATUS_VOID) {
+    if([_board isPointWithinBoard:loc] && [[[_board board] objectAtIndex:nextPosIntKey] status] != MAPSTATUS_VOID) {
         // Checks if the move is 1 step in x or y, but not both at the same time.
         if( ((x - unitX == 1 || x - unitX == -1) && y == unitY) ||
             ((y - unitY == 1 || y - unitY == -1) && x == unitX) )

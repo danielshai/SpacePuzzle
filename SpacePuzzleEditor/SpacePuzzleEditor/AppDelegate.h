@@ -48,7 +48,6 @@
 -(void)refreshBoardView;
 -(void)refreshElementView;
 -(void)setupBoard;
--(BOOL)connectionIsConnectable:(Element*) from To: (Element*)to;
 -(void)observeText:(NSString *)text Selector:(SEL)selector;
 -(void)notifyText:(NSString *)text Object: (NSObject*)object Key: (NSString*)key;
 @end

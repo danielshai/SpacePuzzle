@@ -382,4 +382,8 @@
     element = [element stringByAppendingString:@">"];
     [_parser addOutput:element];
 }
+
+-(BOOL)isPointWithinBoard:(CGPoint)p {
+    return (p.x >= 0 && p.x < BOARD_SIZE_X && p.y >= 0 && p.y < BOARD_SIZE_Y);
+}
 @end

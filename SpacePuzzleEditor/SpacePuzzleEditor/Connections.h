@@ -20,4 +20,5 @@
 -(void)removeAllConnections;
 -(void)createStarConnection: (Element*) from To: (Element*)to;
 -(void)createBridgeConnection: (Element*) from To: (Element*)to;
++(BOOL)isValidConnection: (Element*) from To: (Element*)to;
 @end

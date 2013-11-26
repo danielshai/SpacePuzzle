@@ -17,6 +17,8 @@
 		E60C69FE183B908500D6FA14 /* Star.png in Resources */ = {isa = PBXBuildFile; fileRef = E60C69FD183B908500D6FA14 /* Star.png */; };
 		E60C6A04183B953C00D6FA14 /* Star.m in Sources */ = {isa = PBXBuildFile; fileRef = E60C6A03183B953C00D6FA14 /* Star.m */; };
 		E60C92AB183A5FD9005DCBB7 /* Rock.png in Resources */ = {isa = PBXBuildFile; fileRef = E60C92AA183A5FD9005DCBB7 /* Rock.png */; };
+		E60EAC921844CC7900D18506 /* MovingPlatform.m in Sources */ = {isa = PBXBuildFile; fileRef = E60EAC8F1844CC7900D18506 /* MovingPlatform.m */; };
+		E60EAC931844CC7900D18506 /* PlatformLever.m in Sources */ = {isa = PBXBuildFile; fileRef = E60EAC911844CC7900D18506 /* PlatformLever.m */; };
 		E6279F6A18434377009A91BC /* Connections.m in Sources */ = {isa = PBXBuildFile; fileRef = E6279F6918434377009A91BC /* Connections.m */; };
 		E6279F6F18436EA6009A91BC /* Bridge.m in Sources */ = {isa = PBXBuildFile; fileRef = E6279F6C18436EA6009A91BC /* Bridge.m */; };
 		E6279F7018436EA6009A91BC /* BridgeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E6279F6E18436EA6009A91BC /* BridgeButton.m */; };
@@ -72,6 +74,10 @@
 		E60C6A02183B953C00D6FA14 /* Star.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Star.h; path = ../SpacePuzzle/SpacePuzzle/Star.h; sourceTree = "<group>"; };
 		E60C6A03183B953C00D6FA14 /* Star.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Star.m; path = ../SpacePuzzle/SpacePuzzle/Star.m; sourceTree = "<group>"; };
 		E60C92AA183A5FD9005DCBB7 /* Rock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Rock.png; path = ../../Resources/Elements/Rock.png; sourceTree = "<group>"; };
+		E60EAC8E1844CC7900D18506 /* MovingPlatform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MovingPlatform.h; path = ../SpacePuzzle/SpacePuzzle/MovingPlatform.h; sourceTree = "<group>"; };
+		E60EAC8F1844CC7900D18506 /* MovingPlatform.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MovingPlatform.m; path = ../SpacePuzzle/SpacePuzzle/MovingPlatform.m; sourceTree = "<group>"; };
+		E60EAC901844CC7900D18506 /* PlatformLever.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlatformLever.h; path = ../SpacePuzzle/SpacePuzzle/PlatformLever.h; sourceTree = "<group>"; };
+		E60EAC911844CC7900D18506 /* PlatformLever.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlatformLever.m; path = ../SpacePuzzle/SpacePuzzle/PlatformLever.m; sourceTree = "<group>"; };
 		E6279F6818434377009A91BC /* Connections.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Connections.h; path = SpacePuzzleEditor/Connections.h; sourceTree = "<group>"; };
 		E6279F6918434377009A91BC /* Connections.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Connections.m; path = SpacePuzzleEditor/Connections.m; sourceTree = "<group>"; };
 		E6279F6B18436EA6009A91BC /* Bridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Bridge.h; path = ../SpacePuzzle/SpacePuzzle/Bridge.h; sourceTree = "<group>"; };
@@ -168,6 +174,10 @@
 		E60C6A05183B954A00D6FA14 /* Elements */ = {
 			isa = PBXGroup;
 			children = (
+				E60EAC8E1844CC7900D18506 /* MovingPlatform.h */,
+				E60EAC8F1844CC7900D18506 /* MovingPlatform.m */,
+				E60EAC901844CC7900D18506 /* PlatformLever.h */,
+				E60EAC911844CC7900D18506 /* PlatformLever.m */,
 				E6279F6B18436EA6009A91BC /* Bridge.h */,
 				E6279F6C18436EA6009A91BC /* Bridge.m */,
 				E6279F6D18436EA6009A91BC /* BridgeButton.h */,
@@ -407,10 +417,12 @@
 			files = (
 				E6A0EEE518311690006BF476 /* Position.m in Sources */,
 				E654B2F01830F7DD006BFCAC /* main.m in Sources */,
+				E60EAC921844CC7900D18506 /* MovingPlatform.m in Sources */,
 				E6279F7018436EA6009A91BC /* BridgeButton.m in Sources */,
 				E605767D18362B590033AE88 /* Element.m in Sources */,
 				E6FBA613183E478A007A39C4 /* StarButton.m in Sources */,
 				E6A0EEE418311690006BF476 /* BoardCoord.m in Sources */,
+				E60EAC931844CC7900D18506 /* PlatformLever.m in Sources */,
 				E65EE66F18325FB300E38A3F /* Palette.m in Sources */,
 				E6EE6F411831428B0072D3E6 /* Converter.m in Sources */,
 				E6279F6F18436EA6009A91BC /* Bridge.m in Sources */,

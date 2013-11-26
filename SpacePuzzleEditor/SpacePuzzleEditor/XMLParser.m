@@ -138,7 +138,7 @@
         BridgeButton *bb = [[BridgeButton alloc] initWithBridge:b X:tempXElement Y:tempYElement];
         NSNumber *index = [NSNumber numberWithInteger:tempYElement*BOARD_SIZE_X + tempXElement];
         [_elements setObject:bb forKey:index];
-        NSLog(@"From: %ld %ld  To: %ld %ld",(long)bb.x,(long)bb.y,(long)b.x,(long)b.y);
+       // NSLog(@"From: %ld %ld  To: %ld %ld",(long)bb.x,(long)bb.y,(long)b.x,(long)b.y);
         
     } else if ([elementName isEqualToString:STAR_BUTTON_REF]) {
         starButtonStar = NO;
@@ -169,7 +169,6 @@
               !bridgeButtonBridge) {
         tempYElement = intString;
     } else if([currentElement isEqualToString:@"x"] && (starButtonStar || bridgeButtonBridge) ) {
-        if(bridgeButtonBridge)NSLog(@"Setting ref %ld", (long)tempXRef);
         tempXRef = intString;
     } else if([currentElement isEqualToString:@"y"] && (starButtonStar || bridgeButtonBridge) ) {
         tempYRef = intString;

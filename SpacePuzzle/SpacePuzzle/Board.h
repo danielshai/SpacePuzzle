@@ -41,4 +41,5 @@
 -(void) starButtonExport: (StarButton*) sb;
 -(void) bridgeExport: (Bridge*) b;
 -(void) bridgeButtonExport: (BridgeButton*) bb;
+-(BOOL) isPointWithinBoard: (CGPoint)p;
 @end
