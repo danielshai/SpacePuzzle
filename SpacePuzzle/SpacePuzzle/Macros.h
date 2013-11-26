@@ -6,8 +6,8 @@
     Contains definitions of constants.
 */
 
-#ifndef Block_Game_Macros_h
-#define Block_Game_Macros_h
+#ifndef Space_Puzzle_Macros_h
+#define Space_Puzzle_Macros_h
 
 #define MAPSTATUS_VOID          -1
 #define MAPSTATUS_SOLID         0
@@ -20,6 +20,9 @@
 #define BRUSH_STARBUTTON        105
 #define BRUSH_BRIDGEBUTTON      106
 #define BRUSH_BRIDGE            107
+#define BRUSH_LEVER             108
+#define BRUSH_MOVING_PLATFORM   109
+#define BRUSH_PATH              110
 
 #define TILESIZE                44
 #define BOARD_PIXEL_BEGIN_X     10 // The pixel value that the actual board begins at.
@@ -34,7 +37,6 @@
 #define TOUCHES_BEGAN           @"TouchesBegan"
 #define TOUCHES_MOVED           @"TouchesMoved"
 #define TOUCHES_ENDED           @"TouchesEnded"
-#define NEXT_BUTTON_TOUCHED     @"nextButtonTouched"
 #define UNIT_MOVED              @"UnitMoved"
 #define UNIT_WANTS_TO_MOVE      @"UnitWantsToMove"
 
@@ -43,8 +45,13 @@
 #define CLASS_BRIDGE            @"Bridge"
 #define CLASS_BOX               @"Box"
 #define CLASS_BRIDGEBUTTON      @"BridgeButton"
+#define CLASS_LEVER             @"PlatformLever"
+#define CLASS_MOVING_PLATFORM   @"MovingPlatform"
+
 #define STAR_BUTTON_REF         @"starbuttonstar"
 #define BRIDGE_BUTTON_REF       @"bridgebuttonbridge"
+#define LEVER_REF               @"leverplatform"
+
 #define RIGHT                   1
 #define LEFT                    2
 #define UP                      3
