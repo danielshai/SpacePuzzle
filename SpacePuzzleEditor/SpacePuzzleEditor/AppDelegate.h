@@ -7,6 +7,7 @@
 //    - Städa: Synka alltid viewn (BoardScene) utifrån datamodellen. Alltså när en |editABoardItem| sker,
 //             säg bara till AppDelegate, som i sin tur uppdaterar datamodellen och efter det uppdaterar
 //             BoardScene, typ en metod |updateView|
+//    - Lever, moving platform, path (alla elements). Bridge horizontal/vertical?
 #import <Cocoa/Cocoa.h>
 #import <SpriteKit/SpriteKit.h>
 #import "Board.h"
