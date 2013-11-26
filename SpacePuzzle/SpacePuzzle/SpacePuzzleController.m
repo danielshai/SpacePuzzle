@@ -54,6 +54,11 @@
     doubleTapR.numberOfTapsRequired = 2;
     [_scene.view addGestureRecognizer:doubleTapR];
     
+    UITapGestureRecognizer *trippleTapR = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(trippleTap:)];
+    trippleTapR.numberOfTapsRequired = 3;
+    [_scene.view addGestureRecognizer:trippleTapR];
+
+    
     UISwipeGestureRecognizer *swipeUp = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeUp:)];
     swipeUp.direction = UISwipeGestureRecognizerDirectionUp;
     [_scene.view addGestureRecognizer:swipeUp];
@@ -94,19 +99,23 @@
         // Convert to board coordinates. Invert with -9.
         location = [Converter convertMousePosToCoord:location];
         location.y = abs(location.y - 9);
-        
+    
+        [self unitWantsToDoActionAt:location];
+    }
+}
+
+-(void)trippleTap:(UIGestureRecognizer *)sender {
+    if(sender.state == UIGestureRecognizerStateEnded) {
         if (_currentUnit == _bigL) {
             _currentUnit = _littleJohn;
             _nextUnit = _bigL;
             NSLog(@"Little John");
         } else {
-            _currentUnit = _bigL;
-            _nextUnit = _littleJohn;
-            NSLog(@"Big L");
+         _currentUnit = _bigL;
+         _nextUnit = _littleJohn;
+         NSLog(@"Big L");
         }
         [_scene changeUnit];
-        
-        [self unitWantsToDoActionAt:location];
     }
 }
 
@@ -210,7 +219,7 @@
     Element *e = [[_board elementDictionary] objectForKey:nextPos];
     // First check if the movement was inside the board and if the tile isn't |void| (which units cannot
     // move to).
-    if([_board isPointWithinBoard:loc] && [[[_board board] objectAtIndex:nextPosIntKey] status] != MAPSTATUS_VOID) {
+    if([_board isPointMovableTo:loc]) {
         // Checks if the move is 1 step in x or y, but not both at the same time.
         if( ((x - unitX == 1 || x - unitX == -1) && y == unitY) ||
             ((y - unitY == 1 || y - unitY == -1) && x == unitX) )
@@ -236,8 +245,7 @@
                 _currentUnit.y = y;
                 [_scene updateUnit:CGPointMake(x, y) inDirection:dir];
                 [self isUnitOnGoal];
-                [e movedTo];
-                
+                [self unitWantsToDoActionAt:CGPointMake(x, y)];
                 // If the element is a star.
                 if([e isKindOfClass:[Star class]] && ![e hidden]) {
                     _player.starsTaken += 1;
@@ -359,9 +367,9 @@
     [sb doAction];
     
     // Updates the button on the scene.
-    [_scene refreshElementAtPosition:sb.key OfClass:@"Button" WithStatus:sb.state];
+    [_scene refreshElementAtPosition:sb.key OfClass:CLASS_STARBUTTON WithStatus:sb.state];
     // Updates the star connected to the button on the scene, i.e. showing it.
-    [_scene setElementAtPosition:sb.star.key IsHidden:NO];
+    [_scene setElementAtPosition:sb.star.key IsHidden:sb.star.hidden];
     
 }
 
@@ -370,7 +378,8 @@
     [bb doAction];
     
     // Updates the button on the scene.
-    [_scene refreshElementAtPosition:bb.bridge.key OfClass:CLASS_BRIDGE WithStatus:!bb.blocking];
+    [_scene refreshElementAtPosition:bb.bridge.key OfClass:CLASS_BRIDGE WithStatus:bb.state];
+    [_scene refreshElementAtPosition:bb.key OfClass:CLASS_BRIDGEBUTTON WithStatus:bb.state];
     // Updates the bridge connected to the button on the scene, i.e. showing it.
     [_scene setElementAtPosition:bb.bridge.key IsHidden:NO];
 }

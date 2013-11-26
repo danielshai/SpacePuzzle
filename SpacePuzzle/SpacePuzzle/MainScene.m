@@ -143,25 +143,7 @@
 -(void)refreshElementAtPosition: (NSNumber*)index OfClass:(NSString*)name WithStatus:(BOOL)on{
     SKSpriteNode *s = [_elements objectForKey:index];
 
-    if([name isEqualToString:@"Button"]) {
-        if(on) {
-            s.texture = _buttonOn;
-        } else {
-            s.texture = _buttonOff;
-        }
-    } else if([name isEqualToString:@"Bridge"]) {
-        if (on) {
-            s.texture = _bridgeOn;
-        } else {
-            s.texture = _bridgeOff;
-        }
-    } else if ([name isEqualToString:@"Lever"]) {
-        if (on) {
-            s.texture = _switchOn;
-        } else {
-            s.texture = _switchOff;
-        }
-    }
+    s.texture = [self updateSpriteWith:name State:on];
 }
 
 -(void)setElementAtPosition:(NSNumber *)index IsHidden:(BOOL)hidden {

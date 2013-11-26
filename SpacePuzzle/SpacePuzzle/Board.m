@@ -383,6 +383,22 @@
     [_parser addOutput:element];
 }
 
+-(BOOL)isPointMovableTo:(CGPoint)p {
+    if([self isPointWithinBoard:p]) {
+        NSNumber *posKey = [NSNumber numberWithInt:p.y*BOARD_SIZE_X + p.x];
+        NSInteger posIntKey = [posKey integerValue];
+        if([[_board objectAtIndex:posIntKey] status] != MAPSTATUS_VOID) {
+            return YES;
+        } else if([[_elementDictionary objectForKey:posKey] isKindOfClass:[Bridge class]]) {
+            Bridge *b = (Bridge*)[_elementDictionary objectForKey:posKey];
+            return !b.blocking;
+        }
+        return NO;
+    } else {
+        return NO;
+    }
+}
+
 -(BOOL)isPointWithinBoard:(CGPoint)p {
     return (p.x >= 0 && p.x < BOARD_SIZE_X && p.y >= 0 && p.y < BOARD_SIZE_Y);
 }

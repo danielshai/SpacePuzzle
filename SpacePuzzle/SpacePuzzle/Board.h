@@ -42,4 +42,5 @@
 -(void) bridgeExport: (Bridge*) b;
 -(void) bridgeButtonExport: (BridgeButton*) bb;
 -(BOOL) isPointWithinBoard: (CGPoint)p;
+-(BOOL) isPointMovableTo: (CGPoint)p;
 @end

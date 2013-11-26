@@ -42,4 +42,9 @@
     _star.hidden = !_state;
 }
 
+-(void) movedTo {
+    _state = !_state;
+    _star.hidden = !_state;
+}
+
 @end
