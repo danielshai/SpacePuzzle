@@ -46,7 +46,8 @@
     [self observeText:@"ControlDragUp" Selector:@selector(controlDragUp:)];
     [[self window] setTitle:@"Untitled.splvl"];
     [_palette setFloatingPanel:YES];
-    [_palette setWorksWhenModal:YES];
+    //[_palette setWorksWhenModal:YES];
+    [_palette setBecomesKeyOnlyIfNeeded:YES];
 }
 
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender {
