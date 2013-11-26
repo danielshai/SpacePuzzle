@@ -46,5 +46,6 @@
 -(void)setupUnits: (CGPoint)pos;
 -(void)notifyText: (NSString *)text Object: (NSObject*)object Key: (NSString*)key;
 -(void)changeUnit;
+-(SKTexture*)updateSpriteWith:(NSString *) name State: (BOOL)state;
 
 @end

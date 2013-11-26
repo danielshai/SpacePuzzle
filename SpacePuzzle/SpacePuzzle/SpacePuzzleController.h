@@ -26,6 +26,7 @@
 @property (nonatomic, retain) Board *board;
 @property (nonatomic, assign) MainScene *scene;
 @property (nonatomic, retain) Unit *currentUnit;
+@property (nonatomic, retain) Unit *nextUnit;
 @property (nonatomic, retain) BigL *bigL;
 @property (nonatomic, retain) LittleJohn *littleJohn;
 @property (nonatomic, retain) Player *player;

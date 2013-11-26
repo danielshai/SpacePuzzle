@@ -260,4 +260,39 @@
         _currentUnit = _bigL;
     }
 }
+
+-(SKTexture*) updateSpriteWith:(NSString *)name State:(BOOL)state {
+    SKTexture *pic;
+    if ([name isEqualToString:@"StarButton"] || [name isEqualToString:@"BridgeButton"]) {
+        if (state) {
+            pic = [SKTexture textureWithImageNamed:@"ButtonON.png"];
+        } else {
+            pic = [SKTexture textureWithImageNamed:@"ButtonOFF.png"];
+        }
+    } else if ([name isEqualToString:@"Bridge"]) {
+        if (state) {
+            pic = [SKTexture textureWithImageNamed:@"BridgeON.png"];
+        } else {
+            pic = [SKTexture textureWithImageNamed:@"BridgeOFF.png"];
+        }
+    } else if ([name isEqualToString:@"Lever"]) {
+        if (state) {
+            pic = [SKTexture textureWithImageNamed:@"SwitchON.png"];
+        } else {
+            pic = [SKTexture textureWithImageNamed:@"SwitchOFF.png"];
+        }
+    } else if ([name isEqualToString:@"MovingPlatform"]) {
+        // Might add the rainbow colours after the platform.
+        pic = [SKTexture textureWithImageNamed:@"MovingPlatform.png"];
+    } else if ([name isEqualToString:@"Star"]) {
+        // Might add when a star is disabled.
+        pic = [SKTexture textureWithImageNamed:@"Star.png"];
+    } else if ([name isEqualToString:@"Star"]) {
+        pic = [SKTexture textureWithImageNamed:@"Box.png"];
+    } else if ([name isEqualToString:@"Start"]) {
+        pic = [SKTexture textureWithImageNamed:@"Start.gif"];
+    }
+    return pic;
+}
+
 @end

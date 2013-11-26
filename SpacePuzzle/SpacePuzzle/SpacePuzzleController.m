@@ -17,6 +17,7 @@
 @synthesize board = _board;
 @synthesize scene = _scene;
 @synthesize currentUnit = _currentUnit;
+@synthesize nextUnit = _nextUnit;
 @synthesize bigL = _bigL;
 @synthesize littleJohn = _littleJohn;
 @synthesize player = _player;
@@ -96,9 +97,11 @@
         
         if (_currentUnit == _bigL) {
             _currentUnit = _littleJohn;
+            _nextUnit = _bigL;
             NSLog(@"Little John");
         } else {
             _currentUnit = _bigL;
+            _nextUnit = _littleJohn;
             NSLog(@"Big L");
         }
         [_scene changeUnit];
@@ -324,7 +327,7 @@
     }
     
     // Add more elements which cannot be pushed upon to if-statement.
-    if (![e isKindOfClass:[Box class]] && (_littleJohn.x != nextPos.x && _littleJohn.y != nextPos.y)) {
+    if (![e isKindOfClass:[Box class]] && (_nextUnit.x != nextPos.x && _nextUnit.y != nextPos.y)) {
         NSInteger intKey = [nextKey integerValue];
         NSInteger nextTile = [[[_board board] objectAtIndex:intKey] status];
         
@@ -403,6 +406,7 @@
     _littleJohn.x = _board.startPos.x;
     _littleJohn.y = _board.startPos.y;
     _currentUnit = _littleJohn;
+    _nextUnit = _bigL;
     CGPoint p = CGPointMake(_littleJohn.x, _littleJohn.y);
     [_scene setupUnits:p];
 }
