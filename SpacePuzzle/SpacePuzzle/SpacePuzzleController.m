@@ -11,6 +11,7 @@
 #import "StarButton.h"
 #import "BridgeButton.h"
 #import "PlatformLever.h"
+#import "Bridge.h"
 
 @implementation SpacePuzzleController
 @synthesize board = _board;
@@ -163,25 +164,16 @@
     Element *obj;
     while((obj = [enumerator nextObject])) {
         CGPoint p = CGPointMake([obj x], [obj y]);
-        NSString *str = NSStringFromClass([obj class]);
-        
-        if(![str isEqualToString:@"StarButton"] && ![str isEqualToString:@"BridgeButton"]) {
-            [_scene setupElement:p Name:str Hidden:[obj hidden]];
+        if([obj isKindOfClass:[Bridge class]]) {
+            [_scene setupElement:p Name:@"BridgeOFF.png" Hidden:[obj hidden]];
+        } else if( ![obj isKindOfClass:[StarButton class]] && ![obj isKindOfClass:[BridgeButton class]] ) {
+            [_scene setupElement:p Name:NSStringFromClass([obj class]) Hidden:[obj hidden]];
         } else {
             [_scene setupElement:p Name:@"ButtonOFF" Hidden:[obj hidden]];
         }
     }
-    // TEMP TEST CODE FOR STAR BUTTON
-    NSNumber *nr = [NSNumber numberWithInteger:2*BOARD_SIZE_X];
-    obj = [[_board elementDictionary] objectForKey:nr];
-    Star *s = (Star*)obj;
-    s.hidden = YES;
-    [_scene setElementAtPosition:s.key IsHidden:YES];
-    StarButton *st = [[StarButton alloc] initWithStar:s X:0 Y:0];
-    nr = [NSNumber numberWithInteger:0];
-    [[_board elementDictionary] setObject:st forKey:nr];
+
     CGPoint p = CGPointMake(0, 0);
-    [_scene setupElement:p Name:@"ButtonOFF" Hidden:NO];
     
     // TEMP TEST CODE FOR PLATFORM LEVER
     MovingPlatform *mp = [[MovingPlatform alloc] initWithX:2 Y:0 Hidden:NO];
@@ -214,7 +206,8 @@
     NSInteger unitY = _currentUnit.y;
     NSNumber *unitKey = [NSNumber numberWithInt:unitY*BOARD_SIZE_X + unitX];
     NSInteger unitIntKey = [unitKey integerValue];
-    
+    NSNumber *nextPos = [NSNumber numberWithInt:y*BOARD_SIZE_X + x];
+    Element *e = [[_board elementDictionary] objectForKey:nextPos];
     // First check if the movement was inside the board and if the tile isn't |void| (which units cannot
     // move to).
     if(x >= 0 && x < BOARD_SIZE_X && y >= 0 && y < BOARD_SIZE_Y
@@ -236,9 +229,7 @@
             NSInteger dir = [Converter convertCoordsTo:actionPoint Direction:unitPoint];
             
             // Updates the position of curKey to the one that the unit is moving towards.
-            NSNumber *nextPos = [NSNumber numberWithInt:y*BOARD_SIZE_X + x];
             // Check elements on the board.
-            Element *e = [[_board elementDictionary] objectForKey:nextPos];
             
             // If the element isn't blocking, move unit.
             if(![e blocking]) {
@@ -380,10 +371,9 @@
     [bb doAction];
     
     // Updates the button on the scene.
-    [_scene refreshElementAtPosition:bb.key OfClass:@"Button" WithStatus:bb.state];
+    [_scene refreshElementAtPosition:bb.bridge.key OfClass:CLASS_BRIDGE WithStatus:!bb.blocking];
     // Updates the bridge connected to the button on the scene, i.e. showing it.
     [_scene setElementAtPosition:bb.bridge.key IsHidden:NO];
-    [_scene refreshElementAtPosition:bb.bridge.key OfClass:@"Bridge" WithStatus:bb.bridge.blocking];
 }
 
 -(void)doActionOnPlatformLever:(Element *)lever {

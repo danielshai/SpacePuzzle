@@ -19,6 +19,8 @@
 @class Element;
 @class Star;
 @class Player;
+@class BridgeButton;
+@class Bridge;
 
 @interface SpacePuzzleController : UIViewController
 @property (nonatomic, retain) Board *board;
