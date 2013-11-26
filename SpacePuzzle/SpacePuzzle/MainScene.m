@@ -282,11 +282,8 @@
             pic = [SKTexture textureWithImageNamed:@"SwitchOFF.png"];
         }
     } else if ([name isEqualToString:@"MovingPlatform"]) {
-        if (state) {
-            pic = [SKTexture textureWithImageNamed:@"MovingPlatform.png"];
-        } else {
-            pic = [SKTexture textureWithImageNamed:@"voidtile.png"];
-        }
+        // Might add the rainbow colours after the platform.
+        pic = [SKTexture textureWithImageNamed:@"MovingPlatform.png"];
     } else if ([name isEqualToString:@"Star"]) {
         // Might add when a star is disabled.
         pic = [SKTexture textureWithImageNamed:@"Star.png"];
