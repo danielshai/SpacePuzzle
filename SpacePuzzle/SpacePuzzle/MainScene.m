@@ -6,6 +6,7 @@
 #import "Macros.h"
 #import "Converter.h"
 #import "astroWalk.h"
+#import "LittleJohnWalk.h"
 
 @implementation MainScene
 @synthesize solidTile = _solidTile;
@@ -92,19 +93,31 @@
             walkAnim = [SKAction sequence:@[walk, walk, walk, walk]];
             move = [SKAction moveToX:pos.x duration:walkAnim.duration];
         }
-        SKAction *action = [SKAction group:@[walkAnim, move]];
-        [_currentUnit runAction:action];
     } else {
         if(direction == UP) {
             _currentUnit.texture = [SKTexture textureWithImageNamed:@"AlienUp.png"];
+            walk = [SKAction animateWithTextures:LITTLEJOHNWALK_ANIM_BUP timePerFrame:0.1];
+            walkAnim = [SKAction sequence:@[walk, walk, walk, walk]];
+            move = [SKAction moveToY:pos.y duration:walkAnim.duration];
         } else if(direction == DOWN) {
             _currentUnit.texture = [SKTexture textureWithImageNamed:@"AlienDown.png"];
+            walk = [SKAction animateWithTextures:LITTLEJOHNWALK_ANIM_BDOWN timePerFrame:0.1];
+            walkAnim = [SKAction sequence:@[walk, walk, walk, walk]];
+            move = [SKAction moveToY:pos.y duration:walkAnim.duration];
         } else if(direction == RIGHT) {
             _currentUnit.texture = [SKTexture textureWithImageNamed:@"AlienRight.png"];
+            walk = [SKAction animateWithTextures:LITTLEJOHNWALK_ANIM_BRIGHT timePerFrame:0.1];
+            walkAnim = [SKAction sequence:@[walk, walk, walk, walk]];
+            move = [SKAction moveToX:pos.x duration:walkAnim.duration];
         } else {
             _currentUnit.texture = [SKTexture textureWithImageNamed:@"AlienLeft.png"];
+            walk = [SKAction animateWithTextures:LITTLEJOHNWALK_ANIM_BLEFT timePerFrame:0.1];
+            walkAnim = [SKAction sequence:@[walk, walk, walk, walk]];
+            move = [SKAction moveToX:pos.x duration:walkAnim.duration];
         }
     }
+    SKAction *action = [SKAction group:@[walkAnim, move]];
+    [_currentUnit runAction:action];
     //_currentUnit.position = pos;
 }
 

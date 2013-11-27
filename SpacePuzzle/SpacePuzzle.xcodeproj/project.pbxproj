@@ -41,6 +41,7 @@
 		77D60730184374030079A182 /* AstroUp.png in Resources */ = {isa = PBXBuildFile; fileRef = 77D6072E184374030079A182 /* AstroUp.png */; };
 		77F0A81C1845FF28002FA17A /* AnimationFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F0A81B1845FF28002FA17A /* AnimationFactory.m */; };
 		77F0A8201846005F002FA17A /* animations.atlasc in Resources */ = {isa = PBXBuildFile; fileRef = 77F0A81E1846005F002FA17A /* animations.atlasc */; };
+		77F0A82318464495002FA17A /* LittleJohnWalk.atlasc in Resources */ = {isa = PBXBuildFile; fileRef = 77F0A82118464495002FA17A /* LittleJohnWalk.atlasc */; };
 		E6057677183619120033AE88 /* Box.m in Sources */ = {isa = PBXBuildFile; fileRef = E6057676183619120033AE88 /* Box.m */; };
 		E60C6A01183B94F000D6FA14 /* Star.m in Sources */ = {isa = PBXBuildFile; fileRef = E60C6A00183B94F000D6FA14 /* Star.m */; };
 		E60C6A0A183BB19F00D6FA14 /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = E60C6A09183BB19F00D6FA14 /* Player.m */; };
@@ -125,6 +126,8 @@
 		77F0A81B1845FF28002FA17A /* AnimationFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimationFactory.m; sourceTree = "<group>"; };
 		77F0A81E1846005F002FA17A /* animations.atlasc */ = {isa = PBXFileReference; lastKnownFileType = folder; path = animations.atlasc; sourceTree = "<group>"; };
 		77F0A81F1846005F002FA17A /* astroWalk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = astroWalk.h; sourceTree = "<group>"; };
+		77F0A82118464495002FA17A /* LittleJohnWalk.atlasc */ = {isa = PBXFileReference; lastKnownFileType = folder; path = LittleJohnWalk.atlasc; sourceTree = "<group>"; };
+		77F0A82218464495002FA17A /* LittleJohnWalk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LittleJohnWalk.h; sourceTree = "<group>"; };
 		E6057675183619120033AE88 /* Box.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Box.h; sourceTree = "<group>"; };
 		E6057676183619120033AE88 /* Box.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Box.m; sourceTree = "<group>"; };
 		E60C69FF183B94F000D6FA14 /* Star.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Star.h; sourceTree = "<group>"; };
@@ -265,6 +268,8 @@
 			isa = PBXGroup;
 			children = (
 				77F0A81E1846005F002FA17A /* animations.atlasc */,
+				77F0A82118464495002FA17A /* LittleJohnWalk.atlasc */,
+				77F0A82218464495002FA17A /* LittleJohnWalk.h */,
 				77F0A81F1846005F002FA17A /* astroWalk.h */,
 				77F0A81A1845FF28002FA17A /* AnimationFactory.h */,
 				77F0A81B1845FF28002FA17A /* AnimationFactory.m */,
@@ -542,6 +547,7 @@
 				77D60727184373F40079A182 /* AlienDown.png in Resources */,
 				E687AE4D183A43EB00A5B78C /* mario.splvl in Resources */,
 				7797AC3D183CE9F500E63E95 /* Rock.png in Resources */,
+				77F0A82318464495002FA17A /* LittleJohnWalk.atlasc in Resources */,
 				E6214074182BA53800EC5C21 /* Images.xcassets in Resources */,
 				7797AC42183CE9F500E63E95 /* Background.png in Resources */,
 				7797AC3A183CE9F500E63E95 /* ButtonOFF.png in Resources */,
