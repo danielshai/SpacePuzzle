@@ -10,12 +10,16 @@
     NSInteger statusOfPalette;
     SKTexture *currentTexture;
     BOOL controlClickDrag;
+    BOOL pathDrag;
     CGPoint startControlDrag;
     CGPoint endControlDrag;
+    CGPoint startPathLine;
+    NSMutableArray *pathNodes;
     SKShapeNode *controlDragLine;
     SKShapeNode *controlDragOutline;
     SKShapeNode *circle;
     SKShapeNode *circleOutline;
+    SKSpriteNode *pathHover;
 }
 @property (nonatomic, retain) SKTexture *solid;
 @property (nonatomic, retain) SKTexture *voidTile;
@@ -47,6 +51,8 @@
 -(BOOL)removeAConnectionFrom: (CGPoint)from To: (CGPoint)to;
 -(BOOL)isPointAConnectionEndPoint: (CGPoint) loc;
 -(BOOL)removeAConnectionBasedOnEndPoint: (CGPoint) loc;
+-(void)removeAllPaths;
+-(void)addAPath:(NSMutableArray*) path;
 -(void)cleanElements;
 -(void)cleanView;
 -(void)setTextureOfSprite: (SKSpriteNode*)sprite AccordingToStatus: (NSInteger)status;
@@ -65,6 +71,7 @@
 -(void)platformClick;
 -(void)leverClick;
 -(void)drawControlLine;
+-(void)drawPathLineFrom: (CGPoint)from To: (CGPoint)to InDirection: (NSInteger)dir;
 -(void)highlightElement:(CGPoint) elementIndex;
 -(void)noHighlight;
 -(void)notifyText:(NSString *)text Object: (NSObject*)object Key: (NSString*)key;

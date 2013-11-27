@@ -18,4 +18,5 @@
 @property (nonatomic, retain) MovingPlatform *platform;
 -(CGPoint) nextPoint;
 -(void) addPoint: (CGPoint)p;
+-(CGPoint) getCGPointAtIndex: (NSInteger)i;
 @end

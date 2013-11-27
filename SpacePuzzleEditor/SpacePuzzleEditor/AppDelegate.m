@@ -12,6 +12,7 @@
 #import "Bridge.h"
 #import "BridgeButton.h"
 #import "PlatformLever.h"
+#import "Path.h"
 
 @implementation AppDelegate
 
@@ -45,6 +46,7 @@
     [self observeText:@"BoardEdited" Selector:@selector(boardEdited:)];
     [self observeText:@"ControlDrag" Selector:@selector(controlDragged:)];
     [self observeText:@"ControlDragUp" Selector:@selector(controlDragUp:)];
+    [self observeText:@"PathDrag" Selector:@selector(pathDrag:)];
     [[self window] setTitle:@"Untitled.splvl"];
     [_palette setFloatingPanel:YES];
     //[_palette setWorksWhenModal:YES];
@@ -53,6 +55,56 @@
 
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender {
     return YES;
+}
+
+-(void)pathDrag:(NSNotification *)notification {
+    NSDictionary *userInfo = notification.userInfo;
+    NSSet *objectSent = [userInfo objectForKey:@"PathDrag"];
+    NSArray *data = [objectSent allObjects];
+    NSValue *startPoint = [data objectAtIndex:0];
+    NSValue *endPoint = [data objectAtIndex:1];
+    
+    NSNumber *indexStart = [NSNumber numberWithInteger:startPoint.pointValue.y*BOARD_SIZE_X + startPoint.pointValue.x];
+    
+    Element *eStart = [[_board elementDictionary] objectForKey:indexStart];
+  //  Element *eEnd = [[_board elementDictionary] objectForKey:indexEnd];
+    
+    CGPoint pStart = CGPointMake(startPoint.pointValue.x, startPoint.pointValue.y);
+    CGPoint pEnd = CGPointMake(endPoint.pointValue.x, endPoint.pointValue.y);
+
+    if(eStart && [_board isPointWithinBoard:pStart] && [_board isPointWithinBoard:pEnd]) {
+        if([eStart isKindOfClass:[MovingPlatform class]]) {
+            MovingPlatform *mp = (MovingPlatform*)eStart;
+            NSMutableArray *points = [[mp path] points];
+            Position *p = [points objectAtIndex:[points count]-1];
+            CGPoint pp = CGPointMake(p.x, p.y);
+            if((p.x != pEnd.x || p.y != pEnd.y) && ![Converter isPoint:pp DiagonallyAdjacentWithPoint:pEnd]) {
+                [[mp path] addPoint:pEnd];
+                [self refreshPathView];
+            }
+        }
+    }
+}
+
+-(void)refreshPathView {
+    [_scene removeAllPaths];
+    for(id key in [_board elementDictionary]) {
+        Element *e = [[_board elementDictionary] objectForKey:key];
+        if([e isKindOfClass:[MovingPlatform class]]) {
+            MovingPlatform *mp = (MovingPlatform*)e;
+            NSMutableArray *vals = [[NSMutableArray alloc] init];
+            for(int j = 0; j < mp.path.points.count; j++ ) {
+                Position *p = [mp.path.points objectAtIndex:j];
+                NSPoint pp;
+                pp.x = p.x;
+                pp.y = p.y;
+                
+                NSValue *v = [NSValue valueWithPoint:pp];
+                [vals insertObject:v atIndex:j];
+            }
+            [_scene addAPath:vals];
+        }
+    }
 }
 
 -(void)controlDragged:(NSNotification*) notification {

@@ -7,6 +7,7 @@
 //
 
 #import "MovingPlatform.h"
+#import "Path.h"
 
 @implementation MovingPlatform
 @synthesize blocking = _blocking;
@@ -15,6 +16,7 @@
 -(id)init {
     if(self = [super init]){
         _blocking = NO;
+        _path = [[Path alloc] init];
     }
     return self;
 }
@@ -22,6 +24,7 @@
 -(id)initWithX:(NSInteger)x Y:(NSInteger)y {
     if(self = [super initWithX:x Y:y]) {
         _blocking = NO;
+        _path = [[Path alloc] init];
     }
     return self;
 }
