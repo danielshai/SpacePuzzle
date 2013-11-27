@@ -27,6 +27,9 @@
     BOOL bridgeElement;
     BOOL bridgeButtonElement;
     BOOL bridgeButtonBridge;
+    BOOL platformElement;
+    BOOL leverElement;
+    BOOL leverPlatform;
     NSInteger tempXElement;
     NSInteger tempYElement;
     NSInteger tempXRef;

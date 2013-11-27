@@ -633,13 +633,11 @@
     
     CGPoint pxl = [Converter convertCoordToPixel:pos];
     pxl.x += TILESIZE/2;
-    pxl.y -= 10;
     lever.position = pxl;
     lever.size = CGSizeMake(TILESIZE-4, _leverTexture.size.height/2);
     
     [_elementSprites setObject:lever forKey:index];
     [self addChild:lever];
-    
 }
 
 -(void)cleanElements {

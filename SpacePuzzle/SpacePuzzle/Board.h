@@ -16,6 +16,8 @@
 @class Star;
 @class Bridge;
 @class BridgeButton;
+@class MovingPlatform;
+@class PlatformLever;
 
 @interface Board : NSObject
 
@@ -41,6 +43,8 @@
 -(void) starButtonExport: (StarButton*) sb;
 -(void) bridgeExport: (Bridge*) b;
 -(void) bridgeButtonExport: (BridgeButton*) bb;
+-(void) movingPlatformExport: (MovingPlatform*) mp;
+-(void) leverExport: (PlatformLever*) pl;
 -(BOOL) isPointWithinBoard: (CGPoint)p;
 -(BOOL) isPointMovableTo: (CGPoint)p;
 @end

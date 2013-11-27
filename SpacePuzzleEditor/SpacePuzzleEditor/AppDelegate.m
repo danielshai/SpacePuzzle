@@ -11,6 +11,7 @@
 #import "Connections.h"
 #import "Bridge.h"
 #import "BridgeButton.h"
+#import "PlatformLever.h"
 
 @implementation AppDelegate
 
@@ -261,7 +262,7 @@
         }
     }
     
-    // Adds feedback to the user if the board has been edited (adds a * at the end of the file name).
+    // Adds feedback to the user if the board has been edited (adds a "*" at the end of the file name).
     if(edited == NO) {
         edited = YES;
         if([currentFilePath isEqualToString:@""]) {
@@ -285,7 +286,8 @@
 }
 
 /*
- *  Loads connections from the element collection. Typically used when a level is loaded. */
+ *  Loads connections from the element collection (cleaning up before loading). Typically used when 
+ *  a level is loaded. */
 -(void)loadConnections {
     [_connections removeAllConnections];
     for(id key in [_board elementDictionary]) {
@@ -302,6 +304,12 @@
             Element *to = (Element*)bb.bridge;
             if(bb.bridge) {
                 [_connections addConnectionFrom:bb To:to];
+            }
+        } else if([e isKindOfClass:[PlatformLever class]]) {
+            PlatformLever *pl = (PlatformLever*)e;
+            Element *to = (Element*)pl.movingPlatform;
+            if(pl.movingPlatform) {
+                [_connections addConnectionFrom:pl To:to];
             }
         }
     }

@@ -11,6 +11,7 @@
 
 @implementation Path
 @synthesize points = _points;
+@synthesize platform = _platform;
 
 -(id)init {
     if(self = [super init]){

@@ -8,12 +8,14 @@
 
 #import <Foundation/Foundation.h>
 @class Position;
+@class MovingPlatform;
 
 @interface Path : NSObject {
     NSInteger index;
     BOOL countUp;
 }
 @property (nonatomic, retain) NSMutableArray *points;
+@property (nonatomic, retain) MovingPlatform *platform;
 -(CGPoint) nextPoint;
 -(void) addPoint: (CGPoint)p;
 @end

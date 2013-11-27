@@ -8,6 +8,8 @@
 #import "Star.h"
 #import "Bridge.h"
 #import "BridgeButton.h"
+#import "MovingPlatform.h"
+#import "PlatformLever.h"
 
 @implementation Board
 
@@ -198,6 +200,15 @@
             [self bridgeExport:ee];
         }
     }
+    // Moving platform.
+    for(id key in _elementDictionary) {
+        Element *e = [_elementDictionary objectForKey:key];
+        if([e isKindOfClass: [MovingPlatform class]]) {
+            MovingPlatform *ee = (MovingPlatform*)e;
+            [self movingPlatformExport:ee];
+        }
+    }
+    
     // Buttons, and other elements with references to other elements should be last.
     // Star buttons.
     for(id key in _elementDictionary) {
@@ -213,6 +224,14 @@
         if([e isKindOfClass: [BridgeButton class]]) {
             BridgeButton *ee = (BridgeButton*)e;
             [self bridgeButtonExport:ee];
+        }
+    }
+    // Platform lever.
+    for(id key in _elementDictionary) {
+        Element *e = [_elementDictionary objectForKey:key];
+        if([e isKindOfClass: [PlatformLever class]]) {
+            PlatformLever *ee = (PlatformLever*)e;
+            [self leverExport:ee];
         }
     }
     [_parser addOutput:@"</boardelements>"];
@@ -379,6 +398,76 @@
     }
     element = [element stringByAppendingString:@"</"];
     element = [element stringByAppendingString:NSStringFromClass([sb class])];
+    element = [element stringByAppendingString:@">"];
+    [_parser addOutput:element];
+}
+
+-(void)movingPlatformExport:(MovingPlatform *)mp {
+    NSString *element = @"<";
+    
+    element = [element stringByAppendingString:NSStringFromClass([mp class])];
+    element = [element stringByAppendingString:@">"];
+    
+    // Output actual data about the element.
+    element = [element stringByAppendingString:@"<x>"];
+    element = [element stringByAppendingString:[@(mp.x) stringValue]];
+    element = [element stringByAppendingString:@"</x>"];
+    
+    element = [element stringByAppendingString:@"<y>"];
+    element = [element stringByAppendingString:[@(mp.y) stringValue]];
+    element = [element stringByAppendingString:@"</y>"];
+    
+    element = [element stringByAppendingString:@"<blocking>"];
+    element = [element stringByAppendingString:[@(mp.blocking) stringValue]];
+    element = [element stringByAppendingString:@"</blocking>"];
+    
+    // End of this element.
+    element = [element stringByAppendingString:@"</"];
+    element = [element stringByAppendingString:NSStringFromClass([mp class])];
+    element = [element stringByAppendingString:@">"];
+    
+    [_parser addOutput:element];
+
+}
+
+-(void)leverExport:(PlatformLever *)pl {
+    NSString *element = @"<";
+    
+    element = [element stringByAppendingString:NSStringFromClass([pl class])];
+    element = [element stringByAppendingString:@">"];
+    
+    // Output actual data about the element.
+    element = [element stringByAppendingString:@"<x>"];
+    element = [element stringByAppendingString:[@(pl.x) stringValue]];
+    element = [element stringByAppendingString:@"</x>"];
+    element = [element stringByAppendingString:@"<y>"];
+    element = [element stringByAppendingString:[@(pl.y) stringValue]];
+    element = [element stringByAppendingString:@"</y>"];
+    element = [element stringByAppendingString:@"<blocking>"];
+    element = [element stringByAppendingString:[@(pl.blocking) stringValue]];
+    element = [element stringByAppendingString:@"</blocking>"];
+    element = [element stringByAppendingString:@"<state>"];
+    element = [element stringByAppendingString:[@(pl.state) stringValue]];
+    element = [element stringByAppendingString:@"</state>"];
+    // End of this element.
+    
+    // The referenced star's coordinates.
+    if(pl.movingPlatform) {
+        element = [element stringByAppendingString:@"<"];
+        element = [element stringByAppendingString:LEVER_REF];
+        element = [element stringByAppendingString:@">"];
+        element = [element stringByAppendingString:@"<x>"];
+        element = [element stringByAppendingString:[@(pl.movingPlatform.x) stringValue]];
+        element = [element stringByAppendingString:@"</x>"];
+        element = [element stringByAppendingString:@"<y>"];
+        element = [element stringByAppendingString:[@(pl.movingPlatform.y) stringValue]];
+        element = [element stringByAppendingString:@"</y>"];
+        element = [element stringByAppendingString:@"</"];
+        element = [element stringByAppendingString:LEVER_REF];
+        element = [element stringByAppendingString:@">"];
+    }
+    element = [element stringByAppendingString:@"</"];
+    element = [element stringByAppendingString:NSStringFromClass([pl class])];
     element = [element stringByAppendingString:@">"];
     [_parser addOutput:element];
 }

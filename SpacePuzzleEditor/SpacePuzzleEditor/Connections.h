@@ -12,6 +12,8 @@
 @class StarButton;
 @class Bridge;
 @class BridgeButton;
+@class PlatformLever;
+@class MovingPlatform;
 
 @interface Connections : NSObject
 @property (nonatomic, retain) NSMutableArray *connections;
@@ -20,5 +22,9 @@
 -(void)removeAllConnections;
 -(void)createStarConnection: (Element*) from To: (Element*)to;
 -(void)createBridgeConnection: (Element*) from To: (Element*)to;
+-(void)createMovingPlatformConnection: (Element*) from To: (Element*)to;
 +(BOOL)isValidConnection: (Element*) from To: (Element*)to;
++(BOOL)isAStarConnection: (Element*)from To: (Element*)to;
++(BOOL)isABridgeConnection: (Element*)from To: (Element*)to;
++(BOOL)isAMovingPlatformConnection: (Element*)from To: (Element*)to;
 @end
