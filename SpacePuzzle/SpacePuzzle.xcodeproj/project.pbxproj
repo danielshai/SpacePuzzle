@@ -39,6 +39,8 @@
 		77D6072C184373F40079A182 /* AstroLeft.png in Resources */ = {isa = PBXBuildFile; fileRef = 77D60726184373F40079A182 /* AstroLeft.png */; };
 		77D6072F184374030079A182 /* AstroRight.png in Resources */ = {isa = PBXBuildFile; fileRef = 77D6072D184374030079A182 /* AstroRight.png */; };
 		77D60730184374030079A182 /* AstroUp.png in Resources */ = {isa = PBXBuildFile; fileRef = 77D6072E184374030079A182 /* AstroUp.png */; };
+		77F0A81C1845FF28002FA17A /* AnimationFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F0A81B1845FF28002FA17A /* AnimationFactory.m */; };
+		77F0A8201846005F002FA17A /* animations.atlasc in Resources */ = {isa = PBXBuildFile; fileRef = 77F0A81E1846005F002FA17A /* animations.atlasc */; };
 		E6057677183619120033AE88 /* Box.m in Sources */ = {isa = PBXBuildFile; fileRef = E6057676183619120033AE88 /* Box.m */; };
 		E60C6A01183B94F000D6FA14 /* Star.m in Sources */ = {isa = PBXBuildFile; fileRef = E60C6A00183B94F000D6FA14 /* Star.m */; };
 		E60C6A0A183BB19F00D6FA14 /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = E60C6A09183BB19F00D6FA14 /* Player.m */; };
@@ -119,6 +121,10 @@
 		77D60726184373F40079A182 /* AstroLeft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AstroLeft.png; path = ../Units/AstroLeft.png; sourceTree = "<group>"; };
 		77D6072D184374030079A182 /* AstroRight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AstroRight.png; path = ../Units/AstroRight.png; sourceTree = "<group>"; };
 		77D6072E184374030079A182 /* AstroUp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AstroUp.png; path = ../Units/AstroUp.png; sourceTree = "<group>"; };
+		77F0A81A1845FF28002FA17A /* AnimationFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimationFactory.h; sourceTree = "<group>"; };
+		77F0A81B1845FF28002FA17A /* AnimationFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimationFactory.m; sourceTree = "<group>"; };
+		77F0A81E1846005F002FA17A /* animations.atlasc */ = {isa = PBXFileReference; lastKnownFileType = folder; path = animations.atlasc; sourceTree = "<group>"; };
+		77F0A81F1846005F002FA17A /* astroWalk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = astroWalk.h; sourceTree = "<group>"; };
 		E6057675183619120033AE88 /* Box.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Box.h; sourceTree = "<group>"; };
 		E6057676183619120033AE88 /* Box.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Box.m; sourceTree = "<group>"; };
 		E60C69FF183B94F000D6FA14 /* Star.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Star.h; sourceTree = "<group>"; };
@@ -255,6 +261,17 @@
 			path = ../../Resources/Units;
 			sourceTree = "<group>";
 		};
+		77F0A81D1845FF53002FA17A /* Animations */ = {
+			isa = PBXGroup;
+			children = (
+				77F0A81E1846005F002FA17A /* animations.atlasc */,
+				77F0A81F1846005F002FA17A /* astroWalk.h */,
+				77F0A81A1845FF28002FA17A /* AnimationFactory.h */,
+				77F0A81B1845FF28002FA17A /* AnimationFactory.m */,
+			);
+			name = Animations;
+			sourceTree = "<group>";
+		};
 		E6057678183619520033AE88 /* Elements */ = {
 			isa = PBXGroup;
 			children = (
@@ -338,6 +355,7 @@
 				E687AE4E183A440F00A5B78C /* Levels */,
 				E605768118362BC70033AE88 /* Resources */,
 				E621405D182BA53800EC5C21 /* Supporting Files */,
+				77F0A81D1845FF53002FA17A /* Animations */,
 			);
 			path = SpacePuzzle;
 			sourceTree = "<group>";
@@ -516,6 +534,7 @@
 				7797AC3E183CE9F500E63E95 /* Star.png in Resources */,
 				77D6072F184374030079A182 /* AstroRight.png in Resources */,
 				7797AC37183CE9F500E63E95 /* BridgeOFF.png in Resources */,
+				77F0A8201846005F002FA17A /* animations.atlasc in Resources */,
 				77D6072A184373F40079A182 /* AlienUp.png in Resources */,
 				77D60728184373F40079A182 /* AlienLeft.png in Resources */,
 				7797AC46183CE9F500E63E95 /* voidtile.png in Resources */,
@@ -562,6 +581,7 @@
 				779DB368183E32560059A084 /* MovingPlatform.m in Sources */,
 				E6E65815182BC82E0022BF5F /* LittleJohn.m in Sources */,
 				E6E65801182BB9020022BF5F /* Position.m in Sources */,
+				77F0A81C1845FF28002FA17A /* AnimationFactory.m in Sources */,
 				779DB365183E32030059A084 /* PlatformLever.m in Sources */,
 				E6E6581C182BCD660022BF5F /* Converter.m in Sources */,
 				77010766183E010D00AAF564 /* StarButton.m in Sources */,

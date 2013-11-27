@@ -33,6 +33,7 @@
 @property (nonatomic, retain) SKTexture *littleJohnDown;
 @property (nonatomic, retain) SKTexture *littleJohnRight;
 @property (nonatomic, retain) SKTexture *littleJohnLeft;
+@property (strong) SKAction *sequence;
 
 -(void)updateUnit:(CGPoint) coord inDirection:(NSInteger) direction;
 -(void)refreshTileAtPosition: (CGPoint)pos WithStatus: (NSInteger)status;

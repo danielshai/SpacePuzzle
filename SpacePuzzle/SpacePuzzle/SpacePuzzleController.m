@@ -210,7 +210,7 @@
     NSInteger x  = loc.x;
     NSInteger y = loc.y;
     NSNumber *nextPosKey = [NSNumber numberWithInt:y*BOARD_SIZE_X + x];
-    NSInteger nextPosIntKey = [nextPosKey integerValue];
+    // NSInteger nextPosIntKey = [nextPosKey integerValue];
     // The unit who wants to move's position.
     NSInteger unitX = _currentUnit.x;
     NSInteger unitY = _currentUnit.y;
@@ -239,12 +239,14 @@
             
             // Updates the position of curKey to the one that the unit is moving towards.
             // Check elements on the board.
-            
+
             // If the element isn't blocking, move unit.
             if(![e blocking]) {
                 _currentUnit.x = x;
                 _currentUnit.y = y;
-                [_scene updateUnit:CGPointMake(x, y) inDirection:dir];
+                NSLog(@"%d %d", x, y);
+                
+                [_scene updateUnit:actionPoint inDirection:dir];
                 [self isUnitOnGoal];
                 [self unitWantsToDoActionAt:CGPointMake(x, y)];
                 // If the element is a star.
@@ -412,6 +414,8 @@
  *  Creates the units. */
 -(void)setupUnits {
     _bigL = [[BigL alloc] init];
+    _bigL.x = _board.startPos.x;
+    _bigL.y = _board.startPos.y;
     _littleJohn = [[LittleJohn alloc] init];
     _littleJohn.x = _board.startPos.x;
     _littleJohn.y = _board.startPos.y;

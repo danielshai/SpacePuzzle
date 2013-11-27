@@ -4,6 +4,8 @@
 
 #import "MainScene.h"
 #import "Macros.h"
+#import "Converter.h"
+#import "astroWalk.h"
 
 @implementation MainScene
 @synthesize solidTile = _solidTile;
@@ -29,6 +31,7 @@
 @synthesize littleJohnDown = _littleJohnDown;
 @synthesize littleJohnRight = _littleJohnRight;
 @synthesize littleJohnLeft = _littleJohnLeft;
+@synthesize sequence = _sequence;
 
 -(id)initWithSize:(CGSize)size {    
     if (self = [super initWithSize:size]) {
@@ -62,19 +65,35 @@
     CGPoint pos = [Converter convertCoordToPixel:coord];
     pos.x += 20;
     pos.y -= 5;
-    _currentUnit.position = pos;
+    SKAction *walk;
+    SKAction *walkAnim;
+    SKAction *move;
     // Depending on the direction the unit is making, update to the correct picture.
     // Should use [path stringByAppendingString:@".png"] instead due to the numerous numbers of if-statments;
     if (_currentUnit == _bigL) {
         if(direction == UP) {
             _currentUnit.texture = [SKTexture textureWithImageNamed:@"AstroUp.png"];
+            walk = [SKAction animateWithTextures:ANIMATIONS_ANIM_AUP timePerFrame:0.1];
+            walkAnim = [SKAction sequence:@[walk, walk, walk, walk]];
+            move = [SKAction moveToY:pos.y duration:walkAnim.duration];
         } else if(direction == DOWN) {
             _currentUnit.texture = [SKTexture textureWithImageNamed:@"AstroDown.png"];
+            walk = [SKAction animateWithTextures:ANIMATIONS_ANIM_ADOWN timePerFrame:0.1];
+            walkAnim = [SKAction sequence:@[walk, walk, walk, walk]];
+            move = [SKAction moveToY:pos.y duration:walkAnim.duration];
         } else if(direction == RIGHT) {
             _currentUnit.texture = [SKTexture textureWithImageNamed:@"AstroRight.png"];
+            walk = [SKAction animateWithTextures:ANIMATIONS_ANIM_ARIGHT timePerFrame:0.1];
+            walkAnim = [SKAction sequence:@[walk, walk, walk, walk]];
+            move = [SKAction moveToX:pos.x duration:walkAnim.duration];
         } else {
             _currentUnit.texture = [SKTexture textureWithImageNamed:@"AstroLeft.png"];
+            walk = [SKAction animateWithTextures:ANIMATIONS_ANIM_ALEFT timePerFrame:0.1];
+            walkAnim = [SKAction sequence:@[walk, walk, walk, walk]];
+            move = [SKAction moveToX:pos.x duration:walkAnim.duration];
         }
+        SKAction *action = [SKAction group:@[walkAnim, move]];
+        [_currentUnit runAction:action];
     } else {
         if(direction == UP) {
             _currentUnit.texture = [SKTexture textureWithImageNamed:@"AlienUp.png"];
@@ -86,6 +105,7 @@
             _currentUnit.texture = [SKTexture textureWithImageNamed:@"AlienLeft.png"];
         }
     }
+    //_currentUnit.position = pos;
 }
 
 -(void)moveElement:(CGPoint)oldCoord NewCoord:(CGPoint)newCoord {
