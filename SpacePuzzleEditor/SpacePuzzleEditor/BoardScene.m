@@ -212,6 +212,7 @@
         [self noHighlight];
     } else if(pathDrag) {
         pathDrag = NO;
+        pathHover.hidden = YES;
     }
 }
 
@@ -227,7 +228,7 @@
     from.x += TILESIZE/2;
     to.x += TILESIZE/2;
     
-    // DEPENDING ON DIRECTION to.x+1 or to.x. Same for y!
+    // Removes overlapping lines in different directions.
     if(dir == RIGHT) {
         CGPathMoveToPoint(pathToDraw, NULL, from.x, from.y);
         CGPathAddLineToPoint(pathToDraw, NULL, to.x-1, to.y);
