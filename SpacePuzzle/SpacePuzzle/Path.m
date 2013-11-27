@@ -49,4 +49,9 @@
     [_points insertObject:pos atIndex:_points.count];
 }
 
+-(CGPoint) getCGPointAtIndex:(NSInteger)i {
+    Position *p = [_points objectAtIndex:i];
+    return CGPointMake(p.x, p.y);
+}
+
 @end

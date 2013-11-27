@@ -18,6 +18,7 @@
 @class BridgeButton;
 @class MovingPlatform;
 @class PlatformLever;
+@class Path;
 
 @interface Board : NSObject
 

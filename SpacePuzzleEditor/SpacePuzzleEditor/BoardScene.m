@@ -31,6 +31,9 @@
         _elementSprites = [[NSMutableDictionary alloc] init];
         _connectionNodes = [[NSMutableDictionary alloc] init];
         
+        pathNodes = [[NSMutableArray alloc] init];
+        pathDrag = NO;
+        
         controlClickDrag = NO;
         controlDragLine = [SKShapeNode node];
         //controlDragLine.glowWidth = 1;
@@ -39,6 +42,13 @@
         //[controlDragLine setStrokeColor:[SKColor colorWithRed:244.0/255.0 green:185.0/255.0 blue:43.0/255.0 alpha:1]]; // Orange colour.
         controlDragOutline = [SKShapeNode node];
         controlDragOutline.lineWidth = 2;
+        
+        pathHover = [SKSpriteNode spriteNodeWithImageNamed:@"OrangeTile.png"];
+        pathHover.size = CGSizeMake(42,42);
+        pathHover.hidden = YES;
+        pathHover.zPosition = 999996;
+        pathHover.color = [SKColor colorWithRed:100.0/255.0 green:190.0/255.0 blue:100.0/255.0 alpha:1];
+        pathHover.colorBlendFactor = 1;
         
         _controlHover = [SKSpriteNode spriteNodeWithImageNamed:@"OrangeTile.png"];
         _controlHover.size = CGSizeMake(42, 42);
@@ -109,6 +119,7 @@
         [self addChild:circle];
         [self addChild:circleOutline];
         [self addChild:_controlHover];
+        [self addChild:pathHover];
         //  [self addChild:controlDragOutline];
     }
     return self;
@@ -118,7 +129,6 @@
  *  Highlights an element. Used when control dragging to show if a connection can be made. */
 -(void)highlightElement:(CGPoint) elementIndex {
     _controlHover.hidden = NO;
-    //CGPoint p = CGPointMake(elementIndex.pointValue.x, elementIndex.pointValue.y);
    
     elementIndex = [Converter convertCoordToPixel:elementIndex];
     elementIndex.x += 22;
@@ -130,17 +140,21 @@
 }
 
 -(void)mouseDown:(NSEvent *)theEvent {
-    if (theEvent.modifierFlags & NSControlKeyMask) {
+    if((theEvent.modifierFlags & NSAlternateKeyMask) && (theEvent.modifierFlags & NSControlKeyMask)) {
+        pathDrag = YES;
+        SKView *sk = self.view;
+        NSPoint loc = [sk convertPoint:[theEvent locationInWindow] fromView:nil];
+        startPathLine = CGPointMake(loc.x, loc.y);
+        loc = [Converter convertMousePosToCoord:loc];
+        // INTE GÖRA DETTA I SCENE!?
+    } else if (theEvent.modifierFlags & NSControlKeyMask) {
         controlClickDrag = YES;
         
         SKView *sk = self.view;
         NSPoint loc = [sk convertPoint:[theEvent locationInWindow] fromView:nil];
         startControlDrag = CGPointMake(loc.x, loc.y);
         loc = [Converter convertMousePosToCoord:loc];
-        
-        // NSArray *arr = [NSArray arrayWithObjects:[NSValue valueWithPoint:loc],nil];
-        // [self notifyText:@"ControlPanel" Object:arr Key:@"ControlPanel"];
-    } else if (!controlClickDrag) {
+    } else if (!controlClickDrag || !pathDrag) {
         [self editABoardItem:theEvent];
     }
 }
@@ -160,6 +174,16 @@
         NSArray *arr = [NSArray arrayWithObjects:[NSValue valueWithPoint:start],
                         [NSNumber valueWithPoint:end], nil];
         [self notifyText:@"ControlDrag" Object:arr Key:@"ControlDrag"];
+    } else if(pathDrag) {
+        CGPoint end = CGPointMake(loc.x, loc.y);
+        end = [Converter convertMousePosToCoord:end];
+
+        CGPoint start = [Converter convertMousePosToCoord:startPathLine];
+        NSArray *arr = [NSArray arrayWithObjects:[NSValue valueWithPoint:start],
+                        [NSNumber valueWithPoint:end], nil];
+        [self notifyText:@"PathDrag" Object:arr Key:@"PathDrag"];
+  //      [self drawPathLine];
+        
     } else {
         circle.hidden = YES;
         circleOutline.hidden = YES;
@@ -186,7 +210,43 @@
                         [NSNumber valueWithPoint:endControlDrag], nil];
         [self notifyText:@"ControlDragUp" Object:arr Key:@"ControlDragUp"];
         [self noHighlight];
+    } else if(pathDrag) {
+        pathDrag = NO;
     }
+}
+
+-(void)drawPathLineFrom:(CGPoint)from To:(CGPoint)to InDirection:(NSInteger)dir{
+    SKShapeNode *pathLine = [SKShapeNode node];
+    pathLine.lineWidth = 1;
+    [pathLine setStrokeColor:[SKColor colorWithRed:100.0/255.0 green:185.0/255.0 blue:100.0/255.0 alpha:0.6]];
+    pathLine.hidden = NO;
+    
+    CGMutablePathRef pathToDraw = CGPathCreateMutable();
+    from = [Converter convertCoordToPixel:from];
+    to = [Converter convertCoordToPixel:to];
+    from.x += TILESIZE/2;
+    to.x += TILESIZE/2;
+    
+    // DEPENDING ON DIRECTION to.x+1 or to.x. Same for y!
+    if(dir == RIGHT) {
+        CGPathMoveToPoint(pathToDraw, NULL, from.x, from.y);
+        CGPathAddLineToPoint(pathToDraw, NULL, to.x-1, to.y);
+    } else if (dir == LEFT) {
+        CGPathMoveToPoint(pathToDraw, NULL, from.x, from.y);
+        CGPathAddLineToPoint(pathToDraw, NULL, to.x+1, to.y);
+    } else if (dir == DOWN) {
+        CGPathMoveToPoint(pathToDraw, NULL, from.x, from.y);
+        CGPathAddLineToPoint(pathToDraw, NULL, to.x, to.y+1);
+    } else if (dir == UP) {
+        CGPathMoveToPoint(pathToDraw, NULL, from.x, from.y);
+        CGPathAddLineToPoint(pathToDraw, NULL, to.x, to.y-1);
+    }
+    pathLine.path = pathToDraw;
+    [pathNodes addObject:pathLine];
+    [self addChild:pathLine];
+    
+    pathHover.hidden = NO;
+    pathHover.position = to;
 }
 
 /*
@@ -211,6 +271,24 @@
         [s removeFromParent];
     }
     [_connectionNodes removeAllObjects];
+}
+
+-(void)removeAllPaths {
+    for(int i = 0; i < pathNodes.count; i++) {
+        SKShapeNode* s = [pathNodes objectAtIndex:i];
+        [s removeFromParent];
+    }
+    [pathNodes removeAllObjects];
+}
+
+-(void)addAPath:(NSMutableArray *)path {
+    for(int i = 0; i < path.count-1; i++) {
+        NSValue *from = [path objectAtIndex:i];
+        NSValue *to = [path objectAtIndex:i+1];
+        CGPoint f = CGPointMake(from.pointValue.x, from.pointValue.y);
+        CGPoint t = CGPointMake(to.pointValue.x, to.pointValue.y);
+        [self drawPathLineFrom: f To:t InDirection:[Converter convertCoordsTo:t Direction:f]];
+    }
 }
 
 -(void)drawControlLine {

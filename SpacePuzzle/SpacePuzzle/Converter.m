@@ -98,6 +98,11 @@
     return CGPointMake(x, y);
 }
 
++(BOOL)isPoint: (CGPoint)p1 DiagonallyAdjacentWithPoint: (CGPoint)p2 {
+    return !( ((p1.x - p2.x == 1 || p1.x - p2.x == -1) && p1.y == p2.y) ||
+              ((p1.y - p2.y == 1 || p1.y - p2.y == -1) && p1.x == p2.x) );
+}
+
 +(NSInteger) convertCoordsTo:(CGPoint)object Direction:(CGPoint)unit {
     if (object.y > unit.y) {
         return DOWN;

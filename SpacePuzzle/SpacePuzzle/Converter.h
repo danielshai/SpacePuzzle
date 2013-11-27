@@ -23,5 +23,6 @@
 +(CGPoint) convertMousePosToCoord:(CGPoint)pos;
 +(CGPoint) convertCoordToPixel:(CGPoint)coord;
 +(CGPoint) convertFlatIndexToTwoDimensions:(NSInteger) index;
++(BOOL) isPoint: (CGPoint)p1 DiagonallyAdjacentWithPoint: (CGPoint)p2;
 +(NSInteger) convertCoordsTo:(CGPoint) object Direction: (CGPoint) u;
 @end

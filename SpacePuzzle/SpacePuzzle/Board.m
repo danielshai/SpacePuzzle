@@ -10,6 +10,7 @@
 #import "BridgeButton.h"
 #import "MovingPlatform.h"
 #import "PlatformLever.h"
+#import "Path.h"
 
 @implementation Board
 
@@ -95,6 +96,12 @@
     element.y = pos.y;
     element.blocking = block;
     NSNumber *flatIndex = [NSNumber numberWithInt:pos.y*_boardSizeX + pos.x];
+    
+    if([name isEqualToString:CLASS_MOVING_PLATFORM]) {
+        MovingPlatform *mp = (MovingPlatform*)element;
+        [[mp path] addPoint:pos];
+    }
+    
     [_elementDictionary setObject:element forKey:flatIndex];
 }
 

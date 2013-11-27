@@ -20,6 +20,7 @@
 @class Connections;
 @class Bridge;
 @class BridgeButton;
+@class Path;
 
 @interface AppDelegate : NSObject <NSApplicationDelegate> {
     NSString *currentFilePath;
@@ -40,6 +41,7 @@
 -(IBAction)saveAsLevel:(id)sender;
 -(void)boardEdited:(NSNotification *) notification;
 -(void)showControlPanel:(NSNotification *) notification;
+-(void)pathDrag:(NSNotification*) notification;
 -(void)controlDragged:(NSNotification *) notification;
 -(void)controlDragUp:(NSNotification *) notification;
 -(void)loadConnections;
@@ -49,6 +51,7 @@
 -(void)refreshBoardView;
 -(void)refreshElementView;
 -(void)setupBoard;
+-(void)refreshPathView;
 -(void)observeText:(NSString *)text Selector:(SEL)selector;
 -(void)notifyText:(NSString *)text Object: (NSObject*)object Key: (NSString*)key;
 @end
