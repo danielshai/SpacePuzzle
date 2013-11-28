@@ -9,6 +9,8 @@
 #ifndef Space_Puzzle_Macros_h
 #define Space_Puzzle_Macros_h
 
+#define PI                      3.1415
+
 #define MAPSTATUS_VOID          -1
 #define MAPSTATUS_SOLID         0
 #define MAPSTATUS_CRACKED       1
@@ -56,4 +58,15 @@
 #define LEFT                    2
 #define UP                      3
 #define DOWN                    4
+
+#define RAINBOW_FROM_UP_TO_RIGHT    1001
+#define RAINBOW_FROM_UP_TO_LEFT     1002
+#define RAINBOW_FROM_RIGHT_TO_UP    1003
+#define RAINBOW_FROM_RIGHT_TO_DOWN  1004
+#define RAINBOW_FROM_DOWN_TO_LEFT   1005
+#define RAINBOW_FROM_DOWN_TO_RIGHT  1006
+#define RAINBOW_FROM_LEFT_TO_UP     1007
+#define RAINBOW_FROM_LEFT_TO_DOWN   1008
+
+
 #endif
