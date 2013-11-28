@@ -180,6 +180,8 @@
     [_parser addOutput:@"</finish>"];
 }
 
+/*
+ *  Exporting XML formatted data about elements on the canvas. */
 -(void)elementExport {
     [_parser addOutput:@"<boardelements>"];
    
@@ -244,6 +246,8 @@
     [_parser addOutput:@"</boardelements>"];
 }
 
+/*
+ *  Exporting XML formatted data about |Star|. */
 -(void)starExport:(Star *)star {
     NSString *element = @"<";
     
@@ -271,6 +275,8 @@
     [_parser addOutput:element];
 }
 
+/*
+ *  Exporting XML formatted data about |Box|. */
 -(void)boxExport:(Box *)box {
     NSString *element = @"<";
     
@@ -298,6 +304,8 @@
     [_parser addOutput:element];
 }
 
+/*
+ *  Exporting XML formatted data about |Bridge|. */
 -(void)bridgeExport:(Bridge *)b {
     NSString *element = @"<";
     
@@ -325,6 +333,8 @@
     [_parser addOutput:element];
 }
 
+/*
+ *  Exporting XML formatted data about |BridgeButton|. */
 -(void)bridgeButtonExport:(BridgeButton *)bb {
     NSString *element = @"<";
     
@@ -367,6 +377,8 @@
     [_parser addOutput:element];
 }
 
+/*
+ *  Exporting XML formatted data about |StarButton|. */
 -(void)starButtonExport:(StarButton *)sb {
     NSString *element = @"<";
     
@@ -409,6 +421,8 @@
     [_parser addOutput:element];
 }
 
+/*
+ *  Exporting XML formatted data about |MovingPlatform|. ADD PATHS!! */
 -(void)movingPlatformExport:(MovingPlatform *)mp {
     NSString *element = @"<";
     
@@ -437,6 +451,8 @@
 
 }
 
+/*
+ *  Exporting XML formatted data about |PlatformLever|. */
 -(void)leverExport:(PlatformLever *)pl {
     NSString *element = @"<";
     
