@@ -10,4 +10,6 @@
 
 @interface Star : Element
 
+@property (nonatomic, assign) BOOL taken;
+
 @end

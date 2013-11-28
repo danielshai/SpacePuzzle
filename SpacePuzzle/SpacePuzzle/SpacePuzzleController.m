@@ -250,9 +250,10 @@
                 [self isUnitOnGoal];
                 [self unitWantsToDoActionAt:CGPointMake(x, y)];
                 // If the element is a star.
-                if([e isKindOfClass:[Star class]] && ![e hidden]) {
+                if([e isKindOfClass:[Star class]] && ![e hidden] && ![e taken]) {
+                    [e movedTo];
                     _player.starsTaken += 1;
-                    [[_board elementDictionary] removeObjectForKey:nextPosKey];
+                    //[[_board elementDictionary] removeObjectForKey:nextPosKey];
                     [_scene removeElementAtPosition:nextPosKey];
                 }
             }
@@ -372,8 +373,9 @@
     // Updates the button on the scene.
     [_scene refreshElementAtPosition:sb.key OfClass:CLASS_STARBUTTON WithStatus:sb.state];
     // Updates the star connected to the button on the scene, i.e. showing it.
-    [_scene setElementAtPosition:sb.star.key IsHidden:sb.star.hidden];
-    
+    if(sb.star.taken == NO) {
+        [_scene setElementAtPosition:sb.star.key IsHidden:sb.star.hidden];
+    }
 }
 
 -(void)doActionOnBridgeButton: (Element*)button {
