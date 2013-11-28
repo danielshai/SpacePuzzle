@@ -219,11 +219,13 @@
     [self refreshBoardView];
     [self refreshElementView];
     [self updateConnectionsView];
+    [self refreshPathView:CGPointMake(-10, -10)];
 }
 
 -(void)cleanView {
     [self refreshBoardView];
     [self refreshElementView];
+    [self refreshPathView:CGPointMake(-10, -10)];
     [_scene cleanView];
 }
 

@@ -16,6 +16,7 @@
 #import "BridgeButton.h"
 #import "PlatformLever.h"
 #import "MovingPlatform.h"
+#import "Path.h"
 
 @implementation XMLParser
 @synthesize parser = _parser;
@@ -143,12 +144,12 @@
         b.hidden = NO;
         BridgeButton *bb = [[BridgeButton alloc] initWithBridge:b X:tempXElement Y:tempYElement];
         [_elements setObject:bb forKey:bb.key];
-       // NSLog(@"From: %ld %ld  To: %ld %ld",(long)bb.x,(long)bb.y,(long)b.x,(long)b.y);
         
     } else if ([elementName isEqualToString:CLASS_MOVING_PLATFORM]) {
         platformElement = NO;
         MovingPlatform *mp = [[MovingPlatform alloc] initWithX:tempXElement Y:tempYElement];
         [_elements setObject:mp forKey:mp.key];
+        [[mp path] addPoint:CGPointMake(tempXElement, tempYElement)];
         
     } else if ([elementName isEqualToString:CLASS_LEVER]) {
         leverElement = NO;

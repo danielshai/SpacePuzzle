@@ -80,6 +80,7 @@
 -(void)platformClick;
 -(void)leverClick;
 -(void)drawControlLine;
+-(void)drawRainbowAtPosition: (CGPoint)p WithDirection: (NSInteger)dir;
 -(void)addRainbowSpriteAtPosition: (CGPoint)p Rotation: (CGFloat)r Texture: (SKTexture*)texture;
 -(void)drawPathLineFrom: (CGPoint)from To: (CGPoint)to InDirection: (NSInteger)dir
       WithLastDirection: (NSInteger)lastDir;
