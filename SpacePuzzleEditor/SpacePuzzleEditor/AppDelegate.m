@@ -80,13 +80,13 @@
             CGPoint pp = CGPointMake(p.x, p.y);
             if((p.x != pEnd.x || p.y != pEnd.y) && ![Converter isPoint:pp DiagonallyAdjacentWithPoint:pEnd]) {
                 [[mp path] addPoint:pEnd];
-                [self refreshPathView];
+                [self refreshPathView:pEnd];
             }
         }
     }
 }
 
--(void)refreshPathView {
+-(void)refreshPathView:(CGPoint)p {
     [_scene removeAllPaths];
     for(id key in [_board elementDictionary]) {
         Element *e = [[_board elementDictionary] objectForKey:key];
@@ -105,6 +105,7 @@
             [_scene addAPath:vals];
         }
     }
+    [_scene pathHighlight:p];
 }
 
 -(void)controlDragged:(NSNotification*) notification {
@@ -191,7 +192,7 @@
     }
 }
 
-- (IBAction)newLevel:(id)sender {
+-(IBAction)newLevel:(id)sender {
     NSAlert *alert = [NSAlert alertWithMessageText:@"Are you sure you want to create a new level?"
                                      defaultButton:@"Yes"
                                    alternateButton:@"No"

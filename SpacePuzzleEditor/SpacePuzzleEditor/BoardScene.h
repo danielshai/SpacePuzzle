@@ -8,6 +8,7 @@
 
 @interface BoardScene : SKScene {
     NSInteger statusOfPalette;
+    NSInteger lastDirChange;
     SKTexture *currentTexture;
     BOOL controlClickDrag;
     BOOL pathDrag;
@@ -15,11 +16,15 @@
     CGPoint endControlDrag;
     CGPoint startPathLine;
     NSMutableArray *pathNodes;
+    NSMutableArray *rainbowSprites;
     SKShapeNode *controlDragLine;
     SKShapeNode *controlDragOutline;
     SKShapeNode *circle;
     SKShapeNode *circleOutline;
     SKSpriteNode *pathHover;
+    SKTexture *rainbowStraight;
+    SKTexture *rainbowLeftTurn;
+    SKTexture *rainbowRightTurn;
 }
 @property (nonatomic, retain) SKTexture *solid;
 @property (nonatomic, retain) SKTexture *voidTile;
@@ -71,8 +76,10 @@
 -(void)platformClick;
 -(void)leverClick;
 -(void)drawControlLine;
--(void)drawPathLineFrom: (CGPoint)from To: (CGPoint)to InDirection: (NSInteger)dir;
--(void)highlightElement:(CGPoint) elementIndex;
+-(void)drawPathLineFrom: (CGPoint)from To: (CGPoint)to InDirection: (NSInteger)dir
+      WithLastDirection: (NSInteger)lastDir;
+-(void)highlightElement: (CGPoint) elementIndex;
+-(void)pathHighlight: (CGPoint)pos;
 -(void)noHighlight;
 -(void)notifyText:(NSString *)text Object: (NSObject*)object Key: (NSString*)key;
 -(void)changeTextureOfBrush:(NSInteger) status;

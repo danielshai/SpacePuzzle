@@ -13,6 +13,9 @@
 		E605769E183651D20033AE88 /* solidtile.png in Resources */ = {isa = PBXBuildFile; fileRef = E605769B183651D20033AE88 /* solidtile.png */; };
 		E605769F183651D20033AE88 /* voidtile.png in Resources */ = {isa = PBXBuildFile; fileRef = E605769C183651D20033AE88 /* voidtile.png */; };
 		E60576AE18365BC40033AE88 /* Start.gif in Resources */ = {isa = PBXBuildFile; fileRef = E60576AD18365BC40033AE88 /* Start.gif */; };
+		E60B23251847394700645462 /* RainbHoriz.png in Resources */ = {isa = PBXBuildFile; fileRef = E60B23221847394700645462 /* RainbHoriz.png */; };
+		E60B23261847394700645462 /* RainbLTurn.png in Resources */ = {isa = PBXBuildFile; fileRef = E60B23231847394700645462 /* RainbLTurn.png */; };
+		E60B2329184741B500645462 /* RainbRTurn.png in Resources */ = {isa = PBXBuildFile; fileRef = E60B2328184741B500645462 /* RainbRTurn.png */; };
 		E60C69FE183B908500D6FA14 /* Star.png in Resources */ = {isa = PBXBuildFile; fileRef = E60C69FD183B908500D6FA14 /* Star.png */; };
 		E60C6A04183B953C00D6FA14 /* Star.m in Sources */ = {isa = PBXBuildFile; fileRef = E60C6A03183B953C00D6FA14 /* Star.m */; };
 		E60C92AB183A5FD9005DCBB7 /* Rock.png in Resources */ = {isa = PBXBuildFile; fileRef = E60C92AA183A5FD9005DCBB7 /* Rock.png */; };
@@ -71,6 +74,9 @@
 		E605769B183651D20033AE88 /* solidtile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = solidtile.png; path = ../../Resources/Tiles/solidtile.png; sourceTree = "<group>"; };
 		E605769C183651D20033AE88 /* voidtile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = voidtile.png; path = ../../Resources/Tiles/voidtile.png; sourceTree = "<group>"; };
 		E60576AD18365BC40033AE88 /* Start.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = Start.gif; path = ../../Resources/Elements/Start.gif; sourceTree = "<group>"; };
+		E60B23221847394700645462 /* RainbHoriz.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = RainbHoriz.png; path = ../../Resources/Interface/RainbHoriz.png; sourceTree = "<group>"; };
+		E60B23231847394700645462 /* RainbLTurn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = RainbLTurn.png; path = ../../Resources/Interface/RainbLTurn.png; sourceTree = "<group>"; };
+		E60B2328184741B500645462 /* RainbRTurn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = RainbRTurn.png; path = ../../Resources/Interface/RainbRTurn.png; sourceTree = "<group>"; };
 		E60C69FD183B908500D6FA14 /* Star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Star.png; path = ../../Resources/Elements/Star.png; sourceTree = "<group>"; };
 		E60C6A02183B953C00D6FA14 /* Star.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Star.h; path = ../SpacePuzzle/SpacePuzzle/Star.h; sourceTree = "<group>"; };
 		E60C6A03183B953C00D6FA14 /* Star.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Star.m; path = ../SpacePuzzle/SpacePuzzle/Star.m; sourceTree = "<group>"; };
@@ -159,6 +165,9 @@
 		E60576A0183651E30033AE88 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E60B2328184741B500645462 /* RainbRTurn.png */,
+				E60B23221847394700645462 /* RainbHoriz.png */,
+				E60B23231847394700645462 /* RainbLTurn.png */,
 				E6FB7DC718450D560075E460 /* SwitchOFF.png */,
 				E6FB7DC518450CF30075E460 /* MovingPlatform.png */,
 				E6279F7118437AF0009A91BC /* BridgeON.png */,
@@ -390,6 +399,7 @@
 			files = (
 				E60C92AB183A5FD9005DCBB7 /* Rock.png in Resources */,
 				E687AE4B183A239000A5B78C /* Finish.png in Resources */,
+				E60B23261847394700645462 /* RainbLTurn.png in Resources */,
 				E654B3001830F7DD006BFCAC /* Images.xcassets in Resources */,
 				E605769E183651D20033AE88 /* solidtile.png in Resources */,
 				E6279F7218437AF0009A91BC /* BridgeON.png in Resources */,
@@ -401,6 +411,8 @@
 				E654B2F41830F7DD006BFCAC /* Credits.rtf in Resources */,
 				E6FB7DC818450D560075E460 /* SwitchOFF.png in Resources */,
 				E654B2F61830F7DD006BFCAC /* MainMenu.xib in Resources */,
+				E60B2329184741B500645462 /* RainbRTurn.png in Resources */,
+				E60B23251847394700645462 /* RainbHoriz.png in Resources */,
 				E6D12B64183F661A00DE1632 /* OrangeTile.png in Resources */,
 				E60C69FE183B908500D6FA14 /* Star.png in Resources */,
 				E68A93F8183D0A8700AE9D4C /* Cracked.png in Resources */,

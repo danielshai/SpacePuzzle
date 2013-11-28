@@ -51,7 +51,7 @@
 -(void)refreshBoardView;
 -(void)refreshElementView;
 -(void)setupBoard;
--(void)refreshPathView;
+-(void)refreshPathView: (CGPoint)p;
 -(void)observeText:(NSString *)text Selector:(SEL)selector;
 -(void)notifyText:(NSString *)text Object: (NSObject*)object Key: (NSString*)key;
 @end
