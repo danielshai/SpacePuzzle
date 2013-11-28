@@ -41,6 +41,7 @@
         //controlDragLine.glowWidth = 1;
         controlDragLine.lineWidth = 1;
         [controlDragLine setStrokeColor:[SKColor colorWithRed:155.0/255.0 green:155.0/255.0 blue:255.0/255.0 alpha:1]];
+        
         //[controlDragLine setStrokeColor:[SKColor colorWithRed:244.0/255.0 green:185.0/255.0 blue:43.0/255.0 alpha:1]]; // Orange colour.
         controlDragOutline = [SKShapeNode node];
         controlDragOutline.lineWidth = 2;
@@ -116,10 +117,10 @@
         [self observeText:@"LeverClick" Selector:@selector(leverClick)];
         [self observeText:@"PlatformClick" Selector:@selector(platformClick)];
         
-        controlDragLine.zPosition = 999999;
-        circle.zPosition = 999998;
-        circleOutline.zPosition = 999997;
-        controlDragOutline.zPosition = 999997;
+        controlDragLine.zPosition = 99999999;
+        circle.zPosition = 99999998;
+        circleOutline.zPosition = 99999997;
+        controlDragOutline.zPosition = 99999997;
         [self addChild:controlDragLine];
         [self addChild:circle];
         [self addChild:circleOutline];
@@ -271,8 +272,8 @@
                 [self addRainbowSpriteAtPosition:to Rotation:0 Texture:rainbowStraight];
                 if(dirChange) {
                     SKSpriteNode *lastRainbow = [rainbowSprites objectAtIndex:[rainbowSprites count]-2];
-                    lastRainbow.texture = rainbowLeftTurn;
-                    lastRainbow.zRotation = PI;
+                    lastRainbow.texture = rainbowRightTurn;
+                    lastRainbow.zRotation = 0;
                 }
             } else if(firstDir == UP || firstDir == LEFT) {
                 [self addRainbowSpriteAtPosition:to Rotation:PI Texture:rainbowStraight];
@@ -427,6 +428,7 @@
     rainbow.alpha = 0.25;
     rainbow.position = p;
     rainbow.zRotation = r;
+    rainbow.zPosition = 999999;
     [rainbowSprites addObject:rainbow];
     [self addChild:rainbow];
 }
