@@ -10,6 +10,7 @@
     NSInteger statusOfPalette;
     NSInteger lastDirChange;
     NSInteger lastDir;
+    NSInteger firstDir;
     SKTexture *currentTexture;
     BOOL controlClickDrag;
     BOOL pathDrag;
@@ -79,6 +80,7 @@
 -(void)platformClick;
 -(void)leverClick;
 -(void)drawControlLine;
+-(void)addRainbowSpriteAtPosition: (CGPoint)p Rotation: (CGFloat)r Texture: (SKTexture*)texture;
 -(void)drawPathLineFrom: (CGPoint)from To: (CGPoint)to InDirection: (NSInteger)dir
       WithLastDirection: (NSInteger)lastDir;
 -(void)highlightElement: (CGPoint) elementIndex;
