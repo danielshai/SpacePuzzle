@@ -5,8 +5,9 @@
 #import "MainScene.h"
 #import "Macros.h"
 #import "Converter.h"
-#import "astroWalk.h"
+#import "BigLWalk.h"
 #import "LittleJohnWalk.h"
+#import "AnimationFactory.h"
 
 @implementation MainScene
 @synthesize solidTile = _solidTile;
@@ -33,6 +34,14 @@
 @synthesize littleJohnRight = _littleJohnRight;
 @synthesize littleJohnLeft = _littleJohnLeft;
 @synthesize sequence = _sequence;
+@synthesize bWUp = _bWUp;
+@synthesize bWDown = _bWDown;
+@synthesize bWRight = _bWRight;
+@synthesize bWLeft = _bWLeft;
+@synthesize lWUp = _lWUp;
+@synthesize lWDown = _lWDown;
+@synthesize lWRight = _lWRight;
+@synthesize lWLeft = _lWLeft;
 
 -(id)initWithSize:(CGSize)size {    
     if (self = [super initWithSize:size]) {
@@ -56,8 +65,48 @@
         [self addChild:_bkg];
         _elements = [[NSMutableDictionary alloc] init];
         _tiles = [[NSMutableArray alloc] init];
+        [self initScene];
     }
     return self;
+}
+
+// Preloads animation textures.
+-(void)initScene {
+    // Preloading Big Ls walking animations.
+    [SKTexture preloadTextures:BIGLWALK_ANIM_AUP withCompletionHandler:^(void){
+        SKAction *walk = [SKAction animateWithTextures:BIGLWALK_ANIM_AUP timePerFrame:0.1];
+        _bWUp = [SKAction sequence:@[walk, walk, walk, walk]];
+    }];
+    [SKTexture preloadTextures:BIGLWALK_ANIM_ADOWN withCompletionHandler:^(void){
+        SKAction *walk = [SKAction animateWithTextures:BIGLWALK_ANIM_ADOWN timePerFrame:0.1];
+        _bWDown = [SKAction sequence:@[walk, walk, walk, walk]];
+    }];
+    [SKTexture preloadTextures:BIGLWALK_ANIM_ARIGHT withCompletionHandler:^(void){
+        SKAction *walk = [SKAction animateWithTextures:BIGLWALK_ANIM_ARIGHT timePerFrame:0.1];
+        _bWRight = [SKAction sequence:@[walk, walk, walk, walk]];
+    }];
+    [SKTexture preloadTextures:BIGLWALK_ANIM_ALEFT withCompletionHandler:^(void){
+        SKAction *walk = [SKAction animateWithTextures:BIGLWALK_ANIM_ALEFT timePerFrame:0.1];
+        _bWLeft = [SKAction sequence:@[walk, walk, walk, walk]];
+    }];
+    
+    // Preloading Little Johns walking animations.
+    [SKTexture preloadTextures:LITTLEJOHNWALK_ANIM_BUP withCompletionHandler:^(void){
+        SKAction *walk = [SKAction animateWithTextures:LITTLEJOHNWALK_ANIM_BUP timePerFrame:0.1];
+        _lWUp = [SKAction sequence:@[walk, walk, walk, walk]];
+    }];
+    [SKTexture preloadTextures:LITTLEJOHNWALK_ANIM_BDOWN withCompletionHandler:^(void){
+        SKAction *walk = [SKAction animateWithTextures:LITTLEJOHNWALK_ANIM_BDOWN timePerFrame:0.1];
+        _lWDown = [SKAction sequence:@[walk, walk, walk, walk]];
+    }];
+    [SKTexture preloadTextures:LITTLEJOHNWALK_ANIM_BRIGHT withCompletionHandler:^(void){
+        SKAction *walk = [SKAction animateWithTextures:LITTLEJOHNWALK_ANIM_BRIGHT timePerFrame:0.1];
+        _lWRight = [SKAction sequence:@[walk, walk, walk, walk]];
+    }];
+    [SKTexture preloadTextures:LITTLEJOHNWALK_ANIM_BLEFT withCompletionHandler:^(void){
+        SKAction *walk = [SKAction animateWithTextures:LITTLEJOHNWALK_ANIM_BLEFT timePerFrame:0.1];
+        _lWLeft = [SKAction sequence:@[walk, walk, walk, walk]];
+    }];
 }
 
 /*
@@ -66,57 +115,38 @@
     CGPoint pos = [Converter convertCoordToPixel:coord];
     pos.x += 20;
     pos.y -= 5;
-    SKAction *walk;
-    SKAction *walkAnim;
     SKAction *move;
+    SKAction *action;
     // Depending on the direction the unit is making, update to the correct picture.
-    // Should use [path stringByAppendingString:@".png"] instead due to the numerous numbers of if-statments;
     if (_currentUnit == _bigL) {
         if(direction == UP) {
-            _currentUnit.texture = [SKTexture textureWithImageNamed:@"AstroUp.png"];
-            walk = [SKAction animateWithTextures:ANIMATIONS_ANIM_AUP timePerFrame:0.1];
-            walkAnim = [SKAction sequence:@[walk, walk, walk, walk]];
-            move = [SKAction moveToY:pos.y duration:walkAnim.duration];
+            move = [SKAction moveToY:pos.y duration:_bWUp.duration];
+            action = [SKAction group:@[_bWUp, move]];
         } else if(direction == DOWN) {
-            _currentUnit.texture = [SKTexture textureWithImageNamed:@"AstroDown.png"];
-            walk = [SKAction animateWithTextures:ANIMATIONS_ANIM_ADOWN timePerFrame:0.1];
-            walkAnim = [SKAction sequence:@[walk, walk, walk, walk]];
-            move = [SKAction moveToY:pos.y duration:walkAnim.duration];
+            move = [SKAction moveToY:pos.y duration:_bWDown.duration];
+            action = [SKAction group:@[_bWDown, move]];
         } else if(direction == RIGHT) {
-            _currentUnit.texture = [SKTexture textureWithImageNamed:@"AstroRight.png"];
-            walk = [SKAction animateWithTextures:ANIMATIONS_ANIM_ARIGHT timePerFrame:0.1];
-            walkAnim = [SKAction sequence:@[walk, walk, walk, walk]];
-            move = [SKAction moveToX:pos.x duration:walkAnim.duration];
+            move = [SKAction moveToX:pos.x duration:_bWRight.duration];
+            action = [SKAction group:@[_bWRight, move]];
         } else {
-            _currentUnit.texture = [SKTexture textureWithImageNamed:@"AstroLeft.png"];
-            walk = [SKAction animateWithTextures:ANIMATIONS_ANIM_ALEFT timePerFrame:0.1];
-            walkAnim = [SKAction sequence:@[walk, walk, walk, walk]];
-            move = [SKAction moveToX:pos.x duration:walkAnim.duration];
+            move = [SKAction moveToX:pos.x duration:_bWLeft.duration];
+            action = [SKAction group:@[_bWLeft, move]];
         }
     } else {
         if(direction == UP) {
-            _currentUnit.texture = [SKTexture textureWithImageNamed:@"AlienUp.png"];
-            walk = [SKAction animateWithTextures:LITTLEJOHNWALK_ANIM_BUP timePerFrame:0.1];
-            walkAnim = [SKAction sequence:@[walk, walk, walk, walk]];
-            move = [SKAction moveToY:pos.y duration:walkAnim.duration];
+            move = [SKAction moveToY:pos.y duration:_lWUp.duration];
+            action = [SKAction group:@[_lWUp, move]];
         } else if(direction == DOWN) {
-            _currentUnit.texture = [SKTexture textureWithImageNamed:@"AlienDown.png"];
-            walk = [SKAction animateWithTextures:LITTLEJOHNWALK_ANIM_BDOWN timePerFrame:0.1];
-            walkAnim = [SKAction sequence:@[walk, walk, walk, walk]];
-            move = [SKAction moveToY:pos.y duration:walkAnim.duration];
+            move = [SKAction moveToY:pos.y duration:_lWDown.duration];
+            action = [SKAction group:@[_lWDown, move]];
         } else if(direction == RIGHT) {
-            _currentUnit.texture = [SKTexture textureWithImageNamed:@"AlienRight.png"];
-            walk = [SKAction animateWithTextures:LITTLEJOHNWALK_ANIM_BRIGHT timePerFrame:0.1];
-            walkAnim = [SKAction sequence:@[walk, walk, walk, walk]];
-            move = [SKAction moveToX:pos.x duration:walkAnim.duration];
+            move = [SKAction moveToX:pos.x duration:_lWRight.duration];
+            action = [SKAction group:@[_lWRight, move]];
         } else {
-            _currentUnit.texture = [SKTexture textureWithImageNamed:@"AlienLeft.png"];
-            walk = [SKAction animateWithTextures:LITTLEJOHNWALK_ANIM_BLEFT timePerFrame:0.1];
-            walkAnim = [SKAction sequence:@[walk, walk, walk, walk]];
-            move = [SKAction moveToX:pos.x duration:walkAnim.duration];
+            move = [SKAction moveToX:pos.x duration:_lWLeft.duration];
+            action = [SKAction group:@[_lWLeft, move]];
         }
     }
-    SKAction *action = [SKAction group:@[walkAnim, move]];
     [_currentUnit runAction:action];
     //_currentUnit.position = pos;
 }
@@ -242,9 +272,9 @@
 -(void)setupUnits:(CGPoint)pos{
     // TEMP
     _littleJohn = [SKSpriteNode spriteNodeWithImageNamed:@"AlienDown.png"];
-    _littleJohn.size = CGSizeMake(32,32);
+    _littleJohn.size = CGSizeMake(44,44);
     _bigL = [SKSpriteNode spriteNodeWithImageNamed:@"AstroDown.png"];
-    _bigL.size = CGSizeMake(32,32);
+    _bigL.size = CGSizeMake(44,44);
     CGPoint p = [Converter convertCoordToPixel:CGPointMake(pos.x, pos.y)];
     p.x += 20;
     p.y -= 5;

@@ -7,7 +7,7 @@
             <key>generator</key>
             <string>TexturePacker 3.2.1 - http://www.codeandweb.com/texturepacker</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:88ce68474392a859bb5ff8912a321b6f:56a831f4bc672232e640534b469992b8:dcf1751d629ca25fb49edae1ec0e589f$</string>
+            <string>$TexturePacker:SmartUpdate:8fc9925ac50105112d6fd8cc70d05e9f:56a831f4bc672232e640534b469992b8:82c6c67887464d0aa305c79df2f1672e$</string>
         </dict>
         <key>format</key>
         <string>APPL</string>
@@ -15,7 +15,7 @@
         <array>
             <dict>
                 <key>path</key>
-                <string>animations.1.png</string>
+                <string>BigLWalk.1.png</string>
                 <key>size</key>
                 <string>{208,252}</string>
                 <key>subimages</key>

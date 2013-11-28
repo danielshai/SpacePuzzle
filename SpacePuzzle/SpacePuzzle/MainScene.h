@@ -9,6 +9,8 @@
 #import "Macros.h"
 #import "Converter.h"
 
+@class AnimationFactory;
+
 @interface MainScene : SKScene
 @property (nonatomic, retain) SKTexture *solidTile;
 @property (nonatomic, retain) SKTexture *crackedTile;
@@ -33,7 +35,18 @@
 @property (nonatomic, retain) SKTexture *littleJohnDown;
 @property (nonatomic, retain) SKTexture *littleJohnRight;
 @property (nonatomic, retain) SKTexture *littleJohnLeft;
-@property (strong) SKAction *sequence;
+@property (nonatomic, retain) SKAction *sequence;
+@property (nonatomic, retain) AnimationFactory *aniFact;
+
+@property (nonatomic, retain) SKAction *bWUp;
+@property (nonatomic, retain) SKAction *bWDown;
+@property (nonatomic, retain) SKAction *bWRight;
+@property (nonatomic, retain) SKAction *bWLeft;
+@property (nonatomic, retain) SKAction *lWUp;
+@property (nonatomic, retain) SKAction *lWDown;
+@property (nonatomic, retain) SKAction *lWRight;
+@property (nonatomic, retain) SKAction *lWLeft;
+
 
 -(void)updateUnit:(CGPoint) coord inDirection:(NSInteger) direction;
 -(void)refreshTileAtPosition: (CGPoint)pos WithStatus: (NSInteger)status;

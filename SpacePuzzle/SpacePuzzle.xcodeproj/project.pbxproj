@@ -10,6 +10,7 @@
 		77010766183E010D00AAF564 /* StarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 77010765183E010D00AAF564 /* StarButton.m */; };
 		77010769183E0FB500AAF564 /* BridgeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 77010768183E0FB500AAF564 /* BridgeButton.m */; };
 		7701076C183E0FFB00AAF564 /* Bridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 7701076B183E0FFB00AAF564 /* Bridge.m */; };
+		7705C3A718477A4600CEB0C9 /* BigLWalk.atlasc in Resources */ = {isa = PBXBuildFile; fileRef = 7705C3A518477A4600CEB0C9 /* BigLWalk.atlasc */; };
 		7797AC36183CE9F500E63E95 /* Box.png in Resources */ = {isa = PBXBuildFile; fileRef = 7797AC1F183CE9F500E63E95 /* Box.png */; };
 		7797AC37183CE9F500E63E95 /* BridgeOFF.png in Resources */ = {isa = PBXBuildFile; fileRef = 7797AC20183CE9F500E63E95 /* BridgeOFF.png */; };
 		7797AC38183CE9F500E63E95 /* BridgeON.png in Resources */ = {isa = PBXBuildFile; fileRef = 7797AC21183CE9F500E63E95 /* BridgeON.png */; };
@@ -40,7 +41,6 @@
 		77D6072F184374030079A182 /* AstroRight.png in Resources */ = {isa = PBXBuildFile; fileRef = 77D6072D184374030079A182 /* AstroRight.png */; };
 		77D60730184374030079A182 /* AstroUp.png in Resources */ = {isa = PBXBuildFile; fileRef = 77D6072E184374030079A182 /* AstroUp.png */; };
 		77F0A81C1845FF28002FA17A /* AnimationFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F0A81B1845FF28002FA17A /* AnimationFactory.m */; };
-		77F0A8201846005F002FA17A /* animations.atlasc in Resources */ = {isa = PBXBuildFile; fileRef = 77F0A81E1846005F002FA17A /* animations.atlasc */; };
 		77F0A82318464495002FA17A /* LittleJohnWalk.atlasc in Resources */ = {isa = PBXBuildFile; fileRef = 77F0A82118464495002FA17A /* LittleJohnWalk.atlasc */; };
 		E6057677183619120033AE88 /* Box.m in Sources */ = {isa = PBXBuildFile; fileRef = E6057676183619120033AE88 /* Box.m */; };
 		E60C6A01183B94F000D6FA14 /* Star.m in Sources */ = {isa = PBXBuildFile; fileRef = E60C6A00183B94F000D6FA14 /* Star.m */; };
@@ -91,6 +91,8 @@
 		77010768183E0FB500AAF564 /* BridgeButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BridgeButton.m; sourceTree = "<group>"; };
 		7701076A183E0FFB00AAF564 /* Bridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bridge.h; sourceTree = "<group>"; };
 		7701076B183E0FFB00AAF564 /* Bridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bridge.m; sourceTree = "<group>"; };
+		7705C3A518477A4600CEB0C9 /* BigLWalk.atlasc */ = {isa = PBXFileReference; lastKnownFileType = folder; path = BigLWalk.atlasc; sourceTree = "<group>"; };
+		7705C3A618477A4600CEB0C9 /* BigLWalk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BigLWalk.h; sourceTree = "<group>"; };
 		7797AC1F183CE9F500E63E95 /* Box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Box.png; sourceTree = "<group>"; };
 		7797AC20183CE9F500E63E95 /* BridgeOFF.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BridgeOFF.png; sourceTree = "<group>"; };
 		7797AC21183CE9F500E63E95 /* BridgeON.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BridgeON.png; sourceTree = "<group>"; };
@@ -124,8 +126,6 @@
 		77D6072E184374030079A182 /* AstroUp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AstroUp.png; path = ../Units/AstroUp.png; sourceTree = "<group>"; };
 		77F0A81A1845FF28002FA17A /* AnimationFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimationFactory.h; sourceTree = "<group>"; };
 		77F0A81B1845FF28002FA17A /* AnimationFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimationFactory.m; sourceTree = "<group>"; };
-		77F0A81E1846005F002FA17A /* animations.atlasc */ = {isa = PBXFileReference; lastKnownFileType = folder; path = animations.atlasc; sourceTree = "<group>"; };
-		77F0A81F1846005F002FA17A /* astroWalk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = astroWalk.h; sourceTree = "<group>"; };
 		77F0A82118464495002FA17A /* LittleJohnWalk.atlasc */ = {isa = PBXFileReference; lastKnownFileType = folder; path = LittleJohnWalk.atlasc; sourceTree = "<group>"; };
 		77F0A82218464495002FA17A /* LittleJohnWalk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LittleJohnWalk.h; sourceTree = "<group>"; };
 		E6057675183619120033AE88 /* Box.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Box.h; sourceTree = "<group>"; };
@@ -267,10 +267,10 @@
 		77F0A81D1845FF53002FA17A /* Animations */ = {
 			isa = PBXGroup;
 			children = (
-				77F0A81E1846005F002FA17A /* animations.atlasc */,
+				7705C3A518477A4600CEB0C9 /* BigLWalk.atlasc */,
+				7705C3A618477A4600CEB0C9 /* BigLWalk.h */,
 				77F0A82118464495002FA17A /* LittleJohnWalk.atlasc */,
 				77F0A82218464495002FA17A /* LittleJohnWalk.h */,
-				77F0A81F1846005F002FA17A /* astroWalk.h */,
 				77F0A81A1845FF28002FA17A /* AnimationFactory.h */,
 				77F0A81B1845FF28002FA17A /* AnimationFactory.m */,
 			);
@@ -539,12 +539,12 @@
 				7797AC3E183CE9F500E63E95 /* Star.png in Resources */,
 				77D6072F184374030079A182 /* AstroRight.png in Resources */,
 				7797AC37183CE9F500E63E95 /* BridgeOFF.png in Resources */,
-				77F0A8201846005F002FA17A /* animations.atlasc in Resources */,
 				77D6072A184373F40079A182 /* AlienUp.png in Resources */,
 				77D60728184373F40079A182 /* AlienLeft.png in Resources */,
 				7797AC46183CE9F500E63E95 /* voidtile.png in Resources */,
 				7797AC3B183CE9F500E63E95 /* ButtonON.png in Resources */,
 				77D60727184373F40079A182 /* AlienDown.png in Resources */,
+				7705C3A718477A4600CEB0C9 /* BigLWalk.atlasc in Resources */,
 				E687AE4D183A43EB00A5B78C /* mario.splvl in Resources */,
 				7797AC3D183CE9F500E63E95 /* Rock.png in Resources */,
 				77F0A82318464495002FA17A /* LittleJohnWalk.atlasc in Resources */,
@@ -729,6 +729,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SpacePuzzle/SpacePuzzle-Prefix.pch";
 				INFOPLIST_FILE = "SpacePuzzle/SpacePuzzle-Info.plist";
