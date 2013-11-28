@@ -363,13 +363,11 @@
         
         if(lastDirChange == RAINBOW_FROM_LEFT_TO_UP) {
             NSLog(@"left up");
-            SKSpriteNode *rainbow = [SKSpriteNode spriteNodeWithTexture:rainbowStraight];
-            rainbow.size = CGSizeMake(TILESIZE, TILESIZE);
-            rainbow.alpha = 0.25;
-            rainbow.zRotation = -PI/2;
-            rainbow.position = to;
-            [rainbowSprites addObject:rainbow];
-            [self addChild:rainbow];
+            if(firstDir == RIGHT || firstDir == DOWN) {
+                [self addRainbowSpriteAtPosition:to Rotation:PI/2 Texture:rainbowStraight];
+            } else if (firstDir == LEFT || firstDir == UP) {
+                [self addRainbowSpriteAtPosition:to Rotation:-PI/2 Texture:rainbowStraight];
+            }
             
             if(dirChange) {
                 SKSpriteNode *lastRainbow = [rainbowSprites objectAtIndex:[rainbowSprites count]-2];
