@@ -35,6 +35,8 @@
         
         pathDrag = NO;
         controlClickDrag = NO;
+        dirChange = NO;
+        redInRainbowUp = YES;
         controlDragLine = [SKShapeNode node];
         //controlDragLine.glowWidth = 1;
         controlDragLine.lineWidth = 1;
@@ -225,8 +227,8 @@
       WithLastDirection:(NSInteger)lastDir {
     SKShapeNode *pathLine = [SKShapeNode node];
 
-    pathLine.lineWidth = 1;
-    [pathLine setStrokeColor:[SKColor colorWithRed:185.0/255.0 green:185.0/255.0 blue:185.0/255.0 alpha:0.6]];
+    pathLine.lineWidth = 0.5;
+    [pathLine setStrokeColor:[SKColor colorWithRed:50.0/255.0 green:50.0/255.0 blue:50.0/255.0 alpha:0.6]];
     pathLine.hidden = NO;
     
     CGMutablePathRef pathToDraw = CGPathCreateMutable();
@@ -242,16 +244,24 @@
         CGPathMoveToPoint(pathToDraw, NULL, from.x, from.y);
         CGPathAddLineToPoint(pathToDraw, NULL, to.x-1, to.y);
         // The rainbow showing the path. The texture and rotation depends of previous direction.
-        
+
         if(lastDirChange == RAINBOW_FROM_DOWN_TO_RIGHT) {
             NSLog(@"down right");
+            
             SKSpriteNode *rainbow = [SKSpriteNode spriteNodeWithTexture:rainbowStraight];
             rainbow.size = CGSizeMake(TILESIZE, TILESIZE);
             rainbow.alpha = 0.25;
             rainbow.position = to;
-//            rainbow.zRotation = PI;
+            rainbow.zRotation = PI;
             [rainbowSprites addObject:rainbow];
             [self addChild:rainbow];
+            
+            // If there was a change in direction, the previous sprite's texture must change to a turn.
+            if(dirChange) {
+                SKSpriteNode *lastRainbow = [rainbowSprites objectAtIndex:[rainbowSprites count]-2];
+                lastRainbow.texture = rainbowRightTurn;
+            }
+            
         } else if(lastDirChange == RAINBOW_FROM_UP_TO_RIGHT) {
             NSLog(@"up right");
             SKSpriteNode *rainbow = [SKSpriteNode spriteNodeWithTexture:rainbowStraight];
@@ -260,6 +270,12 @@
             rainbow.position = to;
             [rainbowSprites addObject:rainbow];
             [self addChild:rainbow];
+            
+            if(dirChange) {
+                SKSpriteNode *lastRainbow = [rainbowSprites objectAtIndex:[rainbowSprites count]-2];
+                lastRainbow.texture = rainbowRightTurn;
+                lastRainbow.zRotation = 0;
+            }
         } else {
             NSLog(@"just right");
             SKSpriteNode *rainbow = [SKSpriteNode spriteNodeWithTexture:rainbowStraight];
@@ -272,15 +288,21 @@
     } else if (dir == LEFT) {
         CGPathMoveToPoint(pathToDraw, NULL, from.x, from.y);
         CGPathAddLineToPoint(pathToDraw, NULL, to.x+1, to.y);
+        
         if(lastDirChange == RAINBOW_FROM_DOWN_TO_LEFT) {
             NSLog(@"down left");
             SKSpriteNode *rainbow = [SKSpriteNode spriteNodeWithTexture:rainbowStraight];
             rainbow.size = CGSizeMake(TILESIZE, TILESIZE);
             rainbow.alpha = alpha;
             rainbow.position = to;
-            rainbow.zRotation = PI;
             [rainbowSprites addObject:rainbow];
             [self addChild:rainbow];
+            
+            if(dirChange) {
+                SKSpriteNode *lastRainbow = [rainbowSprites objectAtIndex:[rainbowSprites count]-2];
+                lastRainbow.texture = rainbowLeftTurn;
+                lastRainbow.zRotation = -PI/2;
+            }
         } else if(lastDirChange == RAINBOW_FROM_UP_TO_LEFT) {
             SKSpriteNode *rainbow = [SKSpriteNode spriteNodeWithTexture:rainbowStraight];
             rainbow.size = CGSizeMake(TILESIZE, TILESIZE);
@@ -290,6 +312,12 @@
             NSLog(@"up left");
             [rainbowSprites addObject:rainbow];
             [self addChild:rainbow];
+            
+            if(dirChange) {
+                SKSpriteNode *lastRainbow = [rainbowSprites objectAtIndex:[rainbowSprites count]-2];
+                lastRainbow.texture = rainbowLeftTurn;
+                lastRainbow.zRotation = PI/2 - PI/2;
+            }
         } else {
             NSLog(@"just left");
             SKSpriteNode *rainbow = [SKSpriteNode spriteNodeWithTexture:rainbowStraight];
@@ -308,9 +336,15 @@
             rainbow.size = CGSizeMake(TILESIZE, TILESIZE);
             rainbow.alpha = alpha;
             rainbow.position = to;
-            rainbow.zRotation = -PI/2;
+            rainbow.zRotation = PI/2;
             [rainbowSprites addObject:rainbow];
             [self addChild:rainbow];
+            
+            if(dirChange) {
+                SKSpriteNode *lastRainbow = [rainbowSprites objectAtIndex:[rainbowSprites count]-2];
+                lastRainbow.texture = rainbowRightTurn;
+                lastRainbow.zRotation = 0;
+            }
         } else if(lastDirChange == RAINBOW_FROM_RIGHT_TO_DOWN) {
             SKSpriteNode *rainbow = [SKSpriteNode spriteNodeWithTexture:rainbowStraight];
             rainbow.size = CGSizeMake(TILESIZE, TILESIZE);
@@ -320,6 +354,11 @@
             NSLog(@"right down");
             [rainbowSprites addObject:rainbow];
             [self addChild:rainbow];
+            if(dirChange) {
+                SKSpriteNode *lastRainbow = [rainbowSprites objectAtIndex:[rainbowSprites count]-2];
+                lastRainbow.texture = rainbowRightTurn;
+                lastRainbow.zRotation = -PI/2;
+            }
         } else {
             NSLog(@"just down");
             SKSpriteNode *rainbow = [SKSpriteNode spriteNodeWithTexture:rainbowStraight];
@@ -339,10 +378,16 @@
             SKSpriteNode *rainbow = [SKSpriteNode spriteNodeWithTexture:rainbowStraight];
             rainbow.size = CGSizeMake(TILESIZE, TILESIZE);
             rainbow.alpha = 0.25;
-            rainbow.zRotation = PI/2;
+            rainbow.zRotation = -PI/2;
             rainbow.position = to;
             [rainbowSprites addObject:rainbow];
             [self addChild:rainbow];
+            
+            if(dirChange) {
+                SKSpriteNode *lastRainbow = [rainbowSprites objectAtIndex:[rainbowSprites count]-2];
+                lastRainbow.texture = rainbowLeftTurn;
+                lastRainbow.zRotation = PI;
+            }
         } else if(lastDirChange == RAINBOW_FROM_RIGHT_TO_UP) {
             NSLog(@"right up");
             SKSpriteNode *rainbow = [SKSpriteNode spriteNodeWithTexture:rainbowStraight];
@@ -352,6 +397,12 @@
             rainbow.position = to;
             [rainbowSprites addObject:rainbow];
             [self addChild:rainbow];
+            
+            if(dirChange) {
+                SKSpriteNode *lastRainbow = [rainbowSprites objectAtIndex:[rainbowSprites count]-2];
+                lastRainbow.texture = rainbowLeftTurn;
+                lastRainbow.zRotation = -PI/2;
+            }
         } else {
             NSLog(@"just up");
             SKSpriteNode *rainbow = [SKSpriteNode spriteNodeWithTexture:rainbowStraight];
@@ -424,20 +475,30 @@
             NSInteger prevDir = [Converter convertCoordsTo:pt Direction:pf];
             if(prevDir == DOWN && dir == RIGHT) {
                 lastDirChange = RAINBOW_FROM_DOWN_TO_RIGHT;
+                dirChange = YES;
             } else if(prevDir == UP && dir == RIGHT) {
                 lastDirChange = RAINBOW_FROM_UP_TO_RIGHT;
+                dirChange = YES;
             } else if(prevDir == DOWN && dir == LEFT) {
                 lastDirChange = RAINBOW_FROM_DOWN_TO_LEFT;
+                dirChange = YES;
             } else if(prevDir == UP && dir == LEFT) {
                 lastDirChange = RAINBOW_FROM_UP_TO_LEFT;
+                dirChange = YES;
             } else if(prevDir == LEFT && dir == DOWN) {
                 lastDirChange = RAINBOW_FROM_LEFT_TO_DOWN;
+                dirChange = YES;
             } else if(prevDir == LEFT && dir == UP) {
                 lastDirChange = RAINBOW_FROM_LEFT_TO_UP;
+                dirChange = YES;
             } else if(prevDir == RIGHT && dir == UP) {
                 lastDirChange = RAINBOW_FROM_RIGHT_TO_UP;
+                dirChange = YES;
             } else if(prevDir == RIGHT && dir == DOWN) {
                 lastDirChange = RAINBOW_FROM_RIGHT_TO_DOWN;
+                dirChange = YES;
+            } else {
+                dirChange = NO;
             }
         } else {
             lastDirChange = dir;

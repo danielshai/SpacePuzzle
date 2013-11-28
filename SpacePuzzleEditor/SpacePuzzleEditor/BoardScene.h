@@ -9,9 +9,12 @@
 @interface BoardScene : SKScene {
     NSInteger statusOfPalette;
     NSInteger lastDirChange;
+    NSInteger lastDir;
     SKTexture *currentTexture;
     BOOL controlClickDrag;
     BOOL pathDrag;
+    BOOL dirChange;
+    BOOL redInRainbowUp;
     CGPoint startControlDrag;
     CGPoint endControlDrag;
     CGPoint startPathLine;
