@@ -38,13 +38,21 @@
 }
 
 -(void) doAction {
-    _state = !_state;
-    _star.hidden = !_state;
+    if(_star.taken == NO) {
+        _state = !_state;
+        _star.hidden = !_state;
+    } else {
+        _state = !_state;
+    }
 }
 
 -(void) movedTo {
-    _state = !_state;
-    _star.hidden = !_state;
+    if(_star.taken == NO) {
+        _state = !_state;
+        _star.hidden = !_state;
+    } else {
+        _state = !_state;
+    }
 }
 
 @end

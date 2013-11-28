@@ -33,6 +33,15 @@
     return self;
 }
 
+-(id)initWithX:(NSInteger)x Y:(NSInteger)y Hidden:(BOOL)hidden Taken:(BOOL)taken {
+    if(self = [super initWithX:x Y:y]) {
+        _blocking = NO;
+        _hidden = hidden;
+        _taken = NO;
+    }
+    return self;
+}
+
 -(void)doAction {
     
 }
