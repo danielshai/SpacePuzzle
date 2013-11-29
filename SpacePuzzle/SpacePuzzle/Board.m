@@ -442,13 +442,26 @@
     element = [element stringByAppendingString:[@(mp.blocking) stringValue]];
     element = [element stringByAppendingString:@"</blocking>"];
     
+    element = [element stringByAppendingString:@"<path>"];
+    // Path.
+    for(int i = 0; i < [[[mp path] points] count]; i++) {
+        // Output path.
+        CGPoint p = [[mp path] getCGPointAtIndex:i];
+        element = [element stringByAppendingString:@"<x>"];
+        element = [element stringByAppendingString:[@(p.x) stringValue]];
+        element = [element stringByAppendingString:@"</x>"];
+        
+        element = [element stringByAppendingString:@"<y>"];
+        element = [element stringByAppendingString:[@(p.y) stringValue]];
+        element = [element stringByAppendingString:@"</y>"];
+    }
+    element = [element stringByAppendingString:@"</path>"];
     // End of this element.
     element = [element stringByAppendingString:@"</"];
     element = [element stringByAppendingString:NSStringFromClass([mp class])];
     element = [element stringByAppendingString:@">"];
     
     [_parser addOutput:element];
-
 }
 
 /*

@@ -55,12 +55,15 @@
         leverElement = NO;
         leverPlatform = NO;
         platformElement = NO;
+        path = NO;
         
         _board = [[NSMutableArray alloc] init];
         _parser = [[NSXMLParser alloc] initWithContentsOfURL:url];
         _start = [[Position alloc] initWithX:0 Y:0];
         _finish = [[Position alloc] initWithX:0 Y:0];
         _elements = [[NSMutableDictionary alloc] init];
+        pathArray = [[NSMutableArray alloc] init];
+        
         [_parser setDelegate:self];
         [_parser parse];
     }
@@ -103,6 +106,8 @@
         platformElement = YES;
     } else if ([currentElement isEqualToString:LEVER_REF]) {
         leverPlatform = YES;
+    } else if ([currentElement isEqualToString:@"path"]) {
+        path = YES;
     }
 }
 
@@ -148,8 +153,14 @@
     } else if ([elementName isEqualToString:CLASS_MOVING_PLATFORM]) {
         platformElement = NO;
         MovingPlatform *mp = [[MovingPlatform alloc] initWithX:tempXElement Y:tempYElement];
+        for(int i = 0; i < pathArray.count; i++) {
+            Position *p = [pathArray objectAtIndex:i];
+            [[[mp path] points] insertObject:p atIndex:i];
+        }
+ 
         [_elements setObject:mp forKey:mp.key];
-        [[mp path] addPoint:CGPointMake(tempXElement, tempYElement)];
+        // Clear the path array for the next |MovingPlatform|.
+        [pathArray removeAllObjects];
         
     } else if ([elementName isEqualToString:CLASS_LEVER]) {
         leverElement = NO;
@@ -164,6 +175,8 @@
         bridgeButtonBridge = NO;
     } else if ([elementName isEqualToString:LEVER_REF]) {
         leverPlatform = NO;
+    } else if ([elementName isEqualToString:@"path"]) {
+        path = NO;
     }
 }
 
@@ -183,12 +196,12 @@
     } else if([currentElement isEqualToString:@"y"] && finishElement) {
         _finish.y = intString;
     } else if([currentElement isEqualToString:@"x"] && boardElement && !starButtonStar &&
-              !bridgeButtonBridge && !leverPlatform) {
+              !bridgeButtonBridge && !leverPlatform && !path) {
         tempXElement = intString;
     } else if([currentElement isEqualToString:@"y"] && boardElement && !starButtonStar &&
-              !bridgeButtonBridge && !leverPlatform) {
+              !bridgeButtonBridge && !leverPlatform && !path) {
         tempYElement = intString;
-    } else if([currentElement isEqualToString:@"x"] && (starButtonStar || bridgeButtonBridge || leverPlatform) ) {
+    } else if([currentElement isEqualToString:@"x"] && (starButtonStar || bridgeButtonBridge || leverPlatform ) ) {
         tempXRef = intString;
     } else if([currentElement isEqualToString:@"y"] && (starButtonStar || bridgeButtonBridge || leverPlatform) ) {
         tempYRef = intString;
@@ -196,6 +209,12 @@
         tempBlockingElement = intString;
     } else if([currentElement isEqualToString:@"state"] && (starButtonElement || bridgeButtonElement || leverElement) ) {
         tempState = intString;
+    } else if([currentElement isEqualToString:@"x"] && path) {
+        pathX = intString;
+    } else if([currentElement isEqualToString:@"y"] && path) {
+        pathY = intString;
+        Position *p = [[Position alloc] initWithX:pathX Y:pathY];
+        [pathArray insertObject:p atIndex:pathArray.count];
     }
 }
 
@@ -218,6 +237,8 @@
     leverPlatform = NO;
     leverElement = NO;
     platformElement = NO;
+    path = NO;
+    [pathArray removeAllObjects];
 }
 
 -(void)addOutput:(NSString *)string {

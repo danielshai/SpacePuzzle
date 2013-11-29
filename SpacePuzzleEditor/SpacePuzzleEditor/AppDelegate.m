@@ -370,6 +370,10 @@
     }
 }
 
+-(void)loadPaths {
+    
+}
+
 -(void)setupBoard {
     _board = [[Board alloc] init];
     // TEMP CODE.
@@ -423,13 +427,14 @@
                 [_board loadBoard:path];
                 currentFilePath = path;
                 [self loadConnections];
+                [self loadPaths];
                 [self refreshView];
                 // Updates the window's title.
                 [[self window] setTitle:[path lastPathComponent]];
                 // A newly opened file cannot be edited.
                 [[NSDocumentController sharedDocumentController] noteNewRecentDocumentURL:[NSURL fileURLWithPath:path]];
             } else {
-                NSAlert *alert = [NSAlert alertWithMessageText: @"File is not a valid level!"
+                NSAlert *alert = [NSAlert alertWithMessageText:@"File is not a valid level!"
                                                  defaultButton:@"OK"
                                                alternateButton:@""
                                                    otherButton:nil

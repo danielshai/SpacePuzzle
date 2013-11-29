@@ -30,10 +30,14 @@
     BOOL platformElement;
     BOOL leverElement;
     BOOL leverPlatform;
+    BOOL path;
     NSInteger tempXElement;
     NSInteger tempYElement;
     NSInteger tempXRef;
     NSInteger tempYRef;
+    NSInteger pathX;
+    NSInteger pathY;
+    NSMutableArray *pathArray;
     BOOL tempBlockingElement;
     BOOL tempState;
     NSString *output;
