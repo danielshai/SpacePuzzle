@@ -381,7 +381,7 @@
     [_scene setElementAtPosition:pl.movingPlatform.key IsHidden:NO];
     [_scene refreshElementAtPosition:pl.movingPlatform.key OfClass:CLASS_MOVING_PLATFORM WithStatus:pl.movingPlatform.blocking];
     
-    [NSTimer scheduledTimerWithTimeInterval:2 target:self
+    [NSTimer scheduledTimerWithTimeInterval:0.6 target:self
                                    selector:@selector(movePlatform:)  userInfo:pl.movingPlatform
                                   repeats:YES];
 }
@@ -395,8 +395,8 @@
         mp.y = p.y;
     }
     
-    NSLog(@"%f %f --- %f %f",prevPoint.x,prevPoint.y,mp.x,mp.y);
-  //  [_scene moveElement:prevPoint NewCoord:CGPointMake(mp.x, mp.y)];
+    NSLog(@"%f %f --- %ld %ld",prevPoint.x,prevPoint.y,(long)mp.x,(long)mp.y);
+    [_scene moveElement:prevPoint NewCoord:CGPointMake(mp.x, mp.y)];
 }
 
 /*

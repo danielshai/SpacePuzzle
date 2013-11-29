@@ -154,9 +154,13 @@
 -(void)moveElement:(CGPoint)oldCoord NewCoord:(CGPoint)newCoord {
     NSNumber *indexOrigin = [NSNumber numberWithFloat:oldCoord.y*BOARD_SIZE_X + oldCoord.x];
     NSNumber *indexNew = [NSNumber numberWithFloat:newCoord.y*BOARD_SIZE_X + newCoord.x];
+    NSLog(@"moving: %f %f %f %f", oldCoord.x,oldCoord.y,newCoord.x,newCoord.y);
+    if(indexNew.integerValue == indexOrigin.integerValue) {
+        NSLog(@"retu");
+        return;
+    }
     SKSpriteNode *s = [_elements objectForKey:indexOrigin];
     [_elements setObject:s forKey:indexNew];
-
     // Gets the pixel value for the new position.
     newCoord = [Converter convertCoordToPixel:newCoord];
     // Converter does not take into account anchor point.
@@ -263,6 +267,7 @@
         sprite.size = CGSizeMake(TILESIZE, sprite.texture.size.height/2);
         pos.y -= 10;
     }*/
+
     [sprite setPosition:pos];
     NSNumber *nr = [NSNumber numberWithInt:coord.y*BOARD_SIZE_X + coord.x];
     [_elements setObject:sprite forKey:nr];
