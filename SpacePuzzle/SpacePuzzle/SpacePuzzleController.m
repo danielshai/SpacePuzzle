@@ -12,6 +12,7 @@
 #import "BridgeButton.h"
 #import "PlatformLever.h"
 #import "Bridge.h"
+#import "Path.h"
 
 @implementation SpacePuzzleController
 @synthesize board = _board;
@@ -171,35 +172,16 @@
     // Talk to the scene what to show.
     NSEnumerator *enumerator = [[_board elementDictionary] objectEnumerator];
     Element *obj;
-    while((obj = [enumerator nextObject])) {
+    while(obj = [enumerator nextObject]) {
         CGPoint p = CGPointMake([obj x], [obj y]);
-        if([obj isKindOfClass:[Bridge class]]) {
-            [_scene setupElement:p Name:@"BridgeOFF.png" Hidden:[obj hidden]];
-        } else if( ![obj isKindOfClass:[StarButton class]] && ![obj isKindOfClass:[BridgeButton class]] ) {
+       // if([obj isKindOfClass:[Bridge class]]) {
+        //    [_scene setupElement:p Name:@"BridgeOFF.png" Hidden:[obj hidden]];
+        //} else if( ![obj isKindOfClass:[StarButton class]] && ![obj isKindOfClass:[BridgeButton class]] ) {
             [_scene setupElement:p Name:NSStringFromClass([obj class]) Hidden:[obj hidden]];
-        } else {
-            [_scene setupElement:p Name:@"ButtonOFF" Hidden:[obj hidden]];
-        }
+        //} else {
+        //    [_scene setupElement:p Name:@"ButtonOFF" Hidden:[obj hidden]];
+        //}
     }
-
-    CGPoint p = CGPointMake(0, 0);
-    
-    // TEMP TEST CODE FOR PLATFORM LEVER
-    MovingPlatform *mp = [[MovingPlatform alloc] initWithX:2 Y:0 Hidden:NO];
-    [[_board elementDictionary] setObject:mp forKey:mp.key];
-    PlatformLever *pl = [[PlatformLever alloc] initWithMovingPlatform:mp X:1 Y:0];
-    [[_board elementDictionary] setObject:pl forKey:pl.key];
-
-    p = CGPointMake(2, 0);
-    [_scene setupElement:p Name:@"MovingPlatform" Hidden:NO];
-    [_scene setElementAtPosition:mp.key IsHidden:NO];
-    [_scene setElementAtPosition:pl.key IsHidden:NO];
-    
-    pl.movingPlatform = mp;
-   // nr = [NSNumber numberWithInteger:1];
-  //  [[_board elementDictionary] setObject:pl forKey:nr];
-    p = CGPointMake(1, 0);
-    [_scene setupElement:p Name:@"SwitchOFF" Hidden:NO];
 }
 
 /*
@@ -394,13 +376,30 @@
     [pl doAction];
     
     // Updates the lever on the scene.
-    [_scene refreshElementAtPosition:pl.key OfClass:@"Lever" WithStatus:pl.state];
+    [_scene refreshElementAtPosition:pl.key OfClass:CLASS_LEVER WithStatus:pl.state];
     // Updates the moving platform connected to the lever on the scene, i.e. moving it.
     [_scene setElementAtPosition:pl.movingPlatform.key IsHidden:NO];
-    [_scene refreshElementAtPosition:pl.movingPlatform.key OfClass:@"MovingPlatform" WithStatus:pl.movingPlatform.blocking];
+    [_scene refreshElementAtPosition:pl.movingPlatform.key OfClass:CLASS_MOVING_PLATFORM WithStatus:pl.movingPlatform.blocking];
+    
+    [NSTimer scheduledTimerWithTimeInterval:2 target:self
+                                   selector:@selector(movePlatform:)  userInfo:pl.movingPlatform
+                                  repeats:YES];
 }
 
-/* 
+-(void)movePlatform:(NSTimer *)timer {
+    MovingPlatform *mp = [timer userInfo];
+    CGPoint prevPoint = CGPointMake(mp.x, mp.y);
+    if(mp) {
+        CGPoint p = mp.path.nextPoint;
+        mp.x = p.x;
+        mp.y = p.y;
+    }
+    
+    NSLog(@"%f %f --- %f %f",prevPoint.x,prevPoint.y,mp.x,mp.y);
+  //  [_scene moveElement:prevPoint NewCoord:CGPointMake(mp.x, mp.y)];
+}
+
+/*
  *  Checks if the |currentUnit| is on the finish position. */
 -(BOOL)isUnitOnGoal {
     return([[_board finishPos] x] == _currentUnit.x && [[_board finishPos] y] == _currentUnit.y);

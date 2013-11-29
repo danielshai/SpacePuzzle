@@ -38,6 +38,7 @@
 
 -(void) doAction {
     _state = !_state;
+    [_movingPlatform start];
 }
 
 @end

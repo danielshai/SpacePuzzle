@@ -11,5 +11,8 @@
 
 @interface MovingPlatform : Element
 @property (nonatomic, retain) Path* path;
+@property (nonatomic, assign) NSInteger speed;
 -(id)initWithX:(NSInteger)x Y:(NSInteger)y Path:(Path*) path;
+-(void)start;
+-(void)stop;
 @end

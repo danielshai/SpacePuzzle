@@ -519,6 +519,8 @@
         } else if([[_elementDictionary objectForKey:posKey] isKindOfClass:[Bridge class]]) {
             Bridge *b = (Bridge*)[_elementDictionary objectForKey:posKey];
             return !b.blocking;
+        } else if ([[_elementDictionary objectForKey:posKey] isKindOfClass:[MovingPlatform class]]) {
+            return YES;
         }
         return NO;
     } else {
