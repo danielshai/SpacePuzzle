@@ -12,16 +12,12 @@
 		7701076C183E0FFB00AAF564 /* Bridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 7701076B183E0FFB00AAF564 /* Bridge.m */; };
 		7705C3A718477A4600CEB0C9 /* BigLWalk.atlasc in Resources */ = {isa = PBXBuildFile; fileRef = 7705C3A518477A4600CEB0C9 /* BigLWalk.atlasc */; };
 		7797AC36183CE9F500E63E95 /* Box.png in Resources */ = {isa = PBXBuildFile; fileRef = 7797AC1F183CE9F500E63E95 /* Box.png */; };
-		7797AC37183CE9F500E63E95 /* BridgeOFF.png in Resources */ = {isa = PBXBuildFile; fileRef = 7797AC20183CE9F500E63E95 /* BridgeOFF.png */; };
 		7797AC38183CE9F500E63E95 /* BridgeON.png in Resources */ = {isa = PBXBuildFile; fileRef = 7797AC21183CE9F500E63E95 /* BridgeON.png */; };
-		7797AC39183CE9F500E63E95 /* Button.png in Resources */ = {isa = PBXBuildFile; fileRef = 7797AC22183CE9F500E63E95 /* Button.png */; };
-		7797AC3A183CE9F500E63E95 /* ButtonOFF.png in Resources */ = {isa = PBXBuildFile; fileRef = 7797AC23183CE9F500E63E95 /* ButtonOFF.png */; };
 		7797AC3B183CE9F500E63E95 /* ButtonON.png in Resources */ = {isa = PBXBuildFile; fileRef = 7797AC24183CE9F500E63E95 /* ButtonON.png */; };
 		7797AC3C183CE9F500E63E95 /* Finish.png in Resources */ = {isa = PBXBuildFile; fileRef = 7797AC25183CE9F500E63E95 /* Finish.png */; };
 		7797AC3D183CE9F500E63E95 /* Rock.png in Resources */ = {isa = PBXBuildFile; fileRef = 7797AC26183CE9F500E63E95 /* Rock.png */; };
 		7797AC3E183CE9F500E63E95 /* Star.png in Resources */ = {isa = PBXBuildFile; fileRef = 7797AC27183CE9F500E63E95 /* Star.png */; };
 		7797AC3F183CE9F500E63E95 /* Start.gif in Resources */ = {isa = PBXBuildFile; fileRef = 7797AC28183CE9F500E63E95 /* Start.gif */; };
-		7797AC40183CE9F500E63E95 /* SwitchOFF.png in Resources */ = {isa = PBXBuildFile; fileRef = 7797AC29183CE9F500E63E95 /* SwitchOFF.png */; };
 		7797AC41183CE9F500E63E95 /* SwitchON.png in Resources */ = {isa = PBXBuildFile; fileRef = 7797AC2A183CE9F500E63E95 /* SwitchON.png */; };
 		7797AC42183CE9F500E63E95 /* Background.png in Resources */ = {isa = PBXBuildFile; fileRef = 7797AC2C183CE9F500E63E95 /* Background.png */; };
 		7797AC43183CE9F500E63E95 /* Cracked.png in Resources */ = {isa = PBXBuildFile; fileRef = 7797AC2E183CE9F500E63E95 /* Cracked.png */; };
@@ -45,6 +41,10 @@
 		E6057677183619120033AE88 /* Box.m in Sources */ = {isa = PBXBuildFile; fileRef = E6057676183619120033AE88 /* Box.m */; };
 		E60C6A01183B94F000D6FA14 /* Star.m in Sources */ = {isa = PBXBuildFile; fileRef = E60C6A00183B94F000D6FA14 /* Star.m */; };
 		E60C6A0A183BB19F00D6FA14 /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = E60C6A09183BB19F00D6FA14 /* Player.m */; };
+		E60DA7761848A1370088AB3D /* Bridge.png in Resources */ = {isa = PBXBuildFile; fileRef = E60DA7751848A1370088AB3D /* Bridge.png */; };
+		E60DA7781848A1880088AB3D /* PlatformLever.png in Resources */ = {isa = PBXBuildFile; fileRef = E60DA7771848A1880088AB3D /* PlatformLever.png */; };
+		E60DA77B1848A2350088AB3D /* BridgeButton.png in Resources */ = {isa = PBXBuildFile; fileRef = E60DA7791848A2350088AB3D /* BridgeButton.png */; };
+		E60DA77C1848A2350088AB3D /* StarButton.png in Resources */ = {isa = PBXBuildFile; fileRef = E60DA77A1848A2350088AB3D /* StarButton.png */; };
 		E6214055182BA53800EC5C21 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6214054182BA53800EC5C21 /* Foundation.framework */; };
 		E6214057182BA53800EC5C21 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6214056182BA53800EC5C21 /* CoreGraphics.framework */; };
 		E6214059182BA53800EC5C21 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6214058182BA53800EC5C21 /* UIKit.framework */; };
@@ -94,16 +94,12 @@
 		7705C3A518477A4600CEB0C9 /* BigLWalk.atlasc */ = {isa = PBXFileReference; lastKnownFileType = folder; path = BigLWalk.atlasc; sourceTree = "<group>"; };
 		7705C3A618477A4600CEB0C9 /* BigLWalk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BigLWalk.h; sourceTree = "<group>"; };
 		7797AC1F183CE9F500E63E95 /* Box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Box.png; sourceTree = "<group>"; };
-		7797AC20183CE9F500E63E95 /* BridgeOFF.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BridgeOFF.png; sourceTree = "<group>"; };
 		7797AC21183CE9F500E63E95 /* BridgeON.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BridgeON.png; sourceTree = "<group>"; };
-		7797AC22183CE9F500E63E95 /* Button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Button.png; sourceTree = "<group>"; };
-		7797AC23183CE9F500E63E95 /* ButtonOFF.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ButtonOFF.png; sourceTree = "<group>"; };
 		7797AC24183CE9F500E63E95 /* ButtonON.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ButtonON.png; sourceTree = "<group>"; };
 		7797AC25183CE9F500E63E95 /* Finish.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Finish.png; sourceTree = "<group>"; };
 		7797AC26183CE9F500E63E95 /* Rock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Rock.png; sourceTree = "<group>"; };
 		7797AC27183CE9F500E63E95 /* Star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Star.png; sourceTree = "<group>"; };
 		7797AC28183CE9F500E63E95 /* Start.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Start.gif; sourceTree = "<group>"; };
-		7797AC29183CE9F500E63E95 /* SwitchOFF.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SwitchOFF.png; sourceTree = "<group>"; };
 		7797AC2A183CE9F500E63E95 /* SwitchON.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SwitchON.png; sourceTree = "<group>"; };
 		7797AC2C183CE9F500E63E95 /* Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Background.png; sourceTree = "<group>"; };
 		7797AC2E183CE9F500E63E95 /* Cracked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Cracked.png; sourceTree = "<group>"; };
@@ -134,6 +130,10 @@
 		E60C6A00183B94F000D6FA14 /* Star.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Star.m; sourceTree = "<group>"; };
 		E60C6A08183BB19F00D6FA14 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
 		E60C6A09183BB19F00D6FA14 /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
+		E60DA7751848A1370088AB3D /* Bridge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Bridge.png; sourceTree = "<group>"; };
+		E60DA7771848A1880088AB3D /* PlatformLever.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlatformLever.png; sourceTree = "<group>"; };
+		E60DA7791848A2350088AB3D /* BridgeButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BridgeButton.png; sourceTree = "<group>"; };
+		E60DA77A1848A2350088AB3D /* StarButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = StarButton.png; sourceTree = "<group>"; };
 		E6214051182BA53800EC5C21 /* SpacePuzzle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpacePuzzle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6214054182BA53800EC5C21 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		E6214056182BA53800EC5C21 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -208,6 +208,10 @@
 		7797AC1E183CE9F500E63E95 /* Elements */ = {
 			isa = PBXGroup;
 			children = (
+				E60DA7791848A2350088AB3D /* BridgeButton.png */,
+				E60DA77A1848A2350088AB3D /* StarButton.png */,
+				E60DA7771848A1880088AB3D /* PlatformLever.png */,
+				E60DA7751848A1370088AB3D /* Bridge.png */,
 				77D6072D184374030079A182 /* AstroRight.png */,
 				77D6072E184374030079A182 /* AstroUp.png */,
 				77D60721184373F40079A182 /* AlienDown.png */,
@@ -218,16 +222,12 @@
 				77D60726184373F40079A182 /* AstroLeft.png */,
 				779EF6A6183F608C0097441A /* MovingPlatform.png */,
 				7797AC1F183CE9F500E63E95 /* Box.png */,
-				7797AC20183CE9F500E63E95 /* BridgeOFF.png */,
 				7797AC21183CE9F500E63E95 /* BridgeON.png */,
-				7797AC22183CE9F500E63E95 /* Button.png */,
-				7797AC23183CE9F500E63E95 /* ButtonOFF.png */,
 				7797AC24183CE9F500E63E95 /* ButtonON.png */,
 				7797AC25183CE9F500E63E95 /* Finish.png */,
 				7797AC26183CE9F500E63E95 /* Rock.png */,
 				7797AC27183CE9F500E63E95 /* Star.png */,
 				7797AC28183CE9F500E63E95 /* Start.gif */,
-				7797AC29183CE9F500E63E95 /* SwitchOFF.png */,
 				7797AC2A183CE9F500E63E95 /* SwitchON.png */,
 			);
 			name = Elements;
@@ -532,13 +532,13 @@
 				7797AC36183CE9F500E63E95 /* Box.png in Resources */,
 				7797AC47183CE9F500E63E95 /* Alien.png in Resources */,
 				7797AC48183CE9F500E63E95 /* Astronaut.png in Resources */,
-				7797AC39183CE9F500E63E95 /* Button.png in Resources */,
+				E60DA7781848A1880088AB3D /* PlatformLever.png in Resources */,
 				77D6072C184373F40079A182 /* AstroLeft.png in Resources */,
 				E6214061182BA53800EC5C21 /* InfoPlist.strings in Resources */,
 				77D6072B184373F40079A182 /* AstroDown.png in Resources */,
+				E60DA7761848A1370088AB3D /* Bridge.png in Resources */,
 				7797AC3E183CE9F500E63E95 /* Star.png in Resources */,
 				77D6072F184374030079A182 /* AstroRight.png in Resources */,
-				7797AC37183CE9F500E63E95 /* BridgeOFF.png in Resources */,
 				77D6072A184373F40079A182 /* AlienUp.png in Resources */,
 				77D60728184373F40079A182 /* AlienLeft.png in Resources */,
 				7797AC46183CE9F500E63E95 /* voidtile.png in Resources */,
@@ -547,20 +547,20 @@
 				7705C3A718477A4600CEB0C9 /* BigLWalk.atlasc in Resources */,
 				E687AE4D183A43EB00A5B78C /* mario.splvl in Resources */,
 				7797AC3D183CE9F500E63E95 /* Rock.png in Resources */,
+				E60DA77B1848A2350088AB3D /* BridgeButton.png in Resources */,
 				77F0A82318464495002FA17A /* LittleJohnWalk.atlasc in Resources */,
 				E6214074182BA53800EC5C21 /* Images.xcassets in Resources */,
 				7797AC42183CE9F500E63E95 /* Background.png in Resources */,
-				7797AC3A183CE9F500E63E95 /* ButtonOFF.png in Resources */,
 				7797AC38183CE9F500E63E95 /* BridgeON.png in Resources */,
 				7797AC3F183CE9F500E63E95 /* Start.gif in Resources */,
 				7797AC45183CE9F500E63E95 /* solidtile.png in Resources */,
 				7797AC3C183CE9F500E63E95 /* Finish.png in Resources */,
 				77D60729184373F40079A182 /* AlienRight.png in Resources */,
 				E621406A182BA53800EC5C21 /* Main.storyboard in Resources */,
+				E60DA77C1848A2350088AB3D /* StarButton.png in Resources */,
 				77D60730184374030079A182 /* AstroUp.png in Resources */,
 				7797AC43183CE9F500E63E95 /* Cracked.png in Resources */,
 				7797AC41183CE9F500E63E95 /* SwitchON.png in Resources */,
-				7797AC40183CE9F500E63E95 /* SwitchOFF.png in Resources */,
 				779EF6A7183F608C0097441A /* MovingPlatform.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

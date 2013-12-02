@@ -287,7 +287,7 @@
                         <font key="titleFont" metaFont="system"/>
                     </box>
                     <box autoresizesSubviews="NO" verticalHuggingPriority="750" fixedFrame="YES" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="bbO-ni-hSY">
-                        <rect key="frame" x="12" y="362" width="252" height="4"/>
+                        <rect key="frame" x="12" y="362" width="252" height="5"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                         <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -464,7 +464,7 @@
                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TBv-LT-2v8">
                         <rect key="frame" x="115" y="203" width="48" height="48"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" image="Button" id="Luv-Xz-XIA"/>
+                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" image="BridgeButton" id="Luv-Xz-XIA"/>
                     </imageView>
                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K3t-Ns-VvJ">
                         <rect key="frame" x="118" y="203" width="45" height="45"/>
@@ -495,7 +495,7 @@
                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OZT-3M-D5l">
                         <rect key="frame" x="116" y="119" width="48" height="48"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" image="Button" id="9Tm-FR-b62"/>
+                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" image="BridgeButton" id="9Tm-FR-b62"/>
                     </imageView>
                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="i9I-0W-kXG">
                         <rect key="frame" x="119" y="119" width="45" height="45"/>
@@ -594,7 +594,7 @@
                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f2k-iA-gNa">
                         <rect key="frame" x="114" y="33" width="48" height="48"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" image="SwitchOFF" id="VTc-f9-5xR"/>
+                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" image="PlatformLever" id="VTc-f9-5xR"/>
                     </imageView>
                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="y4j-qA-rwy">
                         <rect key="frame" x="117" y="36" width="42" height="43"/>
@@ -616,6 +616,7 @@
                 <outlet property="eraserClick" destination="phZ-kF-e3G" id="7jl-it-Ppa"/>
                 <outlet property="finishButton" destination="hPy-zW-iXT" id="tVK-mE-KzX"/>
                 <outlet property="rockButton" destination="6VA-Ty-BGb" id="yyb-J3-BD4"/>
+                <outlet property="sdf" destination="hPy-zW-iXT" id="7mQ-1C-lji"/>
                 <outlet property="selected" destination="HFh-uJ-dod" id="8ov-Zn-vsg"/>
                 <outlet property="selectedBridge" destination="uP5-0F-dCq" id="COd-1Q-JEk"/>
                 <outlet property="selectedBridgeButton" destination="oHq-av-KQC" id="Hs3-Kw-jdf"/>
@@ -671,15 +672,15 @@
     <resources>
         <image name="Background.png" width="128" height="128"/>
         <image name="Box" width="176" height="176"/>
+        <image name="BridgeButton" width="88" height="88"/>
         <image name="BridgeON" width="88" height="88"/>
-        <image name="Button" width="173" height="168"/>
         <image name="Cracked" width="88" height="88"/>
         <image name="Finish" width="256" height="256"/>
         <image name="MovingPlatform" width="88" height="88"/>
         <image name="NSRemoveTemplate" width="8" height="8"/>
-        <image name="Star" width="186" height="256"/>
+        <image name="PlatformLever" width="88" height="88"/>
+        <image name="Star" width="88" height="88"/>
         <image name="Start" width="400" height="400"/>
-        <image name="SwitchOFF" width="83" height="33"/>
         <image name="solidtile" width="88" height="88"/>
     </resources>
 </document>

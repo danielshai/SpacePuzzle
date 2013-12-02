@@ -165,9 +165,13 @@
 -(void)moveElement:(CGPoint)oldCoord NewCoord:(CGPoint)newCoord {
     NSNumber *indexOrigin = [NSNumber numberWithFloat:oldCoord.y*BOARD_SIZE_X + oldCoord.x];
     NSNumber *indexNew = [NSNumber numberWithFloat:newCoord.y*BOARD_SIZE_X + newCoord.x];
+    NSLog(@"moving: %f %f %f %f", oldCoord.x,oldCoord.y,newCoord.x,newCoord.y);
+    if(indexNew.integerValue == indexOrigin.integerValue) {
+        NSLog(@"retu");
+        return;
+    }
     SKSpriteNode *s = [_elements objectForKey:indexOrigin];
     [_elements setObject:s forKey:indexNew];
-
     // Gets the pixel value for the new position.
     newCoord = [Converter convertCoordToPixel:newCoord];
     // Converter does not take into account anchor point.
@@ -256,9 +260,13 @@
     // Shift the sprite a bit.
     pos.x += sprite.size.width/2;
     
-    if([className isEqualToString:@"Star"]) {
-        sprite.size = CGSizeMake(22, 22);
-    } else if([className isEqualToString:@"ButtonOFF"]) {
+    if([className isEqualToString:CLASS_STAR]) {
+        sprite.size = CGSizeMake(34, 34);
+    } else if([className isEqualToString:CLASS_LEVER]) {
+        sprite.size = CGSizeMake(34, _switchOff.size.height/2);
+        pos.y -= 10;
+    }
+    /*else if([className isEqualToString:@"ButtonOFF"]) {
         sprite.size = CGSizeMake(40, 40);
         pos.y -= 2;
         [sprite setPosition:pos];
@@ -266,10 +274,11 @@
         sprite.size = CGSizeMake(42, 40);
         pos.y -= 1;
         [sprite setPosition:pos];
-    } else if([className isEqualToString:@"SwitchOFF"]) {
+    } else if([className isEqualToString:@"PlatformLever"]) {
         sprite.size = CGSizeMake(TILESIZE, sprite.texture.size.height/2);
         pos.y -= 10;
-    }
+    }*/
+
     [sprite setPosition:pos];
     NSNumber *nr = [NSNumber numberWithInt:coord.y*BOARD_SIZE_X + coord.x];
     [_elements setObject:sprite forKey:nr];
@@ -333,13 +342,13 @@
         } else {
             pic = [SKTexture textureWithImageNamed:@"BridgeOFF.png"];
         }
-    } else if ([name isEqualToString:@"Lever"]) {
+    } else if ([name isEqualToString:CLASS_LEVER]) {
         if (state) {
             pic = [SKTexture textureWithImageNamed:@"SwitchON.png"];
         } else {
-            pic = [SKTexture textureWithImageNamed:@"SwitchOFF.png"];
+            pic = [SKTexture textureWithImageNamed:CLASS_LEVER];
         }
-    } else if ([name isEqualToString:@"MovingPlatform"]) {
+    } else if ([name isEqualToString:CLASS_MOVING_PLATFORM]) {
         // Might add the rainbow colours after the platform.
         pic = [SKTexture textureWithImageNamed:@"MovingPlatform.png"];
     } else if ([name isEqualToString:@"Star"]) {

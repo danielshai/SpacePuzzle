@@ -12,11 +12,13 @@
 @implementation MovingPlatform
 @synthesize blocking = _blocking;
 @synthesize path = _path;
+@synthesize speed = _speed;
 
 -(id)init {
     if(self = [super init]){
         _blocking = NO;
         _path = [[Path alloc] init];
+        _speed = 2;
     }
     return self;
 }
@@ -25,6 +27,7 @@
     if(self = [super initWithX:x Y:y]) {
         _blocking = NO;
         _path = [[Path alloc] init];
+        _speed = 2;
     }
     return self;
 }
@@ -33,6 +36,7 @@
     if(self = [super initWithX:x Y:y]) {
         _blocking = NO;
         _path = path;
+        _speed = 2;
     }
     return self;
 }
@@ -43,6 +47,14 @@
 
 -(void) doAction {
     
+}
+
+-(void)start {
+    NSLog(@"Started");
+}
+
+-(void)stop {
+    NSLog(@"Stopped");
 }
 
 @end

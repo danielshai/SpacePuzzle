@@ -48,6 +48,7 @@
 -(void)setupBoard;
 -(void)setupElements;
 -(void)setupUnits;
+-(void)movePlatform: (MovingPlatform*)mp;
 -(void)observeText:(NSString*)text Selector: (SEL)selector;
 -(NSArray*)getDataFromNotification:(NSNotification*) notif Key: (NSString*) key;
 @end

@@ -180,6 +180,8 @@
     [_parser addOutput:@"</finish>"];
 }
 
+/*
+ *  Exporting XML formatted data about elements on the canvas. */
 -(void)elementExport {
     [_parser addOutput:@"<boardelements>"];
    
@@ -244,6 +246,8 @@
     [_parser addOutput:@"</boardelements>"];
 }
 
+/*
+ *  Exporting XML formatted data about |Star|. */
 -(void)starExport:(Star *)star {
     NSString *element = @"<";
     
@@ -271,6 +275,8 @@
     [_parser addOutput:element];
 }
 
+/*
+ *  Exporting XML formatted data about |Box|. */
 -(void)boxExport:(Box *)box {
     NSString *element = @"<";
     
@@ -298,6 +304,8 @@
     [_parser addOutput:element];
 }
 
+/*
+ *  Exporting XML formatted data about |Bridge|. */
 -(void)bridgeExport:(Bridge *)b {
     NSString *element = @"<";
     
@@ -325,6 +333,8 @@
     [_parser addOutput:element];
 }
 
+/*
+ *  Exporting XML formatted data about |BridgeButton|. */
 -(void)bridgeButtonExport:(BridgeButton *)bb {
     NSString *element = @"<";
     
@@ -367,6 +377,8 @@
     [_parser addOutput:element];
 }
 
+/*
+ *  Exporting XML formatted data about |StarButton|. */
 -(void)starButtonExport:(StarButton *)sb {
     NSString *element = @"<";
     
@@ -409,6 +421,8 @@
     [_parser addOutput:element];
 }
 
+/*
+ *  Exporting XML formatted data about |MovingPlatform|. ADD PATHS!! */
 -(void)movingPlatformExport:(MovingPlatform *)mp {
     NSString *element = @"<";
     
@@ -428,15 +442,30 @@
     element = [element stringByAppendingString:[@(mp.blocking) stringValue]];
     element = [element stringByAppendingString:@"</blocking>"];
     
+    element = [element stringByAppendingString:@"<path>"];
+    // Path.
+    for(int i = 0; i < [[[mp path] points] count]; i++) {
+        // Output path.
+        CGPoint p = [[mp path] getCGPointAtIndex:i];
+        element = [element stringByAppendingString:@"<x>"];
+        element = [element stringByAppendingString:[@(p.x) stringValue]];
+        element = [element stringByAppendingString:@"</x>"];
+        
+        element = [element stringByAppendingString:@"<y>"];
+        element = [element stringByAppendingString:[@(p.y) stringValue]];
+        element = [element stringByAppendingString:@"</y>"];
+    }
+    element = [element stringByAppendingString:@"</path>"];
     // End of this element.
     element = [element stringByAppendingString:@"</"];
     element = [element stringByAppendingString:NSStringFromClass([mp class])];
     element = [element stringByAppendingString:@">"];
     
     [_parser addOutput:element];
-
 }
 
+/*
+ *  Exporting XML formatted data about |PlatformLever|. */
 -(void)leverExport:(PlatformLever *)pl {
     NSString *element = @"<";
     
@@ -490,6 +519,8 @@
         } else if([[_elementDictionary objectForKey:posKey] isKindOfClass:[Bridge class]]) {
             Bridge *b = (Bridge*)[_elementDictionary objectForKey:posKey];
             return !b.blocking;
+        } else if ([[_elementDictionary objectForKey:posKey] isKindOfClass:[MovingPlatform class]]) {
+            return YES;
         }
         return NO;
     } else {
