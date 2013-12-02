@@ -388,13 +388,14 @@
 
 -(void)movePlatform:(NSTimer *)timer {
     MovingPlatform *mp = [timer userInfo];
+    [[_board elementDictionary] removeObjectForKey:mp.key];
     CGPoint prevPoint = CGPointMake(mp.x, mp.y);
     if(mp) {
         CGPoint p = mp.path.nextPoint;
         mp.x = p.x;
         mp.y = p.y;
     }
-    
+    [[_board elementDictionary] setObject:mp forKey:mp.key];
     NSLog(@"%f %f --- %ld %ld",prevPoint.x,prevPoint.y,(long)mp.x,(long)mp.y);
     [_scene moveElement:prevPoint NewCoord:CGPointMake(mp.x, mp.y)];
 }
