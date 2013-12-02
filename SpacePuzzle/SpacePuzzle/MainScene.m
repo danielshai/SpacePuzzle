@@ -67,37 +67,37 @@
 -(void)initScene {
     // Preloading Big Ls walking animations.
     [SKTexture preloadTextures:BIGLWALK_ANIM_AUP withCompletionHandler:^(void){
-        SKAction *walk = [SKAction animateWithTextures:BIGLWALK_ANIM_AUP timePerFrame:0.1];
+        SKAction *walk = [SKAction animateWithTextures:BIGLWALK_ANIM_AUP timePerFrame:TIME_PER_FRAME];
         _bWUp = [SKAction sequence:@[walk, walk, walk, walk]];
     }];
     [SKTexture preloadTextures:BIGLWALK_ANIM_ADOWN withCompletionHandler:^(void){
-        SKAction *walk = [SKAction animateWithTextures:BIGLWALK_ANIM_ADOWN timePerFrame:0.1];
+        SKAction *walk = [SKAction animateWithTextures:BIGLWALK_ANIM_ADOWN timePerFrame:TIME_PER_FRAME];
         _bWDown = [SKAction sequence:@[walk, walk, walk, walk]];
     }];
     [SKTexture preloadTextures:BIGLWALK_ANIM_ARIGHT withCompletionHandler:^(void){
-        SKAction *walk = [SKAction animateWithTextures:BIGLWALK_ANIM_ARIGHT timePerFrame:0.1];
+        SKAction *walk = [SKAction animateWithTextures:BIGLWALK_ANIM_ARIGHT timePerFrame:TIME_PER_FRAME];
         _bWRight = [SKAction sequence:@[walk, walk, walk, walk]];
     }];
     [SKTexture preloadTextures:BIGLWALK_ANIM_ALEFT withCompletionHandler:^(void){
-        SKAction *walk = [SKAction animateWithTextures:BIGLWALK_ANIM_ALEFT timePerFrame:0.1];
+        SKAction *walk = [SKAction animateWithTextures:BIGLWALK_ANIM_ALEFT timePerFrame:TIME_PER_FRAME];
         _bWLeft = [SKAction sequence:@[walk, walk, walk, walk]];
     }];
     
     // Preloading Little Johns walking animations.
     [SKTexture preloadTextures:LITTLEJOHNWALK_ANIM_BUP withCompletionHandler:^(void){
-        SKAction *walk = [SKAction animateWithTextures:LITTLEJOHNWALK_ANIM_BUP timePerFrame:0.1];
+        SKAction *walk = [SKAction animateWithTextures:LITTLEJOHNWALK_ANIM_BUP timePerFrame:TIME_PER_FRAME];
         _lWUp = [SKAction sequence:@[walk, walk, walk, walk]];
     }];
     [SKTexture preloadTextures:LITTLEJOHNWALK_ANIM_BDOWN withCompletionHandler:^(void){
-        SKAction *walk = [SKAction animateWithTextures:LITTLEJOHNWALK_ANIM_BDOWN timePerFrame:0.1];
+        SKAction *walk = [SKAction animateWithTextures:LITTLEJOHNWALK_ANIM_BDOWN timePerFrame:TIME_PER_FRAME];
         _lWDown = [SKAction sequence:@[walk, walk, walk, walk]];
     }];
     [SKTexture preloadTextures:LITTLEJOHNWALK_ANIM_BRIGHT withCompletionHandler:^(void){
-        SKAction *walk = [SKAction animateWithTextures:LITTLEJOHNWALK_ANIM_BRIGHT timePerFrame:0.1];
+        SKAction *walk = [SKAction animateWithTextures:LITTLEJOHNWALK_ANIM_BRIGHT timePerFrame:TIME_PER_FRAME];
         _lWRight = [SKAction sequence:@[walk, walk, walk, walk]];
     }];
     [SKTexture preloadTextures:LITTLEJOHNWALK_ANIM_BLEFT withCompletionHandler:^(void){
-        SKAction *walk = [SKAction animateWithTextures:LITTLEJOHNWALK_ANIM_BLEFT timePerFrame:0.1];
+        SKAction *walk = [SKAction animateWithTextures:LITTLEJOHNWALK_ANIM_BLEFT timePerFrame:TIME_PER_FRAME];
         _lWLeft = [SKAction sequence:@[walk, walk, walk, walk]];
     }];
 }
@@ -165,7 +165,7 @@
 -(void)moveElement:(CGPoint)oldCoord NewCoord:(CGPoint)newCoord {
     NSNumber *indexOrigin = [NSNumber numberWithFloat:oldCoord.y*BOARD_SIZE_X + oldCoord.x];
     NSNumber *indexNew = [NSNumber numberWithFloat:newCoord.y*BOARD_SIZE_X + newCoord.x];
-    NSLog(@"moving: %f %f %f %f", oldCoord.x,oldCoord.y,newCoord.x,newCoord.y);
+  //  NSLog(@"moving: %f %f %f %f", oldCoord.x,oldCoord.y,newCoord.x,newCoord.y);
     if(indexNew.integerValue == indexOrigin.integerValue) {
         NSLog(@"retu");
         return;
