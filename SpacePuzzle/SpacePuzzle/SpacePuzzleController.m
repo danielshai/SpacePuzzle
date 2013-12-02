@@ -75,14 +75,12 @@
     UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeRight:)];
     swipeRight.direction = UISwipeGestureRecognizerDirectionRight;
     [_scene.view addGestureRecognizer:swipeRight];
-    
-    [self observeText:@"AnimationFinished" Selector:@selector(waitForAnimation:)];
 }
 
 /*
  *  Called when the user taps once. */
 -(void)singleTap:(UIGestureRecognizer *)sender {
-    if (sender.state == UIGestureRecognizerStateEnded) {
+    if (sender.state == UIGestureRecognizerStateEnded && ![_scene animating]) {
         CGPoint location = [sender locationInView:_scene.view];
         
         // Convert to board coordinates. Invert with -9.
@@ -96,7 +94,7 @@
 /* 
  *  Called when the user double taps the view. */
 -(void)doubleTap:(UIGestureRecognizer *)sender {
-    if (sender.state == UIGestureRecognizerStateEnded) {
+    if (sender.state == UIGestureRecognizerStateEnded && ![_scene animating]) {
         CGPoint location = [sender locationInView:_scene.view];
         
         // Convert to board coordinates. Invert with -9.
@@ -108,7 +106,7 @@
 }
 
 -(void)trippleTap:(UIGestureRecognizer *)sender {
-    if(sender.state == UIGestureRecognizerStateEnded) {
+    if(sender.state == UIGestureRecognizerStateEnded && ![_scene animating]) {
         if (_currentUnit == _bigL) {
             _currentUnit = _littleJohn;
             _nextUnit = _bigL;
@@ -123,7 +121,7 @@
 }
 
 -(void)swipeUp:(UISwipeGestureRecognizer *)sender {
-    if (sender.state == UIGestureRecognizerStateEnded) {
+    if (sender.state == UIGestureRecognizerStateEnded && ![[_scene currentUnit] hasActions]) {
         CGPoint location = CGPointMake(_currentUnit.x, _currentUnit.y);
         location.y -= 1;
         [self unitWantsToMoveTo:location];
@@ -131,7 +129,7 @@
 }
 
 -(void)swipeDown:(UISwipeGestureRecognizer *)sender {
-    if (sender.state == UIGestureRecognizerStateEnded) {
+    if (sender.state == UIGestureRecognizerStateEnded && ![[_scene currentUnit] hasActions]) {
         CGPoint location = CGPointMake(_currentUnit.x, _currentUnit.y);
         location.y += 1;
         [self unitWantsToMoveTo:location];
@@ -139,7 +137,7 @@
 }
 
 -(void)swipeLeft:(UISwipeGestureRecognizer *)sender {
-    if (sender.state == UIGestureRecognizerStateEnded) {
+    if (sender.state == UIGestureRecognizerStateEnded && ![[_scene currentUnit] hasActions]) {
         CGPoint location = CGPointMake(_currentUnit.x, _currentUnit.y);
         location.x -= 1;
         [self unitWantsToMoveTo:location];
@@ -147,7 +145,7 @@
 }
 
 -(void)swipeRight:(UISwipeGestureRecognizer *)sender {
-    if (sender.state == UIGestureRecognizerStateEnded) {
+    if (sender.state == UIGestureRecognizerStateEnded && ![[_scene currentUnit] hasActions]) {
         CGPoint location = CGPointMake(_currentUnit.x, _currentUnit.y);
         location.x += 1;
         [self unitWantsToMoveTo:location];
@@ -299,34 +297,6 @@
                 [self doActionOnPlatformLever:e];
         }
     }
-}
-
--(void)waitForAnimation:(NSNotification *)notification{
-    /*
-    NSDictionary *userInfo = notification.userInfo;
-    NSSet *objectSent = [userInfo objectForKey:@"AnimationFinished"];
-    NSArray *data = [objectSent allObjects];
-    Position *coord = [[Position alloc] init];
-    coord = [data objectAtIndex:0];
-    
-    NSNumber *currentPos = [NSNumber numberWithInt:coord.y*BOARD_SIZE_X + coord.x];
-    Element *e = [[_board elementDictionary] objectForKey:currentPos];
-    
-    _currentUnit.x = coord.x;
-    _currentUnit.y = coord.y;
-    NSLog(@"UNIT %d %d", _currentUnit.x, _currentUnit.y);
-    [self isUnitOnGoal];
-    [self unitWantsToMoveTo:CGPointMake(_currentUnit.x, _currentUnit.y)];
-    // If the element is a star.
-    if([e isKindOfClass:[Star class]] && ![e hidden] && ![e taken]) {
-        [e movedTo];
-        _player.starsTaken += 1;
-        //[[_board elementDictionary] removeObjectForKey:nextPosKey];
-        [_scene removeElementAtPosition:currentPos];
-        if(_player.starsTaken >= 3) {
-            NSLog(@"CONGRATULATIONS! YOU WON!");
-        }
-    }*/
 }
 
 /*

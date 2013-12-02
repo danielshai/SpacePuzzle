@@ -36,7 +36,7 @@
 @synthesize lWDown = _lWDown;
 @synthesize lWRight = _lWRight;
 @synthesize lWLeft = _lWLeft;
-@synthesize controlArray = _controlArray;
+@synthesize animating = _animating;
 
 -(id)initWithSize:(CGSize)size {    
     if (self = [super initWithSize:size]) {
@@ -60,7 +60,7 @@
         [self addChild:_bkg];
         _elements = [[NSMutableDictionary alloc] init];
         _tiles = [[NSMutableArray alloc] init];
-        _controlArray = [[NSMutableArray alloc] init];
+        _animating = NO;
         [self initScene];
     }
     return self;
@@ -146,20 +146,7 @@
             action = [SKAction group:@[_lWLeft, move]];
         }
     }
-    
-    [_controlArray addObject:coordinations];
-    
-    [UIView animateWithDuration:action.duration
-        animations:^{
-            [_currentUnit runAction:action];
-        }
-        completion:^(BOOL finished) {
-            if(finished){
-                [self notifyText:@"AnimationFinished" Object:_controlArray Key:@"AnimationFinished"];
-                [_controlArray removeAllObjects];
-            }
-        }];
-    //_currentUnit.position = pos;
+    [_currentUnit runAction:action];
 }
 
 -(void)moveElement:(CGPoint)oldCoord NewCoord:(CGPoint)newCoord {
