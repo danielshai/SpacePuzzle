@@ -110,9 +110,6 @@
 }
 
 +(BOOL)isPoint:(CGPoint)p1 sameAsPoint:(CGPoint)p2 {
-    NSLog(@"p1: %f %f. p2: %f %f", p1.x,p1.y,p2.x,p2.y);
-    BOOL b = p1.x == p2.x && p1.y == p2.y;
-    NSLog(@"%d",b);
     return p1.x == p2.x && p1.y == p2.y;
 }
 

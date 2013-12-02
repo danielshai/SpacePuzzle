@@ -199,7 +199,9 @@
     NSNumber *unitKey = [NSNumber numberWithInt:unitY*BOARD_SIZE_X + unitX];
     NSInteger unitIntKey = [unitKey integerValue];
     NSNumber *nextPos = [NSNumber numberWithInt:y*BOARD_SIZE_X + x];
+
     Element *e = [[_board elementDictionary] objectForKey:nextPos];
+    Element *eFrom = [[_board elementDictionary] objectForKey:unitKey];
     CGPoint movePoint = CGPointMake(x, y);
     CGPoint unitPoint = CGPointMake(unitX, unitY);
     // First check if the movement was inside the board and if the tile isn't |void| (which units cannot
@@ -221,7 +223,6 @@
             if(![e blocking]) {
                 _currentUnit.x = x;
                 _currentUnit.y = y;
-                NSLog(@"%d %d", x, y);
                 
                 [_scene updateUnit:movePoint inDirection:dir];
                 [self isUnitOnGoal];
@@ -232,6 +233,33 @@
                     _player.starsTaken += 1;
                     //[[_board elementDictionary] removeObjectForKey:nextPosKey];
                     [_scene removeElementAtPosition:nextPosKey];
+                } else if([e isKindOfClass:[StarButton class]]) {
+                    [self doActionOnStarButton:e];
+                } else if([e isKindOfClass:[BridgeButton class]]) {
+                    [self doActionOnBridgeButton:e];
+                }
+                
+                // Check elements that the unit left.
+                if([eFrom isKindOfClass:[StarButton class]]) {
+                    // Buttons should be deactivated if left.
+                    StarButton *sb = (StarButton*)eFrom;
+                    [sb unitLeft];
+                    [_scene refreshElementAtPosition:sb.key OfClass:CLASS_STARBUTTON WithStatus:sb.state];
+                    // Updates the star connected to the button on the scene, i.e. showing it.
+                    if(sb.star.taken == NO) {
+                        [_scene setElementAtPosition:sb.star.key IsHidden:sb.star.hidden];
+                    }
+                } else if([eFrom isKindOfClass:[BridgeButton class]]) {
+                    // Buttons should be deactivated if left.
+                    BridgeButton *bb = (BridgeButton*)eFrom;
+                    [bb unitLeft];
+                    
+                    // Updates the button on the scene.
+                    [_scene refreshElementAtPosition:bb.bridge.key OfClass:CLASS_BRIDGE WithStatus:bb.state];
+                    [_scene refreshElementAtPosition:bb.key OfClass:CLASS_BRIDGEBUTTON WithStatus:bb.state];
+                    // Updates the bridge connected to the button on the scene, i.e. showing it.
+                    [_scene setElementAtPosition:bb.bridge.key IsHidden:NO];
+
                 }
             }
         }
@@ -261,7 +289,7 @@
                 NSInteger dir = [Converter convertCoordsTo:actionPoint Direction:unitPoint];
                 [self doActionOnBox:e InDirection:dir];
         } else if ([e isKindOfClass:[StarButton class]] && [Converter isPoint:unitPoint sameAsPoint:actionPoint]) {
-                [self doActionOnStarButton:e];
+                //[self doActionOnStarButton:e];
         } else if ([e isKindOfClass:[BridgeButton class]] && [Converter isPoint:unitPoint sameAsPoint:actionPoint]) {
                 [self doActionOnBridgeButton:e];
         } else if ([e isKindOfClass:[PlatformLever class]] && [Converter isPoint:unitPoint sameAsPoint:actionPoint]) {
@@ -338,7 +366,7 @@
 
 -(void)doActionOnStarButton:(Element *)button {
     StarButton *sb = (StarButton*)button;
-    [sb doAction];
+    [sb movedTo];
     
     // Updates the button on the scene.
     [_scene refreshElementAtPosition:sb.key OfClass:CLASS_STARBUTTON WithStatus:sb.state];
@@ -350,7 +378,7 @@
 
 -(void)doActionOnBridgeButton: (Element*)button {
     BridgeButton *bb = (BridgeButton*)button;
-    [bb doAction];
+    [bb movedTo];
     
     // Updates the button on the scene.
     [_scene refreshElementAtPosition:bb.bridge.key OfClass:CLASS_BRIDGE WithStatus:bb.state];
@@ -359,6 +387,7 @@
     [_scene setElementAtPosition:bb.bridge.key IsHidden:NO];
 }
 
+// Moving platform should have TIMER in it.
 -(void)doActionOnPlatformLever:(Element *)lever {
     PlatformLever *pl = (PlatformLever*)lever;
     [pl doAction];

@@ -41,4 +41,13 @@
     _bridge.blocking = !_bridge.blocking;
 }
 
+-(void)movedTo {
+    _state = YES;
+    _bridge.blocking = NO;
+}
+
+-(void)unitLeft {
+    _state = NO;
+    _bridge.blocking = YES;
+}
 @end
