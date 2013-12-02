@@ -238,9 +238,11 @@
                 } else if([e isKindOfClass:[BridgeButton class]]) {
                     [self doActionOnBridgeButton:e];
                 }
-                
                 // Check elements that the unit left.
-                if([eFrom isKindOfClass:[StarButton class]]) {
+                CGPoint nextUnitPos = CGPointMake(_nextUnit.x, _nextUnit.y);
+                // Checks if the element moved from is a |StarButton|, and the second condition checks if
+                // the other unit is still on the button, which means the button shouldn't be deactivated.
+                if([eFrom isKindOfClass:[StarButton class]] && ![Converter isPoint:nextUnitPos sameAsPoint:unitPoint]) {
                     // Buttons should be deactivated if left.
                     StarButton *sb = (StarButton*)eFrom;
                     [sb unitLeft];
@@ -249,7 +251,7 @@
                     if(sb.star.taken == NO) {
                         [_scene setElementAtPosition:sb.star.key IsHidden:sb.star.hidden];
                     }
-                } else if([eFrom isKindOfClass:[BridgeButton class]]) {
+                } else if([eFrom isKindOfClass:[BridgeButton class]] && ![Converter isPoint:nextUnitPos sameAsPoint:unitPoint]) {
                     // Buttons should be deactivated if left.
                     BridgeButton *bb = (BridgeButton*)eFrom;
                     [bb unitLeft];
@@ -259,7 +261,6 @@
                     [_scene refreshElementAtPosition:bb.key OfClass:CLASS_BRIDGEBUTTON WithStatus:bb.state];
                     // Updates the bridge connected to the button on the scene, i.e. showing it.
                     [_scene setElementAtPosition:bb.bridge.key IsHidden:NO];
-
                 }
             }
         }
