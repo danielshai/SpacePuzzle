@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <SpriteKit/SpriteKit.h>
 #import <Foundation/Foundation.h>
+#import <QuartzCore/QuartzCore.h>
 #import "Board.h"
 #import "Macros.h"
 #import "MainScene.h"
@@ -39,6 +40,7 @@
 -(void)swipeRight:(UISwipeGestureRecognizer *)sender;
 -(void)unitWantsToMoveTo: (CGPoint)loc;
 -(void)unitWantsToDoActionAt: (CGPoint)loc;
+-(void)waitForAnimation:(NSNotification *) notification;
 -(void)doActionOnBox: (Element*)rock InDirection: (NSInteger)dir;
 -(void)doActionOnStarButton: (Element*)button;
 -(void)doActionOnBridgeButton: (Element*)button;

@@ -8,6 +8,8 @@
 #import "BigLWalk.h"
 #import "LittleJohnWalk.h"
 #import "AnimationFactory.h"
+#import "Element.h"
+#import "Position.h"
 
 @implementation MainScene
 @synthesize solidTile = _solidTile;
@@ -25,14 +27,6 @@
 @synthesize bridgeOn = _bridgeOn;
 @synthesize switchOff = _switchOff;
 @synthesize switchOn = _switchOn;
-@synthesize bigLUp = _bigLUp;
-@synthesize bigLDown = _bigLDown;
-@synthesize bigLRight = _bigLRight;
-@synthesize bigLLeft = _bigLLeft;
-@synthesize littleJohnUp = _littleJohnUp;
-@synthesize littleJohnDown = _littleJohnDown;
-@synthesize littleJohnRight = _littleJohnRight;
-@synthesize littleJohnLeft = _littleJohnLeft;
 @synthesize sequence = _sequence;
 @synthesize bWUp = _bWUp;
 @synthesize bWDown = _bWDown;
@@ -42,6 +36,7 @@
 @synthesize lWDown = _lWDown;
 @synthesize lWRight = _lWRight;
 @synthesize lWLeft = _lWLeft;
+@synthesize controlArray = _controlArray;
 
 -(id)initWithSize:(CGSize)size {    
     if (self = [super initWithSize:size]) {
@@ -65,6 +60,7 @@
         [self addChild:_bkg];
         _elements = [[NSMutableDictionary alloc] init];
         _tiles = [[NSMutableArray alloc] init];
+        _controlArray = [[NSMutableArray alloc] init];
         [self initScene];
     }
     return self;
@@ -111,10 +107,13 @@
 
 /*
  *  Updates the current unit with the data model. */
--(void)updateUnit:(CGPoint)coord inDirection:(NSInteger)direction {
+-(void)updateUnit:(CGPoint)coord inDirection:(NSInteger)direction{
     CGPoint pos = [Converter convertCoordToPixel:coord];
     pos.x += 20;
     pos.y -= 5;
+    Position *coordinations = [[Position alloc] init];
+    coordinations.x = coord.x;
+    coordinations.y = coord.y;
     SKAction *move;
     SKAction *action;
     // Depending on the direction the unit is making, update to the correct picture.
@@ -147,7 +146,19 @@
             action = [SKAction group:@[_lWLeft, move]];
         }
     }
-    [_currentUnit runAction:action];
+    
+    [_controlArray addObject:coordinations];
+    
+    [UIView animateWithDuration:action.duration
+        animations:^{
+            [_currentUnit runAction:action];
+        }
+        completion:^(BOOL finished) {
+            if(finished){
+                [self notifyText:@"AnimationFinished" Object:_controlArray Key:@"AnimationFinished"];
+                [_controlArray removeAllObjects];
+            }
+        }];
     //_currentUnit.position = pos;
 }
 

@@ -42,11 +42,10 @@
 
 -(void) movedTo {
     _taken = YES;
-    NSLog(@"HEJ!");
 }
 
 -(void) doAction {
-     NSLog(@"HEJ2!");
+
 }
 
 @end

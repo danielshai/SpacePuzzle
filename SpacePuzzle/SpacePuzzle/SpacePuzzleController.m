@@ -13,6 +13,7 @@
 #import "PlatformLever.h"
 #import "Bridge.h"
 #import "Path.h"
+#import "Position.h"
 
 @implementation SpacePuzzleController
 @synthesize board = _board;
@@ -59,7 +60,6 @@
     trippleTapR.numberOfTapsRequired = 3;
     [_scene.view addGestureRecognizer:trippleTapR];
 
-    
     UISwipeGestureRecognizer *swipeUp = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeUp:)];
     swipeUp.direction = UISwipeGestureRecognizerDirectionUp;
     [_scene.view addGestureRecognizer:swipeUp];
@@ -75,6 +75,8 @@
     UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeRight:)];
     swipeRight.direction = UISwipeGestureRecognizerDirectionRight;
     [_scene.view addGestureRecognizer:swipeRight];
+    
+    [self observeText:@"AnimationFinished" Selector:@selector(waitForAnimation:)];
 }
 
 /*
@@ -182,6 +184,24 @@
         //    [_scene setupElement:p Name:@"ButtonOFF" Hidden:[obj hidden]];
         //}
     }
+    /*CGPoint p = CGPointMake(0, 0);
+    
+    // TEMP TEST CODE FOR PLATFORM LEVER
+    MovingPlatform *mp = [[MovingPlatform alloc] initWithX:2 Y:0 Hidden:NO];
+    [[_board elementDictionary] setObject:mp forKey:mp.key];
+    PlatformLever *pl = [[PlatformLever alloc] initWithMovingPlatform:mp X:1 Y:0];
+    [[_board elementDictionary] setObject:pl forKey:pl.key];
+
+    p = CGPointMake(2, 0);
+    [_scene setupElement:p Name:@"MovingPlatform" Hidden:NO];
+    [_scene setElementAtPosition:mp.key IsHidden:NO];
+    [_scene setElementAtPosition:pl.key IsHidden:NO];
+    
+    pl.movingPlatform = mp;
+   // nr = [NSNumber numberWithInteger:1];
+  //  [[_board elementDictionary] setObject:pl forKey:nr];
+    p = CGPointMake(1, 0);
+    [_scene setupElement:p Name:@"SwitchOFF" Hidden:NO];*/
 }
 
 /*
@@ -217,51 +237,43 @@
                 [[[_board board] objectAtIndex:unitIntKey] setStatus:MAPSTATUS_VOID];
                 [_scene refreshTileAtFlatIndex:unitIntKey WithStatus:MAPSTATUS_VOID];
             }
-
-            NSInteger dir = [Converter convertCoordsTo:movePoint Direction:unitPoint];
+            CGPoint actionPoint = CGPointMake(x, y);
+            CGPoint unitPoint = CGPointMake(unitX, unitY);
+            NSInteger dir = [Converter convertCoordsTo:actionPoint Direction:unitPoint];
+            
+            // Updates the position of curKey to the one that the unit is moving towards.
+            // Check elements on the board.
             // If the element isn't blocking, move unit.
             if(![e blocking]) {
-                _currentUnit.x = x;
-                _currentUnit.y = y;
-                
-                [_scene updateUnit:movePoint inDirection:dir];
-                [self isUnitOnGoal];
-                [self unitWantsToDoActionAt:movePoint];
-                // If the element is a star.
-                if([e isKindOfClass:[Star class]] && ![e hidden] && ![e taken]) {
-                    [e movedTo];
-                    _player.starsTaken += 1;
-                    //[[_board elementDictionary] removeObjectForKey:nextPosKey];
-                    [_scene removeElementAtPosition:nextPosKey];
-                } else if([e isKindOfClass:[StarButton class]]) {
-                    [self doActionOnStarButton:e];
-                } else if([e isKindOfClass:[BridgeButton class]]) {
-                    [self doActionOnBridgeButton:e];
-                }
-                // Check elements that the unit left.
-                CGPoint nextUnitPos = CGPointMake(_nextUnit.x, _nextUnit.y);
-                // Checks if the element moved from is a |StarButton|, and the second condition checks if
-                // the other unit is still on the button, which means the button shouldn't be deactivated.
-                if([eFrom isKindOfClass:[StarButton class]] && ![Converter isPoint:nextUnitPos sameAsPoint:unitPoint]) {
-                    // Buttons should be deactivated if left.
-                    StarButton *sb = (StarButton*)eFrom;
-                    [sb unitLeft];
-                    [_scene refreshElementAtPosition:sb.key OfClass:CLASS_STARBUTTON WithStatus:sb.state];
-                    // Updates the star connected to the button on the scene, i.e. showing it.
-                    if(sb.star.taken == NO) {
-                        [_scene setElementAtPosition:sb.star.key IsHidden:sb.star.hidden];
-                    }
-                } else if([eFrom isKindOfClass:[BridgeButton class]] && ![Converter isPoint:nextUnitPos sameAsPoint:unitPoint]) {
-                    // Buttons should be deactivated if left.
-                    BridgeButton *bb = (BridgeButton*)eFrom;
-                    [bb unitLeft];
+                [CATransaction begin]; {
+                    [CATransaction setCompletionBlock:^{
+                        // This block runs after any animations created before the call to
+                        // [CATransaction commit] below.  Specifically, if
+                        // doMethodOneWhichHasAnimation starts any animations, this block
+                        // will not run until those animations are finished.
+                        _currentUnit.x = x;
+                        _currentUnit.y = y;
+                        NSLog(@"UNIT %d %d", _currentUnit.x, _currentUnit.y);
+                        [self isUnitOnGoal];
+                        [self unitWantsToMoveTo:CGPointMake(_currentUnit.x, _currentUnit.y)];
+                        // If the element is a star.
+                        if([e isKindOfClass:[Star class]] && ![e hidden] && ![e taken]) {
+                            [e movedTo];
+                            _player.starsTaken += 1;
+                            //[[_board elementDictionary] removeObjectForKey:nextPosKey];
+                            [_scene removeElementAtPosition:nextPosKey];
+                            if(_player.starsTaken >= 3) {
+                                NSLog(@"CONGRATULATIONS! YOU WON!");
+                            }
+                        }
+                        
+                    }];
                     
-                    // Updates the button on the scene.
-                    [_scene refreshElementAtPosition:bb.bridge.key OfClass:CLASS_BRIDGE WithStatus:bb.state];
-                    [_scene refreshElementAtPosition:bb.key OfClass:CLASS_BRIDGEBUTTON WithStatus:bb.state];
-                    // Updates the bridge connected to the button on the scene, i.e. showing it.
-                    [_scene setElementAtPosition:bb.bridge.key IsHidden:NO];
-                }
+                    // You don't need to modify `doMethodOneWhichHasAnimation`.  Its animations are
+                    // automatically part of the current transaction.
+                    [_scene updateUnit:actionPoint inDirection:dir];
+                    
+                } [CATransaction commit];
             }
         }
     }
@@ -297,6 +309,34 @@
                 [self doActionOnPlatformLever:e];
         }
     }
+}
+
+-(void)waitForAnimation:(NSNotification *)notification{
+    /*
+    NSDictionary *userInfo = notification.userInfo;
+    NSSet *objectSent = [userInfo objectForKey:@"AnimationFinished"];
+    NSArray *data = [objectSent allObjects];
+    Position *coord = [[Position alloc] init];
+    coord = [data objectAtIndex:0];
+    
+    NSNumber *currentPos = [NSNumber numberWithInt:coord.y*BOARD_SIZE_X + coord.x];
+    Element *e = [[_board elementDictionary] objectForKey:currentPos];
+    
+    _currentUnit.x = coord.x;
+    _currentUnit.y = coord.y;
+    NSLog(@"UNIT %d %d", _currentUnit.x, _currentUnit.y);
+    [self isUnitOnGoal];
+    [self unitWantsToMoveTo:CGPointMake(_currentUnit.x, _currentUnit.y)];
+    // If the element is a star.
+    if([e isKindOfClass:[Star class]] && ![e hidden] && ![e taken]) {
+        [e movedTo];
+        _player.starsTaken += 1;
+        //[[_board elementDictionary] removeObjectForKey:nextPosKey];
+        [_scene removeElementAtPosition:currentPos];
+        if(_player.starsTaken >= 3) {
+            NSLog(@"CONGRATULATIONS! YOU WON!");
+        }
+    }*/
 }
 
 /*
@@ -392,7 +432,7 @@
 -(void)doActionOnPlatformLever:(Element *)lever {
     PlatformLever *pl = (PlatformLever*)lever;
     [pl doAction];
-    
+    NSLog(@"INSIDE PLATFORM LEVER");
     // Updates the lever on the scene.
     [_scene refreshElementAtPosition:pl.key OfClass:CLASS_LEVER WithStatus:pl.state];
     // Updates the moving platform connected to the lever on the scene, i.e. moving it.
