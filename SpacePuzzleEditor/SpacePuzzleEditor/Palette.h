@@ -11,6 +11,7 @@
 
 @interface Palette : NSPanel
 @property (weak) IBOutlet NSImageView *solidTile;
+@property (weak) IBOutlet NSButton *sdf;
 @property (weak) IBOutlet NSImageView *crackedTile;
 @property (weak) IBOutlet NSImageView *voidTile;
 // Image view that indicate which brush that has been selected.

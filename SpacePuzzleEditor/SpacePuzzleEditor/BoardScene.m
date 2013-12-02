@@ -74,10 +74,10 @@
         _finishElement = [SKTexture textureWithImageNamed:@"Finish.png"];
         _rockTexture = [SKTexture textureWithImageNamed:@"Box.png"];
         _starTexture = [SKTexture textureWithImageNamed:@"Star.png"];
-        _buttonTexture = [SKTexture textureWithImageNamed:@"Button.png"];
+        _buttonTexture = [SKTexture textureWithImageNamed:@"BridgeButton.png"];
         _bridgeTexture = [SKTexture textureWithImageNamed:@"BridgeON.png"];
         _platformTexture = [SKTexture textureWithImageNamed:@"MovingPlatform.png"];
-        _leverTexture = [SKTexture textureWithImageNamed:@"SwitchOFF.png"];
+        _leverTexture = [SKTexture textureWithImageNamed:@"PlatformLever.png"];
         rainbowLeftTurn = [SKTexture textureWithImageNamed:@"RainbLTurn.png"];
         rainbowRightTurn = [SKTexture textureWithImageNamed:@"RainbRTurn.png"];
         rainbowStraight = [SKTexture textureWithImageNamed:@"RainbHoriz.png"];
