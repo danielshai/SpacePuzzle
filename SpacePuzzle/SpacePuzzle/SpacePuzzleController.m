@@ -264,25 +264,19 @@
     CGPoint unitPoint = CGPointMake(unitX, unitY);
     CGPoint actionPoint = CGPointMake(x, y);
  
-    // Checks if element will be next to the unit.
-    if( ((x - unitX == 1 || x - unitX == -1) && y == unitY) ||
-       ((y - unitY == 1 || y - unitY == -1) && x == unitX) ||
-       (x == unitX && y == unitY) )
-    {
-        Element *e = [[_board elementDictionary] objectForKey:actionPointKey];
-        // If the element exists.
-        if(e) {
-            // Do action depending on element type and current unit.
-            if ([e isKindOfClass:[Box class]] && _currentUnit == _bigL) {
+    Element *e = [[_board elementDictionary] objectForKey:actionPointKey];
+    // If the element exists.
+    if(e) {
+        // Do action depending on element type and current unit.
+        if ([e isKindOfClass:[Box class]] && _currentUnit == _bigL && [Converter isPoint:actionPoint NextToPoint:unitPoint]) {
                 NSInteger dir = [Converter convertCoordsTo:actionPoint Direction:unitPoint];
                 [self doActionOnBox:e InDirection:dir];
-            } else if ([e isKindOfClass:[StarButton class]]) {
+        } else if ([e isKindOfClass:[StarButton class]] && [Converter isPoint:unitPoint sameAsPoint:actionPoint]) {
                 [self doActionOnStarButton:e];
-            } else if ([e isKindOfClass:[BridgeButton class]]) {
+        } else if ([e isKindOfClass:[BridgeButton class]] && [Converter isPoint:unitPoint sameAsPoint:actionPoint]) {
                 [self doActionOnBridgeButton:e];
-            } else if ([e isKindOfClass:[PlatformLever class]]) {
+        } else if ([e isKindOfClass:[PlatformLever class]] && [Converter isPoint:unitPoint sameAsPoint:actionPoint]) {
                 [self doActionOnPlatformLever:e];
-            }
         }
     }
 }
