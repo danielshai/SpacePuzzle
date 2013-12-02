@@ -42,7 +42,7 @@
 
 @property (nonatomic, retain) NSMutableArray *controlArray;
 
--(void)updateUnit:(CGPoint) coord inDirection:(NSInteger) direction withPos:(NSNumber*) posKey;
+-(void)updateUnit:(CGPoint) coord inDirection:(NSInteger) direction;
 -(void)refreshTileAtPosition: (CGPoint)pos WithStatus: (NSInteger)status;
 -(void)refreshTileAtFlatIndex: (NSInteger)findex WithStatus:(NSInteger)status;
 -(void)refreshElementAtPosition: (NSNumber*)index OfClass:(NSString*)name WithStatus:(BOOL)on;

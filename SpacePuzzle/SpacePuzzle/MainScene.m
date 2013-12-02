@@ -107,7 +107,7 @@
 
 /*
  *  Updates the current unit with the data model. */
--(void)updateUnit:(CGPoint)coord inDirection:(NSInteger)direction withPos:(NSNumber *)posKey{
+-(void)updateUnit:(CGPoint)coord inDirection:(NSInteger)direction{
     CGPoint pos = [Converter convertCoordToPixel:coord];
     pos.x += 20;
     pos.y -= 5;
@@ -148,15 +148,16 @@
     }
     
     [_controlArray addObject:coordinations];
-    [_controlArray addObject:posKey];
     
     [UIView animateWithDuration:action.duration
         animations:^{
             [_currentUnit runAction:action];
         }
         completion:^(BOOL finished) {
-            [self notifyText:@"AnimationFinished" Object:_controlArray Key:@"AnimationFinished"];
-            [_controlArray removeAllObjects];
+            if(finished){
+                [self notifyText:@"AnimationFinished" Object:_controlArray Key:@"AnimationFinished"];
+                [_controlArray removeAllObjects];
+            }
         }];
     //_currentUnit.position = pos;
 }

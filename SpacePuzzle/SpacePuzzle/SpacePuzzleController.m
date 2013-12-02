@@ -211,7 +211,7 @@
     // The position that the unit wants to move to.
     NSInteger x  = loc.x;
     NSInteger y = loc.y;
-    // NSNumber *nextPosKey = [NSNumber numberWithInt:y*BOARD_SIZE_X + x];
+    NSNumber *nextPosKey = [NSNumber numberWithInt:y*BOARD_SIZE_X + x];
     // NSInteger nextPosIntKey = [nextPosKey integerValue];
     // The unit who wants to move's position.
     NSInteger unitX = _currentUnit.x;
@@ -243,7 +243,35 @@
             // Check elements on the board.
             // If the element isn't blocking, move unit.
             if(![e blocking]) {
-                [_scene updateUnit:actionPoint inDirection:dir withPos:nextPos];
+                [CATransaction begin]; {
+                    [CATransaction setCompletionBlock:^{
+                        // This block runs after any animations created before the call to
+                        // [CATransaction commit] below.  Specifically, if
+                        // doMethodOneWhichHasAnimation starts any animations, this block
+                        // will not run until those animations are finished.
+                        _currentUnit.x = x;
+                        _currentUnit.y = y;
+                        NSLog(@"UNIT %d %d", _currentUnit.x, _currentUnit.y);
+                        [self isUnitOnGoal];
+                        [self unitWantsToMoveTo:CGPointMake(_currentUnit.x, _currentUnit.y)];
+                        // If the element is a star.
+                        if([e isKindOfClass:[Star class]] && ![e hidden] && ![e taken]) {
+                            [e movedTo];
+                            _player.starsTaken += 1;
+                            //[[_board elementDictionary] removeObjectForKey:nextPosKey];
+                            [_scene removeElementAtPosition:nextPosKey];
+                            if(_player.starsTaken >= 3) {
+                                NSLog(@"CONGRATULATIONS! YOU WON!");
+                            }
+                        }
+                        
+                    }];
+                    
+                    // You don't need to modify `doMethodOneWhichHasAnimation`.  Its animations are
+                    // automatically part of the current transaction.
+                    [_scene updateUnit:actionPoint inDirection:dir];
+                    
+                } [CATransaction commit];
             }
         }
     }
@@ -282,31 +310,31 @@
 }
 
 -(void)waitForAnimation:(NSNotification *)notification{
+    /*
     NSDictionary *userInfo = notification.userInfo;
     NSSet *objectSent = [userInfo objectForKey:@"AnimationFinished"];
     NSArray *data = [objectSent allObjects];
     Position *coord = [[Position alloc] init];
     coord = [data objectAtIndex:0];
-    NSNumber *posKey = [data objectAtIndex:1];
     
     NSNumber *currentPos = [NSNumber numberWithInt:coord.y*BOARD_SIZE_X + coord.x];
     Element *e = [[_board elementDictionary] objectForKey:currentPos];
     
     _currentUnit.x = coord.x;
     _currentUnit.y = coord.y;
-    
+    NSLog(@"UNIT %d %d", _currentUnit.x, _currentUnit.y);
     [self isUnitOnGoal];
-    [self unitWantsToDoActionAt:CGPointMake(coord.x, coord.y)];
+    [self unitWantsToMoveTo:CGPointMake(_currentUnit.x, _currentUnit.y)];
     // If the element is a star.
     if([e isKindOfClass:[Star class]] && ![e hidden] && ![e taken]) {
         [e movedTo];
         _player.starsTaken += 1;
         //[[_board elementDictionary] removeObjectForKey:nextPosKey];
-        [_scene removeElementAtPosition:posKey];
+        [_scene removeElementAtPosition:currentPos];
         if(_player.starsTaken >= 3) {
             NSLog(@"CONGRATULATIONS! YOU WON!");
         }
-    }
+    }*/
 }
 
 /*
@@ -401,7 +429,7 @@
 -(void)doActionOnPlatformLever:(Element *)lever {
     PlatformLever *pl = (PlatformLever*)lever;
     [pl doAction];
-    
+    NSLog(@"INSIDE PLATFORM LEVER");
     // Updates the lever on the scene.
     [_scene refreshElementAtPosition:pl.key OfClass:CLASS_LEVER WithStatus:pl.state];
     // Updates the moving platform connected to the lever on the scene, i.e. moving it.
