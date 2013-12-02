@@ -200,13 +200,13 @@
     NSInteger unitIntKey = [unitKey integerValue];
     NSNumber *nextPos = [NSNumber numberWithInt:y*BOARD_SIZE_X + x];
     Element *e = [[_board elementDictionary] objectForKey:nextPos];
+    CGPoint movePoint = CGPointMake(x, y);
+    CGPoint unitPoint = CGPointMake(unitX, unitY);
     // First check if the movement was inside the board and if the tile isn't |void| (which units cannot
     // move to).
-    if([_board isPointMovableTo:loc]) {
+    if([_board isPointMovableTo:loc] && ![Converter isPoint:movePoint sameAsPoint:unitPoint]) {
         // Checks if the move is 1 step in x or y, but not both at the same time.
-        if( ((x - unitX == 1 || x - unitX == -1) && y == unitY) ||
-            ((y - unitY == 1 || y - unitY == -1) && x == unitX) )
-        {
+        if( [Converter isPoint:unitPoint NextToPoint:movePoint] ) {
             // If |bigL| is standing on a cracked tile and moves away from it. This will destroy the tile,
             // making it void, and also destroying the item on it.
             if ([[[_board board] objectAtIndex:unitIntKey] status] == MAPSTATUS_CRACKED && _currentUnit == _bigL) {
@@ -215,22 +215,17 @@
                 [[[_board board] objectAtIndex:unitIntKey] setStatus:MAPSTATUS_VOID];
                 [_scene refreshTileAtFlatIndex:unitIntKey WithStatus:MAPSTATUS_VOID];
             }
-            CGPoint actionPoint = CGPointMake(x, y);
-            CGPoint unitPoint = CGPointMake(unitX, unitY);
-            NSInteger dir = [Converter convertCoordsTo:actionPoint Direction:unitPoint];
-            
-            // Updates the position of curKey to the one that the unit is moving towards.
-            // Check elements on the board.
 
+            NSInteger dir = [Converter convertCoordsTo:movePoint Direction:unitPoint];
             // If the element isn't blocking, move unit.
             if(![e blocking]) {
                 _currentUnit.x = x;
                 _currentUnit.y = y;
                 NSLog(@"%d %d", x, y);
                 
-                [_scene updateUnit:actionPoint inDirection:dir];
+                [_scene updateUnit:movePoint inDirection:dir];
                 [self isUnitOnGoal];
-                [self unitWantsToDoActionAt:CGPointMake(x, y)];
+                [self unitWantsToDoActionAt:movePoint];
                 // If the element is a star.
                 if([e isKindOfClass:[Star class]] && ![e hidden] && ![e taken]) {
                     [e movedTo];
