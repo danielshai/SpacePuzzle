@@ -18,4 +18,5 @@
 -(void) doAction;
 -(void) doMoveAction: (NSInteger) dir;
 -(void) movedTo;
+-(void) unitLeft;
 @end

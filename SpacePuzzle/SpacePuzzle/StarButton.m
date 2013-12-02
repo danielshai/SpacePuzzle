@@ -38,7 +38,7 @@
 }
 
 -(void) doAction {
-    if(_star.taken == NO) {
+    if(!_star.taken) {
         _state = !_state;
         _star.hidden = !_state;
     } else {
@@ -47,11 +47,20 @@
 }
 
 -(void) movedTo {
-    if(_star.taken == NO) {
-        _state = !_state;
-        _star.hidden = !_state;
+    if(!_star.taken) {
+        _state = YES;
+        _star.hidden = NO;
     } else {
-        _state = !_state;
+        _state = YES;
+    }
+}
+
+-(void)unitLeft {
+    if(!_star.taken) {
+        _state = NO;
+        _star.hidden = YES;
+    } else {
+        _state = NO;
     }
 }
 

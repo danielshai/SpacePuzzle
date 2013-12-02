@@ -110,7 +110,7 @@
 }
 
 +(BOOL)isPoint:(CGPoint)p1 sameAsPoint:(CGPoint)p2 {
-    return p1.x == p2.x && p1.y && p2.y;
+    return p1.x == p2.x && p1.y == p2.y;
 }
 
 +(NSInteger) convertCoordsTo:(CGPoint)object Direction:(CGPoint)unit {

@@ -54,6 +54,10 @@
     
 }
 
+-(void)unitLeft {
+    
+}
+
 -(NSNumber*) key {
     return [NSNumber numberWithInteger:self.y*BOARD_SIZE_X + self.x];
 }

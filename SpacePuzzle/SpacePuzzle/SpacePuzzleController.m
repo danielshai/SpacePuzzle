@@ -219,14 +219,16 @@
     NSNumber *unitKey = [NSNumber numberWithInt:unitY*BOARD_SIZE_X + unitX];
     NSInteger unitIntKey = [unitKey integerValue];
     NSNumber *nextPos = [NSNumber numberWithInt:y*BOARD_SIZE_X + x];
+
     Element *e = [[_board elementDictionary] objectForKey:nextPos];
+    Element *eFrom = [[_board elementDictionary] objectForKey:unitKey];
+    CGPoint movePoint = CGPointMake(x, y);
+    CGPoint unitPoint = CGPointMake(unitX, unitY);
     // First check if the movement was inside the board and if the tile isn't |void| (which units cannot
     // move to).
-    if([_board isPointMovableTo:loc]) {
+    if([_board isPointMovableTo:loc] && ![Converter isPoint:movePoint sameAsPoint:unitPoint]) {
         // Checks if the move is 1 step in x or y, but not both at the same time.
-        if( ((x - unitX == 1 || x - unitX == -1) && y == unitY) ||
-            ((y - unitY == 1 || y - unitY == -1) && x == unitX) )
-        {
+        if( [Converter isPoint:unitPoint NextToPoint:movePoint] ) {
             // If |bigL| is standing on a cracked tile and moves away from it. This will destroy the tile,
             // making it void, and also destroying the item on it.
             if ([[[_board board] objectAtIndex:unitIntKey] status] == MAPSTATUS_CRACKED && _currentUnit == _bigL) {
@@ -300,7 +302,7 @@
                 NSInteger dir = [Converter convertCoordsTo:actionPoint Direction:unitPoint];
                 [self doActionOnBox:e InDirection:dir];
         } else if ([e isKindOfClass:[StarButton class]] && [Converter isPoint:unitPoint sameAsPoint:actionPoint]) {
-                [self doActionOnStarButton:e];
+                //[self doActionOnStarButton:e];
         } else if ([e isKindOfClass:[BridgeButton class]] && [Converter isPoint:unitPoint sameAsPoint:actionPoint]) {
                 [self doActionOnBridgeButton:e];
         } else if ([e isKindOfClass:[PlatformLever class]] && [Converter isPoint:unitPoint sameAsPoint:actionPoint]) {
@@ -405,7 +407,7 @@
 
 -(void)doActionOnStarButton:(Element *)button {
     StarButton *sb = (StarButton*)button;
-    [sb doAction];
+    [sb movedTo];
     
     // Updates the button on the scene.
     [_scene refreshElementAtPosition:sb.key OfClass:CLASS_STARBUTTON WithStatus:sb.state];
@@ -417,7 +419,7 @@
 
 -(void)doActionOnBridgeButton: (Element*)button {
     BridgeButton *bb = (BridgeButton*)button;
-    [bb doAction];
+    [bb movedTo];
     
     // Updates the button on the scene.
     [_scene refreshElementAtPosition:bb.bridge.key OfClass:CLASS_BRIDGE WithStatus:bb.state];
@@ -426,6 +428,7 @@
     [_scene setElementAtPosition:bb.bridge.key IsHidden:NO];
 }
 
+// Moving platform should have TIMER in it.
 -(void)doActionOnPlatformLever:(Element *)lever {
     PlatformLever *pl = (PlatformLever*)lever;
     [pl doAction];
