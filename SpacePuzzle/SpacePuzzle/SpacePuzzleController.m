@@ -422,7 +422,6 @@
 -(void)doActionOnPlatformLever:(Element *)lever {
     PlatformLever *pl = (PlatformLever*)lever;
     [pl doAction];
-    NSLog(@"INSIDE PLATFORM LEVER");
     // Updates the lever on the scene.
     [_scene refreshElementAtPosition:pl.key OfClass:CLASS_LEVER WithStatus:pl.state];
     // Updates the moving platform connected to the lever on the scene, i.e. moving it.
@@ -437,28 +436,34 @@
 -(void)movePlatform:(NSTimer *)timer {
     MovingPlatform *mp = [timer userInfo];
     [[_board elementDictionary] removeObjectForKey:mp.key];
+    
+    
     CGPoint prevPoint = CGPointMake(mp.x, mp.y);
     if(mp) {
         CGPoint p = mp.path.nextPoint;
         mp.x = p.x;
         mp.y = p.y;
+        
+        NSInteger dir = [Converter convertCoordsTo:prevPoint Direction:p];
+        
+        if(_littleJohn.x == prevPoint.x && _littleJohn.y == prevPoint.y) {
+            _littleJohn.x = mp.x;
+            _littleJohn.y = mp.y;
+            [_scene updateUnit:CGPointMake(_littleJohn.x, _littleJohn.y) inDirection:dir];
+        }
+        
+        if(_bigL.x == prevPoint.x && _bigL.y == prevPoint.y) {
+            _bigL.x = mp.x;
+            _bigL.y = mp.y;
+            [_scene updateUnit:CGPointMake(_bigL.x, _bigL.y) inDirection:dir];
+        }
     }
     [[_board elementDictionary] setObject:mp forKey:mp.key];
     NSLog(@"%f %f --- %ld %ld",prevPoint.x,prevPoint.y,(long)mp.x,(long)mp.y);
     
     // Check if unit is on platform, if so move it.
     NSLog(@"%ld %ld", (long)_bigL.x, (long)_bigL.y);
-    if(_littleJohn.x == prevPoint.x && _littleJohn.y == prevPoint.y) {
-        _littleJohn.x = mp.x;
-        _littleJohn.y = mp.y;
-        [_scene updateUnit:CGPointMake(_littleJohn.x, _littleJohn.y) inDirection:DOWN];
-    }
     
-    if(_bigL.x == prevPoint.x && _bigL.y == prevPoint.y) {
-        _bigL.x = mp.x;
-        _bigL.y = mp.y;
-        [_scene updateUnit:CGPointMake(_bigL.x, _bigL.y) inDirection:RIGHT];
-    }
     
     [_scene moveElement:prevPoint NewCoord:CGPointMake(mp.x, mp.y)];
 }

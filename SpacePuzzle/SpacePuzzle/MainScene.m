@@ -263,6 +263,7 @@
         sprite.size = CGSizeMake(34, 34);
     } else if([className isEqualToString:CLASS_LEVER]) {
         sprite.size = CGSizeMake(34, _switchOff.size.height/2);
+       
         pos.y -= 10;
     }
     /*else if([className isEqualToString:@"ButtonOFF"]) {
