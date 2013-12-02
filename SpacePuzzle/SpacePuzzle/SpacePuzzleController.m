@@ -80,7 +80,7 @@
 /*
  *  Called when the user taps once. */
 -(void)singleTap:(UIGestureRecognizer *)sender {
-    if (sender.state == UIGestureRecognizerStateEnded && ![_scene animating]) {
+    if (sender.state == UIGestureRecognizerStateEnded && ![[_scene currentUnit] hasActions]) {
         CGPoint location = [sender locationInView:_scene.view];
         
         // Convert to board coordinates. Invert with -9.
@@ -94,7 +94,7 @@
 /* 
  *  Called when the user double taps the view. */
 -(void)doubleTap:(UIGestureRecognizer *)sender {
-    if (sender.state == UIGestureRecognizerStateEnded && ![_scene animating]) {
+    if (sender.state == UIGestureRecognizerStateEnded && ![[_scene currentUnit] hasActions]) {
         CGPoint location = [sender locationInView:_scene.view];
         
         // Convert to board coordinates. Invert with -9.
@@ -106,7 +106,7 @@
 }
 
 -(void)trippleTap:(UIGestureRecognizer *)sender {
-    if(sender.state == UIGestureRecognizerStateEnded && ![_scene animating]) {
+    if(sender.state == UIGestureRecognizerStateEnded && ![[_scene currentUnit] hasActions]) {
         if (_currentUnit == _bigL) {
             _currentUnit = _littleJohn;
             _nextUnit = _bigL;
