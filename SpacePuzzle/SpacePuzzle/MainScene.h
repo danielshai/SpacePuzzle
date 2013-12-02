@@ -40,7 +40,7 @@
 @property (nonatomic, retain) SKAction *lWRight;
 @property (nonatomic, retain) SKAction *lWLeft;
 
-@property (nonatomic, retain) NSMutableArray *controlArray;
+@property (nonatomic, assign) BOOL animating;
 
 -(void)updateUnit:(CGPoint) coord inDirection:(NSInteger) direction;
 -(void)refreshTileAtPosition: (CGPoint)pos WithStatus: (NSInteger)status;
