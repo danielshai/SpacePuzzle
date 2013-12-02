@@ -205,8 +205,8 @@
 }
 
 /*
- *  Called when a unit wants to move to a location on the board. This method checks if the move is possible,
- *  if so moves the unit. If unit moves to star, consume the star. */
+ *  Called when a unit wants to move to a location on the board. This method checks if the move is 
+ *  possible, if so moves the unit. If unit moves to star, consume the star. */
 -(void)unitWantsToMoveTo:(CGPoint)loc {
     // The position that the unit wants to move to.
     NSInteger x  = loc.x;
@@ -322,7 +322,7 @@
     CGPoint nextPos;
     Element *e;
     NSNumber *elementKey = [NSNumber numberWithInteger:rock.y*BOARD_SIZE_X + rock.x];
-    
+
     if (dir == RIGHT) {
         // Check if at the edge of the board, if so do nothing.
         if(rock.x >= BOARD_SIZE_X-1) {
@@ -353,9 +353,8 @@
         e = [[_board elementDictionary] objectForKey:nextKey];
         nextPos = CGPointMake(rock.x, rock.y + 1);
     }
-    
     // Add more elements which cannot be pushed upon to if-statement.
-    if (![e isKindOfClass:[Box class]] && (_nextUnit.x != nextPos.x && _nextUnit.y != nextPos.y)) {
+    if (![e isKindOfClass:[Box class]] && (_nextUnit.x != nextPos.x || _nextUnit.y != nextPos.y)) {
         NSInteger intKey = [nextKey integerValue];
         NSInteger nextTile = [[[_board board] objectAtIndex:intKey] status];
         
@@ -417,7 +416,7 @@
     
     [NSTimer scheduledTimerWithTimeInterval:0.6 target:self
                                    selector:@selector(movePlatform:)  userInfo:pl.movingPlatform
-                                  repeats:YES];
+                                    repeats:YES];
 }
 
 -(void)movePlatform:(NSTimer *)timer {
@@ -431,6 +430,21 @@
     }
     [[_board elementDictionary] setObject:mp forKey:mp.key];
     NSLog(@"%f %f --- %ld %ld",prevPoint.x,prevPoint.y,(long)mp.x,(long)mp.y);
+    
+    // Check if unit is on platform, if so move it.
+    NSLog(@"%ld %ld", (long)_bigL.x, (long)_bigL.y);
+    if(_littleJohn.x == prevPoint.x && _littleJohn.y == prevPoint.y) {
+        _littleJohn.x = mp.x;
+        _littleJohn.y = mp.y;
+        [_scene updateUnit:CGPointMake(_littleJohn.x, _littleJohn.y) inDirection:DOWN];
+    }
+    
+    if(_bigL.x == prevPoint.x && _bigL.y == prevPoint.y) {
+        _bigL.x = mp.x;
+        _bigL.y = mp.y;
+        [_scene updateUnit:CGPointMake(_bigL.x, _bigL.y) inDirection:RIGHT];
+    }
+    
     [_scene moveElement:prevPoint NewCoord:CGPointMake(mp.x, mp.y)];
 }
 
