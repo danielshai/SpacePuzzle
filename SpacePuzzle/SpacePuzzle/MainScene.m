@@ -9,6 +9,7 @@
 #import "LittleJohnWalk.h"
 #import "AnimationFactory.h"
 #import "Element.h"
+#import "Position.h"
 
 @implementation MainScene
 @synthesize solidTile = _solidTile;
@@ -35,6 +36,7 @@
 @synthesize lWDown = _lWDown;
 @synthesize lWRight = _lWRight;
 @synthesize lWLeft = _lWLeft;
+@synthesize controlArray = _controlArray;
 
 -(id)initWithSize:(CGSize)size {    
     if (self = [super initWithSize:size]) {
@@ -58,6 +60,7 @@
         [self addChild:_bkg];
         _elements = [[NSMutableDictionary alloc] init];
         _tiles = [[NSMutableArray alloc] init];
+        _controlArray = [[NSMutableArray alloc] init];
         [self initScene];
     }
     return self;
@@ -104,15 +107,13 @@
 
 /*
  *  Updates the current unit with the data model. */
--(void)updateUnit:(CGPoint)coord inDirection:(NSInteger)direction withPos:(NSNumber *)posKey forElement:(Element *)element{
+-(void)updateUnit:(CGPoint)coord inDirection:(NSInteger)direction withPos:(NSNumber *)posKey{
     CGPoint pos = [Converter convertCoordToPixel:coord];
     pos.x += 20;
     pos.y -= 5;
     Position *coordinations = [[Position alloc] init];
     coordinations.x = coord.x;
     coordinations.y = coord.y;
-    NSNumber *elemPos = posKey;
-    Element *elem = element;
     SKAction *move;
     SKAction *action;
     // Depending on the direction the unit is making, update to the correct picture.
@@ -145,19 +146,17 @@
             action = [SKAction group:@[_lWLeft, move]];
         }
     }
-    NSLog(@"%d %d", coordinations.x, coordinations.y);
-    NSLog(@"%f %f", coord.x, coord.y);
+    
+    [_controlArray addObject:coordinations];
+    [_controlArray addObject:posKey];
     
     [UIView animateWithDuration:action.duration
         animations:^{
             [_currentUnit runAction:action];
         }
         completion:^(BOOL finished) {
-            NSMutableArray *arr;
-            [arr addObject:coordinations];
-            [arr addObject:elem];
-            [arr addObject:elemPos];
-            [self notifyText:@"AnimationFinished" Object:arr Key:@"AnimationFinished"];
+            [self notifyText:@"AnimationFinished" Object:_controlArray Key:@"AnimationFinished"];
+            [_controlArray removeAllObjects];
         }];
     //_currentUnit.position = pos;
 }

@@ -13,6 +13,7 @@
 #import "PlatformLever.h"
 #import "Bridge.h"
 #import "Path.h"
+#import "Position.h"
 
 @implementation SpacePuzzleController
 @synthesize board = _board;
@@ -183,7 +184,7 @@
         //    [_scene setupElement:p Name:@"ButtonOFF" Hidden:[obj hidden]];
         //}
     }
-    CGPoint p = CGPointMake(0, 0);
+    /*CGPoint p = CGPointMake(0, 0);
     
     // TEMP TEST CODE FOR PLATFORM LEVER
     MovingPlatform *mp = [[MovingPlatform alloc] initWithX:2 Y:0 Hidden:NO];
@@ -200,7 +201,7 @@
    // nr = [NSNumber numberWithInteger:1];
   //  [[_board elementDictionary] setObject:pl forKey:nr];
     p = CGPointMake(1, 0);
-    [_scene setupElement:p Name:@"SwitchOFF" Hidden:NO];
+    [_scene setupElement:p Name:@"SwitchOFF" Hidden:NO];*/
 }
 
 /*
@@ -242,7 +243,7 @@
             // Check elements on the board.
             // If the element isn't blocking, move unit.
             if(![e blocking]) {
-                [_scene updateUnit:actionPoint inDirection:dir withPos:nextPos forElement:e];
+                [_scene updateUnit:actionPoint inDirection:dir withPos:nextPos];
             }
         }
     }
@@ -292,13 +293,13 @@
     NSArray *data = [objectSent allObjects];
     Position *coord = [[Position alloc] init];
     coord = [data objectAtIndex:0];
-    Element  *e = [data objectAtIndex:1];
-    NSNumber *posKey = [data objectAtIndex:2];
+    NSNumber *posKey = [data objectAtIndex:1];
+    
+    NSNumber *currentPos = [NSNumber numberWithInt:coord.y*BOARD_SIZE_X + coord.x];
+    Element *e = [[_board elementDictionary] objectForKey:currentPos];
     
     _currentUnit.x = coord.x;
     _currentUnit.y = coord.y;
-    
-    NSLog(@"%d %d", coord.x, coord.y);
     
     [self isUnitOnGoal];
     [self unitWantsToDoActionAt:CGPointMake(coord.x, coord.y)];
