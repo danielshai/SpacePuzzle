@@ -156,7 +156,6 @@
     NSNumber *indexNew = [NSNumber numberWithFloat:newCoord.y*BOARD_SIZE_X + newCoord.x];
   //  NSLog(@"moving: %f %f %f %f", oldCoord.x,oldCoord.y,newCoord.x,newCoord.y);
     if(indexNew.integerValue == indexOrigin.integerValue) {
-        NSLog(@"retu");
         return;
     }
     SKSpriteNode *s = [_elements objectForKey:indexOrigin];
