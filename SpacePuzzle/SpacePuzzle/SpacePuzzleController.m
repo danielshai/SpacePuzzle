@@ -184,24 +184,6 @@
         //    [_scene setupElement:p Name:@"ButtonOFF" Hidden:[obj hidden]];
         //}
     }
-    /*CGPoint p = CGPointMake(0, 0);
-    
-    // TEMP TEST CODE FOR PLATFORM LEVER
-    MovingPlatform *mp = [[MovingPlatform alloc] initWithX:2 Y:0 Hidden:NO];
-    [[_board elementDictionary] setObject:mp forKey:mp.key];
-    PlatformLever *pl = [[PlatformLever alloc] initWithMovingPlatform:mp X:1 Y:0];
-    [[_board elementDictionary] setObject:pl forKey:pl.key];
-
-    p = CGPointMake(2, 0);
-    [_scene setupElement:p Name:@"MovingPlatform" Hidden:NO];
-    [_scene setElementAtPosition:mp.key IsHidden:NO];
-    [_scene setElementAtPosition:pl.key IsHidden:NO];
-    
-    pl.movingPlatform = mp;
-   // nr = [NSNumber numberWithInteger:1];
-  //  [[_board elementDictionary] setObject:pl forKey:nr];
-    p = CGPointMake(1, 0);
-    [_scene setupElement:p Name:@"SwitchOFF" Hidden:NO];*/
 }
 
 /*
@@ -237,43 +219,51 @@
                 [[[_board board] objectAtIndex:unitIntKey] setStatus:MAPSTATUS_VOID];
                 [_scene refreshTileAtFlatIndex:unitIntKey WithStatus:MAPSTATUS_VOID];
             }
-            CGPoint actionPoint = CGPointMake(x, y);
-            CGPoint unitPoint = CGPointMake(unitX, unitY);
-            NSInteger dir = [Converter convertCoordsTo:actionPoint Direction:unitPoint];
-            
-            // Updates the position of curKey to the one that the unit is moving towards.
-            // Check elements on the board.
+
+            NSInteger dir = [Converter convertCoordsTo:movePoint Direction:unitPoint];
             // If the element isn't blocking, move unit.
             if(![e blocking]) {
-                [CATransaction begin]; {
-                    [CATransaction setCompletionBlock:^{
-                        // This block runs after any animations created before the call to
-                        // [CATransaction commit] below.  Specifically, if
-                        // doMethodOneWhichHasAnimation starts any animations, this block
-                        // will not run until those animations are finished.
-                        _currentUnit.x = x;
-                        _currentUnit.y = y;
-                        NSLog(@"UNIT %d %d", _currentUnit.x, _currentUnit.y);
-                        [self isUnitOnGoal];
-                        [self unitWantsToMoveTo:CGPointMake(_currentUnit.x, _currentUnit.y)];
-                        // If the element is a star.
-                        if([e isKindOfClass:[Star class]] && ![e hidden] && ![e taken]) {
-                            [e movedTo];
-                            _player.starsTaken += 1;
-                            //[[_board elementDictionary] removeObjectForKey:nextPosKey];
-                            [_scene removeElementAtPosition:nextPosKey];
-                            if(_player.starsTaken >= 3) {
-                                NSLog(@"CONGRATULATIONS! YOU WON!");
-                            }
-                        }
-                        
-                    }];
+                _currentUnit.x = x;
+                _currentUnit.y = y;
+                
+                [_scene updateUnit:movePoint inDirection:dir];
+                [self isUnitOnGoal];
+                [self unitWantsToDoActionAt:movePoint];
+                // If the element is a star.
+                if([e isKindOfClass:[Star class]] && ![e hidden] && ![e taken]) {
+                    [e movedTo];
+                    _player.starsTaken += 1;
+                    //[[_board elementDictionary] removeObjectForKey:nextPosKey];
+                    [_scene removeElementAtPosition:nextPosKey];
+                } else if([e isKindOfClass:[StarButton class]]) {
+                    [self doActionOnStarButton:e];
+                } else if([e isKindOfClass:[BridgeButton class]]) {
+                    [self doActionOnBridgeButton:e];
+                }
+                // Check elements that the unit left.
+                CGPoint nextUnitPos = CGPointMake(_nextUnit.x, _nextUnit.y);
+                // Checks if the element moved from is a |StarButton|, and the second condition checks if
+                // the other unit is still on the button, which means the button shouldn't be deactivated.
+                if([eFrom isKindOfClass:[StarButton class]] && ![Converter isPoint:nextUnitPos sameAsPoint:unitPoint]) {
+                    // Buttons should be deactivated if left.
+                    StarButton *sb = (StarButton*)eFrom;
+                    [sb unitLeft];
+                    [_scene refreshElementAtPosition:sb.key OfClass:CLASS_STARBUTTON WithStatus:sb.state];
+                    // Updates the star connected to the button on the scene, i.e. showing it.
+                    if(sb.star.taken == NO) {
+                        [_scene setElementAtPosition:sb.star.key IsHidden:sb.star.hidden];
+                    }
+                } else if([eFrom isKindOfClass:[BridgeButton class]] && ![Converter isPoint:nextUnitPos sameAsPoint:unitPoint]) {
+                    // Buttons should be deactivated if left.
+                    BridgeButton *bb = (BridgeButton*)eFrom;
+                    [bb unitLeft];
                     
-                    // You don't need to modify `doMethodOneWhichHasAnimation`.  Its animations are
-                    // automatically part of the current transaction.
-                    [_scene updateUnit:actionPoint inDirection:dir];
-                    
-                } [CATransaction commit];
+                    // Updates the button on the scene.
+                    [_scene refreshElementAtPosition:bb.bridge.key OfClass:CLASS_BRIDGE WithStatus:bb.state];
+                    [_scene refreshElementAtPosition:bb.key OfClass:CLASS_BRIDGEBUTTON WithStatus:bb.state];
+                    // Updates the bridge connected to the button on the scene, i.e. showing it.
+                    [_scene setElementAtPosition:bb.bridge.key IsHidden:NO];
+                }
             }
         }
     }
