@@ -9,7 +9,8 @@
 #import "Macros.h"
 #import "Converter.h"
 
-@class AnimationFactory;
+@class Element;
+@class SpacePuzzleController;
 
 @interface MainScene : SKScene
 @property (nonatomic, retain) SKTexture *solidTile;
@@ -27,16 +28,8 @@
 @property (nonatomic, retain) SKSpriteNode *bkg;
 @property (nonatomic, retain) NSMutableDictionary *elements;
 @property (nonatomic, retain) NSMutableArray *tiles;
-@property (nonatomic, retain) SKTexture *bigLUp;
-@property (nonatomic, retain) SKTexture *bigLDown;
-@property (nonatomic, retain) SKTexture *bigLRight;
-@property (nonatomic, retain) SKTexture *bigLLeft;
-@property (nonatomic, retain) SKTexture *littleJohnUp;
-@property (nonatomic, retain) SKTexture *littleJohnDown;
-@property (nonatomic, retain) SKTexture *littleJohnRight;
-@property (nonatomic, retain) SKTexture *littleJohnLeft;
 @property (nonatomic, retain) SKAction *sequence;
-@property (nonatomic, retain) AnimationFactory *aniFact;
+@property (nonatomic, retain) SKAction *moveTo;
 
 @property (nonatomic, retain) SKAction *bWUp;
 @property (nonatomic, retain) SKAction *bWDown;
@@ -47,8 +40,7 @@
 @property (nonatomic, retain) SKAction *lWRight;
 @property (nonatomic, retain) SKAction *lWLeft;
 
-
--(void)updateUnit:(CGPoint) coord inDirection:(NSInteger) direction;
+-(void)updateUnit:(CGPoint) coord inDirection:(NSInteger) direction withPos:(NSNumber*) posKey forElement:(Element*) element;
 -(void)refreshTileAtPosition: (CGPoint)pos WithStatus: (NSInteger)status;
 -(void)refreshTileAtFlatIndex: (NSInteger)findex WithStatus:(NSInteger)status;
 -(void)refreshElementAtPosition: (NSNumber*)index OfClass:(NSString*)name WithStatus:(BOOL)on;

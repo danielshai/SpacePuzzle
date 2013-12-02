@@ -8,6 +8,7 @@
 #import "BigLWalk.h"
 #import "LittleJohnWalk.h"
 #import "AnimationFactory.h"
+#import "Element.h"
 
 @implementation MainScene
 @synthesize solidTile = _solidTile;
@@ -25,14 +26,6 @@
 @synthesize bridgeOn = _bridgeOn;
 @synthesize switchOff = _switchOff;
 @synthesize switchOn = _switchOn;
-@synthesize bigLUp = _bigLUp;
-@synthesize bigLDown = _bigLDown;
-@synthesize bigLRight = _bigLRight;
-@synthesize bigLLeft = _bigLLeft;
-@synthesize littleJohnUp = _littleJohnUp;
-@synthesize littleJohnDown = _littleJohnDown;
-@synthesize littleJohnRight = _littleJohnRight;
-@synthesize littleJohnLeft = _littleJohnLeft;
 @synthesize sequence = _sequence;
 @synthesize bWUp = _bWUp;
 @synthesize bWDown = _bWDown;
@@ -111,10 +104,15 @@
 
 /*
  *  Updates the current unit with the data model. */
--(void)updateUnit:(CGPoint)coord inDirection:(NSInteger)direction {
+-(void)updateUnit:(CGPoint)coord inDirection:(NSInteger)direction withPos:(NSNumber *)posKey forElement:(Element *)element{
     CGPoint pos = [Converter convertCoordToPixel:coord];
     pos.x += 20;
     pos.y -= 5;
+    Position *coordinations = [[Position alloc] init];
+    coordinations.x = coord.x;
+    coordinations.y = coord.y;
+    NSNumber *elemPos = posKey;
+    Element *elem = element;
     SKAction *move;
     SKAction *action;
     // Depending on the direction the unit is making, update to the correct picture.
@@ -147,7 +145,20 @@
             action = [SKAction group:@[_lWLeft, move]];
         }
     }
-    [_currentUnit runAction:action];
+    NSLog(@"%d %d", coordinations.x, coordinations.y);
+    NSLog(@"%f %f", coord.x, coord.y);
+    
+    [UIView animateWithDuration:action.duration
+        animations:^{
+            [_currentUnit runAction:action];
+        }
+        completion:^(BOOL finished) {
+            NSMutableArray *arr;
+            [arr addObject:coordinations];
+            [arr addObject:elem];
+            [arr addObject:elemPos];
+            [self notifyText:@"AnimationFinished" Object:arr Key:@"AnimationFinished"];
+        }];
     //_currentUnit.position = pos;
 }
 

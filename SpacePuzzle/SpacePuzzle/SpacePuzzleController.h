@@ -39,6 +39,7 @@
 -(void)swipeRight:(UISwipeGestureRecognizer *)sender;
 -(void)unitWantsToMoveTo: (CGPoint)loc;
 -(void)unitWantsToDoActionAt: (CGPoint)loc;
+-(void)waitForAnimation:(NSNotification *) notification;
 -(void)doActionOnBox: (Element*)rock InDirection: (NSInteger)dir;
 -(void)doActionOnStarButton: (Element*)button;
 -(void)doActionOnBridgeButton: (Element*)button;
