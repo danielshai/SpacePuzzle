@@ -52,7 +52,7 @@
         _bridgeOff = [SKTexture textureWithImageNamed:@"BridgeOFF.png"];
         _switchOn = [SKTexture textureWithImageNamed:@"SwitchON.png"];
         _switchOff = [SKTexture textureWithImageNamed:@"SwitchOFF.png"];
-        _bkg = [SKSpriteNode spriteNodeWithImageNamed:@"Background.png"];
+        _bkg = [SKSpriteNode spriteNodeWithImageNamed:@"Background01.png"];
         _movingPlatform = [SKTexture textureWithImageNamed:@"MovingPlatform.png"];
         _star = [SKTexture textureWithImageNamed:@"Star.png"];
         _box = [SKTexture textureWithImageNamed:@"Box.png"];
