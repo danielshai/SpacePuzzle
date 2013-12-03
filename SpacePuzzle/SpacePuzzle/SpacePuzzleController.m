@@ -54,7 +54,7 @@
     }*/
     
     _player = [[Player alloc] initWithWorld:0 andLevel:1];
-    _level = 2;
+    _level = 1;
     _world = 0;
 
     [self setupBoard];
