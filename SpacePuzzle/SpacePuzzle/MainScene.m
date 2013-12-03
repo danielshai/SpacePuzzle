@@ -161,6 +161,7 @@
             action = [SKAction group:@[_lWLeft, move]];
         }
     }
+    
     [_currentUnit setZPosition:9999];
     [_currentUnit runAction:action];
 }

@@ -40,7 +40,7 @@
     _scene = [MainScene sceneWithSize:skView.bounds.size];
     _scene.scaleMode = SKSceneScaleModeAspectFill;
     
-    [LoadSaveFile saveFileWithWorld:0 andLevel:1];
+    [LoadSaveFile saveFileWithWorld:0 andLevel:8];
     
     if([LoadSaveFile loadFile]) {
         NSString *currentState = [LoadSaveFile loadFile];
@@ -297,6 +297,8 @@
                     // Updates the bridge connected to the button on the scene, i.e. showing it.
                     [_scene setElementAtPosition:bb.bridge.key IsHidden:NO];
                 }
+            } else if([e isKindOfClass:[Box class]]) {
+                [self doActionOnBox:e InDirection:dir];
             }
         }
     }
