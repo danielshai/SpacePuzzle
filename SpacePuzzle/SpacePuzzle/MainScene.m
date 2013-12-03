@@ -322,14 +322,10 @@
 /*
  * Change the current unit. */
 -(void) changeUnit {
-    NSLog(@"Change in scene");
-    
     if (_currentUnit == _bigL) {
         _currentUnit = _littleJohn;
-        NSLog(@"Little john in scene");
     } else if (_currentUnit == _littleJohn) {
         _currentUnit = _bigL;
-        NSLog(@"big l in scene");
     }
 }
 
