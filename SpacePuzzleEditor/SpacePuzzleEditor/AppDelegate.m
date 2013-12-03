@@ -165,21 +165,6 @@
     }
 }
 
--(IBAction)newLevel:(id)sender {
-    NSAlert *alert = [NSAlert alertWithMessageText:@"Are you sure you want to create a new level?"
-                                     defaultButton:@"Yes"
-                                   alternateButton:@"No"
-                                       otherButton:nil
-                         informativeTextWithFormat:@"Unsaved work will be lost."];
-    if([alert runModal] == NSOKButton) {
-        [_board createEmptyBoard];
-        [self loadConnections];
-        [self cleanView];
-        currentFilePath = @"";
-        [[self window] setTitle:@"Untitled.splvl"];
-    }
-}
-
 -(BOOL)application:(NSApplication *)theApplication openFile:(NSString *)filename {
     [_board loadBoard:filename];
     currentFilePath = filename;
@@ -435,6 +420,21 @@
         [_board saveBoard:currentFilePath];
         [[self window] setTitle:[currentFilePath lastPathComponent]];
         edited = NO;
+    }
+}
+
+-(IBAction)newLevel:(id)sender {
+    NSAlert *alert = [NSAlert alertWithMessageText:@"Are you sure you want to create a new level?"
+                                     defaultButton:@"Yes"
+                                   alternateButton:@"No"
+                                       otherButton:nil
+                         informativeTextWithFormat:@"Unsaved work will be lost."];
+    if([alert runModal] == NSOKButton) {
+        [_board createEmptyBoard];
+        [self loadConnections];
+        [self cleanView];
+        currentFilePath = @"";
+        [[self window] setTitle:@"Untitled.splvl"];
     }
 }
 

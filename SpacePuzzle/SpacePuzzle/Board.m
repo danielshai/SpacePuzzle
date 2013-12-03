@@ -124,6 +124,10 @@
         }
     }
     [_elementDictionary removeAllObjects];
+    _startPosAlien.x = -2;
+    _startPosAlien.y = -2;
+    _startPosAstronaut.x = -2;
+    _startPosAstronaut.y = -2;
 }
 
 /* 
