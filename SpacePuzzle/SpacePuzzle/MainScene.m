@@ -42,6 +42,7 @@
 -(id)initWithSize:(CGSize)size {    
     if (self = [super initWithSize:size]) {
         /* Setup your scene here */
+        
         _currentUnit = _littleJohn;
         self.backgroundColor = [SKColor colorWithRed:0.15 green:0.15 blue:0.3 alpha:1.0];
         _solidTile = [SKTexture textureWithImageNamed:@"solidtile.png"];
@@ -54,9 +55,10 @@
         _switchOn = [SKTexture textureWithImageNamed:@"SwitchON.png"];
         _switchOff = [SKTexture textureWithImageNamed:@"SwitchOFF.png"];
         _finish = [SKSpriteNode spriteNodeWithImageNamed:@"Finish.png"];
-        _finish.zPosition = 9999;
         _finish.size = CGSizeMake(TILESIZE, TILESIZE);
+        _finish.zPosition = 2;
         [self addChild:_finish];
+        
         _bkg = [SKSpriteNode spriteNodeWithImageNamed:@"Background01.png"];
         _movingPlatform = [SKTexture textureWithImageNamed:@"MovingPlatform.png"];
         _star = [SKTexture textureWithImageNamed:@"Star.png"];
@@ -64,9 +66,13 @@
         
         _bkg.size = CGSizeMake(size.width, size.height);
         _littleJohn.texture = [SKTexture textureWithImageNamed:@"AlienDown"];
+        _littleJohn.zPosition = 99999;
         _bigL.texture = [SKTexture textureWithImageNamed:@"AstroDown"];
+        _bigL.zPosition = 99999;
+        
         _bkg.position = CGPointMake(WIN_SIZE_X/2, WIN_SIZE_Y/2);
         [self addChild:_bkg];
+        
         _elements = [[NSMutableDictionary alloc] init];
         _tiles = [[NSMutableArray alloc] init];
   
@@ -155,6 +161,8 @@
             action = [SKAction group:@[_lWLeft, move]];
         }
     }
+    [_currentUnit setZPosition:9999];
+    NSLog(@"%f",[_currentUnit zPosition]);
     [_currentUnit runAction:action];
 }
 
