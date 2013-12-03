@@ -162,7 +162,6 @@
         }
     }
     [_currentUnit setZPosition:9999];
-    NSLog(@"%f",[_currentUnit zPosition]);
     [_currentUnit runAction:action];
 }
 
