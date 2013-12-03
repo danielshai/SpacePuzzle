@@ -610,9 +610,9 @@
                 _finishSprite.position = CGPointMake(loc.x, loc.y);
                 [self notifyText:@"BoardEdited" Object:arr Key:@"BoardEdited"];
             } else if(statusOfPalette == BRUSH_ERASER) {
-                if([_elementSprites objectForKey:flatIndex]) {
+                //if([_elementSprites objectForKey:flatIndex]) {
                     [self notifyText:@"BoardEdited" Object:arr Key:@"BoardEdited"];
-                }
+              //  }
             }
             // Elements that are part of the element dictionary.
             else if (![_elementSprites objectForKey:flatIndex]) {
@@ -1043,6 +1043,18 @@
     } else if(status == BRUSH_START_ASTRO) {
         sprite.texture = _startAstronautTxt;
     }
+}
+
+-(void)setStartAlienPosition:(CGPoint)p {
+    p = [Converter convertCoordToPixel:p];
+    p.x += TILESIZE/2;
+    _startAlienSprite.position = p;
+}
+
+-(void)setStartAstronautPosition:(CGPoint)p {
+    p = [Converter convertCoordToPixel:p];
+    p.x += TILESIZE/2;
+    _startAstronautSprite.position = p;
 }
 
 -(void)drawRainbowAtPosition:(CGPoint)p WithDirection:(NSInteger)dir {

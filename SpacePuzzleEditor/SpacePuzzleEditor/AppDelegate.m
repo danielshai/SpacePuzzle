@@ -229,12 +229,13 @@
     CGPoint point = CGPointMake(val.pointValue.x, val.pointValue.y);
     // The used brush.
     NSInteger stat = [[data objectAtIndex:1] integerValue];
-    NSNumber *flatIndex = [NSNumber numberWithInt:val.pointValue.y * BOARD_SIZE_X + val.pointValue.x];
+    NSNumber *flatIndex = [NSNumber numberWithInt:point.y * BOARD_SIZE_X + point.x];
     // If the change was on a tile, the |BoardCoord| status should change. Otherwise elements should change.
-    if(stat == MAPSTATUS_SOLID || stat== MAPSTATUS_CRACKED || stat == MAPSTATUS_VOID) {
-        BoardCoord *bc = [[_board board] objectAtIndex:val.pointValue.y * BOARD_SIZE_X + val.pointValue.x];
+    if(stat == MAPSTATUS_SOLID || stat == MAPSTATUS_CRACKED || stat == MAPSTATUS_VOID) {
+        BoardCoord *bc = [[_board board] objectAtIndex:point.y * BOARD_SIZE_X + point.x];
         bc.status = stat;
     } else {
+        // newPos == point, no??
         CGPoint newPos = CGPointMake(val.pointValue.x, val.pointValue.y);
 
         if(stat == BRUSH_START_ASTRO) {
@@ -263,6 +264,19 @@
                 //Element *e = [[_board elementDictionary] objectForKey:flatIndex];
                 [_connections removeConnection:point];
                 [self updateConnectionsView];
+            }
+            NSLog(@"new pos %f %f", newPos.x,newPos.y);
+            // Remove starting positions.
+            if(newPos.x == _board.startPosAlien.x && newPos.y == _board.startPosAlien.y) {
+                _board.startPosAlien.x = -2;
+                _board.startPosAlien.y = -2;
+                NSLog(@"erase alien");
+                [_scene setStartAlienPosition:CGPointMake(-2, -2)];
+            }
+            if(newPos.x == _board.startPosAstronaut.x && newPos.y == _board.startPosAstronaut.y) {
+                _board.startPosAstronaut.x = -2;
+                _board.startPosAstronaut.y = -2;
+                [_scene setStartAstronautPosition:CGPointMake(-2, -2)];
             }
         } else if (stat == BRUSH_ROCK) {
             [_board addElementNamed:CLASS_BOX AtPosition:newPos IsBlocking:YES];

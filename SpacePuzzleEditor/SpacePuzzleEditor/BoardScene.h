@@ -102,4 +102,6 @@
 -(void)addAPlatform:(CGPoint) pos Index: (NSNumber*) index;
 -(void)addALever:(CGPoint) pos Index: (NSNumber*) index;
 -(NSInteger)classToBrush: (NSString*)className;
+-(void)setStartAlienPosition: (CGPoint)p;
+-(void)setStartAstronautPosition: (CGPoint)p;
 @end
