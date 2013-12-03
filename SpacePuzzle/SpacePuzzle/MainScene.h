@@ -22,6 +22,10 @@
 @property (nonatomic, retain) SKTexture *bridgeOff;
 @property (nonatomic, retain) SKTexture *switchOn;
 @property (nonatomic, retain) SKTexture *switchOff;
+@property (nonatomic, retain) SKTexture *movingPlatform;
+@property (nonatomic, retain) SKTexture *star;
+@property (nonatomic, retain) SKTexture *box;
+
 @property (nonatomic, retain) SKSpriteNode *bigL;
 @property (nonatomic, retain) SKSpriteNode *littleJohn;
 @property (nonatomic, retain) SKSpriteNode *currentUnit;
@@ -39,8 +43,6 @@
 @property (nonatomic, retain) SKAction *lWDown;
 @property (nonatomic, retain) SKAction *lWRight;
 @property (nonatomic, retain) SKAction *lWLeft;
-
-@property (nonatomic, assign) BOOL animating;
 
 -(void)updateUnit:(CGPoint) coord inDirection:(NSInteger) direction;
 -(void)refreshTileAtPosition: (CGPoint)pos WithStatus: (NSInteger)status;

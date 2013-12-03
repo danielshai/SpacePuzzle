@@ -36,7 +36,7 @@
 @synthesize lWDown = _lWDown;
 @synthesize lWRight = _lWRight;
 @synthesize lWLeft = _lWLeft;
-@synthesize animating = _animating;
+@synthesize star = _star;
 
 -(id)initWithSize:(CGSize)size {    
     if (self = [super initWithSize:size]) {
@@ -47,12 +47,16 @@
         _crackedTile = [SKTexture textureWithImageNamed:@"Cracked.png"];
         _voidTile = [SKTexture textureWithImageNamed:@"voidtile.png"];
         _buttonOn = [SKTexture textureWithImageNamed:@"ButtonON.png"];
-        _buttonOff = [SKTexture textureWithImageNamed:@"ButtonOFF.png"];
+        _buttonOff = [SKTexture textureWithImageNamed:@"BridgeButton.png"];
         _bridgeOn = [SKTexture textureWithImageNamed:@"BridgeON.png"];
         _bridgeOff = [SKTexture textureWithImageNamed:@"BridgeOFF.png"];
         _switchOn = [SKTexture textureWithImageNamed:@"SwitchON.png"];
         _switchOff = [SKTexture textureWithImageNamed:@"SwitchOFF.png"];
         _bkg = [SKSpriteNode spriteNodeWithImageNamed:@"Background.png"];
+        _movingPlatform = [SKTexture textureWithImageNamed:@"MovingPlatform.png"];
+        _star = [SKTexture textureWithImageNamed:@"Star.png"];
+        _box = [SKTexture textureWithImageNamed:@"Box.png"];
+        
         _bkg.size = CGSizeMake(size.width, size.height);
         _littleJohn.texture = [SKTexture textureWithImageNamed:@"AlienDown"];
         _bigL.texture = [SKTexture textureWithImageNamed:@"AstroDown"];
@@ -60,7 +64,7 @@
         [self addChild:_bkg];
         _elements = [[NSMutableDictionary alloc] init];
         _tiles = [[NSMutableArray alloc] init];
-        _animating = NO;
+  
         [self initScene];
     }
     return self;
@@ -237,6 +241,7 @@
 }
 
 -(void)setupElement:(CGPoint)coord Name:(NSString *)className Hidden:(BOOL)hidden{
+   
     NSString *path = className;
     path = [path stringByAppendingString:@".png"];
     SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithImageNamed:path];
@@ -317,32 +322,32 @@
 
 -(SKTexture*) updateSpriteWith:(NSString *)name State:(BOOL)state {
     SKTexture *pic;
-    if ([name isEqualToString:@"StarButton"] || [name isEqualToString:@"BridgeButton"]) {
+    if ([name isEqualToString:CLASS_STARBUTTON] || [name isEqualToString:CLASS_BRIDGEBUTTON]) {
         if (state) {
-            pic = [SKTexture textureWithImageNamed:@"ButtonON.png"];
+            pic = _buttonOn;
         } else {
-            pic = [SKTexture textureWithImageNamed:@"ButtonOFF.png"];
+            pic = _buttonOff;
         }
-    } else if ([name isEqualToString:@"Bridge"]) {
+    } else if ([name isEqualToString:CLASS_BRIDGE]) {
         if (state) {
-            pic = [SKTexture textureWithImageNamed:@"BridgeON.png"];
+            pic = _bridgeOn;
         } else {
-            pic = [SKTexture textureWithImageNamed:@"BridgeOFF.png"];
+            pic = _bridgeOff;
         }
     } else if ([name isEqualToString:CLASS_LEVER]) {
         if (state) {
-            pic = [SKTexture textureWithImageNamed:@"SwitchON.png"];
+            pic = _switchOn;
         } else {
-            pic = [SKTexture textureWithImageNamed:CLASS_LEVER];
+            pic = _switchOff;
         }
     } else if ([name isEqualToString:CLASS_MOVING_PLATFORM]) {
         // Might add the rainbow colours after the platform.
-        pic = [SKTexture textureWithImageNamed:@"MovingPlatform.png"];
-    } else if ([name isEqualToString:@"Star"]) {
+        pic = _movingPlatform;
+    } else if ([name isEqualToString:CLASS_STAR]) {
         // Might add when a star is disabled.
-        pic = [SKTexture textureWithImageNamed:@"Star.png"];
-    } else if ([name isEqualToString:@"Star"]) {
-        pic = [SKTexture textureWithImageNamed:@"Box.png"];
+        pic = _star;
+    } else if ([name isEqualToString:CLASS_BOX]) {
+        pic = _box;
     } else if ([name isEqualToString:@"Start"]) {
         pic = [SKTexture textureWithImageNamed:@"Start.gif"];
     }
