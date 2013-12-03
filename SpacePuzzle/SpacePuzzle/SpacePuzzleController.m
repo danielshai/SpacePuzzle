@@ -164,7 +164,6 @@
         if([_littleJohn isPlayingOnLevel]) {
             _currentUnit = _littleJohn;
             _nextUnit = _bigL;
-            NSLog(@"Little John ctrl");
             [_scene changeUnit];
         }
     } else if(_currentUnit == _littleJohn) {
@@ -172,7 +171,6 @@
             _currentUnit = _bigL;
             _nextUnit = _littleJohn;
             [_scene changeUnit];
-            NSLog(@"Big L ctrl");
         }
     }
 }

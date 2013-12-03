@@ -265,12 +265,12 @@
                 [_connections removeConnection:point];
                 [self updateConnectionsView];
             }
-            NSLog(@"new pos %f %f", newPos.x,newPos.y);
+            
             // Remove starting positions.
             if(newPos.x == _board.startPosAlien.x && newPos.y == _board.startPosAlien.y) {
                 _board.startPosAlien.x = -2;
                 _board.startPosAlien.y = -2;
-                NSLog(@"erase alien");
+
                 [_scene setStartAlienPosition:CGPointMake(-2, -2)];
             }
             if(newPos.x == _board.startPosAstronaut.x && newPos.y == _board.startPosAstronaut.y) {
