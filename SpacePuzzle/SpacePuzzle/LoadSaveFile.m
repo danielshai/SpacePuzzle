@@ -43,13 +43,13 @@
         level = [unarchivedData objectForKey:@"CurrentLevel"];
         currentLevel = [level stringValue];
         // Adding current world number.
-        [currentState stringByAppendingString:currentWorld];
+        currentState = [currentState stringByAppendingString:currentWorld];
         // Adding current level number.
         if([level integerValue] < 10) {
-            [currentState stringByAppendingString:[NSString stringWithFormat:@"%d", 0]];
-            [currentState stringByAppendingString:currentLevel];
+            currentState = [currentState stringByAppendingString:[NSString stringWithFormat:@"%d", 0]];
+            currentState = [currentState stringByAppendingString:currentLevel];
         } else {
-            [currentState stringByAppendingString:currentLevel];
+            currentState = [currentState stringByAppendingString:currentLevel];
         }
         return currentState;
     }
@@ -58,7 +58,7 @@
 +(void) saveFileWithWorld:(NSInteger)world andLevel:(NSInteger)level {
     // We're going to save the data to SavedState.plist in our app's documents directory
     NSString *rootPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString *plistPath = [rootPath stringByAppendingPathComponent:@"SavedState.plist"];
+    NSString *plistPath = [rootPath stringByAppendingString:@"/SavedState.plist"];
     
     // Create a dictionary to store all your data
     NSMutableDictionary *dataToSave = [NSMutableDictionary dictionary];
@@ -74,21 +74,19 @@
     NSData *serializedData = [NSPropertyListSerialization dataFromPropertyList:dataToSave
                                                                         format:NSPropertyListXMLFormat_v1_0
                                                               errorDescription:&errorDescription];
-    if(serializedData)
-    {
+    if(serializedData) {
         // Write file
         NSError *error;
         BOOL didWrite = [serializedData writeToFile:plistPath options:NSDataWritingFileProtectionComplete error:&error];
         
-        NSLog(@"Error while writing: %@", [error description]);
-        
         if (didWrite)
             NSLog(@"File did write");
-        else
+        else {
             NSLog(@"File write failed");
+            NSLog(@"Error while writing: %@", [error description]);
+        }
     }
-    else 
-    {
+    else {
         NSLog(@"Error in creating state data dictionary: %@", errorDescription);
     }
 }

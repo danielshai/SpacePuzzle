@@ -39,24 +39,22 @@
     // Create and configure the scene.
     _scene = [MainScene sceneWithSize:skView.bounds.size];
     _scene.scaleMode = SKSceneScaleModeAspectFill;
-    /*
+    
+    [LoadSaveFile saveFileWithWorld:0 andLevel:1];
+    
     if([LoadSaveFile loadFile]) {
         NSString *currentState = [LoadSaveFile loadFile];
-        _world = [currentState characterAtIndex:5];
-        if([[currentState substringFromIndex:6] integerValue] != 0){
-            _level = [[currentState substringWithRange:NSMakeRange(6, 7)] integerValue];
+        _world = [[currentState substringWithRange:NSMakeRange(5, 1)] integerValue];
+        if([[currentState substringWithRange:NSMakeRange(6, 1)] integerValue] != 0){
+            _level = [[currentState substringWithRange:NSMakeRange(6, 2)] integerValue];
         } else {
-            _level = [currentState characterAtIndex:7];
+            _level = [[currentState substringWithRange:NSMakeRange(7, 1)] integerValue];
         }
         _player = [[Player alloc] initWithWorld:_world andLevel:_level];
     } else {
         _player = [[Player alloc] initWithWorld:0 andLevel:1];
-    }*/
-    
-    _player = [[Player alloc] initWithWorld:0 andLevel:1];
-    _level = 2;
-    _world = 0;
-
+    }
+        
     [self setupBoard];
     [self setupElements];
     [self setupUnits];
