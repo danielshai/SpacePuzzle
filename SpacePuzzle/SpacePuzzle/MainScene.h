@@ -53,9 +53,11 @@
 -(void)removeElementAtPosition: (NSNumber*)index;
 -(void)setupBoardX: (NSInteger)x Y: (NSInteger)y Status: (NSInteger)status;
 -(void)setupElement: (CGPoint)coord Name: (NSString*)className Hidden: (BOOL)hidden;
--(void)setupUnits: (CGPoint)pos;
+-(void)setupAstronaut: (CGPoint)pos;
+-(void)setupAlien: (CGPoint)pos;
 -(void)notifyText: (NSString *)text Object: (NSObject*)object Key: (NSString*)key;
 -(void)changeUnit;
+-(void)setCurrentUnitWithMacro: (NSInteger)unit;
 -(SKTexture*)updateSpriteWith:(NSString *) name State: (BOOL)state;
 
 @end

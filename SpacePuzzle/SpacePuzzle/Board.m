@@ -34,8 +34,8 @@
         _boardBegin.x = BOARD_PIXEL_BEGIN_X;
         _boardBegin.y = BOARD_PIXEL_BEGIN_Y;
         _elementDictionary = [[NSMutableDictionary alloc] init];
-        _startPosAstronaut = [[Position alloc] initWithX:0 Y:0];
-        _startPosAlien = [[Position alloc] initWithX:0 Y:0];
+        _startPosAstronaut = [[Position alloc] initWithX:-2 Y:-2];
+        _startPosAlien = [[Position alloc] initWithX:-2 Y:-2];
         _finishPos = [[Position alloc] initWithX:0 Y:0];
     }
     return self;

@@ -281,21 +281,30 @@
 
 /*
  *  Sets up the view of units. */
--(void)setupUnits:(CGPoint)pos{
-    // TEMP
+-(void)setupAlien:(CGPoint)pos {
+    pos = [Converter convertCoordToPixel:CGPointMake(pos.x, pos.y)];
+    pos.x += 20;
+    pos.y -= 5;
+    
     _littleJohn = [SKSpriteNode spriteNodeWithImageNamed:@"AlienDown.png"];
+    _littleJohn.position = pos;
     _littleJohn.size = CGSizeMake(TILESIZE,TILESIZE);
+    
+    [self addChild:_littleJohn];
+    _currentUnit = _littleJohn;
+}
+
+-(void)setupAstronaut:(CGPoint)pos {
+    pos = [Converter convertCoordToPixel:CGPointMake(pos.x, pos.y)];
+    pos.x += 20;
+    pos.y -= 5;
+    
     _bigL = [SKSpriteNode spriteNodeWithImageNamed:@"AstroDown.png"];
     _bigL.size = CGSizeMake(TILESIZE,TILESIZE);
-    CGPoint p = [Converter convertCoordToPixel:CGPointMake(pos.x, pos.y)];
-    p.x += 20;
-    p.y -= 5;
-    _littleJohn.position = p;
-    _bigL.position = p;
-
-    [self addChild:_littleJohn];
+    _bigL.position = pos;
+    
     [self addChild:_bigL];
-    _currentUnit = _littleJohn;
+    _currentUnit = _bigL;
 }
 
 /*
@@ -313,10 +322,22 @@
 /*
  * Change the current unit. */
 -(void) changeUnit {
+    NSLog(@"Change in scene");
+    
     if (_currentUnit == _bigL) {
         _currentUnit = _littleJohn;
-    } else {
+        NSLog(@"Little john in scene");
+    } else if (_currentUnit == _littleJohn) {
         _currentUnit = _bigL;
+        NSLog(@"big l in scene");
+    }
+}
+
+-(void)setCurrentUnitWithMacro:(NSInteger)unit {
+    if(unit == BIG_L) {
+        _currentUnit = _bigL;
+    } else if(unit == LITTLE_JOHN) {
+        _currentUnit = _littleJohn;
     }
 }
 

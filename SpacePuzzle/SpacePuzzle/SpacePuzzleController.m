@@ -107,16 +107,7 @@
 
 -(void)trippleTap:(UIGestureRecognizer *)sender {
     if(sender.state == UIGestureRecognizerStateEnded && ![[_scene currentUnit] hasActions]) {
-        if (_currentUnit == _bigL) {
-            _currentUnit = _littleJohn;
-            _nextUnit = _bigL;
-            NSLog(@"Little John");
-        } else {
-         _currentUnit = _bigL;
-         _nextUnit = _littleJohn;
-         NSLog(@"Big L");
-        }
-        [_scene changeUnit];
+        [self changeUnit];
     }
 }
 
@@ -152,12 +143,30 @@
     }
 }
 
+-(void)changeUnit {
+    if (_currentUnit == _bigL) {
+        if([_littleJohn isPlayingOnLevel]) {
+            _currentUnit = _littleJohn;
+            _nextUnit = _bigL;
+            NSLog(@"Little John ctrl");
+            [_scene changeUnit];
+        }
+    } else if(_currentUnit == _littleJohn) {
+        if([_bigL isPlayingOnLevel]) {
+            _currentUnit = _bigL;
+            _nextUnit = _littleJohn;
+            [_scene changeUnit];
+            NSLog(@"Big L ctrl");
+        }
+    }
+}
+
 /*
  *  Loads the board according to the level. ADD LEVELFACTORY!!!. */
 -(void)setupBoard {
     _board = [[Board alloc] init];
     // Load the board.
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"mario" ofType:@"splvl"];
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"mario2" ofType:@"splvl"];
     [_board loadBoard:path];
     
     for(int i = 0; i < BOARD_SIZE_Y; i++) {
@@ -454,15 +463,41 @@
  *  Creates the units. */
 -(void)setupUnits {
     _bigL = [[BigL alloc] init];
-    _bigL.x = _board.startPos.x;
-    _bigL.y = _board.startPos.y;
+    _bigL.x = _board.startPosAstronaut.x;
+    _bigL.y = _board.startPosAstronaut.y;
+    _currentUnit = _bigL;
+    CGPoint p = CGPointMake(_bigL.x, _bigL.y);
+    [_scene setupAstronaut:p];
+    // If the unit has a valid starting position, it is playing.
+    if(_board.startPosAstronaut.x >= 0 && _board.startPosAstronaut.y >= 0) {
+        _bigL.isPlayingOnLevel = YES;
+    } else {
+        _bigL.isPlayingOnLevel = NO;
+    }
+    
     _littleJohn = [[LittleJohn alloc] init];
-    _littleJohn.x = _board.startPos.x;
-    _littleJohn.y = _board.startPos.y;
+    _littleJohn.x = _board.startPosAlien.x;
+    _littleJohn.y = _board.startPosAlien.y;
     _currentUnit = _littleJohn;
-    _nextUnit = _bigL;
-    CGPoint p = CGPointMake(_littleJohn.x, _littleJohn.y);
-    [_scene setupUnits:p];
+    CGPoint pp = CGPointMake(_littleJohn.x, _littleJohn.y);
+    [_scene setupAlien:pp];
+    if(_board.startPosAlien.x >= 0 && _board.startPosAlien.y >= 0) {
+        _littleJohn.isPlayingOnLevel = YES;
+    } else {
+        _littleJohn.isPlayingOnLevel = NO;
+    }
+    
+    if(_bigL.isPlayingOnLevel && !_littleJohn.isPlayingOnLevel) {
+        NSLog(@"Only L");
+        _currentUnit = _bigL;
+        _nextUnit = _bigL;
+        [_scene setCurrentUnitWithMacro:BIG_L];
+    } else if(!_bigL.isPlayingOnLevel && _littleJohn.isPlayingOnLevel) {
+        NSLog(@"Only John");
+        _currentUnit = _littleJohn;
+        _nextUnit = _littleJohn;
+        [_scene setCurrentUnitWithMacro:LITTLE_JOHN];
+    }
 }
 
 /*

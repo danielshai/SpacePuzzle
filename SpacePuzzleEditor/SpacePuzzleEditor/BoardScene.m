@@ -855,9 +855,9 @@
     startAstro.x += TILESIZE/2;
     startAlien.x += TILESIZE/2;
     finish.x += TILESIZE/2;
-    
     _startAstronautSprite.position = startAstro;
     _startAlienSprite.position = startAlien;
+    _startAlienSprite.hidden = NO;
     _finishSprite.position = finish;
 }
 

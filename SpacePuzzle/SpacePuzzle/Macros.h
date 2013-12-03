@@ -62,6 +62,9 @@
 #define UP                      3
 #define DOWN                    4
 
+#define BIG_L                   500
+#define LITTLE_JOHN             501
+
 #define RAINBOW_FROM_UP_TO_RIGHT    1001
 #define RAINBOW_FROM_UP_TO_LEFT     1002
 #define RAINBOW_FROM_RIGHT_TO_UP    1003

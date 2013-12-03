@@ -5,6 +5,7 @@
 #import "Unit.h"
 
 @implementation Unit
+@synthesize isPlayingOnLevel = _isPlayingOnLevel;
 
 -(id)init {
     if(self = [super init]){
