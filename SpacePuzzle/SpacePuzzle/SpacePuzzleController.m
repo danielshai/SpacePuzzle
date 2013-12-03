@@ -14,6 +14,7 @@
 #import "Bridge.h"
 #import "Path.h"
 #import "Position.h"
+#import "LoadSaveFile.h"
 
 @implementation SpacePuzzleController
 @synthesize board = _board;
@@ -23,6 +24,8 @@
 @synthesize bigL = _bigL;
 @synthesize littleJohn = _littleJohn;
 @synthesize player = _player;
+@synthesize world = _world;
+@synthesize level = _level;
 
 -(void)viewDidLoad
 {
@@ -36,9 +39,24 @@
     // Create and configure the scene.
     _scene = [MainScene sceneWithSize:skView.bounds.size];
     _scene.scaleMode = SKSceneScaleModeAspectFill;
+    /*
+    if([LoadSaveFile loadFile]) {
+        NSString *currentState = [LoadSaveFile loadFile];
+        _world = [currentState characterAtIndex:5];
+        if([[currentState substringFromIndex:6] integerValue] != 0){
+            _level = [[currentState substringWithRange:NSMakeRange(6, 7)] integerValue];
+        } else {
+            _level = [currentState characterAtIndex:7];
+        }
+        _player = [[Player alloc] initWithWorld:_world andLevel:_level];
+    } else {
+        _player = [[Player alloc] initWithWorld:0 andLevel:1];
+    }*/
     
-    _player = [[Player alloc] init];
-    
+    _player = [[Player alloc] initWithWorld:0 andLevel:1];
+    _level = 2;
+    _world = 0;
+
     [self setupBoard];
     [self setupElements];
     [self setupUnits];
@@ -157,7 +175,14 @@
 -(void)setupBoard {
     _board = [[Board alloc] init];
     // Load the board.
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"mario" ofType:@"splvl"];
+    NSString *currentLevel = @"Level";
+    currentLevel = [currentLevel stringByAppendingString:[NSString stringWithFormat:@"%d", _world]];
+    if(_level < 10) {
+        currentLevel = [currentLevel stringByAppendingString:[NSString stringWithFormat:@"%d%d", 0, _level]];
+    } else {
+        currentLevel = [currentLevel stringByAppendingString:[NSString stringWithFormat:@"%d", _level]];
+    }
+    NSString *path = [[NSBundle mainBundle] pathForResource:currentLevel ofType:@"splvl"];
     [_board loadBoard:path];
     
     for(int i = 0; i < BOARD_SIZE_Y; i++) {

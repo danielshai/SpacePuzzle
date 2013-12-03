@@ -38,6 +38,10 @@
 		77D60730184374030079A182 /* AstroUp.png in Resources */ = {isa = PBXBuildFile; fileRef = 77D6072E184374030079A182 /* AstroUp.png */; };
 		77F0A81C1845FF28002FA17A /* AnimationFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F0A81B1845FF28002FA17A /* AnimationFactory.m */; };
 		77F0A82318464495002FA17A /* LittleJohnWalk.atlasc in Resources */ = {isa = PBXBuildFile; fileRef = 77F0A82118464495002FA17A /* LittleJohnWalk.atlasc */; };
+		77F2163F184DD58A00FD23D2 /* Level001.splvl in Resources */ = {isa = PBXBuildFile; fileRef = 77F2163C184DD58A00FD23D2 /* Level001.splvl */; };
+		77F21640184DD58A00FD23D2 /* Level002.splvl in Resources */ = {isa = PBXBuildFile; fileRef = 77F2163D184DD58A00FD23D2 /* Level002.splvl */; };
+		77F21641184DD58A00FD23D2 /* Level003.splvl in Resources */ = {isa = PBXBuildFile; fileRef = 77F2163E184DD58A00FD23D2 /* Level003.splvl */; };
+		77F21644184DDEFF00FD23D2 /* LoadSaveFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F21643184DDEFF00FD23D2 /* LoadSaveFile.m */; };
 		E6057677183619120033AE88 /* Box.m in Sources */ = {isa = PBXBuildFile; fileRef = E6057676183619120033AE88 /* Box.m */; };
 		E60C6A01183B94F000D6FA14 /* Star.m in Sources */ = {isa = PBXBuildFile; fileRef = E60C6A00183B94F000D6FA14 /* Star.m */; };
 		E60C6A0A183BB19F00D6FA14 /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = E60C6A09183BB19F00D6FA14 /* Player.m */; };
@@ -124,6 +128,11 @@
 		77F0A81B1845FF28002FA17A /* AnimationFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimationFactory.m; sourceTree = "<group>"; };
 		77F0A82118464495002FA17A /* LittleJohnWalk.atlasc */ = {isa = PBXFileReference; lastKnownFileType = folder; path = LittleJohnWalk.atlasc; sourceTree = "<group>"; };
 		77F0A82218464495002FA17A /* LittleJohnWalk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LittleJohnWalk.h; sourceTree = "<group>"; };
+		77F2163C184DD58A00FD23D2 /* Level001.splvl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level001.splvl; sourceTree = "<group>"; };
+		77F2163D184DD58A00FD23D2 /* Level002.splvl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level002.splvl; sourceTree = "<group>"; };
+		77F2163E184DD58A00FD23D2 /* Level003.splvl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level003.splvl; sourceTree = "<group>"; };
+		77F21642184DDEFF00FD23D2 /* LoadSaveFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadSaveFile.h; sourceTree = "<group>"; };
+		77F21643184DDEFF00FD23D2 /* LoadSaveFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadSaveFile.m; sourceTree = "<group>"; };
 		E6057675183619120033AE88 /* Box.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Box.h; sourceTree = "<group>"; };
 		E6057676183619120033AE88 /* Box.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Box.m; sourceTree = "<group>"; };
 		E60C69FF183B94F000D6FA14 /* Star.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Star.h; sourceTree = "<group>"; };
@@ -397,6 +406,9 @@
 		E687AE4E183A440F00A5B78C /* Levels */ = {
 			isa = PBXGroup;
 			children = (
+				77F2163C184DD58A00FD23D2 /* Level001.splvl */,
+				77F2163D184DD58A00FD23D2 /* Level002.splvl */,
+				77F2163E184DD58A00FD23D2 /* Level003.splvl */,
 				E687AE4C183A43EB00A5B78C /* mario.splvl */,
 			);
 			name = Levels;
@@ -421,6 +433,8 @@
 				E6E6581A182BCD660022BF5F /* Converter.h */,
 				E6E6581B182BCD660022BF5F /* Converter.m */,
 				E6E657FB182BB7BD0022BF5F /* Macros.h */,
+				77F21642184DDEFF00FD23D2 /* LoadSaveFile.h */,
+				77F21643184DDEFF00FD23D2 /* LoadSaveFile.m */,
 			);
 			name = Utility;
 			sourceTree = "<group>";
@@ -536,6 +550,7 @@
 				7797AC47183CE9F500E63E95 /* Alien.png in Resources */,
 				7797AC48183CE9F500E63E95 /* Astronaut.png in Resources */,
 				E60DA7781848A1880088AB3D /* PlatformLever.png in Resources */,
+				77F2163F184DD58A00FD23D2 /* Level001.splvl in Resources */,
 				77D6072C184373F40079A182 /* AstroLeft.png in Resources */,
 				E6214061182BA53800EC5C21 /* InfoPlist.strings in Resources */,
 				77D6072B184373F40079A182 /* AstroDown.png in Resources */,
@@ -555,6 +570,7 @@
 				E6214074182BA53800EC5C21 /* Images.xcassets in Resources */,
 				7797AC42183CE9F500E63E95 /* Background.png in Resources */,
 				7797AC38183CE9F500E63E95 /* BridgeON.png in Resources */,
+				77F21641184DD58A00FD23D2 /* Level003.splvl in Resources */,
 				7797AC3F183CE9F500E63E95 /* Start.gif in Resources */,
 				7797AC45183CE9F500E63E95 /* solidtile.png in Resources */,
 				7797AC3C183CE9F500E63E95 /* Finish.png in Resources */,
@@ -562,6 +578,7 @@
 				E621406A182BA53800EC5C21 /* Main.storyboard in Resources */,
 				E60DA77C1848A2350088AB3D /* StarButton.png in Resources */,
 				77D60730184374030079A182 /* AstroUp.png in Resources */,
+				77F21640184DD58A00FD23D2 /* Level002.splvl in Resources */,
 				7797AC43183CE9F500E63E95 /* Cracked.png in Resources */,
 				7797AC41183CE9F500E63E95 /* SwitchON.png in Resources */,
 				779EF6A7183F608C0097441A /* MovingPlatform.png in Resources */,
@@ -604,6 +621,7 @@
 				E6E65804182BBAB30022BF5F /* BoardCoord.m in Sources */,
 				E6E65819182BC9390022BF5F /* Unit.m in Sources */,
 				E6214070182BA53800EC5C21 /* MainScene.m in Sources */,
+				77F21644184DDEFF00FD23D2 /* LoadSaveFile.m in Sources */,
 				7701076C183E0FFB00AAF564 /* Bridge.m in Sources */,
 				E6E657FE182BB8C50022BF5F /* Board.m in Sources */,
 			);

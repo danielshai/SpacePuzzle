@@ -10,4 +10,8 @@
 
 @interface Player : NSObject
 @property (nonatomic, assign) NSInteger starsTaken;
+@property (nonatomic, assign) NSInteger world;
+@property (nonatomic, assign) NSInteger level;
+
+-(id)initWithWorld: (NSInteger) world andLevel: (NSInteger) level;
 @end

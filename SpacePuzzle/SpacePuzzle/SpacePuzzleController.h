@@ -30,6 +30,8 @@
 @property (nonatomic, retain) BigL *bigL;
 @property (nonatomic, retain) LittleJohn *littleJohn;
 @property (nonatomic, retain) Player *player;
+@property (nonatomic, assign) NSInteger world;
+@property (nonatomic, assign) NSInteger level;
 
 -(void)singleTap:(UIGestureRecognizer *)sender;
 -(void)doubleTap:(UIGestureRecognizer *)sender;
