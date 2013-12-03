@@ -309,7 +309,7 @@
 
 -(void)setupAstronaut:(CGPoint)pos {
     pos = [Converter convertCoordToPixel:CGPointMake(pos.x, pos.y)];
-    pos.x += 20;
+    pos.x += 24;
     pos.y -= 5;
     
     _bigL = [SKSpriteNode spriteNodeWithImageNamed:@"AstroDown.png"];
