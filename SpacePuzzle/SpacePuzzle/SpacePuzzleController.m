@@ -106,7 +106,7 @@
 }
 
 -(void)trippleTap:(UIGestureRecognizer *)sender {
-    if(sender.state == UIGestureRecognizerStateEnded && ![[_scene currentUnit] hasActions]) {
+    if(sender.state == UIGestureRecognizerStateEnded && ![[_scene currentUnit] hasActions]  ) {
         if (_currentUnit == _bigL) {
             _currentUnit = _littleJohn;
             _nextUnit = _bigL;
