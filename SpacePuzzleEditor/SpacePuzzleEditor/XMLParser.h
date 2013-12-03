@@ -17,7 +17,8 @@
 @interface XMLParser : NSObject <NSXMLParserDelegate> {
     NSString *currentElement;
     BOOL boardElement;
-    BOOL startElement;
+    BOOL startAstronautElement;
+    BOOL startAlienElement;
     BOOL finishElement;
     BOOL rockElement;
     BOOL starElement;
@@ -45,7 +46,8 @@
 
 @property (nonatomic, retain) NSXMLParser *parser;
 @property (nonatomic, retain) NSMutableArray *board;
-@property (nonatomic, retain) Position *start;
+@property (nonatomic, retain) Position *startAstronaut;
+@property (nonatomic, retain) Position *startAlien;
 @property (nonatomic, retain) Position *finish;
 @property (nonatomic, retain) NSMutableDictionary *elements;
 -(id)initWithContentsOfURL:(NSURL *)url;

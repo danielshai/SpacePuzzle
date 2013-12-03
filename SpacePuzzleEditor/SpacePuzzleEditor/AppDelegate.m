@@ -165,48 +165,6 @@
     }
 }
 
--(void)showControlPanel:(NSNotification *) notification {
-    // Get the data (location of click).
-    NSDictionary *userInfo = notification.userInfo;
-    NSSet *objectSent = [userInfo objectForKey:@"ControlPanel"];
-    NSArray *data = [objectSent allObjects];
-    // Edited at coordinate.
-    NSValue *val = [data objectAtIndex:0];
-    NSNumber *index = [NSNumber numberWithInteger:val.pointValue.y*BOARD_SIZE_X + val.pointValue.x];
-    
-    Element *e = [[_board elementDictionary] objectForKey:index];
- 
-    if([NSStringFromClass([e class]) isEqualToString:@"StarButton"]) {
-        // Open properties window. Set some size and position.
-        [_controlPanel makeKeyAndOrderFront:self];
-        NSRect frame = [[self window] frame];
-        CGPoint p = frame.origin;
-        CGSize s = frame.size;
-        s.height -= 200;
-        s.width -= 10;
-        p.x += 5;
-        p.y += 100;
-        frame.size = s;
-        frame.origin = p;
-        [_controlPanel setFrame:frame display:YES animate:YES];
-    }
-}
-
--(IBAction)newLevel:(id)sender {
-    NSAlert *alert = [NSAlert alertWithMessageText:@"Are you sure you want to create a new level?"
-                                     defaultButton:@"Yes"
-                                   alternateButton:@"No"
-                                       otherButton:nil
-                         informativeTextWithFormat:@"Unsaved work will be lost."];
-    if([alert runModal] == NSOKButton) {
-        [_board createEmptyBoard];
-        [self loadConnections];
-        [self cleanView];
-        currentFilePath = @"";
-        [[self window] setTitle:@"Untitled.splvl"];
-    }
-}
-
 -(BOOL)application:(NSApplication *)theApplication openFile:(NSString *)filename {
     [_board loadBoard:filename];
     currentFilePath = filename;
@@ -246,9 +204,10 @@
 }
 
 -(void)refreshElementView {
-    CGPoint s = CGPointMake(_board.startPos.x, _board.startPos.y);
+    CGPoint sAs = CGPointMake(_board.startPosAstronaut.x, _board.startPosAstronaut.y);
+    CGPoint sAl = CGPointMake(_board.startPosAlien.x, _board.startPosAlien.y);
     CGPoint f = CGPointMake(_board.finishPos.x, _board.finishPos.y);
-    [_scene refreshElementsStart:s Finish:f];
+    [_scene refreshStartAstro:sAs StartAlien:sAl Finish:f];
     
     [_scene cleanElements];
     for(id key in [_board elementDictionary]) {
@@ -270,18 +229,24 @@
     CGPoint point = CGPointMake(val.pointValue.x, val.pointValue.y);
     // The used brush.
     NSInteger stat = [[data objectAtIndex:1] integerValue];
-    NSNumber *flatIndex = [NSNumber numberWithInt:val.pointValue.y * BOARD_SIZE_X + val.pointValue.x];
+    NSNumber *flatIndex = [NSNumber numberWithInt:point.y * BOARD_SIZE_X + point.x];
     // If the change was on a tile, the |BoardCoord| status should change. Otherwise elements should change.
-    if(stat == MAPSTATUS_SOLID || stat== MAPSTATUS_CRACKED || stat == MAPSTATUS_VOID) {
-        BoardCoord *bc = [[_board board] objectAtIndex:val.pointValue.y * BOARD_SIZE_X + val.pointValue.x];
+    if(stat == MAPSTATUS_SOLID || stat == MAPSTATUS_CRACKED || stat == MAPSTATUS_VOID) {
+        BoardCoord *bc = [[_board board] objectAtIndex:point.y * BOARD_SIZE_X + point.x];
         bc.status = stat;
     } else {
+        // newPos == point, no??
         CGPoint newPos = CGPointMake(val.pointValue.x, val.pointValue.y);
 
-        if(stat == BRUSH_START) {
+        if(stat == BRUSH_START_ASTRO) {
             // Update position of start element.
-            _board.startPos.x = newPos.x;
-            _board.startPos.y = newPos.y;
+            _board.startPosAstronaut.x = newPos.x;
+            _board.startPosAstronaut.y = newPos.y;
+            _scene.startAstronautSprite.hidden = NO;
+        } else if(stat == BRUSH_START_ALIEN) {
+            _board.startPosAlien.x = newPos.x;
+            _board.startPosAlien.y = newPos.y;
+            _scene.startAlienSprite.hidden = NO;
         } else if (stat == BRUSH_FINISH) {
             // Update position of finish element.
             _board.finishPos.x = newPos.x;
@@ -299,6 +264,19 @@
                 //Element *e = [[_board elementDictionary] objectForKey:flatIndex];
                 [_connections removeConnection:point];
                 [self updateConnectionsView];
+            }
+            NSLog(@"new pos %f %f", newPos.x,newPos.y);
+            // Remove starting positions.
+            if(newPos.x == _board.startPosAlien.x && newPos.y == _board.startPosAlien.y) {
+                _board.startPosAlien.x = -2;
+                _board.startPosAlien.y = -2;
+                NSLog(@"erase alien");
+                [_scene setStartAlienPosition:CGPointMake(-2, -2)];
+            }
+            if(newPos.x == _board.startPosAstronaut.x && newPos.y == _board.startPosAstronaut.y) {
+                _board.startPosAstronaut.x = -2;
+                _board.startPosAstronaut.y = -2;
+                [_scene setStartAstronautPosition:CGPointMake(-2, -2)];
             }
         } else if (stat == BRUSH_ROCK) {
             [_board addElementNamed:CLASS_BOX AtPosition:newPos IsBlocking:YES];
@@ -456,6 +434,21 @@
         [_board saveBoard:currentFilePath];
         [[self window] setTitle:[currentFilePath lastPathComponent]];
         edited = NO;
+    }
+}
+
+-(IBAction)newLevel:(id)sender {
+    NSAlert *alert = [NSAlert alertWithMessageText:@"Are you sure you want to create a new level?"
+                                     defaultButton:@"Yes"
+                                   alternateButton:@"No"
+                                       otherButton:nil
+                         informativeTextWithFormat:@"Unsaved work will be lost."];
+    if([alert runModal] == NSOKButton) {
+        [_board createEmptyBoard];
+        [self loadConnections];
+        [self cleanView];
+        currentFilePath = @"";
+        [[self window] setTitle:@"Untitled.splvl"];
     }
 }
 

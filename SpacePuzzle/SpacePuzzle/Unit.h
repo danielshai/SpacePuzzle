@@ -8,6 +8,7 @@
 #import "Position.h"
 
 @interface Unit : Position
+@property (nonatomic, assign) BOOL isPlayingOnLevel;
 -(void) move;
 
 @end

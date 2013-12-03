@@ -3,7 +3,10 @@
     SpacePuzzle
 
     Controller for the main game scene.
-    ADD LEVELFACTORY.
+    
+    To fix:
+        - Level progress.
+        - Startpositioner för olika units.
 */
 
 #import <UIKit/UIKit.h>
@@ -39,6 +42,7 @@
 -(void)swipeDown:(UISwipeGestureRecognizer *)sender;
 -(void)swipeLeft:(UISwipeGestureRecognizer *)sender;
 -(void)swipeRight:(UISwipeGestureRecognizer *)sender;
+-(void)changeUnit;
 -(void)unitWantsToMoveTo: (CGPoint)loc;
 -(void)unitWantsToDoActionAt: (CGPoint)loc;
 -(void)doActionOnBox: (Element*)rock InDirection: (NSInteger)dir;

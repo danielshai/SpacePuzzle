@@ -21,15 +21,16 @@
 @implementation XMLParser
 @synthesize parser = _parser;
 @synthesize board = _board;
-@synthesize start = _start;
+@synthesize startAstronaut = _startAstronaut;
 @synthesize finish = _finish;
 @synthesize elements = _elements;
+@synthesize startAlien = _startAlien;
 
 -(id)init {
     if(self = [super init]) {
         output = @"";
         boardElement = NO;
-        startElement = NO;
+        startAstronautElement = NO;
         finishElement = NO;
         _board = [[NSMutableArray alloc] init];
         [_parser setDelegate:self];
@@ -41,7 +42,8 @@
     if(self = [super init]) {
         output = @"";
         boardElement = NO;
-        startElement = NO;
+        startAstronautElement = NO;
+        startAlienElement = NO;
         finishElement = NO;
         starElement = NO;
         boardElements = NO;
@@ -59,7 +61,8 @@
         
         _board = [[NSMutableArray alloc] init];
         _parser = [[NSXMLParser alloc] initWithContentsOfURL:url];
-        _start = [[Position alloc] initWithX:0 Y:0];
+        _startAstronaut = [[Position alloc] initWithX:0 Y:0];
+        _startAlien = [[Position alloc] initWithX:0 Y:0];
         _finish = [[Position alloc] initWithX:0 Y:0];
         _elements = [[NSMutableDictionary alloc] init];
         pathArray = [[NSMutableArray alloc] init];
@@ -71,8 +74,8 @@
 }
 
 -(void)parserDidStartDocument:(NSXMLParser *)parser {
-    _start = [[Position alloc] initWithX:0 Y:0];
-    _finish = [[Position alloc] initWithX:0 Y:0];
+   // _startAstronaut = [[Position alloc] initWithX:0 Y:0];
+   // _finish = [[Position alloc] initWithX:0 Y:0];
 }
 
 -(void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict {
@@ -80,8 +83,10 @@
     
     if([currentElement isEqualToString:@"coords"]) {
         boardElement = YES;
-    } else if ([currentElement isEqualToString:@"start"]) {
-        startElement = YES;
+    } else if ([currentElement isEqualToString:@"startastronaut"]) {
+        startAstronautElement = YES;
+    } else if ([elementName isEqualToString:@"startalien"]) {
+        startAlienElement = YES;
     } else if ([currentElement isEqualToString:@"finish"]) {
         finishElement = YES;
     } else if ([currentElement isEqualToString:CLASS_BOX]) {
@@ -115,8 +120,10 @@
 
     if ([elementName isEqualToString:@"coords"]) {
         boardElement = NO;
-    } else if ([elementName isEqualToString:@"start"]) {
-        startElement = NO;
+    } else if ([elementName isEqualToString:@"startastronaut"]) {
+        startAstronautElement = NO;
+    } else if ([elementName isEqualToString:@"startalien"]) {
+        startAlienElement = NO;
     } else if ([elementName isEqualToString:@"finish"]) {
         finishElement = NO;
     } else if ([elementName isEqualToString:CLASS_BOX]) {
@@ -187,10 +194,14 @@
         boardElement = YES;
     } else if([currentElement isEqualToString:@"status"] && boardElement) {
         [_board insertObject:[NSNumber numberWithInt:intString] atIndex:[_board count]];
-    } else if([currentElement isEqualToString:@"x"] && startElement) {
-        _start.x = intString;
-    } else if([currentElement isEqualToString:@"y"] && startElement) {
-        _start.y = intString;
+    } else if([currentElement isEqualToString:@"x"] && startAstronautElement) {
+        _startAstronaut.x = intString;
+    } else if([currentElement isEqualToString:@"y"] && startAstronautElement) {
+        _startAstronaut.y = intString;
+    } else if([currentElement isEqualToString:@"x"] && startAlienElement) {
+        _startAlien.x = intString;
+    } else if([currentElement isEqualToString:@"y"] && startAlienElement) {
+        _startAlien.y = intString;
     } else if([currentElement isEqualToString:@"x"] && finishElement) {
         _finish.x = intString;
     } else if([currentElement isEqualToString:@"y"] && finishElement) {
@@ -222,7 +233,8 @@
     // INSERT ERROR CHECK HERE.
     output = @"";
     boardElement = NO;
-    startElement = NO;
+    startAstronautElement = NO;
+    startAlienElement = NO;
     finishElement = NO;
     rockElement = NO;
     starElement = NO;
