@@ -284,9 +284,9 @@
 -(void)setupUnits:(CGPoint)pos{
     // TEMP
     _littleJohn = [SKSpriteNode spriteNodeWithImageNamed:@"AlienDown.png"];
-    _littleJohn.size = CGSizeMake(44,44);
+    _littleJohn.size = CGSizeMake(TILESIZE,TILESIZE);
     _bigL = [SKSpriteNode spriteNodeWithImageNamed:@"AstroDown.png"];
-    _bigL.size = CGSizeMake(44,44);
+    _bigL.size = CGSizeMake(TILESIZE,TILESIZE);
     CGPoint p = [Converter convertCoordToPixel:CGPointMake(pos.x, pos.y)];
     p.x += 20;
     p.y -= 5;

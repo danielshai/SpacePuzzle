@@ -11,8 +11,9 @@
 @synthesize crackedTile = _crackedTile;
 @synthesize boardSprites = _boardSprites;
 @synthesize bkg = _bkg;
-@synthesize startElement = _startElement;
-@synthesize startElSprite = _startElSprite;
+@synthesize startAstronautTxt = _startAstronautTxt;
+@synthesize startAstronautSprite = _startAstronautSprite;
+@synthesize startAlienSprite = _startAlienSprite;
 @synthesize finishElement = _finishElement;
 @synthesize finishSprite = _finishSprite;
 @synthesize rockTexture = _rockTexture;
@@ -70,7 +71,8 @@
         _voidTile = [SKTexture textureWithImageNamed:@"voidtile.png"];
         _crackedTile = [SKTexture textureWithImageNamed:@"Cracked.png"];
         _bkg = [SKSpriteNode spriteNodeWithImageNamed:@"Background.png"];
-        _startElement = [SKTexture textureWithImageNamed:@"Start.gif"];
+        _startAstronautTxt = [SKTexture textureWithImageNamed:@"Astronaut.png"];
+        _startAlienTxt = [SKTexture textureWithImageNamed:@"Alien.png"];
         _finishElement = [SKTexture textureWithImageNamed:@"Finish.png"];
         _rockTexture = [SKTexture textureWithImageNamed:@"Box.png"];
         _starTexture = [SKTexture textureWithImageNamed:@"Star.png"];
@@ -82,11 +84,19 @@
         rainbowRightTurn = [SKTexture textureWithImageNamed:@"RainbRTurn.png"];
         rainbowStraight = [SKTexture textureWithImageNamed:@"RainbHoriz.png"];
         
-        _startElSprite = [SKSpriteNode spriteNodeWithTexture:_startElement];
-        _startElSprite.position = CGPointMake(-100, -100);
-        _startElSprite.size = CGSizeMake(TILESIZE/2, TILESIZE/2);
-        _startElSprite.zPosition = 10;
-        [self addChild:_startElSprite];
+        _startAstronautSprite = [SKSpriteNode spriteNodeWithTexture:_startAstronautTxt];
+        _startAstronautSprite.position = CGPointMake(-100, -100);
+        _startAlienSprite.hidden = YES;
+        _startAstronautSprite.size = CGSizeMake(TILESIZE-6, TILESIZE-6);
+        _startAstronautSprite.zPosition = 10;
+        [self addChild:_startAstronautSprite];
+        
+        _startAlienSprite = [SKSpriteNode spriteNodeWithTexture:_startAlienTxt];
+        _startAlienSprite.position = CGPointMake(-100, -100);
+        _startAlienSprite.hidden = YES;
+        _startAlienSprite.size = CGSizeMake(TILESIZE-6, TILESIZE-6);
+        _startAlienSprite.zPosition = 10;
+        [self addChild:_startAlienSprite];
         
         _finishSprite = [SKSpriteNode spriteNodeWithTexture:_finishElement];
         _finishSprite.position = CGPointMake(-100, -100);
@@ -116,6 +126,7 @@
         [self observeText:@"BridgeClick" Selector:@selector(bridgeClick)];
         [self observeText:@"LeverClick" Selector:@selector(leverClick)];
         [self observeText:@"PlatformClick" Selector:@selector(platformClick)];
+        [self observeText:@"AlienClick" Selector:@selector(alienClick)];
         
         controlDragLine.zPosition = 99999999;
         circle.zPosition = 99999998;
@@ -580,13 +591,18 @@
             
             [self notifyText:@"BoardEdited" Object:arr Key:@"BoardEdited"];
         }
-        // Elements.
+        // Elements. THIS SHOULD BE CHANGED TO ONLY UPDATE 
         else {
-            if(statusOfPalette == BRUSH_START) {
+            if(statusOfPalette == BRUSH_START_ASTRO) {
                 // Change position of Start sprite.
                 loc = [Converter convertCoordToPixel:loc];
                 loc.x += TILESIZE/2;
-                _startElSprite.position = CGPointMake(loc.x, loc.y);
+                _startAstronautSprite.position = CGPointMake(loc.x, loc.y);
+                [self notifyText:@"BoardEdited" Object:arr Key:@"BoardEdited"];
+            } else if(statusOfPalette == BRUSH_START_ALIEN) {
+                loc = [Converter convertCoordToPixel:loc];
+                loc.x += TILESIZE/2;
+                _startAlienSprite.position = CGPointMake(loc.x, loc.y);
                 [self notifyText:@"BoardEdited" Object:arr Key:@"BoardEdited"];
             } else if(statusOfPalette == BRUSH_FINISH) {
                 loc = [Converter convertCoordToPixel:loc];
@@ -697,7 +713,7 @@
 /*
  *  Runs when something is clicked on the palette. */
 -(void)startClick {
-    [self changeTextureOfBrush:BRUSH_START];
+    [self changeTextureOfBrush:BRUSH_START_ASTRO];
 }
 
 -(void)finishClick {
@@ -748,6 +764,10 @@
     [self changeTextureOfBrush:BRUSH_LEVER];
 }
 
+-(void)alienClick {
+    [self changeTextureOfBrush:BRUSH_START_ALIEN];
+}
+
 /*
  *  Changes the texture of the brush, i.e. what the brush will "paint". */
 -(void)changeTextureOfBrush:(NSInteger)status {
@@ -763,8 +783,11 @@
         case MAPSTATUS_CRACKED:
             currentTexture = _crackedTile;
             break;
-        case BRUSH_START:
-            currentTexture = _startElement;
+        case BRUSH_START_ASTRO:
+            currentTexture = _startAstronautTxt;
+            break;
+        case BRUSH_START_ALIEN:
+            currentTexture = _startAlienTxt;
             break;
         case BRUSH_FINISH:
             currentTexture = _finishElement;
@@ -825,13 +848,16 @@
     [self setTextureOfSprite:sprite AccordingToStatus:status];
 }
 
--(void)refreshElementsStart:(CGPoint)start Finish:(CGPoint)finish {
-    start = [Converter convertCoordToPixel:start];
+-(void)refreshStartAstro:(CGPoint)startAstro StartAlien:(CGPoint)startAlien Finish:(CGPoint)finish {
+    startAstro = [Converter convertCoordToPixel:startAstro];
+    startAlien = [Converter convertCoordToPixel:startAlien];
     finish = [Converter convertCoordToPixel:finish];
-    start.x += TILESIZE/2;
+    startAstro.x += TILESIZE/2;
+    startAlien.x += TILESIZE/2;
     finish.x += TILESIZE/2;
     
-    _startElSprite.position = start;
+    _startAstronautSprite.position = startAstro;
+    _startAlienSprite.position = startAlien;
     _finishSprite.position = finish;
 }
 
@@ -875,7 +901,7 @@
     CGPoint pxl = [Converter convertCoordToPixel:pos];
     pxl.x += TILESIZE/2;
     star.position = pxl;
-    star.size = CGSizeMake(TILESIZE-20, TILESIZE-20);
+    star.size = CGSizeMake(TILESIZE-10, TILESIZE-10);
     
     [_elementSprites setObject:star forKey:index];
     [self addChild:star];
@@ -980,7 +1006,8 @@
     
     [_elementSprites removeAllObjects];
     
-    _startElSprite.position = CGPointMake(-100, -100);
+    _startAstronautSprite.position = CGPointMake(-100, -100);
+    _startAlienSprite.position = CGPointMake(-100, -100);
     _finishSprite.position = CGPointMake(-100, -100);
 }
 
@@ -1013,8 +1040,8 @@
         sprite.texture = _voidTile;
     } else if(status == MAPSTATUS_CRACKED) {
         sprite.texture = _crackedTile;
-    } else if(status == BRUSH_START) {
-        sprite.texture = _startElement;
+    } else if(status == BRUSH_START_ASTRO) {
+        sprite.texture = _startAstronautTxt;
     }
 }
 

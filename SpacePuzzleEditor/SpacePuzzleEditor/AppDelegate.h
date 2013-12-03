@@ -40,7 +40,6 @@
 -(IBAction)saveLevel:(id)sender;
 -(IBAction)saveAsLevel:(id)sender;
 -(void)boardEdited:(NSNotification *) notification;
--(void)showControlPanel:(NSNotification *) notification;
 -(void)pathDrag:(NSNotification*) notification;
 -(void)controlDragged:(NSNotification *) notification;
 -(void)controlDragUp:(NSNotification *) notification;

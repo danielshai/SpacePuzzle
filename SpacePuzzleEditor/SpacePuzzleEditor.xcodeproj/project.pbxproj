@@ -27,6 +27,8 @@
 		E6279F6F18436EA6009A91BC /* Bridge.m in Sources */ = {isa = PBXBuildFile; fileRef = E6279F6C18436EA6009A91BC /* Bridge.m */; };
 		E6279F7018436EA6009A91BC /* BridgeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E6279F6E18436EA6009A91BC /* BridgeButton.m */; };
 		E6279F7218437AF0009A91BC /* BridgeON.png in Resources */ = {isa = PBXBuildFile; fileRef = E6279F7118437AF0009A91BC /* BridgeON.png */; };
+		E62A051F184DD06D009B4004 /* Alien.png in Resources */ = {isa = PBXBuildFile; fileRef = E62A051E184DD06D009B4004 /* Alien.png */; };
+		E62A0521184DD079009B4004 /* Astronaut.png in Resources */ = {isa = PBXBuildFile; fileRef = E62A0520184DD079009B4004 /* Astronaut.png */; };
 		E64C9F8C18339F2E00A18E36 /* XMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = E64C9F8B18339F2E00A18E36 /* XMLParser.m */; };
 		E654B2E21830F7DD006BFCAC /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E654B2E11830F7DD006BFCAC /* Cocoa.framework */; };
 		E654B2E41830F7DD006BFCAC /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E654B2E31830F7DD006BFCAC /* SpriteKit.framework */; };
@@ -94,6 +96,8 @@
 		E6279F6D18436EA6009A91BC /* BridgeButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BridgeButton.h; path = ../SpacePuzzle/SpacePuzzle/BridgeButton.h; sourceTree = "<group>"; };
 		E6279F6E18436EA6009A91BC /* BridgeButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BridgeButton.m; path = ../SpacePuzzle/SpacePuzzle/BridgeButton.m; sourceTree = "<group>"; };
 		E6279F7118437AF0009A91BC /* BridgeON.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BridgeON.png; path = ../../Resources/Elements/BridgeON.png; sourceTree = "<group>"; };
+		E62A051E184DD06D009B4004 /* Alien.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Alien.png; path = ../../Resources/Units/Alien.png; sourceTree = "<group>"; };
+		E62A0520184DD079009B4004 /* Astronaut.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Astronaut.png; path = ../../Resources/Units/Astronaut.png; sourceTree = "<group>"; };
 		E64C9F8A18339F2E00A18E36 /* XMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLParser.h; sourceTree = "<group>"; };
 		E64C9F8B18339F2E00A18E36 /* XMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLParser.m; sourceTree = "<group>"; wrapsLines = 1; };
 		E654B2DE1830F7DD006BFCAC /* SpacePuzzleEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpacePuzzleEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -165,6 +169,8 @@
 		E60576A0183651E30033AE88 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E62A0520184DD079009B4004 /* Astronaut.png */,
+				E62A051E184DD06D009B4004 /* Alien.png */,
 				E606D34F184C79A600A04E23 /* PlatformLever.png */,
 				E606D34D184C799900A04E23 /* BridgeButton.png */,
 				E60B2328184741B500645462 /* RainbRTurn.png */,
@@ -398,6 +404,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				E60C92AB183A5FD9005DCBB7 /* Rock.png in Resources */,
+				E62A051F184DD06D009B4004 /* Alien.png in Resources */,
+				E62A0521184DD079009B4004 /* Astronaut.png in Resources */,
 				E687AE4B183A239000A5B78C /* Finish.png in Resources */,
 				E60B23261847394700645462 /* RainbLTurn.png in Resources */,
 				E654B3001830F7DD006BFCAC /* Images.xcassets in Resources */,

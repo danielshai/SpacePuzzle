@@ -29,7 +29,8 @@
 @property (nonatomic, assign) CGPoint boardBegin;
 @property (nonatomic, retain) XMLParser *parser;
 @property (nonatomic, retain) NSMutableDictionary *elementDictionary;
-@property (nonatomic, retain) Position *startPos;
+@property (nonatomic, retain) Position *startPosAstronaut;
+@property (nonatomic, retain) Position *startPosAlien;
 @property (nonatomic, retain) Position *finishPos;
 
 -(void) moveElementFrom: (CGPoint)from To: (CGPoint)to;

@@ -165,33 +165,6 @@
     }
 }
 
--(void)showControlPanel:(NSNotification *) notification {
-    // Get the data (location of click).
-    NSDictionary *userInfo = notification.userInfo;
-    NSSet *objectSent = [userInfo objectForKey:@"ControlPanel"];
-    NSArray *data = [objectSent allObjects];
-    // Edited at coordinate.
-    NSValue *val = [data objectAtIndex:0];
-    NSNumber *index = [NSNumber numberWithInteger:val.pointValue.y*BOARD_SIZE_X + val.pointValue.x];
-    
-    Element *e = [[_board elementDictionary] objectForKey:index];
- 
-    if([NSStringFromClass([e class]) isEqualToString:@"StarButton"]) {
-        // Open properties window. Set some size and position.
-        [_controlPanel makeKeyAndOrderFront:self];
-        NSRect frame = [[self window] frame];
-        CGPoint p = frame.origin;
-        CGSize s = frame.size;
-        s.height -= 200;
-        s.width -= 10;
-        p.x += 5;
-        p.y += 100;
-        frame.size = s;
-        frame.origin = p;
-        [_controlPanel setFrame:frame display:YES animate:YES];
-    }
-}
-
 -(IBAction)newLevel:(id)sender {
     NSAlert *alert = [NSAlert alertWithMessageText:@"Are you sure you want to create a new level?"
                                      defaultButton:@"Yes"
@@ -246,9 +219,10 @@
 }
 
 -(void)refreshElementView {
-    CGPoint s = CGPointMake(_board.startPos.x, _board.startPos.y);
+    CGPoint sAs = CGPointMake(_board.startPosAstronaut.x, _board.startPosAstronaut.y);
+    CGPoint sAl = CGPointMake(_board.startPosAlien.x, _board.startPosAlien.y);
     CGPoint f = CGPointMake(_board.finishPos.x, _board.finishPos.y);
-    [_scene refreshElementsStart:s Finish:f];
+    [_scene refreshStartAstro:sAs StartAlien:sAl Finish:f];
     
     [_scene cleanElements];
     for(id key in [_board elementDictionary]) {
@@ -278,10 +252,15 @@
     } else {
         CGPoint newPos = CGPointMake(val.pointValue.x, val.pointValue.y);
 
-        if(stat == BRUSH_START) {
+        if(stat == BRUSH_START_ASTRO) {
             // Update position of start element.
-            _board.startPos.x = newPos.x;
-            _board.startPos.y = newPos.y;
+            _board.startPosAstronaut.x = newPos.x;
+            _board.startPosAstronaut.y = newPos.y;
+            _scene.startAstronautSprite.hidden = NO;
+        } else if(stat == BRUSH_START_ALIEN) {
+            _board.startPosAlien.x = newPos.x;
+            _board.startPosAlien.y = newPos.y;
+            _scene.startAlienSprite.hidden = NO;
         } else if (stat == BRUSH_FINISH) {
             // Update position of finish element.
             _board.finishPos.x = newPos.x;

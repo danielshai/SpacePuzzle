@@ -3,7 +3,10 @@
     SpacePuzzle
 
     Controller for the main game scene.
-    ADD LEVELFACTORY.
+    
+    To fix:
+        - Level progress.
+        - Startpositioner för olika units.
 */
 
 #import <UIKit/UIKit.h>

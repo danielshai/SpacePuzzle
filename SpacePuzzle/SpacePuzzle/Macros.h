@@ -15,7 +15,8 @@
 #define MAPSTATUS_SOLID         0
 #define MAPSTATUS_CRACKED       1
 #define BRUSH_ROCK              100
-#define BRUSH_START             101
+#define BRUSH_START_ASTRO       101
+#define BRUSH_START_ALIEN       111
 #define BRUSH_FINISH            102
 #define BRUSH_STAR              103
 #define BRUSH_ERASER            104

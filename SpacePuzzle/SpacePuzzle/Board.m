@@ -20,20 +20,22 @@
 @synthesize boardSizeY = _boardSizeY;
 @synthesize boardBegin = _boardBegin;
 @synthesize elementDictionary = _elementDictionary;
-@synthesize startPos = _startPos;
+@synthesize startPosAstronaut = _startPosAstronaut;
+@synthesize startPosAlien = _startPosAlien;
 @synthesize finishPos = _finishPos;
 
 -(id) init {
     if(self = [super init]){
         _board = [[NSMutableArray alloc] init];
         _parser = [[XMLParser alloc] init];
-        _boardSizeX = 7;
-        _boardSizeY = 10;
-        _tilesize = 44;
+        _boardSizeX = BOARD_SIZE_X;
+        _boardSizeY = BOARD_SIZE_Y;
+        _tilesize = TILESIZE;
         _boardBegin.x = BOARD_PIXEL_BEGIN_X;
         _boardBegin.y = BOARD_PIXEL_BEGIN_Y;
         _elementDictionary = [[NSMutableDictionary alloc] init];
-        _startPos = [[Position alloc] initWithX:5 Y:8];
+        _startPosAstronaut = [[Position alloc] initWithX:0 Y:0];
+        _startPosAlien = [[Position alloc] initWithX:0 Y:0];
         _finishPos = [[Position alloc] initWithX:0 Y:0];
     }
     return self;
@@ -78,8 +80,11 @@
     }
     
     // Start and finish positions
-    _startPos.x = [[_parser start] x];
-    _startPos.y = [[_parser start] y];
+    _startPosAstronaut.x = [[_parser startAstronaut] x];
+    _startPosAstronaut.y = [[_parser startAstronaut] y];
+    
+    _startPosAlien.x = [[_parser startAlien] x];
+    _startPosAlien.y = [[_parser startAlien] y];
     
     _finishPos.x = [[_parser finish] x];
     _finishPos.y = [[_parser finish] y];
@@ -152,19 +157,32 @@
 /*
  *  Exports the start and finish tokens to the splvl file. */
 -(void)startAndFinishExport {
-    // Start pos.
-    [_parser addOutput:@"<start>"];
+    // Start pos astro.
+    [_parser addOutput:@"<startastronaut>"];
     NSString *coordX = @"<x>";
     
-    coordX = [coordX stringByAppendingString:[@(_startPos.x) stringValue]];
+    coordX = [coordX stringByAppendingString:[@(_startPosAstronaut.x) stringValue]];
     coordX = [coordX stringByAppendingString:@"</x>"];
     [_parser addOutput:coordX];
     
     NSString *coordY = @"<y>";
-    coordY = [coordY stringByAppendingString:[@(_startPos.y) stringValue]];
+    coordY = [coordY stringByAppendingString:[@(_startPosAstronaut.y) stringValue]];
     coordY = [coordY stringByAppendingString:@"</y>"];
     [_parser addOutput:coordY];
-    [_parser addOutput:@"</start>"];
+    [_parser addOutput:@"</startastronaut>"];
+    
+    // Start pos alien.
+    [_parser addOutput:@"<startalien>"];
+    NSString *coordXAlien = @"<x>";
+    coordXAlien = [coordXAlien stringByAppendingString:[@(_startPosAlien.x) stringValue]];
+    coordXAlien = [coordXAlien stringByAppendingString:@"</x>"];
+    [_parser addOutput:coordXAlien];
+    
+    NSString *coordYAlien = @"<y>";
+    coordYAlien = [coordYAlien stringByAppendingString:[@(_startPosAlien.y) stringValue]];
+    coordYAlien = [coordYAlien stringByAppendingString:@"</y>"];
+    [_parser addOutput:coordYAlien];
+    [_parser addOutput:@"</startalien>"];
     
     // Finish pos.
     [_parser addOutput:@"<finish>"];
