@@ -411,6 +411,7 @@
 				77F2163C184DD58A00FD23D2 /* Level001.splvl */,
 				77F2163D184DD58A00FD23D2 /* Level002.splvl */,
 				77F2163E184DD58A00FD23D2 /* Level003.splvl */,
+				E62A0522184DF78D009B4004 /* mario2.splvl */,
 				E687AE4C183A43EB00A5B78C /* mario.splvl */,
 			);
 			name = Levels;

@@ -124,17 +124,8 @@
 }
 
 -(void)trippleTap:(UIGestureRecognizer *)sender {
-    if(sender.state == UIGestureRecognizerStateEnded && ![[_scene currentUnit] hasActions]  ) {
-        if (_currentUnit == _bigL) {
-            _currentUnit = _littleJohn;
-            _nextUnit = _bigL;
-            NSLog(@"Little John");
-        } else {
-         _currentUnit = _bigL;
-         _nextUnit = _littleJohn;
-         NSLog(@"Big L");
-        }
-        [_scene changeUnit];
+    if(sender.state == UIGestureRecognizerStateEnded && ![[_scene currentUnit] hasActions]) {
+        [self changeUnit];
     }
 }
 
