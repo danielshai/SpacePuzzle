@@ -100,7 +100,7 @@
         
         _finishSprite = [SKSpriteNode spriteNodeWithTexture:_finishElement];
         _finishSprite.position = CGPointMake(-100, -100);
-        _finishSprite.size = CGSizeMake(TILESIZE/2, TILESIZE/2);
+        _finishSprite.size = CGSizeMake(TILESIZE-4, TILESIZE-4);
         _finishSprite.zPosition = 10;
         [self addChild:_finishSprite];
         

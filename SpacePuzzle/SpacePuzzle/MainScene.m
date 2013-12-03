@@ -37,6 +37,7 @@
 @synthesize lWRight = _lWRight;
 @synthesize lWLeft = _lWLeft;
 @synthesize star = _star;
+@synthesize finish = _finish;
 
 -(id)initWithSize:(CGSize)size {    
     if (self = [super initWithSize:size]) {
@@ -53,6 +54,10 @@
         _switchOn = [SKTexture textureWithImageNamed:@"SwitchON.png"];
         _switchOff = [SKTexture textureWithImageNamed:@"SwitchOFF.png"];
         _bkg = [SKSpriteNode spriteNodeWithImageNamed:@"Background.png"];
+        _finish = [SKSpriteNode spriteNodeWithImageNamed:@"Finish.png"];
+        _finish.zPosition = 9999;
+        _finish.size = CGSizeMake(TILESIZE, TILESIZE);
+        [self addChild:_finish];
         _movingPlatform = [SKTexture textureWithImageNamed:@"MovingPlatform.png"];
         _star = [SKTexture textureWithImageNamed:@"Star.png"];
         _box = [SKTexture textureWithImageNamed:@"Box.png"];

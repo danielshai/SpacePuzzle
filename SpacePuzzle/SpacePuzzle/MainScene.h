@@ -30,6 +30,7 @@
 @property (nonatomic, retain) SKSpriteNode *littleJohn;
 @property (nonatomic, retain) SKSpriteNode *currentUnit;
 @property (nonatomic, retain) SKSpriteNode *bkg;
+@property (nonatomic, retain) SKSpriteNode *finish;
 @property (nonatomic, retain) NSMutableDictionary *elements;
 @property (nonatomic, retain) NSMutableArray *tiles;
 @property (nonatomic, retain) SKAction *sequence;

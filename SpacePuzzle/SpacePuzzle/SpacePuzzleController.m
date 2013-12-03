@@ -196,6 +196,11 @@
             [_scene setupBoardX:[bc x] Y:[bc y] Status:[bc status]];
         }
     }
+    CGPoint p = CGPointMake(_board.finishPos.x, _board.finishPos.y);
+    p = [Converter convertCoordToPixel:p];
+    p.x += TILESIZE/2;
+    p.y -= 2;
+    [_scene finish].position = p;
 }
 
 -(void)setupElements {
