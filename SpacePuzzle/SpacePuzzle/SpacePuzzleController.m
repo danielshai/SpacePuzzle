@@ -183,7 +183,7 @@
     NSString *currentLevel = @"Level";
     currentLevel = [currentLevel stringByAppendingString:[NSString stringWithFormat:@"%d", _world]];
     if(_level < 10) {
-        currentLevel = [currentLevel stringByAppendingString:[NSString stringWithFormat:@"%d%d", 0, _level]];
+        currentLevel = [currentLevel stringByAppendingString:[NSString stringWithFormat:@"%d%d", 0, 7]];
     } else {
         currentLevel = [currentLevel stringByAppendingString:[NSString stringWithFormat:@"%d", _level]];
     }
@@ -312,7 +312,6 @@
     NSInteger y = loc.y;
 
     NSNumber *actionPointKey = [NSNumber numberWithInt:y*BOARD_SIZE_X + x];
-    
     NSInteger unitX = _currentUnit.x;
     NSInteger unitY = _currentUnit.y;
     
@@ -323,17 +322,27 @@
     // If the element exists.
     if(e) {
         // Do action depending on element type and current unit.
-        if ([e isKindOfClass:[Box class]] && _currentUnit == _bigL && [Converter isPoint:actionPoint NextToPoint:unitPoint]) {
-                NSInteger dir = [Converter convertCoordsTo:actionPoint Direction:unitPoint];
-                [self doActionOnBox:e InDirection:dir];
+        /*if ([e isKindOfClass:[Box class]] && _currentUnit == _bigL && [Converter isPoint:actionPoint NextToPoint:unitPoint]) {
+            NSInteger dir = [Converter convertCoordsTo:actionPoint Direction:unitPoint];
+            [self doActionOnBox:e InDirection:dir];
+        } else*/
+        
+        if ([e isKindOfClass:[Box class]] && _currentUnit == _bigL && ![Converter isPoint:unitPoint sameAsPoint:actionPoint]) {
+            [self doActionOnBoxSmash:e];
         } else if ([e isKindOfClass:[StarButton class]] && [Converter isPoint:unitPoint sameAsPoint:actionPoint]) {
-                //[self doActionOnStarButton:e];
+            //[self doActionOnStarButton:e];
         } else if ([e isKindOfClass:[BridgeButton class]] && [Converter isPoint:unitPoint sameAsPoint:actionPoint]) {
-                [self doActionOnBridgeButton:e];
+            [self doActionOnBridgeButton:e];
         } else if ([e isKindOfClass:[PlatformLever class]] && [Converter isPoint:unitPoint sameAsPoint:actionPoint]) {
-                [self doActionOnPlatformLever:e];
+            [self doActionOnPlatformLever:e];
         }
     }
+}
+
+-(void)doActionOnBoxSmash:(Element*)box {
+    NSNumber *elementKey = [NSNumber numberWithInteger:box.y*BOARD_SIZE_X + box.x];
+    [[_board elementDictionary] removeObjectForKey:elementKey];
+    [_scene removeElementAtPosition:elementKey];
 }
 
 /*
