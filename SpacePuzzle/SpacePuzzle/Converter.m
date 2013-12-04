@@ -82,7 +82,6 @@
     nx = floorf(nx);
     ny = floorf(ny);
     
-    NSLog(@"%f %f", nx,ny);
     return CGPointMake(nx, ny);
 }
 
