@@ -82,7 +82,7 @@
     nx = floorf(nx);
     ny = floorf(ny);
     
-    NSLog(@"%f %f", nx,ny);
+    // NSLog(@"%f %f", nx,ny);
     return CGPointMake(nx, ny);
 }
 
@@ -98,7 +98,7 @@
     NSInteger x = index % BOARD_SIZE_Y;
     CGFloat y = index / BOARD_SIZE_Y;
     y = floorf(y);
-    NSLog(@"Got: %ld, returned x: %ld y: %ld", (long)index, (long)x, (long)y);
+    // NSLog(@"Got: %ld, returned x: %ld y: %ld", (long)index, (long)x, (long)y);
     return CGPointMake(x, y);
 }
 

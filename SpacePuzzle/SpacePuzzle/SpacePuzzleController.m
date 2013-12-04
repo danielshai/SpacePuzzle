@@ -296,7 +296,7 @@
                 // Check elements that the unit left.
 
                 } else if([e isKindOfClass:[Box class]] && swipe && _currentUnit == _bigL) {
-                [self doActionOnBox:e InDirection:dir];
+                    [self doActionOnBox:e InDirection:dir];
             }
         }
     }
@@ -315,7 +315,6 @@
     
     CGPoint unitPoint = CGPointMake(unitX, unitY);
     CGPoint actionPoint = CGPointMake(x, y);
- 
     Element *e = [[_board elementDictionary] objectForKey:actionPointKey];
     // If the element exists.
     if(e) {
@@ -324,7 +323,6 @@
             NSInteger dir = [Converter convertCoordsTo:actionPoint Direction:unitPoint];
             [self doActionOnBox:e InDirection:dir];
         } else*/
-        
         if ([e isKindOfClass:[Box class]] && _currentUnit == _bigL && [Converter isPoint:unitPoint NextToPoint:actionPoint]){
             [self doActionOnBoxSmash:e];
         } else if ([e isKindOfClass:[StarButton class]] && [Converter isPoint:unitPoint sameAsPoint:actionPoint]) {
