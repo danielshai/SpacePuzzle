@@ -475,7 +475,6 @@
     // Check if unit is on platform, if so move it.
     NSLog(@"%ld %ld", (long)_bigL.x, (long)_bigL.y);
     
-    
     [_scene moveElement:prevPoint NewCoord:CGPointMake(mp.x, mp.y)];
 }
 
@@ -512,7 +511,7 @@
     _bigL = [[BigL alloc] init];
     _bigL.x = _board.startPosAstronaut.x;
     _bigL.y = _board.startPosAstronaut.y;
-    _currentUnit = _bigL;
+ 
     CGPoint p = CGPointMake(_bigL.x, _bigL.y);
     [_scene setupAstronaut:p];
     // If the unit has a valid starting position, it is playing.
@@ -525,9 +524,10 @@
     _littleJohn = [[LittleJohn alloc] init];
     _littleJohn.x = _board.startPosAlien.x;
     _littleJohn.y = _board.startPosAlien.y;
-    _currentUnit = _littleJohn;
+
     CGPoint pp = CGPointMake(_littleJohn.x, _littleJohn.y);
     [_scene setupAlien:pp];
+    
     if(_board.startPosAlien.x >= 0 && _board.startPosAlien.y >= 0) {
         _littleJohn.isPlayingOnLevel = YES;
     } else {
@@ -544,6 +544,11 @@
         _currentUnit = _littleJohn;
         _nextUnit = _littleJohn;
         [_scene setCurrentUnitWithMacro:LITTLE_JOHN];
+    } else if([_bigL isPlayingOnLevel] && [_littleJohn isPlayingOnLevel]) {
+        // If both are playing, set astronaut as starting unit as default.
+        _currentUnit = _bigL;
+        _nextUnit = _littleJohn;
+        [_scene setCurrentUnitWithMacro:BIG_L];
     }
 }
 

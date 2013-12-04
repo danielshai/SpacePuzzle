@@ -359,8 +359,10 @@
 -(void)setCurrentUnitWithMacro:(NSInteger)unit {
     if(unit == BIG_L) {
         _currentUnit = _bigL;
+        _gui.texture = _guiAstro;
     } else if(unit == LITTLE_JOHN) {
         _currentUnit = _littleJohn;
+        _gui.texture = _guiAlien;
     }
 }
 

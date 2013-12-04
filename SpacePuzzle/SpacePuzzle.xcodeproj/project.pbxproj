@@ -47,6 +47,7 @@
 		E60DA7781848A1880088AB3D /* PlatformLever.png in Resources */ = {isa = PBXBuildFile; fileRef = E60DA7771848A1880088AB3D /* PlatformLever.png */; };
 		E60DA77B1848A2350088AB3D /* BridgeButton.png in Resources */ = {isa = PBXBuildFile; fileRef = E60DA7791848A2350088AB3D /* BridgeButton.png */; };
 		E60DA77C1848A2350088AB3D /* StarButton.png in Resources */ = {isa = PBXBuildFile; fileRef = E60DA77A1848A2350088AB3D /* StarButton.png */; };
+		E61CD101184F48BA00E4CC91 /* Level005.splvl in Resources */ = {isa = PBXBuildFile; fileRef = E61CD100184F48BA00E4CC91 /* Level005.splvl */; };
 		E61E76C2184E099D00E76AC3 /* Level001.splvl in Resources */ = {isa = PBXBuildFile; fileRef = E61E76BC184E099D00E76AC3 /* Level001.splvl */; };
 		E61E76C3184E099D00E76AC3 /* Level002.splvl in Resources */ = {isa = PBXBuildFile; fileRef = E61E76BD184E099D00E76AC3 /* Level002.splvl */; };
 		E61E76C4184E099D00E76AC3 /* Level003.splvl in Resources */ = {isa = PBXBuildFile; fileRef = E61E76BE184E099D00E76AC3 /* Level003.splvl */; };
@@ -150,6 +151,7 @@
 		E60DA7771848A1880088AB3D /* PlatformLever.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlatformLever.png; sourceTree = "<group>"; };
 		E60DA7791848A2350088AB3D /* BridgeButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BridgeButton.png; sourceTree = "<group>"; };
 		E60DA77A1848A2350088AB3D /* StarButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = StarButton.png; sourceTree = "<group>"; };
+		E61CD100184F48BA00E4CC91 /* Level005.splvl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Level005.splvl; path = ../../Levels/Level005.splvl; sourceTree = "<group>"; };
 		E61E76BC184E099D00E76AC3 /* Level001.splvl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Level001.splvl; path = ../../Levels/Level001.splvl; sourceTree = "<group>"; };
 		E61E76BD184E099D00E76AC3 /* Level002.splvl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Level002.splvl; path = ../../Levels/Level002.splvl; sourceTree = "<group>"; };
 		E61E76BE184E099D00E76AC3 /* Level003.splvl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Level003.splvl; path = ../../Levels/Level003.splvl; sourceTree = "<group>"; };
@@ -433,6 +435,7 @@
 				E61E76BD184E099D00E76AC3 /* Level002.splvl */,
 				E61E76BE184E099D00E76AC3 /* Level003.splvl */,
 				E61E76BF184E099D00E76AC3 /* Level004.splvl */,
+				E61CD100184F48BA00E4CC91 /* Level005.splvl */,
 				E61E76C0184E099D00E76AC3 /* Level007.splvl */,
 				E61E76C1184E099D00E76AC3 /* Level008.splvl */,
 				E62A0522184DF78D009B4004 /* mario2.splvl */,
@@ -579,6 +582,7 @@
 				7797AC47183CE9F500E63E95 /* Alien.png in Resources */,
 				E6F7129A184F3995005C52A4 /* BarAstro.png in Resources */,
 				7797AC48183CE9F500E63E95 /* Astronaut.png in Resources */,
+				E61CD101184F48BA00E4CC91 /* Level005.splvl in Resources */,
 				E62A0523184DF78D009B4004 /* mario2.splvl in Resources */,
 				E60DA7781848A1880088AB3D /* PlatformLever.png in Resources */,
 				77D6072C184373F40079A182 /* AstroLeft.png in Resources */,
