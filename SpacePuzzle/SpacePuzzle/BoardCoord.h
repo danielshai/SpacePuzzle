@@ -11,5 +11,5 @@
 @interface BoardCoord : Position
 
 @property (nonatomic, assign) NSInteger status;
-
+@property (nonatomic, retain) NSMutableArray *elements;
 @end

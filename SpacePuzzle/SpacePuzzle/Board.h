@@ -49,4 +49,5 @@
 -(void) leverExport: (PlatformLever*) pl;
 -(BOOL) isPointWithinBoard: (CGPoint)p;
 -(BOOL) isPointMovableTo: (CGPoint)p;
+-(BOOL) isPointCracked: (CGPoint)p ;
 @end
