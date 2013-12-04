@@ -40,7 +40,7 @@
     _scene = [MainScene sceneWithSize:skView.bounds.size];
     _scene.scaleMode = SKSceneScaleModeAspectFill;
     
-    [LoadSaveFile saveFileWithWorld:0 andLevel:1];
+    [LoadSaveFile saveFileWithWorld:0 andLevel:7];
     _board = [[Board alloc] init];
     [self setupNextLevel];
     
@@ -87,8 +87,8 @@
         // Convert to board coordinates. Invert with -9.
         location = [Converter convertMousePosToCoord:location];
         location.y = abs(location.y - 9);
-        
-        [self unitWantsToMoveTo:location];
+
+        [self unitWantsToMoveTo:location WithSwipe:NO];
     }
 }
 
@@ -108,7 +108,7 @@
 
 -(void)trippleTap:(UIGestureRecognizer *)sender {
     if(sender.state == UIGestureRecognizerStateEnded && ![[_scene currentUnit] hasActions]) {
-        [self changeUnit];
+        //[self changeUnit];
     }
 }
 
@@ -116,7 +116,7 @@
     if (sender.state == UIGestureRecognizerStateEnded && ![[_scene currentUnit] hasActions]) {
         CGPoint location = CGPointMake(_currentUnit.x, _currentUnit.y);
         location.y -= 1;
-        [self unitWantsToMoveTo:location];
+        [self unitWantsToMoveTo:location WithSwipe:YES];
     }
 }
 
@@ -124,7 +124,7 @@
     if (sender.state == UIGestureRecognizerStateEnded && ![[_scene currentUnit] hasActions]) {
         CGPoint location = CGPointMake(_currentUnit.x, _currentUnit.y);
         location.y += 1;
-        [self unitWantsToMoveTo:location];
+        [self unitWantsToMoveTo:location WithSwipe:YES];
     }
 }
 
@@ -132,7 +132,7 @@
     if (sender.state == UIGestureRecognizerStateEnded && ![[_scene currentUnit] hasActions]) {
         CGPoint location = CGPointMake(_currentUnit.x, _currentUnit.y);
         location.x -= 1;
-        [self unitWantsToMoveTo:location];
+        [self unitWantsToMoveTo:location WithSwipe:YES];
     }
 }
 
@@ -140,7 +140,7 @@
     if (sender.state == UIGestureRecognizerStateEnded && ![[_scene currentUnit] hasActions]) {
         CGPoint location = CGPointMake(_currentUnit.x, _currentUnit.y);
         location.x += 1;
-        [self unitWantsToMoveTo:location];
+        [self unitWantsToMoveTo:location WithSwipe:YES];
     }
 }
 
@@ -150,7 +150,9 @@
             _currentUnit = _littleJohn;
             _nextUnit = _bigL;
             [_scene changeUnit];
+            NSLog(@"Change unit");
         }
+        NSLog(@"cant change, only L");
     } else if(_currentUnit == _littleJohn) {
         if([_bigL isPlayingOnLevel]) {
             _currentUnit = _bigL;
@@ -210,7 +212,7 @@
 /*
  *  Called when a unit wants to move to a location on the board. This method checks if the move is 
  *  possible, if so moves the unit. If unit moves to star, consume the star. */
--(void)unitWantsToMoveTo:(CGPoint)loc {
+-(void)unitWantsToMoveTo:(CGPoint)loc WithSwipe:(BOOL)swipe {
     // The position that the unit wants to move to.
     NSInteger x  = loc.x;
     NSInteger y = loc.y;
@@ -290,7 +292,7 @@
                     // Updates the bridge connected to the button on the scene, i.e. showing it.
                     [_scene setElementAtPosition:bb.bridge.key IsHidden:NO];
                 }
-            } else if([e isKindOfClass:[Box class]]) {
+            } else if([e isKindOfClass:[Box class]] && swipe) {
                 [self doActionOnBox:e InDirection:dir];
             }
         }
@@ -377,10 +379,15 @@
         nextPos = CGPointMake(rock.x, rock.y + 1);
     }
     // Add more elements which cannot be pushed upon to if-statement.
-    if (![e isKindOfClass:[Box class]] && (_nextUnit.x != nextPos.x || _nextUnit.y != nextPos.y) && [[_board finishPos ] x] != nextPos.x && [[_board finishPos] y] != nextPos.y) {
+    // ![e isKindOfClass:[Box class]] ---> !e isBlocking
+    CGPoint nextUnitPos = CGPointMake(_nextUnit.x, _nextUnit.y);
+    CGPoint finishPos = CGPointMake([_board finishPos].x, [_board finishPos].y);
+    
+    if (![e isKindOfClass:[Box class]] && ![Converter isPoint:nextPos sameAsPoint:nextUnitPos] &&
+        ![Converter isPoint:finishPos sameAsPoint:nextPos]) {
         NSInteger intKey = [nextKey integerValue];
         NSInteger nextTile = [[[_board board] objectAtIndex:intKey] status];
-        
+        NSLog(@"MOVE");
         CGPoint posPreMove = CGPointMake(rock.x, rock.y);
         [rock doMoveAction:dir];
 
@@ -473,7 +480,6 @@
     // Check if unit is on platform, if so move it.
     NSLog(@"%ld %ld", (long)_bigL.x, (long)_bigL.y);
     
-    
     [_scene moveElement:prevPoint NewCoord:CGPointMake(mp.x, mp.y)];
 }
 
@@ -510,7 +516,7 @@
     _bigL = [[BigL alloc] init];
     _bigL.x = _board.startPosAstronaut.x;
     _bigL.y = _board.startPosAstronaut.y;
-    _currentUnit = _bigL;
+ 
     CGPoint p = CGPointMake(_bigL.x, _bigL.y);
     [_scene setupAstronaut:p];
     // If the unit has a valid starting position, it is playing.
@@ -523,9 +529,10 @@
     _littleJohn = [[LittleJohn alloc] init];
     _littleJohn.x = _board.startPosAlien.x;
     _littleJohn.y = _board.startPosAlien.y;
-    _currentUnit = _littleJohn;
+
     CGPoint pp = CGPointMake(_littleJohn.x, _littleJohn.y);
     [_scene setupAlien:pp];
+    
     if(_board.startPosAlien.x >= 0 && _board.startPosAlien.y >= 0) {
         _littleJohn.isPlayingOnLevel = YES;
     } else {
@@ -542,6 +549,11 @@
         _currentUnit = _littleJohn;
         _nextUnit = _littleJohn;
         [_scene setCurrentUnitWithMacro:LITTLE_JOHN];
+    } else if([_bigL isPlayingOnLevel] && [_littleJohn isPlayingOnLevel]) {
+        // If both are playing, set astronaut as starting unit as default.
+        _currentUnit = _bigL;
+        _nextUnit = _littleJohn;
+        [_scene setCurrentUnitWithMacro:BIG_L];
     }
 }
 
@@ -558,13 +570,11 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:selector name:text object:nil];
 }
 
--(BOOL)shouldAutorotate
-{
+-(BOOL)shouldAutorotate {
     return YES;
 }
 
--(NSUInteger)supportedInterfaceOrientations
-{
+-(NSUInteger)supportedInterfaceOrientations {
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
         return UIInterfaceOrientationMaskAllButUpsideDown;
     } else {
@@ -572,10 +582,16 @@
     }
 }
 
--(void)didReceiveMemoryWarning
-{
+-(void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Release any cached data, images, etc that aren't in use.
 }
 
+-(BOOL)prefersStatusBarHidden {
+    return true;
+}
+
+- (IBAction)changeUnitAction:(id)sender {
+    [self changeUnit];
+}
 @end

@@ -26,6 +26,7 @@
 @class Bridge;
 
 @interface SpacePuzzleController : UIViewController
+
 @property (nonatomic, retain) Board *board;
 @property (nonatomic, assign) MainScene *scene;
 @property (nonatomic, retain) Unit *currentUnit;
@@ -43,7 +44,7 @@
 -(void)swipeLeft:(UISwipeGestureRecognizer *)sender;
 -(void)swipeRight:(UISwipeGestureRecognizer *)sender;
 -(void)changeUnit;
--(void)unitWantsToMoveTo: (CGPoint)loc;
+-(void)unitWantsToMoveTo: (CGPoint)loc WithSwipe: (BOOL)swipe;
 -(void)unitWantsToDoActionAt: (CGPoint)loc;
 -(void)doActionOnBoxSmash: (Element*)box;
 -(void)doActionOnBox: (Element*)rock InDirection: (NSInteger)dir;
@@ -59,4 +60,5 @@
 -(void)getNextLevel;
 -(void)setupNextLevel;
 -(NSArray*)getDataFromNotification:(NSNotification*) notif Key: (NSString*) key;
+-(IBAction)changeUnitAction:(id)sender;
 @end

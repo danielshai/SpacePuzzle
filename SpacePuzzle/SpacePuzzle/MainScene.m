@@ -38,6 +38,8 @@
 @synthesize lWLeft = _lWLeft;
 @synthesize star = _star;
 @synthesize finish = _finish;
+@synthesize gui = _gui;
+@synthesize guiAstro = _guiAstro;
 
 -(id)initWithSize:(CGSize)size {    
     if (self = [super initWithSize:size]) {
@@ -54,6 +56,8 @@
         _bridgeOff = [SKTexture textureWithImageNamed:@"BridgeOFF.png"];
         _switchOn = [SKTexture textureWithImageNamed:@"SwitchON.png"];
         _switchOff = [SKTexture textureWithImageNamed:@"SwitchOFF.png"];
+        _guiAstro = [SKTexture textureWithImageNamed:@"BarAstro"];
+        _guiAlien = [SKTexture textureWithImageNamed:@"BarAlien"];
         _finish = [SKSpriteNode spriteNodeWithImageNamed:@"Finish.png"];
         _finish.size = CGSizeMake(TILESIZE, TILESIZE);
         _finish.zPosition = 2;
@@ -75,7 +79,15 @@
         
         _elements = [[NSMutableDictionary alloc] init];
         _tiles = [[NSMutableArray alloc] init];
-  
+
+        _gui = [SKSpriteNode spriteNodeWithTexture:_guiAstro];
+        CGSize scale = _gui.size;
+        scale.width = scale.width / 2;
+        scale.height = scale.height / 2;
+        _gui.size = scale;
+        _gui.position = CGPointMake(WIN_SIZE_X/2, WIN_SIZE_Y-_gui.size.height/2);
+        [self addChild:_gui];
+        
         [self initScene];
     }
     return self;
@@ -337,16 +349,20 @@
 -(void) changeUnit {
     if (_currentUnit == _bigL) {
         _currentUnit = _littleJohn;
+        _gui.texture = _guiAlien;
     } else if (_currentUnit == _littleJohn) {
         _currentUnit = _bigL;
+        _gui.texture = _guiAstro;
     }
 }
 
 -(void)setCurrentUnitWithMacro:(NSInteger)unit {
     if(unit == BIG_L) {
         _currentUnit = _bigL;
+        _gui.texture = _guiAstro;
     } else if(unit == LITTLE_JOHN) {
         _currentUnit = _littleJohn;
+        _gui.texture = _guiAlien;
     }
 }
 
