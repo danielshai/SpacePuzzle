@@ -576,7 +576,7 @@
     // Find mouse location and convert.
     SKView *sk = self.view;
     NSPoint mouseLoc = [sk convertPoint:[theEvent locationInWindow] fromView:nil];
-    NSLog(@"mouse %f %f", mouseLoc.x,mouseLoc.y);
+    
     CGPoint loc = CGPointMake(mouseLoc.x*WIN_SIZE_X/(sk.frame.size.width), mouseLoc.y*WIN_SIZE_Y/(sk.frame.size.height));
     loc.y = WIN_SIZE_Y-loc.y;
     loc = [Converter convertMousePosToCoord:loc];
