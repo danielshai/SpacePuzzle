@@ -59,6 +59,7 @@
 -(void)notifyText: (NSString *)text Object: (NSObject*)object Key: (NSString*)key;
 -(void)changeUnit;
 -(void)setCurrentUnitWithMacro: (NSInteger)unit;
+-(void)cleanScene;
 -(SKTexture*)updateSpriteWith:(NSString *) name State: (BOOL)state;
 
 @end

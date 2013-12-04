@@ -350,6 +350,25 @@
     }
 }
 
+-(void)cleanScene {
+    for(id elm in _elements) {
+        SKSpriteNode *s = [_elements objectForKey:elm];
+        [s removeFromParent];
+    }
+    [_elements removeAllObjects];
+    
+    for(int i = 0; i < _tiles.count; i++) {
+        SKSpriteNode *s = [_tiles objectAtIndex:i];
+        [s removeFromParent];
+    }
+    [_tiles removeAllObjects];
+    
+    if(_littleJohn)
+        [_littleJohn removeFromParent];
+    if(_bigL)
+        [_bigL removeFromParent];
+}
+
 -(SKTexture*) updateSpriteWith:(NSString *)name State:(BOOL)state {
     SKTexture *pic;
     if ([name isEqualToString:CLASS_STARBUTTON] || [name isEqualToString:CLASS_BRIDGEBUTTON]) {

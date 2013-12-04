@@ -67,6 +67,7 @@
             BoardCoord* bc = [[BoardCoord alloc] init];
             bc.x = j;
             bc.y = i;
+    
             if(i*_boardSizeX + j < [[_parser board] count]) {
                 bc.status = [[[_parser board] objectAtIndex:((i*_boardSizeX) + j)] intValue];
             } else {
