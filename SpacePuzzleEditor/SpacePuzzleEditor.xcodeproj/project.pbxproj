@@ -23,6 +23,8 @@
 		E60C92AB183A5FD9005DCBB7 /* Rock.png in Resources */ = {isa = PBXBuildFile; fileRef = E60C92AA183A5FD9005DCBB7 /* Rock.png */; };
 		E60EAC921844CC7900D18506 /* MovingPlatform.m in Sources */ = {isa = PBXBuildFile; fileRef = E60EAC8F1844CC7900D18506 /* MovingPlatform.m */; };
 		E60EAC931844CC7900D18506 /* PlatformLever.m in Sources */ = {isa = PBXBuildFile; fileRef = E60EAC911844CC7900D18506 /* PlatformLever.m */; };
+		E61CD109184F6A3B00E4CC91 /* BarAstro.png in Resources */ = {isa = PBXBuildFile; fileRef = E61CD108184F6A3B00E4CC91 /* BarAstro.png */; };
+		E61CD10B184F6B3800E4CC91 /* BG.png in Resources */ = {isa = PBXBuildFile; fileRef = E61CD10A184F6B3800E4CC91 /* BG.png */; };
 		E6279F6A18434377009A91BC /* Connections.m in Sources */ = {isa = PBXBuildFile; fileRef = E6279F6918434377009A91BC /* Connections.m */; };
 		E6279F6F18436EA6009A91BC /* Bridge.m in Sources */ = {isa = PBXBuildFile; fileRef = E6279F6C18436EA6009A91BC /* Bridge.m */; };
 		E6279F7018436EA6009A91BC /* BridgeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E6279F6E18436EA6009A91BC /* BridgeButton.m */; };
@@ -89,6 +91,8 @@
 		E60EAC8F1844CC7900D18506 /* MovingPlatform.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MovingPlatform.m; path = ../SpacePuzzle/SpacePuzzle/MovingPlatform.m; sourceTree = "<group>"; };
 		E60EAC901844CC7900D18506 /* PlatformLever.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlatformLever.h; path = ../SpacePuzzle/SpacePuzzle/PlatformLever.h; sourceTree = "<group>"; };
 		E60EAC911844CC7900D18506 /* PlatformLever.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlatformLever.m; path = ../SpacePuzzle/SpacePuzzle/PlatformLever.m; sourceTree = "<group>"; };
+		E61CD108184F6A3B00E4CC91 /* BarAstro.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BarAstro.png; path = ../../Resources/Interface/BarAstro.png; sourceTree = "<group>"; };
+		E61CD10A184F6B3800E4CC91 /* BG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BG.png; path = ../../Resources/Interface/BG.png; sourceTree = "<group>"; };
 		E6279F6818434377009A91BC /* Connections.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Connections.h; path = SpacePuzzleEditor/Connections.h; sourceTree = "<group>"; };
 		E6279F6918434377009A91BC /* Connections.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Connections.m; path = SpacePuzzleEditor/Connections.m; sourceTree = "<group>"; };
 		E6279F6B18436EA6009A91BC /* Bridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Bridge.h; path = ../SpacePuzzle/SpacePuzzle/Bridge.h; sourceTree = "<group>"; };
@@ -169,6 +173,8 @@
 		E60576A0183651E30033AE88 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E61CD10A184F6B3800E4CC91 /* BG.png */,
+				E61CD108184F6A3B00E4CC91 /* BarAstro.png */,
 				E62A0520184DD079009B4004 /* Astronaut.png */,
 				E62A051E184DD06D009B4004 /* Alien.png */,
 				E606D34F184C79A600A04E23 /* PlatformLever.png */,
@@ -408,6 +414,7 @@
 				E62A0521184DD079009B4004 /* Astronaut.png in Resources */,
 				E687AE4B183A239000A5B78C /* Finish.png in Resources */,
 				E60B23261847394700645462 /* RainbLTurn.png in Resources */,
+				E61CD10B184F6B3800E4CC91 /* BG.png in Resources */,
 				E654B3001830F7DD006BFCAC /* Images.xcassets in Resources */,
 				E605769E183651D20033AE88 /* solidtile.png in Resources */,
 				E6279F7218437AF0009A91BC /* BridgeON.png in Resources */,
@@ -424,6 +431,7 @@
 				E60C69FE183B908500D6FA14 /* Star.png in Resources */,
 				E606D34E184C799900A04E23 /* BridgeButton.png in Resources */,
 				E68A93F8183D0A8700AE9D4C /* Cracked.png in Resources */,
+				E61CD109184F6A3B00E4CC91 /* BarAstro.png in Resources */,
 				E605769F183651D20033AE88 /* voidtile.png in Resources */,
 				E60576AE18365BC40033AE88 /* Start.gif in Resources */,
 			);

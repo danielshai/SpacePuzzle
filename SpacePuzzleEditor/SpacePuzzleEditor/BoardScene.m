@@ -70,7 +70,7 @@
         _solid = [SKTexture textureWithImageNamed:@"solidtile.png"];
         _voidTile = [SKTexture textureWithImageNamed:@"voidtile.png"];
         _crackedTile = [SKTexture textureWithImageNamed:@"Cracked.png"];
-        _bkg = [SKSpriteNode spriteNodeWithImageNamed:@"Background.png"];
+        _bkg = [SKSpriteNode spriteNodeWithImageNamed:@"BG"];
         _startAstronautTxt = [SKTexture textureWithImageNamed:@"Astronaut.png"];
         _startAlienTxt = [SKTexture textureWithImageNamed:@"Alien.png"];
         _finishElement = [SKTexture textureWithImageNamed:@"Finish.png"];
@@ -576,12 +576,14 @@
     // Find mouse location and convert.
     SKView *sk = self.view;
     NSPoint mouseLoc = [sk convertPoint:[theEvent locationInWindow] fromView:nil];
+    NSLog(@"mouse %f %f", mouseLoc.x,mouseLoc.y);
     CGPoint loc = CGPointMake(mouseLoc.x*WIN_SIZE_X/(sk.frame.size.width), mouseLoc.y*WIN_SIZE_Y/(sk.frame.size.height));
-    
+    loc.y = WIN_SIZE_Y-loc.y;
     loc = [Converter convertMousePosToCoord:loc];
     NSArray *arr = [NSArray arrayWithObjects:[NSValue valueWithPoint:loc],
                     [NSNumber numberWithInteger: statusOfPalette],nil];
     NSNumber *flatIndex = [NSNumber numberWithInt:loc.y*BOARD_SIZE_X + loc.x];
+    
     // Check if the click was inside the board.
     if(loc.x >= 0 && loc.x < BOARD_SIZE_X && loc.y >= 0 && loc.y < BOARD_SIZE_Y) {
         // Change texture of sprite if tiles.
