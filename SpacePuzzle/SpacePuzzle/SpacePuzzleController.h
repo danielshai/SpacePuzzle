@@ -56,5 +56,7 @@
 -(void)setupUnits;
 -(void)movePlatform: (MovingPlatform*)mp;
 -(void)observeText:(NSString*)text Selector: (SEL)selector;
+-(void)getNextLevel;
+-(void)setupNextLevel;
 -(NSArray*)getDataFromNotification:(NSNotification*) notif Key: (NSString*) key;
 @end

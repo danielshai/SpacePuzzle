@@ -40,24 +40,9 @@
     _scene = [MainScene sceneWithSize:skView.bounds.size];
     _scene.scaleMode = SKSceneScaleModeAspectFill;
     
-    [LoadSaveFile saveFileWithWorld:0 andLevel:8];
-    
-    if([LoadSaveFile loadFile]) {
-        NSString *currentState = [LoadSaveFile loadFile];
-        _world = [[currentState substringWithRange:NSMakeRange(5, 1)] integerValue];
-        if([[currentState substringWithRange:NSMakeRange(6, 1)] integerValue] != 0){
-            _level = [[currentState substringWithRange:NSMakeRange(6, 2)] integerValue];
-        } else {
-            _level = [[currentState substringWithRange:NSMakeRange(7, 1)] integerValue];
-        }
-        _player = [[Player alloc] initWithWorld:_world andLevel:_level];
-    } else {
-        _player = [[Player alloc] initWithWorld:0 andLevel:1];
-    }
-        
-    [self setupBoard];
-    [self setupElements];
-    [self setupUnits];
+    [LoadSaveFile saveFileWithWorld:0 andLevel:1];
+    _board = [[Board alloc] init];
+    [self setupNextLevel];
     
     // Present the scene.
     [skView presentScene:_scene];
@@ -178,16 +163,18 @@
 /*
  *  Loads the board according to the level. ADD LEVELFACTORY!!!. */
 -(void)setupBoard {
-    _board = [[Board alloc] init];
     // Load the board.
+    [self getNextLevel];
     NSString *currentLevel = @"Level";
     currentLevel = [currentLevel stringByAppendingString:[NSString stringWithFormat:@"%d", _world]];
     if(_level < 10) {
-        currentLevel = [currentLevel stringByAppendingString:[NSString stringWithFormat:@"%d%d", 0, 7]];
+        currentLevel = [currentLevel stringByAppendingString:[NSString stringWithFormat:@"%d%d", 0, _level]];
     } else {
         currentLevel = [currentLevel stringByAppendingString:[NSString stringWithFormat:@"%d", _level]];
     }
+
     NSString *path = [[NSBundle mainBundle] pathForResource:currentLevel ofType:@"splvl"];
+    NSLog(@"p %@", currentLevel);
     [_board loadBoard:path];
     
     for(int i = 0; i < BOARD_SIZE_Y; i++) {
@@ -207,6 +194,7 @@
     // Talk to the scene what to show.
     NSEnumerator *enumerator = [[_board elementDictionary] objectEnumerator];
     Element *obj;
+    
     while(obj = [enumerator nextObject]) {
         CGPoint p = CGPointMake([obj x], [obj y]);
        // if([obj isKindOfClass:[Bridge class]]) {
@@ -260,7 +248,12 @@
                 _currentUnit.y = y;
                 
                 [_scene updateUnit:movePoint inDirection:dir];
-                [self isUnitOnGoal];
+                if([self isUnitOnGoal]) {
+                    _level++;
+                    [LoadSaveFile saveFileWithWorld:_world andLevel:_level];
+                    [self setupNextLevel];
+                }
+                
                 [self unitWantsToDoActionAt:movePoint];
                 // If the element is a star.
                 if([e isKindOfClass:[Star class]] && ![e hidden] && ![e taken]) {
@@ -453,7 +446,6 @@
     MovingPlatform *mp = [timer userInfo];
     [[_board elementDictionary] removeObjectForKey:mp.key];
     
-    
     CGPoint prevPoint = CGPointMake(mp.x, mp.y);
     if(mp) {
         CGPoint p = mp.path.nextPoint;
@@ -496,6 +488,21 @@
     return [objectSent allObjects];
 }
 
+-(void)getNextLevel {
+    if([LoadSaveFile loadFile]) {
+        NSString *currentState = [LoadSaveFile loadFile];
+        _world = [[currentState substringWithRange:NSMakeRange(5, 1)] integerValue];
+        if([[currentState substringWithRange:NSMakeRange(6, 1)] integerValue] != 0){
+            _level = [[currentState substringWithRange:NSMakeRange(6, 2)] integerValue];
+        } else {
+            _level = [[currentState substringWithRange:NSMakeRange(7, 1)] integerValue];
+        }
+        _player = [[Player alloc] initWithWorld:_world andLevel:_level];
+    } else {
+        _player = [[Player alloc] initWithWorld:0 andLevel:1];
+    }
+}
+
 /*
  *  Creates the units. */
 -(void)setupUnits {
@@ -535,6 +542,13 @@
         _nextUnit = _littleJohn;
         [_scene setCurrentUnitWithMacro:LITTLE_JOHN];
     }
+}
+
+-(void)setupNextLevel {
+    [_scene cleanScene];
+    [self setupBoard];
+    [self setupElements];
+    [self setupUnits];
 }
 
 /*
