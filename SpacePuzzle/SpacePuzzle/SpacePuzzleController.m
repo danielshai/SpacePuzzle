@@ -40,7 +40,7 @@
     _scene = [MainScene sceneWithSize:skView.bounds.size];
     _scene.scaleMode = SKSceneScaleModeAspectFill;
     
-    [LoadSaveFile saveFileWithWorld:0 andLevel:7];
+    [LoadSaveFile saveFileWithWorld:0 andLevel:1];
     _board = [[Board alloc] init];
     [self setupNextLevel];
     
@@ -170,7 +170,7 @@
     NSString *currentLevel = @"Level";
     currentLevel = [currentLevel stringByAppendingString:[NSString stringWithFormat:@"%d", _world]];
     if(_level < 10) {
-        currentLevel = [currentLevel stringByAppendingString:[NSString stringWithFormat:@"%d%d", 0, 7]];
+        currentLevel = [currentLevel stringByAppendingString:[NSString stringWithFormat:@"%d%d", 0, _level]];
     } else {
         currentLevel = [currentLevel stringByAppendingString:[NSString stringWithFormat:@"%d", _level]];
     }
@@ -292,7 +292,7 @@
                     // Updates the bridge connected to the button on the scene, i.e. showing it.
                     [_scene setElementAtPosition:bb.bridge.key IsHidden:NO];
                 }
-            } else if([e isKindOfClass:[Box class]] && swipe) {
+            } else if([e isKindOfClass:[Box class]] && swipe && _currentUnit == _bigL) {
                 [self doActionOnBox:e InDirection:dir];
             }
         }
@@ -322,7 +322,7 @@
             [self doActionOnBox:e InDirection:dir];
         } else*/
         
-        if ([e isKindOfClass:[Box class]] && _currentUnit == _bigL && [Converter isPoint:actionPoint NextToPoint:unitPoint]){
+        if ([e isKindOfClass:[Box class]] && _currentUnit == _bigL && [Converter isPoint:unitPoint NextToPoint:actionPoint]){
             [self doActionOnBoxSmash:e];
         } else if ([e isKindOfClass:[StarButton class]] && [Converter isPoint:unitPoint sameAsPoint:actionPoint]) {
             //[self doActionOnStarButton:e];
@@ -347,7 +347,7 @@
     CGPoint nextPos;
     Element *e;
     NSNumber *elementKey = [NSNumber numberWithInteger:rock.y*BOARD_SIZE_X + rock.x];
-    NSLog(@"%d", dir);
+
     if (dir == RIGHT) {
         // Check if at the edge of the board, if so do nothing.
         if(rock.x >= BOARD_SIZE_X-1) {
