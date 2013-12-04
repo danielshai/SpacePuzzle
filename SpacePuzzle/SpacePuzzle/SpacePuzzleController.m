@@ -591,7 +591,11 @@
     return true;
 }
 
-- (IBAction)changeUnitAction:(id)sender {
+-(IBAction)changeUnitAction:(id)sender {
     [self changeUnit];
+}
+
+- (IBAction)restartAction:(id)sender {
+    [self setupNextLevel];
 }
 @end

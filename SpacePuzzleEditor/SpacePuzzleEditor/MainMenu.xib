@@ -697,7 +697,7 @@
         <image name="BridgeButton" width="88" height="88"/>
         <image name="BridgeON" width="88" height="88"/>
         <image name="Cracked" width="88" height="88"/>
-        <image name="Finish" width="256" height="256"/>
+        <image name="Finish" width="88" height="88"/>
         <image name="MovingPlatform" width="88" height="88"/>
         <image name="NSRemoveTemplate" width="8" height="8"/>
         <image name="PlatformLever" width="88" height="88"/>

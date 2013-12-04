@@ -59,6 +59,7 @@
 -(void)observeText:(NSString*)text Selector: (SEL)selector;
 -(void)getNextLevel;
 -(void)setupNextLevel;
+- (IBAction)restartAction:(id)sender;
 -(NSArray*)getDataFromNotification:(NSNotification*) notif Key: (NSString*) key;
 -(IBAction)changeUnitAction:(id)sender;
 @end
