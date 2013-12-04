@@ -168,7 +168,7 @@
     NSString *currentLevel = @"Level";
     currentLevel = [currentLevel stringByAppendingString:[NSString stringWithFormat:@"%d", _world]];
     if(_level < 10) {
-        currentLevel = [currentLevel stringByAppendingString:[NSString stringWithFormat:@"%d%d", 0, _level]];
+        currentLevel = [currentLevel stringByAppendingString:[NSString stringWithFormat:@"%d%d", 0, 7]];
     } else {
         currentLevel = [currentLevel stringByAppendingString:[NSString stringWithFormat:@"%d", _level]];
     }
@@ -320,7 +320,7 @@
             [self doActionOnBox:e InDirection:dir];
         } else*/
         
-        if ([e isKindOfClass:[Box class]] && _currentUnit == _bigL && ![Converter isPoint:unitPoint sameAsPoint:actionPoint]){
+        if ([e isKindOfClass:[Box class]] && _currentUnit == _bigL && [Converter isPoint:actionPoint NextToPoint:unitPoint]){
             [self doActionOnBoxSmash:e];
         } else if ([e isKindOfClass:[StarButton class]] && [Converter isPoint:unitPoint sameAsPoint:actionPoint]) {
             //[self doActionOnStarButton:e];
@@ -345,7 +345,7 @@
     CGPoint nextPos;
     Element *e;
     NSNumber *elementKey = [NSNumber numberWithInteger:rock.y*BOARD_SIZE_X + rock.x];
-
+    NSLog(@"%d", dir);
     if (dir == RIGHT) {
         // Check if at the edge of the board, if so do nothing.
         if(rock.x >= BOARD_SIZE_X-1) {
