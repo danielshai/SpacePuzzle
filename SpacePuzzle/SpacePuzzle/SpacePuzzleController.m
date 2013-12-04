@@ -40,7 +40,7 @@
     _scene = [MainScene sceneWithSize:skView.bounds.size];
     _scene.scaleMode = SKSceneScaleModeAspectFill;
     
-    [LoadSaveFile saveFileWithWorld:0 andLevel:7];
+    [LoadSaveFile saveFileWithWorld:0 andLevel:1];
     _board = [[Board alloc] init];
     [self setupNextLevel];
     
@@ -292,7 +292,7 @@
                     // Updates the bridge connected to the button on the scene, i.e. showing it.
                     [_scene setElementAtPosition:bb.bridge.key IsHidden:NO];
                 }
-            } else if([e isKindOfClass:[Box class]] && swipe) {
+            } else if([e isKindOfClass:[Box class]] && swipe && _currentUnit == _bigL) {
                 [self doActionOnBox:e InDirection:dir];
             }
         }
