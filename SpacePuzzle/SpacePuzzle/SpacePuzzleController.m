@@ -327,7 +327,7 @@
             [self doActionOnBox:e InDirection:dir];
         } else*/
         
-        if ([e isKindOfClass:[Box class]] && _currentUnit == _bigL && ![Converter isPoint:unitPoint sameAsPoint:actionPoint]) {
+        if ([e isKindOfClass:[Box class]] && _currentUnit == _bigL && ![Converter isPoint:unitPoint sameAsPoint:actionPoint]){
             [self doActionOnBoxSmash:e];
         } else if ([e isKindOfClass:[StarButton class]] && [Converter isPoint:unitPoint sameAsPoint:actionPoint]) {
             //[self doActionOnStarButton:e];
@@ -384,13 +384,13 @@
         nextPos = CGPointMake(rock.x, rock.y + 1);
     }
     // Add more elements which cannot be pushed upon to if-statement.
-    if (![e isKindOfClass:[Box class]] && (_nextUnit.x != nextPos.x || _nextUnit.y != nextPos.y)) {
+    if (![e isKindOfClass:[Box class]] && (_nextUnit.x != nextPos.x || _nextUnit.y != nextPos.y) && [[_board finishPos ] x] != nextPos.x && [[_board finishPos] y] != nextPos.y) {
         NSInteger intKey = [nextKey integerValue];
         NSInteger nextTile = [[[_board board] objectAtIndex:intKey] status];
         
         CGPoint posPreMove = CGPointMake(rock.x, rock.y);
         [rock doMoveAction:dir];
-        
+
         if(nextTile != MAPSTATUS_SOLID) {
             [[_board elementDictionary] removeObjectForKey:elementKey];
             [_scene removeElementAtPosition:elementKey];
@@ -402,6 +402,7 @@
             }
         } else {
             NSNumber *index = [NSNumber numberWithInteger:nextPos.y * BOARD_SIZE_X + nextPos.x];
+            // CHANGE THIS WHEN TWO OR MORE OBJECTS CAN BE PLACED ON THE SAME TILE!
             [[_board elementDictionary] removeObjectForKey:index];
             [_board moveElementFrom:posPreMove To:nextPos];
             [_scene removeElementAtPosition:index];
