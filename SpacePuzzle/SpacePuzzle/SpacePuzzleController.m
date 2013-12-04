@@ -40,7 +40,7 @@
     _scene = [MainScene sceneWithSize:skView.bounds.size];
     _scene.scaleMode = SKSceneScaleModeAspectFill;
     
-    [LoadSaveFile saveFileWithWorld:0 andLevel:1];
+    [LoadSaveFile saveFileWithWorld:0 andLevel:5];
     _board = [[Board alloc] init];
     [self setupNextLevel];
     
@@ -86,7 +86,7 @@
         
         // Convert to board coordinates. Invert with -9.
         location = [Converter convertMousePosToCoord:location];
-        location.y = abs(location.y - 9);
+        //location.y = abs(location.y - 9);
 
         [self unitWantsToMoveTo:location WithSwipe:NO];
     }
@@ -257,19 +257,8 @@
                 }
                 
                 [self unitWantsToDoActionAt:movePoint];
-                // If the element is a star.
-                if([e isKindOfClass:[Star class]] && ![e hidden] && ![e taken]) {
-                    [e movedTo];
-                    _player.starsTaken += 1;
-                    //[[_board elementDictionary] removeObjectForKey:nextPosKey];
-                    [_scene removeElementAtPosition:nextPosKey];
-                } else if([e isKindOfClass:[StarButton class]]) {
-                    [self doActionOnStarButton:e];
-                } else if([e isKindOfClass:[BridgeButton class]]) {
-                    [self doActionOnBridgeButton:e];
-                }
-                // Check elements that the unit left.
                 CGPoint nextUnitPos = CGPointMake(_nextUnit.x, _nextUnit.y);
+                
                 // Checks if the element moved from is a |StarButton|, and the second condition checks if
                 // the other unit is still on the button, which means the button shouldn't be deactivated.
                 if([eFrom isKindOfClass:[StarButton class]] && ![Converter isPoint:nextUnitPos sameAsPoint:unitPoint]) {
@@ -292,7 +281,21 @@
                     // Updates the bridge connected to the button on the scene, i.e. showing it.
                     [_scene setElementAtPosition:bb.bridge.key IsHidden:NO];
                 }
-            } else if([e isKindOfClass:[Box class]] && swipe && _currentUnit == _bigL) {
+
+                // If the element is a star.
+                if([e isKindOfClass:[Star class]] && ![e hidden] && ![e taken]) {
+                    [e movedTo];
+                    _player.starsTaken += 1;
+                    //[[_board elementDictionary] removeObjectForKey:nextPosKey];
+                    [_scene removeElementAtPosition:nextPosKey];
+                } else if([e isKindOfClass:[StarButton class]]) {
+                    [self doActionOnStarButton:e];
+                } else if([e isKindOfClass:[BridgeButton class]]) {
+                    [self doActionOnBridgeButton:e];
+                }
+                // Check elements that the unit left.
+
+                } else if([e isKindOfClass:[Box class]] && swipe && _currentUnit == _bigL) {
                 [self doActionOnBox:e InDirection:dir];
             }
         }

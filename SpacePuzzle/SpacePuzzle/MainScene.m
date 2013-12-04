@@ -265,7 +265,7 @@
     [_tiles insertObject:sprite atIndex:y*BOARD_SIZE_X + x];
 }
 
--(void)setupElement:(CGPoint)coord Name:(NSString *)className Hidden:(BOOL)hidden{
+-(void)setupElement:(CGPoint)coord Name:(NSString *)className Hidden:(BOOL)hidden {
    
     NSString *path = className;
     path = [path stringByAppendingString:@".png"];
@@ -277,7 +277,8 @@
     pos.x += sprite.size.width/2;
     
     if([className isEqualToString:CLASS_STAR]) {
-        sprite.size = CGSizeMake(34, 34);
+        sprite.size = CGSizeMake(40, 40);
+        pos.y -= 4;
     } else if([className isEqualToString:CLASS_LEVER]) {
         sprite.size = CGSizeMake(34, _switchOff.size.height/2);
        
