@@ -40,7 +40,7 @@
     _scene = [MainScene sceneWithSize:skView.bounds.size];
     _scene.scaleMode = SKSceneScaleModeAspectFill;
     
-    [LoadSaveFile saveFileWithWorld:0 andLevel:1];
+    [LoadSaveFile saveFileWithWorld:0 andLevel:7];
     _board = [[Board alloc] init];
     [self setupNextLevel];
     
@@ -88,7 +88,7 @@
         location = [Converter convertMousePosToCoord:location];
         location.y = abs(location.y - 9);
 
-        [self unitWantsToMoveTo:location];
+        [self unitWantsToMoveTo:location WithSwipe:NO];
     }
 }
 
@@ -116,7 +116,7 @@
     if (sender.state == UIGestureRecognizerStateEnded && ![[_scene currentUnit] hasActions]) {
         CGPoint location = CGPointMake(_currentUnit.x, _currentUnit.y);
         location.y -= 1;
-        [self unitWantsToMoveTo:location];
+        [self unitWantsToMoveTo:location WithSwipe:YES];
     }
 }
 
@@ -124,7 +124,7 @@
     if (sender.state == UIGestureRecognizerStateEnded && ![[_scene currentUnit] hasActions]) {
         CGPoint location = CGPointMake(_currentUnit.x, _currentUnit.y);
         location.y += 1;
-        [self unitWantsToMoveTo:location];
+        [self unitWantsToMoveTo:location WithSwipe:YES];
     }
 }
 
@@ -132,7 +132,7 @@
     if (sender.state == UIGestureRecognizerStateEnded && ![[_scene currentUnit] hasActions]) {
         CGPoint location = CGPointMake(_currentUnit.x, _currentUnit.y);
         location.x -= 1;
-        [self unitWantsToMoveTo:location];
+        [self unitWantsToMoveTo:location WithSwipe:YES];
     }
 }
 
@@ -140,7 +140,7 @@
     if (sender.state == UIGestureRecognizerStateEnded && ![[_scene currentUnit] hasActions]) {
         CGPoint location = CGPointMake(_currentUnit.x, _currentUnit.y);
         location.x += 1;
-        [self unitWantsToMoveTo:location];
+        [self unitWantsToMoveTo:location WithSwipe:YES];
     }
 }
 
@@ -212,7 +212,7 @@
 /*
  *  Called when a unit wants to move to a location on the board. This method checks if the move is 
  *  possible, if so moves the unit. If unit moves to star, consume the star. */
--(void)unitWantsToMoveTo:(CGPoint)loc {
+-(void)unitWantsToMoveTo:(CGPoint)loc WithSwipe:(BOOL)swipe {
     // The position that the unit wants to move to.
     NSInteger x  = loc.x;
     NSInteger y = loc.y;
@@ -292,7 +292,7 @@
                     // Updates the bridge connected to the button on the scene, i.e. showing it.
                     [_scene setElementAtPosition:bb.bridge.key IsHidden:NO];
                 }
-            } else if([e isKindOfClass:[Box class]]) {
+            } else if([e isKindOfClass:[Box class]] && swipe) {
                 [self doActionOnBox:e InDirection:dir];
             }
         }
@@ -322,7 +322,7 @@
             [self doActionOnBox:e InDirection:dir];
         } else*/
         
-        if ([e isKindOfClass:[Box class]] && _currentUnit == _bigL && ![Converter isPoint:unitPoint sameAsPoint:actionPoint]){
+        if ([e isKindOfClass:[Box class]] && _currentUnit == _bigL && [Converter isPoint:unitPoint NextToPoint:actionPoint]){
             [self doActionOnBoxSmash:e];
         } else if ([e isKindOfClass:[StarButton class]] && [Converter isPoint:unitPoint sameAsPoint:actionPoint]) {
             //[self doActionOnStarButton:e];
@@ -379,10 +379,15 @@
         nextPos = CGPointMake(rock.x, rock.y + 1);
     }
     // Add more elements which cannot be pushed upon to if-statement.
-    if (![e isKindOfClass:[Box class]] && (_nextUnit.x != nextPos.x || _nextUnit.y != nextPos.y) && [[_board finishPos ] x] != nextPos.x && [[_board finishPos] y] != nextPos.y) {
+    // ![e isKindOfClass:[Box class]] ---> !e isBlocking
+    CGPoint nextUnitPos = CGPointMake(_nextUnit.x, _nextUnit.y);
+    CGPoint finishPos = CGPointMake([_board finishPos].x, [_board finishPos].y);
+    
+    if (![e isKindOfClass:[Box class]] && ![Converter isPoint:nextPos sameAsPoint:nextUnitPos] &&
+        ![Converter isPoint:finishPos sameAsPoint:nextPos]) {
         NSInteger intKey = [nextKey integerValue];
         NSInteger nextTile = [[[_board board] objectAtIndex:intKey] status];
-        
+        NSLog(@"MOVE");
         CGPoint posPreMove = CGPointMake(rock.x, rock.y);
         [rock doMoveAction:dir];
 
