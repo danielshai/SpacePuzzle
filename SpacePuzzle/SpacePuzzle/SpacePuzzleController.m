@@ -86,7 +86,6 @@
         
         // Convert to board coordinates. Invert with -9.
         location = [Converter convertMousePosToCoord:location];
-        //location.y = abs(location.y - 9);
 
         [self unitWantsToMoveTo:location WithSwipe:NO];
     }
@@ -100,7 +99,6 @@
         
         // Convert to board coordinates. Invert with -9.
         location = [Converter convertMousePosToCoord:location];
-        location.y = abs(location.y - 9);
     
         [self unitWantsToDoActionAt:location];
     }
