@@ -25,12 +25,16 @@
 @property (nonatomic, retain) SKTexture *movingPlatform;
 @property (nonatomic, retain) SKTexture *star;
 @property (nonatomic, retain) SKTexture *box;
+@property (nonatomic, retain) SKTexture *guiAstro;
+@property (nonatomic, retain) SKTexture *guiAlien;
 
 @property (nonatomic, retain) SKSpriteNode *bigL;
 @property (nonatomic, retain) SKSpriteNode *littleJohn;
 @property (nonatomic, retain) SKSpriteNode *currentUnit;
 @property (nonatomic, retain) SKSpriteNode *bkg;
 @property (nonatomic, retain) SKSpriteNode *finish;
+@property (nonatomic, retain) SKSpriteNode *gui;
+
 @property (nonatomic, retain) NSMutableDictionary *elements;
 @property (nonatomic, retain) NSMutableArray *tiles;
 @property (nonatomic, retain) SKAction *sequence;

@@ -87,7 +87,7 @@
         // Convert to board coordinates. Invert with -9.
         location = [Converter convertMousePosToCoord:location];
         location.y = abs(location.y - 9);
-        
+
         [self unitWantsToMoveTo:location];
     }
 }
@@ -108,7 +108,7 @@
 
 -(void)trippleTap:(UIGestureRecognizer *)sender {
     if(sender.state == UIGestureRecognizerStateEnded && ![[_scene currentUnit] hasActions]) {
-        [self changeUnit];
+        //[self changeUnit];
     }
 }
 
@@ -150,7 +150,9 @@
             _currentUnit = _littleJohn;
             _nextUnit = _bigL;
             [_scene changeUnit];
+            NSLog(@"Change unit");
         }
+        NSLog(@"cant change, only L");
     } else if(_currentUnit == _littleJohn) {
         if([_bigL isPlayingOnLevel]) {
             _currentUnit = _bigL;
@@ -558,13 +560,11 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:selector name:text object:nil];
 }
 
--(BOOL)shouldAutorotate
-{
+-(BOOL)shouldAutorotate {
     return YES;
 }
 
--(NSUInteger)supportedInterfaceOrientations
-{
+-(NSUInteger)supportedInterfaceOrientations {
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
         return UIInterfaceOrientationMaskAllButUpsideDown;
     } else {
@@ -572,10 +572,16 @@
     }
 }
 
--(void)didReceiveMemoryWarning
-{
+-(void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Release any cached data, images, etc that aren't in use.
 }
 
+-(BOOL)prefersStatusBarHidden {
+    return true;
+}
+
+- (IBAction)changeUnitAction:(id)sender {
+    [self changeUnit];
+}
 @end
