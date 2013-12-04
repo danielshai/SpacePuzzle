@@ -48,6 +48,9 @@
 		E60DA77B1848A2350088AB3D /* BridgeButton.png in Resources */ = {isa = PBXBuildFile; fileRef = E60DA7791848A2350088AB3D /* BridgeButton.png */; };
 		E60DA77C1848A2350088AB3D /* StarButton.png in Resources */ = {isa = PBXBuildFile; fileRef = E60DA77A1848A2350088AB3D /* StarButton.png */; };
 		E61CD101184F48BA00E4CC91 /* Level005.splvl in Resources */ = {isa = PBXBuildFile; fileRef = E61CD100184F48BA00E4CC91 /* Level005.splvl */; };
+		E61CD105184F585200E4CC91 /* Level006.splvl in Resources */ = {isa = PBXBuildFile; fileRef = E61CD102184F585200E4CC91 /* Level006.splvl */; };
+		E61CD106184F585200E4CC91 /* Level009.splvl in Resources */ = {isa = PBXBuildFile; fileRef = E61CD103184F585200E4CC91 /* Level009.splvl */; };
+		E61CD107184F585200E4CC91 /* Level010.splvl in Resources */ = {isa = PBXBuildFile; fileRef = E61CD104184F585200E4CC91 /* Level010.splvl */; };
 		E61E76C2184E099D00E76AC3 /* Level001.splvl in Resources */ = {isa = PBXBuildFile; fileRef = E61E76BC184E099D00E76AC3 /* Level001.splvl */; };
 		E61E76C3184E099D00E76AC3 /* Level002.splvl in Resources */ = {isa = PBXBuildFile; fileRef = E61E76BD184E099D00E76AC3 /* Level002.splvl */; };
 		E61E76C4184E099D00E76AC3 /* Level003.splvl in Resources */ = {isa = PBXBuildFile; fileRef = E61E76BE184E099D00E76AC3 /* Level003.splvl */; };
@@ -152,6 +155,9 @@
 		E60DA7791848A2350088AB3D /* BridgeButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BridgeButton.png; sourceTree = "<group>"; };
 		E60DA77A1848A2350088AB3D /* StarButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = StarButton.png; sourceTree = "<group>"; };
 		E61CD100184F48BA00E4CC91 /* Level005.splvl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Level005.splvl; path = ../../Levels/Level005.splvl; sourceTree = "<group>"; };
+		E61CD102184F585200E4CC91 /* Level006.splvl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Level006.splvl; path = ../../Levels/Level006.splvl; sourceTree = "<group>"; };
+		E61CD103184F585200E4CC91 /* Level009.splvl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Level009.splvl; path = ../../Levels/Level009.splvl; sourceTree = "<group>"; };
+		E61CD104184F585200E4CC91 /* Level010.splvl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Level010.splvl; path = ../../Levels/Level010.splvl; sourceTree = "<group>"; };
 		E61E76BC184E099D00E76AC3 /* Level001.splvl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Level001.splvl; path = ../../Levels/Level001.splvl; sourceTree = "<group>"; };
 		E61E76BD184E099D00E76AC3 /* Level002.splvl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Level002.splvl; path = ../../Levels/Level002.splvl; sourceTree = "<group>"; };
 		E61E76BE184E099D00E76AC3 /* Level003.splvl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Level003.splvl; path = ../../Levels/Level003.splvl; sourceTree = "<group>"; };
@@ -436,8 +442,11 @@
 				E61E76BE184E099D00E76AC3 /* Level003.splvl */,
 				E61E76BF184E099D00E76AC3 /* Level004.splvl */,
 				E61CD100184F48BA00E4CC91 /* Level005.splvl */,
+				E61CD102184F585200E4CC91 /* Level006.splvl */,
 				E61E76C0184E099D00E76AC3 /* Level007.splvl */,
 				E61E76C1184E099D00E76AC3 /* Level008.splvl */,
+				E61CD103184F585200E4CC91 /* Level009.splvl */,
+				E61CD104184F585200E4CC91 /* Level010.splvl */,
 				E62A0522184DF78D009B4004 /* mario2.splvl */,
 				E687AE4C183A43EB00A5B78C /* mario.splvl */,
 			);
@@ -596,6 +605,7 @@
 				7797AC46183CE9F500E63E95 /* voidtile.png in Resources */,
 				E61E76C3184E099D00E76AC3 /* Level002.splvl in Resources */,
 				7797AC3B183CE9F500E63E95 /* ButtonON.png in Resources */,
+				E61CD105184F585200E4CC91 /* Level006.splvl in Resources */,
 				77D60727184373F40079A182 /* AlienDown.png in Resources */,
 				7705C3A718477A4600CEB0C9 /* BigLWalk.atlasc in Resources */,
 				E687AE4D183A43EB00A5B78C /* mario.splvl in Resources */,
@@ -605,10 +615,12 @@
 				7797AC3D183CE9F500E63E95 /* Rock.png in Resources */,
 				E60DA77B1848A2350088AB3D /* BridgeButton.png in Resources */,
 				77F0A82318464495002FA17A /* LittleJohnWalk.atlasc in Resources */,
+				E61CD106184F585200E4CC91 /* Level009.splvl in Resources */,
 				E6214074182BA53800EC5C21 /* Images.xcassets in Resources */,
 				7797AC42183CE9F500E63E95 /* Background.png in Resources */,
 				7797AC38183CE9F500E63E95 /* BridgeON.png in Resources */,
 				7797AC3F183CE9F500E63E95 /* Start.gif in Resources */,
+				E61CD107184F585200E4CC91 /* Level010.splvl in Resources */,
 				7797AC45183CE9F500E63E95 /* solidtile.png in Resources */,
 				7797AC3C183CE9F500E63E95 /* Finish.png in Resources */,
 				77D60729184373F40079A182 /* AlienRight.png in Resources */,
