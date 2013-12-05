@@ -254,6 +254,7 @@
             _board.finishPos.y = newPos.y;
         } else if (stat == BRUSH_ERASER) {
             // If a connection is on the position, first remove that one.
+            NSLog(@"%f %f", point.x,point.y);
             BOOL removeConnection = [_scene removeAConnectionFrom:point];
             BOOL removeConnectionEndPoint = [_scene removeAConnectionBasedOnEndPoint:point];
             if(!removeConnection && !removeConnectionEndPoint) {

@@ -646,6 +646,7 @@
     to = [Converter convertCoordToPixel:to];
     to.x += 20;
     from.x += 20;
+    
     s.lineWidth = 0.4;
     s.zPosition = 999999999;
     
@@ -673,8 +674,12 @@
     [self addChild:s];
     
     from = [Converter convertMousePosToCoord:from];
+    from.y = BOARD_SIZE_Y - 2 - from.y;
     to = [Converter convertMousePosToCoord:to];
+    to.y = BOARD_SIZE_Y - 2 - to.y;
     NSNumber *indexFrom = [NSNumber numberWithInteger:from.y * BOARD_SIZE_X + from.x];
+    NSLog(@"connection: %f %f",from.x,from.y);
+    NSLog(@"connection: %f %f",to.x,to.y);
     [_connectionNodes setObject:s forKey:indexFrom];
    // [_connectionNodes setObject:s forKey:indexTo];
 }
@@ -695,7 +700,7 @@
     for(id key in _connectionNodes) {
         SKShapeNode* s = [_connectionNodes objectForKey:key];
         CGPoint p = [Converter convertMousePosToCoord: s.position];
-        
+        p.y = BOARD_SIZE_Y - 2 - p.y;
         if(loc.x == p.x && loc.y == p.y) {
             [_connectionNodes removeObjectForKey:key];
             [s removeFromParent];
