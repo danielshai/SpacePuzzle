@@ -12,4 +12,5 @@
 
 @property (nonatomic, assign) NSInteger status;
 @property (nonatomic, retain) NSMutableArray *elements;
+-(NSNumber*) key;
 @end

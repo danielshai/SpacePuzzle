@@ -4,6 +4,7 @@
 
 
 #import "BoardCoord.h"
+#import "Macros.h"
 
 @implementation BoardCoord
 @synthesize status = _status;
@@ -14,6 +15,10 @@
         _elements = [[NSMutableArray alloc] init];
     }
     return self;
+}
+
+-(NSNumber*) key {
+    return [NSNumber numberWithInteger:self.y*BOARD_SIZE_X + self.x];
 }
 
 @end

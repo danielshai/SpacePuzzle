@@ -23,6 +23,7 @@
 @synthesize startPosAstronaut = _startPosAstronaut;
 @synthesize startPosAlien = _startPosAlien;
 @synthesize finishPos = _finishPos;
+@synthesize originalNumberOfStars = _originalNumberOfStars;
 
 -(id) init {
     if(self = [super init]){
@@ -37,6 +38,7 @@
         _startPosAstronaut = [[Position alloc] initWithX:-2 Y:-2];
         _startPosAlien = [[Position alloc] initWithX:-2 Y:-2];
         _finishPos = [[Position alloc] initWithX:0 Y:0];
+        _originalNumberOfStars = 0;
     }
     return self;
 }
@@ -89,9 +91,24 @@
     
     _finishPos.x = [[_parser finish] x];
     _finishPos.y = [[_parser finish] y];
-    
+
     // The elements.
     _elementDictionary = [_parser elements];
+   
+    for(NSNumber *key in _elementDictionary) {
+        NSMutableArray *posArray = [_elementDictionary objectForKey:key];
+        NSInteger index = [key integerValue];
+
+        BoardCoord *bc = [_board objectAtIndex:index];
+
+        for(int i = 0; i < posArray.count; i++) {
+            [[bc elements] addObject:[posArray objectAtIndex:i]];
+            if ([[posArray objectAtIndex:i] isKindOfClass:[Star class]]) {
+                _originalNumberOfStars++;
+            }
+            NSLog(@"Loaded element: %@ at %d",[posArray objectAtIndex:i], index);
+        }
+    }
 }
 
 /*

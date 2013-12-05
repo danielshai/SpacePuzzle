@@ -31,6 +31,7 @@
 @class Player;
 @class BridgeButton;
 @class Bridge;
+@class BoardController;
 
 @interface SpacePuzzleController : UIViewController
 
@@ -43,6 +44,7 @@
 @property (nonatomic, retain) Player *player;
 @property (nonatomic, assign) NSInteger world;
 @property (nonatomic, assign) NSInteger level;
+@property (nonatomic, retain) BoardController *boardController;
 
 -(void)singleTap:(UIGestureRecognizer *)sender;
 -(void)doubleTap:(UIGestureRecognizer *)sender;
@@ -62,12 +64,14 @@
 -(void)setupBoard;
 -(void)setupElements;
 -(void)setupUnits;
+-(void)setupScene;
 -(void)movePlatform: (MovingPlatform*)mp;
 -(void)observeText:(NSString*)text Selector: (SEL)selector;
 -(void)getNextLevel;
 -(void)setupNextLevel;
 -(void)takeStar: (Star*)star;
-- (IBAction)restartAction:(id)sender;
+-(NSInteger)currentUnitToMacro;
+-(IBAction)restartAction:(id)sender;
 -(NSArray*)getDataFromNotification:(NSNotification*) notif Key: (NSString*) key;
 -(IBAction)changeUnitAction:(id)sender;
 @end
