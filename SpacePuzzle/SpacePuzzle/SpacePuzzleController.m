@@ -47,7 +47,7 @@
     // Present the scene.
     [skView presentScene:_scene];
     
-    // Input recognizers.
+    // Gesture recognizers.
     UITapGestureRecognizer *singleTapR = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTap:)];
     singleTapR.numberOfTapsRequired = 1;
     [_scene.view addGestureRecognizer:singleTapR];
@@ -237,6 +237,51 @@
         _currentUnit.y = y;
         [_scene updateUnit:movePoint inDirection:dir];
         
+        /* ---------------------------------------------------------------------------------------------
+         
+        New structure of controller, model, and elements:
+        -------------------------------------------------
+          Board has functions that checks what elements are on a position, and updates them accordingly.
+          The elements container will be either a) having an array in each BoardCoord that holds the
+          elements on that position, or b) 2 (or 3) separate dictionaries. These separate dictionaries would represent the different layers of elements on the board.
+         
+          Pros and Cons:
+          --------------
+            - a) is more dynamic in adding several elements on one point. Could theoretically have as
+              many elements on a point as you want. Time complexity increases (O(n)) as well as space 
+              usage. This should be a minor increase, though (I think), since the array is so small with
+              a practical maximum of around 5, give or take.
+            - b) is more static. For every new layer of element you want in the game, code has to be 
+              updated. Time complexity (O(1)) is less as well as space usage.
+         
+          Counting stars with method a)
+          -----------------------------
+          At init, loop through all BoardCoords and count how many stars. Since this is O(n*n), this should
+          only be done at init, and not every time a star is taken. Save amount of stars in a property.
+          Every time (in Board unitMovedToPoint) a star is taken, subtract 1 from this propery.
+         
+          Interaction between SpacePuzzleController, MainScene, and data model
+          --------------------------------------------------------------------
+          For example, controller would call _boardController unitMovedFromPoint:fromPoint (after checking 
+          if a move can be done, like the code above). In unitMovedFromPoint, board would check what 
+          elements are on that point and update them accordingly. Then controller would call
+          _scene updateElementsAtPosition:fromPoint withArrayOfElements:elements. 
+          _scene updateElementsAtPosition will first remove the sprites at that position, and then add new
+          ones according to the array argument (could be empty, which means no sprites there).
+         
+          Then, the same procedure is repeated for toPoint. For example, after moving this controller can 
+          ask the board how many star elements are left, and update the player model accordingly.
+         
+          To wrap the Board's methods of moving etc, create BoardController class which does all changes
+          in board (that are at present done in this controller). Pseudo code (in SpaceController):
+          if boardController isPointMovableTo
+            currentUnitPos = toPos;
+            boardController unitMovedFrom:from To:to
+            scene updateElementAtPosition:from withArray:boardController elementsAtPosition:from
+            scene updateElementAtPosition:to withArray:boardController elementsAtPosition:to
+         
+         ----------------------------------------------------------------------------------------------*/
+        
         // If |bigL| is standing on a cracked tile and moves away from it. This will destroy the tile,
         // making it void, and also destroying the item on it.
         if ([_board isPointCracked:unitPoint] && _currentUnit == _bigL) {
@@ -258,7 +303,7 @@
         [self unitWantsToDoActionAt:movePoint];
         CGPoint nextUnitPos = CGPointMake(_nextUnit.x, _nextUnit.y);
         
-        /* Checks element. on the tile moved from. */
+        /* Checks elements on the tile moved from. */
         
         // Checks if the element moved from is a |StarButton|, and the second condition checks if
         // the other unit is still on the button, which means the button shouldn't be deactivated.
