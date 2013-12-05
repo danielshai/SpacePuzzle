@@ -1,7 +1,7 @@
 //
 //  GViewAppDelegate.m
 //  SpacePuzzleEditor
-
+// REMOVE CONNECTION VAFAN??
 #import "AppDelegate.h"
 #import "BoardScene.h"
 #import "XMLParser.h"
@@ -123,10 +123,10 @@
     
     CGPoint pStart = CGPointMake(startPoint.pointValue.x, startPoint.pointValue.y);
     CGPoint pEnd = CGPointMake(endPoint.pointValue.x, endPoint.pointValue.y);
-    
+
     if(eStart && eEnd && [_board isPointWithinBoard:pStart] && [_board isPointWithinBoard:pEnd]) {
         if([Connections isValidConnection:eStart To:eEnd]) {
-            // Tell the scene to highlight star.
+            // Tell the scene to highlight element.
             CGPoint p = CGPointMake(endPoint.pointValue.x, endPoint.pointValue.y);
             [_scene highlightElement:p];
         } else {
@@ -147,7 +147,8 @@
     NSValue *endPoint = [data objectAtIndex:1];
     NSNumber *indexStart = [NSNumber numberWithInteger:startPoint.pointValue.y*BOARD_SIZE_X + startPoint.pointValue.x];
     NSNumber *indexEnd = [NSNumber numberWithInteger:endPoint.pointValue.y*BOARD_SIZE_X + endPoint.pointValue.x];
-    
+    NSLog(@"Start: %f %f", startPoint.pointValue.x, startPoint.pointValue.y);
+    NSLog(@"End: %f %f", endPoint.pointValue.x, endPoint.pointValue.y);
     Element *eStart = [[_board elementDictionary] objectForKey:indexStart];
     Element *eEnd = [[_board elementDictionary] objectForKey:indexEnd];
     

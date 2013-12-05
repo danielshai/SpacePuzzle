@@ -162,15 +162,16 @@
         SKView *sk = self.view;
         NSPoint loc = [sk convertPoint:[theEvent locationInWindow] fromView:nil];
         startPathLine = CGPointMake(loc.x, loc.y);
-        loc = [Converter convertMousePosToCoord:loc];
+       
         // INTE GÖRA DETTA I SCENE!?
     } else if (theEvent.modifierFlags & NSControlKeyMask) {
         controlClickDrag = YES;
         
         SKView *sk = self.view;
         NSPoint loc = [sk convertPoint:[theEvent locationInWindow] fromView:nil];
+        
         startControlDrag = CGPointMake(loc.x, loc.y);
-        loc = [Converter convertMousePosToCoord:loc];
+
     } else if (!controlClickDrag || !pathDrag) {
         [self editABoardItem:theEvent];
     }
@@ -184,18 +185,28 @@
         circle.hidden = NO;
         circleOutline.hidden = NO;
         controlDragOutline.hidden = NO;
+        
         endControlDrag = CGPointMake(loc.x, loc.y);
+        
         [self drawControlLine];
-        CGPoint start = [Converter convertMousePosToCoord:startControlDrag];
-        CGPoint end = [Converter convertMousePosToCoord:endControlDrag];
+        CGPoint start = CGPointMake(startControlDrag.x, startControlDrag.y);
+        CGPoint end = CGPointMake(endControlDrag.x, endControlDrag.y);
+        start = [Converter convertMousePosToCoord:start];
+        start.y = BOARD_SIZE_Y-2-start.y;
+        
+        end = [Converter convertMousePosToCoord:end];
+        end.y = BOARD_SIZE_Y-2-end.y;
         NSArray *arr = [NSArray arrayWithObjects:[NSValue valueWithPoint:start],
                         [NSNumber valueWithPoint:end], nil];
         [self notifyText:@"ControlDrag" Object:arr Key:@"ControlDrag"];
     } else if(pathDrag) {
         CGPoint end = CGPointMake(loc.x, loc.y);
         end = [Converter convertMousePosToCoord:end];
-
+        end.y = BOARD_SIZE_Y - 2 - end.y;
+        
         CGPoint start = [Converter convertMousePosToCoord:startPathLine];
+        start.y = BOARD_SIZE_Y - 2 - start.y;
+        
         NSArray *arr = [NSArray arrayWithObjects:[NSValue valueWithPoint:start],
                         [NSNumber valueWithPoint:end], nil];
         [self notifyText:@"PathDrag" Object:arr Key:@"PathDrag"];
@@ -220,9 +231,11 @@
         controlClickDrag = NO;
         
         startControlDrag = [Converter convertMousePosToCoord:startControlDrag];
-        endControlDrag = [Converter convertMousePosToCoord:endControlDrag];
+        startControlDrag.y = BOARD_SIZE_Y - 2 - startControlDrag.y;
         
-
+        endControlDrag = [Converter convertMousePosToCoord:endControlDrag];
+        endControlDrag.y = BOARD_SIZE_Y - 2 - endControlDrag.y;
+        
         NSArray *arr = [NSArray arrayWithObjects:[NSValue valueWithPoint:startControlDrag],
                         [NSNumber valueWithPoint:endControlDrag], nil];
         [self notifyText:@"ControlDragUp" Object:arr Key:@"ControlDragUp"];
@@ -543,6 +556,7 @@
 
 -(void)drawControlLine {
     CGMutablePathRef pathToDraw = CGPathCreateMutable();
+
     CGPathMoveToPoint(pathToDraw, NULL, startControlDrag.x, startControlDrag.y);
     CGPathAddLineToPoint(pathToDraw, NULL, endControlDrag.x, endControlDrag.y);
     controlDragLine.path = pathToDraw;
