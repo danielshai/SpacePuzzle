@@ -385,6 +385,7 @@
 		E621405C182BA53800EC5C21 /* SpacePuzzle */ = {
 			isa = PBXGroup;
 			children = (
+				77F0A81D1845FF53002FA17A /* Animations */,
 				E6214068182BA53800EC5C21 /* Main.storyboard */,
 				E6214065182BA53800EC5C21 /* GViewAppDelegate.h */,
 				E6214066182BA53800EC5C21 /* GViewAppDelegate.m */,
@@ -400,7 +401,6 @@
 				E687AE4E183A440F00A5B78C /* Levels */,
 				E605768118362BC70033AE88 /* Resources */,
 				E621405D182BA53800EC5C21 /* Supporting Files */,
-				77F0A81D1845FF53002FA17A /* Animations */,
 			);
 			path = SpacePuzzle;
 			sourceTree = "<group>";

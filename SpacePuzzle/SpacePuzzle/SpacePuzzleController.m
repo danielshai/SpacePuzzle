@@ -47,7 +47,7 @@
     // Present the scene.
     [skView presentScene:_scene];
     
-    // Input recognizers.
+    // Gesture recognizers.
     UITapGestureRecognizer *singleTapR = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTap:)];
     singleTapR.numberOfTapsRequired = 1;
     [_scene.view addGestureRecognizer:singleTapR];
@@ -84,7 +84,7 @@
     if (sender.state == UIGestureRecognizerStateEnded && ![[_scene currentUnit] hasActions]) {
         CGPoint location = [sender locationInView:_scene.view];
         
-        // Convert to board coordinates. Invert with -9.
+        // Convert to board coordinates.
         location = [Converter convertMousePosToCoord:location];
 
         [self unitWantsToMoveTo:location WithSwipe:NO];
@@ -97,7 +97,6 @@
     if (sender.state == UIGestureRecognizerStateEnded && ![[_scene currentUnit] hasActions]) {
         CGPoint location = [sender locationInView:_scene.view];
         
-        // Convert to board coordinates. Invert with -9.
         location = [Converter convertMousePosToCoord:location];
     
         [self unitWantsToDoActionAt:location];
@@ -214,64 +213,114 @@
     // The position that the unit wants to move to.
     NSInteger x  = loc.x;
     NSInteger y = loc.y;
-    NSNumber *nextPosKey = [NSNumber numberWithInt:y*BOARD_SIZE_X + x];
+
     // NSInteger nextPosIntKey = [nextPosKey integerValue];
     // The unit who wants to move's position.
     NSInteger unitX = _currentUnit.x;
     NSInteger unitY = _currentUnit.y;
+    CGPoint unitPoint = CGPointMake(unitX, unitY);
     NSNumber *unitKey = [NSNumber numberWithInt:unitY*BOARD_SIZE_X + unitX];
     NSInteger unitIntKey = [unitKey integerValue];
-    NSNumber *nextPos = [NSNumber numberWithInt:y*BOARD_SIZE_X + x];
-
-    Element *e = [[_board elementDictionary] objectForKey:nextPos];
     Element *eFrom = [[_board elementDictionary] objectForKey:unitKey];
+    
     CGPoint movePoint = CGPointMake(x, y);
-    CGPoint unitPoint = CGPointMake(unitX, unitY);
-    // First check if the movement was inside the board and if the tile isn't |void| (which units cannot
-    // move to).
-    if([_board isPointMovableTo:loc] && ![Converter isPoint:movePoint sameAsPoint:unitPoint]) {
-        // Checks if the move is 1 step in x or y, but not both at the same time.
-        if( [Converter isPoint:unitPoint NextToPoint:movePoint] ) {
-            // If |bigL| is standing on a cracked tile and moves away from it. This will destroy the tile,
-            // making it void, and also destroying the item on it.
-            if ([[[_board board] objectAtIndex:unitIntKey] status] == MAPSTATUS_CRACKED && _currentUnit == _bigL) {
-                [[_board elementDictionary] removeObjectForKey:unitKey];
-                [_scene removeElementAtPosition:unitKey];
-                [[[_board board] objectAtIndex:unitIntKey] setStatus:MAPSTATUS_VOID];
-                [_scene refreshTileAtFlatIndex:unitIntKey WithStatus:MAPSTATUS_VOID];
-            }
+    NSNumber *nextPosKey = [NSNumber numberWithInt:y*BOARD_SIZE_X + x];
+    Element *e = [[_board elementDictionary] objectForKey:nextPosKey];
 
-            NSInteger dir = [Converter convertCoordsTo:movePoint Direction:unitPoint];
-            // If the element isn't blocking, move unit.
-            if(![e blocking]) {
-                _currentUnit.x = x;
-                _currentUnit.y = y;
-                
-                [_scene updateUnit:movePoint inDirection:dir];
-                if([self isUnitOnGoal]) {
-                    _level++;
-                    [LoadSaveFile saveFileWithWorld:_world andLevel:_level];
-                    [self setupNextLevel];
-                }
-                
-                [self unitWantsToDoActionAt:movePoint];
-                CGPoint nextUnitPos = CGPointMake(_nextUnit.x, _nextUnit.y);
-                
-                // Checks if the element moved from is a |StarButton|, and the second condition checks if
-                // the other unit is still on the button, which means the button shouldn't be deactivated.
-                if([eFrom isKindOfClass:[StarButton class]] && ![Converter isPoint:nextUnitPos sameAsPoint:unitPoint]) {
-                    // Buttons should be deactivated if left.
-                    StarButton *sb = (StarButton*)eFrom;
-                    [sb unitLeft];
-                    [_scene refreshElementAtPosition:sb.key OfClass:CLASS_STARBUTTON WithStatus:sb.state];
-                    // Updates the star connected to the button on the scene, i.e. showing it.
-                    if(sb.star.taken == NO) {
-                        [_scene setElementAtPosition:sb.star.key IsHidden:sb.star.hidden];
-                    }
-                } else if([eFrom isKindOfClass:[BridgeButton class]] && ![Converter isPoint:nextUnitPos sameAsPoint:unitPoint]) {
-                    // Buttons should be deactivated if left.
-                    BridgeButton *bb = (BridgeButton*)eFrom;
-                    [bb unitLeft];
+    NSInteger dir = [Converter convertCoordsTo:movePoint Direction:unitPoint];
+    // First check if the movement is possible on the board and the move isn't to the same point or
+    // diagonally.
+    if([_board isPointMovableTo:movePoint] && ![Converter isPoint:movePoint sameAsPoint:unitPoint]
+       && [Converter isPoint:unitPoint NextToPoint:movePoint]) {
+        // Move unit in data model and view.
+        _currentUnit.x = x;
+        _currentUnit.y = y;
+        [_scene updateUnit:movePoint inDirection:dir];
+        
+        /* ---------------------------------------------------------------------------------------------
+         
+        New structure of controller, model, and elements:
+        -------------------------------------------------
+          Board has functions that checks what elements are on a position, and updates them accordingly.
+          The elements container will be either a) having an array in each BoardCoord that holds the
+          elements on that position, or b) 2 (or 3) separate dictionaries. These separate dictionaries would represent the different layers of elements on the board.
+         
+          Pros and Cons:
+          --------------
+            - a) is more dynamic in adding several elements on one point. Could theoretically have as
+              many elements on a point as you want. Time complexity increases (O(n)) as well as space 
+              usage. This should be a minor increase, though (I think), since the array is so small with
+              a practical maximum of around 5, give or take.
+            - b) is more static. For every new layer of element you want in the game, code has to be 
+              updated. Time complexity (O(1)) is less as well as space usage.
+         
+          Counting stars with method a)
+          -----------------------------
+          At init, loop through all BoardCoords and count how many stars. Since this is O(n*n), this should
+          only be done at init, and not every time a star is taken. Save amount of stars in a property.
+          Every time (in Board unitMovedToPoint) a star is taken, subtract 1 from this propery.
+         
+          Interaction between SpacePuzzleController, MainScene, and data model
+          --------------------------------------------------------------------
+          For example, controller would call _boardController unitMovedFromPoint:fromPoint (after checking 
+          if a move can be done, like the code above). In unitMovedFromPoint, board would check what 
+          elements are on that point and update them accordingly. Then controller would call
+          _scene updateElementsAtPosition:fromPoint withArrayOfElements:elements. 
+          _scene updateElementsAtPosition will first remove the sprites at that position, and then add new
+          ones according to the array argument (could be empty, which means no sprites there).
+         
+          Then, the same procedure is repeated for toPoint. For example, after moving this controller can 
+          ask the board how many star elements are left, and update the player model accordingly.
+         
+          To wrap the Board's methods of moving etc, create BoardController class which does all changes
+          in board (that are at present done in this controller). Pseudo code (in SpaceController):
+          if boardController isPointMovableTo
+            currentUnitPos = toPos;
+            boardController unitMovedFrom:from To:to
+            scene updateElementAtPosition:from withArray:boardController elementsAtPosition:from
+            scene updateElementAtPosition:to withArray:boardController elementsAtPosition:to
+         
+         ----------------------------------------------------------------------------------------------*/
+        
+        // If |bigL| is standing on a cracked tile and moves away from it. This will destroy the tile,
+        // making it void, and also destroying the item on it.
+        if ([_board isPointCracked:unitPoint] && _currentUnit == _bigL) {
+            // Update model and scene.
+            [[_board elementDictionary] removeObjectForKey:unitKey];
+            [_scene removeElementAtPosition:unitKey];
+            [[[_board board] objectAtIndex:unitIntKey] setStatus:MAPSTATUS_VOID];
+            [_scene refreshTileAtFlatIndex:unitIntKey WithStatus:MAPSTATUS_VOID];
+        }
+        
+        // If the player moved to the finish, new level.
+        if([self areUnitsOnFinish]) {
+            _level++;
+            [LoadSaveFile saveFileWithWorld:_world andLevel:_level];
+            [self setupNextLevel];
+            return;
+        }
+        
+        [self unitWantsToDoActionAt:movePoint];
+        CGPoint nextUnitPos = CGPointMake(_nextUnit.x, _nextUnit.y);
+        
+        /* Checks elements on the tile moved from. */
+        
+        // Checks if the element moved from is a |StarButton|, and the second condition checks if
+        // the other unit is still on the button, which means the button shouldn't be deactivated.
+        if([eFrom isKindOfClass:[StarButton class]] && ![Converter isPoint:nextUnitPos sameAsPoint:unitPoint]) {
+            // Buttons should be deactivated if left.
+            StarButton *sb = (StarButton*)eFrom;
+            [sb unitLeft];
+            [_scene refreshElementAtPosition:sb.key OfClass:CLASS_STARBUTTON WithStatus:sb.state];
+            // Updates the star connected to the button on the scene, i.e. showing it.
+            if(sb.star.taken == NO) {
+                [_scene setElementAtPosition:sb.star.key IsHidden:sb.star.hidden];
+            }
+        } else if([eFrom isKindOfClass:[BridgeButton class]]
+                  && ![Converter isPoint:nextUnitPos sameAsPoint:unitPoint]) {
+            // Buttons should be deactivated if left.
+            BridgeButton *bb = (BridgeButton*)eFrom;
+            [bb unitLeft];
                     
                     // Updates the button on the scene.
                     [_scene refreshElementAtPosition:bb.bridge.key OfClass:CLASS_BRIDGE WithStatus:bb.state];
@@ -297,6 +346,10 @@
                     [self doActionOnBox:e InDirection:dir];
             }
         }
+    } else if([e isKindOfClass:[Box class]] && swipe && _currentUnit == _bigL) {
+        // Point isn't movable to, but if unit is astronaut and element blocking is a box, move it!
+        // |swipe| needs to be YES because moving boxes cannot be done by single tap.
+        [self doActionOnBox:e InDirection:dir];
     }
 }
 
@@ -411,6 +464,8 @@
     }
 }
 
+/*
+ *  Does action on a star button, i.e. turns it on/off. */
 -(void)doActionOnStarButton:(Element *)button {
     StarButton *sb = (StarButton*)button;
     [sb movedTo];
@@ -418,8 +473,16 @@
     // Updates the button on the scene.
     [_scene refreshElementAtPosition:sb.key OfClass:CLASS_STARBUTTON WithStatus:sb.state];
     // Updates the star connected to the button on the scene, i.e. showing it.
-    if(sb.star.taken == NO) {
+    if(!sb.star.taken) {
         [_scene setElementAtPosition:sb.star.key IsHidden:sb.star.hidden];
+        
+        CGPoint starPos = CGPointMake(sb.star.x, sb.star.y);
+        CGPoint nextUnitPos = CGPointMake(_nextUnit.x, _nextUnit.y);
+        // If the other unit is standing on the same spot as the star and button is on the star should be
+        // taken by the player.
+        if([Converter isPoint:starPos sameAsPoint:nextUnitPos] && sb.state) {
+            [self takeStar:sb.star];
+        }
     }
 }
 
@@ -482,10 +545,21 @@
     [_scene moveElement:prevPoint NewCoord:CGPointMake(mp.x, mp.y)];
 }
 
+-(void)takeStar:(Star *)star {
+    [star movedTo];
+    _player.starsTaken += 1;
+    [_scene removeElementAtPosition:star.key];
+}
+
 /*
  *  Checks if the |currentUnit| is on the finish position. */
--(BOOL)isUnitOnGoal {
-    return([[_board finishPos] x] == _currentUnit.x && [[_board finishPos] y] == _currentUnit.y);
+-(BOOL)areUnitsOnFinish {
+    CGPoint finishPoint = CGPointMake(_board.finishPos.x, _board.finishPos.y);
+    CGPoint currentUnitPoint = CGPointMake(_currentUnit.x, _currentUnit.y);
+    CGPoint nextUnitPoint = CGPointMake(_nextUnit.x, _nextUnit.y);
+    
+    return [Converter isPoint:finishPoint sameAsPoint:currentUnitPoint]
+        && [Converter isPoint:finishPoint sameAsPoint:nextUnitPoint];
 }
 
 -(NSArray*) getDataFromNotification:(NSNotification *)notif Key:(NSString *)key {

@@ -537,18 +537,21 @@
         NSInteger posIntKey = [posKey integerValue];
         BoardCoord *bc = [_board objectAtIndex:posIntKey];
         
-        if([bc status] != MAPSTATUS_VOID) {
-            return YES;
-        } else if([[_elementDictionary objectForKey:posKey] isKindOfClass:[Bridge class]]) {
-            Bridge *b = (Bridge*)[_elementDictionary objectForKey:posKey];
-            return !b.blocking;
-        } else if ([[_elementDictionary objectForKey:posKey] isKindOfClass:[MovingPlatform class]]) {
-            return YES;
-        }
+        return (![[_elementDictionary objectForKey:posKey] blocking] && [bc status] != MAPSTATUS_VOID);
+        //else if ([[_elementDictionary objectForKey:posKey] isKindOfClass:[MovingPlatform class]]) {
+        // return YES;
+        //}
         return NO;
     } else {
         return NO;
     }
+}
+
+-(BOOL)isPointCracked:(CGPoint)p {
+    NSNumber *posKey = [NSNumber numberWithInt:p.y*BOARD_SIZE_X + p.x];
+    NSInteger posIntKey = [posKey integerValue];
+    BoardCoord *bc = [_board objectAtIndex:posIntKey];
+    return bc.status == MAPSTATUS_CRACKED;
 }
 
 -(BOOL)isPointWithinBoard:(CGPoint)p {

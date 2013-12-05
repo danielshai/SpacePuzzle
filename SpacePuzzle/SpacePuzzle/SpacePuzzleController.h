@@ -5,8 +5,15 @@
     Controller for the main game scene.
     
     To fix:
-        - Level progress.
-        - Startpositioner för olika units.
+        - When standing on a tile and star appears, you don't pick it up (which you should).
+        - Moving platform moving along paths (a generalised solution).
+        - Textures should be in "Images.xcassets" with 2 versions of each (ordinary and retina [x2 size]).
+        - Several elements on one coordinate.
+    Cleaning up to do:
+        - In board, create a class XMLExporter that has class functions that export the board.
+        - Cleaner check of handling input from user, i.e. check what to do and doing it.
+        - Cleaner update of scene.
+        - Make use of AnimationFactory.
 */
 
 #import <UIKit/UIKit.h>
@@ -51,7 +58,7 @@
 -(void)doActionOnStarButton: (Element*)button;
 -(void)doActionOnBridgeButton: (Element*)button;
 -(void)doActionOnPlatformLever: (Element*)lever;
--(BOOL)isUnitOnGoal;
+-(BOOL)areUnitsOnFinish;
 -(void)setupBoard;
 -(void)setupElements;
 -(void)setupUnits;
@@ -59,6 +66,7 @@
 -(void)observeText:(NSString*)text Selector: (SEL)selector;
 -(void)getNextLevel;
 -(void)setupNextLevel;
+-(void)takeStar: (Star*)star;
 - (IBAction)restartAction:(id)sender;
 -(NSArray*)getDataFromNotification:(NSNotification*) notif Key: (NSString*) key;
 -(IBAction)changeUnitAction:(id)sender;

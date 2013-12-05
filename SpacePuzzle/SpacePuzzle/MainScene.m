@@ -94,22 +94,26 @@
 }
 
 // Preloads animation textures.
+// UPDATE: resize:YES ger animation utan vita rutor. Dock resizar den spriten till 88x88, eftersom texturen
+// har den storleken. Om vi kör med bilder i Images.xcassets med en version av varje texture för vanlig
+// iPhone och en för Retina, dvs. 44x44 och 88x88.
 -(void)initScene {
-    // Preloading Big Ls walking animations.
+    // Preloading Big L's walking animations.
     [SKTexture preloadTextures:BIGLWALK_ANIM_AUP withCompletionHandler:^(void){
-        SKAction *walk = [SKAction animateWithTextures:BIGLWALK_ANIM_AUP timePerFrame:TIME_PER_FRAME];
+        SKAction *walk = [SKAction animateWithTextures:BIGLWALK_ANIM_AUP timePerFrame:TIME_PER_FRAME resize:NO restore:NO];
         _bWUp = [SKAction sequence:@[walk, walk, walk, walk]];
     }];
     [SKTexture preloadTextures:BIGLWALK_ANIM_ADOWN withCompletionHandler:^(void){
-        SKAction *walk = [SKAction animateWithTextures:BIGLWALK_ANIM_ADOWN timePerFrame:TIME_PER_FRAME];
+        SKAction *walk = [SKAction animateWithTextures:BIGLWALK_ANIM_ADOWN timePerFrame:TIME_PER_FRAME resize:NO restore:NO];
+        
         _bWDown = [SKAction sequence:@[walk, walk, walk, walk]];
     }];
     [SKTexture preloadTextures:BIGLWALK_ANIM_ARIGHT withCompletionHandler:^(void){
-        SKAction *walk = [SKAction animateWithTextures:BIGLWALK_ANIM_ARIGHT timePerFrame:TIME_PER_FRAME];
+        SKAction *walk = [SKAction animateWithTextures:BIGLWALK_ANIM_ARIGHT timePerFrame:TIME_PER_FRAME resize:NO restore:NO];
         _bWRight = [SKAction sequence:@[walk, walk, walk, walk]];
     }];
     [SKTexture preloadTextures:BIGLWALK_ANIM_ALEFT withCompletionHandler:^(void){
-        SKAction *walk = [SKAction animateWithTextures:BIGLWALK_ANIM_ALEFT timePerFrame:TIME_PER_FRAME];
+        SKAction *walk = [SKAction animateWithTextures:BIGLWALK_ANIM_ALEFT timePerFrame:TIME_PER_FRAME resize:NO restore:NO];
         _bWLeft = [SKAction sequence:@[walk, walk, walk, walk]];
     }];
     
