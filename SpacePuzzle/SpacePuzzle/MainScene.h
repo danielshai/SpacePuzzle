@@ -48,6 +48,7 @@
 @property (nonatomic, retain) SKAction *lWDown;
 @property (nonatomic, retain) SKAction *lWRight;
 @property (nonatomic, retain) SKAction *lWLeft;
+@property (nonatomic, retain) SKAction *moveBox;
 
 -(void)updateUnit:(CGPoint) coord inDirection:(NSInteger) direction;
 -(void)refreshTileAtPosition: (CGPoint)pos WithStatus: (NSInteger)status;

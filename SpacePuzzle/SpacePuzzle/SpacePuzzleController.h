@@ -32,7 +32,10 @@
 @class BridgeButton;
 @class Bridge;
 
-@interface SpacePuzzleController : UIViewController
+@interface SpacePuzzleController : UIViewController {
+    NSMutableArray *swipeArray;
+    NSTimer *timer;
+}
 
 @property (nonatomic, retain) Board *board;
 @property (nonatomic, assign) MainScene *scene;
@@ -44,6 +47,7 @@
 @property (nonatomic, assign) NSInteger world;
 @property (nonatomic, assign) NSInteger level;
 
+-(void)checkInteraction:(NSTimer *)time;
 -(void)singleTap:(UIGestureRecognizer *)sender;
 -(void)doubleTap:(UIGestureRecognizer *)sender;
 -(void)swipeUp:(UISwipeGestureRecognizer *)sender;

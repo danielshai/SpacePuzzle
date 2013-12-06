@@ -36,6 +36,9 @@
     skView.showsFPS = YES;
     skView.showsNodeCount = YES;
     
+    swipeArray = [[NSMutableArray alloc] init];
+    timer = [NSTimer scheduledTimerWithTimeInterval:0.12 target:self selector:@selector(checkInteraction:) userInfo:nil repeats:YES];
+    
     // Create and configure the scene.
     _scene = [MainScene sceneWithSize:skView.bounds.size];
     _scene.scaleMode = SKSceneScaleModeAspectFill;
@@ -114,6 +117,12 @@
         CGPoint location = CGPointMake(_currentUnit.x, _currentUnit.y);
         location.y -= 1;
         [self unitWantsToMoveTo:location WithSwipe:YES];
+    } else {
+        CGPoint location = CGPointMake(_currentUnit.x, _currentUnit.y);
+        location.y -= 1;
+        Position *pos = [[Position alloc] initWithX:location.x Y:location.y];
+        [swipeArray addObject: pos];
+        NSLog(@"Stored Swiped Up at %d %d", pos.x, pos.y);
     }
 }
 
@@ -122,6 +131,12 @@
         CGPoint location = CGPointMake(_currentUnit.x, _currentUnit.y);
         location.y += 1;
         [self unitWantsToMoveTo:location WithSwipe:YES];
+    } else {
+        CGPoint location = CGPointMake(_currentUnit.x, _currentUnit.y);
+        location.y += 1;
+        Position *pos = [[Position alloc] initWithX:location.x Y:location.y];
+        [swipeArray addObject: pos];
+        NSLog(@"Stored Swiped Down at %d %d", pos.x, pos.y);
     }
 }
 
@@ -130,6 +145,12 @@
         CGPoint location = CGPointMake(_currentUnit.x, _currentUnit.y);
         location.x -= 1;
         [self unitWantsToMoveTo:location WithSwipe:YES];
+    } else {
+        CGPoint location = CGPointMake(_currentUnit.x, _currentUnit.y);
+        location.x -= 1;
+        Position *pos = [[Position alloc] initWithX:location.x Y:location.y];
+        [swipeArray addObject: pos];
+        NSLog(@"Stored Swiped Left at %d %d", pos.x, pos.y);
     }
 }
 
@@ -138,6 +159,24 @@
         CGPoint location = CGPointMake(_currentUnit.x, _currentUnit.y);
         location.x += 1;
         [self unitWantsToMoveTo:location WithSwipe:YES];
+    } else {
+        CGPoint location = CGPointMake(_currentUnit.x, _currentUnit.y);
+        location.x += 1;
+        Position *pos = [[Position alloc] initWithX:location.x Y:location.y];
+        [swipeArray addObject: pos];
+        NSLog(@"Stored Swiped Right at %d %d", pos.x, pos.y);
+    }
+}
+
+-(void)checkInteraction:(NSTimer *)time {
+    if(![_scene hasActions]){
+        for (int i = 0; i < swipeArray.count; i++) {
+            NSLog(@"TIMER MOVE");
+            Position *pos = [swipeArray objectAtIndex:i];
+            CGPoint nextLoc = CGPointMake(pos.x, pos.y);
+            [self unitWantsToMoveTo:nextLoc WithSwipe:YES];
+        }
+        [swipeArray removeAllObjects];
     }
 }
 
@@ -210,6 +249,7 @@
  *  Called when a unit wants to move to a location on the board. This method checks if the move is 
  *  possible, if so moves the unit. If unit moves to star, consume the star. */
 -(void)unitWantsToMoveTo:(CGPoint)loc WithSwipe:(BOOL)swipe {
+    NSLog(@"WANTS TO MOVE");
     // The position that the unit wants to move to.
     NSInteger x  = loc.x;
     NSInteger y = loc.y;
@@ -322,31 +362,25 @@
             BridgeButton *bb = (BridgeButton*)eFrom;
             [bb unitLeft];
                     
-                    // Updates the button on the scene.
-                    [_scene refreshElementAtPosition:bb.bridge.key OfClass:CLASS_BRIDGE WithStatus:bb.state];
-                    [_scene refreshElementAtPosition:bb.key OfClass:CLASS_BRIDGEBUTTON WithStatus:bb.state];
-                    // Updates the bridge connected to the button on the scene, i.e. showing it.
-                    [_scene setElementAtPosition:bb.bridge.key IsHidden:NO];
-                }
-
-                // If the element is a star.
-                if([e isKindOfClass:[Star class]] && ![e hidden] && ![e taken]) {
-                    [e movedTo];
-                    _player.starsTaken += 1;
-                    //[[_board elementDictionary] removeObjectForKey:nextPosKey];
-                    [_scene removeElementAtPosition:nextPosKey];
-                } else if([e isKindOfClass:[StarButton class]]) {
-                    [self doActionOnStarButton:e];
-                } else if([e isKindOfClass:[BridgeButton class]]) {
-                    [self doActionOnBridgeButton:e];
-                }
-                // Check elements that the unit left.
-
-                } else if([e isKindOfClass:[Box class]] && swipe && _currentUnit == _bigL) {
-                    [self doActionOnBox:e InDirection:dir];
-            }
+            // Updates the button on the scene.
+            [_scene refreshElementAtPosition:bb.bridge.key OfClass:CLASS_BRIDGE WithStatus:bb.state];
+            [_scene refreshElementAtPosition:bb.key OfClass:CLASS_BRIDGEBUTTON WithStatus:bb.state];
+            // Updates the bridge connected to the button on the scene, i.e. showing it.
+            [_scene setElementAtPosition:bb.bridge.key IsHidden:NO];
         }
-    } else if([e isKindOfClass:[Box class]] && swipe && _currentUnit == _bigL) {
+        /* Checks elements on the tile moved to. */
+        
+        // If the element is a star.
+        if([e isKindOfClass:[Star class]] && ![e hidden] && ![e taken]) {
+            Star *star = (Star*)e;
+            [self takeStar:star];
+        } else if([e isKindOfClass:[StarButton class]]) {
+            [self doActionOnStarButton:e];
+        } else if([e isKindOfClass:[BridgeButton class]]) {
+            [self doActionOnBridgeButton:e];
+        }
+    }
+     else if([e isKindOfClass:[Box class]] && swipe && _currentUnit == _bigL) {
         // Point isn't movable to, but if unit is astronaut and element blocking is a box, move it!
         // |swipe| needs to be YES because moving boxes cannot be done by single tap.
         [self doActionOnBox:e InDirection:dir];

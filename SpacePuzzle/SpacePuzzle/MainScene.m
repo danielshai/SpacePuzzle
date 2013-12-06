@@ -10,6 +10,7 @@
 #import "AnimationFactory.h"
 #import "Element.h"
 #import "Position.h"
+#import "Box.h"
 
 @implementation MainScene
 @synthesize solidTile = _solidTile;
@@ -40,6 +41,7 @@
 @synthesize finish = _finish;
 @synthesize gui = _gui;
 @synthesize guiAstro = _guiAstro;
+@synthesize moveBox = _moveBox;
 
 -(id)initWithSize:(CGSize)size {    
     if (self = [super initWithSize:size]) {
@@ -79,7 +81,7 @@
         
         _elements = [[NSMutableDictionary alloc] init];
         _tiles = [[NSMutableArray alloc] init];
-
+        
         _gui = [SKSpriteNode spriteNodeWithTexture:_guiAstro];
         CGSize scale = _gui.size;
         scale.width = scale.width / 2;
@@ -185,6 +187,7 @@
 -(void)moveElement:(CGPoint)oldCoord NewCoord:(CGPoint)newCoord {
     NSNumber *indexOrigin = [NSNumber numberWithFloat:oldCoord.y*BOARD_SIZE_X + oldCoord.x];
     NSNumber *indexNew = [NSNumber numberWithFloat:newCoord.y*BOARD_SIZE_X + newCoord.x];
+    Element *e = [_elements objectForKey:indexOrigin];
   //  NSLog(@"moving: %f %f %f %f", oldCoord.x,oldCoord.y,newCoord.x,newCoord.y);
     if(indexNew.integerValue == indexOrigin.integerValue) {
         return;
@@ -197,6 +200,9 @@
     newCoord.x += TILESIZE/2;
     s.position = newCoord;
     [_elements removeObjectForKey:indexOrigin];
+    if ([e isKindOfClass:[Box class]]) {
+        SKAction *mBox = [SKAction moveTo:newCoord duration:TIME_PER_FRAME*4];
+    }
 }
 
 -(void)removeElementAtPosition:(NSNumber *)index {
