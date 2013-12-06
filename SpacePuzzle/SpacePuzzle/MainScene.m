@@ -8,10 +8,15 @@
 #import "BigLWalk.h"
 #import "LittleJohnWalk.h"
 #import "AnimationFactory.h"
-#import "Element.h"
 #import "Position.h"
 #import "Element.h"
 #import "Box.h"
+#import "Star.h"
+#import "StarButton.h"
+#import "BridgeButton.h"
+#import "Bridge.h"
+#import "PlatformLever.h"
+#import "MovingPlatform.h"
 
 @implementation MainScene
 @synthesize solidTile = _solidTile;
@@ -186,18 +191,50 @@
 
 -(void)updateElementsAtPosition:(CGPoint)pos withArray:(NSMutableArray *)elArr {
     Element *element;
+    NSMutableArray *arr = [[NSMutableArray alloc] init];
+    // Remove sprites at position now...
+    
+    NSMutableArray *prevArr = [_elements objectForKey:element.key];
+    if(prevArr) {
+        for (int i = 0; i < prevArr.count; i++) {
+            SKSpriteNode *pS = [prevArr objectAtIndex:i];
+            [pS removeFromParent];
+        }
+        [prevArr removeAllObjects];
+        [_elements removeObjectForKey:element.key];
+    }
+    
     for(int i = 0; i < elArr.count; i++) {
         element = [elArr objectAtIndex:i];
-        
-        // Get sprite, set texture according to getTextureForElement:element.
+        SKSpriteNode *s = [SKSpriteNode spriteNodeWithTexture:[self getTextureForElement:element]];
+        s.size = CGSizeMake(TILESIZE, TILESIZE);
+        pos = [Converter convertCoordToPixel:pos];
+        pos.x += TILESIZE/2;
+        s.position = pos;
+        [self addChild:s];
+        [arr insertObject:s atIndex:i];
     }
+    [_elements setObject:arr forKey:element.key];
 }
 
+// ADD STATE OF ELEMENT.
 -(SKTexture*)getTextureForElement:(Element *)e {
     if([e isKindOfClass:[Box class]]) {
         return _box;
+    } else if([e isKindOfClass:[Star class]]) {
+        return _star;
+    } else if([e isKindOfClass:[StarButton class]]) {
+        return _buttonOff;
+    } else if([e isKindOfClass:[BridgeButton class]]) {
+        return _buttonOff;
+    } else if([e isKindOfClass:[Bridge class]]) {
+        return _buttonOff;
+    } else if([e isKindOfClass:[PlatformLever class]]) {
+        return _buttonOff;
+    } else if([e isKindOfClass:[MovingPlatform class]]) {
+        return _buttonOff;
     }
-    return _box;
+    return nil;
 }
 
 -(void)moveElement:(CGPoint)oldCoord NewCoord:(CGPoint)newCoord {
@@ -390,6 +427,7 @@
 }
 
 -(void)cleanScene {
+    /*
     for(id elm in _elements) {
         SKSpriteNode *s = [_elements objectForKey:elm];
         [s removeFromParent];
@@ -405,7 +443,7 @@
     if(_littleJohn)
         [_littleJohn removeFromParent];
     if(_bigL)
-        [_bigL removeFromParent];
+        [_bigL removeFromParent];*/
 }
 
 -(SKTexture*) updateSpriteWith:(NSString *)name State:(BOOL)state {

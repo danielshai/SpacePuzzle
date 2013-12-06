@@ -194,18 +194,12 @@
 
 -(void)setupElements {
     // Talk to the scene what to show.
-    NSEnumerator *enumerator = [[_board elementDictionary] objectEnumerator];
-    Element *obj;
     
-    while(obj = [enumerator nextObject]) {
-        CGPoint p = CGPointMake([obj x], [obj y]);
-       // if([obj isKindOfClass:[Bridge class]]) {
-        //    [_scene setupElement:p Name:@"BridgeOFF.png" Hidden:[obj hidden]];
-        //} else if( ![obj isKindOfClass:[StarButton class]] && ![obj isKindOfClass:[BridgeButton class]] ) {
-            [_scene setupElement:p Name:NSStringFromClass([obj class]) Hidden:[obj hidden]];
-        //} else {
-        //    [_scene setupElement:p Name:@"ButtonOFF" Hidden:[obj hidden]];
-        //}
+    for(id key in [[_boardController board] elementDictionary]) {
+        NSMutableArray *arr = [[[_boardController board] elementDictionary] objectForKey:key];
+        Element *e = [arr objectAtIndex:0];
+        CGPoint elementPos = CGPointMake(e.x, e.y);
+        [_scene updateElementsAtPosition:elementPos withArray:arr];
     }
 }
 
@@ -573,6 +567,13 @@
         _currentUnit = _bigL;
         _nextUnit = _littleJohn;
     }
+    
+    // Units in scene.
+    CGPoint pA = CGPointMake(_bigL.x, _bigL.y);
+    [_scene setupAstronaut:pA];
+    CGPoint pAl = CGPointMake(_littleJohn.x, _littleJohn.y);
+    [_scene setupAlien:pAl];
+    [_scene setCurrentUnitWithMacro:[self currentUnitToMacro]];
 }
 
 -(NSInteger)currentUnitToMacro {
@@ -587,9 +588,9 @@
 -(void)setupNextLevel {
     [self getNextLevel];
     [_boardController setupBoardWithWorld:_world AndLevel:_level];
+    [self setupScene];
     [self setupElements];
     [self setupUnits];
-    [self setupScene];
 }
 
 -(void)setupScene {
@@ -608,13 +609,6 @@
     [_scene finish].position = p;
     
     // Elements in scene.
-    
-    // Units in scene.
-    CGPoint pA = CGPointMake(_bigL.x, _bigL.y);
-    [_scene setupAstronaut:pA];
-    CGPoint pAl = CGPointMake(_littleJohn.x, _littleJohn.y);
-    [_scene setupAlien:pAl];
-    [_scene setCurrentUnitWithMacro:[self currentUnitToMacro]];
 }
 
 /*

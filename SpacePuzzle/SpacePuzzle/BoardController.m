@@ -67,6 +67,7 @@
             Element *eTo = [[bcTo elements] objectAtIndex:i];
             if([eTo isKindOfClass:[Star class]] && ![eTo hidden] && ![eTo taken]) {
                 [self takeStar:eTo];
+                [bcTo.elements removeObject:eTo];
             } else if([eTo isKindOfClass:[StarButton class]]) {
        //     [self doActionOnStarButton:eTo];
             } else if([eTo isKindOfClass:[BridgeButton class]]) {
