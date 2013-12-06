@@ -15,9 +15,10 @@
 @property (nonatomic, assign) NSInteger starsLeft;
 
 -(void) setupBoardWithWorld: (NSInteger)world AndLevel: (NSInteger)level;
--(void) unitMovedFrom: (CGPoint)from To: (CGPoint)to UnitWasAstronatut: (BOOL)isAstronaut;
+-(BOOL) unitWantsToMoveFrom: (CGPoint)from To: (CGPoint)to WithSwipe: (BOOL)swipe UnitWasAstronatut: (BOOL)isAstronaut OtherUnitPosition: (CGPoint)otherUnitPoint;
 -(NSInteger) getBoardStatusAtPosition: (CGPoint)p;
 -(BOOL) isPointMovableTo: (CGPoint)p;
 -(NSMutableArray*) elementsAtPosition: (CGPoint)p;
 -(void)takeStar: (Element*)star;
+-(void)doActionOnBox: (Element*)rock InDirection: (NSInteger)dir OtherUnitPosition: (CGPoint)otherUnitPos;
 @end

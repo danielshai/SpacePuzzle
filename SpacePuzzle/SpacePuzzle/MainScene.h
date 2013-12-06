@@ -50,6 +50,7 @@
 @property (nonatomic, retain) SKAction *lWLeft;
 
 -(void)updateUnit:(CGPoint) coord inDirection:(NSInteger) direction;
+-(void)updateElementsAtPosition: (CGPoint)pos withArray: (NSMutableArray*)elArr;
 -(void)refreshTileAtPosition: (CGPoint)pos WithStatus: (NSInteger)status;
 -(void)refreshTileAtFlatIndex: (NSInteger)findex WithStatus:(NSInteger)status;
 -(void)refreshElementAtPosition: (NSNumber*)index OfClass:(NSString*)name WithStatus:(BOOL)on;
@@ -64,6 +65,7 @@
 -(void)changeUnit;
 -(void)setCurrentUnitWithMacro: (NSInteger)unit;
 -(void)cleanScene;
+-(SKTexture*)getTextureForElement: (Element*)e;
 -(SKTexture*)updateSpriteWith:(NSString *) name State: (BOOL)state;
 
 @end

@@ -10,6 +10,8 @@
 #import "AnimationFactory.h"
 #import "Element.h"
 #import "Position.h"
+#import "Element.h"
+#import "Box.h"
 
 @implementation MainScene
 @synthesize solidTile = _solidTile;
@@ -180,6 +182,22 @@
     
     [_currentUnit setZPosition:9999];
     [_currentUnit runAction:action];
+}
+
+-(void)updateElementsAtPosition:(CGPoint)pos withArray:(NSMutableArray *)elArr {
+    Element *element;
+    for(int i = 0; i < elArr.count; i++) {
+        element = [elArr objectAtIndex:i];
+        
+        // Get sprite, set texture according to getTextureForElement:element.
+    }
+}
+
+-(SKTexture*)getTextureForElement:(Element *)e {
+    if([e isKindOfClass:[Box class]]) {
+        return _box;
+    }
+    return _box;
 }
 
 -(void)moveElement:(CGPoint)oldCoord NewCoord:(CGPoint)newCoord {

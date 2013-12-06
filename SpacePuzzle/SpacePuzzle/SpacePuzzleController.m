@@ -228,19 +228,20 @@
     
     CGPoint to = CGPointMake(x, y);
     NSNumber *nextPosKey = [NSNumber numberWithInt:y*BOARD_SIZE_X + x];
-    Element *e = [[_board elementDictionary] objectForKey:nextPosKey];
 
     NSInteger dir = [Converter convertCoordsTo:to Direction:from];
     // First check if the movement is possible on the board and the move isn't to the same point or
     // diagonally.
-    if([_boardController isPointMovableTo:to] && ![Converter isPoint:to sameAsPoint:from]
-       && [Converter isPoint:from NextToPoint:to]) {
-        // Move unit in data model and view.
+
+    // Move unit in data model and view.
+    CGPoint nextUnitPos = CGPointMake(_nextUnit.x, _nextUnit.y);
+    if([_boardController unitWantsToMoveFrom:from To:to WithSwipe:swipe UnitWasAstronatut:_currentUnit == _bigL OtherUnitPosition:nextUnitPos]) {
         _currentUnit.x = x;
         _currentUnit.y = y;
-     
-        [_boardController unitMovedFrom:from To:to UnitWasAstronatut:_currentUnit==_bigL];
         [_scene updateUnit:to inDirection:dir];
+    }
+     
+
         // UPDATE ELEMENTS AT from AND to
         /* ---------------------------------------------------------------------------------------------
          
@@ -291,23 +292,16 @@
          
          ----------------------------------------------------------------------------------------------*/
         
-        // If the player moved to the finish, new level.
-        if([self areUnitsOnFinish]) {
-            // THIS CODE NEEDS TO ACCOUNT FOR WORLDS.
-            _level++;
-            [LoadSaveFile saveFileWithWorld:_world andLevel:_level];
-            [self setupNextLevel];
-            return;
-        }
-        
-        [self unitWantsToDoActionAt:to];
-        CGPoint nextUnitPos = CGPointMake(_nextUnit.x, _nextUnit.y);
-        
-        } else if([e isKindOfClass:[Box class]] && swipe && _currentUnit == _bigL) {
-        // Point isn't movable to, but if unit is astronaut and element blocking is a box, move it!
-        // |swipe| needs to be YES because moving boxes cannot be done by single tap.
-        [self doActionOnBox:e InDirection:dir];
+    // If the player moved to the finish, new level.
+    if([self areUnitsOnFinish]) {
+        // THIS CODE NEEDS TO ACCOUNT FOR WORLDS.
+        _level++;
+        [LoadSaveFile saveFileWithWorld:_world andLevel:_level];
+        [self setupNextLevel];
+        return;
     }
+        
+    // [self unitWantsToDoActionAt:to];
 }
 
 /*
