@@ -1,4 +1,5 @@
 // Board.m
+#import "Converter.h"
 #import "Board.h"
 #import "Macros.h"
 #import "XMLParser.h"
@@ -549,19 +550,22 @@
 }
 
 -(BOOL)isPointMovableTo:(CGPoint)p {
+    BOOL isMovable = NO;
+    BoardCoord *bc = [_board objectAtIndex:[Converter CGPointToKey:p]];
+    
     if([self isPointWithinBoard:p]) {
-        NSNumber *posKey = [NSNumber numberWithInt:p.y*BOARD_SIZE_X + p.x];
-        NSInteger posIntKey = [posKey integerValue];
-        BoardCoord *bc = [_board objectAtIndex:posIntKey];
-        
-        return (![[_elementDictionary objectForKey:posKey] blocking] && [bc status] != MAPSTATUS_VOID);
-        //else if ([[_elementDictionary objectForKey:posKey] isKindOfClass:[MovingPlatform class]]) {
-        // return YES;
-        //}
-        return NO;
-    } else {
-        return NO;
+        if(bc.elements) {
+            for (int i = 0; i < bc.elements.count; i++) {
+                Element *e = [bc.elements objectAtIndex:i];
+                isMovable = ![e blocking];
+                if(!isMovable) {
+                    return NO;
+                }
+            }
+        }
+        return [bc status] != MAPSTATUS_VOID;
     }
+    return NO;
 }
 
 -(BOOL)isPointCracked:(CGPoint)p {

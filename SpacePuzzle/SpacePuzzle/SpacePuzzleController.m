@@ -32,6 +32,8 @@
 -(void)viewDidLoad
 {
     [super viewDidLoad];
+    _bigL = [[BigL alloc] init];
+    _littleJohn = [[LittleJohn alloc] init];
 
     // Configure the view.
     SKView *skView = (SKView *)self.view;
@@ -40,6 +42,7 @@
     
     // Create and configure the scene.
     _scene = [MainScene sceneWithSize:skView.bounds.size];
+    _scene.controller = self;
     _scene.scaleMode = SKSceneScaleModeAspectFill;
     
     [LoadSaveFile saveFileWithWorld:0 andLevel:1];
@@ -162,6 +165,16 @@
     }
 }
 
+-(void)sceneFinishedMovingUnit {
+    // If the player moved to the finish, new level.
+    if([self areUnitsOnFinish]) {
+        // THIS CODE NEEDS TO ACCOUNT FOR WORLDS.
+        _level++;
+        [LoadSaveFile saveFileWithWorld:_world andLevel:_level];
+        [self setupNextLevel];
+    }
+}
+
 /*
  *  Loads the board according to the level. ADD LEVELFACTORY!!!. */
 -(void)setupBoard {
@@ -217,11 +230,8 @@
     NSInteger unitY = _currentUnit.y;
     CGPoint from = CGPointMake(unitX, unitY);
     NSNumber *unitKey = [NSNumber numberWithInt:unitY*BOARD_SIZE_X + unitX];
-    NSInteger unitIntKey = [unitKey integerValue];
-    Element *eFrom = [[_board elementDictionary] objectForKey:unitKey];
     
     CGPoint to = CGPointMake(x, y);
-    NSNumber *nextPosKey = [NSNumber numberWithInt:y*BOARD_SIZE_X + x];
 
     NSInteger dir = [Converter convertCoordsTo:to Direction:from];
     // First check if the movement is possible on the board and the move isn't to the same point or
@@ -233,6 +243,8 @@
         _currentUnit.x = x;
         _currentUnit.y = y;
         [_scene updateUnit:to inDirection:dir];
+        [_scene updateElementsAtPosition:from withArray:[_boardController elementsAtPosition:from]];
+        [_scene updateElementsAtPosition:to withArray:[_boardController elementsAtPosition:to]];
     }
      
 
@@ -285,15 +297,6 @@
             player.stars = boardController starstaken
          
          ----------------------------------------------------------------------------------------------*/
-        
-    // If the player moved to the finish, new level.
-    if([self areUnitsOnFinish]) {
-        // THIS CODE NEEDS TO ACCOUNT FOR WORLDS.
-        _level++;
-        [LoadSaveFile saveFileWithWorld:_world andLevel:_level];
-        [self setupNextLevel];
-        return;
-    }
         
     // [self unitWantsToDoActionAt:to];
 }
@@ -452,7 +455,8 @@
     [_scene refreshElementAtPosition:pl.key OfClass:CLASS_LEVER WithStatus:pl.state];
     // Updates the moving platform connected to the lever on the scene, i.e. moving it.
     [_scene setElementAtPosition:pl.movingPlatform.key IsHidden:NO];
-    [_scene refreshElementAtPosition:pl.movingPlatform.key OfClass:CLASS_MOVING_PLATFORM WithStatus:pl.movingPlatform.blocking];
+    [_scene refreshElementAtPosition:pl.movingPlatform.key OfClass:CLASS_MOVING_PLATFORM
+                          WithStatus:pl.movingPlatform.blocking];
     
     [NSTimer scheduledTimerWithTimeInterval:0.6 target:self
                                    selector:@selector(movePlatform:)  userInfo:pl.movingPlatform
@@ -501,7 +505,7 @@
 /*
  *  Checks if the |currentUnit| is on the finish position. */
 -(BOOL)areUnitsOnFinish {
-    CGPoint finishPoint = CGPointMake(_board.finishPos.x, _board.finishPos.y);
+    CGPoint finishPoint = CGPointMake(_boardController.board.finishPos.x, _boardController.board.finishPos.y);
     CGPoint currentUnitPoint = CGPointMake(_currentUnit.x, _currentUnit.y);
     CGPoint nextUnitPoint = CGPointMake(_nextUnit.x, _nextUnit.y);
     
@@ -533,7 +537,6 @@
 /*
  *  Creates the units. */
 -(void)setupUnits {
-    _bigL = [[BigL alloc] init];
     _bigL.x = _boardController.board.startPosAstronaut.x;
     _bigL.y = _boardController.board.startPosAstronaut.y;
  
@@ -544,7 +547,6 @@
         _bigL.isPlayingOnLevel = NO;
     }
     
-    _littleJohn = [[LittleJohn alloc] init];
     _littleJohn.x = _boardController.board.startPosAlien.x;
     _littleJohn.y = _boardController.board.startPosAlien.y;
     
@@ -572,6 +574,7 @@
     CGPoint pA = CGPointMake(_bigL.x, _bigL.y);
     [_scene setupAstronaut:pA];
     CGPoint pAl = CGPointMake(_littleJohn.x, _littleJohn.y);
+    
     [_scene setupAlien:pAl];
     [_scene setCurrentUnitWithMacro:[self currentUnitToMacro]];
 }

@@ -1,7 +1,7 @@
 //
 //  GViewMyScene.m
 //  SpacePuzzle
-
+#import "SpacePuzzleController.h"
 #import "MainScene.h"
 #import "Macros.h"
 #import "Converter.h"
@@ -19,6 +19,7 @@
 #import "MovingPlatform.h"
 
 @implementation MainScene
+@synthesize controller = _controller;
 @synthesize solidTile = _solidTile;
 @synthesize crackedTile = _crackedTile;
 @synthesize voidTile = _voidTile;
@@ -51,7 +52,12 @@
 -(id)initWithSize:(CGSize)size {    
     if (self = [super initWithSize:size]) {
         /* Setup your scene here */
-        
+        _bigL = [SKSpriteNode spriteNodeWithImageNamed:@"AstroDown.png"];
+        _littleJohn = [SKSpriteNode spriteNodeWithImageNamed:@"AlienDown.png"];
+        _bigL.zPosition = 9999999;
+        _littleJohn.zPosition = 9999999;
+        [self addChild:_littleJohn];
+        [self addChild:_bigL];
         _currentUnit = _littleJohn;
         self.backgroundColor = [SKColor colorWithRed:0.15 green:0.15 blue:0.3 alpha:1.0];
         _solidTile = [SKTexture textureWithImageNamed:@"solidtile.png"];
@@ -186,22 +192,24 @@
     }
     
     [_currentUnit setZPosition:9999];
-    [_currentUnit runAction:action];
+    [_currentUnit runAction:action completion:^{
+        [_controller sceneFinishedMovingUnit];
+    }];
 }
 
 -(void)updateElementsAtPosition:(CGPoint)pos withArray:(NSMutableArray *)elArr {
-    Element *element;
     NSMutableArray *arr = [[NSMutableArray alloc] init];
-    // Remove sprites at position now...
+    NSNumber *index = [NSNumber numberWithInteger:pos.y*BOARD_SIZE_X+pos.x];
+    Element *element;
     
-    NSMutableArray *prevArr = [_elements objectForKey:element.key];
-    if(prevArr) {
+    NSMutableArray *prevArr = [_elements objectForKey:index];
+    if(prevArr.count > 0) {
         for (int i = 0; i < prevArr.count; i++) {
             SKSpriteNode *pS = [prevArr objectAtIndex:i];
             [pS removeFromParent];
         }
         [prevArr removeAllObjects];
-        [_elements removeObjectForKey:element.key];
+        [_elements removeObjectForKey:index];
     }
     
     for(int i = 0; i < elArr.count; i++) {
@@ -214,7 +222,10 @@
         [self addChild:s];
         [arr insertObject:s atIndex:i];
     }
-    [_elements setObject:arr forKey:element.key];
+    
+    if(elArr.count > 0) {
+        [_elements setObject:arr forKey:index];
+    }
 }
 
 // ADD STATE OF ELEMENT.
@@ -371,11 +382,9 @@
     pos.x += 20;
     pos.y -= 5;
     
-    _littleJohn = [SKSpriteNode spriteNodeWithImageNamed:@"AlienDown.png"];
     _littleJohn.position = pos;
     _littleJohn.size = CGSizeMake(TILESIZE,TILESIZE);
     
-    [self addChild:_littleJohn];
     _currentUnit = _littleJohn;
 }
 
@@ -384,11 +393,9 @@
     pos.x += 24;
     pos.y -= 5;
     
-    _bigL = [SKSpriteNode spriteNodeWithImageNamed:@"AstroDown.png"];
     _bigL.size = CGSizeMake(TILESIZE,TILESIZE);
     _bigL.position = pos;
     
-    [self addChild:_bigL];
     _currentUnit = _bigL;
 }
 
@@ -427,10 +434,14 @@
 }
 
 -(void)cleanScene {
-    /*
+    // IMPLEMENT!!!!!
+    
     for(id elm in _elements) {
-        SKSpriteNode *s = [_elements objectForKey:elm];
-        [s removeFromParent];
+        NSMutableArray *arr = [_elements objectForKey:elm];
+        for(int i = 0; i < arr.count; i++) {
+            SKSpriteNode *s = [arr objectAtIndex:i];
+            [s removeFromParent];
+        }
     }
     [_elements removeAllObjects];
     
@@ -439,7 +450,7 @@
         [s removeFromParent];
     }
     [_tiles removeAllObjects];
-    
+    /*
     if(_littleJohn)
         [_littleJohn removeFromParent];
     if(_bigL)

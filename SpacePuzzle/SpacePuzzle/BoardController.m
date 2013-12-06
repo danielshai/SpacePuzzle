@@ -36,6 +36,7 @@
     
     if([self isPointMovableTo:to] && ![Converter isPoint:to sameAsPoint:from]
            && [Converter isPoint:from NextToPoint:to]) {
+        NSLog(@"MOVE TO %f %f", to.x,to.y);
         // If |bigL| is standing on a cracked tile and moves away from it. This will destroy the tile,
         // making it void, and also destroying the item on it.
         if ([_board isPointCracked:from] && isAstronaut) {

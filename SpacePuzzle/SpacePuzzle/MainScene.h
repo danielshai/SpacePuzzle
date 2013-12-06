@@ -13,6 +13,7 @@
 @class SpacePuzzleController;
 
 @interface MainScene : SKScene
+@property (nonatomic, retain) SpacePuzzleController *controller;
 @property (nonatomic, retain) SKTexture *solidTile;
 @property (nonatomic, retain) SKTexture *crackedTile;
 @property (nonatomic, retain) SKTexture *voidTile;

@@ -61,6 +61,7 @@
 -(void)doActionOnBridgeButton: (Element*)button;
 -(void)doActionOnPlatformLever: (Element*)lever;
 -(BOOL)areUnitsOnFinish;
+-(void)sceneFinishedMovingUnit;
 -(void)setupBoard;
 -(void)setupElements;
 -(void)setupUnits;
