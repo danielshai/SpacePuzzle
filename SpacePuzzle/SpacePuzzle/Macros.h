@@ -27,7 +27,8 @@
 #define BRUSH_MOVING_PLATFORM   109
 #define BRUSH_PATH              110
 
-#define TIME_PER_FRAME          0.03
+#define TIME_PER_FRAME_UNIT_WALK 0.03
+#define TIME_PER_FRAME_BOX_MOVE 0.025
 
 #define TILESIZE                44
 #define BOARD_PIXEL_BEGIN_X     10 // The pixel value that the actual board begins at.

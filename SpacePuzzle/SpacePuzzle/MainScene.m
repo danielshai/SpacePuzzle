@@ -41,7 +41,7 @@
 @synthesize finish = _finish;
 @synthesize gui = _gui;
 @synthesize guiAstro = _guiAstro;
-@synthesize moveBox = _moveBox;
+@synthesize mBox = _mBox;
 
 -(id)initWithSize:(CGSize)size {    
     if (self = [super initWithSize:size]) {
@@ -102,39 +102,48 @@
 -(void)initScene {
     // Preloading Big L's walking animations.
     [SKTexture preloadTextures:BIGLWALK_ANIM_AUP withCompletionHandler:^(void){
-        SKAction *walk = [SKAction animateWithTextures:BIGLWALK_ANIM_AUP timePerFrame:TIME_PER_FRAME resize:NO restore:NO];
+        SKAction *walk = [SKAction animateWithTextures:BIGLWALK_ANIM_AUP timePerFrame:TIME_PER_FRAME_UNIT_WALK resize:NO restore:NO];
         _bWUp = [SKAction sequence:@[walk, walk, walk, walk]];
     }];
     [SKTexture preloadTextures:BIGLWALK_ANIM_ADOWN withCompletionHandler:^(void){
-        SKAction *walk = [SKAction animateWithTextures:BIGLWALK_ANIM_ADOWN timePerFrame:TIME_PER_FRAME resize:NO restore:NO];
+        SKAction *walk = [SKAction animateWithTextures:BIGLWALK_ANIM_ADOWN timePerFrame:TIME_PER_FRAME_UNIT_WALK resize:NO restore:NO];
         
         _bWDown = [SKAction sequence:@[walk, walk, walk, walk]];
     }];
     [SKTexture preloadTextures:BIGLWALK_ANIM_ARIGHT withCompletionHandler:^(void){
-        SKAction *walk = [SKAction animateWithTextures:BIGLWALK_ANIM_ARIGHT timePerFrame:TIME_PER_FRAME resize:NO restore:NO];
+        SKAction *walk = [SKAction animateWithTextures:BIGLWALK_ANIM_ARIGHT timePerFrame:TIME_PER_FRAME_UNIT_WALK resize:NO restore:NO];
         _bWRight = [SKAction sequence:@[walk, walk, walk, walk]];
     }];
     [SKTexture preloadTextures:BIGLWALK_ANIM_ALEFT withCompletionHandler:^(void){
-        SKAction *walk = [SKAction animateWithTextures:BIGLWALK_ANIM_ALEFT timePerFrame:TIME_PER_FRAME resize:NO restore:NO];
+        SKAction *walk = [SKAction animateWithTextures:BIGLWALK_ANIM_ALEFT timePerFrame:TIME_PER_FRAME_UNIT_WALK resize:NO restore:NO];
         _bWLeft = [SKAction sequence:@[walk, walk, walk, walk]];
     }];
     
     // Preloading Little Johns walking animations.
     [SKTexture preloadTextures:LITTLEJOHNWALK_ANIM_BUP withCompletionHandler:^(void){
-        SKAction *walk = [SKAction animateWithTextures:LITTLEJOHNWALK_ANIM_BUP timePerFrame:TIME_PER_FRAME];
+        SKAction *walk = [SKAction animateWithTextures:LITTLEJOHNWALK_ANIM_BUP timePerFrame:TIME_PER_FRAME_UNIT_WALK];
         _lWUp = [SKAction sequence:@[walk, walk, walk, walk]];
     }];
     [SKTexture preloadTextures:LITTLEJOHNWALK_ANIM_BDOWN withCompletionHandler:^(void){
-        SKAction *walk = [SKAction animateWithTextures:LITTLEJOHNWALK_ANIM_BDOWN timePerFrame:TIME_PER_FRAME];
+        SKAction *walk = [SKAction animateWithTextures:LITTLEJOHNWALK_ANIM_BDOWN timePerFrame:TIME_PER_FRAME_UNIT_WALK];
         _lWDown = [SKAction sequence:@[walk, walk, walk, walk]];
     }];
     [SKTexture preloadTextures:LITTLEJOHNWALK_ANIM_BRIGHT withCompletionHandler:^(void){
-        SKAction *walk = [SKAction animateWithTextures:LITTLEJOHNWALK_ANIM_BRIGHT timePerFrame:TIME_PER_FRAME];
+        SKAction *walk = [SKAction animateWithTextures:LITTLEJOHNWALK_ANIM_BRIGHT timePerFrame:TIME_PER_FRAME_UNIT_WALK];
         _lWRight = [SKAction sequence:@[walk, walk, walk, walk]];
     }];
     [SKTexture preloadTextures:LITTLEJOHNWALK_ANIM_BLEFT withCompletionHandler:^(void){
-        SKAction *walk = [SKAction animateWithTextures:LITTLEJOHNWALK_ANIM_BLEFT timePerFrame:TIME_PER_FRAME];
+        SKAction *walk = [SKAction animateWithTextures:LITTLEJOHNWALK_ANIM_BLEFT timePerFrame:TIME_PER_FRAME_UNIT_WALK];
         _lWLeft = [SKAction sequence:@[walk, walk, walk, walk]];
+    }];
+    
+    // Preloading Boxes moving animations.
+    NSArray *arr = [[NSArray alloc] init];
+    SKTexture *t = [SKTexture textureWithImageNamed:@"Box.png"];
+    arr = @[t,t,t,t];
+    [SKTexture preloadTextures:LITTLEJOHNWALK_ANIM_BLEFT withCompletionHandler:^(void){
+        SKAction *moveBox = [SKAction animateWithTextures:arr timePerFrame:TIME_PER_FRAME_BOX_MOVE];
+        _mBox = [SKAction sequence:@[moveBox, moveBox, moveBox, moveBox]];
     }];
 }
 
@@ -187,7 +196,6 @@
 -(void)moveElement:(CGPoint)oldCoord NewCoord:(CGPoint)newCoord {
     NSNumber *indexOrigin = [NSNumber numberWithFloat:oldCoord.y*BOARD_SIZE_X + oldCoord.x];
     NSNumber *indexNew = [NSNumber numberWithFloat:newCoord.y*BOARD_SIZE_X + newCoord.x];
-    Element *e = [_elements objectForKey:indexOrigin];
   //  NSLog(@"moving: %f %f %f %f", oldCoord.x,oldCoord.y,newCoord.x,newCoord.y);
     if(indexNew.integerValue == indexOrigin.integerValue) {
         return;
@@ -198,11 +206,12 @@
     newCoord = [Converter convertCoordToPixel:newCoord];
     // Converter does not take into account anchor point.
     newCoord.x += TILESIZE/2;
-    s.position = newCoord;
-    [_elements removeObjectForKey:indexOrigin];
-    if ([e isKindOfClass:[Box class]]) {
-        SKAction *mBox = [SKAction moveTo:newCoord duration:TIME_PER_FRAME*4];
-    }
+    SKAction *move = [SKAction moveTo:newCoord duration:_mBox.duration];
+    SKAction *action = [SKAction group:@[_mBox, move]];
+    [s runAction:action completion:^(void){
+        s.position = newCoord;
+        [_elements removeObjectForKey:indexOrigin];
+    }];
 }
 
 -(void)removeElementAtPosition:(NSNumber *)index {

@@ -122,7 +122,6 @@
         location.y -= 1;
         Position *pos = [[Position alloc] initWithX:location.x Y:location.y];
         [swipeArray addObject: pos];
-        NSLog(@"Stored Swiped Up at %d %d", pos.x, pos.y);
     }
 }
 
@@ -136,7 +135,6 @@
         location.y += 1;
         Position *pos = [[Position alloc] initWithX:location.x Y:location.y];
         [swipeArray addObject: pos];
-        NSLog(@"Stored Swiped Down at %d %d", pos.x, pos.y);
     }
 }
 
@@ -150,7 +148,6 @@
         location.x -= 1;
         Position *pos = [[Position alloc] initWithX:location.x Y:location.y];
         [swipeArray addObject: pos];
-        NSLog(@"Stored Swiped Left at %d %d", pos.x, pos.y);
     }
 }
 
@@ -164,14 +161,12 @@
         location.x += 1;
         Position *pos = [[Position alloc] initWithX:location.x Y:location.y];
         [swipeArray addObject: pos];
-        NSLog(@"Stored Swiped Right at %d %d", pos.x, pos.y);
     }
 }
 
 -(void)checkInteraction:(NSTimer *)time {
     if(![_scene hasActions]){
         for (int i = 0; i < swipeArray.count; i++) {
-            NSLog(@"TIMER MOVE");
             Position *pos = [swipeArray objectAtIndex:i];
             CGPoint nextLoc = CGPointMake(pos.x, pos.y);
             [self unitWantsToMoveTo:nextLoc WithSwipe:YES];
@@ -188,7 +183,7 @@
             [_scene changeUnit];
             NSLog(@"Change unit");
         }
-        NSLog(@"cant change, only L");
+        NSLog(@"Can't change, only L");
     } else if(_currentUnit == _littleJohn) {
         if([_bigL isPlayingOnLevel]) {
             _currentUnit = _bigL;
@@ -249,7 +244,6 @@
  *  Called when a unit wants to move to a location on the board. This method checks if the move is 
  *  possible, if so moves the unit. If unit moves to star, consume the star. */
 -(void)unitWantsToMoveTo:(CGPoint)loc WithSwipe:(BOOL)swipe {
-    NSLog(@"WANTS TO MOVE");
     // The position that the unit wants to move to.
     NSInteger x  = loc.x;
     NSInteger y = loc.y;
@@ -473,7 +467,6 @@
         ![Converter isPoint:finishPos sameAsPoint:nextPos]) {
         NSInteger intKey = [nextKey integerValue];
         NSInteger nextTile = [[[_board board] objectAtIndex:intKey] status];
-        NSLog(@"MOVE");
         CGPoint posPreMove = CGPointMake(rock.x, rock.y);
         [rock doMoveAction:dir];
 
