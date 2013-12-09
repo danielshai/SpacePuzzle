@@ -25,7 +25,10 @@
 -(void)takeStar: (Element*)star;
 -(BOOL)removeElement: (Element*)e FromBoardCoord: (BoardCoord*)bc;
 -(void)addElement: (Element*)e ToBoardCoord: (BoardCoord*)bc;
--(void)doActionOnBox: (Element*)rock InDirection: (NSInteger)dir OtherUnitPosition: (CGPoint)otherUnitPos;
+-(void)moveBox: (Element*)rock InDirection: (NSInteger)dir OtherUnitPosition: (CGPoint)otherUnitPos;
 -(void)doActionOnStarButton:(Element *)button OtherUnitPoint: (CGPoint)otherUnitPoint;
+-(void)doActionOnBoxSmash:(Element*)box;
+-(void)unitWantsToDoActionAt:(CGPoint)loc From: (CGPoint)from IsBigL: (BOOL)isBigL;
 -(void)boxMovedToPoint: (CGPoint)p FromPoint: (CGPoint)pFrom OtherUnitPos: (CGPoint)otherUnitPos;
+-(BoardCoord*) boardCoordForPoint: (CGPoint)p;
 @end

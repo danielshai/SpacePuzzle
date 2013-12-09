@@ -56,7 +56,11 @@
             if( ([eFrom isKindOfClass:[StarButton class]] || [eFrom isKindOfClass:[BridgeButton class]])
             && ![Converter isPoint:from sameAsPoint:otherUnitPoint]) {
                 // Buttons should be deactivated if left.
-                [eFrom unitLeft];
+                StarButton *sb = (StarButton*)eFrom;
+                [sb unitLeft];
+                CGPoint p = CGPointMake(sb.star.x, sb.star.y);
+                BoardCoord *bc = [self boardCoordForPoint:p];
+                [self.spController updateElementsAtPosition:p withArray:bc.elements];
             }
         }
     
@@ -77,20 +81,52 @@
         }
         return YES;
     }
-    BoardCoord *bcTo = [[_board board] objectAtIndex:[Converter CGPointToKey:to]];
+    BoardCoord *bcTo = [self boardCoordForPoint:to];
     
     for (int i = 0; i < bcTo.elements.count; i++) {
         Element *eTo = [[bcTo elements] objectAtIndex:i];
         if([eTo isKindOfClass:[Box class]] && swipe && isAstronaut) {
             // Point isn't movable to, but if unit is astronaut and element blocking is a box, move it!
             // |swipe| needs to be YES because moving boxes cannot be done by single tap.
-            [self doActionOnBox:eTo InDirection:dir OtherUnitPosition:otherUnitPoint];
+            [self moveBox:eTo InDirection:dir OtherUnitPosition:otherUnitPoint];
         }
     }
     return NO;
 }
 
--(void)doActionOnBox: (Element*)rock InDirection: (NSInteger)dir OtherUnitPosition:(CGPoint)otherUnitPos {
+-(BoardCoord*) boardCoordForPoint:(CGPoint)p {
+    return [[_board board] objectAtIndex:[Converter CGPointToKey:p]];
+}
+
+-(void)unitWantsToDoActionAt:(CGPoint)loc From:(CGPoint)from IsBigL:(BOOL)isBigL {
+    
+    BoardCoord *bc = [[_board board] objectAtIndex:[Converter CGPointToKey:loc]];
+    
+    for (int i = 0; i < bc.elements.count; i++) {
+        Element *e = [bc.elements objectAtIndex:i];
+        
+        if(e) {
+            if ([e isKindOfClass:[Box class]] && isBigL && [Converter isPoint:loc NextToPoint:from]){
+                [self doActionOnBoxSmash:e];
+            } else if ([e isKindOfClass:[StarButton class]] && [Converter isPoint:loc sameAsPoint:from]) {
+                //[self doActionOnStarButton:e];
+            } else if ([e isKindOfClass:[BridgeButton class]] && [Converter isPoint:from sameAsPoint:loc]) {
+                //       [self doActionOnBridgeButton:e];
+            } else if ([e isKindOfClass:[PlatformLever class]] && [Converter isPoint:from sameAsPoint:loc]) {
+                //       [self doActionOnPlatformLever:e];
+            }
+        }
+    }
+}
+
+-(void)doActionOnBoxSmash:(Element*)box {
+    CGPoint p = CGPointMake(box.x, box.y);
+    BoardCoord *bc = [[_board board] objectAtIndex:[Converter CGPointToKey:p]];
+    [self removeElement:box FromBoardCoord:bc];
+    [self.spController updateElementsAtPosition:p withArray:bc.elements];
+}
+
+-(void)moveBox: (Element*)rock InDirection: (NSInteger)dir OtherUnitPosition:(CGPoint)otherUnitPos {
     NSNumber *nextKey;
     CGPoint nextPos;
     NSMutableArray *eArray;
@@ -256,12 +292,10 @@
             return YES;
         }
     }
-    
     return NO;
 }
 
 -(NSMutableArray*)elementsAtPosition:(CGPoint)p {
-    // RETURN STRING REPRESENTATION OF CLASSES?
     return [[[_board board] objectAtIndex:[Converter CGPointToKey:p]] elements];
 }
 

@@ -308,6 +308,7 @@
 -(void)unitWantsToDoActionAt:(CGPoint)loc {
     NSInteger x = loc.x;
     NSInteger y = loc.y;
+    
 
     NSNumber *actionPointKey = [NSNumber numberWithInt:y*BOARD_SIZE_X + x];
     NSInteger unitX = _currentUnit.x;
@@ -318,12 +319,12 @@
  
     Element *e = [[_board elementDictionary] objectForKey:actionPointKey];
     // If the element exists.
-    if(e) {
+    /*if(e) {
         // Do action depending on element type and current unit.
-        /*if ([e isKindOfClass:[Box class]] && _currentUnit == _bigL && [Converter isPoint:actionPoint NextToPoint:unitPoint]) {
+        if ([e isKindOfClass:[Box class]] && _currentUnit == _bigL && [Converter isPoint:actionPoint NextToPoint:unitPoint]) {
             NSInteger dir = [Converter convertCoordsTo:actionPoint Direction:unitPoint];
             [self doActionOnBox:e InDirection:dir];
-        } else*/
+        } else
         
         if ([e isKindOfClass:[Box class]] && _currentUnit == _bigL && [Converter isPoint:unitPoint NextToPoint:actionPoint]){
             [self doActionOnBoxSmash:e];
@@ -334,7 +335,8 @@
         } else if ([e isKindOfClass:[PlatformLever class]] && [Converter isPoint:unitPoint sameAsPoint:actionPoint]) {
             [self doActionOnPlatformLever:e];
         }
-    }
+    }*/
+    [_boardController unitWantsToDoActionAt:loc From:unitPoint IsBigL:_currentUnit == _bigL];
 }
 
 -(void)doActionOnBoxSmash:(Element*)box {
@@ -611,8 +613,6 @@
     p.x += TILESIZE/2;
     p.y -= 2;
     [_scene finish].position = p;
-    
-    // Elements in scene.
 }
 
 /*
@@ -626,7 +626,6 @@
 }
 
 -(void)updateElementsAtPosition:(CGPoint)pos withArray:(NSMutableArray *)elArr {
-    NSLog(@"UPDATE AT: %f %f",pos.x,pos.y);
     [_scene updateElementsAtPosition:pos withArray:elArr];
 }
 

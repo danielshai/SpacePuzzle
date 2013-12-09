@@ -263,6 +263,7 @@
     } else if([e isKindOfClass:[MovingPlatform class]]) {
         return _buttonOff;
     }
+
     return nil;
 }
 
