@@ -65,6 +65,7 @@
 -(void)changeUnit;
 -(void)setCurrentUnitWithMacro: (NSInteger)unit;
 -(void)cleanScene;
+-(void)starTakenAtPosition: (NSNumber*)index;
 -(SKTexture*)updateSpriteWith:(NSString *) name State: (BOOL)state;
 
 @end

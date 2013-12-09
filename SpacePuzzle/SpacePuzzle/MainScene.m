@@ -272,6 +272,12 @@
     }
 }
 
+-(void)starTakenAtPosition:(NSNumber *)index {
+    SKSpriteNode *star = [_elements objectForKey:index];
+    
+    [self removeElementAtPosition:index];
+}
+
 -(void)removeElementAtPosition:(NSNumber *)index {
     SKSpriteNode* s = [_elements objectForKey:index];
     [s removeFromParent];
