@@ -204,8 +204,10 @@
     
     NSMutableArray *prevArr = [_elements objectForKey:index];
     if(prevArr.count > 0) {
+     
         for (int i = 0; i < prevArr.count; i++) {
             SKSpriteNode *pS = [prevArr objectAtIndex:i];
+            
             [pS removeFromParent];
         }
         [prevArr removeAllObjects];
@@ -219,6 +221,7 @@
         pos = [Converter convertCoordToPixel:pos];
         pos.x += TILESIZE/2;
         s.position = pos;
+        s.hidden = element.hidden;
         [self addChild:s];
         [arr insertObject:s atIndex:i];
     }
@@ -235,7 +238,12 @@
     } else if([e isKindOfClass:[Star class]]) {
         return _star;
     } else if([e isKindOfClass:[StarButton class]]) {
-        return _buttonOff;
+        StarButton *sb = (StarButton*)e;
+        if(sb.state) {
+            return _buttonOn;
+        } else {
+            return _buttonOff;
+        }
     } else if([e isKindOfClass:[BridgeButton class]]) {
         return _buttonOff;
     } else if([e isKindOfClass:[Bridge class]]) {

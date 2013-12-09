@@ -45,8 +45,9 @@
     _scene.controller = self;
     _scene.scaleMode = SKSceneScaleModeAspectFill;
     
-    [LoadSaveFile saveFileWithWorld:0 andLevel:1];
+    [LoadSaveFile saveFileWithWorld:0 andLevel:5];
     _boardController = [[BoardController alloc] init];
+    _boardController.spController = self;
     
     [self setupNextLevel];
     
@@ -243,10 +244,10 @@
         _currentUnit.x = x;
         _currentUnit.y = y;
         [_scene updateUnit:to inDirection:dir];
-        [_scene updateElementsAtPosition:from withArray:[_boardController elementsAtPosition:from]];
-        [_scene updateElementsAtPosition:to withArray:[_boardController elementsAtPosition:to]];
+        [_scene refreshTileAtPosition:from WithStatus:[_boardController getBoardStatusAtPosition:from]];
     }
-     
+    [_scene updateElementsAtPosition:from withArray:[_boardController elementsAtPosition:from]];
+    [_scene updateElementsAtPosition:to withArray:[_boardController elementsAtPosition:to]];
 
         // UPDATE ELEMENTS AT from AND to
         /* ---------------------------------------------------------------------------------------------
@@ -622,6 +623,11 @@
 
 -(BOOL)shouldAutorotate {
     return YES;
+}
+
+-(void)updateElementsAtPosition:(CGPoint)pos withArray:(NSMutableArray *)elArr {
+    NSLog(@"UPDATE AT: %f %f",pos.x,pos.y);
+    [_scene updateElementsAtPosition:pos withArray:elArr];
 }
 
 -(NSUInteger)supportedInterfaceOrientations {

@@ -107,7 +107,6 @@
             if ([[posArray objectAtIndex:i] isKindOfClass:[Star class]]) {
                 _originalNumberOfStars++;
             }
-            NSLog(@"Loaded element: %@ at %d",[posArray objectAtIndex:i], index);
         }
     }
 }

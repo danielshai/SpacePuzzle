@@ -18,6 +18,7 @@
 #import "Bridge.h"
 #import "PlatformLever.h"
 #import "MovingPlatform.h"
+#import "SpacePuzzleController.h"
 
 @implementation BoardController
 @synthesize board = _board;
@@ -36,7 +37,6 @@
     
     if([self isPointMovableTo:to] && ![Converter isPoint:to sameAsPoint:from]
            && [Converter isPoint:from NextToPoint:to]) {
-        NSLog(@"MOVE TO %f %f", to.x,to.y);
         // If |bigL| is standing on a cracked tile and moves away from it. This will destroy the tile,
         // making it void, and also destroying the item on it.
         if ([_board isPointCracked:from] && isAstronaut) {
@@ -70,7 +70,7 @@
                 [self takeStar:eTo];
                 [bcTo.elements removeObject:eTo];
             } else if([eTo isKindOfClass:[StarButton class]]) {
-       //     [self doActionOnStarButton:eTo];
+                [self doActionOnStarButton:eTo OtherUnitPoint:otherUnitPoint];
             } else if([eTo isKindOfClass:[BridgeButton class]]) {
       //      [self doActionOnBridgeButton:eTo];
             }
@@ -93,65 +93,107 @@
 -(void)doActionOnBox: (Element*)rock InDirection: (NSInteger)dir OtherUnitPosition:(CGPoint)otherUnitPos {
     NSNumber *nextKey;
     CGPoint nextPos;
-    Element *e;
+    NSMutableArray *eArray;
     NSNumber *elementKey = [NSNumber numberWithInteger:rock.y*BOARD_SIZE_X + rock.x];
-    
+    CGPoint rockPoint = CGPointMake(rock.x, rock.y);
+    BoardCoord *bcFrom = [[_board board] objectAtIndex:[Converter CGPointToKey:rockPoint]];
+    NSLog(@"MOVE BOX");
     if (dir == RIGHT) {
         // Check if at the edge of the board, if so do nothing.
         if(rock.x >= BOARD_SIZE_X-1) {
             return;
         }
         nextKey = [NSNumber numberWithInt:rock.y*BOARD_SIZE_X + rock.x + 1];
-        e = [[_board elementDictionary] objectForKey:nextKey];
         nextPos = CGPointMake(rock.x + 1, rock.y);
+        BoardCoord *bcNext = [[_board board] objectAtIndex:[Converter CGPointToKey:nextPos]];
+        eArray = [bcNext elements];
+        
     } else if (dir == LEFT) {
         if(rock.x <= 0) {
             return;
         }
         nextKey = [NSNumber numberWithInt:rock.y*BOARD_SIZE_X + rock.x - 1];
-        e = [[_board elementDictionary] objectForKey:nextKey];
-        nextPos = CGPointMake(rock.x - 1, rock.y);
+        nextPos = CGPointMake(rock.x-1, rock.y);
+        BoardCoord *bcNext = [[_board board] objectAtIndex:[Converter CGPointToKey:nextPos]];
+        eArray = [bcNext elements];
     } else if (dir == UP) {
         if(rock.y <= 0) {
             return;
         }
-        nextKey = [NSNumber numberWithInt:(rock.y - 1)*BOARD_SIZE_X + rock.x];
-        e = [[_board elementDictionary] objectForKey:nextKey];
-        nextPos = CGPointMake(rock.x, rock.y - 1);
+        nextKey = [NSNumber numberWithInt:(rock.y-1)*BOARD_SIZE_X + rock.x];
+        nextPos = CGPointMake(rock.x, rock.y-1);
+        BoardCoord *bcNext = [[_board board] objectAtIndex:[Converter CGPointToKey:nextPos]];
+        eArray = [bcNext elements];
     } else if (dir == DOWN){
         if(rock.y >= BOARD_SIZE_Y-1) {
             return;
         }
-        nextKey = [NSNumber numberWithInt:(rock.y + 1)*BOARD_SIZE_X + rock.x];
-        e = [[_board elementDictionary] objectForKey:nextKey];
-        nextPos = CGPointMake(rock.x, rock.y + 1);
+        nextKey = [NSNumber numberWithInt:(rock.y+1)*BOARD_SIZE_X + rock.x];
+        nextPos = CGPointMake(rock.x, rock.y+1);
+        BoardCoord *bcNext = [[_board board] objectAtIndex:[Converter CGPointToKey:nextPos]];
+        eArray = [bcNext elements];
     }
     // Add more elements which cannot be pushed upon to if-statement.
     // ![e isKindOfClass:[Box class]] ---> !e isBlocking
     CGPoint finishPos = CGPointMake([_board finishPos].x, [_board finishPos].y);
     
-    if (![e isKindOfClass:[Box class]] && ![Converter isPoint:nextPos sameAsPoint:otherUnitPos] &&
-        ![Converter isPoint:finishPos sameAsPoint:nextPos]) {
-        NSInteger intKey = [nextKey integerValue];
-        NSInteger nextTile = [[[_board board] objectAtIndex:intKey] status];
-        
-        CGPoint posPreMove = CGPointMake(rock.x, rock.y);
-        [rock doMoveAction:dir];
-        
-        if(nextTile != MAPSTATUS_SOLID) {
-            [[_board elementDictionary] removeObjectForKey:elementKey];
-            if(nextTile == MAPSTATUS_CRACKED) {
-                [[_board elementDictionary] removeObjectForKey:nextKey];
-                [[[_board board] objectAtIndex:intKey] setStatus:MAPSTATUS_VOID];
-            }
-        } else {
-            NSNumber *index = [NSNumber numberWithInteger:nextPos.y * BOARD_SIZE_X + nextPos.x];
-            // CHANGE THIS WHEN TWO OR MORE OBJECTS CAN BE PLACED ON THE SAME TILE!
-            [[_board elementDictionary] removeObjectForKey:index];
-            [_board moveElementFrom:posPreMove To:nextPos];
+    for(int i = 0; i < eArray.count; i++) {
+        Element *e = [eArray objectAtIndex:i];
+        if ([e isKindOfClass:[Box class]] || [Converter isPoint:nextPos sameAsPoint:otherUnitPos] ||
+            [Converter isPoint:finishPos sameAsPoint:nextPos]) {
+                return;
         }
-        //nextTile should invoke its "doAction"...
     }
+    
+    // Move can be made.
+    NSInteger intKey = [nextKey integerValue];
+    NSInteger nextTile = [[[_board board] objectAtIndex:intKey] status];
+
+    CGPoint posPreMove = CGPointMake(rock.x, rock.y);
+
+    [rock doMoveAction:dir];
+    
+    // Remove rock from bcFrom
+    [self removeElement:rock FromBoardCoord:bcFrom];
+    // Add rock to bcTo
+    
+    NSLog(@"From %f %f",posPreMove.x,posPreMove.y);
+    [self.spController updateElementsAtPosition:posPreMove withArray:bcFrom.elements];
+    rockPoint = CGPointMake(rock.x, rock.y);
+    BoardCoord *bcMovedTo = [[_board board] objectAtIndex:[Converter CGPointToKey:rockPoint]];
+    [self.spController updateElementsAtPosition:rockPoint withArray:bcMovedTo.elements];
+    
+/*
+    if(nextTile != MAPSTATUS_SOLID) {
+        [[_board elementDictionary] removeObjectForKey:elementKey];
+        if(nextTile == MAPSTATUS_CRACKED) {
+            [[_board elementDictionary] removeObjectForKey:nextKey];
+            [[[_board board] objectAtIndex:intKey] setStatus:MAPSTATUS_VOID];
+    }
+    } else {
+        NSNumber *index = [NSNumber numberWithInteger:nextPos.y * BOARD_SIZE_X + nextPos.x];
+        // CHANGE THIS WHEN TWO OR MORE OBJECTS CAN BE PLACED ON THE SAME TILE!
+        [[_board elementDictionary] removeObjectForKey:index];
+        [_board moveElementFrom:posPreMove To:nextPos];
+ */
+}
+
+-(void)doActionOnStarButton:(Element *)button OtherUnitPoint:(CGPoint)otherUnitPoint {
+    StarButton *sb = (StarButton*)button;
+    [sb movedTo];
+    CGPoint starPos = CGPointMake(sb.star.x, sb.star.y);
+    // Updates the star connected to the button on the scene, i.e. showing it.
+    if(!sb.star.taken) {
+        
+
+        // If the other unit is standing on the same spot as the star and button is on the star should be
+        // taken by the player.
+        if([Converter isPoint:starPos sameAsPoint:otherUnitPoint] && sb.state) {
+            [self takeStar:sb.star];
+        }
+    }
+    BoardCoord *bcStar = [[_board board] objectAtIndex:[Converter CGPointToKey:starPos]];
+    [self.spController updateElementsAtPosition:starPos withArray:bcStar.elements];
 }
 
 -(void)setupBoardWithWorld: (NSInteger)world AndLevel: (NSInteger)level {
@@ -168,6 +210,18 @@
     NSLog(@"p %@", currentLevel);
     [_board loadBoard:path];
     _starsLeft = [_board originalNumberOfStars];
+}
+
+-(BOOL)removeElement: (Element*)e FromBoardCoord: (BoardCoord*)bc {
+    for (int i = 0; i < bc.elements.count; i++) {
+        Element *eBc = [bc.elements objectAtIndex:i];
+        if(eBc == e) {
+            [bc.elements removeObjectAtIndex:i];
+            return YES;
+        }
+    }
+    
+    return NO;
 }
 
 -(NSMutableArray*)elementsAtPosition:(CGPoint)p {

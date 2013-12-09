@@ -71,6 +71,7 @@
 -(void)getNextLevel;
 -(void)setupNextLevel;
 -(void)takeStar: (Star*)star;
+-(void)updateElementsAtPosition: (CGPoint)pos withArray: (NSMutableArray*)elArr;
 -(NSInteger)currentUnitToMacro;
 -(IBAction)restartAction:(id)sender;
 -(NSArray*)getDataFromNotification:(NSNotification*) notif Key: (NSString*) key;

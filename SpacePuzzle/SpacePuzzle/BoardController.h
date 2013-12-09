@@ -9,10 +9,13 @@
 #import <Foundation/Foundation.h>
 @class Board;
 @class Element;
+@class SpacePuzzleController;
+@class BoardCoord;
 
 @interface BoardController : NSObject
 @property (nonatomic, retain) Board *board;
 @property (nonatomic, assign) NSInteger starsLeft;
+@property (nonatomic, retain) SpacePuzzleController *spController;
 
 -(void) setupBoardWithWorld: (NSInteger)world AndLevel: (NSInteger)level;
 -(BOOL) unitWantsToMoveFrom: (CGPoint)from To: (CGPoint)to WithSwipe: (BOOL)swipe UnitWasAstronatut: (BOOL)isAstronaut OtherUnitPosition: (CGPoint)otherUnitPoint;
@@ -20,5 +23,7 @@
 -(BOOL) isPointMovableTo: (CGPoint)p;
 -(NSMutableArray*) elementsAtPosition: (CGPoint)p;
 -(void)takeStar: (Element*)star;
+-(BOOL)removeElement: (Element*)e FromBoardCoord: (BoardCoord*)bc;
 -(void)doActionOnBox: (Element*)rock InDirection: (NSInteger)dir OtherUnitPosition: (CGPoint)otherUnitPos;
+-(void)doActionOnStarButton:(Element *)button OtherUnitPoint: (CGPoint)otherUnitPoint;
 @end
