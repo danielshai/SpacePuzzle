@@ -94,10 +94,9 @@
     NSNumber *nextKey;
     CGPoint nextPos;
     NSMutableArray *eArray;
-    NSNumber *elementKey = [NSNumber numberWithInteger:rock.y*BOARD_SIZE_X + rock.x];
     CGPoint rockPoint = CGPointMake(rock.x, rock.y);
     BoardCoord *bcFrom = [[_board board] objectAtIndex:[Converter CGPointToKey:rockPoint]];
-    NSLog(@"MOVE BOX");
+
     if (dir == RIGHT) {
         // Check if at the edge of the board, if so do nothing.
         if(rock.x >= BOARD_SIZE_X-1) {
@@ -137,31 +136,38 @@
     // ![e isKindOfClass:[Box class]] ---> !e isBlocking
     CGPoint finishPos = CGPointMake([_board finishPos].x, [_board finishPos].y);
     
+    // Check the board of the next position. If the box cannot be moved there, return without moving.
+    if([Converter isPoint:nextPos sameAsPoint:otherUnitPos] ||
+       [Converter isPoint:finishPos sameAsPoint:nextPos]) {
+        return;
+    }
+    
+    // Do same for element array.
     for(int i = 0; i < eArray.count; i++) {
         Element *e = [eArray objectAtIndex:i];
-        if ([e isKindOfClass:[Box class]] || [Converter isPoint:nextPos sameAsPoint:otherUnitPos] ||
-            [Converter isPoint:finishPos sameAsPoint:nextPos]) {
-                return;
+        if ([e blocking]) {
+            return;
         }
     }
     
-    // Move can be made.
-    NSInteger intKey = [nextKey integerValue];
-    NSInteger nextTile = [[[_board board] objectAtIndex:intKey] status];
-
     CGPoint posPreMove = CGPointMake(rock.x, rock.y);
 
+    // Do the move on the box.
     [rock doMoveAction:dir];
-    
-    // Remove rock from bcFrom
-    [self removeElement:rock FromBoardCoord:bcFrom];
-    // Add rock to bcTo
-    
-    NSLog(@"From %f %f",posPreMove.x,posPreMove.y);
-    [self.spController updateElementsAtPosition:posPreMove withArray:bcFrom.elements];
     rockPoint = CGPointMake(rock.x, rock.y);
     BoardCoord *bcMovedTo = [[_board board] objectAtIndex:[Converter CGPointToKey:rockPoint]];
+    
+    // Remove rock from bcFrom.
+    [self removeElement:rock FromBoardCoord:bcFrom];
+    NSInteger nextTile = [[[_board board] objectAtIndex:[Converter CGPointToKey:rockPoint]] status];
+    
+    if(nextTile == MAPSTATUS_SOLID) {
+        [self addElement:rock ToBoardCoord:bcMovedTo];
+        [self boxMovedToPoint:rockPoint FromPoint:posPreMove OtherUnitPos:otherUnitPos];
+    }
+    
     [self.spController updateElementsAtPosition:rockPoint withArray:bcMovedTo.elements];
+    [self.spController updateElementsAtPosition:posPreMove withArray:bcFrom.elements];
     
 /*
     if(nextTile != MAPSTATUS_SOLID) {
@@ -178,14 +184,38 @@
  */
 }
 
+/* 
+ *  A box was moved to a point. Check if there's any interaction between box and other elements 
+ *  available. */
+-(void)boxMovedToPoint:(CGPoint)p FromPoint:(CGPoint)pFrom OtherUnitPos:(CGPoint)otherUnitPos {
+    BoardCoord *bc = [[_board board] objectAtIndex:[Converter CGPointToKey:p]];
+    BoardCoord *bcFrom = [[_board board] objectAtIndex:[Converter CGPointToKey:pFrom]];
+    
+    for (int i = 0; i < bc.elements.count; i++) {
+        Element *e = [bc.elements objectAtIndex:i];
+        if([e isKindOfClass:[StarButton class]]) {
+            [self doActionOnStarButton:e OtherUnitPoint:otherUnitPos];
+            [self.spController updateElementsAtPosition:p withArray:bc.elements];
+        }
+        // ADD MORE BUTTONS ETC.
+    }
+    
+    for (int i = 0; i < bcFrom.elements.count; i++) {
+        Element *e = [bcFrom.elements objectAtIndex:i];
+        if([e isKindOfClass:[StarButton class]]) {
+            [e unitLeft];
+            [self.spController updateElementsAtPosition:pFrom withArray:bcFrom.elements];
+        }
+    }
+}
+
 -(void)doActionOnStarButton:(Element *)button OtherUnitPoint:(CGPoint)otherUnitPoint {
     StarButton *sb = (StarButton*)button;
     [sb movedTo];
     CGPoint starPos = CGPointMake(sb.star.x, sb.star.y);
+    CGPoint buttonPos = CGPointMake(sb.x, sb.y);
     // Updates the star connected to the button on the scene, i.e. showing it.
     if(!sb.star.taken) {
-        
-
         // If the other unit is standing on the same spot as the star and button is on the star should be
         // taken by the player.
         if([Converter isPoint:starPos sameAsPoint:otherUnitPoint] && sb.state) {
@@ -193,7 +223,9 @@
         }
     }
     BoardCoord *bcStar = [[_board board] objectAtIndex:[Converter CGPointToKey:starPos]];
+    BoardCoord *bcButton = [[_board board] objectAtIndex:[Converter CGPointToKey:buttonPos]];
     [self.spController updateElementsAtPosition:starPos withArray:bcStar.elements];
+    [self.spController updateElementsAtPosition:buttonPos withArray:bcButton.elements];
 }
 
 -(void)setupBoardWithWorld: (NSInteger)world AndLevel: (NSInteger)level {
@@ -210,6 +242,10 @@
     NSLog(@"p %@", currentLevel);
     [_board loadBoard:path];
     _starsLeft = [_board originalNumberOfStars];
+}
+
+-(void)addElement:(Element *)e ToBoardCoord:(BoardCoord *)bc {
+    [bc.elements addObject:e];
 }
 
 -(BOOL)removeElement: (Element*)e FromBoardCoord: (BoardCoord*)bc {

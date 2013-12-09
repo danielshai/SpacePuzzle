@@ -68,5 +68,6 @@
 -(void)cleanScene;
 -(SKTexture*)getTextureForElement: (Element*)e;
 -(SKTexture*)updateSpriteWith:(NSString *) name State: (BOOL)state;
+-(CGSize)sizeForElement: (Element*)e;
 
 @end

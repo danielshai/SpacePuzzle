@@ -207,7 +207,6 @@
      
         for (int i = 0; i < prevArr.count; i++) {
             SKSpriteNode *pS = [prevArr objectAtIndex:i];
-            
             [pS removeFromParent];
         }
         [prevArr removeAllObjects];
@@ -217,17 +216,28 @@
     for(int i = 0; i < elArr.count; i++) {
         element = [elArr objectAtIndex:i];
         SKSpriteNode *s = [SKSpriteNode spriteNodeWithTexture:[self getTextureForElement:element]];
-        s.size = CGSizeMake(TILESIZE, TILESIZE);
-        pos = [Converter convertCoordToPixel:pos];
-        pos.x += TILESIZE/2;
-        s.position = pos;
+        s.size = [self sizeForElement:element];
+        CGPoint pos2 = [Converter convertCoordToPixel:pos];
+        pos2.x += TILESIZE/2;
+        s.position = pos2;
         s.hidden = element.hidden;
+        s.zPosition = i;
         [self addChild:s];
         [arr insertObject:s atIndex:i];
     }
     
     if(elArr.count > 0) {
         [_elements setObject:arr forKey:index];
+    }
+}
+
+/*
+ *  Gets size for en element. */
+-(CGSize)sizeForElement:(Element *)e {
+    if([e isKindOfClass:[Box class]]) {
+        return CGSizeMake(TILESIZE-8, TILESIZE-8);
+    } else {
+        return CGSizeMake(TILESIZE, TILESIZE);
     }
 }
 
