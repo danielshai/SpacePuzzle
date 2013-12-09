@@ -43,7 +43,7 @@
     _scene = [MainScene sceneWithSize:skView.bounds.size];
     _scene.scaleMode = SKSceneScaleModeAspectFill;
     
-    [LoadSaveFile saveFileWithWorld:0 andLevel:1];
+    [LoadSaveFile saveFileWithWorld:0 andLevel:5];
     _board = [[Board alloc] init];
     [self setupNextLevel];
     
@@ -471,9 +471,10 @@
         [rock doMoveAction:dir];
 
         if(nextTile != MAPSTATUS_SOLID) {
-            [[_board elementDictionary] removeObjectForKey:elementKey];
-            [_scene removeElementAtPosition:elementKey];
-            if(nextTile == MAPSTATUS_CRACKED) {
+            if(nextTile == MAPSTATUS_VOID){
+                [[_board elementDictionary] removeObjectForKey:elementKey];
+                [_scene moveElement:posPreMove NewCoord:nextPos Onto:nextTile InDir:dir];
+            } else if(nextTile == MAPSTATUS_CRACKED) {
                 [[_board elementDictionary] removeObjectForKey:nextKey];
                 [_scene removeElementAtPosition:nextKey];
                 [[[_board board] objectAtIndex:intKey] setStatus:MAPSTATUS_VOID];
@@ -485,7 +486,7 @@
             [[_board elementDictionary] removeObjectForKey:index];
             [_board moveElementFrom:posPreMove To:nextPos];
             [_scene removeElementAtPosition:index];
-            [_scene moveElement:posPreMove NewCoord:nextPos];
+            [_scene moveElement:posPreMove NewCoord:nextPos Onto:nextTile InDir:dir];
         }
         //nextTile should invoke its "doAction"...
     }
@@ -569,7 +570,7 @@
     // Check if unit is on platform, if so move it.
     NSLog(@"%ld %ld", (long)_bigL.x, (long)_bigL.y);
     
-    [_scene moveElement:prevPoint NewCoord:CGPointMake(mp.x, mp.y)];
+    [_scene moveElement:prevPoint NewCoord:CGPointMake(mp.x, mp.y) Onto:MAPSTATUS_SOLID InDir:0];
 }
 
 -(void)takeStar:(Star *)star {

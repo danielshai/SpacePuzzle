@@ -55,7 +55,7 @@
 -(void)refreshTileAtFlatIndex: (NSInteger)findex WithStatus:(NSInteger)status;
 -(void)refreshElementAtPosition: (NSNumber*)index OfClass:(NSString*)name WithStatus:(BOOL)on;
 -(void)setElementAtPosition: (NSNumber*) index IsHidden: (BOOL)hidden;
--(void)moveElement: (CGPoint)oldCoord NewCoord: (CGPoint)newCoord;
+-(void)moveElement: (CGPoint)oldCoord NewCoord: (CGPoint)newCoord Onto:(NSInteger)status InDir:(NSInteger)direction;
 -(void)removeElementAtPosition: (NSNumber*)index;
 -(void)setupBoardX: (NSInteger)x Y: (NSInteger)y Status: (NSInteger)status;
 -(void)setupElement: (CGPoint)coord Name: (NSString*)className Hidden: (BOOL)hidden;
