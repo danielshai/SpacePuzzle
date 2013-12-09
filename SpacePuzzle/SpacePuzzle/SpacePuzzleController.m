@@ -306,36 +306,11 @@
  *  Called when a unit (i.e. the user) wants to do an action. First checks if the action is possible,
  *  then chooses an action based on what element the action is performed on. */
 -(void)unitWantsToDoActionAt:(CGPoint)loc {
-    NSInteger x = loc.x;
-    NSInteger y = loc.y;
-    
-
-    NSNumber *actionPointKey = [NSNumber numberWithInt:y*BOARD_SIZE_X + x];
     NSInteger unitX = _currentUnit.x;
     NSInteger unitY = _currentUnit.y;
     
     CGPoint unitPoint = CGPointMake(unitX, unitY);
-    CGPoint actionPoint = CGPointMake(x, y);
- 
-    Element *e = [[_board elementDictionary] objectForKey:actionPointKey];
-    // If the element exists.
-    /*if(e) {
-        // Do action depending on element type and current unit.
-        if ([e isKindOfClass:[Box class]] && _currentUnit == _bigL && [Converter isPoint:actionPoint NextToPoint:unitPoint]) {
-            NSInteger dir = [Converter convertCoordsTo:actionPoint Direction:unitPoint];
-            [self doActionOnBox:e InDirection:dir];
-        } else
-        
-        if ([e isKindOfClass:[Box class]] && _currentUnit == _bigL && [Converter isPoint:unitPoint NextToPoint:actionPoint]){
-            [self doActionOnBoxSmash:e];
-        } else if ([e isKindOfClass:[StarButton class]] && [Converter isPoint:unitPoint sameAsPoint:actionPoint]) {
-            //[self doActionOnStarButton:e];
-        } else if ([e isKindOfClass:[BridgeButton class]] && [Converter isPoint:unitPoint sameAsPoint:actionPoint]) {
-            [self doActionOnBridgeButton:e];
-        } else if ([e isKindOfClass:[PlatformLever class]] && [Converter isPoint:unitPoint sameAsPoint:actionPoint]) {
-            [self doActionOnPlatformLever:e];
-        }
-    }*/
+    
     [_boardController unitWantsToDoActionAt:loc From:unitPoint IsBigL:_currentUnit == _bigL];
 }
 
