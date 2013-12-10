@@ -149,18 +149,18 @@
         SKAction *moveBox = [SKAction animateWithTextures:arr timePerFrame:TIME_PER_FRAME_BOX_MOVE];
         _mBox = [SKAction sequence:@[moveBox, moveBox, moveBox, moveBox]];
     }];
-    /*
+    
     // Preloading the Stars moving animations.
     [SKTexture preloadTextures:STARONTILE_ANIM_MOVING withCompletionHandler:^(void){
-        SKAction *moveStar = [SKAction animateWithTextures:STARONTILE_ANIM_MOVING timePerFrame:0.05];
+        SKAction *moveStar = [SKAction animateWithTextures:STARONTILE_ANIM_MOVING timePerFrame:0.15];
         _mStar = [SKAction repeatActionForever:moveStar];
     }];
     
     // Preloading the Stars taken animations.
     [SKTexture preloadTextures:STARTAKEN_ANIM_STARTAKEN withCompletionHandler:^(void){
-        SKAction *takenStar = [SKAction animateWithTextures:STARTAKEN_ANIM_STARTAKEN timePerFrame:0.02];
+        SKAction *takenStar = [SKAction animateWithTextures:STARTAKEN_ANIM_STARTAKEN timePerFrame:0.02 resize:NO restore:NO];
         _tStar = [SKAction sequence:@[takenStar]];
-    }];*/
+    }];
 }
 
 /*
@@ -290,18 +290,21 @@
 
 -(void)starTakenAtPosition:(NSNumber *)index CurrentTaken:(NSInteger)taken {
     SKSpriteNode *star = [_elements objectForKey:index];
-    SKAction *move;
+    SKAction *moveToBar;
+    SKAction *moveUpwards = [SKAction moveTo:CGPointMake(star.position.x, (star.position.y + 40)) duration:1.0];
     
     if (taken == 1) {
         // Fixating the stars to their correct positions.
-        move = [SKAction moveTo:CGPointMake(140, 470-17) duration:1];
+        moveToBar = [SKAction moveTo:CGPointMake(140, 470-17) duration:1];
     } else if (taken == 2) {
-        move = [SKAction moveTo:CGPointMake(162, 453) duration:1];
+        moveToBar = [SKAction moveTo:CGPointMake(162, 453) duration:1];
     } else {
-        move = [SKAction moveTo:CGPointMake(184, 453) duration:1];
+        moveToBar = [SKAction moveTo:CGPointMake(184, 453) duration:1];
     }
-//    SKAction *action = [SKAction group:@[_tStar, move]];
-//    [star runAction:action];
+    SKAction *action = [SKAction group:@[_tStar, moveToBar]];
+    [star runAction:moveUpwards completion:^(void){
+        [star runAction:action];
+    }];
     //[self removeElementAtPosition:index];
 }
 
@@ -411,6 +414,10 @@
     NSNumber *nr = [NSNumber numberWithInt:coord.y*BOARD_SIZE_X + coord.x];
     [_elements setObject:sprite forKey:nr];
     sprite.hidden = hidden;
+    
+    if ([className isEqualToString:@"Star"]) {
+        [sprite runAction:_mStar];
+    }
     
     [self addChild:sprite];
 }
