@@ -255,10 +255,6 @@
 		7797AC1E183CE9F500E63E95 /* Elements */ = {
 			isa = PBXGroup;
 			children = (
-				77F122E31855F915005A595F /* Box2.png */,
-				77F122E41855F915005A595F /* Box3.png */,
-				77F122E51855F915005A595F /* Box4.png */,
-				77F122E61855F915005A595F /* Box5.png */,
 				E60DA7791848A2350088AB3D /* BridgeButton.png */,
 				E60DA77A1848A2350088AB3D /* StarButton.png */,
 				E60DA7771848A1880088AB3D /* PlatformLever.png */,
@@ -605,16 +601,13 @@
 			files = (
 				7797AC36183CE9F500E63E95 /* Box.png in Resources */,
 				7797AC47183CE9F500E63E95 /* Alien.png in Resources */,
-				77F122E71855F915005A595F /* Box2.png in Resources */,
 				E6F7129A184F3995005C52A4 /* BarAstro.png in Resources */,
 				7797AC48183CE9F500E63E95 /* Astronaut.png in Resources */,
 				E62A0523184DF78D009B4004 /* mario2.splvl in Resources */,
-				77F122EA1855F915005A595F /* Box5.png in Resources */,
 				E60DA7781848A1880088AB3D /* PlatformLever.png in Resources */,
 				779A2425184F70C100431A5D /* Level001.splvl in Resources */,
 				77F122ED185601D9005A595F /* TopBarAlien.png in Resources */,
 				77D6072C184373F40079A182 /* AstroLeft.png in Resources */,
-				77F122E81855F915005A595F /* Box3.png in Resources */,
 				779A2436184F722300431A5D /* Level008.splvl in Resources */,
 				E6214061182BA53800EC5C21 /* InfoPlist.strings in Resources */,
 				77D6072B184373F40079A182 /* AstroDown.png in Resources */,
@@ -646,7 +639,6 @@
 				7797AC3C183CE9F500E63E95 /* Finish.png in Resources */,
 				77D60729184373F40079A182 /* AlienRight.png in Resources */,
 				779A242E184F70C100431A5D /* Level010.splvl in Resources */,
-				77F122E91855F915005A595F /* Box4.png in Resources */,
 				E621406A182BA53800EC5C21 /* Main.storyboard in Resources */,
 				E6F71299184F3995005C52A4 /* BarAlien.png in Resources */,
 				E60DA77C1848A2350088AB3D /* StarButton.png in Resources */,
