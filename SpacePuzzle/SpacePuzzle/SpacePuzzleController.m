@@ -48,8 +48,10 @@
     _scene.controller = self;
     _scene.scaleMode = SKSceneScaleModeAspectFill;
     
-    [LoadSaveFile saveFileWithWorld:0 andLevel:5];
-    _board = [[Board alloc] init];
+    [LoadSaveFile saveFileWithWorld:0 andLevel:8];
+    _boardController = [[BoardController alloc] init];
+    _boardController.spController = self;
+    
     [self setupNextLevel];
     
     // Present the scene.
@@ -208,6 +210,11 @@
     }
 }
 
+-(void)sceneFinishedMovingElementFrom:(CGPoint)from WithIndex:(NSInteger)index To:(CGPoint)to {
+    CGPoint u = CGPointMake(_currentUnit.x, _currentUnit.y);
+    [_boardController boxMovedToPoint:to FromPoint:from OtherUnitPos:u];
+}
+
 /*
  *  Loads the board according to the level. ADD LEVELFACTORY!!!. */
 -(void)setupBoard {
@@ -262,8 +269,6 @@
     NSInteger unitX = _currentUnit.x;
     NSInteger unitY = _currentUnit.y;
     CGPoint from = CGPointMake(unitX, unitY);
-    NSNumber *unitKey = [NSNumber numberWithInt:unitY*BOARD_SIZE_X + unitX];
-    
     CGPoint to = CGPointMake(x, y);
 
     NSInteger dir = [Converter convertCoordsTo:to Direction:from];
@@ -278,122 +283,8 @@
         [_scene updateUnit:to inDirection:dir];
         [_scene refreshTileAtPosition:from WithStatus:[_boardController getBoardStatusAtPosition:from]];
     }
-    [_scene updateElementsAtPosition:from withArray:[_boardController elementsAtPosition:from]];
-    [_scene updateElementsAtPosition:to withArray:[_boardController elementsAtPosition:to]];
-
-        // UPDATE ELEMENTS AT from AND to
-        /* ---------------------------------------------------------------------------------------------
-         
-        New structure of controller, model, and elements:
-        -------------------------------------------------
-          Board has functions that checks what elements are on a position, and updates them accordingly.
-          The elements container will be either a) having an array in each BoardCoord that holds the
-          elements on that position, or b) 2 (or 3) separate dictionaries. These separate dictionaries 
-          would represent the different layers of elements on the board.
-         
-          Pros and Cons: (a) WAS THE CHOICE)
-          ----------------------------------
-            - a) is more dynamic in adding several elements on one point. Could theoretically have as
-              many elements on a point as you want. Time complexity increases (O(n)) as well as space 
-              usage. This should be a minor increase, though (I think), since the array is so small with
-              a practical maximum of around 5, give or take.
-            - b) is more static. For every new layer of element you want in the game, code has to be 
-              updated. Time complexity (O(1)) is less as well as space usage.
-         
-          Counting stars with method a) (DONE)
-          ------------------------------------
-          At init, loop through all BoardCoords and count how many stars. Since this is O(n*n), this should
-          only be done at init, and not every time a star is taken. Save amount of stars in a property.
-          Every time (in Board unitMovedToPoint) a star is taken, subtract 1 from this propery.
-         
-          Interaction between SpacePuzzleController, MainScene, and data model
-          --------------------------------------------------------------------
-          For example, controller would call _boardController unitMovedFromPoint:fromPoint (after checking 
-          if a move can be done, like the code above). In unitMovedFromPoint, board would check what 
-          elements are on that point and update them accordingly. Then controller would call
-          _scene updateElementsAtPosition:fromPoint withArrayOfElements:elements. 
-          _scene updateElementsAtPosition will first remove the sprites at that position, and then add new
-          ones according to the array argument (could be empty, which means no sprites there).
-         
-          Then, the same procedure is repeated for toPoint. For example, after moving this controller can 
-          ask the board how many star elements are left, and update the player model accordingly.
-         
-          To wrap the Board's methods of moving etc, create BoardController class which does all changes
-          in board (that are at present done in this controller). Pseudo code (in SpaceController):
-          if boardController isPointMovableTo
-            currentUnitPos = toPos;
-            boardController unitMovedFrom:from To:to
-            scene updateTileAtPosition...
-            scene updateElementAtPosition:from withArray:boardController elementsAtPosition:from
-            scene updateElementAtPosition:to withArray:boardController elementsAtPosition:to
-            scene updateUnit:to Dir:dir
-            player.stars = boardController starstaken
-         
-         ----------------------------------------------------------------------------------------------*/
-        
-        // If |bigL| is standing on a cracked tile and moves away from it. This will destroy the tile,
-        // making it void, and also destroying the item on it.
-        if ([_board isPointCracked:unitPoint] && _currentUnit == _bigL) {
-            // Update model and scene.
-            [[_board elementDictionary] removeObjectForKey:unitKey];
-            [_scene removeElementAtPosition:unitKey];
-            [[[_board board] objectAtIndex:unitIntKey] setStatus:MAPSTATUS_VOID];
-            [_scene refreshTileAtFlatIndex:unitIntKey WithStatus:MAPSTATUS_VOID];
-        }
-        
-        // If the player moved to the finish, new level.
-        if([self areUnitsOnFinish]) {
-            _level++;
-            [LoadSaveFile saveFileWithWorld:_world andLevel:_level];
-            [self setupNextLevel];
-            return;
-        }
-        
-        [self unitWantsToDoActionAt:movePoint];
-        CGPoint nextUnitPos = CGPointMake(_nextUnit.x, _nextUnit.y);
-        
-        /* Checks elements on the tile moved from. */
-        
-        // Checks if the element moved from is a |StarButton|, and the second condition checks if
-        // the other unit is still on the button, which means the button shouldn't be deactivated.
-        if([eFrom isKindOfClass:[StarButton class]] && ![Converter isPoint:nextUnitPos sameAsPoint:unitPoint]) {
-            // Buttons should be deactivated if left.
-            StarButton *sb = (StarButton*)eFrom;
-            [sb unitLeft];
-            [_scene refreshElementAtPosition:sb.key OfClass:CLASS_STARBUTTON WithStatus:sb.state];
-            // Updates the star connected to the button on the scene, i.e. showing it.
-            if(sb.star.taken == NO) {
-                [_scene setElementAtPosition:sb.star.key IsHidden:sb.star.hidden];
-            }
-        } else if([eFrom isKindOfClass:[BridgeButton class]]
-                  && ![Converter isPoint:nextUnitPos sameAsPoint:unitPoint]) {
-            // Buttons should be deactivated if left.
-            BridgeButton *bb = (BridgeButton*)eFrom;
-            [bb unitLeft];
-                    
-            // Updates the button on the scene.
-            [_scene refreshElementAtPosition:bb.bridge.key OfClass:CLASS_BRIDGE WithStatus:bb.state];
-            [_scene refreshElementAtPosition:bb.key OfClass:CLASS_BRIDGEBUTTON WithStatus:bb.state];
-            // Updates the bridge connected to the button on the scene, i.e. showing it.
-            [_scene setElementAtPosition:bb.bridge.key IsHidden:NO];
-        }
-        /* Checks elements on the tile moved to. */
-        
-        // If the element is a star.
-        if([e isKindOfClass:[Star class]] && ![e hidden] && ![e taken]) {
-            Star *star = (Star*)e;
-            [self takeStar:star];
-        } else if([e isKindOfClass:[StarButton class]]) {
-            [self doActionOnStarButton:e];
-        } else if([e isKindOfClass:[BridgeButton class]]) {
-            [self doActionOnBridgeButton:e];
-        }
-    }
-     else if([e isKindOfClass:[Box class]] && swipe && _currentUnit == _bigL) {
-        // Point isn't movable to, but if unit is astronaut and element blocking is a box, move it!
-        // |swipe| needs to be YES because moving boxes cannot be done by single tap.
-        [self doActionOnBox:e InDirection:dir];
-    }
+   // [_scene updateElementsAtPosition:from withArray:[_boardController elementsAtPosition:from]];
+    //[_scene updateElementsAtPosition:to withArray:[_boardController elementsAtPosition:to]];
 }
 
 /*
@@ -404,103 +295,8 @@
     NSInteger unitY = _currentUnit.y;
     
     CGPoint unitPoint = CGPointMake(unitX, unitY);
-    CGPoint actionPoint = CGPointMake(x, y);
-    Element *e = [[_board elementDictionary] objectForKey:actionPointKey];
-    // If the element exists.
-    if(e) {
-        // Do action depending on element type and current unit.
-        /*if ([e isKindOfClass:[Box class]] && _currentUnit == _bigL && [Converter isPoint:actionPoint NextToPoint:unitPoint]) {
-            NSInteger dir = [Converter convertCoordsTo:actionPoint Direction:unitPoint];
-            [self doActionOnBox:e InDirection:dir];
-        } else*/
-        if ([e isKindOfClass:[Box class]] && _currentUnit == _bigL && [Converter isPoint:unitPoint NextToPoint:actionPoint]){
-            [self doActionOnBoxSmash:e];
-        } else if ([e isKindOfClass:[StarButton class]] && [Converter isPoint:unitPoint sameAsPoint:actionPoint]) {
-            //[self doActionOnStarButton:e];
-        } else if ([e isKindOfClass:[BridgeButton class]] && [Converter isPoint:unitPoint sameAsPoint:actionPoint]) {
-            [self doActionOnBridgeButton:e];
-        } else if ([e isKindOfClass:[PlatformLever class]] && [Converter isPoint:unitPoint sameAsPoint:actionPoint]) {
-            [self doActionOnPlatformLever:e];
-        }
-    }
-}
-
--(void)doActionOnBoxSmash:(Element*)box {
-    NSNumber *elementKey = [NSNumber numberWithInteger:box.y*BOARD_SIZE_X + box.x];
-    [[_board elementDictionary] removeObjectForKey:elementKey];
-    [_scene removeElementAtPosition:elementKey];
-}
-
-/*
- *  Does an action on a box based on the direction. The action moves the box to a tile. */
--(void)doActionOnBox:(Element *)rock InDirection:(NSInteger)dir{
-    NSNumber *nextKey;
-    CGPoint nextPos;
-    Element *e;
-    NSNumber *elementKey = [NSNumber numberWithInteger:rock.y*BOARD_SIZE_X + rock.x];
-
-    if (dir == RIGHT) {
-        // Check if at the edge of the board, if so do nothing.
-        if(rock.x >= BOARD_SIZE_X-1) {
-            return;
-        }
-        nextKey = [NSNumber numberWithInt:rock.y*BOARD_SIZE_X + rock.x + 1];
-        e = [[_board elementDictionary] objectForKey:nextKey];
-        nextPos = CGPointMake(rock.x + 1, rock.y);
-    } else if (dir == LEFT) {
-        if(rock.x <= 0) {
-            return;
-        }
-        nextKey = [NSNumber numberWithInt:rock.y*BOARD_SIZE_X + rock.x - 1];
-        e = [[_board elementDictionary] objectForKey:nextKey];
-        nextPos = CGPointMake(rock.x - 1, rock.y);
-    } else if (dir == UP) {
-        if(rock.y <= 0) {
-            return;
-        }
-        nextKey = [NSNumber numberWithInt:(rock.y - 1)*BOARD_SIZE_X + rock.x];
-        e = [[_board elementDictionary] objectForKey:nextKey];
-        nextPos = CGPointMake(rock.x, rock.y - 1);
-    } else if (dir == DOWN){
-        if(rock.y >= BOARD_SIZE_Y-1) {
-            return;
-        }
-        nextKey = [NSNumber numberWithInt:(rock.y + 1)*BOARD_SIZE_X + rock.x];
-        e = [[_board elementDictionary] objectForKey:nextKey];
-        nextPos = CGPointMake(rock.x, rock.y + 1);
-    }
-    // Add more elements which cannot be pushed upon to if-statement.
-    // ![e isKindOfClass:[Box class]] ---> !e isBlocking
-    CGPoint nextUnitPos = CGPointMake(_nextUnit.x, _nextUnit.y);
-    CGPoint finishPos = CGPointMake([_board finishPos].x, [_board finishPos].y);
     
-    if (![e isKindOfClass:[Box class]] && ![Converter isPoint:nextPos sameAsPoint:nextUnitPos] &&
-        ![Converter isPoint:finishPos sameAsPoint:nextPos]) {
-        NSInteger intKey = [nextKey integerValue];
-        NSInteger nextTile = [[[_board board] objectAtIndex:intKey] status];
-        CGPoint posPreMove = CGPointMake(rock.x, rock.y);
-        [rock doMoveAction:dir];
-
-        if(nextTile != MAPSTATUS_SOLID) {
-            if(nextTile == MAPSTATUS_VOID){
-                [[_board elementDictionary] removeObjectForKey:elementKey];
-                [_scene moveElement:posPreMove NewCoord:nextPos Onto:nextTile InDir:dir];
-            } else if(nextTile == MAPSTATUS_CRACKED) {
-                [[_board elementDictionary] removeObjectForKey:nextKey];
-                [_scene removeElementAtPosition:nextKey];
-                [[[_board board] objectAtIndex:intKey] setStatus:MAPSTATUS_VOID];
-                [_scene refreshTileAtFlatIndex:intKey WithStatus:MAPSTATUS_VOID];
-            }
-        } else {
-            NSNumber *index = [NSNumber numberWithInteger:nextPos.y * BOARD_SIZE_X + nextPos.x];
-            // CHANGE THIS WHEN TWO OR MORE OBJECTS CAN BE PLACED ON THE SAME TILE!
-            [[_board elementDictionary] removeObjectForKey:index];
-            [_board moveElementFrom:posPreMove To:nextPos];
-            [_scene removeElementAtPosition:index];
-            [_scene moveElement:posPreMove NewCoord:nextPos Onto:nextTile InDir:dir];
-        }
-        //nextTile should invoke its "doAction"...
-    }
+    [_boardController unitWantsToDoActionAt:loc From:unitPoint IsBigL:_currentUnit == _bigL];
 }
 
 /*
@@ -582,7 +378,7 @@
     // Check if unit is on platform, if so move it.
     NSLog(@"%ld %ld", (long)_bigL.x, (long)_bigL.y);
     
-    [_scene moveElement:prevPoint NewCoord:CGPointMake(mp.x, mp.y) Onto:MAPSTATUS_SOLID InDir:0];
+    //[_scene moveElement:prevPoint NewCoord:CGPointMake(mp.x, mp.y) Onto:MAPSTATUS_SOLID InDir:0];
 }
 
 -(void)takeStar:(Star *)star {
@@ -708,7 +504,7 @@
 }
 
 -(BOOL)shouldAutorotate {
-    return YES;
+    return NO;
 }
 
 -(void)updateElementsAtPosition:(CGPoint)pos withArray:(NSMutableArray *)elArr {
@@ -721,6 +517,10 @@
     } else {
         return UIInterfaceOrientationMaskAll;
     }
+}
+
+-(void)moveElementFrom: (CGPoint)oldCoord WithIndex: (NSInteger)elementIndex To: (CGPoint)newCoord OntoStatus:(NSInteger)status InDir:(NSInteger)direction; {
+    [_scene moveElementFrom:oldCoord WithIndex:elementIndex To:newCoord OntoStatus:status InDir:direction];
 }
 
 -(void)didReceiveMemoryWarning {

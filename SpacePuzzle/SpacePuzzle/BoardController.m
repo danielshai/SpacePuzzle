@@ -49,7 +49,6 @@
     
         // Checks if the element moved from is a |StarButton|, and the second condition checks if
         // the other unit is still on the button, which means the button shouldn't be deactivated.
-       
         for (int i = 0; i < bcFrom.elements.count; i++) {
             Element *eFrom = [[bcFrom elements] objectAtIndex:i];
             if( ([eFrom isKindOfClass:[StarButton class]] || [eFrom isKindOfClass:[BridgeButton class]])
@@ -60,6 +59,7 @@
                 CGPoint p = CGPointMake(sb.star.x, sb.star.y);
                 BoardCoord *bc = [self boardCoordForPoint:p];
                 [self.spController updateElementsAtPosition:p withArray:bc.elements];
+                [self.spController updateElementsAtPosition:from withArray:bcFrom.elements];
             }
         }
     
@@ -72,8 +72,12 @@
             if([eTo isKindOfClass:[Star class]] && ![eTo hidden] && ![eTo taken]) {
                 [self takeStar:eTo];
                 [bcTo.elements removeObject:eTo];
+                [self.spController updateElementsAtPosition:from withArray:bcFrom.elements];
+                [self.spController updateElementsAtPosition:to withArray:bcTo.elements];
             } else if([eTo isKindOfClass:[StarButton class]]) {
                 [self doActionOnStarButton:eTo OtherUnitPoint:otherUnitPoint];
+                [self.spController updateElementsAtPosition:from withArray:bcFrom.elements];
+                [self.spController updateElementsAtPosition:to withArray:bcTo.elements];
             } else if([eTo isKindOfClass:[BridgeButton class]]) {
       //      [self doActionOnBridgeButton:eTo];
             }
@@ -93,27 +97,25 @@
     return NO;
 }
 
--(BoardCoord*) boardCoordForPoint:(CGPoint)p {
-    return [[_board board] objectAtIndex:[Converter CGPointToKey:p]];
-}
-
 -(void)unitWantsToDoActionAt:(CGPoint)loc From:(CGPoint)from IsBigL:(BOOL)isBigL {
-    
-    BoardCoord *bc = [[_board board] objectAtIndex:[Converter CGPointToKey:loc]];
+    BoardCoord *bc;
+    if([_board isPointWithinBoard:loc]) {
+        bc = [[_board board] objectAtIndex:[Converter CGPointToKey:loc]];
+    } else {
+        return;
+    }
     
     for (int i = 0; i < bc.elements.count; i++) {
         Element *e = [bc.elements objectAtIndex:i];
-        
-        if(e) {
-            if ([e isKindOfClass:[Box class]] && isBigL && [Converter isPoint:loc NextToPoint:from]){
-                [self doActionOnBoxSmash:e];
-            } else if ([e isKindOfClass:[StarButton class]] && [Converter isPoint:loc sameAsPoint:from]) {
-                //[self doActionOnStarButton:e];
-            } else if ([e isKindOfClass:[BridgeButton class]] && [Converter isPoint:from sameAsPoint:loc]) {
-                //       [self doActionOnBridgeButton:e];
-            } else if ([e isKindOfClass:[PlatformLever class]] && [Converter isPoint:from sameAsPoint:loc]) {
-                //       [self doActionOnPlatformLever:e];
-            }
+  
+        if ([e isKindOfClass:[Box class]] && isBigL && [Converter isPoint:loc NextToPoint:from]){
+            [self doActionOnBoxSmash:e];
+        } else if ([e isKindOfClass:[StarButton class]] && [Converter isPoint:loc sameAsPoint:from]) {
+            //[self doActionOnStarButton:e];
+        } else if ([e isKindOfClass:[BridgeButton class]] && [Converter isPoint:from sameAsPoint:loc]) {
+            //       [self doActionOnBridgeButton:e];
+        } else if ([e isKindOfClass:[PlatformLever class]] && [Converter isPoint:from sameAsPoint:loc]) {
+            //       [self doActionOnPlatformLever:e];
         }
     }
 }
@@ -122,6 +124,22 @@
     CGPoint p = CGPointMake(box.x, box.y);
     BoardCoord *bc = [[_board board] objectAtIndex:[Converter CGPointToKey:p]];
     [self removeElement:box FromBoardCoord:bc];
+    
+    for (int i = 0; i < bc.elements.count; i++) {
+        Element *e = [bc.elements objectAtIndex:i];
+        if([e isKindOfClass:[StarButton class]]) {
+            StarButton *sb = (StarButton*)e;
+            [sb unitLeft];
+            [self.spController updateElementsAtPosition:p withArray:bc.elements];
+            // The star.
+            CGPoint starPos = CGPointMake(sb.star.x, sb.star.y);
+            BoardCoord *bcStar = [[_board board] objectAtIndex:[Converter CGPointToKey:starPos]];
+            [self.spController updateElementsAtPosition:starPos withArray:bcStar.elements];
+        } else if([e isKindOfClass:[BridgeButton class]]) {
+            
+        }
+    }
+    
     [self.spController updateElementsAtPosition:p withArray:bc.elements];
 }
 
@@ -131,7 +149,8 @@
     NSMutableArray *eArray;
     CGPoint rockPoint = CGPointMake(rock.x, rock.y);
     BoardCoord *bcFrom = [[_board board] objectAtIndex:[Converter CGPointToKey:rockPoint]];
-
+    BoardCoord *bcNext;
+    
     if (dir == RIGHT) {
         // Check if at the edge of the board, if so do nothing.
         if(rock.x >= BOARD_SIZE_X-1) {
@@ -139,7 +158,7 @@
         }
         nextKey = [NSNumber numberWithInt:rock.y*BOARD_SIZE_X + rock.x + 1];
         nextPos = CGPointMake(rock.x + 1, rock.y);
-        BoardCoord *bcNext = [[_board board] objectAtIndex:[Converter CGPointToKey:nextPos]];
+        bcNext = [[_board board] objectAtIndex:[Converter CGPointToKey:nextPos]];
         eArray = [bcNext elements];
         
     } else if (dir == LEFT) {
@@ -148,7 +167,7 @@
         }
         nextKey = [NSNumber numberWithInt:rock.y*BOARD_SIZE_X + rock.x - 1];
         nextPos = CGPointMake(rock.x-1, rock.y);
-        BoardCoord *bcNext = [[_board board] objectAtIndex:[Converter CGPointToKey:nextPos]];
+        bcNext = [[_board board] objectAtIndex:[Converter CGPointToKey:nextPos]];
         eArray = [bcNext elements];
     } else if (dir == UP) {
         if(rock.y <= 0) {
@@ -156,7 +175,7 @@
         }
         nextKey = [NSNumber numberWithInt:(rock.y-1)*BOARD_SIZE_X + rock.x];
         nextPos = CGPointMake(rock.x, rock.y-1);
-        BoardCoord *bcNext = [[_board board] objectAtIndex:[Converter CGPointToKey:nextPos]];
+        bcNext = [[_board board] objectAtIndex:[Converter CGPointToKey:nextPos]];
         eArray = [bcNext elements];
     } else if (dir == DOWN){
         if(rock.y >= BOARD_SIZE_Y-1) {
@@ -164,7 +183,7 @@
         }
         nextKey = [NSNumber numberWithInt:(rock.y+1)*BOARD_SIZE_X + rock.x];
         nextPos = CGPointMake(rock.x, rock.y+1);
-        BoardCoord *bcNext = [[_board board] objectAtIndex:[Converter CGPointToKey:nextPos]];
+        bcNext = [[_board board] objectAtIndex:[Converter CGPointToKey:nextPos]];
         eArray = [bcNext elements];
     }
     // Add more elements which cannot be pushed upon to if-statement.
@@ -185,12 +204,13 @@
         }
     }
     
-    CGPoint posPreMove = CGPointMake(rock.x, rock.y);
+    [self.spController moveElementFrom:rockPoint WithIndex:bcFrom.elements.count-1 To:nextPos OntoStatus:bcNext.status InDir:dir];
 
-    // Do the move on the box.
+    CGPoint posPreMove = CGPointMake(rock.x, rock.y);
     [rock doMoveAction:dir];
     rockPoint = CGPointMake(rock.x, rock.y);
     BoardCoord *bcMovedTo = [[_board board] objectAtIndex:[Converter CGPointToKey:rockPoint]];
+    // Do the move on the box.
     
     // Remove rock from bcFrom.
     [self removeElement:rock FromBoardCoord:bcFrom];
@@ -198,12 +218,12 @@
     
     if(nextTile == MAPSTATUS_SOLID) {
         [self addElement:rock ToBoardCoord:bcMovedTo];
-        [self boxMovedToPoint:rockPoint FromPoint:posPreMove OtherUnitPos:otherUnitPos];
+       // [self boxMovedToPoint:rockPoint FromPoint:posPreMove OtherUnitPos:otherUnitPos];
     }
     
-    [self.spController updateElementsAtPosition:rockPoint withArray:bcMovedTo.elements];
+    // SHOULD BE ADDED BACK
+    //[self.spController updateElementsAtPosition:rockPoint withArray:bcMovedTo.elements];
     [self.spController updateElementsAtPosition:posPreMove withArray:bcFrom.elements];
-    
 /*
     if(nextTile != MAPSTATUS_SOLID) {
         [[_board elementDictionary] removeObjectForKey:elementKey];
@@ -223,23 +243,26 @@
  *  A box was moved to a point. Check if there's any interaction between box and other elements 
  *  available. */
 -(void)boxMovedToPoint:(CGPoint)p FromPoint:(CGPoint)pFrom OtherUnitPos:(CGPoint)otherUnitPos {
-    BoardCoord *bc = [[_board board] objectAtIndex:[Converter CGPointToKey:p]];
-    BoardCoord *bcFrom = [[_board board] objectAtIndex:[Converter CGPointToKey:pFrom]];
-    
-    for (int i = 0; i < bc.elements.count; i++) {
-        Element *e = [bc.elements objectAtIndex:i];
-        if([e isKindOfClass:[StarButton class]]) {
-            [self doActionOnStarButton:e OtherUnitPoint:otherUnitPos];
-            [self.spController updateElementsAtPosition:p withArray:bc.elements];
-        }
+    if([_board isPointWithinBoard:p] && [_board isPointWithinBoard:pFrom]) {
+        BoardCoord *bc = [[_board board] objectAtIndex:[Converter CGPointToKey:p]];
+        BoardCoord *bcFrom = [[_board board] objectAtIndex:[Converter CGPointToKey:pFrom]];
+
+        for (int i = 0; i < bc.elements.count; i++) {
+            Element *e = [bc.elements objectAtIndex:i];
+            if([e isKindOfClass:[StarButton class]]) {
+                [self doActionOnStarButton:e OtherUnitPoint:otherUnitPos];
+           // [self.spController updateElementsAtPosition:p withArray:bc.elements];
+            }
         // ADD MORE BUTTONS ETC.
-    }
+        }
     
-    for (int i = 0; i < bcFrom.elements.count; i++) {
-        Element *e = [bcFrom.elements objectAtIndex:i];
-        if([e isKindOfClass:[StarButton class]]) {
-            [e unitLeft];
-            [self.spController updateElementsAtPosition:pFrom withArray:bcFrom.elements];
+        for (int i = 0; i < bcFrom.elements.count; i++) {
+            Element *e = [bcFrom.elements objectAtIndex:i];
+            if([e isKindOfClass:[StarButton class]]) {
+                [e unitLeft];
+                [self.spController updateElementsAtPosition:pFrom withArray:bcFrom.elements];
+                [self.spController updateElementsAtPosition:p withArray:bc.elements];
+            }
         }
     }
 }
@@ -295,14 +318,27 @@
 }
 
 -(NSMutableArray*)elementsAtPosition:(CGPoint)p {
-    return [[[_board board] objectAtIndex:[Converter CGPointToKey:p]] elements];
+    if ([_board isPointWithinBoard:p]) {
+        return [[[_board board] objectAtIndex:[Converter CGPointToKey:p]] elements];
+    }
+    return nil;
 }
 
 /*
  *  Returns the status of a position on the board. */
 -(NSInteger)getBoardStatusAtPosition:(CGPoint)p {
-    BoardCoord *bc = [[_board board] objectAtIndex:p.y*BOARD_SIZE_X+p.x];
-    return bc.status;
+    if([_board isPointWithinBoard:p]) {
+        BoardCoord *bc = [[_board board] objectAtIndex:p.y*BOARD_SIZE_X+p.x];
+        return bc.status;
+    }
+    return -100;
+}
+
+-(BoardCoord*) boardCoordForPoint:(CGPoint)p {
+    if ([_board isPointWithinBoard:p]) {
+        return [[_board board] objectAtIndex:[Converter CGPointToKey:p]];
+    }
+    return nil;
 }
 
 -(BOOL)isPointMovableTo:(CGPoint)p {

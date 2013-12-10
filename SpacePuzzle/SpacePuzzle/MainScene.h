@@ -52,13 +52,12 @@
 @property (nonatomic, retain) SKAction *mBox;
 
 -(void)updateUnit:(CGPoint) coord inDirection:(NSInteger) direction;
--(void)updateElementsAtPosition: (CGPoint)pos withArray: (NSMutableArray*)elArr;
+-(void)updateElementsAtPosition: (CGPoint)pos withArray: (NSMutableArray *)elArr;
 -(void)refreshTileAtPosition: (CGPoint)pos WithStatus: (NSInteger)status;
 -(void)refreshTileAtFlatIndex: (NSInteger)findex WithStatus:(NSInteger)status;
 -(void)refreshElementAtPosition: (NSNumber*)index OfClass:(NSString*)name WithStatus:(BOOL)on;
 -(void)setElementAtPosition: (NSNumber*) index IsHidden: (BOOL)hidden;
--(void)moveElement: (CGPoint)oldCoord NewCoord: (CGPoint)newCoord Onto:(NSInteger)status InDir:(NSInteger)direction;
--(void)removeElementAtPosition: (NSNumber*)index;
+-(void)moveElementFrom: (CGPoint)oldCoord WithIndex: (NSInteger)elementIndex To: (CGPoint)newCoord OntoStatus:(NSInteger)status InDir:(NSInteger)direction;
 -(void)setupBoardX: (NSInteger)x Y: (NSInteger)y Status: (NSInteger)status;
 -(void)setupElement: (CGPoint)coord Name: (NSString*)className Hidden: (BOOL)hidden;
 -(void)setupAstronaut: (CGPoint)pos;
@@ -68,6 +67,8 @@
 -(void)setCurrentUnitWithMacro: (NSInteger)unit;
 -(void)cleanScene;
 -(void)starTakenAtPosition: (NSNumber*)index CurrentTaken:(NSInteger)taken;
+-(SKTexture*)getTextureForElement: (Element*)e;
+-(CGFloat)getZPositionForElement: (Element*)e;
 -(SKTexture*)updateSpriteWith:(NSString *) name State: (BOOL)state;
 -(CGSize)sizeForElement: (Element*)e;
 

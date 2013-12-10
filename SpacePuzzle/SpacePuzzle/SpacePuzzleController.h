@@ -49,6 +49,7 @@
 @property (nonatomic, assign) NSInteger level;
 @property (nonatomic, retain) BoardController *boardController;
 
+-(void)moveElementFrom: (CGPoint)oldCoord WithIndex: (NSInteger)elementIndex To: (CGPoint)newCoord OntoStatus:(NSInteger)status InDir:(NSInteger)direction;
 -(void)checkInteraction:(NSTimer *)time;
 -(void)singleTap:(UIGestureRecognizer *)sender;
 -(void)doubleTap:(UIGestureRecognizer *)sender;
@@ -59,13 +60,12 @@
 -(void)changeUnit;
 -(void)unitWantsToMoveTo: (CGPoint)loc WithSwipe: (BOOL)swipe;
 -(void)unitWantsToDoActionAt: (CGPoint)loc;
--(void)doActionOnBoxSmash: (Element*)box;
--(void)doActionOnBox: (Element*)rock InDirection: (NSInteger)dir;
 -(void)doActionOnStarButton: (Element*)button;
 -(void)doActionOnBridgeButton: (Element*)button;
 -(void)doActionOnPlatformLever: (Element*)lever;
 -(BOOL)areUnitsOnFinish;
 -(void)sceneFinishedMovingUnit;
+-(void)sceneFinishedMovingElementFrom: (CGPoint)from WithIndex: (NSInteger)index To: (CGPoint)to;
 -(void)setupBoard;
 -(void)setupElements;
 -(void)setupUnits;

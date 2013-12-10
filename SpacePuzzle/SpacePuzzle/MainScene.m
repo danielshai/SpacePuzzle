@@ -9,7 +9,15 @@
 #import "LittleJohnWalk.h"
 #import "AnimationFactory.h"
 #import "Position.h"
+#import "Element.h"
+#import "Position.h"
 #import "Box.h"
+#import "Star.h"
+#import "StarButton.h"
+#import "BridgeButton.h"
+#import "Bridge.h"
+#import "PlatformLever.h"
+#import "MovingPlatform.h"
 
 @implementation MainScene
 @synthesize controller = _controller;
@@ -154,7 +162,7 @@
 
 /*
  *  Updates the current unit with the data model. */
--(void)updateUnit:(CGPoint)coord inDirection:(NSInteger)direction{
+-(void)updateUnit:(CGPoint)coord inDirection:(NSInteger)direction {
     CGPoint pos = [Converter convertCoordToPixel:coord];
     pos.x += 20;
     pos.y -= 5;
@@ -217,7 +225,167 @@
                 _currentUnit.texture = [SKTexture textureWithImageNamed:@"AlienLeft.png"];
             }
         }
+        [_controller sceneFinishedMovingUnit];
     }];
+}
+
+-(void)updateElementsAtPosition: (CGPoint)pos withArray: (NSMutableArray *)elArr {
+    NSMutableArray *arr = [[NSMutableArray alloc] init];
+    NSNumber *index = [NSNumber numberWithInteger:pos.y*BOARD_SIZE_X+pos.x];
+    Element *element;
+    
+    NSMutableArray *prevArr = [_elements objectForKey:index];
+    if(prevArr.count > 0) {
+     
+        for (int i = 0; i < prevArr.count; i++) {
+            SKSpriteNode *pS = [prevArr objectAtIndex:i];
+            [pS removeFromParent];
+        }
+        [prevArr removeAllObjects];
+        [_elements removeObjectForKey:index];
+    }
+    
+    for(int i = 0; i < elArr.count; i++) {
+        element = [elArr objectAtIndex:i];
+        SKSpriteNode *s = [SKSpriteNode spriteNodeWithTexture:[self getTextureForElement:element]];
+        s.size = [self sizeForElement:element];
+        CGPoint pos2 = [Converter convertCoordToPixel:pos];
+        pos2.x += TILESIZE/2;
+        s.position = pos2;
+        s.hidden = element.hidden;
+        s.zPosition = [self getZPositionForElement:element];
+        [self addChild:s];
+        [arr insertObject:s atIndex:i];
+    }
+    
+    if(elArr.count > 0) {
+        [_elements setObject:arr forKey:index];
+    }
+}
+
+/*
+ *  Gets size for en element. */
+-(CGSize)sizeForElement:(Element *)e {
+    if([e isKindOfClass:[Box class]]) {
+        return CGSizeMake(TILESIZE-8, TILESIZE-8);
+    } else {
+        return CGSizeMake(TILESIZE, TILESIZE);
+    }
+}
+
+// ADD STATE OF ELEMENT.
+-(SKTexture*)getTextureForElement:(Element *)e {
+    if([e isKindOfClass:[Box class]]) {
+        return _box;
+    } else if([e isKindOfClass:[Star class]]) {
+        return _star;
+    } else if([e isKindOfClass:[StarButton class]]) {
+        StarButton *sb = (StarButton*)e;
+        if(sb.state) {
+            return _buttonOn;
+        } else {
+            return _buttonOff;
+        }
+    } else if([e isKindOfClass:[BridgeButton class]]) {
+        return _buttonOff;
+    } else if([e isKindOfClass:[Bridge class]]) {
+        return _buttonOff;
+    } else if([e isKindOfClass:[PlatformLever class]]) {
+        return _buttonOff;
+    } else if([e isKindOfClass:[MovingPlatform class]]) {
+        return _buttonOff;
+    }
+
+    return nil;
+}
+
+-(void)moveElementFrom: (CGPoint)oldCoord WithIndex: (NSInteger)elementIndex To: (CGPoint)newCoord OntoStatus:(NSInteger)status InDir:(NSInteger)direction {
+    
+    NSNumber *indexOrigin = [NSNumber numberWithFloat:oldCoord.y*BOARD_SIZE_X + oldCoord.x];
+    NSNumber *indexNew = [NSNumber numberWithFloat:newCoord.y*BOARD_SIZE_X + newCoord.x];
+    //  NSLog(@"moving: %f %f %f %f", oldCoord.x,oldCoord.y,newCoord.x,newCoord.y);
+    if(indexNew.integerValue == indexOrigin.integerValue) {
+        return;
+    }
+    NSMutableArray *elArr = [_elements objectForKey:indexOrigin];
+    NSMutableArray *elNewArr = [_elements objectForKey:indexNew];
+    
+    if(!elNewArr) {
+        elNewArr = [[NSMutableArray alloc] init];
+        [_elements setObject:elNewArr forKey:indexNew];
+    }
+    SKSpriteNode *s = [elArr objectAtIndex:elementIndex];
+    
+    [elArr removeObject:s];
+    [elNewArr addObject:s];
+    
+    // Gets the pixel value for the new position.
+    CGPoint movePixel = [Converter convertCoordToPixel:newCoord];
+    // Converter does not take into account anchor point.
+    movePixel.x += TILESIZE/2;
+    if(_currentUnit == _bigL) {
+        if(direction == UP) {
+            _currentUnit.texture = [SKTexture textureWithImageNamed:@"AstroUp.png"];
+        } else if(direction == DOWN) {
+            _currentUnit.texture = [SKTexture textureWithImageNamed:@"AstroDown.png"];
+        } else if(direction == RIGHT) {
+            _currentUnit.texture = [SKTexture textureWithImageNamed:@"AstroRight.png"];
+        } else {
+            _currentUnit.texture = [SKTexture textureWithImageNamed:@"AstroLeft.png"];
+        }
+    } else {
+        if(direction == UP) {
+            _currentUnit.texture = [SKTexture textureWithImageNamed:@"AlienUp.png"];
+        } else if(direction == DOWN) {
+            _currentUnit.texture = [SKTexture textureWithImageNamed:@"AlienDown.png"];
+        } else if(direction == RIGHT) {
+            _currentUnit.texture = [SKTexture textureWithImageNamed:@"AlienRight.png"];
+        } else {
+            _currentUnit.texture = [SKTexture textureWithImageNamed:@"AlienLeft.png"];
+        }
+    }
+    
+    if (status == MAPSTATUS_SOLID) {
+        SKAction *move = [SKAction moveTo:movePixel duration:_mBox.duration];
+        SKAction *action = [SKAction group:@[_mBox, move]];
+        [s runAction:action completion:^(void){
+            s.position = movePixel;
+            NSLog(@"%f %f", oldCoord.x,oldCoord.y);
+            [self.controller sceneFinishedMovingElementFrom:oldCoord WithIndex:elementIndex To:newCoord];
+        }];
+    } else if (status == MAPSTATUS_CRACKED) {
+        // FIX LATER
+    } else {
+        SKAction *move = [SKAction moveTo:movePixel duration:_mBox.duration];
+        SKAction *action = [SKAction group:@[_mBox, move]];
+        [s runAction:action completion:^(void){
+            SKAction *scalEm = [SKAction scaleBy:0.01 duration:1.2];
+            
+            [s runAction:scalEm completion:^(void){
+            [self.controller sceneFinishedMovingElementFrom:oldCoord WithIndex:elementIndex To:newCoord];
+            }];
+        }];
+    }
+}
+
+-(CGFloat)getZPositionForElement:(Element *)e {
+    if([e isKindOfClass:[Box class]]) {
+        return 10;
+    } else if([e isKindOfClass:[Star class]]) {
+        return 9;
+    } else if([e isKindOfClass:[StarButton class]]) {
+        return 8;
+    } else if([e isKindOfClass:[BridgeButton class]]) {
+        return 8;
+    } else if([e isKindOfClass:[Bridge class]]) {
+        return 8;
+    } else if([e isKindOfClass:[PlatformLever class]]) {
+        return 8;
+    } else if([e isKindOfClass:[MovingPlatform class]]) {
+        return 7;
+    }
+    
+    return 0;
 }
 
 -(void)moveElement:(CGPoint)oldCoord NewCoord:(CGPoint)newCoord Onto:(NSInteger)status InDir:(NSInteger)direction {
@@ -260,7 +428,7 @@
         SKAction *action = [SKAction group:@[_mBox, move]];
         [s runAction:action completion:^(void){
             s.position = newCoord;
-            [_elements removeObjectForKey:indexOrigin];
+           // [_elements removeObjectForKey:indexOrigin];
         }];
     } else if (status == MAPSTATUS_CRACKED) {
         // FIX LATER
@@ -271,7 +439,7 @@
             
             SKAction *scalEm = [SKAction scaleBy:0.01 duration:1.2];
             [s runAction:scalEm completion:^(void){
-                [self removeElementAtPosition:indexOrigin];
+                
             }];
         }];
     }
@@ -290,13 +458,6 @@
         move = [SKAction moveTo:CGPointMake(184, 453) duration:1];
     }
     [star runAction:move];
-    //[self removeElementAtPosition:index];
-}
-
--(void)removeElementAtPosition:(NSNumber *)index {
-    SKSpriteNode* s = [_elements objectForKey:index];
-    [s removeFromParent];
-    [_elements removeObjectForKey:index];
 }
 
 -(void)update:(CFTimeInterval)currentTime {

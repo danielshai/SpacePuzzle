@@ -550,9 +550,9 @@
 
 -(BOOL)isPointMovableTo:(CGPoint)p {
     BOOL isMovable = NO;
-    BoardCoord *bc = [_board objectAtIndex:[Converter CGPointToKey:p]];
     
     if([self isPointWithinBoard:p]) {
+        BoardCoord *bc = [_board objectAtIndex:[Converter CGPointToKey:p]];
         if(bc.elements) {
             for (int i = 0; i < bc.elements.count; i++) {
                 Element *e = [bc.elements objectAtIndex:i];
