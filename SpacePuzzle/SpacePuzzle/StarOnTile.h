@@ -58,5 +58,24 @@
 // ----------
 // animations
 // ----------
+#define STARONTILE_ANIM_MOVING @[ \
+    [SKTexture textureWithImageNamed:@"00"], \
+    [SKTexture textureWithImageNamed:@"01"], \
+    [SKTexture textureWithImageNamed:@"02"], \
+    [SKTexture textureWithImageNamed:@"03"], \
+    [SKTexture textureWithImageNamed:@"04"], \
+    [SKTexture textureWithImageNamed:@"05"], \
+    [SKTexture textureWithImageNamed:@"06"], \
+    [SKTexture textureWithImageNamed:@"07"], \
+    [SKTexture textureWithImageNamed:@"08"], \
+    [SKTexture textureWithImageNamed:@"09"], \
+    [SKTexture textureWithImageNamed:@"10"], \
+    [SKTexture textureWithImageNamed:@"11"], \
+    [SKTexture textureWithImageNamed:@"12"], \
+    [SKTexture textureWithImageNamed:@"13"], \
+    [SKTexture textureWithImageNamed:@"14"], \
+    [SKTexture textureWithImageNamed:@"15"], \
+    [SKTexture textureWithImageNamed:@"16"]  \
+]
 
 #endif // __STARONTILE_ATLAS__

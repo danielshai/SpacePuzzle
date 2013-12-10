@@ -35,6 +35,8 @@
 		779A2432184F71D700431A5D /* Level007.splvl in Resources */ = {isa = PBXBuildFile; fileRef = 779A2431184F71D700431A5D /* Level007.splvl */; };
 		779A2434184F721600431A5D /* Level006.splvl in Resources */ = {isa = PBXBuildFile; fileRef = 779A2433184F721600431A5D /* Level006.splvl */; };
 		779A2436184F722300431A5D /* Level008.splvl in Resources */ = {isa = PBXBuildFile; fileRef = 779A2435184F722300431A5D /* Level008.splvl */; };
+		779CA2A71857463A00ED0526 /* StarOnTile.atlasc in Resources */ = {isa = PBXBuildFile; fileRef = 779CA2A31857463A00ED0526 /* StarOnTile.atlasc */; };
+		779CA2A81857463A00ED0526 /* StarTaken.atlasc in Resources */ = {isa = PBXBuildFile; fileRef = 779CA2A51857463A00ED0526 /* StarTaken.atlasc */; };
 		779DB365183E32030059A084 /* PlatformLever.m in Sources */ = {isa = PBXBuildFile; fileRef = 779DB364183E32030059A084 /* PlatformLever.m */; };
 		779DB368183E32560059A084 /* MovingPlatform.m in Sources */ = {isa = PBXBuildFile; fileRef = 779DB367183E32560059A084 /* MovingPlatform.m */; };
 		779EF6A7183F608C0097441A /* MovingPlatform.png in Resources */ = {isa = PBXBuildFile; fileRef = 779EF6A6183F608C0097441A /* MovingPlatform.png */; };
@@ -139,6 +141,10 @@
 		779A2431184F71D700431A5D /* Level007.splvl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Level007.splvl; path = ../../Levels/Level007.splvl; sourceTree = "<group>"; };
 		779A2433184F721600431A5D /* Level006.splvl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Level006.splvl; path = ../../Levels/Level006.splvl; sourceTree = "<group>"; };
 		779A2435184F722300431A5D /* Level008.splvl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Level008.splvl; path = ../../Levels/Level008.splvl; sourceTree = "<group>"; };
+		779CA2A31857463A00ED0526 /* StarOnTile.atlasc */ = {isa = PBXFileReference; lastKnownFileType = folder; path = StarOnTile.atlasc; sourceTree = "<group>"; };
+		779CA2A41857463A00ED0526 /* StarOnTile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StarOnTile.h; sourceTree = "<group>"; };
+		779CA2A51857463A00ED0526 /* StarTaken.atlasc */ = {isa = PBXFileReference; lastKnownFileType = folder; path = StarTaken.atlasc; sourceTree = "<group>"; };
+		779CA2A61857463A00ED0526 /* StarTaken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StarTaken.h; sourceTree = "<group>"; };
 		779DB363183E32030059A084 /* PlatformLever.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlatformLever.h; sourceTree = "<group>"; };
 		779DB364183E32030059A084 /* PlatformLever.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlatformLever.m; sourceTree = "<group>"; };
 		779DB366183E32560059A084 /* MovingPlatform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovingPlatform.h; sourceTree = "<group>"; };

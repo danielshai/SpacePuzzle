@@ -7,6 +7,8 @@
 #import "Converter.h"
 #import "BigLWalk.h"
 #import "LittleJohnWalk.h"
+#import "StarOnTile.h"
+#import "StarTaken.h"
 #import "AnimationFactory.h"
 #import "Position.h"
 #import "Element.h"
@@ -50,6 +52,8 @@
 @synthesize gui = _gui;
 @synthesize guiAstro = _guiAstro;
 @synthesize mBox = _mBox;
+@synthesize mStar = _mStar;
+@synthesize tStar = _tStar;
 
 -(id)initWithSize:(CGSize)size {    
     if (self = [super initWithSize:size]) {
@@ -150,13 +154,25 @@
         _lWLeft = [SKAction sequence:@[walk, walk, walk, walk]];
     }];
     
-    // Preloading Boxes moving animations.
+    // Preloading the Boxes moving animations.
     NSArray *arr = [[NSArray alloc] init];
     SKTexture *t = [SKTexture textureWithImageNamed:@"Box.png"];
     arr = @[t,t,t,t];
     [SKTexture preloadTextures:LITTLEJOHNWALK_ANIM_BLEFT withCompletionHandler:^(void){
         SKAction *moveBox = [SKAction animateWithTextures:arr timePerFrame:TIME_PER_FRAME_BOX_MOVE];
         _mBox = [SKAction sequence:@[moveBox, moveBox, moveBox, moveBox]];
+    }];
+    
+    // Preloading the Stars moving animations.
+    [SKTexture preloadTextures:STARONTILE_ANIM_MOVING withCompletionHandler:^(void){
+        SKAction *moveStar = [SKAction animateWithTextures:STARONTILE_ANIM_MOVING timePerFrame:0.15];
+        _mStar = [SKAction repeatActionForever:moveStar];
+    }];
+    
+    // Preloading the Stars taken animations.
+    [SKTexture preloadTextures:STARTAKEN_ANIM_STARTAKEN withCompletionHandler:^(void){
+        SKAction *takenStar = [SKAction animateWithTextures:STARTAKEN_ANIM_STARTAKEN timePerFrame:0.02 resize:NO restore:NO];
+        _tStar = [SKAction sequence:@[takenStar]];
     }];
 }
 
@@ -447,15 +463,16 @@
 
 -(void)starTakenAtPosition:(NSNumber *)index CurrentTaken:(NSInteger)taken {
     SKSpriteNode *star = [_elements objectForKey:index];
-    SKAction *move;
+    SKAction *moveToBar;
+    SKAction *moveUpwards = [SKAction moveTo:CGPointMake(star.position.x, (star.position.y + 40)) duration:1.0];
     
     if (taken == 1) {
         // Fixating the stars to their correct positions.
-        move = [SKAction moveTo:CGPointMake(140, 470-17) duration:1];
+        moveToBar = [SKAction moveTo:CGPointMake(139, 464) duration:0.5];
     } else if (taken == 2) {
-        move = [SKAction moveTo:CGPointMake(162, 453) duration:1];
+        moveToBar = [SKAction moveTo:CGPointMake(161, 464) duration:0.5];
     } else {
-        move = [SKAction moveTo:CGPointMake(184, 453) duration:1];
+        moveToBar = [SKAction moveTo:CGPointMake(183, 464) duration:0.5];
     }
     [star runAction:move];
 }
@@ -560,6 +577,10 @@
     NSNumber *nr = [NSNumber numberWithInt:coord.y*BOARD_SIZE_X + coord.x];
     [_elements setObject:sprite forKey:nr];
     sprite.hidden = hidden;
+    
+    if ([className isEqualToString:@"Star"]) {
+        [sprite runAction:_mStar];
+    }
     
     [self addChild:sprite];
 }
