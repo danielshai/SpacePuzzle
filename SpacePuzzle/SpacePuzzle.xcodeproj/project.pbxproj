@@ -35,8 +35,8 @@
 		779A2432184F71D700431A5D /* Level007.splvl in Resources */ = {isa = PBXBuildFile; fileRef = 779A2431184F71D700431A5D /* Level007.splvl */; };
 		779A2434184F721600431A5D /* Level006.splvl in Resources */ = {isa = PBXBuildFile; fileRef = 779A2433184F721600431A5D /* Level006.splvl */; };
 		779A2436184F722300431A5D /* Level008.splvl in Resources */ = {isa = PBXBuildFile; fileRef = 779A2435184F722300431A5D /* Level008.splvl */; };
-		779CA29F185741E600ED0526 /* StarOnTile.atlasc in Resources */ = {isa = PBXBuildFile; fileRef = 779CA29D185741E600ED0526 /* StarOnTile.atlasc */; };
-		779CA2A2185741F600ED0526 /* StarTaken.atlasc in Resources */ = {isa = PBXBuildFile; fileRef = 779CA2A0185741F600ED0526 /* StarTaken.atlasc */; };
+		779CA2A71857463A00ED0526 /* StarOnTile.atlasc in Resources */ = {isa = PBXBuildFile; fileRef = 779CA2A31857463A00ED0526 /* StarOnTile.atlasc */; };
+		779CA2A81857463A00ED0526 /* StarTaken.atlasc in Resources */ = {isa = PBXBuildFile; fileRef = 779CA2A51857463A00ED0526 /* StarTaken.atlasc */; };
 		779DB365183E32030059A084 /* PlatformLever.m in Sources */ = {isa = PBXBuildFile; fileRef = 779DB364183E32030059A084 /* PlatformLever.m */; };
 		779DB368183E32560059A084 /* MovingPlatform.m in Sources */ = {isa = PBXBuildFile; fileRef = 779DB367183E32560059A084 /* MovingPlatform.m */; };
 		779EF6A7183F608C0097441A /* MovingPlatform.png in Resources */ = {isa = PBXBuildFile; fileRef = 779EF6A6183F608C0097441A /* MovingPlatform.png */; };
@@ -138,10 +138,10 @@
 		779A2431184F71D700431A5D /* Level007.splvl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Level007.splvl; path = ../../Levels/Level007.splvl; sourceTree = "<group>"; };
 		779A2433184F721600431A5D /* Level006.splvl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Level006.splvl; path = ../../Levels/Level006.splvl; sourceTree = "<group>"; };
 		779A2435184F722300431A5D /* Level008.splvl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Level008.splvl; path = ../../Levels/Level008.splvl; sourceTree = "<group>"; };
-		779CA29D185741E600ED0526 /* StarOnTile.atlasc */ = {isa = PBXFileReference; lastKnownFileType = folder; name = StarOnTile.atlasc; path = ../../../StarOnTile.atlasc; sourceTree = "<group>"; };
-		779CA29E185741E600ED0526 /* StarOnTile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StarOnTile.h; path = ../../../StarOnTile.h; sourceTree = "<group>"; };
-		779CA2A0185741F600ED0526 /* StarTaken.atlasc */ = {isa = PBXFileReference; lastKnownFileType = folder; name = StarTaken.atlasc; path = ../../../StarTaken.atlasc; sourceTree = "<group>"; };
-		779CA2A1185741F600ED0526 /* StarTaken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StarTaken.h; path = ../../../StarTaken.h; sourceTree = "<group>"; };
+		779CA2A31857463A00ED0526 /* StarOnTile.atlasc */ = {isa = PBXFileReference; lastKnownFileType = folder; path = StarOnTile.atlasc; sourceTree = "<group>"; };
+		779CA2A41857463A00ED0526 /* StarOnTile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StarOnTile.h; sourceTree = "<group>"; };
+		779CA2A51857463A00ED0526 /* StarTaken.atlasc */ = {isa = PBXFileReference; lastKnownFileType = folder; path = StarTaken.atlasc; sourceTree = "<group>"; };
+		779CA2A61857463A00ED0526 /* StarTaken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StarTaken.h; sourceTree = "<group>"; };
 		779DB363183E32030059A084 /* PlatformLever.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlatformLever.h; sourceTree = "<group>"; };
 		779DB364183E32030059A084 /* PlatformLever.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlatformLever.m; sourceTree = "<group>"; };
 		779DB366183E32560059A084 /* MovingPlatform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovingPlatform.h; sourceTree = "<group>"; };
@@ -319,10 +319,10 @@
 		77F0A81D1845FF53002FA17A /* Animations */ = {
 			isa = PBXGroup;
 			children = (
-				779CA2A0185741F600ED0526 /* StarTaken.atlasc */,
-				779CA2A1185741F600ED0526 /* StarTaken.h */,
-				779CA29D185741E600ED0526 /* StarOnTile.atlasc */,
-				779CA29E185741E600ED0526 /* StarOnTile.h */,
+				779CA2A31857463A00ED0526 /* StarOnTile.atlasc */,
+				779CA2A41857463A00ED0526 /* StarOnTile.h */,
+				779CA2A51857463A00ED0526 /* StarTaken.atlasc */,
+				779CA2A61857463A00ED0526 /* StarTaken.h */,
 				7705C3A518477A4600CEB0C9 /* BigLWalk.atlasc */,
 				7705C3A618477A4600CEB0C9 /* BigLWalk.h */,
 				77F0A82118464495002FA17A /* LittleJohnWalk.atlasc */,
@@ -632,13 +632,13 @@
 				E60DA77B1848A2350088AB3D /* BridgeButton.png in Resources */,
 				77F0A82318464495002FA17A /* LittleJohnWalk.atlasc in Resources */,
 				779A2434184F721600431A5D /* Level006.splvl in Resources */,
-				779CA2A2185741F600ED0526 /* StarTaken.atlasc in Resources */,
+				779CA2A81857463A00ED0526 /* StarTaken.atlasc in Resources */,
 				E6214074182BA53800EC5C21 /* Images.xcassets in Resources */,
 				7797AC42183CE9F500E63E95 /* Background.png in Resources */,
 				7797AC38183CE9F500E63E95 /* BridgeON.png in Resources */,
 				779A242D184F70C100431A5D /* Level009.splvl in Resources */,
 				7797AC3F183CE9F500E63E95 /* Start.gif in Resources */,
-				779CA29F185741E600ED0526 /* StarOnTile.atlasc in Resources */,
+				779CA2A71857463A00ED0526 /* StarOnTile.atlasc in Resources */,
 				7797AC45183CE9F500E63E95 /* solidtile.png in Resources */,
 				7797AC3C183CE9F500E63E95 /* Finish.png in Resources */,
 				77D60729184373F40079A182 /* AlienRight.png in Resources */,
