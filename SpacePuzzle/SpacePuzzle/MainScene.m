@@ -366,7 +366,6 @@
         SKAction *action = [SKAction group:@[_mBox, move]];
         [s runAction:action completion:^(void){
             s.position = movePixel;
-            NSLog(@"%f %f", oldCoord.x,oldCoord.y);
             [self.controller sceneFinishedMovingElementFrom:oldCoord WithIndex:elementIndex To:newCoord];
         }];
     } else if (status == MAPSTATUS_CRACKED) {
@@ -375,10 +374,12 @@
         SKAction *move = [SKAction moveTo:movePixel duration:_mBox.duration];
         SKAction *action = [SKAction group:@[_mBox, move]];
         [s runAction:action completion:^(void){
+
             SKAction *scalEm = [SKAction scaleBy:0.01 duration:1.2];
-            
+    
             [s runAction:scalEm completion:^(void){
-            [self.controller sceneFinishedMovingElementFrom:oldCoord WithIndex:elementIndex To:newCoord];
+                // THE BUTTON SHOULD BE UPDATED BEFORE THE BOX IS GONE, HOWEVER, THIS WILL ALSO REMOVE THE BOX.
+                [self.controller sceneFinishedMovingElementFrom:oldCoord WithIndex:elementIndex To:newCoord];
             }];
         }];
     }
@@ -404,67 +405,12 @@
     return 0;
 }
 
--(void)moveElement:(CGPoint)oldCoord NewCoord:(CGPoint)newCoord Onto:(NSInteger)status InDir:(NSInteger)direction {
-    NSNumber *indexOrigin = [NSNumber numberWithFloat:oldCoord.y*BOARD_SIZE_X + oldCoord.x];
-    NSNumber *indexNew = [NSNumber numberWithFloat:newCoord.y*BOARD_SIZE_X + newCoord.x];
-  //  NSLog(@"moving: %f %f %f %f", oldCoord.x,oldCoord.y,newCoord.x,newCoord.y);
-    if(indexNew.integerValue == indexOrigin.integerValue) {
-        return;
-    }
-    SKSpriteNode *s = [_elements objectForKey:indexOrigin];
-    [_elements setObject:s forKey:indexNew];
-    // Gets the pixel value for the new position.
-    newCoord = [Converter convertCoordToPixel:newCoord];
-    // Converter does not take into account anchor point.
-    newCoord.x += TILESIZE/2;
-    if(_currentUnit == _bigL) {
-        if(direction == UP) {
-            _currentUnit.texture = [SKTexture textureWithImageNamed:@"AstroUp.png"];
-        } else if(direction == DOWN) {
-            _currentUnit.texture = [SKTexture textureWithImageNamed:@"AstroDown.png"];
-        } else if(direction == RIGHT) {
-            _currentUnit.texture = [SKTexture textureWithImageNamed:@"AstroRight.png"];
-        } else {
-            _currentUnit.texture = [SKTexture textureWithImageNamed:@"AstroLeft.png"];
-        }
-    } else {
-        if(direction == UP) {
-            _currentUnit.texture = [SKTexture textureWithImageNamed:@"AlienUp.png"];
-        } else if(direction == DOWN) {
-            _currentUnit.texture = [SKTexture textureWithImageNamed:@"AlienDown.png"];
-        } else if(direction == RIGHT) {
-            _currentUnit.texture = [SKTexture textureWithImageNamed:@"AlienRight.png"];
-        } else {
-            _currentUnit.texture = [SKTexture textureWithImageNamed:@"AlienLeft.png"];
-        }
-    }
+-(void)starTakenAtPosition:(Element *)star AtIndex: (NSInteger)index CurrentTaken:(NSInteger)taken {
+    NSMutableArray *elArr = [_elements objectForKey:star.key];
     
-    if (status == MAPSTATUS_SOLID) {
-        SKAction *move = [SKAction moveTo:newCoord duration:_mBox.duration];
-        SKAction *action = [SKAction group:@[_mBox, move]];
-        [s runAction:action completion:^(void){
-            s.position = newCoord;
-           // [_elements removeObjectForKey:indexOrigin];
-        }];
-    } else if (status == MAPSTATUS_CRACKED) {
-        // FIX LATER
-    } else {
-        SKAction *move = [SKAction moveTo:newCoord duration:_mBox.duration];
-        SKAction *action = [SKAction group:@[_mBox, move]];
-        [s runAction:action completion:^(void){
-            
-            SKAction *scalEm = [SKAction scaleBy:0.01 duration:1.2];
-            [s runAction:scalEm completion:^(void){
-                
-            }];
-        }];
-    }
-}
-
--(void)starTakenAtPosition:(NSNumber *)index CurrentTaken:(NSInteger)taken {
-    SKSpriteNode *star = [_elements objectForKey:index];
+    SKSpriteNode *starSprite = [elArr objectAtIndex:index];
     SKAction *moveToBar;
-    SKAction *moveUpwards = [SKAction moveTo:CGPointMake(star.position.x, (star.position.y + 40)) duration:1.0];
+    SKAction *moveUpwards = [SKAction moveTo:CGPointMake(starSprite.position.x, (starSprite.position.y + 40)) duration:1.0];
     
     if (taken == 1) {
         // Fixating the stars to their correct positions.
@@ -474,7 +420,17 @@
     } else {
         moveToBar = [SKAction moveTo:CGPointMake(183, 464) duration:0.5];
     }
-    [star runAction:move];
+
+    [starSprite runAction:moveUpwards completion:^(void){
+        [starSprite runAction:_tStar completion:^(void){
+            [starSprite runAction:moveToBar completion:^(void){
+                [starSprite removeAllActions];
+                starSprite.texture = STARTAKEN_TEX_STARTAKEN58;
+                starSprite.size = CGSizeMake(32, 32);
+            }];
+        }];
+    }];
+    //[self removeElementAtPosition:index];
 }
 
 -(void)update:(CFTimeInterval)currentTime {

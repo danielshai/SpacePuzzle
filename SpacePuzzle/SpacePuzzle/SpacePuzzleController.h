@@ -74,7 +74,6 @@
 -(void)observeText:(NSString*)text Selector: (SEL)selector;
 -(void)getNextLevel;
 -(void)setupNextLevel;
--(void)takeStar: (Star*)star;
 -(void)updateElementsAtPosition: (CGPoint)pos withArray: (NSMutableArray*)elArr;
 -(NSInteger)currentUnitToMacro;
 -(IBAction)restartAction:(id)sender;

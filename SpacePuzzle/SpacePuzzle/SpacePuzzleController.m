@@ -48,9 +48,10 @@
     _scene.controller = self;
     _scene.scaleMode = SKSceneScaleModeAspectFill;
     
-    [LoadSaveFile saveFileWithWorld:0 andLevel:8];
+    [LoadSaveFile saveFileWithWorld:0 andLevel:1];
     _boardController = [[BoardController alloc] init];
     _boardController.spController = self;
+    _boardController.scene = _scene;
     
     [self setupNextLevel];
     
@@ -202,6 +203,9 @@
 
 -(void)sceneFinishedMovingUnit {
     // If the player moved to the finish, new level.
+    CGPoint to = CGPointMake(_currentUnit.x, _currentUnit.y);
+    CGPoint other = CGPointMake(_nextUnit.x, _nextUnit.y);
+    [_boardController updateElementsMovedToPoint:to OtherUnit:other];
     if([self areUnitsOnFinish]) {
         // THIS CODE NEEDS TO ACCOUNT FOR WORLDS.
         _level++;
@@ -316,7 +320,7 @@
         // If the other unit is standing on the same spot as the star and button is on the star should be
         // taken by the player.
         if([Converter isPoint:starPos sameAsPoint:nextUnitPos] && sb.state) {
-            [self takeStar:sb.star];
+            
         }
     }
 }
@@ -379,12 +383,6 @@
     NSLog(@"%ld %ld", (long)_bigL.x, (long)_bigL.y);
     
     //[_scene moveElement:prevPoint NewCoord:CGPointMake(mp.x, mp.y) Onto:MAPSTATUS_SOLID InDir:0];
-}
-
--(void)takeStar:(Star *)star {
-    [star movedTo];
-    _player.starsTaken += 1;
-    [_scene starTakenAtPosition:star.key CurrentTaken:_player.starsTaken];
 }
 
 /*

@@ -7,6 +7,7 @@
 //
 
 #import "BoardController.h"
+#import "MainScene.h"
 #import "Board.h"
 #import "Macros.h"
 #import "Converter.h"
@@ -70,14 +71,14 @@
         // If the element is a star.
             Element *eTo = [[bcTo elements] objectAtIndex:i];
             if([eTo isKindOfClass:[Star class]] && ![eTo hidden] && ![eTo taken]) {
-                [self takeStar:eTo];
+                [self takeStar:eTo WithIndex:i];
                 [bcTo.elements removeObject:eTo];
                 [self.spController updateElementsAtPosition:from withArray:bcFrom.elements];
-                [self.spController updateElementsAtPosition:to withArray:bcTo.elements];
+              //  [self.spController updateElementsAtPosition:to withArray:bcTo.elements];
             } else if([eTo isKindOfClass:[StarButton class]]) {
-                [self doActionOnStarButton:eTo OtherUnitPoint:otherUnitPoint];
+                [self doActionOnStarButton:eTo OtherUnitPoint:otherUnitPoint WithIndex:i];
                 [self.spController updateElementsAtPosition:from withArray:bcFrom.elements];
-                [self.spController updateElementsAtPosition:to withArray:bcTo.elements];
+            //    [self.spController updateElementsAtPosition:to withArray:bcTo.elements];
             } else if([eTo isKindOfClass:[BridgeButton class]]) {
       //      [self doActionOnBridgeButton:eTo];
             }
@@ -95,6 +96,26 @@
         }
     }
     return NO;
+}
+
+-(void)updateElementsMovedToPoint:(CGPoint)to OtherUnit:(CGPoint)otherUnitPoint {
+    /* Checks elements on the tile moved to. */
+    BoardCoord *bcTo = [[_board board] objectAtIndex:[Converter CGPointToKey:to]];
+    
+    for (int i = 0; i < bcTo.elements.count; i++) {
+        // If the element is a star.
+        Element *eTo = [[bcTo elements] objectAtIndex:i];
+        if([eTo isKindOfClass:[Star class]] && ![eTo hidden] && ![eTo taken]) {
+            [self takeStar:eTo WithIndex:i];
+            [bcTo.elements removeObject:eTo];
+            [self.spController updateElementsAtPosition:to withArray:bcTo.elements];
+        } else if([eTo isKindOfClass:[StarButton class]]) {
+            [self doActionOnStarButton:eTo OtherUnitPoint:otherUnitPoint WithIndex:i];
+            [self.spController updateElementsAtPosition:to withArray:bcTo.elements];
+        } else if([eTo isKindOfClass:[BridgeButton class]]) {
+            //      [self doActionOnBridgeButton:eTo];
+        }
+    }
 }
 
 -(void)unitWantsToDoActionAt:(CGPoint)loc From:(CGPoint)from IsBigL:(BOOL)isBigL {
@@ -221,7 +242,7 @@
        // [self boxMovedToPoint:rockPoint FromPoint:posPreMove OtherUnitPos:otherUnitPos];
     }
     
-    // SHOULD BE ADDED BACK
+    // SHOULD BE ADDED BACK. NO!
     //[self.spController updateElementsAtPosition:rockPoint withArray:bcMovedTo.elements];
     [self.spController updateElementsAtPosition:posPreMove withArray:bcFrom.elements];
 /*
@@ -250,7 +271,7 @@
         for (int i = 0; i < bc.elements.count; i++) {
             Element *e = [bc.elements objectAtIndex:i];
             if([e isKindOfClass:[StarButton class]]) {
-                [self doActionOnStarButton:e OtherUnitPoint:otherUnitPos];
+                [self doActionOnStarButton:e OtherUnitPoint:otherUnitPos WithIndex:i];
            // [self.spController updateElementsAtPosition:p withArray:bc.elements];
             }
         // ADD MORE BUTTONS ETC.
@@ -260,14 +281,20 @@
             Element *e = [bcFrom.elements objectAtIndex:i];
             if([e isKindOfClass:[StarButton class]]) {
                 [e unitLeft];
-                [self.spController updateElementsAtPosition:pFrom withArray:bcFrom.elements];
-                [self.spController updateElementsAtPosition:p withArray:bc.elements];
+               
+                [self.scene updateElementsAtPosition:pFrom withArray:bcFrom.elements];
+                [self.scene updateElementsAtPosition:p withArray:bc.elements];
+                
+                StarButton *sb = (StarButton*)e;
+                CGPoint starPos = CGPointMake(sb.star.x, sb.star.y);
+                BoardCoord *bcStar = [[_board board] objectAtIndex:[Converter CGPointToKey:starPos]];
+                [self.scene updateElementsAtPosition:starPos withArray:bcStar.elements];
             }
         }
     }
 }
 
--(void)doActionOnStarButton:(Element *)button OtherUnitPoint:(CGPoint)otherUnitPoint {
+-(void)doActionOnStarButton:(Element *)button OtherUnitPoint:(CGPoint)otherUnitPoint WithIndex:(NSInteger)index {
     StarButton *sb = (StarButton*)button;
     [sb movedTo];
     CGPoint starPos = CGPointMake(sb.star.x, sb.star.y);
@@ -277,7 +304,12 @@
         // If the other unit is standing on the same spot as the star and button is on the star should be
         // taken by the player.
         if([Converter isPoint:starPos sameAsPoint:otherUnitPoint] && sb.state) {
-            [self takeStar:sb.star];
+            /* ----------------------------------------BUG-----------------------------------------------*/
+            /* ------------------------------------------------------------------------------------------*/
+            // HOW TO GET INDEX OF sb.star?!?!??!?!?!?!?!?!?+1 BOARDCOORD????
+            [self takeStar:sb.star WithIndex:0];
+            /* ------------------------------------------------------------------------------------------*/
+            /* ------------------------------------------------------------------------------------------*/
         }
     }
     BoardCoord *bcStar = [[_board board] objectAtIndex:[Converter CGPointToKey:starPos]];
@@ -319,7 +351,8 @@
 
 -(NSMutableArray*)elementsAtPosition:(CGPoint)p {
     if ([_board isPointWithinBoard:p]) {
-        return [[[_board board] objectAtIndex:[Converter CGPointToKey:p]] elements];
+        BoardCoord *bc = [[_board board] objectAtIndex:[Converter CGPointToKey:p]];
+        return [bc elements];
     }
     return nil;
 }
@@ -345,8 +378,9 @@
     return [_board isPointMovableTo:p];
 }
 
--(void)takeStar: (Element*)star {
+-(void)takeStar: (Element*)star WithIndex: (NSInteger)index {
     [star movedTo];
     _starsLeft--;
+    [self.scene starTakenAtPosition:star AtIndex:index CurrentTaken:3-_starsLeft];
 }
 @end

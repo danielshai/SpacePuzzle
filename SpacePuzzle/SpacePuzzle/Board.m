@@ -95,7 +95,8 @@
 
     // The elements.
     _elementDictionary = [_parser elements];
-   
+    _originalNumberOfStars = 0;
+    
     for(NSNumber *key in _elementDictionary) {
         NSMutableArray *posArray = [_elementDictionary objectForKey:key];
         NSInteger index = [key integerValue];
