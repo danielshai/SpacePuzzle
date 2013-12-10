@@ -295,15 +295,21 @@
     
     if (taken == 1) {
         // Fixating the stars to their correct positions.
-        moveToBar = [SKAction moveTo:CGPointMake(140, 470-17) duration:1];
+        moveToBar = [SKAction moveTo:CGPointMake(139, 464) duration:0.5];
     } else if (taken == 2) {
-        moveToBar = [SKAction moveTo:CGPointMake(162, 453) duration:1];
+        moveToBar = [SKAction moveTo:CGPointMake(161, 464) duration:0.5];
     } else {
-        moveToBar = [SKAction moveTo:CGPointMake(184, 453) duration:1];
+        moveToBar = [SKAction moveTo:CGPointMake(183, 464) duration:0.5];
     }
-    SKAction *action = [SKAction group:@[_tStar, moveToBar]];
+
     [star runAction:moveUpwards completion:^(void){
-        [star runAction:action];
+        [star runAction:_tStar completion:^(void){
+            [star runAction:moveToBar completion:^(void){
+                [star removeAllActions];
+                star.texture = STARTAKEN_TEX_STARTAKEN58;
+                star.size = CGSizeMake(32, 32);
+            }];
+        }];
     }];
     //[self removeElementAtPosition:index];
 }

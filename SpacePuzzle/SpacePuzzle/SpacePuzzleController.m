@@ -43,7 +43,7 @@
     _scene = [MainScene sceneWithSize:skView.bounds.size];
     _scene.scaleMode = SKSceneScaleModeAspectFill;
     
-    [LoadSaveFile saveFileWithWorld:0 andLevel:5];
+    [LoadSaveFile saveFileWithWorld:0 andLevel:1];
     _board = [[Board alloc] init];
     [self setupNextLevel];
     
