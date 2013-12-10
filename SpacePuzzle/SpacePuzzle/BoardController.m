@@ -30,8 +30,7 @@
     return self;
 }
 
--(BOOL)unitWantsToMoveFrom:(CGPoint)from To:(CGPoint)to WithSwipe:(BOOL)swipe UnitWasAstronatut:(BOOL)isAstronaut OtherUnitPosition:(CGPoint)otherUnitPoint
-{
+-(BOOL)unitWantsToMoveFrom:(CGPoint)from To:(CGPoint)to WithSwipe:(BOOL)swipe UnitWasAstronatut:(BOOL)isAstronaut OtherUnitPosition:(CGPoint)otherUnitPoint {
     NSInteger dir = [Converter convertCoordsTo:to Direction:from];
     BoardCoord *bcFrom = [[_board board] objectAtIndex:[Converter CGPointToKey:from]];
     
