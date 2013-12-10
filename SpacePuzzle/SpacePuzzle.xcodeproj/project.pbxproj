@@ -52,6 +52,8 @@
 		77F122E81855F915005A595F /* Box3.png in Resources */ = {isa = PBXBuildFile; fileRef = 77F122E41855F915005A595F /* Box3.png */; };
 		77F122E91855F915005A595F /* Box4.png in Resources */ = {isa = PBXBuildFile; fileRef = 77F122E51855F915005A595F /* Box4.png */; };
 		77F122EA1855F915005A595F /* Box5.png in Resources */ = {isa = PBXBuildFile; fileRef = 77F122E61855F915005A595F /* Box5.png */; };
+		77F122ED185601D9005A595F /* TopBarAlien.png in Resources */ = {isa = PBXBuildFile; fileRef = 77F122EB185601D9005A595F /* TopBarAlien.png */; };
+		77F122EE185601D9005A595F /* TopBarAstro.png in Resources */ = {isa = PBXBuildFile; fileRef = 77F122EC185601D9005A595F /* TopBarAstro.png */; };
 		77F21644184DDEFF00FD23D2 /* LoadSaveFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F21643184DDEFF00FD23D2 /* LoadSaveFile.m */; };
 		77F760D0184E1EF300FDF315 /* Background01.png in Resources */ = {isa = PBXBuildFile; fileRef = 77F760CF184E1EF300FDF315 /* Background01.png */; };
 		E6057677183619120033AE88 /* Box.m in Sources */ = {isa = PBXBuildFile; fileRef = E6057676183619120033AE88 /* Box.m */; };
@@ -159,6 +161,8 @@
 		77F122E41855F915005A595F /* Box3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Box3.png; path = "../../../../Downloads/SpacePuzzle-master/Resources/Elements/Box3.png"; sourceTree = "<group>"; };
 		77F122E51855F915005A595F /* Box4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Box4.png; path = "../../../../Downloads/SpacePuzzle-master/Resources/Elements/Box4.png"; sourceTree = "<group>"; };
 		77F122E61855F915005A595F /* Box5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Box5.png; path = "../../../../Downloads/SpacePuzzle-master/Resources/Elements/Box5.png"; sourceTree = "<group>"; };
+		77F122EB185601D9005A595F /* TopBarAlien.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TopBarAlien.png; sourceTree = "<group>"; };
+		77F122EC185601D9005A595F /* TopBarAstro.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TopBarAstro.png; sourceTree = "<group>"; };
 		77F21642184DDEFF00FD23D2 /* LoadSaveFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadSaveFile.h; sourceTree = "<group>"; };
 		77F21643184DDEFF00FD23D2 /* LoadSaveFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadSaveFile.m; sourceTree = "<group>"; };
 		77F760CF184E1EF300FDF315 /* Background01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Background01.png; sourceTree = "<group>"; };
@@ -284,6 +288,8 @@
 		7797AC2B183CE9F500E63E95 /* Interface */ = {
 			isa = PBXGroup;
 			children = (
+				77F122EB185601D9005A595F /* TopBarAlien.png */,
+				77F122EC185601D9005A595F /* TopBarAstro.png */,
 				E6F71295184F3995005C52A4 /* BarAlien.png */,
 				E6F71296184F3995005C52A4 /* BarAstro.png */,
 				E6F71297184F3995005C52A4 /* StarOFF.png */,
@@ -606,6 +612,7 @@
 				77F122EA1855F915005A595F /* Box5.png in Resources */,
 				E60DA7781848A1880088AB3D /* PlatformLever.png in Resources */,
 				779A2425184F70C100431A5D /* Level001.splvl in Resources */,
+				77F122ED185601D9005A595F /* TopBarAlien.png in Resources */,
 				77D6072C184373F40079A182 /* AstroLeft.png in Resources */,
 				77F122E81855F915005A595F /* Box3.png in Resources */,
 				779A2436184F722300431A5D /* Level008.splvl in Resources */,
@@ -623,6 +630,7 @@
 				77D60727184373F40079A182 /* AlienDown.png in Resources */,
 				7705C3A718477A4600CEB0C9 /* BigLWalk.atlasc in Resources */,
 				E687AE4D183A43EB00A5B78C /* mario.splvl in Resources */,
+				77F122EE185601D9005A595F /* TopBarAstro.png in Resources */,
 				779A2430184F71AE00431A5D /* Level005.splvl in Resources */,
 				E6F7129C184F3995005C52A4 /* StarON.png in Resources */,
 				7797AC3D183CE9F500E63E95 /* Rock.png in Resources */,

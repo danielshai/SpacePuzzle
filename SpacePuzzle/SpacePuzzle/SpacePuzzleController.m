@@ -576,7 +576,7 @@
 -(void)takeStar:(Star *)star {
     [star movedTo];
     _player.starsTaken += 1;
-    [_scene starTakenAtPosition:star.key];
+    [_scene starTakenAtPosition:star.key CurrentTaken:_player.starsTaken];
 }
 
 /*

@@ -58,8 +58,8 @@
         _bridgeOff = [SKTexture textureWithImageNamed:@"BridgeOFF.png"];
         _switchOn = [SKTexture textureWithImageNamed:@"SwitchON.png"];
         _switchOff = [SKTexture textureWithImageNamed:@"SwitchOFF.png"];
-        _guiAstro = [SKTexture textureWithImageNamed:@"BarAstro"];
-        _guiAlien = [SKTexture textureWithImageNamed:@"BarAlien"];
+        _guiAstro = [SKTexture textureWithImageNamed:@"TopBarAstro"];
+        _guiAlien = [SKTexture textureWithImageNamed:@"TopBarAlien"];
         _finish = [SKSpriteNode spriteNodeWithImageNamed:@"Finish.png"];
         _finish.size = CGSizeMake(TILESIZE, TILESIZE);
         _finish.zPosition = 2;
@@ -272,10 +272,20 @@
     }
 }
 
--(void)starTakenAtPosition:(NSNumber *)index {
+-(void)starTakenAtPosition:(NSNumber *)index CurrentTaken:(NSInteger)taken {
     SKSpriteNode *star = [_elements objectForKey:index];
+    SKAction *move;
     
-    [self removeElementAtPosition:index];
+    if (taken == 1) {
+        // Fixating the stars to their correct positions.
+        move = [SKAction moveTo:CGPointMake(140, 470-17) duration:1];
+    } else if (taken == 2) {
+        move = [SKAction moveTo:CGPointMake(162, 453) duration:1];
+    } else {
+        move = [SKAction moveTo:CGPointMake(184, 453) duration:1];
+    }
+    [star runAction:move];
+    //[self removeElementAtPosition:index];
 }
 
 -(void)removeElementAtPosition:(NSNumber *)index {
