@@ -53,7 +53,7 @@
         for (int i = 0; i < bcFrom.elements.count; i++) {
             Element *eFrom = [[bcFrom elements] objectAtIndex:i];
             if( ([eFrom isKindOfClass:[StarButton class]] || [eFrom isKindOfClass:[BridgeButton class]])
-            && ![Converter isPoint:from sameAsPoint:otherUnitPoint]) {
+            && ![Converter isPoint:from sameAsPoint:otherUnitPoint] ) {
                 // Buttons should be deactivated if left.
                 StarButton *sb = (StarButton*)eFrom;
                 [sb unitLeft];
@@ -87,11 +87,11 @@
     }
     BoardCoord *bcTo = [self boardCoordForPoint:to];
     
+    // Point isn't movable to, but if unit is astronaut and element blocking is a box, move it!
+    // |swipe| needs to be YES because moving boxes cannot be done by single tap.
     for (int i = 0; i < bcTo.elements.count; i++) {
         Element *eTo = [[bcTo elements] objectAtIndex:i];
         if([eTo isKindOfClass:[Box class]] && swipe && isAstronaut) {
-            // Point isn't movable to, but if unit is astronaut and element blocking is a box, move it!
-            // |swipe| needs to be YES because moving boxes cannot be done by single tap.
             [self moveBox:eTo InDirection:dir OtherUnitPosition:otherUnitPoint];
         }
     }
@@ -181,7 +181,6 @@
         nextPos = CGPointMake(rock.x + 1, rock.y);
         bcNext = [[_board board] objectAtIndex:[Converter CGPointToKey:nextPos]];
         eArray = [bcNext elements];
-        
     } else if (dir == LEFT) {
         if(rock.x <= 0) {
             return;
@@ -226,20 +225,25 @@
     }
     
     [self.spController moveElementFrom:rockPoint WithIndex:bcFrom.elements.count-1 To:nextPos OntoStatus:bcNext.status InDir:dir];
-
+    
     CGPoint posPreMove = CGPointMake(rock.x, rock.y);
     [rock doMoveAction:dir];
     rockPoint = CGPointMake(rock.x, rock.y);
     BoardCoord *bcMovedTo = [[_board board] objectAtIndex:[Converter CGPointToKey:rockPoint]];
+    
     // Do the move on the box.
     
-    // Remove rock from bcFrom.
+    // Remove box from bcFrom.
     [self removeElement:rock FromBoardCoord:bcFrom];
     NSInteger nextTile = [[[_board board] objectAtIndex:[Converter CGPointToKey:rockPoint]] status];
     
     if(nextTile == MAPSTATUS_SOLID) {
         [self addElement:rock ToBoardCoord:bcMovedTo];
        // [self boxMovedToPoint:rockPoint FromPoint:posPreMove OtherUnitPos:otherUnitPos];
+    } else if(nextTile == MAPSTATUS_CRACKED) {
+        // UPDATE SCENE!!!!
+        bcMovedTo.status = MAPSTATUS_VOID;
+        [bcFrom.elements removeAllObjects];
     }
     
     // SHOULD BE ADDED BACK. NO!

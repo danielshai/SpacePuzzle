@@ -48,7 +48,7 @@
     _scene.controller = self;
     _scene.scaleMode = SKSceneScaleModeAspectFill;
     
-    [LoadSaveFile saveFileWithWorld:0 andLevel:1];
+    [LoadSaveFile saveFileWithWorld:0 andLevel:8];
     _boardController = [[BoardController alloc] init];
     _boardController.spController = self;
     _boardController.scene = _scene;
