@@ -129,33 +129,82 @@
     } else if ([elementName isEqualToString:CLASS_BOX]) {
         rockElement = NO;
         Box *r = [[Box alloc] initWithX:tempXElement Y:tempYElement];
-        [_elements setObject:r forKey:r.key];
+        if([_elements objectForKey:r.key] != nil) {
+            NSMutableArray *arr = [_elements objectForKey:r.key];
+            [arr addObject:r];
+        } else {
+            NSMutableArray *arr = [[NSMutableArray alloc] init];
+            [arr addObject:r];
+            [_elements setObject:arr forKey:r.key];
+        }
         
     } else if ([elementName isEqualToString:CLASS_STAR]) {
         starElement = NO;
         Star *s = [[Star alloc] initWithX:tempXElement Y:tempYElement];
-        [_elements setObject:s forKey:s.key];
+        if([_elements objectForKey:s.key] != nil) {
+            NSMutableArray *arr = [_elements objectForKey:s.key];
+            [arr addObject:s];
+        } else {
+            NSMutableArray *arr = [[NSMutableArray alloc] init];
+            [arr addObject:s];
+            [_elements setObject:arr forKey:s.key];
+        }
     } else if ([elementName isEqualToString:CLASS_BRIDGE]) {
         bridgeElement = NO;
         Bridge *b = [[Bridge alloc] initWithX:tempXElement Y:tempYElement Hidden:NO];
         b.blocking = tempBlockingElement;
-        [_elements setObject:b forKey:b.key];
+        if([_elements objectForKey:b.key] != nil) {
+            NSMutableArray *arr = [_elements objectForKey:b.key];
+            [arr addObject:b];
+        } else {
+            NSMutableArray *arr = [[NSMutableArray alloc] init];
+            [arr addObject:b];
+            [_elements setObject:arr forKey:b.key];
+        }
         
     } else if ([elementName isEqualToString:CLASS_STARBUTTON]) {
+        StarButton *sb = [[StarButton alloc] initWithX:tempXElement Y:tempYElement];
         starButtonElement = NO;
         NSNumber *starIndex = [NSNumber numberWithInteger:tempYRef*BOARD_SIZE_X+tempXRef];
-        Star *s = [_elements objectForKey:starIndex];
-        s.hidden = YES;
-        StarButton *sb = [[StarButton alloc] initWithStar:s X:tempXElement Y:tempYElement];
-        [_elements setObject:sb forKey:sb.key];
+        NSMutableArray *refArr = [_elements objectForKey:starIndex];
+        for(int i = 0; i<refArr.count; i++) {
+            if([[refArr objectAtIndex:i] isKindOfClass:[Star class]]) {
+                Star *s = [refArr objectAtIndex:i];
+                s.hidden = YES;
+                sb.star = s;
+            }
+        }
+        
+        if([_elements objectForKey:sb.key] != nil) {
+            NSMutableArray *arr = [_elements objectForKey:sb.key];
+            [arr addObject:sb];
+        } else {
+            NSMutableArray *arr = [[NSMutableArray alloc] init];
+            [arr addObject:sb];
+            [_elements setObject:arr forKey:sb.key];
+        }
         
     } else if ([elementName isEqualToString:CLASS_BRIDGEBUTTON]) {
+        BridgeButton *bb = [[BridgeButton alloc] initWithX:tempXElement Y:tempYElement];
         bridgeButtonElement = NO;
         NSNumber *bridgeIndex = [NSNumber numberWithInteger:tempYRef*BOARD_SIZE_X+tempXRef];
-        Bridge *b = [_elements objectForKey:bridgeIndex];
-        b.hidden = NO;
-        BridgeButton *bb = [[BridgeButton alloc] initWithBridge:b X:tempXElement Y:tempYElement];
-        [_elements setObject:bb forKey:bb.key];
+        NSMutableArray *refArr = [_elements objectForKey:bridgeIndex];
+        for(int i = 0; i<refArr.count; i++) {
+            if([[refArr objectAtIndex:i] isKindOfClass:[Bridge class]]) {
+                Bridge *b = [refArr objectAtIndex:i];
+                b.hidden = NO;
+                bb.bridge = b;
+            }
+        }
+        
+        if([_elements objectForKey:bb.key] != nil) {
+            NSMutableArray *arr = [_elements objectForKey:bb.key];
+            [arr addObject:bb];
+        } else {
+            NSMutableArray *arr = [[NSMutableArray alloc] init];
+            [arr addObject:bb];
+            [_elements setObject:arr forKey:bb.key];
+        }
         
     } else if ([elementName isEqualToString:CLASS_MOVING_PLATFORM]) {
         platformElement = NO;
@@ -164,17 +213,38 @@
             Position *p = [pathArray objectAtIndex:i];
             [[[mp path] points] insertObject:p atIndex:i];
         }
- 
-        [_elements setObject:mp forKey:mp.key];
+        if([_elements objectForKey:mp.key] != nil) {
+            NSMutableArray *arr = [_elements objectForKey:mp.key];
+            [arr addObject:mp];
+        } else {
+            NSMutableArray *arr = [[NSMutableArray alloc] init];
+            [arr addObject:mp];
+            [_elements setObject:arr forKey:mp.key];
+        }
+
         // Clear the path array for the next |MovingPlatform|.
         [pathArray removeAllObjects];
         
     } else if ([elementName isEqualToString:CLASS_LEVER]) {
+        PlatformLever *pl = [[PlatformLever alloc] initWithX:tempXElement Y:tempYElement];
         leverElement = NO;
         NSNumber *platformIndex = [NSNumber numberWithInteger:tempYRef*BOARD_SIZE_X+tempXRef];
-        MovingPlatform *mp = [_elements objectForKey:platformIndex];
-        PlatformLever *pl = [[PlatformLever alloc] initWithMovingPlatform:mp X:tempXElement Y:tempYElement];
-        [_elements setObject:pl forKey:pl.key];
+        NSMutableArray *refArr = [_elements objectForKey:platformIndex];
+        for(int i = 0; i<refArr.count; i++) {
+            if([[refArr objectAtIndex:i] isKindOfClass:[MovingPlatform class]]) {
+                MovingPlatform *mp = [refArr objectAtIndex:i];
+                mp.hidden = NO;
+                pl.movingPlatform = mp;
+            }
+        }
+        if([_elements objectForKey:pl.key] != nil) {
+            NSMutableArray *arr = [_elements objectForKey:pl.key];
+            [arr addObject:pl];
+        } else {
+            NSMutableArray *arr = [[NSMutableArray alloc] init];
+            [arr addObject:pl];
+            [_elements setObject:arr forKey:pl.key];
+        }
         
     } else if ([elementName isEqualToString:STAR_BUTTON_REF]) {
         starButtonStar = NO;

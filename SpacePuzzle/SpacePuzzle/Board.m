@@ -1,4 +1,5 @@
 // Board.m
+#import "Converter.h"
 #import "Board.h"
 #import "Macros.h"
 #import "XMLParser.h"
@@ -23,6 +24,7 @@
 @synthesize startPosAstronaut = _startPosAstronaut;
 @synthesize startPosAlien = _startPosAlien;
 @synthesize finishPos = _finishPos;
+@synthesize originalNumberOfStars = _originalNumberOfStars;
 
 -(id) init {
     if(self = [super init]){
@@ -37,6 +39,7 @@
         _startPosAstronaut = [[Position alloc] initWithX:-2 Y:-2];
         _startPosAlien = [[Position alloc] initWithX:-2 Y:-2];
         _finishPos = [[Position alloc] initWithX:0 Y:0];
+        _originalNumberOfStars = 0;
     }
     return self;
 }
@@ -89,9 +92,23 @@
     
     _finishPos.x = [[_parser finish] x];
     _finishPos.y = [[_parser finish] y];
-    
+
     // The elements.
     _elementDictionary = [_parser elements];
+   
+    for(NSNumber *key in _elementDictionary) {
+        NSMutableArray *posArray = [_elementDictionary objectForKey:key];
+        NSInteger index = [key integerValue];
+
+        BoardCoord *bc = [_board objectAtIndex:index];
+
+        for(int i = 0; i < posArray.count; i++) {
+            [[bc elements] addObject:[posArray objectAtIndex:i]];
+            if ([[posArray objectAtIndex:i] isKindOfClass:[Star class]]) {
+                _originalNumberOfStars++;
+            }
+        }
+    }
 }
 
 /*
@@ -532,19 +549,22 @@
 }
 
 -(BOOL)isPointMovableTo:(CGPoint)p {
+    BOOL isMovable = NO;
+    BoardCoord *bc = [_board objectAtIndex:[Converter CGPointToKey:p]];
+    
     if([self isPointWithinBoard:p]) {
-        NSNumber *posKey = [NSNumber numberWithInt:p.y*BOARD_SIZE_X + p.x];
-        NSInteger posIntKey = [posKey integerValue];
-        BoardCoord *bc = [_board objectAtIndex:posIntKey];
-        
-        return (![[_elementDictionary objectForKey:posKey] blocking] && [bc status] != MAPSTATUS_VOID);
-        //else if ([[_elementDictionary objectForKey:posKey] isKindOfClass:[MovingPlatform class]]) {
-        // return YES;
-        //}
-        return NO;
-    } else {
-        return NO;
+        if(bc.elements) {
+            for (int i = 0; i < bc.elements.count; i++) {
+                Element *e = [bc.elements objectAtIndex:i];
+                isMovable = ![e blocking];
+                if(!isMovable) {
+                    return NO;
+                }
+            }
+        }
+        return [bc status] != MAPSTATUS_VOID;
     }
+    return NO;
 }
 
 -(BOOL)isPointCracked:(CGPoint)p {

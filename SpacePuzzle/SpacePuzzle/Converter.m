@@ -117,6 +117,10 @@
     return p1.x == p2.x && p1.y == p2.y;
 }
 
++(NSInteger)CGPointToKey:(CGPoint)p {
+    return p.y*BOARD_SIZE_X+p.x;
+}
+
 +(NSInteger) convertCoordsTo:(CGPoint)object Direction:(CGPoint)unit {
     if (object.y > unit.y) {
         return DOWN;

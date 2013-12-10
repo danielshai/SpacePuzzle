@@ -1,18 +1,18 @@
 //
 //  GViewMyScene.m
 //  SpacePuzzle
-
+#import "SpacePuzzleController.h"
 #import "MainScene.h"
 #import "Macros.h"
 #import "Converter.h"
 #import "BigLWalk.h"
 #import "LittleJohnWalk.h"
 #import "AnimationFactory.h"
-#import "Element.h"
 #import "Position.h"
 #import "Box.h"
 
 @implementation MainScene
+@synthesize controller = _controller;
 @synthesize solidTile = _solidTile;
 @synthesize crackedTile = _crackedTile;
 @synthesize voidTile = _voidTile;
@@ -46,7 +46,12 @@
 -(id)initWithSize:(CGSize)size {    
     if (self = [super initWithSize:size]) {
         /* Setup your scene here */
-        
+        _bigL = [SKSpriteNode spriteNodeWithImageNamed:@"AstroDown.png"];
+        _littleJohn = [SKSpriteNode spriteNodeWithImageNamed:@"AlienDown.png"];
+        _bigL.zPosition = 9999999;
+        _littleJohn.zPosition = 9999999;
+        [self addChild:_littleJohn];
+        [self addChild:_bigL];
         _currentUnit = _littleJohn;
         self.backgroundColor = [SKColor colorWithRed:0.15 green:0.15 blue:0.3 alpha:1.0];
         _solidTile = [SKTexture textureWithImageNamed:@"solidtile.png"];
@@ -405,11 +410,9 @@
     pos.x += 20;
     pos.y -= 5;
     
-    _littleJohn = [SKSpriteNode spriteNodeWithImageNamed:@"AlienDown.png"];
     _littleJohn.position = pos;
     _littleJohn.size = CGSizeMake(TILESIZE,TILESIZE);
     
-    [self addChild:_littleJohn];
     _currentUnit = _littleJohn;
 }
 
@@ -418,11 +421,9 @@
     pos.x += 24;
     pos.y -= 5;
     
-    _bigL = [SKSpriteNode spriteNodeWithImageNamed:@"AstroDown.png"];
     _bigL.size = CGSizeMake(TILESIZE,TILESIZE);
     _bigL.position = pos;
     
-    [self addChild:_bigL];
     _currentUnit = _bigL;
 }
 
@@ -461,9 +462,14 @@
 }
 
 -(void)cleanScene {
+    // IMPLEMENT!!!!!
+    
     for(id elm in _elements) {
-        SKSpriteNode *s = [_elements objectForKey:elm];
-        [s removeFromParent];
+        NSMutableArray *arr = [_elements objectForKey:elm];
+        for(int i = 0; i < arr.count; i++) {
+            SKSpriteNode *s = [arr objectAtIndex:i];
+            [s removeFromParent];
+        }
     }
     [_elements removeAllObjects];
     
@@ -472,11 +478,11 @@
         [s removeFromParent];
     }
     [_tiles removeAllObjects];
-    
+    /*
     if(_littleJohn)
         [_littleJohn removeFromParent];
     if(_bigL)
-        [_bigL removeFromParent];
+        [_bigL removeFromParent];*/
 }
 
 -(SKTexture*) updateSpriteWith:(NSString *)name State:(BOOL)state {

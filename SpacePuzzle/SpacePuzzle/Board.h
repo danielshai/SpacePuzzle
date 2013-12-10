@@ -32,6 +32,7 @@
 @property (nonatomic, retain) Position *startPosAstronaut;
 @property (nonatomic, retain) Position *startPosAlien;
 @property (nonatomic, retain) Position *finishPos;
+@property (nonatomic, assign) NSInteger originalNumberOfStars;
 
 -(void) moveElementFrom: (CGPoint)from To: (CGPoint)to;
 -(void) loadBoard:(NSString*) path;

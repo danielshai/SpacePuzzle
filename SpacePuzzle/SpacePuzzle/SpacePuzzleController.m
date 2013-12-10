@@ -3,6 +3,7 @@
 //  SpacePuzzle
 
 #import "SpacePuzzleController.h"
+#import "BoardController.h"
 #import "Element.h"
 #import "Converter.h"
 #import "Box.h"
@@ -26,10 +27,13 @@
 @synthesize player = _player;
 @synthesize world = _world;
 @synthesize level = _level;
+@synthesize boardController = _boardController;
 
 -(void)viewDidLoad
 {
     [super viewDidLoad];
+    _bigL = [[BigL alloc] init];
+    _littleJohn = [[LittleJohn alloc] init];
 
     // Configure the view.
     SKView *skView = (SKView *)self.view;
@@ -41,6 +45,7 @@
     
     // Create and configure the scene.
     _scene = [MainScene sceneWithSize:skView.bounds.size];
+    _scene.controller = self;
     _scene.scaleMode = SKSceneScaleModeAspectFill;
     
     [LoadSaveFile saveFileWithWorld:0 andLevel:5];
@@ -193,6 +198,16 @@
     }
 }
 
+-(void)sceneFinishedMovingUnit {
+    // If the player moved to the finish, new level.
+    if([self areUnitsOnFinish]) {
+        // THIS CODE NEEDS TO ACCOUNT FOR WORLDS.
+        _level++;
+        [LoadSaveFile saveFileWithWorld:_world andLevel:_level];
+        [self setupNextLevel];
+    }
+}
+
 /*
  *  Loads the board according to the level. ADD LEVELFACTORY!!!. */
 -(void)setupBoard {
@@ -225,18 +240,12 @@
 
 -(void)setupElements {
     // Talk to the scene what to show.
-    NSEnumerator *enumerator = [[_board elementDictionary] objectEnumerator];
-    Element *obj;
     
-    while(obj = [enumerator nextObject]) {
-        CGPoint p = CGPointMake([obj x], [obj y]);
-       // if([obj isKindOfClass:[Bridge class]]) {
-        //    [_scene setupElement:p Name:@"BridgeOFF.png" Hidden:[obj hidden]];
-        //} else if( ![obj isKindOfClass:[StarButton class]] && ![obj isKindOfClass:[BridgeButton class]] ) {
-            [_scene setupElement:p Name:NSStringFromClass([obj class]) Hidden:[obj hidden]];
-        //} else {
-        //    [_scene setupElement:p Name:@"ButtonOFF" Hidden:[obj hidden]];
-        //}
+    for(id key in [[_boardController board] elementDictionary]) {
+        NSMutableArray *arr = [[[_boardController board] elementDictionary] objectForKey:key];
+        Element *e = [arr objectAtIndex:0];
+        CGPoint elementPos = CGPointMake(e.x, e.y);
+        [_scene updateElementsAtPosition:elementPos withArray:arr];
     }
 }
 
@@ -252,35 +261,38 @@
     // The unit who wants to move's position.
     NSInteger unitX = _currentUnit.x;
     NSInteger unitY = _currentUnit.y;
-    CGPoint unitPoint = CGPointMake(unitX, unitY);
+    CGPoint from = CGPointMake(unitX, unitY);
     NSNumber *unitKey = [NSNumber numberWithInt:unitY*BOARD_SIZE_X + unitX];
-    NSInteger unitIntKey = [unitKey integerValue];
-    Element *eFrom = [[_board elementDictionary] objectForKey:unitKey];
     
-    CGPoint movePoint = CGPointMake(x, y);
-    NSNumber *nextPosKey = [NSNumber numberWithInt:y*BOARD_SIZE_X + x];
-    Element *e = [[_board elementDictionary] objectForKey:nextPosKey];
+    CGPoint to = CGPointMake(x, y);
 
-    NSInteger dir = [Converter convertCoordsTo:movePoint Direction:unitPoint];
+    NSInteger dir = [Converter convertCoordsTo:to Direction:from];
     // First check if the movement is possible on the board and the move isn't to the same point or
     // diagonally.
-    if([_board isPointMovableTo:movePoint] && ![Converter isPoint:movePoint sameAsPoint:unitPoint]
-       && [Converter isPoint:unitPoint NextToPoint:movePoint]) {
-        // Move unit in data model and view.
+
+    // Move unit in data model and view.
+    CGPoint nextUnitPos = CGPointMake(_nextUnit.x, _nextUnit.y);
+    if([_boardController unitWantsToMoveFrom:from To:to WithSwipe:swipe UnitWasAstronatut:_currentUnit == _bigL OtherUnitPosition:nextUnitPos]) {
         _currentUnit.x = x;
         _currentUnit.y = y;
-        [_scene updateUnit:movePoint inDirection:dir];
-        
+        [_scene updateUnit:to inDirection:dir];
+        [_scene refreshTileAtPosition:from WithStatus:[_boardController getBoardStatusAtPosition:from]];
+    }
+    [_scene updateElementsAtPosition:from withArray:[_boardController elementsAtPosition:from]];
+    [_scene updateElementsAtPosition:to withArray:[_boardController elementsAtPosition:to]];
+
+        // UPDATE ELEMENTS AT from AND to
         /* ---------------------------------------------------------------------------------------------
          
         New structure of controller, model, and elements:
         -------------------------------------------------
           Board has functions that checks what elements are on a position, and updates them accordingly.
           The elements container will be either a) having an array in each BoardCoord that holds the
-          elements on that position, or b) 2 (or 3) separate dictionaries. These separate dictionaries would represent the different layers of elements on the board.
+          elements on that position, or b) 2 (or 3) separate dictionaries. These separate dictionaries 
+          would represent the different layers of elements on the board.
          
-          Pros and Cons:
-          --------------
+          Pros and Cons: (a) WAS THE CHOICE)
+          ----------------------------------
             - a) is more dynamic in adding several elements on one point. Could theoretically have as
               many elements on a point as you want. Time complexity increases (O(n)) as well as space 
               usage. This should be a minor increase, though (I think), since the array is so small with
@@ -288,8 +300,8 @@
             - b) is more static. For every new layer of element you want in the game, code has to be 
               updated. Time complexity (O(1)) is less as well as space usage.
          
-          Counting stars with method a)
-          -----------------------------
+          Counting stars with method a) (DONE)
+          ------------------------------------
           At init, loop through all BoardCoords and count how many stars. Since this is O(n*n), this should
           only be done at init, and not every time a star is taken. Save amount of stars in a property.
           Every time (in Board unitMovedToPoint) a star is taken, subtract 1 from this propery.
@@ -311,8 +323,11 @@
           if boardController isPointMovableTo
             currentUnitPos = toPos;
             boardController unitMovedFrom:from To:to
+            scene updateTileAtPosition...
             scene updateElementAtPosition:from withArray:boardController elementsAtPosition:from
             scene updateElementAtPosition:to withArray:boardController elementsAtPosition:to
+            scene updateUnit:to Dir:dir
+            player.stars = boardController starstaken
          
          ----------------------------------------------------------------------------------------------*/
         
@@ -385,10 +400,6 @@
  *  Called when a unit (i.e. the user) wants to do an action. First checks if the action is possible,
  *  then chooses an action based on what element the action is performed on. */
 -(void)unitWantsToDoActionAt:(CGPoint)loc {
-    NSInteger x = loc.x;
-    NSInteger y = loc.y;
-
-    NSNumber *actionPointKey = [NSNumber numberWithInt:y*BOARD_SIZE_X + x];
     NSInteger unitX = _currentUnit.x;
     NSInteger unitY = _currentUnit.y;
     
@@ -533,7 +544,8 @@
     [_scene refreshElementAtPosition:pl.key OfClass:CLASS_LEVER WithStatus:pl.state];
     // Updates the moving platform connected to the lever on the scene, i.e. moving it.
     [_scene setElementAtPosition:pl.movingPlatform.key IsHidden:NO];
-    [_scene refreshElementAtPosition:pl.movingPlatform.key OfClass:CLASS_MOVING_PLATFORM WithStatus:pl.movingPlatform.blocking];
+    [_scene refreshElementAtPosition:pl.movingPlatform.key OfClass:CLASS_MOVING_PLATFORM
+                          WithStatus:pl.movingPlatform.blocking];
     
     [NSTimer scheduledTimerWithTimeInterval:0.6 target:self
                                    selector:@selector(movePlatform:)  userInfo:pl.movingPlatform
@@ -582,7 +594,7 @@
 /*
  *  Checks if the |currentUnit| is on the finish position. */
 -(BOOL)areUnitsOnFinish {
-    CGPoint finishPoint = CGPointMake(_board.finishPos.x, _board.finishPos.y);
+    CGPoint finishPoint = CGPointMake(_boardController.board.finishPos.x, _boardController.board.finishPos.y);
     CGPoint currentUnitPoint = CGPointMake(_currentUnit.x, _currentUnit.y);
     CGPoint nextUnitPoint = CGPointMake(_nextUnit.x, _nextUnit.y);
     
@@ -614,27 +626,20 @@
 /*
  *  Creates the units. */
 -(void)setupUnits {
-    _bigL = [[BigL alloc] init];
-    _bigL.x = _board.startPosAstronaut.x;
-    _bigL.y = _board.startPosAstronaut.y;
+    _bigL.x = _boardController.board.startPosAstronaut.x;
+    _bigL.y = _boardController.board.startPosAstronaut.y;
  
-    CGPoint p = CGPointMake(_bigL.x, _bigL.y);
-    [_scene setupAstronaut:p];
     // If the unit has a valid starting position, it is playing.
-    if(_board.startPosAstronaut.x >= 0 && _board.startPosAstronaut.y >= 0) {
+    if(_bigL.x >= 0 && _bigL.y >= 0) {
         _bigL.isPlayingOnLevel = YES;
     } else {
         _bigL.isPlayingOnLevel = NO;
     }
     
-    _littleJohn = [[LittleJohn alloc] init];
-    _littleJohn.x = _board.startPosAlien.x;
-    _littleJohn.y = _board.startPosAlien.y;
-
-    CGPoint pp = CGPointMake(_littleJohn.x, _littleJohn.y);
-    [_scene setupAlien:pp];
+    _littleJohn.x = _boardController.board.startPosAlien.x;
+    _littleJohn.y = _boardController.board.startPosAlien.y;
     
-    if(_board.startPosAlien.x >= 0 && _board.startPosAlien.y >= 0) {
+    if(_littleJohn.x >= 0 && _littleJohn.y >= 0) {
         _littleJohn.isPlayingOnLevel = YES;
     } else {
         _littleJohn.isPlayingOnLevel = NO;
@@ -644,25 +649,56 @@
         NSLog(@"Only L");
         _currentUnit = _bigL;
         _nextUnit = _bigL;
-        [_scene setCurrentUnitWithMacro:BIG_L];
     } else if(!_bigL.isPlayingOnLevel && _littleJohn.isPlayingOnLevel) {
         NSLog(@"Only John");
         _currentUnit = _littleJohn;
         _nextUnit = _littleJohn;
-        [_scene setCurrentUnitWithMacro:LITTLE_JOHN];
     } else if([_bigL isPlayingOnLevel] && [_littleJohn isPlayingOnLevel]) {
         // If both are playing, set astronaut as starting unit as default.
         _currentUnit = _bigL;
         _nextUnit = _littleJohn;
-        [_scene setCurrentUnitWithMacro:BIG_L];
     }
+    
+    // Units in scene.
+    CGPoint pA = CGPointMake(_bigL.x, _bigL.y);
+    [_scene setupAstronaut:pA];
+    CGPoint pAl = CGPointMake(_littleJohn.x, _littleJohn.y);
+    
+    [_scene setupAlien:pAl];
+    [_scene setCurrentUnitWithMacro:[self currentUnitToMacro]];
+}
+
+-(NSInteger)currentUnitToMacro {
+    if(_currentUnit == _bigL) {
+        return BIG_L;
+    } else if(_currentUnit == _littleJohn) {
+        return LITTLE_JOHN;
+    }
+    return -1;
 }
 
 -(void)setupNextLevel {
-    [_scene cleanScene];
-    [self setupBoard];
+    [self getNextLevel];
+    [_boardController setupBoardWithWorld:_world AndLevel:_level];
+    [self setupScene];
     [self setupElements];
     [self setupUnits];
+}
+
+-(void)setupScene {
+    [_scene cleanScene];
+    // Board in scene.
+    for(int i = 0; i < BOARD_SIZE_Y; i++) {
+        for(int j = 0; j < BOARD_SIZE_X; j++) {
+            CGPoint p = CGPointMake(j, i);
+            [_scene setupBoardX:j Y:i Status:[_boardController getBoardStatusAtPosition:p]];
+        }
+    }
+    CGPoint p = CGPointMake(_boardController.board.finishPos.x, _boardController.board.finishPos.y);
+    p = [Converter convertCoordToPixel:p];
+    p.x += TILESIZE/2;
+    p.y -= 2;
+    [_scene finish].position = p;
 }
 
 /*
@@ -673,6 +709,10 @@
 
 -(BOOL)shouldAutorotate {
     return YES;
+}
+
+-(void)updateElementsAtPosition:(CGPoint)pos withArray:(NSMutableArray *)elArr {
+    [_scene updateElementsAtPosition:pos withArray:elArr];
 }
 
 -(NSUInteger)supportedInterfaceOrientations {

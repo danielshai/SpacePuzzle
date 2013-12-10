@@ -13,6 +13,7 @@
 @class SpacePuzzleController;
 
 @interface MainScene : SKScene
+@property (nonatomic, retain) SpacePuzzleController *controller;
 @property (nonatomic, retain) SKTexture *solidTile;
 @property (nonatomic, retain) SKTexture *crackedTile;
 @property (nonatomic, retain) SKTexture *voidTile;
@@ -51,6 +52,7 @@
 @property (nonatomic, retain) SKAction *mBox;
 
 -(void)updateUnit:(CGPoint) coord inDirection:(NSInteger) direction;
+-(void)updateElementsAtPosition: (CGPoint)pos withArray: (NSMutableArray*)elArr;
 -(void)refreshTileAtPosition: (CGPoint)pos WithStatus: (NSInteger)status;
 -(void)refreshTileAtFlatIndex: (NSInteger)findex WithStatus:(NSInteger)status;
 -(void)refreshElementAtPosition: (NSNumber*)index OfClass:(NSString*)name WithStatus:(BOOL)on;
@@ -67,5 +69,6 @@
 -(void)cleanScene;
 -(void)starTakenAtPosition: (NSNumber*)index CurrentTaken:(NSInteger)taken;
 -(SKTexture*)updateSpriteWith:(NSString *) name State: (BOOL)state;
+-(CGSize)sizeForElement: (Element*)e;
 
 @end
