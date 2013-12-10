@@ -242,8 +242,10 @@
        // [self boxMovedToPoint:rockPoint FromPoint:posPreMove OtherUnitPos:otherUnitPos];
     } else if(nextTile == MAPSTATUS_CRACKED) {
         // UPDATE SCENE!!!!
+        NSLog(@"A CRACKED");
         bcMovedTo.status = MAPSTATUS_VOID;
         [bcFrom.elements removeAllObjects];
+        [self.scene refreshTileAtPosition:rockPoint WithStatus:bcMovedTo.status];
     }
     
     // SHOULD BE ADDED BACK. NO!

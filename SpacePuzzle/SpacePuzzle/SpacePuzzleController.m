@@ -29,8 +29,7 @@
 @synthesize level = _level;
 @synthesize boardController = _boardController;
 
--(void)viewDidLoad
-{
+-(void)viewDidLoad {
     [super viewDidLoad];
     _bigL = [[BigL alloc] init];
     _littleJohn = [[LittleJohn alloc] init];
@@ -225,11 +224,11 @@
     // Load the board.
     [self getNextLevel];
     NSString *currentLevel = @"Level";
-    currentLevel = [currentLevel stringByAppendingString:[NSString stringWithFormat:@"%d", _world]];
+    currentLevel = [currentLevel stringByAppendingString:[NSString stringWithFormat:@"%ld", (long)_world]];
     if(_level < 10) {
-        currentLevel = [currentLevel stringByAppendingString:[NSString stringWithFormat:@"%d%d", 0, _level]];
+        currentLevel = [currentLevel stringByAppendingString:[NSString stringWithFormat:@"%d%ld", 0, (long)_level]];
     } else {
-        currentLevel = [currentLevel stringByAppendingString:[NSString stringWithFormat:@"%d", _level]];
+        currentLevel = [currentLevel stringByAppendingString:[NSString stringWithFormat:@"%ld", (long)_level]];
     }
 
     NSString *path = [[NSBundle mainBundle] pathForResource:currentLevel ofType:@"splvl"];
@@ -416,6 +415,7 @@
     } else {
         _player = [[Player alloc] initWithWorld:0 andLevel:1];
     }
+    
 }
 
 /*
@@ -475,6 +475,7 @@
 -(void)setupNextLevel {
     [self getNextLevel];
     [_boardController setupBoardWithWorld:_world AndLevel:_level];
+    [swipeArray removeAllObjects];
     [self setupScene];
     [self setupElements];
     [self setupUnits];
