@@ -7,6 +7,8 @@
 #import "Converter.h"
 #import "BigLWalk.h"
 #import "LittleJohnWalk.h"
+#import "StarOnTile.h"
+#import "StarTaken.h"
 #import "AnimationFactory.h"
 #import "Element.h"
 #import "Position.h"
@@ -42,6 +44,8 @@
 @synthesize gui = _gui;
 @synthesize guiAstro = _guiAstro;
 @synthesize mBox = _mBox;
+@synthesize mStar = _mStar;
+@synthesize tStar = _tStar;
 
 -(id)initWithSize:(CGSize)size {    
     if (self = [super initWithSize:size]) {
@@ -137,7 +141,7 @@
         _lWLeft = [SKAction sequence:@[walk, walk, walk, walk]];
     }];
     
-    // Preloading Boxes moving animations.
+    // Preloading the Boxes moving animations.
     NSArray *arr = [[NSArray alloc] init];
     SKTexture *t = [SKTexture textureWithImageNamed:@"Box.png"];
     arr = @[t,t,t,t];
@@ -145,6 +149,18 @@
         SKAction *moveBox = [SKAction animateWithTextures:arr timePerFrame:TIME_PER_FRAME_BOX_MOVE];
         _mBox = [SKAction sequence:@[moveBox, moveBox, moveBox, moveBox]];
     }];
+    /*
+    // Preloading the Stars moving animations.
+    [SKTexture preloadTextures:STARONTILE_ANIM_MOVING withCompletionHandler:^(void){
+        SKAction *moveStar = [SKAction animateWithTextures:STARONTILE_ANIM_MOVING timePerFrame:0.05];
+        _mStar = [SKAction repeatActionForever:moveStar];
+    }];
+    
+    // Preloading the Stars taken animations.
+    [SKTexture preloadTextures:STARTAKEN_ANIM_STARTAKEN withCompletionHandler:^(void){
+        SKAction *takenStar = [SKAction animateWithTextures:STARTAKEN_ANIM_STARTAKEN timePerFrame:0.02];
+        _tStar = [SKAction sequence:@[takenStar]];
+    }];*/
 }
 
 /*
@@ -284,7 +300,8 @@
     } else {
         move = [SKAction moveTo:CGPointMake(184, 453) duration:1];
     }
-    [star runAction:move];
+//    SKAction *action = [SKAction group:@[_tStar, move]];
+//    [star runAction:action];
     //[self removeElementAtPosition:index];
 }
 

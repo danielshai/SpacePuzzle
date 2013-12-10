@@ -49,6 +49,8 @@
 @property (nonatomic, retain) SKAction *lWRight;
 @property (nonatomic, retain) SKAction *lWLeft;
 @property (nonatomic, retain) SKAction *mBox;
+@property (nonatomic, retain) SKAction *mStar;
+@property (nonatomic, retain) SKAction *tStar;
 
 -(void)updateUnit:(CGPoint) coord inDirection:(NSInteger) direction;
 -(void)refreshTileAtPosition: (CGPoint)pos WithStatus: (NSInteger)status;
