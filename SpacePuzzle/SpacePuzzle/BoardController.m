@@ -72,6 +72,7 @@
             Element *eTo = [[bcTo elements] objectAtIndex:i];
             if([eTo isKindOfClass:[Star class]] && ![eTo hidden] && ![eTo taken]) {
                 [self takeStar:eTo WithIndex:i];
+                NSLog(@"moveEls");
                 [bcTo.elements removeObject:eTo];
                 [self.spController updateElementsAtPosition:from withArray:bcFrom.elements];
               //  [self.spController updateElementsAtPosition:to withArray:bcTo.elements];
@@ -108,6 +109,7 @@
         if([eTo isKindOfClass:[Star class]] && ![eTo hidden] && ![eTo taken]) {
             [self takeStar:eTo WithIndex:i];
             [bcTo.elements removeObject:eTo];
+            NSLog(@"updateEls");
             [self.spController updateElementsAtPosition:to withArray:bcTo.elements];
         } else if([eTo isKindOfClass:[StarButton class]]) {
             [self doActionOnStarButton:eTo OtherUnitPoint:otherUnitPoint WithIndex:i];
@@ -307,6 +309,8 @@
     [sb movedTo];
     CGPoint starPos = CGPointMake(sb.star.x, sb.star.y);
     CGPoint buttonPos = CGPointMake(sb.x, sb.y);
+    BoardCoord *bcStar = [[_board board] objectAtIndex:[Converter CGPointToKey:starPos]];
+    BoardCoord *bcButton = [[_board board] objectAtIndex:[Converter CGPointToKey:buttonPos]];
     // Updates the star connected to the button on the scene, i.e. showing it.
     if(!sb.star.taken) {
         // If the other unit is standing on the same spot as the star and button is on the star should be
@@ -316,12 +320,14 @@
             /* ------------------------------------------------------------------------------------------*/
             // HOW TO GET INDEX OF sb.star?!?!??!?!?!?!?!?!?+1 BOARDCOORD????
             [self takeStar:sb.star WithIndex:0];
+            NSLog(@"action up");
+            [bcStar.elements removeObject:sb.star];
+            [self.spController updateElementsAtPosition:starPos withArray:bcStar.elements];
             /* ------------------------------------------------------------------------------------------*/
             /* ------------------------------------------------------------------------------------------*/
         }
     }
-    BoardCoord *bcStar = [[_board board] objectAtIndex:[Converter CGPointToKey:starPos]];
-    BoardCoord *bcButton = [[_board board] objectAtIndex:[Converter CGPointToKey:buttonPos]];
+
     [self.spController updateElementsAtPosition:starPos withArray:bcStar.elements];
     [self.spController updateElementsAtPosition:buttonPos withArray:bcButton.elements];
 }

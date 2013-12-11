@@ -406,8 +406,18 @@
 
 -(void)starTakenAtPosition:(Element *)star AtIndex: (NSInteger)index CurrentTaken:(NSInteger)taken {
     NSMutableArray *elArr = [_elements objectForKey:star.key];
+    NSLog(@"%@",star.key);
+    NSInteger ind = 0;
+    for (int i = 0; i < elArr.count; i++) {
+        SKSpriteNode *s = [elArr objectAtIndex:i];
+        if(s.texture == _star) {
+            ind = i;
+            break;
+        }
+    }
+    NSLog(@"STAR TAKEN");
+    SKSpriteNode *starSprite = [elArr objectAtIndex:ind];
     
-    SKSpriteNode *starSprite = [elArr objectAtIndex:index];
     SKAction *moveToBar;
     SKAction *moveUpwards = [SKAction moveTo:CGPointMake(starSprite.position.x, (starSprite.position.y + 40)) duration:1.0];
     
