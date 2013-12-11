@@ -24,7 +24,7 @@
 -(NSInteger) getBoardStatusAtPosition: (CGPoint)p;
 -(BOOL) isPointMovableTo: (CGPoint)p;
 -(NSMutableArray*) elementsAtPosition: (CGPoint)p;
--(void)takeStar: (Element*)star WithIndex: (NSInteger)index;
+-(void)takeStar: (Element*)star;
 -(BOOL)removeElement: (Element*)e FromBoardCoord: (BoardCoord*)bc;
 -(void)addElement: (Element*)e ToBoardCoord: (BoardCoord*)bc;
 -(void)moveBox: (Element*)rock InDirection: (NSInteger)dir OtherUnitPosition: (CGPoint)otherUnitPos;
