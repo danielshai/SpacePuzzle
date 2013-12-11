@@ -70,7 +70,7 @@
         for (int i = 0; i < bcTo.elements.count; i++) {
         // If the element is a star.
             Element *eTo = [[bcTo elements] objectAtIndex:i];
-            if([eTo isKindOfClass:[Star class]] && ![eTo hidden] && ![eTo taken]) {
+            if([eTo isKindOfClass:[Star class]] && ![eTo hidden]) {
                 [self takeStar:eTo];
                 [bcTo.elements removeObject:eTo];
                 [self.spController updateElementsAtPosition:from withArray:bcFrom.elements];
