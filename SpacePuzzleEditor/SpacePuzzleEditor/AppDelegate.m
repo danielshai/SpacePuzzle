@@ -25,8 +25,7 @@
 @synthesize connections = _connections;
 @synthesize palette = _palette;
 
-- (void)applicationDidFinishLaunching:(NSNotification *)aNotification
-{
+-(void)applicationDidFinishLaunching:(NSNotification *)aNotification {
  //   _window.acceptsMouseMovedEvents = YES;
    // [_window makeFirstResponder:self.skView.scene];
  
@@ -65,22 +64,26 @@
     NSValue *endPoint = [data objectAtIndex:1];
     
     NSNumber *indexStart = [NSNumber numberWithInteger:startPoint.pointValue.y*BOARD_SIZE_X + startPoint.pointValue.x];
+    NSInteger indexStartInt = [indexStart integerValue];
+    BoardCoord *bc = [[_board board] objectAtIndex:indexStartInt];
+    // Since, in the editor, you can only place one element at a position, always take index:0.
+    if(bc.elements.count > 0) {
+        Element *eStart = [bc.elements objectAtIndex:0];
+        //  Element *eEnd = [[_board elementDictionary] objectForKey:indexEnd];
     
-    Element *eStart = [[_board elementDictionary] objectForKey:indexStart];
-  //  Element *eEnd = [[_board elementDictionary] objectForKey:indexEnd];
-    
-    CGPoint pStart = CGPointMake(startPoint.pointValue.x, startPoint.pointValue.y);
-    CGPoint pEnd = CGPointMake(endPoint.pointValue.x, endPoint.pointValue.y);
+        CGPoint pStart = CGPointMake(startPoint.pointValue.x, startPoint.pointValue.y);
+        CGPoint pEnd = CGPointMake(endPoint.pointValue.x, endPoint.pointValue.y);
 
-    if(eStart && [_board isPointWithinBoard:pStart] && [_board isPointWithinBoard:pEnd]) {
-        if([eStart isKindOfClass:[MovingPlatform class]]) {
-            MovingPlatform *mp = (MovingPlatform*)eStart;
-            NSMutableArray *points = [[mp path] points];
-            Position *p = [points objectAtIndex:[points count]-1];
-            CGPoint pp = CGPointMake(p.x, p.y);
-            if((p.x != pEnd.x || p.y != pEnd.y) && ![Converter isPoint:pp DiagonallyAdjacentWithPoint:pEnd]) {
-                [[mp path] addPoint:pEnd];
-                [self refreshPathView:pEnd];
+        if(eStart && [_board isPointWithinBoard:pStart] && [_board isPointWithinBoard:pEnd]) {
+            if([eStart isKindOfClass:[MovingPlatform class]]) {
+                MovingPlatform *mp = (MovingPlatform*)eStart;
+                NSMutableArray *points = [[mp path] points];
+                Position *p = [points objectAtIndex:[points count]-1];
+                CGPoint pp = CGPointMake(p.x, p.y);
+                if((p.x != pEnd.x || p.y != pEnd.y) && ![Converter isPoint:pp DiagonallyAdjacentWithPoint:pEnd]) {
+                    [[mp path] addPoint:pEnd];
+                    [self refreshPathView:pEnd];
+                }
             }
         }
     }
@@ -88,21 +91,27 @@
 
 -(void)refreshPathView:(CGPoint)p {
     [_scene removeAllPaths];
-    for(id key in [_board elementDictionary]) {
-        Element *e = [[_board elementDictionary] objectForKey:key];
-        if([e isKindOfClass:[MovingPlatform class]]) {
-            MovingPlatform *mp = (MovingPlatform*)e;
-            NSMutableArray *vals = [[NSMutableArray alloc] init];
-            for(int j = 0; j < mp.path.points.count; j++ ) {
-                Position *p = [mp.path.points objectAtIndex:j];
-                NSPoint pp;
-                pp.x = p.x;
-                pp.y = p.y;
-                
-                NSValue *v = [NSValue valueWithPoint:pp];
-                [vals insertObject:v atIndex:j];
+    
+    for (int i = 0; i < [[_board board] count]; i++) {
+        BoardCoord *bc = [[_board board] objectAtIndex:i];
+        
+        for (int j = 0; j < bc.elements.count; j++) {
+            Element *e = [bc.elements objectAtIndex:j];
+            
+            if([e isKindOfClass:[MovingPlatform class]]) {
+                MovingPlatform *mp = (MovingPlatform*)e;
+                NSMutableArray *vals = [[NSMutableArray alloc] init];
+                for(int j = 0; j < mp.path.points.count; j++ ) {
+                    Position *p = [mp.path.points objectAtIndex:j];
+                    NSPoint pp;
+                    pp.x = p.x;
+                    pp.y = p.y;
+                    
+                    NSValue *v = [NSValue valueWithPoint:pp];
+                    [vals insertObject:v atIndex:j];
+                }
+                [_scene addAPath:vals];
             }
-            [_scene addAPath:vals];
         }
     }
     [_scene pathHighlight:p];
@@ -117,20 +126,29 @@
     NSValue *endPoint = [data objectAtIndex:1];
     NSNumber *indexStart = [NSNumber numberWithInteger:startPoint.pointValue.y*BOARD_SIZE_X + startPoint.pointValue.x];
     NSNumber *indexEnd = [NSNumber numberWithInteger:endPoint.pointValue.y*BOARD_SIZE_X + endPoint.pointValue.x];
+    NSInteger indexStartInt = [indexStart integerValue];
+    NSInteger indexEndInt = [indexEnd integerValue];
     
-    Element *eStart = [[_board elementDictionary] objectForKey:indexStart];
-    Element *eEnd = [[_board elementDictionary] objectForKey:indexEnd];
+    BoardCoord *bcStart = [[_board board] objectAtIndex:indexStartInt];
+    BoardCoord *bcEnd = [[_board board] objectAtIndex:indexEndInt];
     
-    CGPoint pStart = CGPointMake(startPoint.pointValue.x, startPoint.pointValue.y);
-    CGPoint pEnd = CGPointMake(endPoint.pointValue.x, endPoint.pointValue.y);
+    if(bcStart.elements.count > 0 && bcEnd.elements.count > 0) {
+        Element *eStart = [bcStart.elements objectAtIndex:0];
+        Element *eEnd = [bcEnd.elements objectAtIndex:0];
+    
+        CGPoint pStart = CGPointMake(startPoint.pointValue.x, startPoint.pointValue.y);
+        CGPoint pEnd = CGPointMake(endPoint.pointValue.x, endPoint.pointValue.y);
 
-    if(eStart && eEnd && [_board isPointWithinBoard:pStart] && [_board isPointWithinBoard:pEnd]) {
-        if([Connections isValidConnection:eStart To:eEnd]) {
-            // Tell the scene to highlight element.
-            CGPoint p = CGPointMake(endPoint.pointValue.x, endPoint.pointValue.y);
-            [_scene highlightElement:p];
+        if(eStart && eEnd && [_board isPointWithinBoard:pStart] && [_board isPointWithinBoard:pEnd]) {
+            if([Connections isValidConnection:eStart To:eEnd]) {
+                // Tell the scene to highlight element.
+                CGPoint p = CGPointMake(endPoint.pointValue.x, endPoint.pointValue.y);
+                [_scene highlightElement:p];
+            } else {
+                // No highlight should be presented, since the elements cannot be connected.
+                [_scene noHighlight];
+            }
         } else {
-            // No highlight should be presented, since the elements cannot be connected.
             [_scene noHighlight];
         }
     } else {
@@ -147,22 +165,28 @@
     NSValue *endPoint = [data objectAtIndex:1];
     NSNumber *indexStart = [NSNumber numberWithInteger:startPoint.pointValue.y*BOARD_SIZE_X + startPoint.pointValue.x];
     NSNumber *indexEnd = [NSNumber numberWithInteger:endPoint.pointValue.y*BOARD_SIZE_X + endPoint.pointValue.x];
-    NSLog(@"Start: %f %f", startPoint.pointValue.x, startPoint.pointValue.y);
-    NSLog(@"End: %f %f", endPoint.pointValue.x, endPoint.pointValue.y);
-    Element *eStart = [[_board elementDictionary] objectForKey:indexStart];
-    Element *eEnd = [[_board elementDictionary] objectForKey:indexEnd];
+    NSInteger indexStartInt = [indexStart integerValue];
+    NSInteger indexEndInt = [indexEnd integerValue];
     
-    if(eStart && eEnd) {
-        // Check class for highlighting purpose.
-        if([Connections isValidConnection:eStart To:eEnd]) {
-            [_connections addConnectionFrom:eStart To:eEnd];
-            [self updateConnectionsView];
+    BoardCoord *bcStart = [[_board board] objectAtIndex:indexStartInt];
+    BoardCoord *bcEnd = [[_board board] objectAtIndex:indexEndInt];
+    
+    if(bcStart.elements.count > 0 && bcEnd.elements.count > 0) {
+        Element *eStart = [bcStart.elements objectAtIndex:0];
+        Element *eEnd = [bcEnd.elements objectAtIndex:0];
+    
+        if(eStart && eEnd) {
+            // Check class for highlighting purpose.
+            if([Connections isValidConnection:eStart To:eEnd]) {
+                [_connections addConnectionFrom:eStart To:eEnd];
+                [self updateConnectionsView];
+            } else {
+                // No highlight should be presented, since the elements cannot be connected.
+                [_scene noHighlight];
+            }
         } else {
-            // No highlight should be presented, since the elements cannot be connected.
             [_scene noHighlight];
         }
-    } else {
-        [_scene noHighlight];
     }
 }
 
@@ -204,6 +228,8 @@
     }
 }
 
+/*
+ *  Updated the view with every element present in the data model. */
 -(void)refreshElementView {
     CGPoint sAs = CGPointMake(_board.startPosAstronaut.x, _board.startPosAstronaut.y);
     CGPoint sAl = CGPointMake(_board.startPosAlien.x, _board.startPosAlien.y);
@@ -211,10 +237,14 @@
     [_scene refreshStartAstro:sAs StartAlien:sAl Finish:f];
     
     [_scene cleanElements];
-    for(id key in [_board elementDictionary]) {
-        Element *e = [[_board elementDictionary] objectForKey:key];
-        CGPoint pos = CGPointMake(e.x, e.y);
-        [_scene addElement:[_scene classToBrush:e.className] Position:pos];
+    for(int i = 0; i < [_board board].count; i++) {
+        BoardCoord *bc = [[_board board] objectAtIndex:i];
+      
+        for(int j = 0; j < bc.elements.count; j++) {
+            Element *e = [[bc elements] objectAtIndex:j];
+            CGPoint pos = CGPointMake(e.x, e.y);
+            [_scene addElement:[_scene classToBrush:e.className] Position:pos];
+        }
     }
 }
 
@@ -308,6 +338,8 @@
     }
 }
 
+/* 
+ *  Shows the connections in the view. */
 -(void)updateConnectionsView {
     [_scene removeAllConnections];
     
@@ -325,26 +357,29 @@
  *  a level is loaded. */
 -(void)loadConnections {
     [_connections removeAllConnections];
-    for(id key in [_board elementDictionary]) {
-        Element *e = [[_board elementDictionary] objectForKey:key];
-        
-        if([e isKindOfClass: [StarButton class]]) {
-            StarButton *sb = (StarButton*)e;
-            Element *to = (Element*)sb.star;
-            if(sb.star) {
-                [_connections addConnectionFrom:e To:to];
-            }
-        } else if([e isKindOfClass:[BridgeButton class]]) {
-            BridgeButton *bb = (BridgeButton*)e;
-            Element *to = (Element*)bb.bridge;
-            if(bb.bridge) {
-                [_connections addConnectionFrom:bb To:to];
-            }
-        } else if([e isKindOfClass:[PlatformLever class]]) {
-            PlatformLever *pl = (PlatformLever*)e;
-            Element *to = (Element*)pl.movingPlatform;
-            if(pl.movingPlatform) {
-                [_connections addConnectionFrom:pl To:to];
+    
+    for (int i = 0; i < [[_board board] count]; i++) {
+        BoardCoord *bc = [[_board board] objectAtIndex:i];
+        for (int j = 0; j < bc.elements.count; j++) {
+            Element *e = [bc.elements objectAtIndex:j];
+            if([e isKindOfClass: [StarButton class]]) {
+                StarButton *sb = (StarButton*)e;
+                Element *to = (Element*)sb.star;
+                if(sb.star) {
+                    [_connections addConnectionFrom:e To:to];
+                }
+            } else if([e isKindOfClass:[BridgeButton class]]) {
+                BridgeButton *bb = (BridgeButton*)e;
+                Element *to = (Element*)bb.bridge;
+                if(bb.bridge) {
+                    [_connections addConnectionFrom:bb To:to];
+                }
+            } else if([e isKindOfClass:[PlatformLever class]]) {
+                PlatformLever *pl = (PlatformLever*)e;
+                Element *to = (Element*)pl.movingPlatform;
+                if(pl.movingPlatform) {
+                    [_connections addConnectionFrom:pl To:to];
+                }
             }
         }
     }

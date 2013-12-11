@@ -336,7 +336,7 @@
     
     NSNumber *indexOrigin = [NSNumber numberWithFloat:oldCoord.y*BOARD_SIZE_X + oldCoord.x];
     NSNumber *indexNew = [NSNumber numberWithFloat:newCoord.y*BOARD_SIZE_X + newCoord.x];
-    //  NSLog(@"moving: %f %f %f %f", oldCoord.x,oldCoord.y,newCoord.x,newCoord.y);
+   
     if(indexNew.integerValue == indexOrigin.integerValue) {
         //return;
         // SHOULD ANYTHING HAPPEN HERE?
@@ -431,7 +431,7 @@
     starSprite.zPosition = [self getZPositionForElement:star];
     [self addChild:starSprite];
     [takenStarsArray addObject:starSprite];
-    
+   
     SKAction *moveToBar;
     SKAction *moveUpwards = [SKAction moveTo:CGPointMake(starSprite.position.x, (starSprite.position.y + 40)) duration:1.0];
     
