@@ -321,7 +321,8 @@
     NSNumber *indexNew = [NSNumber numberWithFloat:newCoord.y*BOARD_SIZE_X + newCoord.x];
     //  NSLog(@"moving: %f %f %f %f", oldCoord.x,oldCoord.y,newCoord.x,newCoord.y);
     if(indexNew.integerValue == indexOrigin.integerValue) {
-        return;
+        //return;
+        // SHOULD ANYTHING HAPPEN HERE?
     }
     NSMutableArray *elArr = [_elements objectForKey:indexOrigin];
     NSMutableArray *elNewArr = [_elements objectForKey:indexNew];
@@ -361,15 +362,13 @@
         }
     }
     
-    if (status == MAPSTATUS_SOLID) {
+    if (status == MAPSTATUS_SOLID || status == MAPSTATUS_CRACKED) {
         SKAction *move = [SKAction moveTo:movePixel duration:_mBox.duration];
         SKAction *action = [SKAction group:@[_mBox, move]];
         [s runAction:action completion:^(void){
             s.position = movePixel;
             [self.controller sceneFinishedMovingElementFrom:oldCoord WithIndex:elementIndex To:newCoord];
         }];
-    } else if (status == MAPSTATUS_CRACKED) {
-        // FIX LATER
     } else {
         SKAction *move = [SKAction moveTo:movePixel duration:_mBox.duration];
         SKAction *action = [SKAction group:@[_mBox, move]];
@@ -407,8 +406,18 @@
 
 -(void)starTakenAtPosition:(Element *)star AtIndex: (NSInteger)index CurrentTaken:(NSInteger)taken {
     NSMutableArray *elArr = [_elements objectForKey:star.key];
+    NSLog(@"%@",star.key);
+    NSInteger ind = 0;
+    for (int i = 0; i < elArr.count; i++) {
+        SKSpriteNode *s = [elArr objectAtIndex:i];
+        if(s.texture == _star) {
+            ind = i;
+            break;
+        }
+    }
+    NSLog(@"STAR TAKEN");
+    SKSpriteNode *starSprite = [elArr objectAtIndex:ind];
     
-    SKSpriteNode *starSprite = [elArr objectAtIndex:index];
     SKAction *moveToBar;
     SKAction *moveUpwards = [SKAction moveTo:CGPointMake(starSprite.position.x, (starSprite.position.y + 40)) duration:1.0];
     

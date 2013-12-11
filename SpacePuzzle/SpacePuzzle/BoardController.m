@@ -72,6 +72,7 @@
             Element *eTo = [[bcTo elements] objectAtIndex:i];
             if([eTo isKindOfClass:[Star class]] && ![eTo hidden]) {
                 [self takeStar:eTo WithIndex:i];
+                NSLog(@"moveEls");
                 [bcTo.elements removeObject:eTo];
                 [self.spController updateElementsAtPosition:from withArray:bcFrom.elements];
               //  [self.spController updateElementsAtPosition:to withArray:bcTo.elements];
@@ -108,6 +109,7 @@
         if([eTo isKindOfClass:[Star class]] && ![eTo hidden] && ![eTo taken]) {
             [self takeStar:eTo WithIndex:i];
             [bcTo.elements removeObject:eTo];
+            NSLog(@"updateEls");
             [self.spController updateElementsAtPosition:to withArray:bcTo.elements];
         } else if([eTo isKindOfClass:[StarButton class]]) {
             [self doActionOnStarButton:eTo OtherUnitPoint:otherUnitPoint WithIndex:i];
@@ -151,7 +153,7 @@
         if([e isKindOfClass:[StarButton class]]) {
             StarButton *sb = (StarButton*)e;
             [sb unitLeft];
-            [self.spController updateElementsAtPosition:p withArray:bc.elements];
+            [self.scene updateElementsAtPosition:p withArray:bc.elements];
             // The star.
             CGPoint starPos = CGPointMake(sb.star.x, sb.star.y);
             BoardCoord *bcStar = [[_board board] objectAtIndex:[Converter CGPointToKey:starPos]];
@@ -224,7 +226,7 @@
         }
     }
     
-    [self.spController moveElementFrom:rockPoint WithIndex:bcFrom.elements.count-1 To:nextPos OntoStatus:bcNext.status InDir:dir];
+    [self.scene moveElementFrom:rockPoint WithIndex:bcFrom.elements.count-1 To:nextPos OntoStatus:bcNext.status InDir:dir];
     
     CGPoint posPreMove = CGPointMake(rock.x, rock.y);
     [rock doMoveAction:dir];
@@ -240,12 +242,6 @@
     if(nextTile == MAPSTATUS_SOLID) {
         [self addElement:rock ToBoardCoord:bcMovedTo];
        // [self boxMovedToPoint:rockPoint FromPoint:posPreMove OtherUnitPos:otherUnitPos];
-    } else if(nextTile == MAPSTATUS_CRACKED) {
-        // UPDATE SCENE!!!!
-        NSLog(@"A CRACKED");
-        bcMovedTo.status = MAPSTATUS_VOID;
-        [bcFrom.elements removeAllObjects];
-        [self.scene refreshTileAtPosition:rockPoint WithStatus:bcMovedTo.status];
     }
     
     // SHOULD BE ADDED BACK. NO!
@@ -269,7 +265,7 @@
 /* 
  *  A box was moved to a point. Check if there's any interaction between box and other elements 
  *  available. */
--(void)boxMovedToPoint:(CGPoint)p FromPoint:(CGPoint)pFrom OtherUnitPos:(CGPoint)otherUnitPos {
+-(void)boxMovedToPoint:(CGPoint)p FromPoint:(CGPoint)pFrom OtherUnitPos:(CGPoint)otherUnitPos InDirection:(NSInteger)dir{
     if([_board isPointWithinBoard:p] && [_board isPointWithinBoard:pFrom]) {
         BoardCoord *bc = [[_board board] objectAtIndex:[Converter CGPointToKey:p]];
         BoardCoord *bcFrom = [[_board board] objectAtIndex:[Converter CGPointToKey:pFrom]];
@@ -297,6 +293,14 @@
                 [self.scene updateElementsAtPosition:starPos withArray:bcStar.elements];
             }
         }
+        NSInteger nextTile = [[[_board board] objectAtIndex:[Converter CGPointToKey:p]] status];
+        // Box was moved to a cracked tile. The tile should be updated and animate box.
+        if(nextTile == MAPSTATUS_CRACKED) {
+            bc.status = MAPSTATUS_VOID;
+            [bc.elements removeAllObjects];
+            [self.scene refreshTileAtPosition:p WithStatus:bc.status];
+            [self.scene moveElementFrom:p WithIndex:0 To:p OntoStatus:MAPSTATUS_VOID InDir:dir];
+        }
     }
 }
 
@@ -305,6 +309,8 @@
     [sb movedTo];
     CGPoint starPos = CGPointMake(sb.star.x, sb.star.y);
     CGPoint buttonPos = CGPointMake(sb.x, sb.y);
+    BoardCoord *bcStar = [[_board board] objectAtIndex:[Converter CGPointToKey:starPos]];
+    BoardCoord *bcButton = [[_board board] objectAtIndex:[Converter CGPointToKey:buttonPos]];
     // Updates the star connected to the button on the scene, i.e. showing it.
     if(!sb.star.taken) {
         // If the other unit is standing on the same spot as the star and button is on the star should be
@@ -315,12 +321,14 @@
             // HOW TO GET INDEX OF sb.star?!?!??!?!?!?!?!?!?+1 BOARDCOORD????
             NSLog(@"Other unit on star!");
             [self takeStar:sb.star WithIndex:0];
+            NSLog(@"action up");
+            [bcStar.elements removeObject:sb.star];
+            [self.spController updateElementsAtPosition:starPos withArray:bcStar.elements];
             /* ------------------------------------------------------------------------------------------*/
             /* ------------------------------------------------------------------------------------------*/
         }
     }
-    BoardCoord *bcStar = [[_board board] objectAtIndex:[Converter CGPointToKey:starPos]];
-    BoardCoord *bcButton = [[_board board] objectAtIndex:[Converter CGPointToKey:buttonPos]];
+
     [self.spController updateElementsAtPosition:starPos withArray:bcStar.elements];
     [self.spController updateElementsAtPosition:buttonPos withArray:bcButton.elements];
 }

@@ -31,7 +31,7 @@
 -(void)doActionOnStarButton:(Element *)button OtherUnitPoint: (CGPoint)otherUnitPoint WithIndex: (NSInteger)index;
 -(void)doActionOnBoxSmash:(Element*)box;
 -(void)unitWantsToDoActionAt:(CGPoint)loc From: (CGPoint)from IsBigL: (BOOL)isBigL;
--(void)boxMovedToPoint: (CGPoint)p FromPoint: (CGPoint)pFrom OtherUnitPos: (CGPoint)otherUnitPos;
+-(void)boxMovedToPoint: (CGPoint)p FromPoint: (CGPoint)pFrom OtherUnitPos: (CGPoint)otherUnitPos InDirection: (NSInteger)dir;
 -(void)updateElementsMovedToPoint: (CGPoint)to OtherUnit: (CGPoint)otherUnitPoint;
 -(BoardCoord*) boardCoordForPoint: (CGPoint)p;
 @end
