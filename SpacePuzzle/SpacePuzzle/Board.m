@@ -129,6 +129,7 @@
 }
 
 -(void)createEmptyBoard {
+    [_board removeAllObjects];
     for (int i = 0; i < _boardSizeY; i++) {
         //j = columns
         for (int j = 0; j < _boardSizeX; j++) {

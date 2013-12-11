@@ -25,8 +25,7 @@
 @synthesize connections = _connections;
 @synthesize palette = _palette;
 
-- (void)applicationDidFinishLaunching:(NSNotification *)aNotification
-{
+-(void)applicationDidFinishLaunching:(NSNotification *)aNotification {
  //   _window.acceptsMouseMovedEvents = YES;
    // [_window makeFirstResponder:self.skView.scene];
  
