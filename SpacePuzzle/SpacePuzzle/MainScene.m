@@ -113,11 +113,12 @@
         
         takenStarsArray = [[NSMutableArray alloc] init];
         
-        NSString *myParticlePath = [[NSBundle mainBundle] pathForResource:@"TestSpark" ofType:@"sks"];
+        NSString *myParticlePath = [[NSBundle mainBundle] pathForResource:@"StarSparkParticle" ofType:@"sks"];
         _myParticle = [NSKeyedUnarchiver unarchiveObjectWithFile:myParticlePath];
         
         _myParticle.particlePosition = CGPointMake(100, 200);
         _myParticle.particleBirthRate = 10;
+        _myParticle.zPosition = 90000;
         
         [self initScene];
     }
@@ -187,7 +188,7 @@
         _tStar = [SKAction sequence:@[takenStar]];
     }];
     
-    //[self addChild:_myParticle];
+    [self addChild:_myParticle];
 }
 
 /*
