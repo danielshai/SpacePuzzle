@@ -255,7 +255,6 @@
     
     NSMutableArray *prevArr = [_elements objectForKey:index];
     if(prevArr.count > 0) {
-     
         for (int i = 0; i < prevArr.count; i++) {
             SKSpriteNode *pS = [prevArr objectAtIndex:i];
             [pS removeFromParent];
@@ -412,13 +411,13 @@
 }
 
 -(void)starTakenAtPosition:(Element *)star CurrentTaken:(NSInteger)taken {
- 
     SKSpriteNode *starSprite = [[SKSpriteNode alloc] initWithTexture:_star];
     CGPoint starPos = CGPointMake(star.x, star.y);
     starPos = [Converter convertCoordToPixel:starPos];
     starPos.x += TILESIZE/2;
     starSprite.position = starPos;
     starSprite.size = [self sizeForElement:star];
+    starSprite.zPosition = [self getZPositionForElement:star];
     [self addChild:starSprite];
     [takenStarsArray addObject:starSprite];
     

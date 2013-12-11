@@ -72,7 +72,6 @@
             Element *eTo = [[bcTo elements] objectAtIndex:i];
             if([eTo isKindOfClass:[Star class]] && ![eTo hidden]) {
                 [self takeStar:eTo];
-                NSLog(@"moveEls");
                 [bcTo.elements removeObject:eTo];
                 [self.spController updateElementsAtPosition:from withArray:bcFrom.elements];
                 [self.spController updateElementsAtPosition:to withArray:bcTo.elements];
@@ -265,17 +264,25 @@
  *  A box was moved to a point. Check if there's any interaction between box and other elements 
  *  available. */
 -(void)boxMovedToPoint:(CGPoint)p FromPoint:(CGPoint)pFrom OtherUnitPos:(CGPoint)otherUnitPos InDirection:(NSInteger)dir {
+    NSInteger removeIndex = -1;
+    
     if([_board isPointWithinBoard:p] && [_board isPointWithinBoard:pFrom]) {
         BoardCoord *bc = [[_board board] objectAtIndex:[Converter CGPointToKey:p]];
         BoardCoord *bcFrom = [[_board board] objectAtIndex:[Converter CGPointToKey:pFrom]];
-
+        
         for (int i = 0; i < bc.elements.count; i++) {
             Element *e = [bc.elements objectAtIndex:i];
             if([e isKindOfClass:[StarButton class]]) {
                 [self doActionOnStarButton:e OtherUnitPoint:otherUnitPos WithIndex:i];
            // [self.spController updateElementsAtPosition:p withArray:bc.elements];
+            } else if([e isKindOfClass:[Star class]]) {
+                removeIndex = i;
             }
         // ADD MORE BUTTONS ETC.
+        }
+        
+        if(removeIndex >= 0) {
+            [bc.elements removeObjectAtIndex:removeIndex];
         }
     
         for (int i = 0; i < bcFrom.elements.count; i++) {
@@ -315,15 +322,9 @@
         // If the other unit is standing on the same spot as the star and button is on the star should be
         // taken by the player.
         if([Converter isPoint:starPos sameAsPoint:otherUnitPoint] && sb.state) {
-            /* ----------------------------------------BUG-----------------------------------------------*/
-            /* ------------------------------------------------------------------------------------------*/
-            // HOW TO GET INDEX OF sb.star?!?!??!?!?!?!?!?!?+1 BOARDCOORD????
             [self takeStar:sb.star];
-            NSLog(@"action up");
             [bcStar.elements removeObject:sb.star];
             [self.spController updateElementsAtPosition:starPos withArray:bcStar.elements];
-            /* ------------------------------------------------------------------------------------------*/
-            /* ------------------------------------------------------------------------------------------*/
         }
     }
 

@@ -474,12 +474,14 @@
 }
 
 -(void)setupNextLevel {
+    for(int i = 0; i < 4; i++) {
     [self getNextLevel];
     [_boardController setupBoardWithWorld:_world AndLevel:_level];
     [swipeArray removeAllObjects];
     [self setupScene];
     [self setupElements];
     [self setupUnits];
+    }
 }
 
 -(void)setupScene {
