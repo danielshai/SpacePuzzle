@@ -328,9 +328,25 @@
         }
     }
 
-    [self.spController updateElementsAtPosition:starPos withArray:bcStar.elements];
-    [self.spController updateElementsAtPosition:buttonPos withArray:bcButton.elements];
+    [self.scene updateElementsAtPosition:starPos withArray:bcStar.elements];
+    [self.scene updateElementsAtPosition:buttonPos withArray:bcButton.elements];
 }
+
+-(void)doActionOnBridgeButton: (Element*)button {
+    BridgeButton *bb = (BridgeButton*)button;
+    [bb movedTo];
+    CGPoint buttonPos = CGPointMake(bb.x, bb.y);
+    CGPoint bridgePos = CGPointMake(bb.bridge.x, bb.bridge.y);
+    BoardCoord *bcButton = [[_board board] objectAtIndex:[Converter CGPointToKey:buttonPos]];
+    BoardCoord *bcBridge = [[_board board] objectAtIndex:[Converter CGPointToKey:bridgePos]];
+    
+    // Updates the button on the scene.
+    [_scene updateElementsAtPosition:buttonPos withArray:bcButton.elements];
+    
+    // Updates the bridge connected to the button on the scene, i.e. showing it.
+    [_scene updateElementsAtPosition:bridgePos withArray:bcBridge.elements];
+}
+
 
 -(void)setupBoardWithWorld: (NSInteger)world AndLevel: (NSInteger)level {
     // Load the board.
@@ -344,6 +360,7 @@
     
     NSString *path = [[NSBundle mainBundle] pathForResource:currentLevel ofType:@"splvl"];
     NSLog(@"p %@", currentLevel);
+    NSLog(@"PATH: %@", path);
     [_board loadBoard:path];
     _starsLeft = [_board originalNumberOfStars];
 }

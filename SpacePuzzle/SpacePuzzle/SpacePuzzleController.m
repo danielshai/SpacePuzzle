@@ -47,7 +47,7 @@
     _scene.controller = self;
     _scene.scaleMode = SKSceneScaleModeAspectFill;
     
-    [LoadSaveFile saveFileWithWorld:0 andLevel:1];
+    [LoadSaveFile saveFileWithWorld:0 andLevel:10];
     _boardController = [[BoardController alloc] init];
     _boardController.spController = self;
     _boardController.scene = _scene;
@@ -238,6 +238,7 @@
 
     NSString *path = [[NSBundle mainBundle] pathForResource:currentLevel ofType:@"splvl"];
     NSLog(@"p %@", currentLevel);
+    NSLog(@"PATH %@",path);
     [_board loadBoard:path];
     
     for(int i = 0; i < BOARD_SIZE_Y; i++) {

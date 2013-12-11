@@ -51,7 +51,6 @@
         } else {
             currentState = [currentState stringByAppendingString:currentLevel];
         }
-        NSLog(@"%@", currentState);
         return currentState;
     }
 }

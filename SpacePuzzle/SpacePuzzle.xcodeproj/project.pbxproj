@@ -82,6 +82,7 @@
 		E6214087182BA53800EC5C21 /* SpacePuzzleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E6214086182BA53800EC5C21 /* SpacePuzzleTests.m */; };
 		E62A0523184DF78D009B4004 /* mario2.splvl in Resources */ = {isa = PBXBuildFile; fileRef = E62A0522184DF78D009B4004 /* mario2.splvl */; };
 		E633067A1835018A00E908F7 /* XMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = E63306791835018A00E908F7 /* XMLParser.m */; };
+		E645787D1858AE6B0091F0F8 /* Level101.splvl in Resources */ = {isa = PBXBuildFile; fileRef = E645787C1858AE6B0091F0F8 /* Level101.splvl */; };
 		E687AE4D183A43EB00A5B78C /* mario.splvl in Resources */ = {isa = PBXBuildFile; fileRef = E687AE4C183A43EB00A5B78C /* mario.splvl */; };
 		E6E657FE182BB8C50022BF5F /* Board.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E657FD182BB8C50022BF5F /* Board.m */; };
 		E6E65801182BB9020022BF5F /* Position.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E65800182BB9020022BF5F /* Position.m */; };
@@ -206,6 +207,7 @@
 		E62A0522184DF78D009B4004 /* mario2.splvl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = mario2.splvl; path = ../../Levels/mario2.splvl; sourceTree = "<group>"; };
 		E63306781835018A00E908F7 /* XMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XMLParser.h; path = ../../SpacePuzzleEditor/SpacePuzzleEditor/XMLParser.h; sourceTree = "<group>"; };
 		E63306791835018A00E908F7 /* XMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XMLParser.m; path = ../../SpacePuzzleEditor/SpacePuzzleEditor/XMLParser.m; sourceTree = "<group>"; };
+		E645787C1858AE6B0091F0F8 /* Level101.splvl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Level101.splvl; path = ../../Levels/Level101.splvl; sourceTree = "<group>"; };
 		E687AE4C183A43EB00A5B78C /* mario.splvl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = mario.splvl; path = ../../Levels/mario.splvl; sourceTree = "<group>"; };
 		E6E657FB182BB7BD0022BF5F /* Macros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Macros.h; sourceTree = "<group>"; };
 		E6E657FC182BB8C50022BF5F /* Board.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Board.h; sourceTree = "<group>"; };
@@ -464,6 +466,7 @@
 		E687AE4E183A440F00A5B78C /* Levels */ = {
 			isa = PBXGroup;
 			children = (
+				E645787C1858AE6B0091F0F8 /* Level101.splvl */,
 				779A2435184F722300431A5D /* Level008.splvl */,
 				779A2433184F721600431A5D /* Level006.splvl */,
 				779A2431184F71D700431A5D /* Level007.splvl */,
@@ -659,6 +662,7 @@
 				E621406A182BA53800EC5C21 /* Main.storyboard in Resources */,
 				E6F71299184F3995005C52A4 /* BarAlien.png in Resources */,
 				E60DA77C1848A2350088AB3D /* StarButton.png in Resources */,
+				E645787D1858AE6B0091F0F8 /* Level101.splvl in Resources */,
 				77D60730184374030079A182 /* AstroUp.png in Resources */,
 				7797AC43183CE9F500E63E95 /* Cracked.png in Resources */,
 				779A2426184F70C100431A5D /* Level002.splvl in Resources */,
