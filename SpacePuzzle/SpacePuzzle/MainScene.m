@@ -415,6 +415,7 @@
     starPos.x += TILESIZE/2;
     starSprite.position = starPos;
     starSprite.size = [self sizeForElement:star];
+    starSprite.zPosition = [self getZPositionForElement:star];
     [self addChild:starSprite];
     [takenStarsArray addObject:starSprite];
     
