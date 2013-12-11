@@ -395,6 +395,7 @@
 -(void)takeStar: (Element*)star {
     [star movedTo];
     _starsLeft--;
+    [self.spController takeStar];
     [self.scene starTakenAtPosition:star CurrentTaken:3-_starsLeft];
 }
 @end

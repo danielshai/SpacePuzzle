@@ -180,6 +180,7 @@
 -(void)mouseDragged:(NSEvent *)theEvent {
     SKView *sk = self.view;
     NSPoint loc = [sk convertPoint:[theEvent locationInWindow] fromView:nil];
+    // A control drag was started before dragging.
     if (controlClickDrag) {
         controlDragLine.hidden = NO;
         circle.hidden = NO;
@@ -199,7 +200,9 @@
         NSArray *arr = [NSArray arrayWithObjects:[NSValue valueWithPoint:start],
                         [NSNumber valueWithPoint:end], nil];
         [self notifyText:@"ControlDrag" Object:arr Key:@"ControlDrag"];
-    } else if(pathDrag) {
+    }
+    // A path drag was started before dragging.
+    else if(pathDrag) {
         CGPoint end = CGPointMake(loc.x, loc.y);
         end = [Converter convertMousePosToCoord:end];
         end.y = BOARD_SIZE_Y - 2 - end.y;

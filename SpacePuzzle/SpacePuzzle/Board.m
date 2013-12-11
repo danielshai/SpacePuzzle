@@ -20,7 +20,7 @@
 @synthesize boardSizeX = _boardSizeX;
 @synthesize boardSizeY = _boardSizeY;
 @synthesize boardBegin = _boardBegin;
-@synthesize elementDictionary = _elementDictionary;
+@synthesize elementDictionary = _elementDictionary; // Used when getting board from XMLParser.
 @synthesize startPosAstronaut = _startPosAstronaut;
 @synthesize startPosAlien = _startPosAlien;
 @synthesize finishPos = _finishPos;
@@ -119,14 +119,13 @@
     element.x = pos.x;
     element.y = pos.y;
     element.blocking = block;
-    NSNumber *flatIndex = [NSNumber numberWithInt:pos.y*_boardSizeX + pos.x];
     
     if([name isEqualToString:CLASS_MOVING_PLATFORM]) {
         MovingPlatform *mp = (MovingPlatform*)element;
         [[mp path] addPoint:pos];
     }
-    
-    [_elementDictionary setObject:element forKey:flatIndex];
+    BoardCoord *bc = [_board objectAtIndex:pos.y*BOARD_SIZE_X+pos.x];
+    [bc.elements addObject:element];
 }
 
 -(void)createEmptyBoard {
@@ -227,61 +226,82 @@
     [_parser addOutput:@"<boardelements>"];
    
     // Start the export with stars.
-    for(id key in _elementDictionary) {
-        Element *e = [_elementDictionary objectForKey:key];
-        if([e isKindOfClass: [Star class]]) {
-            Star *ee = (Star*)e;
-            [self starExport:ee];
+    for(int i = 0; i < _board.count; i++) {
+        BoardCoord *bc = [_board objectAtIndex:i];
+        for (int j = 0; j < bc.elements.count; j++) {
+            Element *e = [bc.elements objectAtIndex:j];
+            if([e isKindOfClass: [Star class]]) {
+                Star *ee = (Star*)e;
+                [self starExport:ee];
+            }
         }
     }
     // Continue the export with boxes.
-    for(id key in _elementDictionary) {
-        Element *e = [_elementDictionary objectForKey:key];
-        if([e isKindOfClass: [Box class]]) {
-            Box *ee = (Box*)e;
-            [self boxExport:ee];
+    for(int i = 0; i < _board.count; i++) {
+        BoardCoord *bc = [_board objectAtIndex:i];
+        for (int j = 0; j < bc.elements.count; j++) {
+            Element *e = [bc.elements objectAtIndex:j];
+            if([e isKindOfClass: [Box class]]) {
+                Box *ee = (Box*)e;
+                [self boxExport:ee];
+            }
         }
     }
     // Bridges.
-    for(id key in _elementDictionary) {
-        Element *e = [_elementDictionary objectForKey:key];
-        if([e isKindOfClass: [Bridge class]]) {
-            Bridge *ee = (Bridge*)e;
-            [self bridgeExport:ee];
+    for(int i = 0; i < _board.count; i++) {
+        BoardCoord *bc = [_board objectAtIndex:i];
+        for (int j = 0; j < bc.elements.count; j++) {
+            Element *e = [bc.elements objectAtIndex:j];
+            if([e isKindOfClass: [Bridge class]]) {
+                Bridge *ee = (Bridge*)e;
+                [self bridgeExport:ee];
+            }
         }
     }
     // Moving platform.
-    for(id key in _elementDictionary) {
-        Element *e = [_elementDictionary objectForKey:key];
-        if([e isKindOfClass: [MovingPlatform class]]) {
-            MovingPlatform *ee = (MovingPlatform*)e;
-            [self movingPlatformExport:ee];
+    for(int i = 0; i < _board.count; i++) {
+        BoardCoord *bc = [_board objectAtIndex:i];
+        for (int j = 0; j < bc.elements.count; j++) {
+            Element *e = [bc.elements objectAtIndex:j];
+            if([e isKindOfClass: [MovingPlatform class]]) {
+                MovingPlatform *ee = (MovingPlatform*)e;
+                [self movingPlatformExport:ee];
+            }
         }
     }
     
     // Buttons, and other elements with references to other elements should be last.
     // Star buttons.
-    for(id key in _elementDictionary) {
-        Element *e = [_elementDictionary objectForKey:key];
-        if([e isKindOfClass: [StarButton class]]) {
-            StarButton *ee = (StarButton*)e;
-            [self starButtonExport:ee];
+    for(int i = 0; i < _board.count; i++) {
+        BoardCoord *bc = [_board objectAtIndex:i];
+        for (int j = 0; j < bc.elements.count; j++) {
+            Element *e = [bc.elements objectAtIndex:j];
+            if([e isKindOfClass: [StarButton class]]) {
+                StarButton *ee = (StarButton*)e;
+                [self starButtonExport:ee];
+            }
         }
     }
     // Bridge buttons.
-    for(id key in _elementDictionary) {
-        Element *e = [_elementDictionary objectForKey:key];
-        if([e isKindOfClass: [BridgeButton class]]) {
-            BridgeButton *ee = (BridgeButton*)e;
-            [self bridgeButtonExport:ee];
+    for(int i = 0; i < _board.count; i++) {
+        BoardCoord *bc = [_board objectAtIndex:i];
+        for (int j = 0; j < bc.elements.count; j++) {
+            Element *e = [bc.elements objectAtIndex:j];
+            if([e isKindOfClass: [BridgeButton class]]) {
+                BridgeButton *ee = (BridgeButton*)e;
+                [self bridgeButtonExport:ee];
+            }
         }
     }
     // Platform lever.
-    for(id key in _elementDictionary) {
-        Element *e = [_elementDictionary objectForKey:key];
-        if([e isKindOfClass: [PlatformLever class]]) {
-            PlatformLever *ee = (PlatformLever*)e;
-            [self leverExport:ee];
+    for(int i = 0; i < _board.count; i++) {
+        BoardCoord *bc = [_board objectAtIndex:i];
+        for (int j = 0; j < bc.elements.count; j++) {
+            Element *e = [bc.elements objectAtIndex:j];
+            if([e isKindOfClass: [PlatformLever class]]) {
+                PlatformLever *ee = (PlatformLever*)e;
+                [self leverExport:ee];
+            }
         }
     }
     [_parser addOutput:@"</boardelements>"];

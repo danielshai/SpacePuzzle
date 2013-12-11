@@ -79,4 +79,5 @@
 -(IBAction)restartAction:(id)sender;
 -(NSArray*)getDataFromNotification:(NSNotification*) notif Key: (NSString*) key;
 -(IBAction)changeUnitAction:(id)sender;
+-(void)takeStar;
 @end

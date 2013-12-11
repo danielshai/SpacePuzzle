@@ -208,6 +208,10 @@
     if([self areUnitsOnFinish]) {
         // THIS CODE NEEDS TO ACCOUNT FOR WORLDS.
         _level++;
+        if(_level > 10) {
+            _level = 1;
+            _world++;
+        }
         [LoadSaveFile saveFileWithWorld:_world andLevel:_level];
         [self setupNextLevel];
     }
@@ -267,7 +271,7 @@
     // The position that the unit wants to move to.
     NSInteger x  = loc.x;
     NSInteger y = loc.y;
-
+    
     // NSInteger nextPosIntKey = [nextPosKey integerValue];
     // The unit who wants to move's position.
     NSInteger unitX = _currentUnit.x;
@@ -289,6 +293,10 @@
     }
    // [_scene updateElementsAtPosition:from withArray:[_boardController elementsAtPosition:from]];
     //[_scene updateElementsAtPosition:to withArray:[_boardController elementsAtPosition:to]];
+}
+
+-(void)takeStar {
+    _player.starsTaken++;
 }
 
 /*
@@ -474,14 +482,12 @@
 }
 
 -(void)setupNextLevel {
-    for(int i = 0; i < 4; i++) {
     [self getNextLevel];
     [_boardController setupBoardWithWorld:_world AndLevel:_level];
     [swipeArray removeAllObjects];
     [self setupScene];
     [self setupElements];
     [self setupUnits];
-    }
 }
 
 -(void)setupScene {
