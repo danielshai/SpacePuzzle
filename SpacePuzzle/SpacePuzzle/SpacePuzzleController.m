@@ -47,7 +47,7 @@
     _scene.controller = self;
     _scene.scaleMode = SKSceneScaleModeAspectFill;
     
-    [LoadSaveFile saveFileWithWorld:0 andLevel:10];
+    [LoadSaveFile saveFileWithWorld:1 andLevel:01];
     _boardController = [[BoardController alloc] init];
     _boardController.spController = self;
     _boardController.scene = _scene;
@@ -218,7 +218,7 @@
 }
 
 -(void)sceneFinishedMovingElementFrom:(CGPoint)from WithIndex:(NSInteger)index To:(CGPoint)to {
-    CGPoint u = CGPointMake(_currentUnit.x, _currentUnit.y);
+    CGPoint u = CGPointMake(_nextUnit.x, _nextUnit.y);
     NSInteger dir = [Converter convertCoordsTo:to Direction:from];
     [_boardController boxMovedToPoint:to FromPoint:from OtherUnitPos:u InDirection: dir];
 }
@@ -238,7 +238,7 @@
 
     NSString *path = [[NSBundle mainBundle] pathForResource:currentLevel ofType:@"splvl"];
     NSLog(@"p %@", currentLevel);
-    NSLog(@"PATH %@",path);
+   
     [_board loadBoard:path];
     
     for(int i = 0; i < BOARD_SIZE_Y; i++) {
@@ -289,6 +289,7 @@
     if([_boardController unitWantsToMoveFrom:from To:to WithSwipe:swipe UnitWasAstronatut:_currentUnit == _bigL OtherUnitPosition:nextUnitPos]) {
         _currentUnit.x = x;
         _currentUnit.y = y;
+
         [_scene updateUnit:to inDirection:dir];
         [_scene refreshTileAtPosition:from WithStatus:[_boardController getBoardStatusAtPosition:from]];
     }
@@ -363,6 +364,7 @@
 }
 
 -(void)movePlatform:(NSTimer *)timer {
+    // TEMP CODE.
     MovingPlatform *mp = [timer userInfo];
     [[_board elementDictionary] removeObjectForKey:mp.key];
     

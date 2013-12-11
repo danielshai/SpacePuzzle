@@ -35,6 +35,7 @@
     NSInteger dir = [Converter convertCoordsTo:to Direction:from];
     BoardCoord *bcFrom = [[_board board] objectAtIndex:[Converter CGPointToKey:from]];
     
+    // First check if the move is valid on the board, i.e. is inside board, and not diagonal, etc.
     if([self isPointMovableTo:to] && ![Converter isPoint:to sameAsPoint:from]
            && [Converter isPoint:from NextToPoint:to]) {
         // If |bigL| is standing on a cracked tile and moves away from it. This will destroy the tile,
@@ -47,20 +48,32 @@
     
         // Update elements.
         /* Checks elements on the tile moved from. */
-    
-        // Checks if the element moved from is a |StarButton|, and the second condition checks if
-        // the other unit is still on the button, which means the button shouldn't be deactivated.
         for (int i = 0; i < bcFrom.elements.count; i++) {
             Element *eFrom = [[bcFrom elements] objectAtIndex:i];
+            // Checks if the element moved from is a button, and the third condition checks if
+            // the other unit is still on the button, which means the button shouldn't be deactivated.
             if( ([eFrom isKindOfClass:[StarButton class]] || [eFrom isKindOfClass:[BridgeButton class]])
             && ![Converter isPoint:from sameAsPoint:otherUnitPoint] ) {
                 // Buttons should be deactivated if left.
-                StarButton *sb = (StarButton*)eFrom;
-                [sb unitLeft];
-                CGPoint p = CGPointMake(sb.star.x, sb.star.y);
-                BoardCoord *bc = [self boardCoordForPoint:p];
-                [self.spController updateElementsAtPosition:p withArray:bc.elements];
-                [self.spController updateElementsAtPosition:from withArray:bcFrom.elements];
+                if([eFrom isKindOfClass:[StarButton class]]) {
+                    StarButton *sb = (StarButton*)eFrom;
+                    [sb unitLeft];
+                    CGPoint p = CGPointMake(sb.star.x, sb.star.y);
+                    BoardCoord *bc = [self boardCoordForPoint:p];
+                    [self.spController updateElementsAtPosition:p withArray:bc.elements];
+                    [self.spController updateElementsAtPosition:from withArray:bcFrom.elements];
+                } else if ([eFrom isKindOfClass:[BridgeButton class]]) {
+                    BridgeButton *bb = (BridgeButton*)eFrom;
+                    [bb unitLeft];
+                    CGPoint p = CGPointMake(bb.bridge.x, bb.bridge.y);
+                    BoardCoord *bc = [self boardCoordForPoint:p];
+                    [self.spController updateElementsAtPosition:p withArray:bc.elements];
+                    [self.spController updateElementsAtPosition:from withArray:bcFrom.elements];
+                    
+                    if([Converter isPoint:p sameAsPoint:otherUnitPoint]) {
+                        [self.scene unitFallingAnimation];
+                    }
+                }
             }
         }
     
@@ -68,7 +81,7 @@
         BoardCoord *bcTo = [[_board board] objectAtIndex:[Converter CGPointToKey:to]];
     
         for (int i = 0; i < bcTo.elements.count; i++) {
-        // If the element is a star.
+            // If the element is a star.
             Element *eTo = [[bcTo elements] objectAtIndex:i];
             if([eTo isKindOfClass:[Star class]] && ![eTo hidden]) {
                 [self takeStar:eTo];
@@ -76,11 +89,11 @@
                 [self.spController updateElementsAtPosition:from withArray:bcFrom.elements];
                 [self.spController updateElementsAtPosition:to withArray:bcTo.elements];
             } else if([eTo isKindOfClass:[StarButton class]]) {
-                [self doActionOnStarButton:eTo OtherUnitPoint:otherUnitPoint WithIndex:i];
+                [self doActionOnStarButton:eTo OtherUnitPoint:otherUnitPoint];
                 [self.spController updateElementsAtPosition:from withArray:bcFrom.elements];
             //    [self.spController updateElementsAtPosition:to withArray:bcTo.elements];
             } else if([eTo isKindOfClass:[BridgeButton class]]) {
-      //      [self doActionOnBridgeButton:eTo];
+                [self doActionOnBridgeButton:eTo OtherUnitPoint:otherUnitPoint];
             }
         }
         return YES;
@@ -110,7 +123,7 @@
             [bcTo.elements removeObject:eTo];
             [self.spController updateElementsAtPosition:to withArray:bcTo.elements];
         } else if([eTo isKindOfClass:[StarButton class]]) {
-            [self doActionOnStarButton:eTo OtherUnitPoint:otherUnitPoint WithIndex:i];
+            [self doActionOnStarButton:eTo OtherUnitPoint:otherUnitPoint];
             [self.spController updateElementsAtPosition:to withArray:bcTo.elements];
         } else if([eTo isKindOfClass:[BridgeButton class]]) {
             //      [self doActionOnBridgeButton:eTo];
@@ -157,7 +170,17 @@
             BoardCoord *bcStar = [[_board board] objectAtIndex:[Converter CGPointToKey:starPos]];
             [self.spController updateElementsAtPosition:starPos withArray:bcStar.elements];
         } else if([e isKindOfClass:[BridgeButton class]]) {
+            BridgeButton *bb = (BridgeButton*)e;
+            [bb unitLeft];
+            [self.scene updateElementsAtPosition:p withArray:bc.elements];
+            // The bridge.
+            CGPoint bridgePos = CGPointMake(bb.bridge.x, bb.bridge.y);
+            BoardCoord *bcBridge = [[_board board] objectAtIndex:[Converter CGPointToKey:bridgePos]];
+            [self.spController updateElementsAtPosition:bridgePos withArray:bcBridge.elements];
             
+            // ADD FALLING ANIMATION HERE!!!!!
+            // COULD YOU HAVE 2 METHODS: boxLeftPos AND boxArrivedAtPos THAT GETS CALLED FROM HERE AND
+            // MOVE. THERE WE CAN DO FALLING ANIMATION AND SUCH SO THAT WE DON'T NEED TO COPY/PASTE.
         }
     }
     
@@ -270,33 +293,55 @@
         BoardCoord *bc = [[_board board] objectAtIndex:[Converter CGPointToKey:p]];
         BoardCoord *bcFrom = [[_board board] objectAtIndex:[Converter CGPointToKey:pFrom]];
         
+        // First, check the position the box was moved to.
         for (int i = 0; i < bc.elements.count; i++) {
             Element *e = [bc.elements objectAtIndex:i];
             if([e isKindOfClass:[StarButton class]]) {
-                [self doActionOnStarButton:e OtherUnitPoint:otherUnitPos WithIndex:i];
+                [self doActionOnStarButton:e OtherUnitPoint:otherUnitPos];
            // [self.spController updateElementsAtPosition:p withArray:bc.elements];
             } else if([e isKindOfClass:[Star class]]) {
                 removeIndex = i;
+            } else if([e isKindOfClass:[BridgeButton class]]) {
+                [self doActionOnBridgeButton:e OtherUnitPoint:otherUnitPos];
             }
         // ADD MORE BUTTONS ETC.
         }
-        
+        // The box was moved to a star, remove it.
         if(removeIndex >= 0) {
             [bc.elements removeObjectAtIndex:removeIndex];
         }
-    
+        
+        // Check elements on the point the box was moved away from. For example, buttons should be
+        // deactivated if so.
         for (int i = 0; i < bcFrom.elements.count; i++) {
             Element *e = [bcFrom.elements objectAtIndex:i];
             if([e isKindOfClass:[StarButton class]]) {
+                // Make into methods, plzzz
                 [e unitLeft];
-               
-                [self.scene updateElementsAtPosition:pFrom withArray:bcFrom.elements];
-                [self.scene updateElementsAtPosition:p withArray:bc.elements];
                 
+                // Updates the position of the button in the view.
+                [self.scene updateElementsAtPosition:pFrom withArray:bcFrom.elements];
+                //[self.scene updateElementsAtPosition:p withArray:bc.elements];
+                
+                // Updates the position of the star in the view.
                 StarButton *sb = (StarButton*)e;
                 CGPoint starPos = CGPointMake(sb.star.x, sb.star.y);
                 BoardCoord *bcStar = [[_board board] objectAtIndex:[Converter CGPointToKey:starPos]];
                 [self.scene updateElementsAtPosition:starPos withArray:bcStar.elements];
+            } else if([e isKindOfClass:[BridgeButton class]]) {
+                [e unitLeft];
+                
+                [self.scene updateElementsAtPosition:pFrom withArray:bcFrom.elements];
+                //[self.scene updateElementsAtPosition:p withArray:bc.elements];
+                
+                BridgeButton *bb = (BridgeButton*)e;
+                CGPoint bridgePos = CGPointMake(bb.bridge.x, bb.bridge.y);
+                BoardCoord *bcBridge = [[_board board] objectAtIndex:[Converter CGPointToKey:bridgePos]];
+                [self.scene updateElementsAtPosition:bridgePos withArray:bcBridge.elements];
+             
+                if([Converter isPoint:bridgePos sameAsPoint:otherUnitPos]) {
+                    [self.scene unitFallingAnimation];
+                }
             }
         }
         NSInteger nextTile = [[[_board board] objectAtIndex:[Converter CGPointToKey:p]] status];
@@ -310,7 +355,7 @@
     }
 }
 
--(void)doActionOnStarButton:(Element *)button OtherUnitPoint:(CGPoint)otherUnitPoint WithIndex:(NSInteger)index {
+-(void)doActionOnStarButton:(Element *)button OtherUnitPoint:(CGPoint)otherUnitPoint {
     StarButton *sb = (StarButton*)button;
     [sb movedTo];
     CGPoint starPos = CGPointMake(sb.star.x, sb.star.y);
@@ -332,7 +377,7 @@
     [self.scene updateElementsAtPosition:buttonPos withArray:bcButton.elements];
 }
 
--(void)doActionOnBridgeButton: (Element*)button {
+-(void)doActionOnBridgeButton: (Element*)button OtherUnitPoint:(CGPoint)otherUnitPoint {
     BridgeButton *bb = (BridgeButton*)button;
     [bb movedTo];
     CGPoint buttonPos = CGPointMake(bb.x, bb.y);
@@ -360,7 +405,6 @@
     
     NSString *path = [[NSBundle mainBundle] pathForResource:currentLevel ofType:@"splvl"];
     NSLog(@"p %@", currentLevel);
-    NSLog(@"PATH: %@", path);
     [_board loadBoard:path];
     _starsLeft = [_board originalNumberOfStars];
 }

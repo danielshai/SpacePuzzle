@@ -5,10 +5,9 @@
     Controller for the main game scene.
     
     To fix:
-        - When standing on a tile and star appears, you don't pick it up (which you should).
+        - When a unit is in void, restart level (first animate falling down, perhaps shows screen?).
         - Moving platform moving along paths (a generalised solution).
         - Textures should be in "Images.xcassets" with 2 versions of each (ordinary and retina [x2 size]).
-        - Several elements on one coordinate.
     Cleaning up to do:
         - In board, create a class XMLExporter that has class functions that export the board.
         - Cleaner check of handling input from user, i.e. check what to do and doing it.
