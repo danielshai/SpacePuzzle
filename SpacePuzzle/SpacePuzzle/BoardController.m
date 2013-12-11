@@ -264,17 +264,25 @@
  *  A box was moved to a point. Check if there's any interaction between box and other elements 
  *  available. */
 -(void)boxMovedToPoint:(CGPoint)p FromPoint:(CGPoint)pFrom OtherUnitPos:(CGPoint)otherUnitPos InDirection:(NSInteger)dir {
+    NSInteger removeIndex = -1;
+    
     if([_board isPointWithinBoard:p] && [_board isPointWithinBoard:pFrom]) {
         BoardCoord *bc = [[_board board] objectAtIndex:[Converter CGPointToKey:p]];
         BoardCoord *bcFrom = [[_board board] objectAtIndex:[Converter CGPointToKey:pFrom]];
-
+        
         for (int i = 0; i < bc.elements.count; i++) {
             Element *e = [bc.elements objectAtIndex:i];
             if([e isKindOfClass:[StarButton class]]) {
                 [self doActionOnStarButton:e OtherUnitPoint:otherUnitPos WithIndex:i];
            // [self.spController updateElementsAtPosition:p withArray:bc.elements];
+            } else if([e isKindOfClass:[Star class]]) {
+                removeIndex = i;
             }
         // ADD MORE BUTTONS ETC.
+        }
+        
+        if(removeIndex >= 0) {
+            [bc.elements removeObjectAtIndex:removeIndex];
         }
     
         for (int i = 0; i < bcFrom.elements.count; i++) {

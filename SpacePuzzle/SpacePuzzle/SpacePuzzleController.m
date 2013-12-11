@@ -47,7 +47,7 @@
     _scene.controller = self;
     _scene.scaleMode = SKSceneScaleModeAspectFill;
     
-    [LoadSaveFile saveFileWithWorld:0 andLevel:1];
+    [LoadSaveFile saveFileWithWorld:0 andLevel:5];
     _boardController = [[BoardController alloc] init];
     _boardController.spController = self;
     _boardController.scene = _scene;
@@ -474,12 +474,14 @@
 }
 
 -(void)setupNextLevel {
+    for(int i = 0; i < 4; i++) {
     [self getNextLevel];
     [_boardController setupBoardWithWorld:_world AndLevel:_level];
     [swipeArray removeAllObjects];
     [self setupScene];
     [self setupElements];
     [self setupUnits];
+    }
 }
 
 -(void)setupScene {
