@@ -321,7 +321,8 @@
     NSNumber *indexNew = [NSNumber numberWithFloat:newCoord.y*BOARD_SIZE_X + newCoord.x];
     //  NSLog(@"moving: %f %f %f %f", oldCoord.x,oldCoord.y,newCoord.x,newCoord.y);
     if(indexNew.integerValue == indexOrigin.integerValue) {
-        return;
+        //return;
+        // SHOULD ANYTHING HAPPEN HERE?
     }
     NSMutableArray *elArr = [_elements objectForKey:indexOrigin];
     NSMutableArray *elNewArr = [_elements objectForKey:indexNew];
@@ -361,15 +362,13 @@
         }
     }
     
-    if (status == MAPSTATUS_SOLID) {
+    if (status == MAPSTATUS_SOLID || status == MAPSTATUS_CRACKED) {
         SKAction *move = [SKAction moveTo:movePixel duration:_mBox.duration];
         SKAction *action = [SKAction group:@[_mBox, move]];
         [s runAction:action completion:^(void){
             s.position = movePixel;
             [self.controller sceneFinishedMovingElementFrom:oldCoord WithIndex:elementIndex To:newCoord];
         }];
-    } else if (status == MAPSTATUS_CRACKED) {
-        // FIX LATER
     } else {
         SKAction *move = [SKAction moveTo:movePixel duration:_mBox.duration];
         SKAction *action = [SKAction group:@[_mBox, move]];

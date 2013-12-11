@@ -215,7 +215,8 @@
 
 -(void)sceneFinishedMovingElementFrom:(CGPoint)from WithIndex:(NSInteger)index To:(CGPoint)to {
     CGPoint u = CGPointMake(_currentUnit.x, _currentUnit.y);
-    [_boardController boxMovedToPoint:to FromPoint:from OtherUnitPos:u];
+    NSInteger dir = [Converter convertCoordsTo:to Direction:from];
+    [_boardController boxMovedToPoint:to FromPoint:from OtherUnitPos:u InDirection: dir];
 }
 
 /*
