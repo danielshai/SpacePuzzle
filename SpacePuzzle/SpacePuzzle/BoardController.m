@@ -71,7 +71,7 @@
         // If the element is a star.
             Element *eTo = [[bcTo elements] objectAtIndex:i];
             if([eTo isKindOfClass:[Star class]] && ![eTo hidden]) {
-                [self takeStar:eTo WithIndex:i];
+                [self takeStar:eTo];
                 NSLog(@"moveEls");
                 [bcTo.elements removeObject:eTo];
                 [self.spController updateElementsAtPosition:from withArray:bcFrom.elements];
@@ -318,8 +318,7 @@
             /* ----------------------------------------BUG-----------------------------------------------*/
             /* ------------------------------------------------------------------------------------------*/
             // HOW TO GET INDEX OF sb.star?!?!??!?!?!?!?!?!?+1 BOARDCOORD????
-            NSLog(@"Other unit on star!");
-            [self takeStar:sb.star WithIndex:0];
+            [self takeStar:sb.star];
             NSLog(@"action up");
             [bcStar.elements removeObject:sb.star];
             [self.spController updateElementsAtPosition:starPos withArray:bcStar.elements];

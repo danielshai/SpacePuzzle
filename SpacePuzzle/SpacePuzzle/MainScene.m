@@ -273,6 +273,9 @@
         s.hidden = element.hidden;
         s.zPosition = [self getZPositionForElement:element];
         [self addChild:s];
+        if(s.texture == _star) {
+            [s runAction:_mStar];
+        }
         [arr insertObject:s atIndex:i];
     }
     
