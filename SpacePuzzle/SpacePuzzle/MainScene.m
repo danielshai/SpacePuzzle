@@ -107,6 +107,8 @@
         _gui.position = CGPointMake(WIN_SIZE_X/2, WIN_SIZE_Y-_gui.size.height/2);
         [self addChild:_gui];
         
+        takenStarsArray = [[NSMutableArray alloc] init];
+        
         [self initScene];
     }
     return self;
@@ -404,19 +406,16 @@
     return 0;
 }
 
--(void)starTakenAtPosition:(Element *)star AtIndex: (NSInteger)index CurrentTaken:(NSInteger)taken {
-    NSMutableArray *elArr = [_elements objectForKey:star.key];
-    NSLog(@"%@",star.key);
-    NSInteger ind = 0;
-    for (int i = 0; i < elArr.count; i++) {
-        SKSpriteNode *s = [elArr objectAtIndex:i];
-        if(s.texture == _star) {
-            ind = i;
-            break;
-        }
-    }
-    NSLog(@"STAR TAKEN");
-    SKSpriteNode *starSprite = [elArr objectAtIndex:ind];
+-(void)starTakenAtPosition:(Element *)star CurrentTaken:(NSInteger)taken {
+ 
+    SKSpriteNode *starSprite = [[SKSpriteNode alloc] initWithTexture:_star];
+    CGPoint starPos = CGPointMake(star.x, star.y);
+    starPos = [Converter convertCoordToPixel:starPos];
+    starPos.x += TILESIZE/2;
+    starSprite.position = starPos;
+    starSprite.size = [self sizeForElement:star];
+    [self addChild:starSprite];
+    [takenStarsArray addObject:starSprite];
     
     SKAction *moveToBar;
     SKAction *moveUpwards = [SKAction moveTo:CGPointMake(starSprite.position.x, (starSprite.position.y + 40)) duration:1.0];
@@ -610,6 +609,12 @@
 
 -(void)cleanScene {
     // IMPLEMENT!!!!!
+    
+    for (int i = 0; i < takenStarsArray.count; i++) {
+        SKSpriteNode *s = [takenStarsArray objectAtIndex:i];
+        [s removeFromParent];
+    }
+    [takenStarsArray removeAllObjects];
     
     for(id elm in _elements) {
         NSMutableArray *arr = [_elements objectForKey:elm];

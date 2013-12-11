@@ -71,11 +71,11 @@
         // If the element is a star.
             Element *eTo = [[bcTo elements] objectAtIndex:i];
             if([eTo isKindOfClass:[Star class]] && ![eTo hidden] && ![eTo taken]) {
-                [self takeStar:eTo WithIndex:i];
+                [self takeStar:eTo];
                 NSLog(@"moveEls");
                 [bcTo.elements removeObject:eTo];
                 [self.spController updateElementsAtPosition:from withArray:bcFrom.elements];
-              //  [self.spController updateElementsAtPosition:to withArray:bcTo.elements];
+                [self.spController updateElementsAtPosition:to withArray:bcTo.elements];
             } else if([eTo isKindOfClass:[StarButton class]]) {
                 [self doActionOnStarButton:eTo OtherUnitPoint:otherUnitPoint WithIndex:i];
                 [self.spController updateElementsAtPosition:from withArray:bcFrom.elements];
@@ -107,9 +107,8 @@
         // If the element is a star.
         Element *eTo = [[bcTo elements] objectAtIndex:i];
         if([eTo isKindOfClass:[Star class]] && ![eTo hidden] && ![eTo taken]) {
-            [self takeStar:eTo WithIndex:i];
+            [self takeStar:eTo];
             [bcTo.elements removeObject:eTo];
-            NSLog(@"updateEls");
             [self.spController updateElementsAtPosition:to withArray:bcTo.elements];
         } else if([eTo isKindOfClass:[StarButton class]]) {
             [self doActionOnStarButton:eTo OtherUnitPoint:otherUnitPoint WithIndex:i];
@@ -265,7 +264,7 @@
 /* 
  *  A box was moved to a point. Check if there's any interaction between box and other elements 
  *  available. */
--(void)boxMovedToPoint:(CGPoint)p FromPoint:(CGPoint)pFrom OtherUnitPos:(CGPoint)otherUnitPos InDirection:(NSInteger)dir{
+-(void)boxMovedToPoint:(CGPoint)p FromPoint:(CGPoint)pFrom OtherUnitPos:(CGPoint)otherUnitPos InDirection:(NSInteger)dir {
     if([_board isPointWithinBoard:p] && [_board isPointWithinBoard:pFrom]) {
         BoardCoord *bc = [[_board board] objectAtIndex:[Converter CGPointToKey:p]];
         BoardCoord *bcFrom = [[_board board] objectAtIndex:[Converter CGPointToKey:pFrom]];
@@ -319,7 +318,7 @@
             /* ----------------------------------------BUG-----------------------------------------------*/
             /* ------------------------------------------------------------------------------------------*/
             // HOW TO GET INDEX OF sb.star?!?!??!?!?!?!?!?!?+1 BOARDCOORD????
-            [self takeStar:sb.star WithIndex:0];
+            [self takeStar:sb.star];
             NSLog(@"action up");
             [bcStar.elements removeObject:sb.star];
             [self.spController updateElementsAtPosition:starPos withArray:bcStar.elements];
@@ -392,9 +391,9 @@
     return [_board isPointMovableTo:p];
 }
 
--(void)takeStar: (Element*)star WithIndex: (NSInteger)index {
+-(void)takeStar: (Element*)star {
     [star movedTo];
     _starsLeft--;
-    [self.scene starTakenAtPosition:star AtIndex:index CurrentTaken:3-_starsLeft];
+    [self.scene starTakenAtPosition:star CurrentTaken:3-_starsLeft];
 }
 @end
