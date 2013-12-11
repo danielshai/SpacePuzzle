@@ -72,7 +72,6 @@
             Element *eTo = [[bcTo elements] objectAtIndex:i];
             if([eTo isKindOfClass:[Star class]] && ![eTo hidden] && ![eTo taken]) {
                 [self takeStar:eTo];
-                NSLog(@"moveEls");
                 [bcTo.elements removeObject:eTo];
                 [self.spController updateElementsAtPosition:from withArray:bcFrom.elements];
                 [self.spController updateElementsAtPosition:to withArray:bcTo.elements];
@@ -315,15 +314,9 @@
         // If the other unit is standing on the same spot as the star and button is on the star should be
         // taken by the player.
         if([Converter isPoint:starPos sameAsPoint:otherUnitPoint] && sb.state) {
-            /* ----------------------------------------BUG-----------------------------------------------*/
-            /* ------------------------------------------------------------------------------------------*/
-            // HOW TO GET INDEX OF sb.star?!?!??!?!?!?!?!?!?+1 BOARDCOORD????
             [self takeStar:sb.star];
-            NSLog(@"action up");
             [bcStar.elements removeObject:sb.star];
             [self.spController updateElementsAtPosition:starPos withArray:bcStar.elements];
-            /* ------------------------------------------------------------------------------------------*/
-            /* ------------------------------------------------------------------------------------------*/
         }
     }
 
