@@ -161,6 +161,7 @@
         pathDrag = YES;
         SKView *sk = self.view;
         NSPoint loc = [sk convertPoint:[theEvent locationInWindow] fromView:nil];
+        
         startPathLine = CGPointMake(loc.x, loc.y);
        
         // INTE GÖRA DETTA I SCENE!?
