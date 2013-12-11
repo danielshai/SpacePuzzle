@@ -21,6 +21,7 @@
 #import "PlatformLever.h"
 #import "MovingPlatform.h"
 #import <math.h>
+#import <emmintrin.h>
 
 @implementation MainScene
 @synthesize controller = _controller;
@@ -55,6 +56,8 @@
 @synthesize mBox = _mBox;
 @synthesize mStar = _mStar;
 @synthesize tStar = _tStar;
+
+@synthesize myParticle = _myParticle;
 
 -(id)initWithSize:(CGSize)size {    
     if (self = [super initWithSize:size]) {
@@ -109,6 +112,12 @@
         [self addChild:_gui];
         
         takenStarsArray = [[NSMutableArray alloc] init];
+        
+        NSString *myParticlePath = [[NSBundle mainBundle] pathForResource:@"TestSpark" ofType:@"sks"];
+        _myParticle = [NSKeyedUnarchiver unarchiveObjectWithFile:myParticlePath];
+        
+        _myParticle.particlePosition = CGPointMake(100, 200);
+        _myParticle.particleBirthRate = 10;
         
         [self initScene];
     }
@@ -177,6 +186,8 @@
         SKAction *takenStar = [SKAction animateWithTextures:STARTAKEN_ANIM_STARTAKEN timePerFrame:0.02 resize:NO restore:NO];
         _tStar = [SKAction sequence:@[takenStar]];
     }];
+    
+    //[self addChild:_myParticle];
 }
 
 /*
