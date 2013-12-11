@@ -48,6 +48,8 @@
 		77D6072C184373F40079A182 /* AstroLeft.png in Resources */ = {isa = PBXBuildFile; fileRef = 77D60726184373F40079A182 /* AstroLeft.png */; };
 		77D6072F184374030079A182 /* AstroRight.png in Resources */ = {isa = PBXBuildFile; fileRef = 77D6072D184374030079A182 /* AstroRight.png */; };
 		77D60730184374030079A182 /* AstroUp.png in Resources */ = {isa = PBXBuildFile; fileRef = 77D6072E184374030079A182 /* AstroUp.png */; };
+		77EC873E185895EA00D38A00 /* TestSpark.sks in Resources */ = {isa = PBXBuildFile; fileRef = 77EC873C185895EA00D38A00 /* TestSpark.sks */; };
+		77EC873F185895EA00D38A00 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 77EC873D185895EA00D38A00 /* spark.png */; };
 		77F0A81C1845FF28002FA17A /* AnimationFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F0A81B1845FF28002FA17A /* AnimationFactory.m */; };
 		77F0A82318464495002FA17A /* LittleJohnWalk.atlasc in Resources */ = {isa = PBXBuildFile; fileRef = 77F0A82118464495002FA17A /* LittleJohnWalk.atlasc */; };
 		77F122ED185601D9005A595F /* TopBarAlien.png in Resources */ = {isa = PBXBuildFile; fileRef = 77F122EB185601D9005A595F /* TopBarAlien.png */; };
@@ -61,8 +63,6 @@
 		E60DA7781848A1880088AB3D /* PlatformLever.png in Resources */ = {isa = PBXBuildFile; fileRef = E60DA7771848A1880088AB3D /* PlatformLever.png */; };
 		E60DA77B1848A2350088AB3D /* BridgeButton.png in Resources */ = {isa = PBXBuildFile; fileRef = E60DA7791848A2350088AB3D /* BridgeButton.png */; };
 		E60DA77C1848A2350088AB3D /* StarButton.png in Resources */ = {isa = PBXBuildFile; fileRef = E60DA77A1848A2350088AB3D /* StarButton.png */; };
-		E60F259F18573F56002AC295 /* StarOnTile.atlasc in Resources */ = {isa = PBXBuildFile; fileRef = E60F259D18573F56002AC295 /* StarOnTile.atlasc */; };
-		E60F25A218573FAC002AC295 /* StarTaken.atlasc in Resources */ = {isa = PBXBuildFile; fileRef = E60F25A018573FAC002AC295 /* StarTaken.atlasc */; };
 		E61474F6185103F8005D9073 /* BoardController.m in Sources */ = {isa = PBXBuildFile; fileRef = E61474F5185103F8005D9073 /* BoardController.m */; };
 		E6214055182BA53800EC5C21 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6214054182BA53800EC5C21 /* Foundation.framework */; };
 		E6214057182BA53800EC5C21 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6214056182BA53800EC5C21 /* CoreGraphics.framework */; };
@@ -158,6 +158,8 @@
 		77D60726184373F40079A182 /* AstroLeft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AstroLeft.png; path = ../Units/AstroLeft.png; sourceTree = "<group>"; };
 		77D6072D184374030079A182 /* AstroRight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AstroRight.png; path = ../Units/AstroRight.png; sourceTree = "<group>"; };
 		77D6072E184374030079A182 /* AstroUp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AstroUp.png; path = ../Units/AstroUp.png; sourceTree = "<group>"; };
+		77EC873C185895EA00D38A00 /* TestSpark.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = TestSpark.sks; sourceTree = "<group>"; };
+		77EC873D185895EA00D38A00 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 		77F0A81A1845FF28002FA17A /* AnimationFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimationFactory.h; sourceTree = "<group>"; };
 		77F0A81B1845FF28002FA17A /* AnimationFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimationFactory.m; sourceTree = "<group>"; };
 		77F0A82118464495002FA17A /* LittleJohnWalk.atlasc */ = {isa = PBXFileReference; lastKnownFileType = folder; path = LittleJohnWalk.atlasc; sourceTree = "<group>"; };
@@ -177,10 +179,6 @@
 		E60DA7771848A1880088AB3D /* PlatformLever.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlatformLever.png; sourceTree = "<group>"; };
 		E60DA7791848A2350088AB3D /* BridgeButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BridgeButton.png; sourceTree = "<group>"; };
 		E60DA77A1848A2350088AB3D /* StarButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = StarButton.png; sourceTree = "<group>"; };
-		E60F259D18573F56002AC295 /* StarOnTile.atlasc */ = {isa = PBXFileReference; lastKnownFileType = folder; path = StarOnTile.atlasc; sourceTree = "<group>"; };
-		E60F259E18573F56002AC295 /* StarOnTile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StarOnTile.h; sourceTree = "<group>"; };
-		E60F25A018573FAC002AC295 /* StarTaken.atlasc */ = {isa = PBXFileReference; lastKnownFileType = folder; path = StarTaken.atlasc; sourceTree = "<group>"; };
-		E60F25A118573FAC002AC295 /* StarTaken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StarTaken.h; sourceTree = "<group>"; };
 		E61474F4185103F8005D9073 /* BoardController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoardController.h; sourceTree = "<group>"; };
 		E61474F5185103F8005D9073 /* BoardController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoardController.m; sourceTree = "<group>"; };
 		E6214051182BA53800EC5C21 /* SpacePuzzle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpacePuzzle.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -338,6 +336,8 @@
 				77F0A82218464495002FA17A /* LittleJohnWalk.h */,
 				77F0A81A1845FF28002FA17A /* AnimationFactory.h */,
 				77F0A81B1845FF28002FA17A /* AnimationFactory.m */,
+				77EC873C185895EA00D38A00 /* TestSpark.sks */,
+				77EC873D185895EA00D38A00 /* spark.png */,
 			);
 			name = Animations;
 			sourceTree = "<group>";
@@ -612,6 +612,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				77EC873F185895EA00D38A00 /* spark.png in Resources */,
 				7797AC36183CE9F500E63E95 /* Box.png in Resources */,
 				7797AC47183CE9F500E63E95 /* Alien.png in Resources */,
 				E6F7129A184F3995005C52A4 /* BarAstro.png in Resources */,
@@ -621,6 +622,7 @@
 				779A2425184F70C100431A5D /* Level001.splvl in Resources */,
 				77F122ED185601D9005A595F /* TopBarAlien.png in Resources */,
 				77D6072C184373F40079A182 /* AstroLeft.png in Resources */,
+				77EC873E185895EA00D38A00 /* TestSpark.sks in Resources */,
 				779A2436184F722300431A5D /* Level008.splvl in Resources */,
 				E6214061182BA53800EC5C21 /* InfoPlist.strings in Resources */,
 				77D6072B184373F40079A182 /* AstroDown.png in Resources */,

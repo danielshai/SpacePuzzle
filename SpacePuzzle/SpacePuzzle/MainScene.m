@@ -20,6 +20,8 @@
 #import "Bridge.h"
 #import "PlatformLever.h"
 #import "MovingPlatform.h"
+#import <math.h>
+#import <emmintrin.h>
 
 @implementation MainScene
 @synthesize controller = _controller;
@@ -55,6 +57,8 @@
 @synthesize mStar = _mStar;
 @synthesize tStar = _tStar;
 
+@synthesize myParticle = _myParticle;
+
 -(id)initWithSize:(CGSize)size {    
     if (self = [super initWithSize:size]) {
         /* Setup your scene here */
@@ -84,7 +88,7 @@
         
         _bkg = [SKSpriteNode spriteNodeWithImageNamed:@"Background01.png"];
         _movingPlatform = [SKTexture textureWithImageNamed:@"MovingPlatform.png"];
-        _star = [SKTexture textureWithImageNamed:@"Star.png"];
+        _star = STARTAKEN_TEX_STARTAKEN50;
         _box = [SKTexture textureWithImageNamed:@"Box.png"];
         
         _bkg.size = CGSizeMake(size.width, size.height);
@@ -108,6 +112,12 @@
         [self addChild:_gui];
         
         takenStarsArray = [[NSMutableArray alloc] init];
+        
+        NSString *myParticlePath = [[NSBundle mainBundle] pathForResource:@"TestSpark" ofType:@"sks"];
+        _myParticle = [NSKeyedUnarchiver unarchiveObjectWithFile:myParticlePath];
+        
+        _myParticle.particlePosition = CGPointMake(100, 200);
+        _myParticle.particleBirthRate = 10;
         
         [self initScene];
     }
@@ -176,6 +186,8 @@
         SKAction *takenStar = [SKAction animateWithTextures:STARTAKEN_ANIM_STARTAKEN timePerFrame:0.02 resize:NO restore:NO];
         _tStar = [SKAction sequence:@[takenStar]];
     }];
+    
+    //[self addChild:_myParticle];
 }
 
 /*
@@ -273,6 +285,7 @@
         s.zPosition = [self getZPositionForElement:element];
         [self addChild:s];
         if(s.texture == _star) {
+            NSLog(@"STAR MOVING");
             [s runAction:_mStar];
         }
         [arr insertObject:s atIndex:i];
@@ -430,13 +443,18 @@
     } else {
         moveToBar = [SKAction moveTo:CGPointMake(183, 464) duration:0.5];
     }
-
-    [starSprite runAction:moveUpwards completion:^(void){
+    starSprite.zRotation = M_PI;
+    
+    SKAction *action = [SKAction rotateByAngle:M_PI*3 duration:1.0];
+    SKAction *new = [SKAction group:@[action, moveUpwards]];
+    [starSprite runAction:new completion:^(void){
         [starSprite runAction:_tStar completion:^(void){
+            starSprite.texture = STARTAKEN_TEX_STARTAKEN50;
             [starSprite runAction:moveToBar completion:^(void){
-                [starSprite removeAllActions];
                 starSprite.texture = STARTAKEN_TEX_STARTAKEN58;
                 starSprite.size = CGSizeMake(32, 32);
+                [starSprite removeAllActions];
+
             }];
         }];
     }];
