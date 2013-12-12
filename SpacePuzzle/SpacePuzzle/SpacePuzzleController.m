@@ -203,8 +203,7 @@
 -(void)sceneFinishedMovingUnit {
     // If the player moved to the finish, new level.
     CGPoint to = CGPointMake(_currentUnit.x, _currentUnit.y);
-    CGPoint other = CGPointMake(_nextUnit.x, _nextUnit.y);
-    [_boardController updateElementsMovedToPoint:to OtherUnit:other];
+    [_boardController updateElementsMovedToPoint:to];
     if([self areUnitsOnFinish]) {
         // THIS CODE NEEDS TO ACCOUNT FOR WORLDS.
         _level++;
@@ -220,9 +219,8 @@
 }
 
 -(void)sceneFinishedMovingElementFrom:(CGPoint)from WithIndex:(NSInteger)index To:(CGPoint)to {
-    CGPoint u = CGPointMake(_nextUnit.x, _nextUnit.y);
     NSInteger dir = [Converter convertCoordsTo:to Direction:from];
-    [_boardController boxMovedToPoint:to FromPoint:from OtherUnitPos:u InDirection: dir];
+    [_boardController boxMovedToPoint:to FromPoint:from InDirection: dir];
     [self checkIfUnitIsFalling];
 }
 
@@ -297,8 +295,7 @@
     // diagonally.
 
     // Move unit in data model and view.
-    CGPoint nextUnitPos = CGPointMake(_nextUnit.x, _nextUnit.y);
-    if([_boardController unitWantsToMoveFrom:from To:to WithSwipe:swipe UnitWasAstronatut:_currentUnit == _bigL OtherUnitPosition:nextUnitPos]) {
+    if([_boardController unitWantsToMoveFrom:from To:to WithSwipe:swipe UnitWasAstronatut:_currentUnit == _bigL]) {
         _currentUnit.x = x;
         _currentUnit.y = y;
 
