@@ -191,7 +191,7 @@
 }
 
 -(void)unitFallingAnimation {
-    SKAction *scalEm = [SKAction scaleBy:0.01 duration:3.0];
+    SKAction *scalEm = [SKAction scaleBy:0.01 duration:2.7];
     
     // CHANGE THIS TO SAFER.
     SKSpriteNode *s;
@@ -615,6 +615,7 @@
     
     _littleJohn.position = pos;
     _littleJohn.size = CGSizeMake(TILESIZE,TILESIZE);
+    [_littleJohn removeAllActions];
     
     _currentUnit = _littleJohn;
 }
@@ -626,7 +627,7 @@
     
     _bigL.size = CGSizeMake(TILESIZE,TILESIZE);
     _bigL.position = pos;
-    
+    [_bigL removeAllActions];
     _currentUnit = _bigL;
 }
 
