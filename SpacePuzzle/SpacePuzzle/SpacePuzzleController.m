@@ -33,7 +33,7 @@
     [super viewDidLoad];
     _bigL = [[BigL alloc] init];
     _littleJohn = [[LittleJohn alloc] init];
-
+    
     // Configure the view.
     SKView *skView = (SKView *)self.view;
     skView.showsFPS = YES;
@@ -200,12 +200,14 @@
     }
 }
 
+/*
+ *  Is called when the animation of moving a unit is finished. Checks if the units are on the finish point,
+ *  if so setup next level. Also, checks if unit should fall after moving. */
 -(void)sceneFinishedMovingUnit {
     // If the player moved to the finish, new level.
     CGPoint to = CGPointMake(_currentUnit.x, _currentUnit.y);
     [_boardController updateElementsMovedToPoint:to];
     if([self areUnitsOnFinish]) {
-        // THIS CODE NEEDS TO ACCOUNT FOR WORLDS.
         _level++;
         if(_level > 10) {
             _level = 1;
@@ -215,21 +217,24 @@
         [self setupNextLevel];
     }
     
-    [self checkIfUnitIsFalling];
+    [self checkIfUnitShouldFall];
 }
 
 -(void)sceneFinishedMovingElementFrom:(CGPoint)from WithIndex:(NSInteger)index To:(CGPoint)to {
     NSInteger dir = [Converter convertCoordsTo:to Direction:from];
     [_boardController boxMovedToPoint:to FromPoint:from InDirection: dir];
-    [self checkIfUnitIsFalling];
+    [self checkIfUnitShouldFall];
 }
 
--(void)checkIfUnitIsFalling {
-    CGPoint unit = CGPointMake(_currentUnit.x, _currentUnit.y);
-    CGPoint other = CGPointMake(_nextUnit.x, _nextUnit.y);
+-(void)checkIfUnitShouldFall {
+    CGPoint bigLPos = CGPointMake(_bigL.x, _bigL.y);
+    CGPoint littleJohnPos = CGPointMake(_littleJohn.x, _littleJohn.y);
     
-    if(![_boardController isPointMovableTo:unit] || ![_boardController isPointMovableTo:other]) {
-        [_scene unitFallingAnimation];
+    if (![_boardController isPointMovableTo:bigLPos] && _bigL.isPlayingOnLevel) {
+        [_scene unitFallingAnimation:BIG_L];
+    }
+    if (![_boardController isPointMovableTo:littleJohnPos] && _littleJohn.isPlayingOnLevel) {
+        [_scene unitFallingAnimation:LITTLE_JOHN];
     }
 }
 
@@ -247,7 +252,7 @@
     }
 
     NSString *path = [[NSBundle mainBundle] pathForResource:currentLevel ofType:@"splvl"];
-    NSLog(@"p %@", currentLevel);
+    NSLog(@"%@", currentLevel);
    
     [_board loadBoard:path];
     
@@ -320,7 +325,6 @@
     CGPoint unitPoint = CGPointMake(unitX, unitY);
     
     [_boardController unitWantsToDoActionAt:loc From:unitPoint IsBigL:_currentUnit == _bigL];
-    // GIT MESSAGE
 }
 
 /*
@@ -423,6 +427,8 @@
     return [objectSent allObjects];
 }
 
+/*
+ *  Sets |level| and |world| according to the level progress. */
 -(void)getNextLevel {
     if([LoadSaveFile loadFile]) {
         NSString *currentState = [LoadSaveFile loadFile];
@@ -436,7 +442,6 @@
     } else {
         _player = [[Player alloc] initWithWorld:0 andLevel:1];
     }
-    
 }
 
 /*

@@ -63,7 +63,7 @@
 -(void)refreshTileAtFlatIndex: (NSInteger)findex WithStatus:(NSInteger)status;
 -(void)refreshElementAtPosition: (NSNumber*)index OfClass:(NSString*)name WithStatus:(BOOL)on;
 -(void)setElementAtPosition: (NSNumber*) index IsHidden: (BOOL)hidden;
--(void)unitFallingAnimation;
+-(void)unitFallingAnimation: (NSInteger)unit;
 -(void)moveElementFrom: (CGPoint)oldCoord WithIndex: (NSInteger)elementIndex To: (CGPoint)newCoord OntoStatus:(NSInteger)status InDir:(NSInteger)direction;
 -(void)setupBoardX: (NSInteger)x Y: (NSInteger)y Status: (NSInteger)status;
 -(void)setupElement: (CGPoint)coord Name: (NSString*)className Hidden: (BOOL)hidden;

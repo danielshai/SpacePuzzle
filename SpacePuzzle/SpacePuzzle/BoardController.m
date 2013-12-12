@@ -182,7 +182,7 @@
             // ADD FALLING ANIMATION HERE!!!!!
             // COULD YOU HAVE 2 METHODS: boxLeftPos AND boxArrivedAtPos THAT GETS CALLED FROM HERE AND
             // MOVE. THERE WE CAN DO FALLING ANIMATION AND SUCH SO THAT WE DON'T NEED TO COPY/PASTE.
-            [self.spController checkIfUnitIsFalling];
+            [self.spController checkIfUnitShouldFall];
         }
     }
     

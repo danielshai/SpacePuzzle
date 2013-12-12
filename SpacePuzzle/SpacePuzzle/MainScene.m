@@ -191,17 +191,17 @@
     [self addChild:_myParticle];
 }
 
--(void)unitFallingAnimation {
+-(void)unitFallingAnimation:(NSInteger)unit {
     SKAction *scalEm = [SKAction scaleBy:0.01 duration:2.7];
     
     // CHANGE THIS TO SAFER.
     SKSpriteNode *s;
-    if(_currentUnit == _bigL) {
-        s = _littleJohn;
-    } else {
+    if(unit == BIG_L) {
         s = _bigL;
+    } else {
+        s = _littleJohn;
     }
-    
+    s.zPosition = 1;
     [s runAction:scalEm completion:^(void){
         [self.controller setupNextLevel];
     }];
@@ -303,7 +303,6 @@
         s.zPosition = [self getZPositionForElement:element];
         [self addChild:s];
         if(s.texture == _star) {
-            NSLog(@"STAR MOVING");
             [s runAction:_mStar];
         }
         [arr insertObject:s atIndex:i];
