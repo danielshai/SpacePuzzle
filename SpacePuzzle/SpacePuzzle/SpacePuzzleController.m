@@ -215,12 +215,24 @@
         [LoadSaveFile saveFileWithWorld:_world andLevel:_level];
         [self setupNextLevel];
     }
+    
+    [self checkIfUnitIsFalling];
 }
 
 -(void)sceneFinishedMovingElementFrom:(CGPoint)from WithIndex:(NSInteger)index To:(CGPoint)to {
     CGPoint u = CGPointMake(_nextUnit.x, _nextUnit.y);
     NSInteger dir = [Converter convertCoordsTo:to Direction:from];
     [_boardController boxMovedToPoint:to FromPoint:from OtherUnitPos:u InDirection: dir];
+    [self checkIfUnitIsFalling];
+}
+
+-(void)checkIfUnitIsFalling {
+    CGPoint unit = CGPointMake(_currentUnit.x, _currentUnit.y);
+    CGPoint other = CGPointMake(_nextUnit.x, _nextUnit.y);
+    
+    if(![_boardController isPointMovableTo:unit] || ![_boardController isPointMovableTo:other]) {
+        [_scene unitFallingAnimation];
+    }
 }
 
 /*
@@ -541,7 +553,7 @@
 }
 
 -(BOOL)prefersStatusBarHidden {
-    return true;
+    return YES;
 }
 
 -(IBAction)changeUnitAction:(id)sender {

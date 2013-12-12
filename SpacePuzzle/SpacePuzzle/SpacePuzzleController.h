@@ -79,4 +79,5 @@
 -(NSArray*)getDataFromNotification:(NSNotification*) notif Key: (NSString*) key;
 -(IBAction)changeUnitAction:(id)sender;
 -(void)takeStar;
+-(void)checkIfUnitIsFalling;
 @end

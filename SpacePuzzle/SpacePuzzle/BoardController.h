@@ -35,4 +35,5 @@
 -(void)boxMovedToPoint: (CGPoint)p FromPoint: (CGPoint)pFrom OtherUnitPos: (CGPoint)otherUnitPos InDirection: (NSInteger)dir;
 -(void)updateElementsMovedToPoint: (CGPoint)to OtherUnit: (CGPoint)otherUnitPoint;
 -(BoardCoord*) boardCoordForPoint: (CGPoint)p;
+-(BOOL)isUnitOnVoid: (CGPoint)unitPoint;
 @end

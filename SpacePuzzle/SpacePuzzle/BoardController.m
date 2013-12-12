@@ -71,7 +71,7 @@
                     [self.spController updateElementsAtPosition:from withArray:bcFrom.elements];
                     
                     if([Converter isPoint:p sameAsPoint:otherUnitPoint]) {
-                        [self.scene unitFallingAnimation];
+                        //[self.scene unitFallingAnimation];
                     }
                 }
             }
@@ -181,6 +181,7 @@
             // ADD FALLING ANIMATION HERE!!!!!
             // COULD YOU HAVE 2 METHODS: boxLeftPos AND boxArrivedAtPos THAT GETS CALLED FROM HERE AND
             // MOVE. THERE WE CAN DO FALLING ANIMATION AND SUCH SO THAT WE DON'T NEED TO COPY/PASTE.
+            [self.spController checkIfUnitIsFalling];
         }
     }
     
@@ -340,7 +341,7 @@
                 [self.scene updateElementsAtPosition:bridgePos withArray:bcBridge.elements];
              
                 if([Converter isPoint:bridgePos sameAsPoint:otherUnitPos]) {
-                    [self.scene unitFallingAnimation];
+                   // [self.scene unitFallingAnimation];
                 }
             }
         }
@@ -449,7 +450,12 @@
     return nil;
 }
 
--(BOOL)isPointMovableTo:(CGPoint)p {
+-(BOOL)isUnitOnVoid: (CGPoint)unit {
+    BoardCoord *bc = [[_board board] objectAtIndex:[Converter CGPointToKey:unit]];
+    return bc.status == MAPSTATUS_VOID;
+}
+
+-(BOOL)isPointMovableTo: (CGPoint)p {
     return [_board isPointMovableTo:p];
 }
 
