@@ -191,6 +191,22 @@
     [self addChild:_myParticle];
 }
 
+-(void)unitFallingAnimation {
+    SKAction *scalEm = [SKAction scaleBy:0.01 duration:3.0];
+    
+    // CHANGE THIS TO SAFER.
+    SKSpriteNode *s;
+    if(_currentUnit == _bigL) {
+        s = _littleJohn;
+    } else {
+        s = _bigL;
+    }
+    
+    [s runAction:scalEm completion:^(void){
+        [self.controller setupNextLevel];
+    }];
+}
+
 /*
  *  Updates the current unit with the data model. */
 -(void)updateUnit:(CGPoint)coord inDirection:(NSInteger)direction {
@@ -204,6 +220,7 @@
     SKAction *action;
     // Depending on the direction the unit is making, update to the correct picture.
     if (_currentUnit == _bigL) {
+        
         if(direction == UP) {
             move = [SKAction moveToY:pos.y duration:_bWUp.duration];
             action = [SKAction group:@[_bWUp, move]];
@@ -321,9 +338,19 @@
             return _buttonOff;
         }
     } else if([e isKindOfClass:[BridgeButton class]]) {
-        return _buttonOff;
+        BridgeButton *bb = (BridgeButton*)e;
+        if(bb.state) {
+            return _buttonOn;
+        } else {
+            return _buttonOff;
+        }
     } else if([e isKindOfClass:[Bridge class]]) {
-        return _buttonOff;
+        Bridge *b = (Bridge*)e;
+        if(b.blocking) {
+            return _bridgeOff;
+        } else {
+            return _bridgeOn;
+        }
     } else if([e isKindOfClass:[PlatformLever class]]) {
         return _buttonOff;
     } else if([e isKindOfClass:[MovingPlatform class]]) {
@@ -393,10 +420,20 @@
         [s runAction:action completion:^(void){
 
             SKAction *scalEm = [SKAction scaleBy:0.01 duration:1.2];
-    
-            [s runAction:scalEm completion:^(void){
-                // THE BUTTON SHOULD BE UPDATED BEFORE THE BOX IS GONE, HOWEVER, THIS WILL ALSO REMOVE THE BOX.
-                [self.controller sceneFinishedMovingElementFrom:oldCoord WithIndex:elementIndex To:newCoord];
+            
+            // Create a new sprite for falling over the edge. This fixes issue with button not being
+            // updated in correct time if a box stands on it before falling over the edge.
+            SKSpriteNode *s2 = [[SKSpriteNode alloc] initWithTexture:_box];
+            s2.position = movePixel;
+            Box *b = [[Box alloc] init];
+            s2.size = [self sizeForElement:b];
+            s2.zPosition = [self getZPositionForElement:b];
+            [self addChild:s2];
+            [self.controller sceneFinishedMovingElementFrom:oldCoord WithIndex:elementIndex To:newCoord];
+            [s removeFromParent];
+            
+            [s2 runAction:scalEm completion:^(void){
+                [s2 removeFromParent];
             }];
         }];
     }

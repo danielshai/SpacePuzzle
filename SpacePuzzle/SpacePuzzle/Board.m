@@ -572,6 +572,7 @@
 
 -(BOOL)isPointMovableTo:(CGPoint)p {
     BOOL isMovable = NO;
+    BOOL movableElementInVoid = NO;
     
     if([self isPointWithinBoard:p]) {
         BoardCoord *bc = [_board objectAtIndex:[Converter CGPointToKey:p]];
@@ -582,9 +583,13 @@
                 if(!isMovable) {
                     return NO;
                 }
+                if( ([e isKindOfClass:[Bridge class]] || [e isKindOfClass:[MovingPlatform class]])
+                   && ![e blocking]) {
+                    movableElementInVoid = YES;
+                }
             }
         }
-        return [bc status] != MAPSTATUS_VOID;
+        return [bc status] != MAPSTATUS_VOID || movableElementInVoid;
     }
     return NO;
 }

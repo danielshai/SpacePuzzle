@@ -261,6 +261,7 @@
     // The used brush.
     NSInteger stat = [[data objectAtIndex:1] integerValue];
     NSNumber *flatIndex = [NSNumber numberWithInt:point.y * BOARD_SIZE_X + point.x];
+    NSInteger flatIndexInt = [flatIndex integerValue];
     // If the change was on a tile, the |BoardCoord| status should change. Otherwise elements should change.
     if(stat == MAPSTATUS_SOLID || stat == MAPSTATUS_CRACKED || stat == MAPSTATUS_VOID) {
         BoardCoord *bc = [[_board board] objectAtIndex:point.y * BOARD_SIZE_X + point.x];
@@ -288,7 +289,8 @@
             BOOL removeConnection = [_scene removeAConnectionFrom:point];
             BOOL removeConnectionEndPoint = [_scene removeAConnectionBasedOnEndPoint:point];
             if(!removeConnection && !removeConnectionEndPoint) {
-                [[_board elementDictionary] removeObjectForKey: flatIndex];
+                BoardCoord *bc = [[_board board] objectAtIndex:flatIndexInt];
+                [bc.elements removeLastObject];
                 [_scene removeOneSprite:flatIndex];
             }
             // If a connection was removed, update data model.

@@ -47,7 +47,7 @@
     _scene.controller = self;
     _scene.scaleMode = SKSceneScaleModeAspectFill;
     
-    [LoadSaveFile saveFileWithWorld:0 andLevel:1];
+    [LoadSaveFile saveFileWithWorld:1 andLevel:01];
     _boardController = [[BoardController alloc] init];
     _boardController.spController = self;
     _boardController.scene = _scene;
@@ -215,12 +215,24 @@
         [LoadSaveFile saveFileWithWorld:_world andLevel:_level];
         [self setupNextLevel];
     }
+    
+    [self checkIfUnitIsFalling];
 }
 
 -(void)sceneFinishedMovingElementFrom:(CGPoint)from WithIndex:(NSInteger)index To:(CGPoint)to {
-    CGPoint u = CGPointMake(_currentUnit.x, _currentUnit.y);
+    CGPoint u = CGPointMake(_nextUnit.x, _nextUnit.y);
     NSInteger dir = [Converter convertCoordsTo:to Direction:from];
     [_boardController boxMovedToPoint:to FromPoint:from OtherUnitPos:u InDirection: dir];
+    [self checkIfUnitIsFalling];
+}
+
+-(void)checkIfUnitIsFalling {
+    CGPoint unit = CGPointMake(_currentUnit.x, _currentUnit.y);
+    CGPoint other = CGPointMake(_nextUnit.x, _nextUnit.y);
+    
+    if(![_boardController isPointMovableTo:unit] || ![_boardController isPointMovableTo:other]) {
+        [_scene unitFallingAnimation];
+    }
 }
 
 /*
@@ -238,6 +250,7 @@
 
     NSString *path = [[NSBundle mainBundle] pathForResource:currentLevel ofType:@"splvl"];
     NSLog(@"p %@", currentLevel);
+   
     [_board loadBoard:path];
     
     for(int i = 0; i < BOARD_SIZE_Y; i++) {
@@ -288,6 +301,7 @@
     if([_boardController unitWantsToMoveFrom:from To:to WithSwipe:swipe UnitWasAstronatut:_currentUnit == _bigL OtherUnitPosition:nextUnitPos]) {
         _currentUnit.x = x;
         _currentUnit.y = y;
+
         [_scene updateUnit:to inDirection:dir];
         [_scene refreshTileAtPosition:from WithStatus:[_boardController getBoardStatusAtPosition:from]];
     }
@@ -362,6 +376,7 @@
 }
 
 -(void)movePlatform:(NSTimer *)timer {
+    // TEMP CODE.
     MovingPlatform *mp = [timer userInfo];
     [[_board elementDictionary] removeObjectForKey:mp.key];
     
@@ -538,7 +553,7 @@
 }
 
 -(BOOL)prefersStatusBarHidden {
-    return true;
+    return YES;
 }
 
 -(IBAction)changeUnitAction:(id)sender {
