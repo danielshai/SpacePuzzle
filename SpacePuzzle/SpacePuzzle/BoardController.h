@@ -20,20 +20,20 @@
 @property (nonatomic, assign) MainScene *scene;
 
 -(void) setupBoardWithWorld: (NSInteger)world AndLevel: (NSInteger)level;
--(BOOL) unitWantsToMoveFrom: (CGPoint)from To: (CGPoint)to WithSwipe: (BOOL)swipe UnitWasAstronatut: (BOOL)isAstronaut OtherUnitPosition: (CGPoint)otherUnitPoint;
+-(BOOL) unitWantsToMoveFrom: (CGPoint)from To: (CGPoint)to WithSwipe: (BOOL)swipe UnitWasAstronatut: (BOOL)isAstronaut;
 -(NSInteger) getBoardStatusAtPosition: (CGPoint)p;
 -(BOOL) isPointMovableTo: (CGPoint)p;
 -(NSMutableArray*) elementsAtPosition: (CGPoint)p;
 -(void)takeStar: (Element*)star;
 -(BOOL)removeElement: (Element*)e FromBoardCoord: (BoardCoord*)bc;
 -(void)addElement: (Element*)e ToBoardCoord: (BoardCoord*)bc;
--(void)moveBox: (Element*)rock InDirection: (NSInteger)dir OtherUnitPosition: (CGPoint)otherUnitPos;
--(void)doActionOnStarButton:(Element *)button OtherUnitPoint: (CGPoint)otherUnitPoint;
--(void)doActionOnBridgeButton: (Element*)button OtherUnitPoint:(CGPoint)otherUnitPoint;
+-(void)moveBox: (Element*)rock InDirection: (NSInteger)dir;
+-(void)doActionOnStarButton:(Element *)button;
+-(void)doActionOnBridgeButton: (Element*)button;
 -(void)doActionOnBoxSmash:(Element*)box;
 -(void)unitWantsToDoActionAt:(CGPoint)loc From: (CGPoint)from IsBigL: (BOOL)isBigL;
--(void)boxMovedToPoint: (CGPoint)p FromPoint: (CGPoint)pFrom OtherUnitPos: (CGPoint)otherUnitPos InDirection: (NSInteger)dir;
--(void)updateElementsMovedToPoint: (CGPoint)to OtherUnit: (CGPoint)otherUnitPoint;
+-(void)boxMovedToPoint: (CGPoint)p FromPoint: (CGPoint)pFrom InDirection: (NSInteger)dir;
+-(void)updateElementsMovedToPoint: (CGPoint)to;
 -(BoardCoord*) boardCoordForPoint: (CGPoint)p;
 -(BOOL)isUnitOnVoid: (CGPoint)unitPoint;
 @end
