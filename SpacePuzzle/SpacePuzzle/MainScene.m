@@ -58,8 +58,8 @@
 @synthesize smBox = _smBox;
 @synthesize sBox = _sBox;
 
-@synthesize sparkParticle = _sparkParticle;
-@synthesize smokeParticle = _smokeParticle;
+//@synthesize sparkParticle = _sparkParticle;
+//@synthesize smokeParticle = _smokeParticle;
 
 -(id)initWithSize:(CGSize)size {    
     if (self = [super initWithSize:size]) {
@@ -117,7 +117,7 @@
         [self addChild:_gui];
         
         takenStarsArray = [[NSMutableArray alloc] init];
-        
+        /*
         NSString *particlePath = [[NSBundle mainBundle] pathForResource:@"StarSparkParticle" ofType:@"sks"];
         _sparkParticle = [NSKeyedUnarchiver unarchiveObjectWithFile:particlePath];
         particlePath = [[NSBundle mainBundle] pathForResource:@"SmokeParticle" ofType:@"sks"];
@@ -126,7 +126,7 @@
         _sparkParticle.zPosition = 90000;
         _smokeParticle.zPosition = 89999;
         
-        [self initScene];
+        [self initScene];*/
     }
     return self;
 }
@@ -460,13 +460,16 @@
 -(void)smashBox:(Element *)box {
     SKSpriteNode *smashedBox = [[SKSpriteNode alloc] initWithTexture:_smBox];
     CGPoint boxPos = CGPointMake(box.x, box.y);
-//    BoardCoord *bc = [[_board board] objectAtIndex:[Converter CGPointToKey:boxPos]];
+    //BoardCoord *bc = [[board board] objectAtIndex:[Converter CGPointToKey:boxPos]];
     
     smashedBox.position = [Converter convertCoordToPixel:boxPos];
     smashedBox.zPosition = 10;
     smashedBox.size = [self sizeForElement:box];
     smashedBox.position = CGPointMake(smashedBox.position.x + TILESIZE/2, smashedBox.position.y);
 
+    //[Board removeElemnt:box FromBoardCoord:bc];
+    
+    /*
     _smokeParticle.particlePosition = [Converter convertCoordToPixel:boxPos];
     _smokeParticle.particlePosition = CGPointMake(smashedBox.position.x, smashedBox.position.y);
     _sBox = [SKAction moveTo:boxPos duration:0.5];
@@ -478,7 +481,7 @@
 //        [Board removeElement:box FromBoardCoord:bc];
         [self addChild:smashedBox];
         [_smokeParticle removeFromParent];
-    }];
+    }];*/
 }
 
 -(CGFloat)getZPositionForElement:(Element *)e {
@@ -524,15 +527,15 @@
         moveToBar = [SKAction moveTo:CGPointMake(183, 464) duration:0.5];
     }
     starSprite.zRotation = M_PI;
-    _sparkParticle.particlePosition = CGPointMake(starSprite.position.x, starSprite.position.y + 20);
-    _sparkParticle.particleBirthRate = 10;
+//    _sparkParticle.particlePosition = CGPointMake(starSprite.position.x, starSprite.position.y + 20);
+//    _sparkParticle.particleBirthRate = 10;
     
     SKAction *action = [SKAction rotateByAngle:M_PI*3 duration:1.0];
     SKAction *new = [SKAction group:@[action, moveUpwards]];
     [starSprite runAction:new completion:^(void){
-        [self addChild:_sparkParticle];
+//        [self addChild:_sparkParticle];
         [starSprite runAction:_tStar completion:^(void){
-            [_sparkParticle removeFromParent];
+//            [_sparkParticle removeFromParent];
             starSprite.texture = STARTAKEN_TEX_STARTAKEN50;
 //            _myParticle 
             [starSprite runAction:moveToBar completion:^(void){

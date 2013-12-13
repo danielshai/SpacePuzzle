@@ -159,7 +159,7 @@
     CGPoint p = CGPointMake(box.x, box.y);
     BoardCoord *bc = [[_board board] objectAtIndex:[Converter CGPointToKey:p]];
     [self.scene smashBox:box];
-    //[self removeElement:box FromBoardCoord:bc];
+    [self removeElement:box FromBoardCoord:bc];
     for (int i = 0; i < bc.elements.count; i++) {
         Element *e = [bc.elements objectAtIndex:i];
         if([e isKindOfClass:[StarButton class]]) {
