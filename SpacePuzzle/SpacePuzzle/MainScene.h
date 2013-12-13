@@ -30,6 +30,7 @@
 @property (nonatomic, retain) SKTexture *box;
 @property (nonatomic, retain) SKTexture *guiAstro;
 @property (nonatomic, retain) SKTexture *guiAlien;
+@property (nonatomic, retain) SKTexture *smBox;
 
 @property (nonatomic, retain) SKSpriteNode *bigL;
 @property (nonatomic, retain) SKSpriteNode *littleJohn;
@@ -54,8 +55,11 @@
 @property (nonatomic, retain) SKAction *mBox;
 @property (nonatomic, retain) SKAction *mStar;
 @property (nonatomic, retain) SKAction *tStar;
+@property (nonatomic, retain) SKAction *sBox;
 
-@property (nonatomic, retain) SKEmitterNode *myParticle;
+@property (nonatomic, retain) SKEmitterNode *sparkParticle;
+@property (nonatomic, retain) SKEmitterNode *smokeParticle;
+
 
 -(void)updateUnit:(CGPoint) coord inDirection:(NSInteger) direction;
 -(void)updateElementsAtPosition: (CGPoint)pos withArray: (NSMutableArray *)elArr;
@@ -65,6 +69,7 @@
 -(void)setElementAtPosition: (NSNumber*) index IsHidden: (BOOL)hidden;
 -(void)unitFallingAnimation: (NSInteger)unit;
 -(void)moveElementFrom: (CGPoint)oldCoord WithIndex: (NSInteger)elementIndex To: (CGPoint)newCoord OntoStatus:(NSInteger)status InDir:(NSInteger)direction;
+-(void)smashBox: (Element*)box;
 -(void)setupBoardX: (NSInteger)x Y: (NSInteger)y Status: (NSInteger)status;
 -(void)setupElement: (CGPoint)coord Name: (NSString*)className Hidden: (BOOL)hidden;
 -(void)setupAstronaut: (CGPoint)pos;
