@@ -31,14 +31,15 @@
 @class BridgeButton;
 @class Bridge;
 @class BoardController;
+@class LevelSceneFinal;
 
 @interface SpacePuzzleController : UIViewController {
     NSMutableArray *swipeArray;
     NSTimer *timer;
 }
-
+@property (nonatomic, retain) LevelSceneFinal *levelSelect;
 @property (nonatomic, retain) Board *board;
-@property (nonatomic, assign) MainScene *scene;
+@property (nonatomic, retain) MainScene *scene;
 @property (nonatomic, retain) Unit *currentUnit;
 @property (nonatomic, retain) Unit *nextUnit;
 @property (nonatomic, retain) BigL *bigL;
@@ -73,6 +74,7 @@
 -(void)observeText:(NSString*)text Selector: (SEL)selector;
 -(void)getNextLevel;
 -(void)setupNextLevel;
+-(void)startGameWithWorld: (NSInteger)world AndLevel: (NSInteger)level;
 -(void)updateElementsAtPosition: (CGPoint)pos withArray: (NSMutableArray*)elArr;
 -(NSInteger)currentUnitToMacro;
 -(IBAction)restartAction:(id)sender;

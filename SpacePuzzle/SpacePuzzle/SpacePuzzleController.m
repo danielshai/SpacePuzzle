@@ -16,6 +16,7 @@
 #import "Path.h"
 #import "Position.h"
 #import "LoadSaveFile.h"
+#import "LevelSceneFinal.h"
 
 @implementation SpacePuzzleController
 @synthesize board = _board;
@@ -31,23 +32,26 @@
 
 -(void)viewDidLoad {
     [super viewDidLoad];
+ 
+    // Configure the view.
+    SKView *skView = (SKView *)self.view;
+   // skView.showsFPS = YES;
+   // skView.showsNodeCount = YES;
+    
+    // Create and configure the scene.
+
+    self.levelSelect = [LevelSceneFinal sceneWithSize:skView.bounds.size];
+    self.levelSelect.spCtrl = self;
+    [skView presentScene:self.levelSelect];
+}
+
+-(void)startGameWithWorld: (NSInteger)world AndLevel: (NSInteger)level {
     _bigL = [[BigL alloc] init];
     _littleJohn = [[LittleJohn alloc] init];
     
-    // Configure the view.
-    SKView *skView = (SKView *)self.view;
-    skView.showsFPS = YES;
-    skView.showsNodeCount = YES;
-    
     swipeArray = [[NSMutableArray alloc] init];
-    timer = [NSTimer scheduledTimerWithTimeInterval:0.12 target:self selector:@selector(checkInteraction:) userInfo:nil repeats:YES];
     
-    // Create and configure the scene.
-    _scene = [MainScene sceneWithSize:skView.bounds.size];
-    _scene.controller = self;
-    _scene.scaleMode = SKSceneScaleModeAspectFill;
-    
-    [LoadSaveFile saveFileWithWorld:1 andLevel:01];
+    [LoadSaveFile saveFileWithWorld:world andLevel:level];
     _boardController = [[BoardController alloc] init];
     _boardController.spController = self;
     _boardController.scene = _scene;
@@ -55,37 +59,42 @@
     [self setupNextLevel];
     
     // Present the scene.
-    [skView presentScene:_scene];
+    //SKView *view = (SKView*)self.view;
+    //[view presentScene:_scene];
+    //self.levelSelect = nil;
+    
+    // Removes old gesture recognizers.
+    for (id gest in self.view.gestureRecognizers) {
+        [self.view removeGestureRecognizer:gest];
+    }
     
     // Gesture recognizers.
     UITapGestureRecognizer *singleTapR = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTap:)];
     singleTapR.numberOfTapsRequired = 1;
-    [_scene.view addGestureRecognizer:singleTapR];
+    [self.view addGestureRecognizer:singleTapR];
     
     UITapGestureRecognizer *doubleTapR = [[UITapGestureRecognizer alloc] initWithTarget:self
-                                                                         action:@selector(doubleTap:)];
+                                                                                 action:@selector(doubleTap:)];
     doubleTapR.numberOfTapsRequired = 2;
-    [_scene.view addGestureRecognizer:doubleTapR];
+    [self.view addGestureRecognizer:doubleTapR];
     
-    UITapGestureRecognizer *trippleTapR = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(trippleTap:)];
-    trippleTapR.numberOfTapsRequired = 3;
-    [_scene.view addGestureRecognizer:trippleTapR];
-
     UISwipeGestureRecognizer *swipeUp = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeUp:)];
     swipeUp.direction = UISwipeGestureRecognizerDirectionUp;
-    [_scene.view addGestureRecognizer:swipeUp];
+    [self.view addGestureRecognizer:swipeUp];
     
     UISwipeGestureRecognizer *swipeDown = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeDown:)];
     swipeDown.direction = UISwipeGestureRecognizerDirectionDown;
-    [_scene.view addGestureRecognizer:swipeDown];
+    [self.view addGestureRecognizer:swipeDown];
     
     UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeLeft:)];
     swipeLeft.direction = UISwipeGestureRecognizerDirectionLeft;
-    [_scene.view addGestureRecognizer:swipeLeft];
+    [self.view addGestureRecognizer:swipeLeft];
     
     UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeRight:)];
     swipeRight.direction = UISwipeGestureRecognizerDirectionRight;
-    [_scene.view addGestureRecognizer:swipeRight];
+    [self.view addGestureRecognizer:swipeRight];
+    
+    timer = [NSTimer scheduledTimerWithTimeInterval:0.12 target:self selector:@selector(checkInteraction:) userInfo:nil repeats:YES];
 }
 
 /*
@@ -96,7 +105,6 @@
         
         // Convert to board coordinates.
         location = [Converter convertMousePosToCoord:location];
-
         [self unitWantsToMoveTo:location WithSwipe:NO];
     }
 }
@@ -110,12 +118,6 @@
         location = [Converter convertMousePosToCoord:location];
     
         [self unitWantsToDoActionAt:location];
-    }
-}
-
--(void)trippleTap:(UIGestureRecognizer *)sender {
-    if(sender.state == UIGestureRecognizerStateEnded && ![[_scene currentUnit] hasActions]) {
-        //[self changeUnit];
     }
 }
 
@@ -274,6 +276,7 @@
     
     for(id key in [[_boardController board] elementDictionary]) {
         NSMutableArray *arr = [[[_boardController board] elementDictionary] objectForKey:key];
+        // atIndex:0 is because, currently, boards cannot have 2 elements in the beginning.
         Element *e = [arr objectAtIndex:0];
         CGPoint elementPos = CGPointMake(e.x, e.y);
         [_scene updateElementsAtPosition:elementPos withArray:arr];
