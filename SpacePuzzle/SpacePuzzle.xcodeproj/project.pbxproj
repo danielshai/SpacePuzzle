@@ -56,6 +56,7 @@
 		77F122EE185601D9005A595F /* TopBarAstro.png in Resources */ = {isa = PBXBuildFile; fileRef = 77F122EC185601D9005A595F /* TopBarAstro.png */; };
 		77F21644184DDEFF00FD23D2 /* LoadSaveFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F21643184DDEFF00FD23D2 /* LoadSaveFile.m */; };
 		77F760D0184E1EF300FDF315 /* Background01.png in Resources */ = {isa = PBXBuildFile; fileRef = 77F760CF184E1EF300FDF315 /* Background01.png */; };
+		E601880E185A0B0000C9329A /* LevelSceneFinal.m in Sources */ = {isa = PBXBuildFile; fileRef = E601880D185A0B0000C9329A /* LevelSceneFinal.m */; };
 		E6057677183619120033AE88 /* Box.m in Sources */ = {isa = PBXBuildFile; fileRef = E6057676183619120033AE88 /* Box.m */; };
 		E60C6A01183B94F000D6FA14 /* Star.m in Sources */ = {isa = PBXBuildFile; fileRef = E60C6A00183B94F000D6FA14 /* Star.m */; };
 		E60C6A0A183BB19F00D6FA14 /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = E60C6A09183BB19F00D6FA14 /* Player.m */; };
@@ -83,6 +84,22 @@
 		E62A0523184DF78D009B4004 /* mario2.splvl in Resources */ = {isa = PBXBuildFile; fileRef = E62A0522184DF78D009B4004 /* mario2.splvl */; };
 		E633067A1835018A00E908F7 /* XMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = E63306791835018A00E908F7 /* XMLParser.m */; };
 		E645787D1858AE6B0091F0F8 /* Level101.splvl in Resources */ = {isa = PBXBuildFile; fileRef = E645787C1858AE6B0091F0F8 /* Level101.splvl */; };
+		E64A9B66185B36F100223042 /* 1star_1x.png in Resources */ = {isa = PBXBuildFile; fileRef = E64A9B56185B36F100223042 /* 1star_1x.png */; };
+		E64A9B67185B36F100223042 /* 2stars_1x.png in Resources */ = {isa = PBXBuildFile; fileRef = E64A9B57185B36F100223042 /* 2stars_1x.png */; };
+		E64A9B68185B36F100223042 /* 3stars_1x.png in Resources */ = {isa = PBXBuildFile; fileRef = E64A9B58185B36F100223042 /* 3stars_1x.png */; };
+		E64A9B69185B36F100223042 /* active_1x.png in Resources */ = {isa = PBXBuildFile; fileRef = E64A9B59185B36F100223042 /* active_1x.png */; };
+		E64A9B6A185B36F100223042 /* bgspace.png in Resources */ = {isa = PBXBuildFile; fileRef = E64A9B5A185B36F100223042 /* bgspace.png */; };
+		E64A9B6B185B36F100223042 /* Exo2.0-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = E64A9B5B185B36F100223042 /* Exo2.0-ExtraBold.otf */; };
+		E64A9B6C185B36F100223042 /* Exo2.0-ExtraBoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = E64A9B5C185B36F100223042 /* Exo2.0-ExtraBoldItalic.otf */; };
+		E64A9B6D185B36F100223042 /* Exo2.0-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = E64A9B5D185B36F100223042 /* Exo2.0-Regular.otf */; };
+		E64A9B6E185B36F100223042 /* Inactive_1x.png in Resources */ = {isa = PBXBuildFile; fileRef = E64A9B5E185B36F100223042 /* Inactive_1x.png */; };
+		E64A9B6F185B36F100223042 /* planetLock.png in Resources */ = {isa = PBXBuildFile; fileRef = E64A9B5F185B36F100223042 /* planetLock.png */; };
+		E64A9B70185B36F100223042 /* planets1.png in Resources */ = {isa = PBXBuildFile; fileRef = E64A9B60185B36F100223042 /* planets1.png */; };
+		E64A9B71185B36F100223042 /* planets2.png in Resources */ = {isa = PBXBuildFile; fileRef = E64A9B61185B36F100223042 /* planets2.png */; };
+		E64A9B72185B36F100223042 /* planets3.png in Resources */ = {isa = PBXBuildFile; fileRef = E64A9B62185B36F100223042 /* planets3.png */; };
+		E64A9B73185B36F100223042 /* planets4.png in Resources */ = {isa = PBXBuildFile; fileRef = E64A9B63185B36F100223042 /* planets4.png */; };
+		E64A9B74185B36F100223042 /* planets5.png in Resources */ = {isa = PBXBuildFile; fileRef = E64A9B64185B36F100223042 /* planets5.png */; };
+		E64A9B75185B36F100223042 /* Shade_2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E64A9B65185B36F100223042 /* Shade_2x.png */; };
 		E687AE4D183A43EB00A5B78C /* mario.splvl in Resources */ = {isa = PBXBuildFile; fileRef = E687AE4C183A43EB00A5B78C /* mario.splvl */; };
 		E6E657FE182BB8C50022BF5F /* Board.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E657FD182BB8C50022BF5F /* Board.m */; };
 		E6E65801182BB9020022BF5F /* Position.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E65800182BB9020022BF5F /* Position.m */; };
@@ -170,6 +187,8 @@
 		77F21642184DDEFF00FD23D2 /* LoadSaveFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadSaveFile.h; sourceTree = "<group>"; };
 		77F21643184DDEFF00FD23D2 /* LoadSaveFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadSaveFile.m; sourceTree = "<group>"; };
 		77F760CF184E1EF300FDF315 /* Background01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Background01.png; sourceTree = "<group>"; };
+		E601880C185A0B0000C9329A /* LevelSceneFinal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelSceneFinal.h; sourceTree = "<group>"; };
+		E601880D185A0B0000C9329A /* LevelSceneFinal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LevelSceneFinal.m; sourceTree = "<group>"; };
 		E6057675183619120033AE88 /* Box.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Box.h; sourceTree = "<group>"; };
 		E6057676183619120033AE88 /* Box.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Box.m; sourceTree = "<group>"; };
 		E60C69FF183B94F000D6FA14 /* Star.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Star.h; sourceTree = "<group>"; };
@@ -208,6 +227,22 @@
 		E63306781835018A00E908F7 /* XMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XMLParser.h; path = ../../SpacePuzzleEditor/SpacePuzzleEditor/XMLParser.h; sourceTree = "<group>"; };
 		E63306791835018A00E908F7 /* XMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XMLParser.m; path = ../../SpacePuzzleEditor/SpacePuzzleEditor/XMLParser.m; sourceTree = "<group>"; };
 		E645787C1858AE6B0091F0F8 /* Level101.splvl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Level101.splvl; path = ../../Levels/Level101.splvl; sourceTree = "<group>"; };
+		E64A9B56185B36F100223042 /* 1star_1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 1star_1x.png; path = "../../Resources/Level select/1star_1x.png"; sourceTree = "<group>"; };
+		E64A9B57185B36F100223042 /* 2stars_1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 2stars_1x.png; path = "../../Resources/Level select/2stars_1x.png"; sourceTree = "<group>"; };
+		E64A9B58185B36F100223042 /* 3stars_1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 3stars_1x.png; path = "../../Resources/Level select/3stars_1x.png"; sourceTree = "<group>"; };
+		E64A9B59185B36F100223042 /* active_1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = active_1x.png; path = "../../Resources/Level select/active_1x.png"; sourceTree = "<group>"; };
+		E64A9B5A185B36F100223042 /* bgspace.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bgspace.png; path = "../../Resources/Level select/bgspace.png"; sourceTree = "<group>"; };
+		E64A9B5B185B36F100223042 /* Exo2.0-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Exo2.0-ExtraBold.otf"; path = "../../Resources/Level select/Exo2.0-ExtraBold.otf"; sourceTree = "<group>"; };
+		E64A9B5C185B36F100223042 /* Exo2.0-ExtraBoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Exo2.0-ExtraBoldItalic.otf"; path = "../../Resources/Level select/Exo2.0-ExtraBoldItalic.otf"; sourceTree = "<group>"; };
+		E64A9B5D185B36F100223042 /* Exo2.0-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Exo2.0-Regular.otf"; path = "../../Resources/Level select/Exo2.0-Regular.otf"; sourceTree = "<group>"; };
+		E64A9B5E185B36F100223042 /* Inactive_1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Inactive_1x.png; path = "../../Resources/Level select/Inactive_1x.png"; sourceTree = "<group>"; };
+		E64A9B5F185B36F100223042 /* planetLock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = planetLock.png; path = "../../Resources/Level select/planetLock.png"; sourceTree = "<group>"; };
+		E64A9B60185B36F100223042 /* planets1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = planets1.png; path = "../../Resources/Level select/planets1.png"; sourceTree = "<group>"; };
+		E64A9B61185B36F100223042 /* planets2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = planets2.png; path = "../../Resources/Level select/planets2.png"; sourceTree = "<group>"; };
+		E64A9B62185B36F100223042 /* planets3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = planets3.png; path = "../../Resources/Level select/planets3.png"; sourceTree = "<group>"; };
+		E64A9B63185B36F100223042 /* planets4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = planets4.png; path = "../../Resources/Level select/planets4.png"; sourceTree = "<group>"; };
+		E64A9B64185B36F100223042 /* planets5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = planets5.png; path = "../../Resources/Level select/planets5.png"; sourceTree = "<group>"; };
+		E64A9B65185B36F100223042 /* Shade_2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Shade_2x.png; path = "../../Resources/Level select/Shade_2x.png"; sourceTree = "<group>"; };
 		E687AE4C183A43EB00A5B78C /* mario.splvl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = mario.splvl; path = ../../Levels/mario.splvl; sourceTree = "<group>"; };
 		E6E657FB182BB7BD0022BF5F /* Macros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Macros.h; sourceTree = "<group>"; };
 		E6E657FC182BB8C50022BF5F /* Board.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Board.h; sourceTree = "<group>"; };
@@ -344,6 +379,28 @@
 			name = Animations;
 			sourceTree = "<group>";
 		};
+		E601880A185A0A4900C9329A /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				E61474F4185103F8005D9073 /* BoardController.h */,
+				E61474F5185103F8005D9073 /* BoardController.m */,
+				E621406B182BA53800EC5C21 /* SpacePuzzleController.h */,
+				E621406C182BA53800EC5C21 /* SpacePuzzleController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		E601880B185A0A5200C9329A /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				E601880C185A0B0000C9329A /* LevelSceneFinal.h */,
+				E601880D185A0B0000C9329A /* LevelSceneFinal.m */,
+				E621406E182BA53800EC5C21 /* MainScene.h */,
+				E621406F182BA53800EC5C21 /* MainScene.m */,
+			);
+			name = Scenes;
+			sourceTree = "<group>";
+		};
 		E6057678183619520033AE88 /* Elements */ = {
 			isa = PBXGroup;
 			children = (
@@ -370,6 +427,7 @@
 		E605768118362BC70033AE88 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E64A9B55185B36E100223042 /* Level select */,
 				7797AC1E183CE9F500E63E95 /* Elements */,
 				7797AC2B183CE9F500E63E95 /* Interface */,
 				7797AC2D183CE9F500E63E95 /* Tiles */,
@@ -413,12 +471,8 @@
 			isa = PBXGroup;
 			children = (
 				77F0A81D1845FF53002FA17A /* Animations */,
-				E61474F4185103F8005D9073 /* BoardController.h */,
-				E61474F5185103F8005D9073 /* BoardController.m */,
-				E621406B182BA53800EC5C21 /* SpacePuzzleController.h */,
-				E621406C182BA53800EC5C21 /* SpacePuzzleController.m */,
-				E621406E182BA53800EC5C21 /* MainScene.h */,
-				E621406F182BA53800EC5C21 /* MainScene.m */,
+				E601880A185A0A4900C9329A /* Controllers */,
+				E601880B185A0A5200C9329A /* Scenes */,
 				E63306781835018A00E908F7 /* XMLParser.h */,
 				E63306791835018A00E908F7 /* XMLParser.m */,
 				E6214065182BA53800EC5C21 /* GViewAppDelegate.h */,
@@ -461,6 +515,29 @@
 				E6214083182BA53800EC5C21 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E64A9B55185B36E100223042 /* Level select */ = {
+			isa = PBXGroup;
+			children = (
+				E64A9B56185B36F100223042 /* 1star_1x.png */,
+				E64A9B57185B36F100223042 /* 2stars_1x.png */,
+				E64A9B58185B36F100223042 /* 3stars_1x.png */,
+				E64A9B59185B36F100223042 /* active_1x.png */,
+				E64A9B5A185B36F100223042 /* bgspace.png */,
+				E64A9B5B185B36F100223042 /* Exo2.0-ExtraBold.otf */,
+				E64A9B5C185B36F100223042 /* Exo2.0-ExtraBoldItalic.otf */,
+				E64A9B5D185B36F100223042 /* Exo2.0-Regular.otf */,
+				E64A9B5E185B36F100223042 /* Inactive_1x.png */,
+				E64A9B5F185B36F100223042 /* planetLock.png */,
+				E64A9B60185B36F100223042 /* planets1.png */,
+				E64A9B61185B36F100223042 /* planets2.png */,
+				E64A9B62185B36F100223042 /* planets3.png */,
+				E64A9B63185B36F100223042 /* planets4.png */,
+				E64A9B64185B36F100223042 /* planets5.png */,
+				E64A9B65185B36F100223042 /* Shade_2x.png */,
+			);
+			name = "Level select";
 			sourceTree = "<group>";
 		};
 		E687AE4E183A440F00A5B78C /* Levels */ = {
@@ -616,8 +693,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				77EC873F185895EA00D38A00 /* spark.png in Resources */,
+				E64A9B6C185B36F100223042 /* Exo2.0-ExtraBoldItalic.otf in Resources */,
 				7797AC36183CE9F500E63E95 /* Box.png in Resources */,
 				7797AC47183CE9F500E63E95 /* Alien.png in Resources */,
+				E64A9B74185B36F100223042 /* planets5.png in Resources */,
+				E64A9B6D185B36F100223042 /* Exo2.0-Regular.otf in Resources */,
 				E6F7129A184F3995005C52A4 /* BarAstro.png in Resources */,
 				7797AC48183CE9F500E63E95 /* Astronaut.png in Resources */,
 				E62A0523184DF78D009B4004 /* mario2.splvl in Resources */,
@@ -635,12 +715,16 @@
 				779A2427184F70C100431A5D /* Level003.splvl in Resources */,
 				77D6072F184374030079A182 /* AstroRight.png in Resources */,
 				77D6072A184373F40079A182 /* AlienUp.png in Resources */,
+				E64A9B6E185B36F100223042 /* Inactive_1x.png in Resources */,
 				77D60728184373F40079A182 /* AlienLeft.png in Resources */,
+				E64A9B71185B36F100223042 /* planets2.png in Resources */,
 				7797AC46183CE9F500E63E95 /* voidtile.png in Resources */,
 				7797AC3B183CE9F500E63E95 /* ButtonON.png in Resources */,
 				77D60727184373F40079A182 /* AlienDown.png in Resources */,
+				E64A9B66185B36F100223042 /* 1star_1x.png in Resources */,
 				7705C3A718477A4600CEB0C9 /* BigLWalk.atlasc in Resources */,
 				E687AE4D183A43EB00A5B78C /* mario.splvl in Resources */,
+				E64A9B6A185B36F100223042 /* bgspace.png in Resources */,
 				77F122EE185601D9005A595F /* TopBarAstro.png in Resources */,
 				779A2430184F71AE00431A5D /* Level005.splvl in Resources */,
 				E6F7129C184F3995005C52A4 /* StarON.png in Resources */,
@@ -652,25 +736,34 @@
 				E6214074182BA53800EC5C21 /* Images.xcassets in Resources */,
 				7797AC42183CE9F500E63E95 /* Background.png in Resources */,
 				7797AC38183CE9F500E63E95 /* BridgeON.png in Resources */,
+				E64A9B6B185B36F100223042 /* Exo2.0-ExtraBold.otf in Resources */,
+				E64A9B72185B36F100223042 /* planets3.png in Resources */,
 				779A242D184F70C100431A5D /* Level009.splvl in Resources */,
 				7797AC3F183CE9F500E63E95 /* Start.gif in Resources */,
 				779CA2A71857463A00ED0526 /* StarOnTile.atlasc in Resources */,
 				7797AC45183CE9F500E63E95 /* solidtile.png in Resources */,
 				7797AC3C183CE9F500E63E95 /* Finish.png in Resources */,
+				E64A9B6F185B36F100223042 /* planetLock.png in Resources */,
 				77D60729184373F40079A182 /* AlienRight.png in Resources */,
 				779A242E184F70C100431A5D /* Level010.splvl in Resources */,
 				E621406A182BA53800EC5C21 /* Main.storyboard in Resources */,
 				E6F71299184F3995005C52A4 /* BarAlien.png in Resources */,
 				E60DA77C1848A2350088AB3D /* StarButton.png in Resources */,
+				E64A9B70185B36F100223042 /* planets1.png in Resources */,
 				E645787D1858AE6B0091F0F8 /* Level101.splvl in Resources */,
 				77D60730184374030079A182 /* AstroUp.png in Resources */,
 				7797AC43183CE9F500E63E95 /* Cracked.png in Resources */,
+				E64A9B68185B36F100223042 /* 3stars_1x.png in Resources */,
 				779A2426184F70C100431A5D /* Level002.splvl in Resources */,
 				7797AC41183CE9F500E63E95 /* SwitchON.png in Resources */,
 				77F760D0184E1EF300FDF315 /* Background01.png in Resources */,
+				E64A9B73185B36F100223042 /* planets4.png in Resources */,
 				779A2428184F70C100431A5D /* Level004.splvl in Resources */,
+				E64A9B69185B36F100223042 /* active_1x.png in Resources */,
 				779EF6A7183F608C0097441A /* MovingPlatform.png in Resources */,
+				E64A9B75185B36F100223042 /* Shade_2x.png in Resources */,
 				E6F7129B184F3995005C52A4 /* StarOFF.png in Resources */,
+				E64A9B67185B36F100223042 /* 2stars_1x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -711,6 +804,7 @@
 				E6E65819182BC9390022BF5F /* Unit.m in Sources */,
 				E6214070182BA53800EC5C21 /* MainScene.m in Sources */,
 				E61474F6185103F8005D9073 /* BoardController.m in Sources */,
+				E601880E185A0B0000C9329A /* LevelSceneFinal.m in Sources */,
 				77F21644184DDEFF00FD23D2 /* LoadSaveFile.m in Sources */,
 				7701076C183E0FFB00AAF564 /* Bridge.m in Sources */,
 				E6E657FE182BB8C50022BF5F /* Board.m in Sources */,

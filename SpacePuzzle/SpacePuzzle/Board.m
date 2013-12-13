@@ -82,7 +82,7 @@
             [_board insertObject:bc atIndex:((i*_boardSizeX) + j)];
         }
     }
-    
+    NSLog(@"Loaded board in load board");
     // Start and finish positions
     _startPosAstronaut.x = [[_parser startAstronaut] x];
     _startPosAstronaut.y = [[_parser startAstronaut] y];

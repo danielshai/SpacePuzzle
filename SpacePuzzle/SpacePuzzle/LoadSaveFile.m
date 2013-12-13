@@ -33,7 +33,7 @@
     
     // If NSDictionary exists, look to see if it holds a saved game state
     if (!unarchivedData) {
-        NSLog(@"Error reading plist: %@, format: %d", errorDesc, format);
+        NSLog(@"Error reading plist: %@, format: %u", errorDesc, format);
         return @"Error! Could not read file!";
     }
     else {

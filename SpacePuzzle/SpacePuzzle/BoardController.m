@@ -203,7 +203,7 @@
         if(rock.x >= BOARD_SIZE_X-1) {
             return;
         }
-        nextKey = [NSNumber numberWithInt:rock.y*BOARD_SIZE_X + rock.x + 1];
+        nextKey = [NSNumber numberWithInteger:rock.y*BOARD_SIZE_X + rock.x + 1];
         nextPos = CGPointMake(rock.x + 1, rock.y);
         bcNext = [[_board board] objectAtIndex:[Converter CGPointToKey:nextPos]];
         eArray = [bcNext elements];
@@ -211,7 +211,7 @@
         if(rock.x <= 0) {
             return;
         }
-        nextKey = [NSNumber numberWithInt:rock.y*BOARD_SIZE_X + rock.x - 1];
+        nextKey = [NSNumber numberWithInteger:rock.y*BOARD_SIZE_X + rock.x - 1];
         nextPos = CGPointMake(rock.x-1, rock.y);
         bcNext = [[_board board] objectAtIndex:[Converter CGPointToKey:nextPos]];
         eArray = [bcNext elements];
@@ -219,7 +219,7 @@
         if(rock.y <= 0) {
             return;
         }
-        nextKey = [NSNumber numberWithInt:(rock.y-1)*BOARD_SIZE_X + rock.x];
+        nextKey = [NSNumber numberWithInteger:(rock.y-1)*BOARD_SIZE_X + rock.x];
         nextPos = CGPointMake(rock.x, rock.y-1);
         bcNext = [[_board board] objectAtIndex:[Converter CGPointToKey:nextPos]];
         eArray = [bcNext elements];
@@ -227,7 +227,7 @@
         if(rock.y >= BOARD_SIZE_Y-1) {
             return;
         }
-        nextKey = [NSNumber numberWithInt:(rock.y+1)*BOARD_SIZE_X + rock.x];
+        nextKey = [NSNumber numberWithInteger:(rock.y+1)*BOARD_SIZE_X + rock.x];
         nextPos = CGPointMake(rock.x, rock.y+1);
         bcNext = [[_board board] objectAtIndex:[Converter CGPointToKey:nextPos]];
         eArray = [bcNext elements];
@@ -403,7 +403,7 @@
 -(void)setupBoardWithWorld: (NSInteger)world AndLevel: (NSInteger)level {
     // Load the board.
     NSString *currentLevel = @"Level";
-    currentLevel = [currentLevel stringByAppendingString:[NSString stringWithFormat:@"%d", world]];
+    currentLevel = [currentLevel stringByAppendingString:[NSString stringWithFormat:@"%ld", (long)world]];
     if(level < 10) {
         currentLevel = [currentLevel stringByAppendingString:[NSString stringWithFormat:@"%d%d", 0, level]];
     } else {
@@ -413,6 +413,7 @@
     NSString *path = [[NSBundle mainBundle] pathForResource:currentLevel ofType:@"splvl"];
     NSLog(@"p %@", currentLevel);
     [_board loadBoard:path];
+    NSLog(@"Loaded board");
     _starsLeft = [_board originalNumberOfStars];
 }
 

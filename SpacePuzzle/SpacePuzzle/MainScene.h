@@ -55,7 +55,7 @@
 @property (nonatomic, retain) SKAction *mStar;
 @property (nonatomic, retain) SKAction *tStar;
 
-@property (nonatomic, retain) SKEmitterNode *myParticle;
+//@property (nonatomic, retain) SKEmitterNode *myParticle;
 
 -(void)updateUnit:(CGPoint) coord inDirection:(NSInteger) direction;
 -(void)updateElementsAtPosition: (CGPoint)pos withArray: (NSMutableArray *)elArr;

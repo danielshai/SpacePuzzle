@@ -4,7 +4,6 @@
 
 
 #import <UIKit/UIKit.h>
-
 #import "GViewAppDelegate.h"
 
 int main(int argc, char * argv[])

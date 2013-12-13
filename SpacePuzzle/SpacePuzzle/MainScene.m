@@ -21,7 +21,6 @@
 #import "PlatformLever.h"
 #import "MovingPlatform.h"
 #import <math.h>
-#import <emmintrin.h>
 
 @implementation MainScene
 @synthesize controller = _controller;
@@ -57,10 +56,12 @@
 @synthesize mStar = _mStar;
 @synthesize tStar = _tStar;
 
-@synthesize myParticle = _myParticle;
+//@synthesize myParticle = _myParticle;
 
 -(id)initWithSize:(CGSize)size {    
     if (self = [super initWithSize:size]) {
+        
+        [self initScene];
         /* Setup your scene here */
         _bigL = [SKSpriteNode spriteNodeWithImageNamed:@"AstroDown.png"];
         _littleJohn = [SKSpriteNode spriteNodeWithImageNamed:@"AlienDown.png"];
@@ -112,14 +113,12 @@
         [self addChild:_gui];
         
         takenStarsArray = [[NSMutableArray alloc] init];
-        
+       /*
         NSString *myParticlePath = [[NSBundle mainBundle] pathForResource:@"TestSpark" ofType:@"sks"];
         _myParticle = [NSKeyedUnarchiver unarchiveObjectWithFile:myParticlePath];
         
         _myParticle.particlePosition = CGPointMake(100, 200);
-        _myParticle.particleBirthRate = 10;
-        
-        [self initScene];
+        _myParticle.particleBirthRate = 10;*/
     }
     return self;
 }
@@ -130,21 +129,26 @@
 // iPhone och en för Retina, dvs. 44x44 och 88x88.
 -(void)initScene {
     // Preloading Big L's walking animations.
+   // SKTextureAtlas *texAt = [SKTextureAtlas atlasNamed:BIGLWALK_ATLAS_NAME];
     [SKTexture preloadTextures:BIGLWALK_ANIM_AUP withCompletionHandler:^(void){
         SKAction *walk = [SKAction animateWithTextures:BIGLWALK_ANIM_AUP timePerFrame:TIME_PER_FRAME_UNIT_WALK resize:NO restore:NO];
         _bWUp = [SKAction sequence:@[walk, walk, walk, walk]];
+        NSLog(@"Finished biglwalk_anim_up");
     }];
+    
     [SKTexture preloadTextures:BIGLWALK_ANIM_ADOWN withCompletionHandler:^(void){
         SKAction *walk = [SKAction animateWithTextures:BIGLWALK_ANIM_ADOWN timePerFrame:TIME_PER_FRAME_UNIT_WALK resize:NO restore:NO];
-        
+        NSLog(@"Finished biglwalk_anim_down");
         _bWDown = [SKAction sequence:@[walk, walk, walk, walk]];
     }];
     [SKTexture preloadTextures:BIGLWALK_ANIM_ARIGHT withCompletionHandler:^(void){
         SKAction *walk = [SKAction animateWithTextures:BIGLWALK_ANIM_ARIGHT timePerFrame:TIME_PER_FRAME_UNIT_WALK resize:NO restore:NO];
+        NSLog(@"Finished biglwalk_anim_RIGHT");
         _bWRight = [SKAction sequence:@[walk, walk, walk, walk]];
     }];
     [SKTexture preloadTextures:BIGLWALK_ANIM_ALEFT withCompletionHandler:^(void){
         SKAction *walk = [SKAction animateWithTextures:BIGLWALK_ANIM_ALEFT timePerFrame:TIME_PER_FRAME_UNIT_WALK resize:NO restore:NO];
+        NSLog(@"Finished biglwalk_anim_LEFT");
         _bWLeft = [SKAction sequence:@[walk, walk, walk, walk]];
     }];
     
@@ -152,17 +156,22 @@
     [SKTexture preloadTextures:LITTLEJOHNWALK_ANIM_BUP withCompletionHandler:^(void){
         SKAction *walk = [SKAction animateWithTextures:LITTLEJOHNWALK_ANIM_BUP timePerFrame:TIME_PER_FRAME_UNIT_WALK];
         _lWUp = [SKAction sequence:@[walk, walk, walk, walk]];
+        NSLog(@"Finished lj_anim_up");
     }];
     [SKTexture preloadTextures:LITTLEJOHNWALK_ANIM_BDOWN withCompletionHandler:^(void){
         SKAction *walk = [SKAction animateWithTextures:LITTLEJOHNWALK_ANIM_BDOWN timePerFrame:TIME_PER_FRAME_UNIT_WALK];
         _lWDown = [SKAction sequence:@[walk, walk, walk, walk]];
+        NSLog(@"Finished lj_anim_down");
     }];
     [SKTexture preloadTextures:LITTLEJOHNWALK_ANIM_BRIGHT withCompletionHandler:^(void){
         SKAction *walk = [SKAction animateWithTextures:LITTLEJOHNWALK_ANIM_BRIGHT timePerFrame:TIME_PER_FRAME_UNIT_WALK];
         _lWRight = [SKAction sequence:@[walk, walk, walk, walk]];
+        NSLog(@"Finished lj_anim_righjt");
     }];
+    
     [SKTexture preloadTextures:LITTLEJOHNWALK_ANIM_BLEFT withCompletionHandler:^(void){
         SKAction *walk = [SKAction animateWithTextures:LITTLEJOHNWALK_ANIM_BLEFT timePerFrame:TIME_PER_FRAME_UNIT_WALK];
+        NSLog(@"Finished ljwalk_anim_left");
         _lWLeft = [SKAction sequence:@[walk, walk, walk, walk]];
     }];
     
@@ -170,24 +179,29 @@
     NSArray *arr = [[NSArray alloc] init];
     SKTexture *t = [SKTexture textureWithImageNamed:@"Box.png"];
     arr = @[t,t,t,t];
-    [SKTexture preloadTextures:LITTLEJOHNWALK_ANIM_BLEFT withCompletionHandler:^(void){
-        SKAction *moveBox = [SKAction animateWithTextures:arr timePerFrame:TIME_PER_FRAME_BOX_MOVE];
-        _mBox = [SKAction sequence:@[moveBox, moveBox, moveBox, moveBox]];
-    }];
+    // ??? ?
+    SKAction *moveBox = [SKAction animateWithTextures:arr timePerFrame:TIME_PER_FRAME_BOX_MOVE];
+    _mBox = [SKAction sequence:@[moveBox, moveBox, moveBox, moveBox]];
     
     // Preloading the Stars moving animations.
     [SKTexture preloadTextures:STARONTILE_ANIM_MOVING withCompletionHandler:^(void){
         SKAction *moveStar = [SKAction animateWithTextures:STARONTILE_ANIM_MOVING timePerFrame:0.15];
         _mStar = [SKAction repeatActionForever:moveStar];
+        NSLog(@"Finished biglwalk_anim_up");
     }];
     
     // Preloading the Stars taken animations.
     [SKTexture preloadTextures:STARTAKEN_ANIM_STARTAKEN withCompletionHandler:^(void){
         SKAction *takenStar = [SKAction animateWithTextures:STARTAKEN_ANIM_STARTAKEN timePerFrame:0.02 resize:NO restore:NO];
         _tStar = [SKAction sequence:@[takenStar]];
+        NSLog(@"Finished starstakrn ani load");
     }];
-    
+    NSLog(@"loaded anis");
     //[self addChild:_myParticle];
+}
+
+-(void)didMoveToView:(SKView *)view {
+    
 }
 
 -(void)unitFallingAnimation:(NSInteger)unit {
@@ -301,12 +315,12 @@
         s.hidden = element.hidden;
         s.zPosition = [self getZPositionForElement:element];
         [self addChild:s];
+        
         if(s.texture == _star) {
             [s runAction:_mStar];
         }
         [arr insertObject:s atIndex:i];
     }
-    
     if(elArr.count > 0) {
         [_elements setObject:arr forKey:index];
     }
