@@ -109,6 +109,13 @@
             [self moveBox:eTo InDirection:dir];
         }
     }
+    
+    
+    if([self isPointMovableTo:to] && ![Converter isPoint:to sameAsPoint:from]
+       && [Converter isPoint:from NextToPoint:to]) {
+    
+    }
+    
     return NO;
 }
 

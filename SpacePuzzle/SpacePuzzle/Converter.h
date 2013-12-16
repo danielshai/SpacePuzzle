@@ -4,8 +4,6 @@
  
     Contains static utility functions in the form of converters between pixels and board
     coordinates.
- 
-    DOES NOT CONVERT CORRECTLY.
 */
 #import <SpriteKit/SpriteKit.h>
 #import <Foundation/Foundation.h>
@@ -27,5 +25,6 @@
 +(BOOL) isPoint: (CGPoint)p1 DiagonallyAdjacentWithPoint: (CGPoint)p2;
 +(BOOL) isPoint: (CGPoint)p1 NextToPoint: (CGPoint)p2;
 +(BOOL) isPoint: (CGPoint)p1 sameAsPoint: (CGPoint)p2;
+//+(BOOL) isPoint: (CGPoint)p1
 +(NSInteger) convertCoordsTo:(CGPoint) object Direction: (CGPoint) u;
 @end

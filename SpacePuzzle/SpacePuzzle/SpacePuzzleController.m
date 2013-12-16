@@ -310,8 +310,9 @@
         [_scene updateUnit:to inDirection:dir];
         [_scene refreshTileAtPosition:from WithStatus:[_boardController getBoardStatusAtPosition:from]];
     }
-   // [_scene updateElementsAtPosition:from withArray:[_boardController elementsAtPosition:from]];
-    //[_scene updateElementsAtPosition:to withArray:[_boardController elementsAtPosition:to]];
+    
+    // Check if going in a longer straight line.
+    
 }
 
 -(void)takeStar {

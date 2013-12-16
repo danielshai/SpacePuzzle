@@ -5,7 +5,10 @@
     Controller for the main game scene.
     
     To fix:
-        - When a unit is in void, restart level (first animate falling down, perhaps shows screen?).
+        - Change unit by clicking it.
+        - Grayed buttons when tapped.
+        - Remove tap to walk???
+        - Tap to move several steps?
         - Moving platform moving along paths (a generalised solution).
         - Textures should be in "Images.xcassets" with 2 versions of each (ordinary and retina [x2 size]).
     Cleaning up to do:
