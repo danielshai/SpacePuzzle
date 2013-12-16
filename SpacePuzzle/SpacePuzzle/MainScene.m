@@ -55,8 +55,11 @@
 @synthesize mBox = _mBox;
 @synthesize mStar = _mStar;
 @synthesize tStar = _tStar;
+@synthesize smBox = _smBox;
+@synthesize sBox = _sBox;
 
-//@synthesize myParticle = _myParticle;
+//@synthesize sparkParticle = _sparkParticle;
+//@synthesize smokeParticle = _smokeParticle;
 
 -(id)initWithSize:(CGSize)size {    
     if (self = [super initWithSize:size]) {
@@ -82,6 +85,7 @@
         _switchOff = [SKTexture textureWithImageNamed:@"SwitchOFF.png"];
         _guiAstro = [SKTexture textureWithImageNamed:@"TopBarAstro"];
         _guiAlien = [SKTexture textureWithImageNamed:@"TopBarAlien"];
+        _smBox = [SKTexture textureWithImageNamed:@"BoxBroken_2x.png"];
         _finish = [SKSpriteNode spriteNodeWithImageNamed:@"Finish.png"];
         _finish.size = CGSizeMake(TILESIZE, TILESIZE);
         _finish.zPosition = 2;
@@ -113,12 +117,16 @@
         [self addChild:_gui];
         
         takenStarsArray = [[NSMutableArray alloc] init];
-       /*
-        NSString *myParticlePath = [[NSBundle mainBundle] pathForResource:@"TestSpark" ofType:@"sks"];
-        _myParticle = [NSKeyedUnarchiver unarchiveObjectWithFile:myParticlePath];
+        /*
+        NSString *particlePath = [[NSBundle mainBundle] pathForResource:@"StarSparkParticle" ofType:@"sks"];
+        _sparkParticle = [NSKeyedUnarchiver unarchiveObjectWithFile:particlePath];
+        particlePath = [[NSBundle mainBundle] pathForResource:@"SmokeParticle" ofType:@"sks"];
+        _smokeParticle = [NSKeyedUnarchiver unarchiveObjectWithFile:particlePath];
         
-        _myParticle.particlePosition = CGPointMake(100, 200);
-        _myParticle.particleBirthRate = 10;*/
+        _sparkParticle.zPosition = 90000;
+        _smokeParticle.zPosition = 89999;
+        
+        [self initScene];*/
     }
     return self;
 }
@@ -196,8 +204,6 @@
         _tStar = [SKAction sequence:@[takenStar]];
         NSLog(@"Finished starstakrn ani load");
     }];
-    NSLog(@"loaded anis");
-    //[self addChild:_myParticle];
 }
 
 -(void)didMoveToView:(SKView *)view {
@@ -451,6 +457,33 @@
     }
 }
 
+-(void)smashBox:(Element *)box {
+    SKSpriteNode *smashedBox = [[SKSpriteNode alloc] initWithTexture:_smBox];
+    CGPoint boxPos = CGPointMake(box.x, box.y);
+    //BoardCoord *bc = [[board board] objectAtIndex:[Converter CGPointToKey:boxPos]];
+    
+    smashedBox.position = [Converter convertCoordToPixel:boxPos];
+    smashedBox.zPosition = 10;
+    smashedBox.size = [self sizeForElement:box];
+    smashedBox.position = CGPointMake(smashedBox.position.x + TILESIZE/2, smashedBox.position.y);
+
+    //[Board removeElemnt:box FromBoardCoord:bc];
+    
+    /*
+    _smokeParticle.particlePosition = [Converter convertCoordToPixel:boxPos];
+    _smokeParticle.particlePosition = CGPointMake(smashedBox.position.x, smashedBox.position.y);
+    _sBox = [SKAction moveTo:boxPos duration:0.5];
+    
+    _smokeParticle.position = boxPos;
+    [self addChild:_smokeParticle];
+    
+    [_smokeParticle runAction:_sBox completion:^(void){
+//        [Board removeElement:box FromBoardCoord:bc];
+        [self addChild:smashedBox];
+        [_smokeParticle removeFromParent];
+    }];*/
+}
+
 -(CGFloat)getZPositionForElement:(Element *)e {
     if([e isKindOfClass:[Box class]]) {
         return 10;
@@ -494,12 +527,17 @@
         moveToBar = [SKAction moveTo:CGPointMake(183, 464) duration:0.5];
     }
     starSprite.zRotation = M_PI;
+//    _sparkParticle.particlePosition = CGPointMake(starSprite.position.x, starSprite.position.y + 20);
+//    _sparkParticle.particleBirthRate = 10;
     
     SKAction *action = [SKAction rotateByAngle:M_PI*3 duration:1.0];
     SKAction *new = [SKAction group:@[action, moveUpwards]];
     [starSprite runAction:new completion:^(void){
+//        [self addChild:_sparkParticle];
         [starSprite runAction:_tStar completion:^(void){
+//            [_sparkParticle removeFromParent];
             starSprite.texture = STARTAKEN_TEX_STARTAKEN50;
+//            _myParticle 
             [starSprite runAction:moveToBar completion:^(void){
                 starSprite.texture = STARTAKEN_TEX_STARTAKEN58;
                 starSprite.size = CGSizeMake(32, 32);

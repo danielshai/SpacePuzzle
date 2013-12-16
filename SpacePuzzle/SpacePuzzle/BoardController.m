@@ -165,8 +165,8 @@
 -(void)doActionOnBoxSmash:(Element*)box {
     CGPoint p = CGPointMake(box.x, box.y);
     BoardCoord *bc = [[_board board] objectAtIndex:[Converter CGPointToKey:p]];
+    [self.scene smashBox:box];
     [self removeElement:box FromBoardCoord:bc];
-    
     for (int i = 0; i < bc.elements.count; i++) {
         Element *e = [bc.elements objectAtIndex:i];
         if([e isKindOfClass:[StarButton class]]) {
@@ -265,7 +265,8 @@
     BoardCoord *bcMovedTo = [[_board board] objectAtIndex:[Converter CGPointToKey:rockPoint]];
     
     // Do the move on the box.
-    
+    CGPoint curPosTile = CGPointMake([[_spController currentUnit] x], [[_spController currentUnit] y]);
+    NSInteger currentTile = [[[_board board] objectAtIndex:[Converter CGPointToKey:curPosTile]] status];
     // Remove box from bcFrom.
     [self removeElement:rock FromBoardCoord:bcFrom];
     NSInteger nextTile = [[[_board board] objectAtIndex:[Converter CGPointToKey:rockPoint]] status];
@@ -274,7 +275,15 @@
         [self addElement:rock ToBoardCoord:bcMovedTo];
        // [self boxMovedToPoint:rockPoint FromPoint:posPreMove OtherUnitPos:otherUnitPos];
     }
-    
+    BoardCoord *bc = [[_board board] objectAtIndex:[Converter CGPointToKey:curPosTile]];
+
+    if(currentTile == MAPSTATUS_CRACKED) {
+        [[_board board] objectAtIndex:currentTile];
+        bc.status = MAPSTATUS_VOID;
+        [bc.elements removeAllObjects];
+        [self.scene refreshTileAtPosition:curPosTile WithStatus:bc.status];
+        //[self.scene moveElementFrom:curPosTile WithIndex:0 To:nextPos OntoStatus:MAPSTATUS_VOID InDir:dir];
+    }
     // SHOULD BE ADDED BACK. NO!
     //[self.spController updateElementsAtPosition:rockPoint withArray:bcMovedTo.elements];
     [self.spController updateElementsAtPosition:posPreMove withArray:bcFrom.elements];
