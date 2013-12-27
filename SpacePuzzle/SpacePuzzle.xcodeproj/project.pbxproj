@@ -26,16 +26,6 @@
 		7797AC46183CE9F500E63E95 /* voidtile.png in Resources */ = {isa = PBXBuildFile; fileRef = 7797AC31183CE9F500E63E95 /* voidtile.png */; };
 		7797AC47183CE9F500E63E95 /* Alien.png in Resources */ = {isa = PBXBuildFile; fileRef = 7797AC33183CE9F500E63E95 /* Alien.png */; };
 		7797AC48183CE9F500E63E95 /* Astronaut.png in Resources */ = {isa = PBXBuildFile; fileRef = 7797AC34183CE9F500E63E95 /* Astronaut.png */; };
-		779A2425184F70C100431A5D /* Level001.splvl in Resources */ = {isa = PBXBuildFile; fileRef = 779A241B184F70C100431A5D /* Level001.splvl */; };
-		779A2426184F70C100431A5D /* Level002.splvl in Resources */ = {isa = PBXBuildFile; fileRef = 779A241C184F70C100431A5D /* Level002.splvl */; };
-		779A2427184F70C100431A5D /* Level003.splvl in Resources */ = {isa = PBXBuildFile; fileRef = 779A241D184F70C100431A5D /* Level003.splvl */; };
-		779A2428184F70C100431A5D /* Level004.splvl in Resources */ = {isa = PBXBuildFile; fileRef = 779A241E184F70C100431A5D /* Level004.splvl */; };
-		779A242D184F70C100431A5D /* Level009.splvl in Resources */ = {isa = PBXBuildFile; fileRef = 779A2423184F70C100431A5D /* Level009.splvl */; };
-		779A242E184F70C100431A5D /* Level010.splvl in Resources */ = {isa = PBXBuildFile; fileRef = 779A2424184F70C100431A5D /* Level010.splvl */; };
-		779A2430184F71AE00431A5D /* Level005.splvl in Resources */ = {isa = PBXBuildFile; fileRef = 779A242F184F71AE00431A5D /* Level005.splvl */; };
-		779A2432184F71D700431A5D /* Level007.splvl in Resources */ = {isa = PBXBuildFile; fileRef = 779A2431184F71D700431A5D /* Level007.splvl */; };
-		779A2434184F721600431A5D /* Level006.splvl in Resources */ = {isa = PBXBuildFile; fileRef = 779A2433184F721600431A5D /* Level006.splvl */; };
-		779A2436184F722300431A5D /* Level008.splvl in Resources */ = {isa = PBXBuildFile; fileRef = 779A2435184F722300431A5D /* Level008.splvl */; };
 		779CA2A71857463A00ED0526 /* StarOnTile.atlasc in Resources */ = {isa = PBXBuildFile; fileRef = 779CA2A31857463A00ED0526 /* StarOnTile.atlasc */; };
 		779CA2A81857463A00ED0526 /* StarTaken.atlasc in Resources */ = {isa = PBXBuildFile; fileRef = 779CA2A51857463A00ED0526 /* StarTaken.atlasc */; };
 		779DB365183E32030059A084 /* PlatformLever.m in Sources */ = {isa = PBXBuildFile; fileRef = 779DB364183E32030059A084 /* PlatformLever.m */; };
@@ -86,7 +76,6 @@
 		E6214087182BA53800EC5C21 /* SpacePuzzleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E6214086182BA53800EC5C21 /* SpacePuzzleTests.m */; };
 		E62A0523184DF78D009B4004 /* mario2.splvl in Resources */ = {isa = PBXBuildFile; fileRef = E62A0522184DF78D009B4004 /* mario2.splvl */; };
 		E633067A1835018A00E908F7 /* XMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = E63306791835018A00E908F7 /* XMLParser.m */; };
-		E645787D1858AE6B0091F0F8 /* Level101.splvl in Resources */ = {isa = PBXBuildFile; fileRef = E645787C1858AE6B0091F0F8 /* Level101.splvl */; };
 		E64A9B67185B36F100223042 /* 2stars_1x.png in Resources */ = {isa = PBXBuildFile; fileRef = E64A9B57185B36F100223042 /* 2stars_1x.png */; };
 		E64A9B68185B36F100223042 /* 3stars_1x.png in Resources */ = {isa = PBXBuildFile; fileRef = E64A9B58185B36F100223042 /* 3stars_1x.png */; };
 		E64A9B69185B36F100223042 /* active_1x.png in Resources */ = {isa = PBXBuildFile; fileRef = E64A9B59185B36F100223042 /* active_1x.png */; };
@@ -100,6 +89,17 @@
 		E64A9B73185B36F100223042 /* planets4.png in Resources */ = {isa = PBXBuildFile; fileRef = E64A9B63185B36F100223042 /* planets4.png */; };
 		E64A9B74185B36F100223042 /* planets5.png in Resources */ = {isa = PBXBuildFile; fileRef = E64A9B64185B36F100223042 /* planets5.png */; };
 		E64A9B75185B36F100223042 /* Shade_2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E64A9B65185B36F100223042 /* Shade_2x.png */; };
+		E651AC5B186DB0DF009D3277 /* Level001.splvl in Resources */ = {isa = PBXBuildFile; fileRef = E651AC50186DB0DF009D3277 /* Level001.splvl */; };
+		E651AC5C186DB0DF009D3277 /* Level002.splvl in Resources */ = {isa = PBXBuildFile; fileRef = E651AC51186DB0DF009D3277 /* Level002.splvl */; };
+		E651AC5D186DB0DF009D3277 /* Level003.splvl in Resources */ = {isa = PBXBuildFile; fileRef = E651AC52186DB0DF009D3277 /* Level003.splvl */; };
+		E651AC5E186DB0DF009D3277 /* Level004.splvl in Resources */ = {isa = PBXBuildFile; fileRef = E651AC53186DB0DF009D3277 /* Level004.splvl */; };
+		E651AC5F186DB0DF009D3277 /* Level005.splvl in Resources */ = {isa = PBXBuildFile; fileRef = E651AC54186DB0DF009D3277 /* Level005.splvl */; };
+		E651AC60186DB0DF009D3277 /* Level006.splvl in Resources */ = {isa = PBXBuildFile; fileRef = E651AC55186DB0DF009D3277 /* Level006.splvl */; };
+		E651AC61186DB0DF009D3277 /* Level007.splvl in Resources */ = {isa = PBXBuildFile; fileRef = E651AC56186DB0DF009D3277 /* Level007.splvl */; };
+		E651AC62186DB0DF009D3277 /* Level008.splvl in Resources */ = {isa = PBXBuildFile; fileRef = E651AC57186DB0DF009D3277 /* Level008.splvl */; };
+		E651AC63186DB0DF009D3277 /* Level009.splvl in Resources */ = {isa = PBXBuildFile; fileRef = E651AC58186DB0DF009D3277 /* Level009.splvl */; };
+		E651AC64186DB0DF009D3277 /* Level010.splvl in Resources */ = {isa = PBXBuildFile; fileRef = E651AC59186DB0DF009D3277 /* Level010.splvl */; };
+		E651AC65186DB0DF009D3277 /* Level101.splvl in Resources */ = {isa = PBXBuildFile; fileRef = E651AC5A186DB0DF009D3277 /* Level101.splvl */; };
 		E687AE4D183A43EB00A5B78C /* mario.splvl in Resources */ = {isa = PBXBuildFile; fileRef = E687AE4C183A43EB00A5B78C /* mario.splvl */; };
 		E6E657FE182BB8C50022BF5F /* Board.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E657FD182BB8C50022BF5F /* Board.m */; };
 		E6E65801182BB9020022BF5F /* Position.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E65800182BB9020022BF5F /* Position.m */; };
@@ -150,16 +150,6 @@
 		7797AC31183CE9F500E63E95 /* voidtile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voidtile.png; sourceTree = "<group>"; };
 		7797AC33183CE9F500E63E95 /* Alien.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Alien.png; sourceTree = "<group>"; };
 		7797AC34183CE9F500E63E95 /* Astronaut.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Astronaut.png; sourceTree = "<group>"; };
-		779A241B184F70C100431A5D /* Level001.splvl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level001.splvl; sourceTree = "<group>"; };
-		779A241C184F70C100431A5D /* Level002.splvl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level002.splvl; sourceTree = "<group>"; };
-		779A241D184F70C100431A5D /* Level003.splvl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level003.splvl; sourceTree = "<group>"; };
-		779A241E184F70C100431A5D /* Level004.splvl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level004.splvl; sourceTree = "<group>"; };
-		779A2423184F70C100431A5D /* Level009.splvl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level009.splvl; sourceTree = "<group>"; };
-		779A2424184F70C100431A5D /* Level010.splvl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Level010.splvl; sourceTree = "<group>"; };
-		779A242F184F71AE00431A5D /* Level005.splvl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Level005.splvl; path = ../../Levels/Level005.splvl; sourceTree = "<group>"; };
-		779A2431184F71D700431A5D /* Level007.splvl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Level007.splvl; path = ../../Levels/Level007.splvl; sourceTree = "<group>"; };
-		779A2433184F721600431A5D /* Level006.splvl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Level006.splvl; path = ../../Levels/Level006.splvl; sourceTree = "<group>"; };
-		779A2435184F722300431A5D /* Level008.splvl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Level008.splvl; path = ../../Levels/Level008.splvl; sourceTree = "<group>"; };
 		779CA2A31857463A00ED0526 /* StarOnTile.atlasc */ = {isa = PBXFileReference; lastKnownFileType = folder; path = StarOnTile.atlasc; sourceTree = "<group>"; };
 		779CA2A41857463A00ED0526 /* StarOnTile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StarOnTile.h; sourceTree = "<group>"; };
 		779CA2A51857463A00ED0526 /* StarTaken.atlasc */ = {isa = PBXFileReference; lastKnownFileType = folder; path = StarTaken.atlasc; sourceTree = "<group>"; };
@@ -229,7 +219,6 @@
 		E62A0522184DF78D009B4004 /* mario2.splvl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = mario2.splvl; path = ../../Levels/mario2.splvl; sourceTree = "<group>"; };
 		E63306781835018A00E908F7 /* XMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XMLParser.h; path = ../../SpacePuzzleEditor/SpacePuzzleEditor/XMLParser.h; sourceTree = "<group>"; };
 		E63306791835018A00E908F7 /* XMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XMLParser.m; path = ../../SpacePuzzleEditor/SpacePuzzleEditor/XMLParser.m; sourceTree = "<group>"; };
-		E645787C1858AE6B0091F0F8 /* Level101.splvl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Level101.splvl; path = ../../Levels/Level101.splvl; sourceTree = "<group>"; };
 		E64A9B56185B36F100223042 /* 1star_1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 1star_1x.png; path = "../../Resources/Level select/1star_1x.png"; sourceTree = "<group>"; };
 		E64A9B57185B36F100223042 /* 2stars_1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 2stars_1x.png; path = "../../Resources/Level select/2stars_1x.png"; sourceTree = "<group>"; };
 		E64A9B58185B36F100223042 /* 3stars_1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 3stars_1x.png; path = "../../Resources/Level select/3stars_1x.png"; sourceTree = "<group>"; };
@@ -245,6 +234,17 @@
 		E64A9B63185B36F100223042 /* planets4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = planets4.png; path = "../../Resources/Level select/planets4.png"; sourceTree = "<group>"; };
 		E64A9B64185B36F100223042 /* planets5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = planets5.png; path = "../../Resources/Level select/planets5.png"; sourceTree = "<group>"; };
 		E64A9B65185B36F100223042 /* Shade_2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Shade_2x.png; path = "../../Resources/Level select/Shade_2x.png"; sourceTree = "<group>"; };
+		E651AC50186DB0DF009D3277 /* Level001.splvl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Level001.splvl; path = ../../Levels/Level001.splvl; sourceTree = "<group>"; };
+		E651AC51186DB0DF009D3277 /* Level002.splvl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Level002.splvl; path = ../../Levels/Level002.splvl; sourceTree = "<group>"; };
+		E651AC52186DB0DF009D3277 /* Level003.splvl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Level003.splvl; path = ../../Levels/Level003.splvl; sourceTree = "<group>"; };
+		E651AC53186DB0DF009D3277 /* Level004.splvl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Level004.splvl; path = ../../Levels/Level004.splvl; sourceTree = "<group>"; };
+		E651AC54186DB0DF009D3277 /* Level005.splvl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Level005.splvl; path = ../../Levels/Level005.splvl; sourceTree = "<group>"; };
+		E651AC55186DB0DF009D3277 /* Level006.splvl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Level006.splvl; path = ../../Levels/Level006.splvl; sourceTree = "<group>"; };
+		E651AC56186DB0DF009D3277 /* Level007.splvl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Level007.splvl; path = ../../Levels/Level007.splvl; sourceTree = "<group>"; };
+		E651AC57186DB0DF009D3277 /* Level008.splvl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Level008.splvl; path = ../../Levels/Level008.splvl; sourceTree = "<group>"; };
+		E651AC58186DB0DF009D3277 /* Level009.splvl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Level009.splvl; path = ../../Levels/Level009.splvl; sourceTree = "<group>"; };
+		E651AC59186DB0DF009D3277 /* Level010.splvl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Level010.splvl; path = ../../Levels/Level010.splvl; sourceTree = "<group>"; };
+		E651AC5A186DB0DF009D3277 /* Level101.splvl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Level101.splvl; path = ../../Levels/Level101.splvl; sourceTree = "<group>"; };
 		E687AE4C183A43EB00A5B78C /* mario.splvl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = mario.splvl; path = ../../Levels/mario.splvl; sourceTree = "<group>"; };
 		E6E657FB182BB7BD0022BF5F /* Macros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Macros.h; sourceTree = "<group>"; };
 		E6E657FC182BB8C50022BF5F /* Board.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Board.h; sourceTree = "<group>"; };
@@ -545,17 +545,17 @@
 		E687AE4E183A440F00A5B78C /* Levels */ = {
 			isa = PBXGroup;
 			children = (
-				E645787C1858AE6B0091F0F8 /* Level101.splvl */,
-				779A2435184F722300431A5D /* Level008.splvl */,
-				779A2433184F721600431A5D /* Level006.splvl */,
-				779A2431184F71D700431A5D /* Level007.splvl */,
-				779A242F184F71AE00431A5D /* Level005.splvl */,
-				779A241B184F70C100431A5D /* Level001.splvl */,
-				779A241C184F70C100431A5D /* Level002.splvl */,
-				779A241D184F70C100431A5D /* Level003.splvl */,
-				779A241E184F70C100431A5D /* Level004.splvl */,
-				779A2423184F70C100431A5D /* Level009.splvl */,
-				779A2424184F70C100431A5D /* Level010.splvl */,
+				E651AC50186DB0DF009D3277 /* Level001.splvl */,
+				E651AC51186DB0DF009D3277 /* Level002.splvl */,
+				E651AC52186DB0DF009D3277 /* Level003.splvl */,
+				E651AC53186DB0DF009D3277 /* Level004.splvl */,
+				E651AC54186DB0DF009D3277 /* Level005.splvl */,
+				E651AC55186DB0DF009D3277 /* Level006.splvl */,
+				E651AC56186DB0DF009D3277 /* Level007.splvl */,
+				E651AC57186DB0DF009D3277 /* Level008.splvl */,
+				E651AC58186DB0DF009D3277 /* Level009.splvl */,
+				E651AC59186DB0DF009D3277 /* Level010.splvl */,
+				E651AC5A186DB0DF009D3277 /* Level101.splvl */,
 				E62A0522184DF78D009B4004 /* mario2.splvl */,
 				E687AE4C183A43EB00A5B78C /* mario.splvl */,
 			);
@@ -705,66 +705,66 @@
 				7797AC48183CE9F500E63E95 /* Astronaut.png in Resources */,
 				E62A0523184DF78D009B4004 /* mario2.splvl in Resources */,
 				E60DA7781848A1880088AB3D /* PlatformLever.png in Resources */,
-				779A2425184F70C100431A5D /* Level001.splvl in Resources */,
 				77F122ED185601D9005A595F /* TopBarAlien.png in Resources */,
 				77D6072C184373F40079A182 /* AstroLeft.png in Resources */,
-				779A2436184F722300431A5D /* Level008.splvl in Resources */,
+				E651AC5E186DB0DF009D3277 /* Level004.splvl in Resources */,
+				E651AC61186DB0DF009D3277 /* Level007.splvl in Resources */,
+				E651AC5F186DB0DF009D3277 /* Level005.splvl in Resources */,
 				E6214061182BA53800EC5C21 /* InfoPlist.strings in Resources */,
+				E651AC65186DB0DF009D3277 /* Level101.splvl in Resources */,
 				77D6072B184373F40079A182 /* AstroDown.png in Resources */,
 				E60DA7761848A1370088AB3D /* Bridge.png in Resources */,
-				779A2432184F71D700431A5D /* Level007.splvl in Resources */,
 				7797AC3E183CE9F500E63E95 /* Star.png in Resources */,
 				77E939761859EDC5003F9A39 /* BoxBroken_2x.png in Resources */,
-				779A2427184F70C100431A5D /* Level003.splvl in Resources */,
 				77D6072F184374030079A182 /* AstroRight.png in Resources */,
 				77D6072A184373F40079A182 /* AlienUp.png in Resources */,
 				E64A9B6E185B36F100223042 /* Inactive_1x.png in Resources */,
 				77D60728184373F40079A182 /* AlienLeft.png in Resources */,
 				E64A9B71185B36F100223042 /* planets2.png in Resources */,
+				E651AC64186DB0DF009D3277 /* Level010.splvl in Resources */,
 				7797AC46183CE9F500E63E95 /* voidtile.png in Resources */,
 				7797AC3B183CE9F500E63E95 /* ButtonON.png in Resources */,
 				77D60727184373F40079A182 /* AlienDown.png in Resources */,
+				E651AC5C186DB0DF009D3277 /* Level002.splvl in Resources */,
 				773A4F621858B027002E3FF9 /* StarSparkParticle.sks in Resources */,
 				7705C3A718477A4600CEB0C9 /* BigLWalk.atlasc in Resources */,
 				E687AE4D183A43EB00A5B78C /* mario.splvl in Resources */,
 				77E939751859EDC5003F9A39 /* BoxBroken_1x.png in Resources */,
 				77F122EE185601D9005A595F /* TopBarAstro.png in Resources */,
-				779A2430184F71AE00431A5D /* Level005.splvl in Resources */,
 				E6F7129C184F3995005C52A4 /* StarON.png in Resources */,
 				7797AC3D183CE9F500E63E95 /* Rock.png in Resources */,
 				E60DA77B1848A2350088AB3D /* BridgeButton.png in Resources */,
 				77F0A82318464495002FA17A /* LittleJohnWalk.atlasc in Resources */,
-				779A2434184F721600431A5D /* Level006.splvl in Resources */,
 				779CA2A81857463A00ED0526 /* StarTaken.atlasc in Resources */,
+				E651AC5B186DB0DF009D3277 /* Level001.splvl in Resources */,
 				E6214074182BA53800EC5C21 /* Images.xcassets in Resources */,
 				7797AC42183CE9F500E63E95 /* Background.png in Resources */,
 				7797AC38183CE9F500E63E95 /* BridgeON.png in Resources */,
 				E64A9B6B185B36F100223042 /* Exo2.0-ExtraBold.otf in Resources */,
 				E64A9B72185B36F100223042 /* planets3.png in Resources */,
-				779A242D184F70C100431A5D /* Level009.splvl in Resources */,
 				7797AC3F183CE9F500E63E95 /* Start.gif in Resources */,
 				779CA2A71857463A00ED0526 /* StarOnTile.atlasc in Resources */,
 				7797AC45183CE9F500E63E95 /* solidtile.png in Resources */,
 				7797AC3C183CE9F500E63E95 /* Finish.png in Resources */,
 				E64A9B6F185B36F100223042 /* planetLock.png in Resources */,
 				77D60729184373F40079A182 /* AlienRight.png in Resources */,
-				779A242E184F70C100431A5D /* Level010.splvl in Resources */,
 				E621406A182BA53800EC5C21 /* Main.storyboard in Resources */,
+				E651AC62186DB0DF009D3277 /* Level008.splvl in Resources */,
 				E6F71299184F3995005C52A4 /* BarAlien.png in Resources */,
 				E60DA77C1848A2350088AB3D /* StarButton.png in Resources */,
 				E64A9B70185B36F100223042 /* planets1.png in Resources */,
-				E645787D1858AE6B0091F0F8 /* Level101.splvl in Resources */,
 				77D60730184374030079A182 /* AstroUp.png in Resources */,
 				77E96936185B439400E60915 /* bgspace.png in Resources */,
 				7797AC43183CE9F500E63E95 /* Cracked.png in Resources */,
+				E651AC60186DB0DF009D3277 /* Level006.splvl in Resources */,
 				E64A9B68185B36F100223042 /* 3stars_1x.png in Resources */,
-				779A2426184F70C100431A5D /* Level002.splvl in Resources */,
 				7797AC41183CE9F500E63E95 /* SwitchON.png in Resources */,
+				E651AC5D186DB0DF009D3277 /* Level003.splvl in Resources */,
 				77F760D0184E1EF300FDF315 /* Background01.png in Resources */,
 				E64A9B73185B36F100223042 /* planets4.png in Resources */,
-				779A2428184F70C100431A5D /* Level004.splvl in Resources */,
 				E64A9B69185B36F100223042 /* active_1x.png in Resources */,
 				779EF6A7183F608C0097441A /* MovingPlatform.png in Resources */,
+				E651AC63186DB0DF009D3277 /* Level009.splvl in Resources */,
 				E64A9B75185B36F100223042 /* Shade_2x.png in Resources */,
 				E6F7129B184F3995005C52A4 /* StarOFF.png in Resources */,
 				E64A9B67185B36F100223042 /* 2stars_1x.png in Resources */,
