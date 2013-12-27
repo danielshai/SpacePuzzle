@@ -16,7 +16,7 @@
 #import "Path.h"
 #import "Position.h"
 #import "LoadSaveFile.h"
-#import "LevelSceneFinal.h"
+#import "LevelSelectScene.h"
 
 @implementation SpacePuzzleController
 @synthesize board = _board;
@@ -40,7 +40,7 @@
     
     // Create and configure the scene.
 
-    self.levelSelect = [LevelSceneFinal sceneWithSize:skView.bounds.size];
+    self.levelSelect = [LevelSelectScene sceneWithSize:skView.bounds.size];
     self.levelSelect.spCtrl = self;
     [skView presentScene:self.levelSelect];
 }

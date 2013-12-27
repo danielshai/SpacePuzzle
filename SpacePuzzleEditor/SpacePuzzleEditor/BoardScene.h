@@ -48,6 +48,7 @@
 @property (nonatomic, retain) SKSpriteNode *startAlienSprite;
 @property (nonatomic, retain) SKSpriteNode *finishSprite;
 @property (nonatomic, retain) SKSpriteNode *controlHover;
+@property (nonatomic, retain) SKSpriteNode *bkgBar;
 @property (nonatomic, retain) NSMutableArray *boardSprites;
 @property (nonatomic, retain) NSMutableDictionary *elementSprites;
 @property (nonatomic, retain) NSMutableDictionary *connectionNodes;

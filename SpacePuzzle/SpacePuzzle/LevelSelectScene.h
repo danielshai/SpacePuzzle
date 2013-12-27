@@ -9,7 +9,7 @@
 #import <SpriteKit/SpriteKit.h>
 @class SpacePuzzleController;
 
-@interface LevelSceneFinal : SKScene {
+@interface LevelSelectScene : SKScene {
     //Locked values
     NSValue *mainLoc, *secLoc, *thirdLoc, *lastLoc, *outLocLeft, *outLocRight;
     NSNumber *mainScale, *secScale, *thirdScale, *lastScale, *outScaleLeft, *outScaleRight;
@@ -42,7 +42,4 @@
 - (BOOL) gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer
 shouldRecognizeSimultaneouslyWithGestureRecognizer:
 (UIGestureRecognizer *)otherGestureRecognizer;
-
-
-
 @end

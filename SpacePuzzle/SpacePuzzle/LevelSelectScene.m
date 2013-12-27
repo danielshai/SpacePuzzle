@@ -6,11 +6,11 @@
 //  Copyright (c) 2013 VVMD. All rights reserved.
 //
 
-#import "LevelSceneFinal.h"
+#import "LevelSelectScene.h"
 #import "SpacePuzzleController.h"
 #import "MainScene.h"
 
-@implementation LevelSceneFinal
+@implementation LevelSelectScene
 
 @synthesize planetNodes = _planetNodes, planetLocations = _planetLocations;
 

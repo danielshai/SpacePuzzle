@@ -59,7 +59,7 @@
 		77F122EE185601D9005A595F /* TopBarAstro.png in Resources */ = {isa = PBXBuildFile; fileRef = 77F122EC185601D9005A595F /* TopBarAstro.png */; };
 		77F21644184DDEFF00FD23D2 /* LoadSaveFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F21643184DDEFF00FD23D2 /* LoadSaveFile.m */; };
 		77F760D0184E1EF300FDF315 /* Background01.png in Resources */ = {isa = PBXBuildFile; fileRef = 77F760CF184E1EF300FDF315 /* Background01.png */; };
-		E601880E185A0B0000C9329A /* LevelSceneFinal.m in Sources */ = {isa = PBXBuildFile; fileRef = E601880D185A0B0000C9329A /* LevelSceneFinal.m */; };
+		E601880E185A0B0000C9329A /* LevelSelectScene.m in Sources */ = {isa = PBXBuildFile; fileRef = E601880D185A0B0000C9329A /* LevelSelectScene.m */; };
 		E6057677183619120033AE88 /* Box.m in Sources */ = {isa = PBXBuildFile; fileRef = E6057676183619120033AE88 /* Box.m */; };
 		E60C6A01183B94F000D6FA14 /* Star.m in Sources */ = {isa = PBXBuildFile; fileRef = E60C6A00183B94F000D6FA14 /* Star.m */; };
 		E60C6A0A183BB19F00D6FA14 /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = E60C6A09183BB19F00D6FA14 /* Player.m */; };
@@ -190,8 +190,8 @@
 		77F21642184DDEFF00FD23D2 /* LoadSaveFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadSaveFile.h; sourceTree = "<group>"; };
 		77F21643184DDEFF00FD23D2 /* LoadSaveFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadSaveFile.m; sourceTree = "<group>"; };
 		77F760CF184E1EF300FDF315 /* Background01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Background01.png; sourceTree = "<group>"; };
-		E601880C185A0B0000C9329A /* LevelSceneFinal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelSceneFinal.h; sourceTree = "<group>"; };
-		E601880D185A0B0000C9329A /* LevelSceneFinal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LevelSceneFinal.m; sourceTree = "<group>"; };
+		E601880C185A0B0000C9329A /* LevelSelectScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelSelectScene.h; sourceTree = "<group>"; };
+		E601880D185A0B0000C9329A /* LevelSelectScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LevelSelectScene.m; sourceTree = "<group>"; };
 		E6057675183619120033AE88 /* Box.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Box.h; sourceTree = "<group>"; };
 		E6057676183619120033AE88 /* Box.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Box.m; sourceTree = "<group>"; };
 		E60C69FF183B94F000D6FA14 /* Star.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Star.h; sourceTree = "<group>"; };
@@ -397,8 +397,8 @@
 		E601880B185A0A5200C9329A /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				E601880C185A0B0000C9329A /* LevelSceneFinal.h */,
-				E601880D185A0B0000C9329A /* LevelSceneFinal.m */,
+				E601880C185A0B0000C9329A /* LevelSelectScene.h */,
+				E601880D185A0B0000C9329A /* LevelSelectScene.m */,
 				E621406E182BA53800EC5C21 /* MainScene.h */,
 				E621406F182BA53800EC5C21 /* MainScene.m */,
 			);
@@ -477,8 +477,6 @@
 				77F0A81D1845FF53002FA17A /* Animations */,
 				E601880A185A0A4900C9329A /* Controllers */,
 				E601880B185A0A5200C9329A /* Scenes */,
-				E63306781835018A00E908F7 /* XMLParser.h */,
-				E63306791835018A00E908F7 /* XMLParser.m */,
 				E6214065182BA53800EC5C21 /* GViewAppDelegate.h */,
 				E6214066182BA53800EC5C21 /* GViewAppDelegate.m */,
 				E6214068182BA53800EC5C21 /* Main.storyboard */,
@@ -567,6 +565,8 @@
 		E6E65807182BC2690022BF5F /* Board */ = {
 			isa = PBXGroup;
 			children = (
+				E63306781835018A00E908F7 /* XMLParser.h */,
+				E63306791835018A00E908F7 /* XMLParser.m */,
 				E6E657FF182BB9020022BF5F /* Position.h */,
 				E6E65800182BB9020022BF5F /* Position.m */,
 				E6E657FC182BB8C50022BF5F /* Board.h */,
@@ -808,7 +808,7 @@
 				E6E65819182BC9390022BF5F /* Unit.m in Sources */,
 				E6214070182BA53800EC5C21 /* MainScene.m in Sources */,
 				E61474F6185103F8005D9073 /* BoardController.m in Sources */,
-				E601880E185A0B0000C9329A /* LevelSceneFinal.m in Sources */,
+				E601880E185A0B0000C9329A /* LevelSelectScene.m in Sources */,
 				77F21644184DDEFF00FD23D2 /* LoadSaveFile.m in Sources */,
 				7701076C183E0FFB00AAF564 /* Bridge.m in Sources */,
 				E6E657FE182BB8C50022BF5F /* Board.m in Sources */,

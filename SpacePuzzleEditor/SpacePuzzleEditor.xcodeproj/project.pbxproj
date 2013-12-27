@@ -54,6 +54,8 @@
 		E6A0EEE518311690006BF476 /* Position.m in Sources */ = {isa = PBXBuildFile; fileRef = E6A0EEE218311690006BF476 /* Position.m */; };
 		E6D12B64183F661A00DE1632 /* OrangeTile.png in Resources */ = {isa = PBXBuildFile; fileRef = E6D12B63183F661A00DE1632 /* OrangeTile.png */; };
 		E6EE6F411831428B0072D3E6 /* Converter.m in Sources */ = {isa = PBXBuildFile; fileRef = E6EE6F401831428B0072D3E6 /* Converter.m */; };
+		E6F12D9C18619DA20019B386 /* Background01.png in Resources */ = {isa = PBXBuildFile; fileRef = E6F12D9A18619DA20019B386 /* Background01.png */; };
+		E6F12D9D18619DA20019B386 /* TopBarAstro.png in Resources */ = {isa = PBXBuildFile; fileRef = E6F12D9B18619DA20019B386 /* TopBarAstro.png */; };
 		E6FB7DC418450B580075E460 /* Path.m in Sources */ = {isa = PBXBuildFile; fileRef = E6FB7DC318450B580075E460 /* Path.m */; };
 		E6FB7DC618450CF30075E460 /* MovingPlatform.png in Resources */ = {isa = PBXBuildFile; fileRef = E6FB7DC518450CF30075E460 /* MovingPlatform.png */; };
 		E6FBA613183E478A007A39C4 /* StarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E6FBA612183E478A007A39C4 /* StarButton.m */; };
@@ -141,6 +143,8 @@
 		E6EE6F3F1831428B0072D3E6 /* Converter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Converter.h; path = ../SpacePuzzle/SpacePuzzle/Converter.h; sourceTree = "<group>"; };
 		E6EE6F401831428B0072D3E6 /* Converter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Converter.m; path = ../SpacePuzzle/SpacePuzzle/Converter.m; sourceTree = "<group>"; };
 		E6EED0BA183B623E0083E633 /* Macros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Macros.h; path = ../../SpacePuzzle/SpacePuzzle/Macros.h; sourceTree = "<group>"; };
+		E6F12D9A18619DA20019B386 /* Background01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Background01.png; path = ../../Resources/Interface/Background01.png; sourceTree = "<group>"; };
+		E6F12D9B18619DA20019B386 /* TopBarAstro.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = TopBarAstro.png; path = ../../Resources/Interface/TopBarAstro.png; sourceTree = "<group>"; };
 		E6FB7DC218450B580075E460 /* Path.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Path.h; path = ../../SpacePuzzle/SpacePuzzle/Path.h; sourceTree = "<group>"; };
 		E6FB7DC318450B580075E460 /* Path.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Path.m; path = ../../SpacePuzzle/SpacePuzzle/Path.m; sourceTree = "<group>"; };
 		E6FB7DC518450CF30075E460 /* MovingPlatform.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = MovingPlatform.png; path = ../../Resources/Elements/MovingPlatform.png; sourceTree = "<group>"; };
@@ -173,6 +177,8 @@
 		E60576A0183651E30033AE88 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E6F12D9A18619DA20019B386 /* Background01.png */,
+				E6F12D9B18619DA20019B386 /* TopBarAstro.png */,
 				E61CD10A184F6B3800E4CC91 /* BG.png */,
 				E61CD108184F6A3B00E4CC91 /* BarAstro.png */,
 				E62A0520184DD079009B4004 /* Astronaut.png */,
@@ -413,6 +419,7 @@
 				E62A051F184DD06D009B4004 /* Alien.png in Resources */,
 				E62A0521184DD079009B4004 /* Astronaut.png in Resources */,
 				E687AE4B183A239000A5B78C /* Finish.png in Resources */,
+				E6F12D9D18619DA20019B386 /* TopBarAstro.png in Resources */,
 				E60B23261847394700645462 /* RainbLTurn.png in Resources */,
 				E61CD10B184F6B3800E4CC91 /* BG.png in Resources */,
 				E654B3001830F7DD006BFCAC /* Images.xcassets in Resources */,
@@ -425,6 +432,7 @@
 				E654B2F41830F7DD006BFCAC /* Credits.rtf in Resources */,
 				E654B2F61830F7DD006BFCAC /* MainMenu.xib in Resources */,
 				E60B2329184741B500645462 /* RainbRTurn.png in Resources */,
+				E6F12D9C18619DA20019B386 /* Background01.png in Resources */,
 				E60B23251847394700645462 /* RainbHoriz.png in Resources */,
 				E6D12B64183F661A00DE1632 /* OrangeTile.png in Resources */,
 				E606D350184C79A600A04E23 /* PlatformLever.png in Resources */,

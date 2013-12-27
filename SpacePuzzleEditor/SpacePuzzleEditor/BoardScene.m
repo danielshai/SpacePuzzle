@@ -70,7 +70,8 @@
         _solid = [SKTexture textureWithImageNamed:@"solidtile.png"];
         _voidTile = [SKTexture textureWithImageNamed:@"voidtile.png"];
         _crackedTile = [SKTexture textureWithImageNamed:@"Cracked.png"];
-        _bkg = [SKSpriteNode spriteNodeWithImageNamed:@"BG"];
+        _bkg = [SKSpriteNode spriteNodeWithImageNamed:@"Background01"];
+        self.bkgBar = [SKSpriteNode spriteNodeWithImageNamed:@"TopBarAstro"];
         _startAstronautTxt = [SKTexture textureWithImageNamed:@"Astronaut.png"];
         _startAlienTxt = [SKTexture textureWithImageNamed:@"Alien.png"];
         _finishElement = [SKTexture textureWithImageNamed:@"Finish.png"];
@@ -106,8 +107,11 @@
         
         _bkg.size = CGSizeMake(size.width, size.height);
         _bkg.position = CGPointMake(WIN_SIZE_X/2, WIN_SIZE_Y/2);
+        self.bkgBar.size = CGSizeMake(self.bkgBar.size.width/2,self.bkgBar.size.height/2);
+        self.bkgBar.position = CGPointMake(320/2,462);
+        //self.bkgBar.alpha = 0.99;
         [self addChild:_bkg];
-        
+        [self addChild:self.bkgBar];
         _boardSprites = [[NSMutableArray alloc] init];
         statusOfPalette = MAPSTATUS_SOLID;
         currentTexture = _solid;

@@ -34,13 +34,13 @@
 @class BridgeButton;
 @class Bridge;
 @class BoardController;
-@class LevelSceneFinal;
+@class LevelSelectScene;
 
 @interface SpacePuzzleController : UIViewController {
     NSMutableArray *swipeArray;
     NSTimer *timer;
 }
-@property (nonatomic, retain) LevelSceneFinal *levelSelect;
+@property (nonatomic, retain) LevelSelectScene *levelSelect;
 @property (nonatomic, retain) Board *board;
 @property (nonatomic, retain) MainScene *scene;
 @property (nonatomic, retain) Unit *currentUnit;
