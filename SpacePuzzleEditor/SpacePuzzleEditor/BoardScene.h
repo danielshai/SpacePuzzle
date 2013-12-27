@@ -26,6 +26,7 @@
     SKShapeNode *circle;
     SKShapeNode *circleOutline;
     SKSpriteNode *pathHover;
+    SKSpriteNode *eraserHover;
     SKTexture *rainbowStraight;
     SKTexture *rainbowLeftTurn;
     SKTexture *rainbowRightTurn;
@@ -69,6 +70,7 @@
 -(void)cleanView;
 -(void)setTextureOfSprite: (SKSpriteNode*)sprite AccordingToStatus: (NSInteger)status;
 -(void)removeOneSprite: (NSNumber*) index;
+-(void)highlightEraser: (CGPoint)pos;
 -(void)solidClick;
 -(void)crackedClick;
 -(void)voidClick;
@@ -87,7 +89,7 @@
 -(void)drawRainbowAtPosition: (CGPoint)p WithDirection: (NSInteger)dir;
 -(void)addRainbowSpriteAtPosition: (CGPoint)p Rotation: (CGFloat)r Texture: (SKTexture*)texture;
 -(void)drawPathLineFrom: (CGPoint)from To: (CGPoint)to InDirection: (NSInteger)dir
-      WithLastDirection: (NSInteger)lastDir;
+      WithLastDirection: (NSInteger)lastDir IsLastPoint: (BOOL)lastPoint;
 -(void)highlightElement: (CGPoint) elementIndex;
 -(void)pathHighlight: (CGPoint)pos;
 -(void)noHighlight;

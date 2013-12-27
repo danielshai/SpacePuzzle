@@ -59,6 +59,13 @@
         _controlHover.hidden = YES;
         _controlHover.zPosition = 999996;
         
+        eraserHover = [SKSpriteNode spriteNodeWithImageNamed:@"OrangeTile"];
+        eraserHover.size = CGSizeMake(42,42);
+        eraserHover.hidden = YES;
+        eraserHover.zPosition = 999996;
+        [self addChild:eraserHover];
+        eraserHover.color = [SKColor colorWithRed:125.0/255.0 green:125.0/255.0 blue:125.0/255.0 alpha:0.8];
+        
         circle = [SKShapeNode node];
         circleOutline = [SKShapeNode node];
         [circleOutline setStrokeColor:[NSColor whiteColor]];
@@ -152,12 +159,19 @@
     _controlHover.hidden = NO;
    
     elementIndex = [Converter convertCoordToPixel:elementIndex];
-    elementIndex.x += 22;
+    elementIndex.x += TILESIZE/2;
     _controlHover.position = elementIndex;
 }
 
 -(void)noHighlight {
     _controlHover.hidden = YES;
+}
+
+-(void)highlightEraser:(CGPoint)pos {
+    eraserHover.hidden = NO;
+    pos = [Converter convertCoordToPixel:pos];
+    pos.x += TILESIZE/2;
+    eraserHover.position = pos;
 }
 
 -(void)mouseDown:(NSEvent *)theEvent {
@@ -257,7 +271,7 @@
 /*
  *  Draws a path using rainbow textures and lines. Not my prettiest work, ok? */
 -(void)drawPathLineFrom:(CGPoint)from To:(CGPoint)to InDirection:(NSInteger)dir
-      WithLastDirection:(NSInteger)lastDir {
+      WithLastDirection:(NSInteger)lastDir IsLastPoint:(BOOL)lastPoint{
     SKShapeNode *pathLine = [SKShapeNode node];
 
     pathLine.lineWidth = 1;
@@ -448,8 +462,15 @@
             [self addRainbowSpriteAtPosition:to Rotation:-PI/2 Texture:rainbowStraight];
         }
     }
-    pathLine.path = pathToDraw;
+
     pathLine.zPosition = 9999999;
+    
+    if(lastPoint) {
+        CGPathAddArc(pathToDraw, NULL, to.x, to.y, 2, 0, M_PI*2, NO);
+        CGPathAddArc(pathToDraw, NULL, to.x, to.y, 1, 0, M_PI*2, NO);
+        CGPathAddArc(pathToDraw, NULL, to.x, to.y, 0.5, 0, M_PI*2, NO);
+    }
+    pathLine.path = pathToDraw;
     [pathNodes addObject:pathLine];
     [self addChild:pathLine];
 }
@@ -550,8 +571,11 @@
         } else {
             lastDirChange = dir;
         }
-        
-        [self drawPathLineFrom: f To:t InDirection:dir WithLastDirection:lastDirChange];
+        if(i != path.count-2) {
+            [self drawPathLineFrom: f To:t InDirection:dir WithLastDirection:lastDirChange IsLastPoint:NO];
+        } else if(i == path.count-2) {
+            [self drawPathLineFrom: f To:t InDirection:dir WithLastDirection:lastDirChange IsLastPoint:YES];
+        }
     }
 }
 
@@ -659,7 +683,7 @@
     s.zPosition = 999999999;
     
     // Sets the position of the node to the end point. This is used later to check if end points of
-    // attempted connections are free. 
+    // attempted connections are free. NOT SURE CORRECT NOW
     s.position = to;
     float relPX = from.x - s.position.x;
     float relPY = from.y - s.position.y;
@@ -851,7 +875,14 @@
 }
 
 -(void)update:(CFTimeInterval)currentTime {
-    /* Called before each frame is rendered */
+    // if(brush_eraser && isErasable) eraserHover
+   /* pathHover.hidden = NO;
+    NSPoint mouseLoc;
+    mouseLoc = [NSEvent mouseLocation];
+    CGPoint realPos2 = [self.view convertPoint:mouseLoc toView:self.view];
+    CGPoint realPos = [self convertPointFromView:CGPointMake(mouseLoc.x, mouseLoc.y)];
+    NSLog(@"%f %f",realPos2.x,realPos2.y);
+    pathHover.position = realPos;*/
 }
 
 -(void)setupBoardX:(NSInteger)x Y:(NSInteger)y TileSize:(NSInteger)ts Status:(NSInteger)status {

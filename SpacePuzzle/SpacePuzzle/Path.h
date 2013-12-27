@@ -19,4 +19,5 @@
 -(CGPoint) nextPoint;
 -(void) addPoint: (CGPoint)p;
 -(CGPoint) getCGPointAtIndex: (NSInteger)i;
+-(void)removeAllPoints;
 @end

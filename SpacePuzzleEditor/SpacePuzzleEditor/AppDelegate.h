@@ -4,9 +4,11 @@
 
 //  TODO:
 //    - Fixa macros med klassnamn.
+//    - Klicka på element för att selecta och då kunna t.ex. ta bort?
 //    - Städa: Synka alltid viewn (BoardScene) utifrån datamodellen. Alltså när en |editABoardItem| sker,
 //             säg bara till AppDelegate, som i sin tur uppdaterar datamodellen och efter det uppdaterar
 //             BoardScene, typ en metod |updateView|
+//             Inga notifications, ist refs i view och controller.
 //    - Lever, moving platform, path (alla elements). Bridge horizontal/vertical?
 #import <Cocoa/Cocoa.h>
 #import <SpriteKit/SpriteKit.h>
@@ -54,4 +56,5 @@
 -(void)refreshPathView: (CGPoint)p;
 -(void)observeText:(NSString *)text Selector:(SEL)selector;
 -(void)notifyText:(NSString *)text Object: (NSObject*)object Key: (NSString*)key;
+-(Path*)pathAtEndPoint: (CGPoint)point;
 @end

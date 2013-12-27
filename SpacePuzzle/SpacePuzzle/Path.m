@@ -22,6 +22,14 @@
     return self;
 }
 
+/*
+ *  Removes all points in a path, except the first one (same as position of moving platform. */
+-(void)removeAllPoints {
+    Position *p = [_points objectAtIndex:0];
+    [_points removeAllObjects];
+    [_points insertObject:p atIndex:0];
+}
+
 -(CGPoint)nextPoint {
     Position *p = [_points objectAtIndex:index];
     

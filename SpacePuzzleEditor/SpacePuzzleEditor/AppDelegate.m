@@ -1,7 +1,6 @@
 //
 //  GViewAppDelegate.m
 //  SpacePuzzleEditor
-// REMOVE CONNECTION VAFAN??
 #import "AppDelegate.h"
 #import "BoardScene.h"
 #import "XMLParser.h"
@@ -13,6 +12,7 @@
 #import "BridgeButton.h"
 #import "PlatformLever.h"
 #import "Path.h"
+#import "MovingPlatform.h"
 
 @implementation AppDelegate
 
@@ -80,6 +80,7 @@
                 NSMutableArray *points = [[mp path] points];
                 Position *p = [points objectAtIndex:[points count]-1];
                 CGPoint pp = CGPointMake(p.x, p.y);
+    
                 if((p.x != pEnd.x || p.y != pEnd.y) && ![Converter isPoint:pp DiagonallyAdjacentWithPoint:pEnd]) {
                     [[mp path] addPoint:pEnd];
                     [self refreshPathView:pEnd];
@@ -98,9 +99,11 @@
         for (int j = 0; j < bc.elements.count; j++) {
             Element *e = [bc.elements objectAtIndex:j];
             
+            // Finds |MovingPlatform| among elements.
             if([e isKindOfClass:[MovingPlatform class]]) {
                 MovingPlatform *mp = (MovingPlatform*)e;
                 NSMutableArray *vals = [[NSMutableArray alloc] init];
+                // Gets the path.
                 for(int j = 0; j < mp.path.points.count; j++ ) {
                     Position *p = [mp.path.points objectAtIndex:j];
                     NSPoint pp;
@@ -171,6 +174,7 @@
     BoardCoord *bcStart = [[_board board] objectAtIndex:indexStartInt];
     BoardCoord *bcEnd = [[_board board] objectAtIndex:indexEndInt];
     
+    // If there are any elements at start and end.
     if(bcStart.elements.count > 0 && bcEnd.elements.count > 0) {
         Element *eStart = [bcStart.elements objectAtIndex:0];
         Element *eEnd = [bcEnd.elements objectAtIndex:0];
@@ -285,19 +289,25 @@
             _board.finishPos.y = newPos.y;
         } else if (stat == BRUSH_ERASER) {
             // If a connection is on the position, first remove that one.
-            NSLog(@"%f %f", point.x,point.y);
             BOOL removeConnection = [_scene removeAConnectionFrom:point];
             BOOL removeConnectionEndPoint = [_scene removeAConnectionBasedOnEndPoint:point];
-            if(!removeConnection && !removeConnectionEndPoint) {
-                BoardCoord *bc = [[_board board] objectAtIndex:flatIndexInt];
-                [bc.elements removeLastObject];
-                [_scene removeOneSprite:flatIndex];
-            }
-            // If a connection was removed, update data model.
+
+            // If a connection was removed, update data model. Else, remove element.
             if(removeConnection || removeConnectionEndPoint) {
                 //Element *e = [[_board elementDictionary] objectForKey:flatIndex];
                 [_connections removeConnection:point];
                 [self updateConnectionsView];
+            } else {
+                // Checks if there is a path at eraser point, if so remove path.
+                Path *p = [self pathAtEndPoint:point];
+                if(p) {
+                    [p removeAllPoints];
+                    [self refreshPathView:CGPointMake(-2, -2)];
+                }
+                BoardCoord *bc = [[_board board] objectAtIndex:flatIndexInt];
+                [bc.elements removeLastObject];
+                [_scene removeOneSprite:flatIndex];
+                [self refreshPathView:CGPointMake(-2, -2)];
             }
             
             // Remove starting positions.
@@ -340,7 +350,26 @@
     }
 }
 
-/* 
+-(Path*)pathAtEndPoint:(CGPoint)point {
+    for(int i = 0; i < [_board board].count; i++) {
+        BoardCoord *bc = [[_board board] objectAtIndex:i];
+        
+        for(int j = 0; j < bc.elements.count; j++) {
+            if([[bc.elements objectAtIndex:j] isKindOfClass:[MovingPlatform class]]) {
+                MovingPlatform *mp = (MovingPlatform*)[bc.elements objectAtIndex:j];
+                Position *lastP = [mp.path.points objectAtIndex:mp.path.points.count-1];
+                
+                if(lastP.x == point.x && lastP.y == point.y) {
+                    NSLog(@"Path end point found");
+                    return mp.path;
+                }
+            }
+        }
+    }
+    return nil;
+}
+
+/*
  *  Shows the connections in the view. */
 -(void)updateConnectionsView {
     [_scene removeAllConnections];
